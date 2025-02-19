@@ -2,13 +2,13 @@ import { Pool, QueryResult, QueryResultRow } from "pg";
 import dotenv from "dotenv";
 dotenv.config({ path: "./.env" });
 
-console.log({
-    PG_HOST: process.env.PG_HOST,
-    PG_PORT: process.env.PG_PORT,
-    PG_DATABASE: process.env.PG_DATABASE,
-    PG_USER: process.env.PG_USER,
-    PG_PASSWORD: JSON.stringify(process.env.PG_PASSWORD),
-});
+// console.log({
+//     PG_HOST: process.env.PG_HOST,
+//     PG_PORT: process.env.PG_PORT,
+//     PG_DATABASE: process.env.PG_DATABASE,
+//     PG_USER: process.env.PG_USER,
+//     PG_PASSWORD: JSON.stringify(process.env.PG_PASSWORD),
+// });
 
 
 const pool = new Pool({
