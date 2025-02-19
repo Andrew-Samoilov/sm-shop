@@ -1,42 +1,131 @@
-@import 'tailwindcss';
+@import "tailwindcss";
+
+@source './**/*.{js,ts,jsx,tsx,mdx,css}';
+
+@custom-variant dark (&:is(.dark *));
 
 @theme {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-text: #444;
+  --color-light: #666;
+  --color-dark: #000;
+  --color-primary: #121212;
+  --color-body: #fff;
+  --color-border: #eaeaea;
+  --color-theme-light: #f2f2f2;
+  --color-theme-dark: #000;
+
+  --color-darkmode-text: #ddd;
+  --color-darkmode-light: #ddd;
+  --color-darkmode-dark: #fff;
+  --color-darkmode-primary: #fff;
+  --color-darkmode-body: #252525;
+  --color-darkmode-border: #3e3e3e;
+  --color-darkmode-theme-light: #222222;
+  --color-darkmode-theme-dark: #000;
+
+  --color-accent: #4169e1;
+  /* Також потрібно змінити колір у public/favicon.svg у fill=... */
+
+  --text-base: 16px;
+  --text-base-sm: calc(var(--text-base) * 0.8);
+
+  --text-scale: 1.2;
+
+  --text-h6: calc(var(--text-base) * var(--text-scale));
+  --text-h6-sm: calc(var(--text-h6) * 0.9);
+
+  --text-h5: calc(var(--text-h6) * var(--text-scale));
+  --text-h5-sm: calc(var(--text-h5) * 0.9);
+
+  --text-h4: calc(var(--text-h5) * var(--text-scale));
+  --text-h4-sm: calc(var(--text-h4) * 0.9);
+
+  --text-h3: calc(var(--text-h4) * var(--text-scale));
+  --text-h3-sm: calc(var(--text-h3) * 0.9);
+
+  --text-h2: calc(var(--text-h3) * var(--text-scale));
+  --text-h2-sm: calc(var(--text-h2) * 0.9);
+
+  --text-h1: calc(var(--text-h2) * var(--text-scale));
+  --text-h1-sm: calc(var(--text-h1) * 0.9);
+
+  --font-primary: Karla, sans-serif;
 }
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+}
 
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
+@utility subHeader {
+  @apply text-xl text-light dark:text-darkmode-light;
+}
+
 @layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply tracking-wide font-bold leading-tight text-dark dark:text-darkmode-dark;
   }
-}
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  h1 {
+    @apply text-h1-sm md:text-h1;
   }
-}
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  h2 {
+    @apply text-h2-sm md:text-h2;
+  }
+
+  h3 {
+    @apply text-h3-sm md:text-h3;
+  }
+
+  h4 {
+    @apply text-h4-sm md:text-h4;
+  }
+
+  a:hover {
+    @apply underline decoration-accent decoration-2;
+  }
+
+  .btn {
+    @apply inline-block rounded-md border border-transparent px-5 py-2 font-semibold transition no-underline;
+  }
+  .btn:hover {
+    @apply no-underline;
+  }
+  .btn-sm {
+    @apply px-4 py-1.5 text-sm font-medium;
+  }
+  .btn-lg {
+    @apply px-12 py-4 text-xl;
+  }
+
+  .btn-primary {
+    @apply border-primary bg-primary text-white dark:border-darkmode-primary dark:bg-darkmode-primary dark:text-dark text-center;
+  }
+  .btn:focus-visible {
+    @apply outline-hidden relative transition-shadow shadow-lg;
+    box-shadow: 0 0 2rem var(--color-accent);
+  }
+
+  section,
+  footer {
+    @apply p-6 mx-auto lg:py-24 gap-6;
+  }
+
+  /* this bullshit css special for toaster */
+  /* section:last-of-type {
+    padding-bottom: 0 !important;
+  } */
+
+  .form-input {
+    @apply w-full rounded-sm border border-border bg-transparent px-4 py-2 md:px-6 md:py-4 text-dark placeholder:text-light  dark:border-darkmode-border dark:bg-darkmode-theme-light dark:text-darkmode-light
+    focus:ring focus:outline-none focus:ring-accent;
+  }
+
+  .form-label {
+    @apply mb-2 block text-xl max-md:text-base font-normal text-dark dark:text-darkmode-light;
+  }
 }
