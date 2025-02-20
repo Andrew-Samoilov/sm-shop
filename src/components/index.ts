@@ -1,2 +1,2 @@
 export { Footer } from "./footer";
-export { default as TyreList } from "./tyre-list/tyre-list";
+export { default as TyreList } from "./tyre-list";

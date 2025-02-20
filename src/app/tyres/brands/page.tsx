@@ -1,6 +1,5 @@
-import { fetchBrands } from "@/lib/prisma";
-
 export const dynamic = "force-static";
+import { fetchBrands } from "@/lib";
 
 export default async function BrandsPage() {
     const brands = await fetchBrands();
