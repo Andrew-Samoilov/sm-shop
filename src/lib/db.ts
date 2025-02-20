@@ -1,15 +1,11 @@
-import { Pool, QueryResult, QueryResultRow } from "pg";
-import dotenv from "dotenv";
-dotenv.config({ path: "./.env" });
+import { Pool, QueryResultRow } from "pg";
 
-// console.log({
-//     PG_HOST: process.env.PG_HOST,
-//     PG_PORT: process.env.PG_PORT,
-//     PG_DATABASE: process.env.PG_DATABASE,
-//     PG_USER: process.env.PG_USER,
-//     PG_PASSWORD: JSON.stringify(process.env.PG_PASSWORD),
+// const requiredEnv = ["PG_HOST", "PG_PORT", "PG_DATABASE", "PG_USER", "PG_PASSWORD"];
+// requiredEnv.forEach((key) => {
+//     if (!process.env[key]) {
+//         throw new Error(`Missing required environment variable: ${key}`);
+//     }
 // });
-
 
 const pool = new Pool({
     host: process.env.PG_HOST,
@@ -19,17 +15,29 @@ const pool = new Pool({
     password: process.env.PG_PASSWORD ?? "",
 });
 
-export const query = async <T extends QueryResultRow = QueryResultRow>(
+export async function query<T extends QueryResultRow = QueryResultRow>(
     text: string,
     params?: (string | number | boolean | null)[]
-): Promise<T[]> => {
-    const client = await pool.connect();
+): Promise<T[]> {
     try {
-        const res: QueryResult<T> = await client.query<T>(text, params ?? []); 
+        const res = await pool.query<T>(text, params ?? []);
         return res.rows;
-    } finally {
-        client.release(); 
+    } catch (error) {
+        console.error("DB Query Error:", error);
+        throw error;
     }
-};
+}
 
-export default pool;
+// export async function fetchBrands() {
+//     console.log("📡 Fetching brands...");
+
+//     try {
+//         const brands = await query<{ id: number; name: string }>(
+//             "SELECT id, name FROM brands ORDER BY name"
+//         );
+//         return brands;
+//     } catch (error) {
+//         console.error("❌ DB Query Error (fetchBrands):", error);
+//         throw error;
+//     }
+// }

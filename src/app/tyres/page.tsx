@@ -1,14 +1,14 @@
-
-import { query } from "@/lib/db";
+import { TyreList } from "@/components";
+import { query } from "@/lib";
+import { Tyre } from "@/types";
 
 export default async function Tyres() {
-    const result = await query<{ now: string }>("SELECT NOW()");
-    console.log("Current timestamp from DB:", ...result);
+    const tyres = await query<Tyre>("SELECT * FROM tyres LIMIT 20");
 
     return (
-        <div>
-            <p>tyres</p>
- 
-        </div>
+        <section>
+            <h1>Tyres List</h1>
+            <TyreList tyres={tyres} />
+        </section>
     );
 }
