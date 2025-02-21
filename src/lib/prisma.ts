@@ -30,3 +30,18 @@ export async function fetchBrandByName(name: string): Promise<brands | null> {
 
     return result.length > 0 ? result[0] : null;
 }
+
+export async function fetchModels() {
+    return await prisma.models.findMany({
+        select: {
+            id: true,
+            name: true,
+            brand: {
+                select: {
+                    name: true,
+                },
+            },
+        },
+        orderBy: { name: "asc" },
+    });
+}

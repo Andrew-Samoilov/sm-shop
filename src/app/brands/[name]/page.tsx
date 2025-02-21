@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { fetchBrandByName, formatDisplayUrl } from "@/lib";
 import Link from "next/link";
 
-export default async function BrandPage({ params }: { params: Promise<{ name: string }> }) {
+export default async function BrandsPage({ params }: { params: Promise<{ name: string }> }) {
     const { name } = await params;
     const brand = await fetchBrandByName(name);
 
