@@ -11,10 +11,10 @@ datasource db {
 model brands {
   id          Int      @id @default(autoincrement())
   name        String
+  logo        String?
   description String?
   website     String?
   country     String?
-  logo        String?
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
 }

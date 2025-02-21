@@ -11,5 +11,11 @@ export interface Tyres {
 
 export interface Brand {
     id: number;
-    title: string;
+    name: string;
+    description?: string;
+    website?: string;
+    country?: string;
+    logo?: string;
+    created_at: Date;
+    updated_at: Date;
 }
