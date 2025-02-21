@@ -1,5 +1,5 @@
 export const dynamic = "force-static";
-import { fetchBrands } from "@/lib";
+import { fetchBrands, normalizeUrl } from "@/lib";
 import Link from "next/link";
 
 export default async function BrandsPage() {
@@ -12,7 +12,7 @@ export default async function BrandsPage() {
                 {brands.map((brand) => (
                     <Link
                         key={brand.id}
-                        href={`/brands/${brand.name.toLowerCase()}`}
+                        href={`/brands/${normalizeUrl(brand.name)}`}
                         className="p-6 border rounded-md border-border dark:border-darkmode-border hover:border-accent hover:no-underline
                         flex flex-col items-center justify-center gap-6">
                         {brand.logo &&

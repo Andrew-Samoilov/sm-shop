@@ -5,8 +5,10 @@ import Link from "next/link";
 
 export default async function BrandPage({ params }: { params: Promise<{ name: string }> }) {
     const { name } = await params;
-    const normalizedName = name.toLowerCase();
-    const brand = await fetchBrandByName(normalizedName);
+    const brand = await fetchBrandByName(name);
+
+    // console.log(brand);
+
     if (!brand) return notFound();
 
     return (
