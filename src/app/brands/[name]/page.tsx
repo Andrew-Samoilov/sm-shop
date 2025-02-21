@@ -4,19 +4,29 @@ import { fetchBrandByName, formatDisplayUrl } from "@/lib";
 import Link from "next/link";
 
 export default async function BrandPage({ params }: { params: Promise<{ name: string }> }) {
-    const { name } = await params; 
+    const { name } = await params;
     const normalizedName = name.toLowerCase();
     const brand = await fetchBrandByName(normalizedName);
     if (!brand) return notFound();
 
     return (
-        <section className="container">
-            <h1>{brand.name}</h1>
-
-            {brand.country && <p className="subheader">Країна походження - {brand.country}.</p>}
+        <section className="container flex flex-col gap-6">
+            <div className="flex justify-between items-center">
+                <div>
+                    <h1>{brand.name}</h1>
+                    {brand.country && <p className="text-light dark:text-darkmode-light">Країна походження - <span className="font-semibold">{brand.country}</span>.</p>}
+                </div>
+                {brand.logo &&
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                        src={brand.logo}
+                        alt={brand.name}
+                        className="max-w-1/2"
+                    />
+                }
+            </div>
             {brand.description && <p>{brand.description}.</p>}
-
-            {brand.website && (
+            {brand.website && !["NULL", "null", ""].includes(brand.website) && (
                 <p>
                     <Link
                         href={brand.website}
