@@ -45,3 +45,15 @@ export async function fetchModels() {
         orderBy: { name: "asc" },
     });
 }
+
+export async function fetchTyres() {
+    return await prisma.tyres.findMany({
+        select: {
+            id: true,
+            title: true,
+            date_code: true,
+            price: true,
+        },
+        orderBy: { title: "asc" },
+    });
+}

@@ -1,14 +1,16 @@
-import { TyreList } from "@/components";
-import { query } from "@/lib";
-import { Tyre } from "@/types";
+import { fetchTyres } from "@/lib";
 
 export default async function Tyres() {
-    const tyres = await query<Tyre>("SELECT * FROM tyres LIMIT 20");
+    const tyres = await fetchTyres();
 
     return (
         <section>
             <h1>Tyres List</h1>
-            <TyreList tyres={tyres} />
+            {tyres.map((tyre) => (
+                <div key={tyre.id}>
+                    <p>{tyre.title} - {tyre.date_code} - {tyre.price.toNumber()} грн.</p>
+                </div>
+            ))}
         </section>
     );
 }
