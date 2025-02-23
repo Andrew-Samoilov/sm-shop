@@ -19,9 +19,9 @@ export async function fetchBrands() {
 }
 
 export async function fetchBrandByName(name: string): Promise<brands | null> {
-    console.log(`fetchBrandByName `,name);
+    console.log(`fetchBrandByName `, name);
     const normalizedName = normalizeUrl(name);
-        
+
     const result = await prisma.$queryRaw<brands[]>`
         SELECT * FROM brands 
         WHERE LOWER(REPLACE(name, ' ', '-')) = ${normalizedName}
@@ -29,6 +29,12 @@ export async function fetchBrandByName(name: string): Promise<brands | null> {
     `;
 
     return result.length > 0 ? result[0] : null;
+}
+
+export async function fetchBrandById(id: number): Promise<brands | null> {
+    return await prisma.brands.findUnique({
+        where: { id },
+    });
 }
 
 export async function fetchModels() {
@@ -55,5 +61,39 @@ export async function fetchTyres() {
             price: true,
         },
         orderBy: { title: "asc" },
+    });
+}
+
+export async function fetchModelsById(brandId: number) {
+    return await prisma.models.findMany({
+        select: {
+            id: true,
+            name: true,
+        },
+        where: {
+            brand: {
+                id: brandId,
+            },
+        },
+        orderBy: {
+            name: "asc"
+        },
+    });
+}
+
+export async function fetchTyresById(brandId: number) {
+    return await prisma.tyres.findMany({
+        select: {
+            id: true,
+            title: true,
+            date_code: true,
+            price: true,
+        },
+        where: {
+            brand_id: brandId,
+        },
+        orderBy: {
+            title: "asc"
+        },
     });
 }

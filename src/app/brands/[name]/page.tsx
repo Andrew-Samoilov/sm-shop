@@ -1,15 +1,15 @@
 export const dynamic = "force-static";
 import { notFound } from "next/navigation";
-import { fetchBrandByName, formatDisplayUrl } from "@/lib";
+import { fetchBrandByName, fetchModelsById, fetchTyresById, formatDisplayUrl } from "@/lib";
 import Link from "next/link";
 
 export default async function BrandsPage({ params }: { params: Promise<{ name: string }> }) {
     const { name } = await params;
     const brand = await fetchBrandByName(name);
-
-    // console.log(brand);
-
     if (!brand) return notFound();
+
+    const brandModels = await fetchModelsById(brand.id);
+    const brandTyres = await fetchTyresById(brand.id);
 
     return (
         <section className="container flex flex-col gap-6">
@@ -41,11 +41,19 @@ export default async function BrandsPage({ params }: { params: Promise<{ name: s
                 </p>
             )}
 
-            {/* {brand.logo && (
-                <div className="mt-4">
-                    <img src={brand.logo} alt={brand.name} className="w-48 rounded-lg shadow" />
-                </div>
-            )} */}
+            <article>
+                <h2>Наявні моделі бренду {brand.name}</h2>
+                {brandModels.map((model) => (
+                    <p key={model.id}>{model.name}</p>
+                ))}
+            </article>
+
+            <article>
+                <h2>Наявні шини бренду {brand.name}</h2>
+                {brandTyres.map((tyre) => (
+                    <p key={tyre.id}>{tyre.title}</p>
+                ))}
+            </article>
 
             <p className="italic text-right text-light dark:text-darkmode-light">
                 Останнє оновлення: {new Date(brand.updated_at).toLocaleDateString()}

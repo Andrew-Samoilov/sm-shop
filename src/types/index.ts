@@ -3,6 +3,7 @@ export interface Tyre {
     title: string;
     date_code: string;
     price: number;
+    brand_id: number;
 }
 
 export interface Tyres {

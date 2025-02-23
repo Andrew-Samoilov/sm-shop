@@ -8,7 +8,8 @@ datasource db {
 }
 
 model brands {
-  id          Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
+
   name        String
   logo        String?
   description String?
@@ -17,12 +18,16 @@ model brands {
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
   models      models[]
+  tyres       tyres[]  @relation("BrandTyres")
 }
 
 model tyres {
-  id                 Int      @id(map: "tires_pkey") @default(autoincrement())
-  model_id           Int?
-  model_rel          models?  @relation(fields: [model_id], references: [id])
+  id Int @id(map: "tires_pkey") @default(autoincrement())
+
+  model_id  Int?
+  model_rel models? @relation(fields: [model_id], references: [id])
+  brand_id  Int?
+  brand_rel brands? @relation("BrandTyres", fields: [brand_id], references: [id])
 
   title              String
   description        String?
@@ -43,15 +48,16 @@ model tyres {
   load_index         String?  @db.VarChar(10)
   speed_index        String?  @db.Char(1)
   type               String?  @db.VarChar(50)
-  brand_id           Int?
 }
 
 model models {
-  id          Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
+
+  brandId Int
+  brand   brands @relation(fields: [brandId], references: [id], onDelete: Cascade)
+
   name        String
   description String?
-  brandId     Int
-  brand       brands   @relation(fields: [brandId], references: [id], onDelete: Cascade)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   tyres       tyres[]
