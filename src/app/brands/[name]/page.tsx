@@ -1,15 +1,28 @@
-export const dynamic = "force-static";
-import { notFound } from "next/navigation";
-import { fetchBrandByName, fetchModelsById, fetchTyresById, formatDisplayUrl } from "@/lib";
+import { fetchBrands, normalizeUrl, fetchBrandByName, fetchModelsById, fetchTyresByBrandId, formatDisplayUrl } from "@/lib"
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
-export default async function BrandsPage({ params }: { params: Promise<{ name: string }> }) {
-    const { name } = await params;
+export async function generateStaticParams() {
+    const brands = await fetchBrands();
+
+    return brands.map((brand) => ({
+        name: normalizeUrl(brand.name),
+    }))
+}
+
+export default async function Brands2Page({
+    params,
+}: {
+    params: Promise<{ name: string }>;
+}) {
+    const resolvedParams = await params;
+    const { name } = resolvedParams;
+
     const brand = await fetchBrandByName(name);
     if (!brand) return notFound();
-
+    
     const brandModels = await fetchModelsById(brand.id);
-    const brandTyres = await fetchTyresById(brand.id);
+    const brandTyres = await fetchTyresByBrandId(brand.id);
 
     return (
         <section className="container flex flex-col gap-6">
@@ -40,7 +53,7 @@ export default async function BrandsPage({ params }: { params: Promise<{ name: s
                     </Link>
                 </p>
             )}
-
+            
             <article>
                 <h2>Наявні моделі бренду {brand.name}</h2>
                 {brandModels.map((model) => (
@@ -58,6 +71,7 @@ export default async function BrandsPage({ params }: { params: Promise<{ name: s
             <p className="italic text-right text-light dark:text-darkmode-light">
                 Останнє оновлення: {new Date(brand.updated_at).toLocaleDateString()}
             </p>
+            
         </section>
     );
 }

@@ -22,8 +22,8 @@ export async function fetchBrands(): Promise<Brand[]> {
 
     return brands.map((brand) => ({
         ...brand,
-        logo: brand.logo ?? undefined, 
-        website: brand.website ?? undefined, 
+        logo: brand.logo ?? undefined,
+        website: brand.website ?? undefined,
     }));
 }
 
@@ -91,7 +91,7 @@ export async function fetchModelsById(brandId: number) {
     });
 }
 
-export async function fetchTyresById(brandId: number) {
+export async function fetchTyresByBrandId(brandId: number) {
     return await prisma.tyres.findMany({
         select: {
             id: true,
