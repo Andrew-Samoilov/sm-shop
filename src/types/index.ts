@@ -20,3 +20,11 @@ export interface Brand {
     created_at: Date;
     updated_at: Date;
 }
+
+export type Model = {
+    id: number;
+    name: string;
+    brand: {
+        name: string;
+    };
+};
