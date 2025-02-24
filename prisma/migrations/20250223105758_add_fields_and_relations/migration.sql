@@ -1,65 +1,45 @@
--- CreateTable
-CREATE TABLE "brands" (
-    "id" SERIAL NOT NULL,
-    "name" TEXT NOT NULL,
-    "logo" TEXT,
-    "description" TEXT,
-    "website" TEXT,
-    "country" TEXT,
-    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "brands_pkey" PRIMARY KEY ("id")
-);
+-- Додавання відсутніх колонок у brands
+ALTER TABLE "brands"
+ADD COLUMN IF NOT EXISTS "logo" TEXT,
+ADD COLUMN IF NOT EXISTS "description" TEXT,
+ADD COLUMN IF NOT EXISTS "website" TEXT,
+ADD COLUMN IF NOT EXISTS "country" TEXT;
 
--- CreateTable
-CREATE TABLE "tyres" (
-    "id" SERIAL NOT NULL,
-    "model_id" INTEGER,
-    "brand_id" INTEGER,
-    "title" TEXT NOT NULL,
-    "description" TEXT,
-    "country" VARCHAR(50),
-    "date_code" CHAR(4),
-    "applicability" VARCHAR(50),
-    "sku" VARCHAR(50) NOT NULL,
-    "inventory_quantity" INTEGER DEFAULT 0,
-    "price" DECIMAL(10,2) NOT NULL,
-    "load_speed_index" VARCHAR(10),
-    "brand" VARCHAR(50),
-    "model" VARCHAR(100),
-    "width" DECIMAL(4,1),
-    "profile" DECIMAL(4,1),
-    "constr" CHAR(1),
-    "diameter" DECIMAL(4,1),
-    "delimiter" CHAR(1),
-    "load_index" VARCHAR(10),
-    "speed_index" CHAR(1),
-    "type" VARCHAR(50),
+-- Додавання відсутніх колонок у tyres
+ALTER TABLE "tyres"
+ADD COLUMN IF NOT EXISTS "title" TEXT,
+ADD COLUMN IF NOT EXISTS "description" TEXT,
+ADD COLUMN IF NOT EXISTS "country" VARCHAR(50),
+ADD COLUMN IF NOT EXISTS "date_code" CHAR(4),
+ADD COLUMN IF NOT EXISTS "applicability" VARCHAR(50),
+ADD COLUMN IF NOT EXISTS "sku" VARCHAR(50) NOT NULL,
+ADD COLUMN IF NOT EXISTS "inventory_quantity" INTEGER DEFAULT 0,
+ADD COLUMN IF NOT EXISTS "price" DECIMAL(10,2) NOT NULL,
+ADD COLUMN IF NOT EXISTS "load_speed_index" VARCHAR(10),
+ADD COLUMN IF NOT EXISTS "brand" VARCHAR(50),
+ADD COLUMN IF NOT EXISTS "model" VARCHAR(100),
+ADD COLUMN IF NOT EXISTS "type" VARCHAR(50),
+ADD COLUMN IF NOT EXISTS "load_index" VARCHAR(10),
+ADD COLUMN IF NOT EXISTS "speed_index" VARCHAR(10),
+ADD COLUMN IF NOT EXISTS "constr" VARCHAR(10),
+ADD COLUMN IF NOT EXISTS "width" INTEGER,
+ADD COLUMN IF NOT EXISTS "profile" INTEGER,
+ADD COLUMN IF NOT EXISTS "diameter" INTEGER,
+ADD COLUMN IF NOT EXISTS "delimiter" VARCHAR(10),
+ADD COLUMN IF NOT EXISTS "brand_id" INTEGER REFERENCES "brands"("id"),
+ADD COLUMN IF NOT EXISTS "model_id" INTEGER;
 
-    CONSTRAINT "tires_pkey" PRIMARY KEY ("id")
-);
 
--- CreateTable
-CREATE TABLE "models" (
-    "id" SERIAL NOT NULL,
-    "brandId" INTEGER NOT NULL,
-    "name" TEXT NOT NULL,
-    "description" TEXT,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
+-- Додавання унікального індексу для sku
+CREATE UNIQUE INDEX IF NOT EXISTS "tires_sku_key" ON "tyres"("sku");
 
-    CONSTRAINT "models_pkey" PRIMARY KEY ("id")
-);
+-- Додавання зовнішніх ключів
+ALTER TABLE "tyres" ADD CONSTRAINT IF NOT EXISTS "tyres_model_id_fkey" 
+FOREIGN KEY ("model_id") REFERENCES "models"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
--- CreateIndex
-CREATE UNIQUE INDEX "tires_sku_key" ON "tyres"("sku");
+ALTER TABLE "tyres" ADD CONSTRAINT IF NOT EXISTS "tyres_brand_id_fkey" 
+FOREIGN KEY ("brand_id") REFERENCES "brands"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
--- AddForeignKey
-ALTER TABLE "tyres" ADD CONSTRAINT "tyres_model_id_fkey" FOREIGN KEY ("model_id") REFERENCES "models"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "tyres" ADD CONSTRAINT "tyres_brand_id_fkey" FOREIGN KEY ("brand_id") REFERENCES "brands"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "models" ADD CONSTRAINT "models_brandId_fkey" FOREIGN KEY ("brandId") REFERENCES "brands"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "models" ADD CONSTRAINT IF NOT EXISTS "models_brandId_fkey" 
+FOREIGN KEY ("brandId") REFERENCES "brands"("id") ON DELETE CASCADE ON UPDATE CASCADE;

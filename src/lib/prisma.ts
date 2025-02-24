@@ -1,25 +1,35 @@
 import { PrismaClient, brands } from "@prisma/client";
 import { normalizeUrl } from "./normalize-url";
+import { Brand } from "@/types";
 
 const globalForPrisma = global as unknown as { prisma?: PrismaClient };
 export const prisma = globalForPrisma.prisma ?? new PrismaClient();
 
 if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
 
-export async function fetchBrands() {
-    return await prisma.brands.findMany({
+export async function fetchBrands(): Promise<Brand[]> {
+    const brands = await prisma.brands.findMany({
         select: {
             id: true,
             name: true,
             logo: true,
             website: true,
+            created_at: true,
+            updated_at: true,
         },
         orderBy: { name: "asc" },
     });
+
+    return brands.map((brand) => ({
+        ...brand,
+        logo: brand.logo ?? undefined, 
+        website: brand.website ?? undefined, 
+    }));
 }
 
+
 export async function fetchBrandByName(name: string): Promise<brands | null> {
-    console.log(`fetchBrandByName `, name);
+    // console.log(`fetchBrandByName `, name);
     const normalizedName = normalizeUrl(name);
 
     const result = await prisma.$queryRaw<brands[]>`
