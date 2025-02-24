@@ -10,7 +10,7 @@ export async function generateStaticParams() {
     }))
 }
 
-export default async function Brands2Page({
+export default async function BrandPage({
     params,
 }: {
     params: Promise<{ name: string }>;
@@ -70,8 +70,7 @@ export default async function Brands2Page({
 
             <p className="italic text-right text-light dark:text-darkmode-light">
                 Останнє оновлення: {new Date(brand.updated_at).toLocaleDateString()}
-            </p>
-            
+            </p>     
         </section>
     );
 }

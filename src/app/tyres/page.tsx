@@ -8,7 +8,7 @@ export default async function Tyres() {
             <h1>Tyres List</h1>
             {tyres.map((tyre) => (
                 <div key={tyre.id}>
-                    <p>{tyre.title} - {tyre.date_code} - {tyre.price.toNumber()} грн.</p>
+                    <p >{tyre.title} - {tyre.date_code} - {tyre.price.toNumber()} грн.</p>
                 </div>
             ))}
         </section>

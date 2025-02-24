@@ -1,5 +1,5 @@
 import { PrismaClient, brands } from "@prisma/client";
-import { normalizeUrl } from "./normalize-url";
+import { normalizeUrl } from "@/lib";
 import { Brand } from "@/types";
 
 const globalForPrisma = global as unknown as { prisma?: PrismaClient };
@@ -29,7 +29,6 @@ export async function fetchBrands(): Promise<Brand[]> {
 
 
 export async function fetchBrandByName(name: string): Promise<brands | null> {
-    // console.log(`fetchBrandByName `, name);
     const normalizedName = normalizeUrl(name);
 
     const result = await prisma.$queryRaw<brands[]>`
@@ -70,7 +69,9 @@ export async function fetchTyres() {
             date_code: true,
             price: true,
         },
-        orderBy: { title: "asc" },
+        orderBy: {
+            title: "asc"
+        },
     });
 }
 
