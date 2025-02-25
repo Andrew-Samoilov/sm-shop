@@ -1,6 +1,9 @@
 import { fetchBrands, normalizeUrl, fetchBrandByName, fetchModelsById, fetchTyresByBrandId, formatDisplayUrl } from "@/lib"
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import path from "path";
+import fs from "fs";
+import ReactMarkdown from "react-markdown";
 
 export async function generateStaticParams() {
     const brands = await fetchBrands();
@@ -8,6 +11,22 @@ export async function generateStaticParams() {
     return brands.map((brand) => ({
         name: normalizeUrl(brand.name),
     }))
+}
+
+
+async function getBrandDescription(brandSlug: string, dbDescription: string) {
+    const filePath = path.join(process.cwd(), `src/import-data/brands/${brandSlug}-description.md`);
+
+    try {
+        if (fs.existsSync(filePath)) {
+            const fileContent = fs.readFileSync(filePath, "utf-8");
+            return fileContent; // Повертає текст із Markdown-файлу
+        }
+    } catch (error) {
+        console.error("Помилка зчитування файлу:", error);
+    }
+
+    return dbDescription; // Якщо файлу немає, повертає короткий текст із БД
 }
 
 export default async function BrandPage({
@@ -20,7 +39,9 @@ export default async function BrandPage({
 
     const brand = await fetchBrandByName(name);
     if (!brand) return notFound();
-    
+
+    const brandSlug = normalizeUrl(brand.name);
+    const description = await getBrandDescription(brandSlug, brand.description);
     const brandModels = await fetchModelsById(brand.id);
     const brandTyres = await fetchTyresByBrandId(brand.id);
 
@@ -30,6 +51,18 @@ export default async function BrandPage({
                 <div>
                     <h1>{brand.name}</h1>
                     {brand.country && <p className="text-light dark:text-darkmode-light">Країна походження - <span className="font-semibold">{brand.country}</span>.</p>}
+                    {brand.website && !["NULL", "null", ""].includes(brand.website) && (
+                        <p>
+                            <Link
+                                href={brand.website}
+                                className="text-blue-600 hover:underline"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {formatDisplayUrl(brand.website)}
+                            </Link>
+                        </p>
+                    )}
                 </div>
                 {brand.logo &&
                     // eslint-disable-next-line @next/next/no-img-element
@@ -40,37 +73,41 @@ export default async function BrandPage({
                     />
                 }
             </div>
-            {brand.description && <p>{brand.description}.</p>}
-            {brand.website && !["NULL", "null", ""].includes(brand.website) && (
-                <p>
-                    <Link
-                        href={brand.website}
-                        className="text-blue-600 hover:underline"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        {formatDisplayUrl(brand.website)}
-                    </Link>
-                </p>
-            )}
-            
+
+            {brand.description &&
+                <ReactMarkdown
+                    components={{
+                        ul: ({ children }) => <ul className="list-disc pl-6">{children}</ul>,
+                        ol: ({ children }) => <ol className="list-decimal pl-6">{children}</ol>,
+                        li: ({ children }) => <li className="ml-4">{children}</li>,
+                    }}
+                >
+                    {description}
+                </ReactMarkdown>
+            }
+
             <article>
                 <h2>Наявні моделі бренду {brand.name}</h2>
                 {brandModels.map((model) => (
-                    <p key={model.id}>{model.name}</p>
+                    <Link
+                        key={model.id}
+                        href={`/models/${normalizeUrl(model.name)}`}
+                    >
+                        <p>{model.name}</p>
+                    </Link>
                 ))}
             </article>
 
             <article>
                 <h2>Наявні шини бренду {brand.name}</h2>
                 {brandTyres.map((tyre) => (
-                    <p key={tyre.id}>{tyre.title}</p>
+                    <p key={tyre.id}>{tyre.title} - {tyre.date_code} - {tyre.price.toNumber()} грн.</p>
                 ))}
             </article>
 
             <p className="italic text-right text-light dark:text-darkmode-light">
                 Останнє оновлення: {new Date(brand.updated_at).toLocaleDateString()}
-            </p>     
+            </p>
         </section>
     );
 }

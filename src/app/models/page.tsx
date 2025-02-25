@@ -1,5 +1,6 @@
-import { fetchModels } from "@/lib";
+import { fetchModels, normalizeUrl } from "@/lib";
 import { Model } from "@/types";
+import Link from "next/link";
 
 export const dynamic = "force-static";
 
@@ -27,7 +28,12 @@ export default async function ModelsPage() {
                 <div key={brand}>
                     <h2>{brand}</h2>
                     {modelList.map((model) => (
-                        <p key={model.id}>{model.name}</p>
+                        <Link
+                            key={model.id}
+                            href={`/models/${normalizeUrl(model.name)}`}                           
+                        >
+                            <p>{model.name}</p>
+                        </Link>
                     ))}
                 </div>
             ))}
