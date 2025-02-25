@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Footer } from "@/components";
+import { Header } from "@/components/header";
 
 export const metadata: Metadata = {
   title: "Шина Мікс",
@@ -24,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="uk" className="scroll-smooth" >
       <body>
+        <Header />
         {children}
         <Footer />
       </body>

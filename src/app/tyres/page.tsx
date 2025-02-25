@@ -4,7 +4,7 @@ export default async function Tyres() {
     const tyres = await fetchTyres();
 
     return (
-        <section>
+        <section className="container ">
             <h1>Tyres List</h1>
             {tyres.map((tyre) => (
                 <div key={tyre.id}>

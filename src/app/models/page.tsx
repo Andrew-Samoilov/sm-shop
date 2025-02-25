@@ -26,7 +26,7 @@ export default async function ModelsPage() {
             <h1>Models</h1>
             {Object.entries(groupedModels).map(([brand, modelList]) => (
                 <div key={brand}>
-                    <h2>{brand}</h2>
+                    <h2>{brand}({modelList.length})</h2>
                     {modelList.map((model) => (
                         <Link
                             key={model.id}

@@ -1,6 +1,7 @@
 
 export { normalizeUrl } from "./normalize-url";
 export { formatDisplayUrl } from "./format-display-url";
+export { markdownComponents } from "../app/brands/[name]/page";
 
 export { prisma } from "./prisma";
 

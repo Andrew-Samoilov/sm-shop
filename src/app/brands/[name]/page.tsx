@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import path from "path";
 import fs from "fs";
 import ReactMarkdown from "react-markdown";
+import { JSX } from "react";
+
 
 export async function generateStaticParams() {
     const brands = await fetchBrands();
@@ -20,14 +22,20 @@ async function getBrandDescription(brandSlug: string, dbDescription: string) {
     try {
         if (fs.existsSync(filePath)) {
             const fileContent = fs.readFileSync(filePath, "utf-8");
-            return fileContent; // Повертає текст із Markdown-файлу
+            return fileContent; 
         }
     } catch (error) {
         console.error("Помилка зчитування файлу:", error);
     }
 
-    return dbDescription; // Якщо файлу немає, повертає короткий текст із БД
+    return dbDescription;
 }
+
+export const markdownComponents = {
+    ul: (props: JSX.IntrinsicElements["ul"]) => <ul className="list-disc pl-6" {...props} />,
+    ol: (props: JSX.IntrinsicElements["ol"]) => <ol className="list-decimal pl-6" {...props} />,
+    li: (props: JSX.IntrinsicElements["li"]) => <li className="ml-4" {...props} />,
+};
 
 export default async function BrandPage({
     params,
@@ -41,9 +49,11 @@ export default async function BrandPage({
     if (!brand) return notFound();
 
     const brandSlug = normalizeUrl(brand.name);
-    const description = await getBrandDescription(brandSlug, brand.description);
+    const description = await getBrandDescription(brandSlug, brand.description??"");
     const brandModels = await fetchModelsById(brand.id);
     const brandTyres = await fetchTyresByBrandId(brand.id);
+
+
 
     return (
         <section className="container flex flex-col gap-6">
@@ -76,18 +86,14 @@ export default async function BrandPage({
 
             {brand.description &&
                 <ReactMarkdown
-                    components={{
-                        ul: ({ children }) => <ul className="list-disc pl-6">{children}</ul>,
-                        ol: ({ children }) => <ol className="list-decimal pl-6">{children}</ol>,
-                        li: ({ children }) => <li className="ml-4">{children}</li>,
-                    }}
+                    components={markdownComponents}
                 >
                     {description}
                 </ReactMarkdown>
             }
 
             <article>
-                <h2>Наявні моделі бренду {brand.name}</h2>
+                <h2>Наявні моделі бренду {brand.name} ({brandModels.length})</h2>
                 {brandModels.map((model) => (
                     <Link
                         key={model.id}
@@ -99,7 +105,7 @@ export default async function BrandPage({
             </article>
 
             <article>
-                <h2>Наявні шини бренду {brand.name}</h2>
+                <h2>Наявні шини бренду {brand.name} ({brandTyres.length})</h2>
                 {brandTyres.map((tyre) => (
                     <p key={tyre.id}>{tyre.title} - {tyre.date_code} - {tyre.price.toNumber()} грн.</p>
                 ))}
