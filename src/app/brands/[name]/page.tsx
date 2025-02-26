@@ -1,11 +1,17 @@
-import { fetchBrands, normalizeUrl, fetchBrandByName, fetchModelsById, fetchTyresByBrandId, formatDisplayUrl } from "@/lib"
+import ReactMarkdown from "react-markdown";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import path from "path";
-import fs from "fs";
-import ReactMarkdown from "react-markdown";
 import { JSX } from "react";
 
+import {
+    fetchBrands,
+    fetchBrandByName,
+    fetchModelsById,
+    fetchTyresByBrandId,
+    normalizeUrl,
+    formatDisplayUrl,
+    getBrandDescription
+} from "@/lib";
 
 export async function generateStaticParams() {
     const brands = await fetchBrands();
@@ -15,21 +21,6 @@ export async function generateStaticParams() {
     }))
 }
 
-
-async function getBrandDescription(brandSlug: string, dbDescription: string) {
-    const filePath = path.join(process.cwd(), `src/import-data/brands/${brandSlug}-description.md`);
-
-    try {
-        if (fs.existsSync(filePath)) {
-            const fileContent = fs.readFileSync(filePath, "utf-8");
-            return fileContent; 
-        }
-    } catch (error) {
-        console.error("Помилка зчитування файлу:", error);
-    }
-
-    return dbDescription;
-}
 
 export const markdownComponents = {
     ul: (props: JSX.IntrinsicElements["ul"]) => <ul className="list-disc pl-6" {...props} />,
@@ -52,8 +43,6 @@ export default async function BrandPage({
     const description = await getBrandDescription(brandSlug, brand.description??"");
     const brandModels = await fetchModelsById(brand.id);
     const brandTyres = await fetchTyresByBrandId(brand.id);
-
-
 
     return (
         <section className="container flex flex-col gap-6">

@@ -1,5 +1,6 @@
-import { fetchBrandById, fetchModelByName, fetchModels, fetchTyresByModelId, normalizeUrl } from "@/lib";
+import { fetchBrandById, fetchModelByName, fetchModels, fetchTyresByModelId, getModelDescription, markdownComponents, normalizeUrl } from "@/lib";
 import { notFound } from "next/navigation";
+import ReactMarkdown from "react-markdown";
 
 export async function generateStaticParams() {
     const brands = await fetchModels();
@@ -19,13 +20,21 @@ export default async function ModelPage({
     const model = await fetchModelByName(name);
     if (!model) return notFound();
 
+    const modelSlug = normalizeUrl(model.name);
+    const description = await getModelDescription(modelSlug, model.description ?? "");
     const modelTyres = await fetchTyresByModelId(model.id);
     const brand = await fetchBrandById(model.brandId);
 
     return (
         <section className="container flex flex-col gap-6">
             <h1>{brand?.name} {model.name}</h1>
-            <p>{model.description}</p>
+            {model.description &&
+                <ReactMarkdown
+                    components={markdownComponents}
+                >
+                    {description}
+                </ReactMarkdown>
+            }
 
             <article>
                 <h2>Наявні шини для моделі {model.name} бренду {brand?.name}</h2>
@@ -35,9 +44,6 @@ export default async function ModelPage({
                     </div>))}
             </article>
 
-            <p className="italic text-right text-light dark:text-darkmode-light">
-                Останнє оновлення: {new Date(model.updatedAt).toLocaleDateString()}
-            </p>
         </section>
     )
 };
