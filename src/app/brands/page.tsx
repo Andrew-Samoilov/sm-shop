@@ -26,9 +26,9 @@ export default async function BrandsPage() {
                             // eslint-disable-next-line @next/next/no-img-element
                             <img
                                 src={brand.logo}
-                            alt={brand.name}
-                            height='auto'
-                            className="w-full max-w-[25%] min-w-fit"
+                                alt={brand.name}
+                                height='auto'
+                                className="w-full max-w-[25%] min-w-fit"
                             />
                         }
                         <p>{brand.name}</p>
