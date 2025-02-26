@@ -1,7 +1,6 @@
 import ReactMarkdown from "react-markdown";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { JSX } from "react";
 
 import {
     fetchBrands,
@@ -16,31 +15,28 @@ import {
 export async function generateStaticParams() {
     const brands = await fetchBrands();
 
-    return brands.map((brand) => ({
-        name: normalizeUrl(brand.name),
-    }))
+    return brands
+        .filter((brand) => brand?.name) // Уникаємо порожніх значень
+        .map((brand) => ({
+            name: normalizeUrl(brand.name),
+        }))
+        .filter((param) => param.name !== ''); // Фільтруємо порожні значення
 }
 
-
-export const markdownComponents = {
-    ul: (props: JSX.IntrinsicElements["ul"]) => <ul className="list-disc pl-6" {...props} />,
-    ol: (props: JSX.IntrinsicElements["ol"]) => <ol className="list-decimal pl-6" {...props} />,
-    li: (props: JSX.IntrinsicElements["li"]) => <li className="ml-4" {...props} />,
-};
 
 export default async function BrandPage({
     params,
 }: {
     params: Promise<{ name: string }>;
 }) {
-    const resolvedParams = await params;
-    const { name } = resolvedParams;
+    const { name } = await params;
+    if (!name) return notFound();
 
     const brand = await fetchBrandByName(name);
     if (!brand) return notFound();
 
     const brandSlug = normalizeUrl(brand.name);
-    const description = await getBrandDescription(brandSlug, brand.description??"");
+    const description = await getBrandDescription(brandSlug, brand.description ?? "");
     const brandModels = await fetchModelsById(brand.id);
     const brandTyres = await fetchTyresByBrandId(brand.id);
 
@@ -73,13 +69,9 @@ export default async function BrandPage({
                 }
             </div>
 
-            {brand.description &&
-                <ReactMarkdown
-                    components={markdownComponents}
-                >
-                    {description}
-                </ReactMarkdown>
-            }
+            <ReactMarkdown>
+                {description}
+            </ReactMarkdown>
 
             <article>
                 <h2>Наявні моделі бренду {brand.name} ({brandModels.length})</h2>
@@ -96,13 +88,9 @@ export default async function BrandPage({
             <article>
                 <h2>Наявні шини бренду {brand.name} ({brandTyres.length})</h2>
                 {brandTyres.map((tyre) => (
-                    <p key={tyre.id}>{tyre.title} - {tyre.date_code} - {tyre.price.toNumber()} грн.</p>
+                    <p key={tyre.id}>{tyre.title} - {tyre.date_code} - {Number(tyre.price).toFixed(2)} грн.</p>
                 ))}
             </article>
-
-            <p className="italic text-right text-light dark:text-darkmode-light">
-                Останнє оновлення: {new Date(brand.updated_at).toLocaleDateString()}
-            </p>
         </section>
     );
 }

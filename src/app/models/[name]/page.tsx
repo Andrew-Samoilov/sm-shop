@@ -1,4 +1,4 @@
-import { fetchBrandById, fetchModelByName, fetchModels, fetchTyresByModelId, getModelDescription, markdownComponents, normalizeUrl } from "@/lib";
+import { fetchBrandById, fetchModelByName, fetchModels, fetchTyresByModelId, getModelDescription, normalizeUrl } from "@/lib";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 
@@ -28,13 +28,10 @@ export default async function ModelPage({
     return (
         <section className="container flex flex-col gap-6">
             <h1>{brand?.name} {model.name}</h1>
-            {model.description &&
-                <ReactMarkdown
-                    components={markdownComponents}
-                >
-                    {description}
-                </ReactMarkdown>
-            }
+
+            <ReactMarkdown>
+                {description}
+            </ReactMarkdown>
 
             <article>
                 <h2>Наявні шини для моделі {model.name} бренду {brand?.name}</h2>
@@ -44,6 +41,6 @@ export default async function ModelPage({
                     </div>))}
             </article>
 
-        </section>
+        </section >
     )
 };

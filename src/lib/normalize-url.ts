@@ -1,4 +1,5 @@
 export function normalizeUrl(name: string): string {
+    if (!name) return '';
     return name
         .toLowerCase()
         .trim()

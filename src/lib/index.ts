@@ -1,7 +1,6 @@
 
 export { normalizeUrl } from "./normalize-url";
 export { formatDisplayUrl } from "./format-display-url";
-export { markdownComponents } from "../app/brands/[name]/page";
 
 export { prisma } from "./prisma";
 
@@ -11,7 +10,7 @@ export { fetchTyresByModelId } from "./prisma/fetch-tyres-by-model-id";
 
 export { fetchBrands } from "./prisma";
 export { fetchBrandByName } from "./prisma";
-export { fetchBrandById } from "./prisma";
+export { fetchBrandById } from "./prisma/fetch-brand-by-id";
 export { getBrandDescription } from "./prisma/get-brand-description";
 
 export { fetchModels } from "./prisma";
