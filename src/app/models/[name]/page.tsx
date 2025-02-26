@@ -3,9 +3,9 @@ import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 
 export async function generateStaticParams() {
-    const brands = await fetchModels();
+    const models = await fetchModels();
 
-    return brands.map((brand) => ({
+    return models.map((brand) => ({
         name: normalizeUrl(brand.name),
     }))
 }

@@ -27,12 +27,12 @@ export async function generateStaticParams() {
 export default async function BrandPage({
     params,
 }: {
-    params: Promise<{ name: string }>;
+    params: Promise<{ brand_name: string }>;
 }) {
-    const { name } = await params;
-    if (!name) return notFound();
+    const { brand_name } = await params;
+    if (!brand_name) return notFound();
 
-    const brand = await fetchBrandByName(name);
+    const brand = await fetchBrandByName(brand_name);
     if (!brand) return notFound();
 
     const brandSlug = normalizeUrl(brand.name);

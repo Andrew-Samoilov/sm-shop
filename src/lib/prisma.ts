@@ -32,8 +32,6 @@ export async function fetchBrands(): Promise<Brand[]> {
     }
 }
 
-
-
 export async function fetchBrandByName(name: string): Promise<brands | null> {
     const normalizedName = normalizeUrl(name);
 

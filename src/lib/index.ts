@@ -7,6 +7,7 @@ export { prisma } from "./prisma";
 export { fetchTyres } from "./prisma";
 export { fetchTyresByBrandId } from "./prisma";
 export { fetchTyresByModelId } from "./prisma/fetch-tyres-by-model-id";
+export { fetchTyreByName } from "./prisma/fetch-tyre-by-name";
 
 export { fetchBrands } from "./prisma";
 export { fetchBrandByName } from "./prisma";
