@@ -81,6 +81,7 @@ export async function fetchTyresByBrandId(brandId: number) {
         select: {
             id: true,
             title: true,
+            slug: true,
             date_code: true,
             price: true,
         },

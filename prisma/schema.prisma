@@ -37,7 +37,7 @@ model tyres {
   applicability      String?  @db.VarChar(50)
   sku                String   @unique(map: "tires_sku_key") @db.VarChar(50)
   inventory_quantity Int?     @default(0)
-  price              Decimal  @db.Decimal(10, 2)
+  price              Float    
   load_speed_index   String?  @db.VarChar(10)
   brand              String?  @db.VarChar(50)
   model              String?  @db.VarChar(100)

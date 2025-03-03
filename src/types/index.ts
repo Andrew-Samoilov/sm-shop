@@ -4,7 +4,7 @@ export interface Tyre {
     slug?: string;
     date_code: string | null;
     price: number;
-    brand_id?: number;
+    brand_id?: number | null;
 }
 
 export interface Tyres {

@@ -5,6 +5,7 @@ export async function fetchTyresByModelId(modelId: number) {
         select: {
             id: true,
             title: true,
+            slug: true,
             date_code: true,
             price: true,
         },

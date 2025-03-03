@@ -40,6 +40,7 @@ export default async function BrandPage({
     const description = await getBrandDescription(brandSlug, brand.description ?? "");
     const brandModels = await fetchModelsById(brand.id);
     const brandTyres = await fetchTyresByBrandId(brand.id);
+    // console.log(`fetchTyresByBrandId `,brandTyres);
 
     return (
         <section className="container flex flex-col gap-6">
