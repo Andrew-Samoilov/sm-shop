@@ -12,9 +12,9 @@ export { fetchTyreByName } from "./prisma/fetch-tyre-by-name";
 export { fetchBrands } from "./prisma";
 export { fetchBrandByName } from "./prisma";
 export { fetchBrandById } from "./prisma/fetch-brand-by-id";
-export { getBrandDescription } from "./prisma/get-brand-description";
+export { getBrandDescription } from "./get-brand-description";
 
 export { fetchModels } from "./prisma";
 export { fetchModelsById } from "./prisma";
 export { fetchModelByName } from "./prisma/fetch-model-by-name";
-export { getModelDescription } from "./prisma/get-model-description";
+export { getModelDescription } from "./get-model-description";

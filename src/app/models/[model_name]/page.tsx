@@ -5,19 +5,18 @@ import ReactMarkdown from "react-markdown";
 export async function generateStaticParams() {
     const models = await fetchModels();
 
-    return models.map((brand) => ({
-        name: normalizeUrl(brand.name),
+    return models.map((model) => ({
+        name: normalizeUrl(model.name),
     }))
 }
 
 export default async function ModelPage({
     params,
 }: {
-    params: Promise<{ name: string }>;
+        params: Promise<{ model_name: string }>;
 }) {
-    const resolvedParams = await params;
-    const { name } = resolvedParams;
-    const model = await fetchModelByName(name);
+    const { model_name } = await params
+    const model = await fetchModelByName(model_name);
     if (!model) return notFound();
 
     const modelSlug = normalizeUrl(model.name);

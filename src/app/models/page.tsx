@@ -4,13 +4,8 @@ import Link from "next/link";
 
 export const dynamic = "force-static";
 
-async function getModels(): Promise<Model[]> {
-    const models = await fetchModels();
-    return models;
-}
-
 export default async function ModelsPage() {
-    const models: Model[] = await getModels();
+    const models: Model[] = await fetchModels();
 
     const groupedModels = models.reduce<Record<string, Model[]>>((acc, model) => {
         const brandName = model.brand.name;
