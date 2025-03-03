@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Footer } from "@/components";
-import { Header } from "@/components/header";
+import { Footer, Header } from "@/components";
 
 export const metadata: Metadata = {
   title: "Шина Мікс",

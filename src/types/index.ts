@@ -1,10 +1,10 @@
 export interface Tyre {
     id: number;
     title: string;
-    slug: string;
-    date_code: string;
+    slug?: string;
+    date_code: string | null;
     price: number;
-    brand_id: number;
+    brand_id?: number;
 }
 
 export interface Tyres {

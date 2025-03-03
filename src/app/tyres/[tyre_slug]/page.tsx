@@ -6,7 +6,7 @@ export async function generateStaticParams() {
     const tyres = await fetchTyres();
     
     return tyres.map((tyre) => ({
-        tyre_slug: tyre.slug
+        tyre_slug: tyre.slug,
     }))
 }
 

@@ -1,3 +1,4 @@
+import { TyresList } from "@/components";
 import { fetchBrandById, fetchModelByName, fetchModels, fetchTyresByModelId, getModelDescription, normalizeUrl } from "@/lib";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
@@ -34,10 +35,7 @@ export default async function ModelPage({
 
             <article>
                 <h2>Наявні шини для моделі {model.name} бренду {brand?.name}</h2>
-                {modelTyres.map((tyre) => (
-                    <div key={tyre.id}>
-                        <p>{tyre.title} - {tyre.date_code} - {tyre.price.toNumber()} грн.</p>
-                    </div>))}
+                <TyresList tyres={modelTyres} />
             </article>
 
         </section >

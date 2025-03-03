@@ -22,7 +22,7 @@ export default async function BrandsPage() {
                     <Link
                         key={brand.id}
                         href={`/brands/${normalizeUrl(brand.name)}`}
-                        className="p-6 border rounded-md border-border dark:border-darkmode-border hover:border-accent hover:no-underline
+                        className="p-6 border-2 rounded-md border-border dark:border-darkmode-border hover:border-accent hover:no-underline
                         flex flex-col items-center justify-center gap-6">
                         {brand.logo &&
                             // eslint-disable-next-line @next/next/no-img-element

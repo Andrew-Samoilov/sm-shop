@@ -11,6 +11,7 @@ import {
     formatDisplayUrl,
     getBrandDescription
 } from "@/lib";
+import { TyresList } from "@/components";
 
 export async function generateStaticParams() {
     const brands = await fetchBrands();
@@ -87,9 +88,7 @@ export default async function BrandPage({
 
             <article>
                 <h2>Наявні шини бренду {brand.name} ({brandTyres.length})</h2>
-                {brandTyres.map((tyre) => (
-                    <p key={tyre.id}>{tyre.title} - {tyre.date_code} - {Number(tyre.price).toFixed(2)} грн.</p>
-                ))}
+                <TyresList tyres={brandTyres} />
             </article>
         </section>
     );
