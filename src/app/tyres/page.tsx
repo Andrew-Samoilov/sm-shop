@@ -1,7 +1,7 @@
-import { fetchTyres, normalizeUrl } from "@/lib";
+import { fetchTyres } from "@/lib";
 import Link from "next/link";
 
-export default async function Tyres() {
+export default async function TyresPage() {
     const tyres = await fetchTyres();
 
     return (
@@ -10,9 +10,9 @@ export default async function Tyres() {
             {tyres.map((tyre) => (
                 <Link
                     key={tyre.id}
-                    href={`/tyres/${normalizeUrl(tyre.title)}`}
+                    href={`/tyres/${tyre.slug}`}
                 >
-                    <p >{tyre.title} - {tyre.date_code} - {tyre.price.toNumber()} грн.</p>
+                    <p >{tyre.title} - {tyre.date_code} - {tyre.price.toString()} грн.</p>
                 </Link>
             ))}
         </section>

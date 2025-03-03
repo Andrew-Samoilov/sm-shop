@@ -59,20 +59,6 @@ export async function fetchModels() {
     });
 }
 
-export async function fetchTyres() {
-    return await prisma.tyres.findMany({
-        select: {
-            id: true,
-            title: true,
-            date_code: true,
-            price: true,
-        },
-        orderBy: {
-            title: "asc"
-        },
-    });
-}
-
 export async function fetchModelsById(brandId: number) {
     return await prisma.models.findMany({
         select: {

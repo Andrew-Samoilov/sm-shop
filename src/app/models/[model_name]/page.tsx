@@ -6,7 +6,7 @@ export async function generateStaticParams() {
     const models = await fetchModels();
 
     return models.map((model) => ({
-        name: normalizeUrl(model.name),
+        model_name: normalizeUrl(model.name),
     }))
 }
 

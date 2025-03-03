@@ -18,9 +18,9 @@ export async function generateStaticParams() {
     return brands
         .filter((brand) => brand?.name) // Уникаємо порожніх значень
         .map((brand) => ({
-            name: normalizeUrl(brand.name),
+            brand_name: normalizeUrl(brand.name),
         }))
-        .filter((param) => param.name !== ''); // Фільтруємо порожні значення
+        .filter((param) => param.brand_name !== ''); // Фільтруємо порожні значення
 }
 
 

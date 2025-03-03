@@ -30,6 +30,7 @@ model tyres {
   brand_rel brands? @relation("BrandTyres", fields: [brand_id], references: [id])
 
   title              String
+  slug               String    
   description        String?
   country            String?  @db.VarChar(50)
   date_code          String?  @db.Char(4)

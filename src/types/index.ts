@@ -1,6 +1,7 @@
 export interface Tyre {
     id: number;
     title: string;
+    slug: string;
     date_code: string;
     price: number;
     brand_id: number;
