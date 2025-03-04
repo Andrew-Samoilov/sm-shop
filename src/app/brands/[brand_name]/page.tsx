@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import {
     fetchBrands,
     fetchBrandByName,
-    fetchModelsById,
+    fetchModelsByBrandId,
     fetchTyresByBrandId,
     normalizeUrl,
     formatDisplayUrl,
@@ -38,7 +38,7 @@ export default async function BrandPage({
 
     const brandSlug = normalizeUrl(brand.name);
     const description = await getBrandDescription(brandSlug, brand.description ?? "");
-    const brandModels = await fetchModelsById(brand.id);
+    const brandModels = await fetchModelsByBrandId(brand.id);
     const brandTyres = await fetchTyresByBrandId(brand.id);
     // console.log(`fetchTyresByBrandId `,brandTyres);
 

@@ -59,23 +59,6 @@ export async function fetchModels() {
     });
 }
 
-export async function fetchModelsById(brandId: number) {
-    return await prisma.models.findMany({
-        select: {
-            id: true,
-            name: true,
-        },
-        where: {
-            brand: {
-                id: brandId,
-            },
-        },
-        orderBy: {
-            name: "asc"
-        },
-    });
-}
-
 export async function fetchTyresByBrandId(brandId: number) {
     return await prisma.tyres.findMany({
         select: {

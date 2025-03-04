@@ -15,6 +15,6 @@ export { fetchBrandById } from "./prisma/fetch-brand-by-id";
 export { getBrandDescription } from "./get-brand-description";
 
 export { fetchModels } from "./prisma";
-export { fetchModelsById } from "./prisma";
+export { fetchModelsByBrandId } from "./prisma/fetch-models-by-brand-id";
 export { fetchModelByName } from "./prisma/fetch-model-by-name";
 export { getModelDescription } from "./get-model-description";
