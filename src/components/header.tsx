@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { Search } from '@/components';
+
 
 export function Header() {
     return (
@@ -8,6 +10,7 @@ export function Header() {
             <Link href="/tyres">Tyres</Link>
             <Link href="/brands">Brands</Link>
             <Link href="/models">Models</Link>
+            <Search />
         </header>
     );
 }
