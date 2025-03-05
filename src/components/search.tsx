@@ -20,7 +20,7 @@ export function Search() {
                 value={query}
                 onChange={handleSearch}
                 placeholder="Пошук шин..."
-                className="w-full p-2 border rounded-md"
+                className="p-2 border border-border dark:border-darkmode-border rounded-md"
             />
         </div>
     );

@@ -22,10 +22,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="uk" className="scroll-smooth" >
-      <body>
+    <html lang="uk" >
+      <body className="scroll-smooth" >
         <Header />
-        {children}
+        <main>
+          {children}
+        </main>
         <Footer />
       </body>
     </html>
