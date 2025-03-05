@@ -10,7 +10,7 @@ export function Search() {
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         setQuery(formatTyreSizeQuery(e.target.value));
-        router.push(`?query=${formatTyreSizeQuery(e.target.value)}`, { scroll: false });
+        router.push(`/tyres?query=${formatTyreSizeQuery(e.target.value)}`, { scroll: false });
     };
 
     return (
@@ -20,7 +20,8 @@ export function Search() {
                 value={query}
                 onChange={handleSearch}
                 placeholder="Пошук шин..."
-                className="p-2 border border-border dark:border-darkmode-border rounded-md"
+                className="py-2 px-4 border border-border dark:border-darkmode-border rounded-md
+                 focus:ring-2 focus:outline-none focus:ring-accent"
             />
         </div>
     );
