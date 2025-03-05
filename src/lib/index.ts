@@ -1,6 +1,7 @@
 
 export { normalizeUrl } from "./normalize-url";
 export { formatDisplayUrl } from "./format-display-url";
+export { formatTyreSizeQuery } from "./format-tyre-size-query"
 
 export { prisma } from "./prisma";
 
