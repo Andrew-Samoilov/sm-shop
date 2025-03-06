@@ -17,11 +17,11 @@ export async function generateStaticParams() {
     const brands = await fetchBrands();
 
     return brands
-        .filter((brand) => brand?.name) // Уникаємо порожніх значень
+        .filter((brand) => brand?.name) 
         .map((brand) => ({
             brand_name: normalizeUrl(brand.name),
         }))
-        .filter((param) => param.brand_name !== ''); // Фільтруємо порожні значення
+        .filter((param) => param.brand_name !== ''); 
 }
 
 

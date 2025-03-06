@@ -9,9 +9,10 @@ export { fetchTyres } from "./prisma/fetch-tyres";
 export { fetchTyreBySlug } from "./prisma/fetch-tyre-by-slug";
 export { fetchTyresByBrandId } from "./prisma";
 export { fetchTyresByModelId } from "./prisma/fetch-tyres-by-model-id";
-export { GetTyresWidths } from './get-tyres-widths'
-export { GetTyresProfiles } from './get-tyres-profiles'
-export { GetTyresDiameters } from './get-tyres-diameters'
+export { fetchTyresByWPD } from "./prisma/fetch-tyres-by-wpd";
+export { GetTyresWidths } from './get-tyres-widths';
+export { GetTyresProfiles } from './get-tyres-profiles';
+export { GetTyresDiameters } from './get-tyres-diameters';
 
 export { fetchBrands } from "./prisma";
 export { fetchBrandByName } from "./prisma";
