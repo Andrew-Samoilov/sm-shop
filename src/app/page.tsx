@@ -1,4 +1,3 @@
-import { TyresSelect } from "@/components";
 import Link from "next/link";
 
 export default function Home() {
@@ -23,9 +22,13 @@ export default function Home() {
           href="/models">
           <h2>Models</h2>
         </Link>
+        <Link
+          className="px-6 py-2 border-2 rounded-md border-border dark:border-darkmode-border
+            hover:border-accent hover:no-underline"
+          href="/search">
+          <h2>Search</h2>
+        </Link>
       </div>
-
-      <TyresSelect />
 
     </section>
   );

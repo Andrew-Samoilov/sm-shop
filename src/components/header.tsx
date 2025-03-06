@@ -9,6 +9,7 @@ export function Header() {
             <Link href="/tyres">Tyres</Link>
             <Link href="/brands">Brands</Link>
             <Link href="/models">Models</Link>
+            <Link href="/search">Search</Link>
             <Search />
         </header>
     );
