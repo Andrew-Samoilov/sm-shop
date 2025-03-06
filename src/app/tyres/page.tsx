@@ -20,14 +20,9 @@ export default async function TyresPage({
         // take: 10,
     });
 
-    const formattedTyres = tyres.map(tyre => ({
-        ...tyre,
-        price: Number(tyre.price),
-    }));
-
     return (
         <section className="container ">
-            <TyresList tyres={formattedTyres} />
+            <TyresList tyres={tyres} />
         </section>
     );
 }
