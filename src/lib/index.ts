@@ -3,23 +3,23 @@ export { normalizeUrl } from "./normalize-url";
 export { formatDisplayUrl } from "./format-display-url";
 export { formatTyreSizeQuery } from "./format-tyre-size-query"
 
-export { prisma } from "./prisma";
+export { prisma } from "./prisma/prisma";
 
-export { fetchTyres } from "./prisma/fetch-tyres";
-export { fetchTyreBySlug } from "./prisma/fetch-tyre-by-slug";
-export { fetchTyresByBrandId } from "./prisma";
-export { fetchTyresByModelId } from "./prisma/fetch-tyres-by-model-id";
-export { fetchTyresByWPD } from "./prisma/fetch-tyres-by-wpd";
-export { GetTyresWidths } from './get-tyres-widths';
-export { GetTyresProfiles } from './get-tyres-profiles';
-export { GetTyresDiameters } from './get-tyres-diameters';
+export { getTyres } from "./prisma/get-tyres";
+export { getTyreBySlug } from "./prisma/get-tyre-by-slug";
+export { getTyresByBrandId } from "./prisma/get-tyres-by-brand-id";
+export { getTyresByModelId } from "./prisma/get-tyres-by-model-id"
+export { getTyresByWPD } from "./prisma/get-tyres-by-wpd";
+export { getTyresWidths } from './get-tyres-widths';
+export { getTyresProfiles } from './get-tyres-profiles';
+export { getTyresDiameters } from './get-tyres-diameters';
 
-export { fetchBrands } from "./prisma";
-export { fetchBrandByName } from "./prisma";
-export { fetchBrandById } from "./prisma/fetch-brand-by-id";
+export { getBrands } from "./prisma/get-brands";
+export { getBrandByName } from "./prisma/get-brand-by-name";
+export { getBrandById } from "./prisma/get-brand-by-id";
 export { getBrandDescription } from "./get-brand-description";
 
-export { fetchModels } from "./prisma";
-export { fetchModelsByBrandId } from "./prisma/fetch-models-by-brand-id";
-export { fetchModelByName } from "./prisma/fetch-model-by-name";
+export { getModels } from "./prisma/get-models";
+export { getModelsByBrandId } from "./prisma/get-models-by-brand-id";
+export { getModelByName } from "./prisma/get-model-by-name";
 export { getModelDescription } from "./get-model-description";

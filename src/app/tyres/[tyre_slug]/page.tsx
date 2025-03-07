@@ -1,10 +1,9 @@
-import { fetchTyres } from "@/lib";
-import { fetchTyreBySlug } from "@/lib/prisma/fetch-tyre-by-slug";
+import { getTyres, getTyreBySlug } from "@/lib";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
-    const tyres = await fetchTyres();
-    
+    const tyres = await getTyres();
+
     return tyres.map((tyre) => ({
         tyre_slug: tyre.slug,
     }))
@@ -13,12 +12,12 @@ export async function generateStaticParams() {
 export default async function TyrePage({
     params,
 }: {
-        params: Promise<{ tyre_slug: string }>;
+    params: Promise<{ tyre_slug: string }>;
 }) {
     const { tyre_slug } = await params;
-    const tyre = await fetchTyreBySlug(tyre_slug);
+    const tyre = await getTyreBySlug(tyre_slug);
 
-    // console.log("fetchTyreBySlug:", tyre);
+    // console.log("getTyreBySlug:", tyre);
     if (!tyre) return notFound();
 
     return (

@@ -1,7 +1,7 @@
 'use server';
 import { prisma } from "@/lib";
 
-export async function GetTyresProfiles() {
+export async function getTyresProfiles() {
     try {
         const profiles = await prisma.$queryRaw<{ profile: string }[]>`
             SELECT DISTINCT profile::TEXT FROM tyres ORDER BY profile ASC;

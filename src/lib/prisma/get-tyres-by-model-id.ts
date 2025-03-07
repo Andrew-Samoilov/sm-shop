@@ -1,6 +1,6 @@
-import {  prisma } from "@/lib";
+import { prisma } from "@/lib";
 
-export async function fetchTyresByModelId(modelId: number) {
+export async function getTyresByModelId(modelId: number) {
     return await prisma.tyres.findMany({
         select: {
             id: true,

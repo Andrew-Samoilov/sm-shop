@@ -3,10 +3,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import {
-    fetchBrands,
-    fetchBrandByName,
-    fetchModelsByBrandId,
-    fetchTyresByBrandId,
+    getBrands,
+    getBrandByName,
+    getModelsByBrandId,
+    getTyresByBrandId,
     normalizeUrl,
     formatDisplayUrl,
     getBrandDescription
@@ -14,14 +14,14 @@ import {
 import { TyresList } from "@/components";
 
 export async function generateStaticParams() {
-    const brands = await fetchBrands();
+    const brands = await getBrands();
 
     return brands
-        .filter((brand) => brand?.name) 
+        .filter((brand) => brand?.name)
         .map((brand) => ({
             brand_name: normalizeUrl(brand.name),
         }))
-        .filter((param) => param.brand_name !== ''); 
+        .filter((param) => param.brand_name !== '');
 }
 
 
@@ -33,14 +33,14 @@ export default async function BrandPage({
     const { brand_name } = await params;
     if (!brand_name) return notFound();
 
-    const brand = await fetchBrandByName(brand_name);
+    const brand = await getBrandByName(brand_name);
     if (!brand) return notFound();
 
     const brandSlug = normalizeUrl(brand.name);
     const description = await getBrandDescription(brandSlug, brand.description ?? "");
-    const brandModels = await fetchModelsByBrandId(brand.id);
-    const brandTyres = await fetchTyresByBrandId(brand.id);
-    // console.log(`fetchTyresByBrandId `,brandTyres);
+    const brandModels = await getModelsByBrandId(brand.id);
+    const brandTyres = await getTyresByBrandId(brand.id);
+    // console.log(`getTyresByBrandId `,brandTyres);
 
     return (
         <section className="container flex flex-col gap-6">

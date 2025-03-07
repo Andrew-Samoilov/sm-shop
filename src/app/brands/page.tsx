@@ -1,8 +1,8 @@
-import { fetchBrands, normalizeUrl } from "@/lib";
+import { getBrands, normalizeUrl } from "@/lib";
 import Link from "next/link";
 
 export async function generateStaticParams() {
-    const brands = await fetchBrands();
+    const brands = await getBrands();
 
     return brands.map((brand) => ({
         name: normalizeUrl(brand.name),
@@ -10,8 +10,7 @@ export async function generateStaticParams() {
 }
 
 export default async function BrandsPage() {
-    const brands = await fetchBrands();
-
+    const brands = await getBrands();
 
     return (
         <section className=" mx-auto p-6">

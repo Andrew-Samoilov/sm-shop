@@ -1,11 +1,11 @@
-import { fetchModels, normalizeUrl } from "@/lib";
+import { getModels, normalizeUrl } from "@/lib";
 import { Model } from "@/types";
 import Link from "next/link";
 
 export const dynamic = "force-static";
 
 export default async function ModelsPage() {
-    const models: Model[] = await fetchModels();
+    const models: Model[] = await getModels();
 
     const groupedModels = models.reduce<Record<string, Model[]>>((acc, model) => {
         const brandName = model.brand.name;

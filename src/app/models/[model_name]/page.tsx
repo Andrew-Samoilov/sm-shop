@@ -1,10 +1,10 @@
 import { TyresList } from "@/components";
-import { fetchBrandById, fetchModelByName, fetchModels, fetchTyresByModelId, getModelDescription, normalizeUrl } from "@/lib";
+import { getBrandById, getModelByName, getModels, getTyresByModelId, getModelDescription, normalizeUrl } from "@/lib";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 
 export async function generateStaticParams() {
-    const models = await fetchModels();
+    const models = await getModels();
 
     return models.map((model) => ({
         model_name: normalizeUrl(model.name),
@@ -14,16 +14,16 @@ export async function generateStaticParams() {
 export default async function ModelPage({
     params,
 }: {
-        params: Promise<{ model_name: string }>;
+    params: Promise<{ model_name: string }>;
 }) {
     const { model_name } = await params
-    const model = await fetchModelByName(model_name);
+    const model = await getModelByName(model_name);
     if (!model) return notFound();
 
     const modelSlug = normalizeUrl(model.name);
     const description = await getModelDescription(modelSlug, model.description ?? "");
-    const modelTyres = await fetchTyresByModelId(model.id);
-    const brand = await fetchBrandById(model.brandId);
+    const modelTyres = await getTyresByModelId(model.id);
+    const brand = await getBrandById(model.brandId);
 
     return (
         <section className="container flex flex-col gap-6">

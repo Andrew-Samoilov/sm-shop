@@ -1,6 +1,6 @@
-import { prisma } from "../prisma";
+import { prisma } from "./prisma";
 
-export async function fetchModelsByBrandId(brandId: number) {
+export async function getModelsByBrandId(brandId: number) {
     return await prisma.models.findMany({
         select: {
             id: true,

@@ -1,7 +1,7 @@
 import { normalizeUrl, prisma } from "@/lib";
 import { models } from "@prisma/client";
 
-export async function fetchModelByName(name: string): Promise<models | null> {
+export async function getModelByName(name: string): Promise<models | null> {
     const normalizedModel = normalizeUrl(name);
 
     const result = await prisma.$queryRaw<models[]>`
@@ -9,6 +9,6 @@ export async function fetchModelByName(name: string): Promise<models | null> {
         WHERE LOWER(REPLACE(name, ' ', '-')) = ${normalizedModel}
         LIMIT 1;
     `;
-    
+
     return result.length > 0 ? result[0] : null;
 }
