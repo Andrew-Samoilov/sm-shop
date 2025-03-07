@@ -26,10 +26,11 @@ export default async function BrandsPage() {
                         {brand.logo &&
                             // eslint-disable-next-line @next/next/no-img-element
                             <img
+                                // src={`/brands-logo/${normalizeUrl(brand.name)}-logo.svg`}
                                 src={brand.logo}
                                 alt={brand.name}
                                 height='auto'
-                                className="w-full max-w-[25%] min-w-fit"
+                                className="min-w-[400px] max-w-[400px] "
                             />
                         }
                         <p>{brand.name}</p>
