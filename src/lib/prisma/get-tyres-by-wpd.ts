@@ -7,6 +7,19 @@ export async function getTyresByWPD(w: string, p: string, d: string) {
             profile: p,
             diameter: d,
         },
+        select: {
+            id: true,
+            model: true,
+            description: true,
+            country: true,
+            model_id: true,
+            brand_id: true,
+            title: true,
+            slug: true,
+            date_code: true,
+            type: true,
+            price: true,
+        },
         orderBy: {
             title: "asc"
         },

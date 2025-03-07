@@ -1,12 +1,3 @@
-export interface Tyre {
-    id: number;
-    title: string;
-    slug?: string;
-    date_code: string | null;
-    price: number;
-    brand_id?: number | null;
-}
-
 export interface Tyres {
     tyres: Tyre[];
 }
@@ -28,4 +19,18 @@ export type Model = {
     brand: {
         name: string;
     };
+};
+
+export type Tyre = {
+    id: number;
+    model: string | null;
+    description: string | null;
+    country: string | null;
+    model_id: number | null;
+    brand_id: number | null;
+    title: string;
+    slug: string;
+    date_code: string | null;
+    type: string | null;
+    price?: number;
 };
