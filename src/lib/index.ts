@@ -5,8 +5,10 @@ export { formatTyreSizeQuery } from "./format-tyre-size-query"
 
 export { prisma } from "./prisma/prisma";
 
-export { getTyres } from "./prisma/get-tyres";
 export { getTyreBySlug } from "./prisma/get-tyre-by-slug";
+export { getTyreById } from "./prisma/get-tyre-by-id";
+
+export { getTyres } from "./prisma/get-tyres";
 export { getTyresByBrandId } from "./prisma/get-tyres-by-brand-id";
 export { getTyresByModelId } from "./prisma/get-tyres-by-model-id"
 export { getTyresByWPD } from "./prisma/get-tyres-by-wpd";
