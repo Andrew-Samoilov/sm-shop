@@ -31,9 +31,12 @@ export default async function BrandsPage() {
                                 alt={brand.name}
                                 height='auto'
                                 className="min-w-[400px] max-w-[400px] "
+                                style={{ viewTransitionName: `logo-${brand.name}` }}
                             />
                         }
-                        <p>{brand.name}</p>
+                        <p
+                            style={{ viewTransitionName: `title-${brand.name}` }}
+                        >{brand.name}</p>
                     </Link>
                 ))}
             </div>

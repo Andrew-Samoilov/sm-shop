@@ -46,13 +46,15 @@ export default async function BrandPage({
         <section className="container flex flex-col gap-6">
             <div className="flex justify-between items-center">
                 <div>
-                    <h1>{brand.name}</h1>
+                    <h1
+                        style={{ viewTransitionName: `title-${brand.name}` }}
+                    >{brand.name}</h1>
                     {brand.country && <p className="text-light dark:text-darkmode-light">Країна походження - <span className="font-semibold">{brand.country}</span>.</p>}
                     {brand.website && !["NULL", "null", ""].includes(brand.website) && (
                         <p>
                             <Link
                                 href={brand.website}
-                                className="text-blue-600 hover:underline"
+                                className="text-blue-600 hover:underline "
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
@@ -66,7 +68,8 @@ export default async function BrandPage({
                     <img
                         src={brand.logo}
                         alt={brand.name}
-                        className="max-w-1/2"
+                    className="max-w-1/2"
+                        style={{ viewTransitionName: `logo-${brand.name}` }}
                     />
                 }
             </div>
