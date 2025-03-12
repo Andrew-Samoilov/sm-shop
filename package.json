@@ -1,6 +1,6 @@
 {
   "name": "sm-shop",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "@prisma/client": "^6.4.0",
     "dotenv": "^16.4.7",
     "next": "15.2.1",

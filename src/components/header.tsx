@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Search } from '@/components';
+import { CartPanel, Search } from '@/components';
 
 export function Header() {
     return (
@@ -11,6 +11,7 @@ export function Header() {
             <Link href="/models">Models</Link>
             <Link href="/search">Search</Link>
             <Search />
+            <CartPanel />
         </header>
     );
 }
