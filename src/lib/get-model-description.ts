@@ -3,7 +3,7 @@ import path from "path";
 import fs from "fs";
 
 export async function getModelDescription(modelSlug: string, dbDescription: string) {
-    const filePath = path.join(process.cwd(), `src/import-data/models/${modelSlug}-description.md`);
+    const filePath = path.join(process.cwd(), `src/static-data/models/${modelSlug}-description.md`);
 
     try {
         if (fs.existsSync(filePath)) {
