@@ -1,11 +1,9 @@
-import packageJson from '../../package.json' assert { type: 'json' };
-import { Logo } from './logo';
-import siteConfig from '../static-data/site-config.json';
 import Link from 'next/link';
-const version = packageJson.version;
+import { Logo } from '@/components';
+import siteConfig from '../static-data/site-config.json';
+import { version } from '../../package.json';
 
 export function Footer() {
-
     return (
         <footer className="bg-theme-light dark:bg-darkmode-theme-light ">
             <div className="container mx-auto ">
