@@ -18,8 +18,11 @@ export function TyresList({ tyres }: Tyres) {
                     <Link href={`/tyres/${tyre.slug}`}>
                         <p>{tyre.title} - {tyre.date_code ?? ""} - {tyre.price.toString()} грн. </p>
                     </Link>
-                    <AddToCartButton id={tyre.id} title={tyre.title} price={tyre.price} quantity={4}/>
-
+                    <AddToCartButton
+                        id={tyre.id}
+                        title={tyre.title}
+                        price={tyre.price}
+                        quantity={4} />
                 </div>
             ))}
         </div>
