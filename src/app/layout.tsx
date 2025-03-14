@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="uk" >
-      <body className="scroll-smooth bg-body text-base dark:bg-darkmode-body font-primary font-normal leading-relaxed text-text dark:text-darkmode-text" >
+      <body className="scroll-smooth bg-body  dark:bg-darkmode-body font-primary leading-relaxed  dark:text-darkmode-text" >
         <Header />
         <main>
           {children}

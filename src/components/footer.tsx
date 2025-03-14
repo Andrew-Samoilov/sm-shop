@@ -7,22 +7,20 @@ export function Footer() {
     return (
         <footer className="bg-theme-light dark:bg-darkmode-theme-light ">
             <div className="container mx-auto ">
-                <nav className="flex flex-col md:flex-row items-start justify-between pb-12 pt-14">
+                <nav className="flex flex-row  items-start justify-between pb-12 pt-14">
                     <span className="hidden md:block"><Logo text={siteConfig.siteName} /></span>
                     <div>
                         <div className='text-lg font-semibold'>Інформація</div>
                         <div className='space-y-2'>
-                            <div>Про нас</div>
+                            <Link href="/about">Про нас</Link>
                             <div>Оплата і доставка</div>
                             <div>Гарантія</div>
-                            <div>Сертифікати</div>
-
                         </div>
                     </div>
                     <div>
                         <div className='text-lg font-semibold'>Товари</div>
                         <div className='space-y-2'>
-                            <div>Шини</div>
+                            <Link href="/tyres">Шини</Link>
                             <div>Диски</div>
                         </div>
 

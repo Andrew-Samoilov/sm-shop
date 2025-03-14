@@ -2,8 +2,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <section >
-      <div className="flex gap-6 justify-center">
+    <section className="flex gap-6 justify-center">
         <Link
           className="px-6 py-2 border-2 rounded-md border-border dark:border-darkmode-border
             hover:border-accent hover:no-underline"
@@ -28,8 +27,7 @@ export default function Home() {
           href="/search">
           <h2>Search</h2>
         </Link>
-      </div>
-
+  
     </section>
   );
 }

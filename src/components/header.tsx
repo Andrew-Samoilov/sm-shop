@@ -8,7 +8,7 @@ export function Header() {
         <header
             className="flex justify-around items-center z-30 sticky top-0 px-4 py-6 backdrop-blur-sm bg-body/75 dark:bg-darkmode-body/75">
             <Logo text={siteConfig.siteName} />
-            <Link href="/tyres">Tyres</Link>
+            <Link href="/tyres">Шини</Link>
             <Link href="/brands">Brands</Link>
             <Link href="/models">Models</Link>
             <Link href="/search">Search</Link>
