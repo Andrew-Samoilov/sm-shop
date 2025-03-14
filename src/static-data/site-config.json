@@ -1,17 +1,8 @@
 {
   "siteName": "Шина Мікс",
-  "phone": "+380973232161",
+  "tel": "0973232161",
   "email": "webmaster@shinamix.com",
-  "social": [
-    {
-      "id": 1,
-      "name": "Fb",
-      "link": "https://facebook.com/ShinaMixUkraine"
-    },
-    {
-      "id": 2,
-      "name": "Tg",
-      "link": "https://t.me/Andrew_Samoilov"
-    }
-  ]
+  "viber": "viber://chat?number=%2B380973232161",
+  "tg": "https://t.me/Andrew_Samoilov",
+  "fb": "https://facebook.com/ShinaMixUkraine"
 }

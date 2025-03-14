@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { CartPanel, Logo, Search } from '@/components';
 import siteConfig from '../static-data/site-config.json';
 
+
 export function Header() {
     return (
         <header

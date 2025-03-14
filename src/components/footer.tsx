@@ -7,22 +7,71 @@ export function Footer() {
     return (
         <footer className="bg-theme-light dark:bg-darkmode-theme-light ">
             <div className="container mx-auto ">
-                <nav className="flex flex-col md:flex-row items-center justify-between pb-12 pt-14">
+                <nav className="flex flex-col md:flex-row items-start justify-between pb-12 pt-14">
                     <span className="hidden md:block"><Logo text={siteConfig.siteName} /></span>
-                    <div className="flex items-center space-x-6">
-                        {siteConfig.social.map(({ id, name, link }) => {
-                            return (
-                                <Link
-                                    className="py-2 px-4 rounded-md"
-                                    target="_blank" rel="noopener noreferrer"
-                                    href={link}
-                                    key={id}
-                                    aria-label={`Завітайте до нас у ${name}`}
+                    <div>
+                        <div className='text-lg font-semibold'>Інформація</div>
+                        <div className='space-y-2'>
+                            <div>Про нас</div>
+                            <div>Оплата і доставка</div>
+                            <div>Гарантія</div>
+                            <div>Сертифікати</div>
+
+                        </div>
+                    </div>
+                    <div>
+                        <div className='text-lg font-semibold'>Товари</div>
+                        <div className='space-y-2'>
+                            <div>Шини</div>
+                            <div>Диски</div>
+                        </div>
+
+                        <div>
+                            <div className='pt-2 text-lg font-semibold'>Послуги</div>
+                            <div className=' space-y-2'>
+                                <div>Шиномонтаж</div>
+                                <div>Зберігання</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div className='text-lg font-semibold'>Контакти</div>
+                        <div className='space-y-2 flex flex-col'>
+                            <a
+                                href={`tel:${siteConfig.tel}`}
+                                aria-label="Дзвоніть"
+                            >
+                                {siteConfig.tel}
+                            </a>
+                            <a
+                                href={`mailto:${siteConfig.email}`}
+                                aria-label="Написати на пошту"
+                            >
+                                {siteConfig.email}
+                            </a>
+                            <div className='flex gap-x-2'>
+                                <a
+                                    href={siteConfig.viber}
+                                    aria-label="Пишіть у Tg"
                                 >
-                                    {name}
-                                </Link>
-                            );
-                        })}
+                                    Viber
+                                </a>
+                                <a
+                                    href={siteConfig.tg}
+                                    aria-label="Пишіть у Tg"
+                                >
+                                    Tg
+                                </a>
+                                <a
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    href={siteConfig.fb}
+                                    aria-label="Завітайте до нас у Fb"
+                                >
+                                    Fb
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </nav>
 
@@ -34,7 +83,7 @@ export function Footer() {
                         Умови<span className="hidden md:inline"> користування сайтом</span>
                     </Link>
                     <div>
-                        ©&nbsp;{new Date().getFullYear()}<span className="hidden md:inline">. All rights reserved. {version}</span>
+                        ©&nbsp; 2001 - {new Date().getFullYear()}<span className="hidden md:inline"> Шина Мікс. {version}</span>
                     </div>
                 </div>
             </div>
