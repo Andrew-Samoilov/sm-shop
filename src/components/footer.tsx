@@ -11,7 +11,8 @@ export function Footer() {
                     <span className="hidden md:block"><Logo text={siteConfig.siteName} /></span>
                     <div>
                         <div className='text-lg font-semibold'>Інформація</div>
-                        <div className='space-y-2'>
+                        <div className='flex flex-col space-y-2'>
+                            <Link href="/contact">Контакти</Link>
                             <Link href="/about">Про нас</Link>
                             <div>Оплата і доставка</div>
                             <div>Гарантія</div>
@@ -33,34 +34,44 @@ export function Footer() {
                         </div>
                     </div>
                     <div>
-                        <div className='text-lg font-semibold'>Контакти</div>
+                        <Link
+                            className='text-lg font-semibold'
+                            href="/contact"
+                        >Контакти</Link>
+                        
                         <div className='space-y-2 flex flex-col'>
-                            <a
-                                href={`tel:${siteConfig.tel}`}
-                                aria-label="Дзвоніть"
-                            >
-                                {siteConfig.tel}
-                            </a>
                             <a
                                 href={`mailto:${siteConfig.email}`}
                                 aria-label="Написати на пошту"
                             >
                                 {siteConfig.email}
                             </a>
+                            <a
+                                href={`tel:${siteConfig.tel.normalize}`}
+                                aria-label="Дзвоніть"
+                            >
+                                {siteConfig.tel.visual}
+                            </a>
                             <div className='flex gap-x-2'>
                                 <a
+                                    className='bg-white p-2 px-3 rounded-full
+                                    hover:bg-black hover:text-white hover:no-underline'
                                     href={siteConfig.viber}
-                                    aria-label="Пишіть у Tg"
+                                    aria-label="Пишіть у Viber"
                                 >
-                                    Viber
+                                    Vb
                                 </a>
                                 <a
                                     href={siteConfig.tg}
                                     aria-label="Пишіть у Tg"
+                                    className='bg-white p-2 px-3 rounded-full
+                                     hover:bg-black hover:text-white hover:no-underline'
                                 >
                                     Tg
                                 </a>
                                 <a
+                                    className='bg-white p-2 px-3 rounded-full
+                                     hover:bg-black hover:text-white hover:no-underline'
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     href={siteConfig.fb}

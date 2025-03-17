@@ -1,7 +1,10 @@
 {
   "siteName": "Шина Мікс",
-  "tel": "0973232161",
-  "email": "webmaster@shinamix.com",
+  "tel": {
+    "visual": "(097) 3232-161",
+    "normalize": "+380973232161"
+  },
+  "email": "office@shinamix.com",
   "viber": "viber://chat?number=%2B380973232161",
   "tg": "https://t.me/Andrew_Samoilov",
   "fb": "https://facebook.com/ShinaMixUkraine"
