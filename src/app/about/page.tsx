@@ -1,14 +1,12 @@
-import { getMdContent } from '@/lib';
-import ReactMarkdown from 'react-markdown';
+import { BenefitsSection, FeatureSection, SertsSection } from '@/components';
 
 export default async function AboutPage() {
-    const content = await getMdContent('about');
     return (
-        <section className="container">
+        <>
             <h1>Про нас</h1>
-            <ReactMarkdown>
-                {content}
-            </ReactMarkdown>
-        </section>
+            <SertsSection />
+            <FeatureSection />
+            <BenefitsSection />
+        </>
     );
 };

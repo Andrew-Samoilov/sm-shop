@@ -6,3 +6,6 @@ export { TyresSelect } from "./tyres-select";
 export { AddToCartButton } from "./add-to-cart-button";
 export { CartPanel } from "./cart-panel";
 export { Logo } from "./logo";
+export { SertsSection } from "./serts-section";
+export { FeatureSection } from "./features-section";
+export { BenefitsSection } from "./benefits-section";

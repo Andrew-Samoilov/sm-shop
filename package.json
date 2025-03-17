@@ -1,6 +1,6 @@
 {
   "name": "sm-shop",
-  "version": "0.3.38",
+  "version": "0.3.4",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -12,6 +12,8 @@
     "@heroicons/react": "^2.2.0",
     "@prisma/client": "^6.4.0",
     "dotenv": "^16.4.7",
+    "embla-carousel-autoplay": "^8.5.2",
+    "embla-carousel-react": "^8.5.2",
     "next": "15.2.1",
     "react": "19.0.0",
     "react-dom": "19.0.0",
