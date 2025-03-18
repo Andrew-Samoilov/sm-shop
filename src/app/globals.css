@@ -110,8 +110,7 @@
     box-shadow: 0 0 2rem var(--color-accent);
   }
 
-  section,
-  footer {
+  section{
     @apply p-6 mx-auto lg:py-24 gap-6;
   }
 

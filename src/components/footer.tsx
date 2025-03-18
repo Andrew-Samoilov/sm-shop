@@ -92,7 +92,7 @@ export function Footer() {
                         Умови<span className="hidden md:inline"> користування сайтом</span>
                     </Link>
                     <div>
-                        ©&nbsp; 2001 - {new Date().getFullYear()}<span className="hidden md:inline"> Шина Мікс. {version}</span>
+                        ©&nbsp;2001 - {new Date().getFullYear()}<span className="hidden md:inline"> Шина Мікс. {version}</span>
                     </div>
                 </div>
             </div>
