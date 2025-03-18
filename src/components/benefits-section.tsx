@@ -1,4 +1,4 @@
-import {benefits} from '../static-data/benefits.json'
+import benefits from '../static-data/benefits.json'
 
 export function BenefitsSection() {
     return (

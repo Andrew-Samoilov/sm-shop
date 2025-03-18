@@ -4,20 +4,7 @@ import Autoplay from 'embla-carousel-autoplay'
 import useEmblaCarousel from 'embla-carousel-react'
 
 import './embla.css'
-// import { IImage } from '@/types'
-import { sert } from '../static-data/serts.json'
-
-// interface SertProps {
-//     id: number;
-//     text: string;
-//     image: IImage;
-// }
-
-// interface SertSectionProps {
-//     id: number;
-//     __component: string;
-//     sert: SertProps[];
-// }
+import sert from '../static-data/serts.json'
 
 export function SertsSection() {
 

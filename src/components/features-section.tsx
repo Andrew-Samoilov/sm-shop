@@ -1,4 +1,4 @@
-import { features } from '../static-data/features.json'
+import features  from '../static-data/features.json'
 export function FeatureSection() {
 
     return (

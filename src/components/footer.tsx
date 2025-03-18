@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import { Logo } from '@/components';
 import siteConfig from '../static-data/site-config.json';
-import { version } from '../../package.json';
+
+import packageData from '../../package.json';
+const version = packageData.version;
 
 export function Footer() {
     return (
