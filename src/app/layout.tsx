@@ -23,9 +23,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="uk" >
-      <body className="scroll-smooth bg-body  dark:bg-darkmode-body font-primary leading-relaxed  dark:text-darkmode-text" >
+      <body className="flex flex-col min-h-screen scroll-smooth bg-body  dark:bg-darkmode-body font-primary leading-relaxed  dark:text-darkmode-text" >
         <Header />
-        <main>
+        <main className="flex-1">
           {children}
         </main>
         <Footer />

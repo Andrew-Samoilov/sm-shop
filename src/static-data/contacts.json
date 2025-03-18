@@ -1,0 +1,29 @@
+[
+  {
+    "id": 251,
+    "name": "Email",
+    "link": [
+      {
+        "id": 1,
+        "text": "office@shinamix.com",
+        "url": "mailto:office@shinamix.com"
+      }
+    ]
+  },
+  {
+    "id": 252,
+    "name": "Телефон",
+    "link": [
+      {
+        "id": 2,
+        "text": "+380 44 377 73 29",
+        "url": "tel:+380443777329"
+      },
+      {
+        "id": 2,
+        "text": "+380 97 3232 161",
+        "url": "tel:+380973232161"
+      }
+    ]
+  }
+]

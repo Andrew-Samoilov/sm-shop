@@ -14,7 +14,7 @@ export function Footer() {
                     <div>
                         <div className='text-lg font-semibold'>Інформація</div>
                         <div className='flex flex-col space-y-2'>
-                            <Link href="/contact">Контакти</Link>
+                            <Link href="/contacts">Контакти</Link>
                             <Link href="/about">Про нас</Link>
                             <div>Оплата і доставка</div>
                             <div>Гарантія</div>
