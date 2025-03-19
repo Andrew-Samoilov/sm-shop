@@ -61,7 +61,7 @@ export default function TyresSelectClient({
                     name="width"
                     value={width}
                     onChange={(e) => setWidth(e.target.value)}
-                    className="py-2 px-4 border-2 rounded-md border-gray-300 focus:ring-2 focus:outline-none"
+                    className="py-2 px-4 border-2 rounded-md border-border focus:ring-2 focus:outline-none"
                 >
                     <option value="">Оберіть ширину</option>
                     {widths.map((w) => (
@@ -75,7 +75,7 @@ export default function TyresSelectClient({
                     name="profile"
                     value={profile}
                     onChange={(e) => setProfile(e.target.value)}
-                    className="py-2 px-4 border-2 rounded-md border-gray-300 focus:ring-2 focus:outline-none"
+                    className="py-2 px-4 border-2 rounded-md border-border focus:ring-2 focus:outline-none"
                 >
                     <option value="">Оберіть профіль</option>
                     {profiles.map((p) => (
@@ -89,7 +89,7 @@ export default function TyresSelectClient({
                     name="diameter"
                     value={diameter}
                     onChange={(e) => setDiameter(e.target.value)}
-                    className="py-2 px-4 border-2 rounded-md border-gray-300 focus:ring-2 focus:outline-none"
+                    className="py-2 px-4 border-2 rounded-md border-border focus:ring-2 focus:outline-none"
                 >
                     <option value="">Оберіть діаметр</option>
                     {diameters.map((d) => (
