@@ -34,7 +34,7 @@ export function Footer() {
                                 <div>Зберігання</div>
                             </div>
                         </div>
-                    </div>c:\sag\shina-mix-landing-nextjs\src\components\custom\contact-form.tsx
+                    </div>
                     <div>
                         <Link
                             className='text-lg font-semibold pl-2'
