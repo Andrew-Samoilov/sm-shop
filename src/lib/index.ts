@@ -26,3 +26,8 @@ export { getModels } from "./prisma/get-models";
 export { getModelsByBrandId } from "./prisma/get-models-by-brand-id";
 export { getModelByName } from "./prisma/get-model-by-name";
 export { getModelDescription } from "./get-model-description";
+
+export { handleClientSubmit } from "./recaptcha/handleClientSubmit";
+export { sendGAEvent } from "./sendGAEvent";
+export { contactHandleSubmit } from "./recaptcha/contactHandleSubmit";
+export { handleRecaptchaSubmit } from "./recaptcha/handleRecaptchaSubmit";

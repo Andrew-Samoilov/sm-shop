@@ -12,7 +12,7 @@ export function Footer() {
                 <nav className="flex flex-row  items-start justify-between pb-12 pt-14">
                     <span className="hidden md:block"><Logo text={siteConfig.siteName} /></span>
                     <div>
-                        <div className='text-lg font-semibold'>Інформація</div>
+                        <div className='text-lg font-semibold pl-2'>Інформація</div>
                         <div className='flex flex-col space-y-2'>
                             <Link href="/contacts">Контакти</Link>
                             <Link href="/about">Про нас</Link>
@@ -21,23 +21,23 @@ export function Footer() {
                         </div>
                     </div>
                     <div>
-                        <div className='text-lg font-semibold'>Товари</div>
+                        <div className='text-lg font-semibold pl-2'>Товари</div>
                         <div className='space-y-2'>
                             <Link href="/tyres">Шини</Link>
                             <div>Диски</div>
                         </div>
 
                         <div>
-                            <div className='pt-2 text-lg font-semibold'>Послуги</div>
-                            <div className=' space-y-2'>
+                            <div className='pt-2 text-lg font-semibold pl-2'>Послуги</div>
+                            <div className='space-y-2'>
                                 <div>Шиномонтаж</div>
                                 <div>Зберігання</div>
                             </div>
                         </div>
-                    </div>
+                    </div>c:\sag\shina-mix-landing-nextjs\src\components\custom\contact-form.tsx
                     <div>
                         <Link
-                            className='text-lg font-semibold'
+                            className='text-lg font-semibold pl-2'
                             href="/contact"
                         >Контакти</Link>
                         

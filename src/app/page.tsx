@@ -27,7 +27,6 @@ export default function Home() {
           href="/search">
           <h2>Search</h2>
         </Link>
-  
     </section>
   );
 }

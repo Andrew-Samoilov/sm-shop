@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import SubmitButton from "./submit-button";
+import { SubmitButton } from "./submit-button";
 import { TyresList } from "./tyres-list";
 import { Tyre } from "@/types";
 
@@ -99,7 +99,7 @@ export default function TyresSelectClient({
                     ))}
                 </select>
 
-                <SubmitButton />
+                <SubmitButton>Шукати</SubmitButton>
             </form>
             <div className="flex justify-center">
                 <TyresList tyres={selectedTyres} />

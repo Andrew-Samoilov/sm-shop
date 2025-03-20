@@ -3,13 +3,13 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 model brands {
-  id Int @id @default(autoincrement())
-
+  id          Int      @id @default(autoincrement())
   name        String
   logo        String?
   description String?
@@ -22,22 +22,18 @@ model brands {
 }
 
 model tyres {
-  id Int @id(map: "tires_pkey") @default(autoincrement())
-
-  model_id  Int?
-  model_rel models? @relation(fields: [model_id], references: [id])
-  brand_id  Int?
-  brand_rel brands? @relation("BrandTyres", fields: [brand_id], references: [id])
-
+  id                 Int      @id(map: "tires_pkey") @default(autoincrement())
+  model_id           Int?
+  brand_id           Int?
   title              String
-  slug               String    
+  slug               String   @default("")
   description        String?
   country            String?  @db.VarChar(50)
   date_code          String?  @db.Char(4)
   applicability      String?  @db.VarChar(50)
   sku                String   @unique(map: "tires_sku_key") @db.VarChar(50)
   inventory_quantity Int?     @default(0)
-  price              Float    
+  price              Float
   load_speed_index   String?  @db.VarChar(10)
   brand              String?  @db.VarChar(50)
   model              String?  @db.VarChar(100)
@@ -49,17 +45,30 @@ model tyres {
   load_index         String?  @db.VarChar(10)
   speed_index        String?  @db.Char(1)
   type               String?  @db.VarChar(50)
+  brand_rel          brands?  @relation("BrandTyres", fields: [brand_id], references: [id])
+  model_rel          models?  @relation(fields: [model_id], references: [id])
+
+  @@index([title(ops: raw("gin_trgm_ops"))], map: "tyres_title_trgm_idx", type: Gin)
 }
 
 model models {
-  id Int @id @default(autoincrement())
-
-  brandId Int
-  brand   brands @relation(fields: [brandId], references: [id], onDelete: Cascade)
-
+  id          Int      @id @default(autoincrement())
+  brandId     Int
   name        String
   description String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  brand       brands   @relation(fields: [brandId], references: [id], onDelete: Cascade)
   tyres       tyres[]
+}
+
+model messages {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  phone     String?
+  message   String
+  createdAt DateTime @default(now())
+
+  @@map("messages") 
 }

@@ -9,3 +9,4 @@ export { Logo } from "./logo";
 export { SertsSection } from "./serts-section";
 export { FeatureSection } from "./features-section";
 export { BenefitsSection } from "./benefits-section";
+export { ContactForm } from "./contact-form";
