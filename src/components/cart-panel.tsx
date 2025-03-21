@@ -46,7 +46,7 @@ export function CartPanel() {
                         <div className="flex justify-between items-center pb-6 border-b">
                             <h2 className="text-lg font-semibold">Кошик</h2>
                             <button onClick={() => setIsOpen(false)}>
-                                <XMarkIcon className="h-6 w-6 text-light" />
+                                <XMarkIcon className="h-6 w-6 text-light cursor-pointer" />
                             </button>
                         </div>
 
