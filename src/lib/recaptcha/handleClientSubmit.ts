@@ -17,10 +17,12 @@ export async function handleClientSubmit(formId: string, formData: FormData) {
             toast.error(result.error || "Не вдалося надіслати форму");
             console.error("❌ Помилка під час надсилання форми:", result.error);
             return;
+        } else {
+            toast.success("Запит успішно надіслано!");
+            // console.log("✅ Форма успішно надіслана:", result);
         }
 
-        toast.success("Запит успішно надіслано!");
-        console.log("✅ Форма успішно надіслана:", result);
+
 
         // Відправка подій в GA
         // const gaEvents: Record<string, { event_category: string; event_label: string }> = {

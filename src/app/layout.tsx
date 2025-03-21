@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Footer, Header } from "@/components";
+import { ToastContainer } from "react-toastify";
 
 export const metadata: Metadata = {
   title: "Шина Мікс",
@@ -28,6 +29,7 @@ export default function RootLayout({
         <main className="flex-1">
           {children}
         </main>
+        <ToastContainer />
         <Footer />
       </body>
     </html>
