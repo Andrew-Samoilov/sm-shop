@@ -8,40 +8,39 @@ const version = packageData.version;
 export function Footer() {
     return (
         <footer className="bg-theme-light dark:bg-darkmode-theme-light ">
-            <div className="container mx-auto ">
-                <nav className="flex flex-row  items-start justify-between pb-12 pt-14">
+            <div className="container md:mx-auto ">
+                <nav className=" pb-12 pt-14 flex flex-col md:flex-row items-center md:items-start md:justify-between">
                     <span className="hidden md:block"><Logo text={siteConfig.siteName} /></span>
-                    <div>
-                        <div className='text-lg font-semibold pl-2'>Інформація</div>
-                        <div className='flex flex-col space-y-2'>
+                    <div >
+                        <div className='text-lg font-semibold text-center'>Інформація</div>
+                        <div className='flex flex-col space-y-2 items-center '>
                             <Link href="/contacts">Контакти</Link>
                             <Link href="/about">Про нас</Link>
                             <div>Оплата і доставка</div>
                             <div>Гарантія</div>
                         </div>
                     </div>
-                    <div>
-                        <div className='text-lg font-semibold pl-2'>Товари</div>
-                        <div className='space-y-2'>
+                    <div className='pt-2 flex flex-col items-center '>
+                        <div className='text-lg font-semibold'>Товари</div>
+                        <div className='space-y-2 lg:flex-row'>
                             <Link href="/tyres">Шини</Link>
                             <div>Диски</div>
                         </div>
-
-                        <div>
-                            <div className='pt-2 text-lg font-semibold pl-2'>Послуги</div>
-                            <div className='space-y-2'>
+                        <div className='pt-2 flex flex-col items-center'>
+                            <div className='text-lg font-semibold'>Послуги</div>
+                            <div className='space-y-2 flex flex-col items-center'>
                                 <div>Шиномонтаж</div>
                                 <div>Зберігання</div>
                             </div>
                         </div>
                     </div>
-                    <div>
+                    <div className='pt-2 flex flex-col items-center'>
                         <Link
-                            className='text-lg font-semibold pl-2'
+                            className='text-lg font-semibold'
                             href="/contact"
                         >Контакти</Link>
-                        
-                        <div className='space-y-2 flex flex-col'>
+
+                        <div className='space-y-2 flex flex-col items-center'>
                             <a
                                 href={`mailto:${siteConfig.email}`}
                                 aria-label="Написати на пошту"
@@ -54,7 +53,7 @@ export function Footer() {
                             >
                                 {siteConfig.tel.visual}
                             </a>
-                            <div className='flex gap-x-2'>
+                            <div className='flex gap-x-2 justify-center'>
                                 <a
                                     className='bg-white p-2 px-3 rounded-full
                                     hover:bg-black hover:text-white hover:no-underline'

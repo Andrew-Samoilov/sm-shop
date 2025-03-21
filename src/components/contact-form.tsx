@@ -71,7 +71,7 @@ export function ContactForm() {
                 disabled={!isChecked}
                 pendingText="Надсилання ..."
                 // onBeforeSubmit={(recaptchaToken) => handleRecaptchaSubmit("contact-form", recaptchaToken, contactHandleSubmit)}
-                className='btn btn-sm md:btn-lg btn-primary font-medium ml-auto'>
+                className='btn btn-primary  ml-auto'>
                 Надіслати
             </SubmitButton>
         </Form>
