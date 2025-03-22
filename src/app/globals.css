@@ -115,9 +115,9 @@
   }
 
   /* this bullshit css special for toaster */
-  /* section:last-of-type {
+  section:last-of-type {
     padding-bottom: 0 !important;
-  } */
+  }
 
   .form-input {
     @apply w-full rounded-sm border border-border bg-transparent px-4 py-2 md:px-6 md:py-4 text-dark placeholder:text-light  dark:border-darkmode-border dark:bg-darkmode-theme-light dark:text-darkmode-light
