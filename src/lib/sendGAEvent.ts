@@ -1,23 +1,42 @@
+type GAEventParams = {
+    action: string;
+    category: string;
+    label: string;
+    value?: string | number;
+};
+
 declare global {
     interface Window {
         dataLayer: Record<string, unknown>[];
-        gtag?: (event: "event", action: string, params: Record<string, unknown>) => void;
+        gtag?: (
+            event: "event",
+            action: string,
+            params: Record<string, unknown>
+        ) => void;
     }
 }
 
-export const sendGAEvent = (eventName: string, eventParams: Record<string, unknown> = {}) => {
+export const sendGAEvent = ({
+    action,
+    category,
+    label,
+    value,
+}: GAEventParams) => {
     if (typeof window !== "undefined") {
-        // console.log(`📊 Відправка події в GA4: ${eventName}`, eventParams);
-
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
-            event: eventName,
-            ...eventParams,
+            event: action,
+            event_category: category,
+            event_label: label,
+            value,
         });
 
         if (window.gtag) {
-            // console.log("✅ Викликаємо `gtag()` з подією:", eventName);
-            window.gtag("event", eventName, eventParams);
+            window.gtag("event", action, {
+                event_category: category,
+                event_label: label,
+                value,
+            });
         } else {
             console.error("❌ `gtag()` не знайдено! GA4 може бути неправильно підключений.");
         }

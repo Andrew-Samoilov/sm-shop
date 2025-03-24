@@ -1,4 +1,5 @@
 import { toast } from "react-toastify";
+import { sendGAEvent } from "../sendGAEvent";
 
 declare global {
     interface Window {
@@ -34,6 +35,12 @@ export async function handleClientSubmit(formId: string, formData: FormData) {
         }
 
         toast.success("Запит успішно надіслано!");
+        // 🎯 ВІДПРАВКА ПОДІЇ В GA
+        sendGAEvent({
+            action: "form_submit",
+            category: "contact",
+            label: "contact_form_main",
+        });
 
         const formEl = document.getElementById(formId) as HTMLFormElement;
         formEl?.reset();
