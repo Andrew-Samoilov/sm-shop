@@ -1,19 +1,30 @@
-"use client";
-
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-
-import { useState } from "react";
+'use client';
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { formatTyreSizeQuery } from "@/lib";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 export function Search() {
     const [query, setQuery] = useState("");
+    const [debouncedQuery, setDebouncedQuery] = useState("");
     const router = useRouter();
 
-    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setQuery(formatTyreSizeQuery(e.target.value));
-        router.push(`/tyres?query=${formatTyreSizeQuery(e.target.value)}`, { scroll: false });
-    };
+    // ⏱ debounce на 300 мс
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setDebouncedQuery(query);
+        }, 300);
+
+        return () => clearTimeout(timeout);
+    }, [query]);
+
+    // 🔁 оновлюємо маршрут тільки після debounce
+    useEffect(() => {
+        if (debouncedQuery.trim()) {
+            const formatted = formatTyreSizeQuery(debouncedQuery);
+            router.push(`/tyres?query=${formatted}`, { scroll: false });
+        }
+    }, [debouncedQuery, router]);
 
     return (
         <div className="relative w-full max-w-md">
@@ -21,11 +32,9 @@ export function Search() {
             <input
                 type="text"
                 value={query}
-                onChange={handleSearch}
+                onChange={(e) => setQuery(e.target.value)}
                 placeholder="Пошук шин..."
-                className="w-full bg-theme-light dark:bg-darkmode-theme-light
-        py-2 pl-4 pr-10 dark:border-darkmode-border rounded-full cursor-text
-        focus:ring-2 focus:outline-none focus:ring-accent"
+                className="w-full bg-theme-light dark:bg-darkmode-theme-light py-2 pl-4 pr-10 dark:border-darkmode-border rounded-full cursor-text focus:ring-2 focus:outline-none focus:ring-accent"
             />
         </div>
     );
