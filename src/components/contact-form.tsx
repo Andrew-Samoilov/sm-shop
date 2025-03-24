@@ -3,12 +3,27 @@ import Form from "next/form";
 
 import { useState } from "react";
 import { SubmitButton } from "./submit-button";
-import { handleClientSubmit } from "@/lib";
+import { handleClientSubmit, loadRecaptchaScript } from "@/lib";
+
+const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!;
 
 export function ContactForm() {
     const [isChecked, setIsChecked] = useState(true);
     const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setIsChecked(event.target.checked);
+    };
+
+    const [isRecaptchaReady, setRecaptchaReady] = useState(false);
+
+    const initRecaptcha = async () => {
+        if (!isRecaptchaReady) {
+            try {
+                await loadRecaptchaScript(siteKey);
+                setRecaptchaReady(true);
+            } catch (e) {
+                console.error(e);
+            }
+        }
     };
 
     return (
@@ -63,6 +78,7 @@ export function ContactForm() {
                 required={true}
                 name='contact_message'
                 id='contact_message'
+                onFocus={initRecaptcha}
                 rows={4}
                 className='mb-6 form-input' />
             <div className="mb-6 ">

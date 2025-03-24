@@ -28,6 +28,6 @@ export { getModelByName } from "./prisma/get-model-by-name";
 export { getModelDescription } from "./get-model-description";
 
 export { handleClientSubmit } from "./recaptcha/handleClientSubmit";
+export { loadRecaptchaScript } from "./recaptcha/loadRecaptchaScript";
+
 export { sendGAEvent } from "./sendGAEvent";
-export { contactHandleSubmit } from "./recaptcha/contactHandleSubmit";
-export { handleRecaptchaSubmit } from "./recaptcha/handleRecaptchaSubmit";
