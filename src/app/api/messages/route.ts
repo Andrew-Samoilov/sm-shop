@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 export async function POST(req: Request) {
     try {
         const body = await req.json();
-        console.log("📥 Отримані дані:", body);
+        // console.log("📥 Отримані дані:", body);
 
         // Переконуємось, що всі необхідні поля є
         const name = body.contact_name?.trim();
@@ -14,10 +14,10 @@ export async function POST(req: Request) {
         const phone = body.contact_tel?.trim() || null;
         const message = body.contact_message?.trim();
 
-        if (!name || !email || !message) {
-            console.error("❌ Помилка: Не всі обов'язкові поля передані.");
+        if (!message) {
+            console.error("❌ Помилка: Обовязкове поле message НЕ передано.");
             return NextResponse.json(
-                { success: false, error: "Заповніть всі обов'язкові поля" },
+                { success: false, error: "Заповність поле повідомлення" },
                 { status: 400 }
             );
         }
