@@ -1,5 +1,4 @@
-import Link from 'next/link';
-import { Logo } from '@/components';
+import { ExternalLinkWithGA, LinkWithGA, Logo } from '@/components';
 import siteConfig from '../static-data/site-config.json';
 
 import packageData from '../../package.json';
@@ -14,8 +13,12 @@ export function Footer() {
                     <div >
                         <div className='text-lg font-semibold text-center'>Інформація</div>
                         <div className='flex flex-col space-y-2 items-center '>
-                            <Link href="/contacts">Контакти</Link>
-                            <Link href="/about">Про нас</Link>
+                            <LinkWithGA href="/contacts" eventLabel="contacts" eventCategory="footer">
+                                Контакти
+                            </LinkWithGA>
+                            <LinkWithGA href="/about" eventLabel="about" eventCategory="footer">
+                                Про нас
+                            </LinkWithGA>
                             <div className='text-light'>Оплата і доставка</div>
                             <div className='text-light'>Гарантія</div>
                         </div>
@@ -23,7 +26,11 @@ export function Footer() {
                     <div className='pt-2 flex flex-col items-center '>
                         <div className='text-lg font-semibold'>Товари</div>
                         <div className='space-y-2 lg:flex-row'>
-                            <Link href="/tyres">Шини</Link>
+
+                            <LinkWithGA href="/tyres" eventLabel="tyres" eventCategory="footer" className='text-lg font-semibold'>
+                                Шини
+                            </LinkWithGA>
+
                             <div className='text-light'>Диски</div>
                         </div>
                         <div className='pt-2 flex flex-col items-center'>
@@ -35,63 +42,71 @@ export function Footer() {
                         </div>
                     </div>
                     <div className='pt-2 flex flex-col items-center'>
-                        <Link
-                            className='text-lg font-semibold'
-                            href="/contact"
-                        >Контакти</Link>
+                        <LinkWithGA href="/contacts" eventLabel="contacts" eventCategory="footer" className='text-lg font-semibold'>
+                            Контакти
+                        </LinkWithGA>
+                       
 
                         <div className='space-y-2 flex flex-col items-center'>
-                            <a
+                            <ExternalLinkWithGA
                                 href={`mailto:${siteConfig.email}`}
-                                aria-label="Написати на пошту"
+                                eventLabel="email"
+                                eventCategory="footer"
+                                ariaLabel="Написати на пошту"
                             >
                                 {siteConfig.email}
-                            </a>
-                            <a
+                            </ExternalLinkWithGA>
+
+                            <ExternalLinkWithGA
                                 href={`tel:${siteConfig.tel.normalize}`}
-                                aria-label="Дзвоніть"
+                                eventLabel="phone"
+                                eventCategory="footer"
+                                ariaLabel="Дзвоніть"
                             >
                                 {siteConfig.tel.visual}
-                            </a>
+                            </ExternalLinkWithGA>
+
                             <div className='flex gap-x-2 justify-center'>
-                                <a
-                                    className='bg-white p-2 px-3 rounded-full
-                                    hover:bg-black hover:text-white hover:no-underline'
+                                <ExternalLinkWithGA
                                     href={siteConfig.viber}
-                                    aria-label="Пишіть у Viber"
+                                    eventLabel="viber"
+                                    eventCategory="footer"
+                                    ariaLabel="Пишіть у Viber"
+                                    className="bg-white p-2 px-3 rounded-full hover:bg-black hover:text-white hover:no-underline"
                                 >
                                     Vb
-                                </a>
-                                <a
+                                </ExternalLinkWithGA>
+
+                                <ExternalLinkWithGA
                                     href={siteConfig.tg}
-                                    aria-label="Пишіть у Tg"
-                                    className='bg-white p-2 px-3 rounded-full
-                                     hover:bg-black hover:text-white hover:no-underline'
+                                    eventLabel="telegram"
+                                    eventCategory="footer"
+                                    ariaLabel="Пишіть у Tg"
+                                    className="bg-white p-2 px-3 rounded-full hover:bg-black hover:text-white hover:no-underline"
                                 >
                                     Tg
-                                </a>
-                                <a
-                                    className='bg-white p-2 px-3 rounded-full
-                                     hover:bg-black hover:text-white hover:no-underline'
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                </ExternalLinkWithGA>
+
+                                <ExternalLinkWithGA
                                     href={siteConfig.fb}
-                                    aria-label="Завітайте до нас у Fb"
+                                    eventLabel="facebook"
+                                    eventCategory="footer"
+                                    ariaLabel="Завітайте до нас у Fb"
+                                    className="bg-white p-2 px-3 rounded-full hover:bg-black hover:text-white hover:no-underline"
                                 >
                                     Fb
-                                </a>
+                                </ExternalLinkWithGA>
                             </div>
                         </div>
+
                     </div>
                 </nav>
 
                 <div className="flex items-center py-6 border-t border-border dark:border-darkmode-border justify-between" >
-                    <Link
-                        href="/terms"
-                        aria-label='Ознайомитись з умовами користування сайтом'
-                    >
+                    <LinkWithGA href="/terms" eventLabel="terms" aria-label='Ознайомитись з умовами користування сайтом' eventCategory="footer" >
                         Умови<span className="hidden md:inline"> користування сайтом</span>
-                    </Link>
+                    </LinkWithGA>
+
                     <div>
                         ©&nbsp;2001 - {new Date().getFullYear()}<span className="hidden md:inline"> Шина Мікс. {version}</span>
                     </div>
