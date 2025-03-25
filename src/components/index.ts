@@ -10,4 +10,3 @@ export { SertsSection } from "./serts-section";
 export { FeatureSection } from "./features-section";
 export { BenefitsSection } from "./benefits-section";
 export { ContactForm } from "./contact-form";
-export { BrandList } from "./brand-list";

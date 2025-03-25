@@ -16,21 +16,21 @@ export function Footer() {
                         <div className='flex flex-col space-y-2 items-center '>
                             <Link href="/contacts">Контакти</Link>
                             <Link href="/about">Про нас</Link>
-                            <div>Оплата і доставка</div>
-                            <div>Гарантія</div>
+                            <div className='text-light'>Оплата і доставка</div>
+                            <div className='text-light'>Гарантія</div>
                         </div>
                     </div>
                     <div className='pt-2 flex flex-col items-center '>
                         <div className='text-lg font-semibold'>Товари</div>
                         <div className='space-y-2 lg:flex-row'>
                             <Link href="/tyres">Шини</Link>
-                            <div>Диски</div>
+                            <div className='text-light'>Диски</div>
                         </div>
                         <div className='pt-2 flex flex-col items-center'>
                             <div className='text-lg font-semibold'>Послуги</div>
                             <div className='space-y-2 flex flex-col items-center'>
-                                <div>Шиномонтаж</div>
-                                <div>Зберігання</div>
+                                <div className='text-light'>Шиномонтаж</div>
+                                <div className='text-light'>Зберігання</div>
                             </div>
                         </div>
                     </div>
