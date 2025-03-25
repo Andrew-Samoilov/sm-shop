@@ -25,14 +25,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="uk">
-      <head>
-        {/* reCAPTCHA */}
-        <script
-          src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
-          async
-          defer
-        />
-      </head>
       <body className="flex flex-col min-h-screen scroll-smooth bg-body dark:bg-darkmode-body font-primary leading-relaxed dark:text-darkmode-text">
         {/* ✅ Google Analytics */}
         <Script

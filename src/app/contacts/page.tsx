@@ -1,10 +1,18 @@
 import Link from "next/link";
 import contacts from '../../static-data/contacts.json';
 import { ContactForm } from "@/components";
+import Script from "next/script";
 
 export default function ContactsPage() {
     return (
         <>
+            {/* reCAPTCHA */}
+            <Script
+                src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
+                async
+                defer
+            />
+
             <section className='bg-gradient-to-b from-body to-theme-light'>
                 <h1>Контакти</h1>
             </section>
@@ -32,7 +40,7 @@ export default function ContactsPage() {
                     ))}
                 </div>
 
-                <div className="grid  gap-6  bg-theme-light dark:bg-darkmode-theme-light p-4 md:p-6 rounded-md">
+                <div className="grid gap-6 bg-theme-light dark:bg-darkmode-theme-light p-4 md:p-6 rounded-md">
                     <h2 className="text-center">Адреса</h2>
                     <iframe
                         title={"Київ"}
