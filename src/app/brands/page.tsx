@@ -1,5 +1,5 @@
+import { LinkWithGA } from "@/components";
 import { getBrands, normalizeUrl } from "@/lib";
-import Link from "next/link";
 
 export async function generateStaticParams() {
     const brands = await getBrands();
@@ -17,8 +17,10 @@ export default async function BrandsPage() {
             <h1>Список брендів</h1>
             <div className="flex flex-wrap justify-between gap-6">
                 {brands.map((brand) => (
-                    <Link
+                    <LinkWithGA
                         key={brand.id}
+                        eventCategory="brand"
+                        eventLabel={brand.name}
                         href={`/brands/${normalizeUrl(brand.name)}`}
                         className="p-6 border-2 rounded-md border-border dark:border-darkmode-border hover:border-accent hover:no-underline
                                     flex flex-col items-center justify-center gap-6"
@@ -34,7 +36,7 @@ export default async function BrandsPage() {
                             />
                         )}
                         <p style={{ viewTransitionName: `title-${brand.name}` }}>{brand.name}</p>
-                    </Link>
+                    </LinkWithGA>
                 ))}
             </div>
         </section>
