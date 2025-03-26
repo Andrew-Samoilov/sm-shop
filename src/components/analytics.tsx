@@ -1,4 +1,3 @@
-// app/analytics.tsx
 'use client'
 
 import { usePathname, useSearchParams } from 'next/navigation'

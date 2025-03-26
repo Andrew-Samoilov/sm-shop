@@ -99,7 +99,6 @@ export function ContactForm() {
             <SubmitButton
                 disabled={!isChecked}
                 pendingText="Надсилання ..."
-                // onBeforeSubmit={(recaptchaToken) => handleRecaptchaSubmit("contact-form", recaptchaToken, contactHandleSubmit)}
                 className='btn btn-primary  ml-auto'>
                 Надіслати
             </SubmitButton>

@@ -16,7 +16,7 @@ export function TyresList({ tyres }: Tyres) {
                     className="flex items-center"
                 >
                     <Link href={`/tyres/${tyre.slug}`}>
-                        <p>{tyre.title} - {tyre.date_code ?? ""} - {tyre.price.toString()} грн. </p>
+                        <p>{tyre.title} - {tyre.date_code ?? ""} - {tyre.price.toString()} грн.</p>
                     </Link>
                     <AddToCartButton
                         id={tyre.id}

@@ -1,5 +1,4 @@
 import ReactMarkdown from "react-markdown";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import {
@@ -11,7 +10,7 @@ import {
     formatDisplayUrl,
     getBrandDescription
 } from "@/lib";
-import { TyresList } from "@/components";
+import { LinkWithGA, TyresList } from "@/components";
 
 export async function generateStaticParams() {
     const brands = await getBrands();
@@ -52,14 +51,17 @@ export default async function BrandPage({
                     {brand.country && <p className="text-light dark:text-darkmode-light">Країна походження - <span className="font-semibold">{brand.country}</span>.</p>}
                     {brand.website && !["NULL", "null", ""].includes(brand.website) && (
                         <p>
-                            <Link
+                            <LinkWithGA
                                 href={brand.website}
                                 className="text-blue-600 hover:underline "
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                eventLabel="brand_website"
+                                eventCategory={`brand-${brand.name}`}
+                                ariaLabel={`Перейти на сайт бренду ${brand.name}`}
                             >
                                 {formatDisplayUrl(brand.website)}
-                            </Link>
+                            </LinkWithGA>
                         </p>
                     )}
                 </div>
@@ -68,7 +70,7 @@ export default async function BrandPage({
                     <img
                         src={brand.logo}
                         alt={brand.name}
-                    className="max-w-1/2"
+                        className="max-w-1/2"
                         style={{ viewTransitionName: `logo-${brand.name}` }}
                     />
                 }
@@ -81,12 +83,19 @@ export default async function BrandPage({
             <article>
                 <h2>Наявні моделі бренду {brand.name} ({brandModels.length})</h2>
                 {brandModels.map((model) => (
-                    <Link
+                    <LinkWithGA
                         key={model.id}
                         href={`/models/${normalizeUrl(model.name)}`}
+                        eventLabel={model.name}
+                        eventCategory={`brand-${brand.name}`}
+                        className="block"
+                        eventParams={{
+                            brand_name: `${brand.name}`,
+                            model_id: `${model.id}`,
+                        }}
                     >
-                        <p>{model.name}</p>
-                    </Link>
+                        {model.name}
+                    </LinkWithGA>
                 ))}
             </article>
 

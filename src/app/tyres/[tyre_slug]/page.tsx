@@ -1,3 +1,4 @@
+import { ViewItemGA } from "@/components";
 import { getTyres, getTyreBySlug } from "@/lib";
 import { notFound } from "next/navigation";
 
@@ -23,6 +24,14 @@ export default async function TyrePage({
     return (
         <section>
             <h1>{tyre.title}</h1>
+            <ViewItemGA
+                item_id={tyre.id}
+                item_name={tyre.title}
+                brand={tyre.brand ?? 'unknown'}
+                model={tyre.model ?? 'unknown'}
+                price={Number(tyre.price)}
+            />
+
             {Object.entries(tyre).map(([key, value]) => (
                 <p key={key}><strong>{key}:</strong> {value !== null ? value.toString() : 'N/A'}</p>
             ))}

@@ -1,4 +1,4 @@
-import { ExternalLinkWithGA, LinkWithGA, Logo } from '@/components';
+import { LinkWithGA, Logo } from '@/components';
 import siteConfig from '../static-data/site-config.json';
 
 import packageData from '../../package.json';
@@ -48,26 +48,26 @@ export function Footer() {
                        
 
                         <div className='space-y-2 flex flex-col items-center'>
-                            <ExternalLinkWithGA
+                            <LinkWithGA
                                 href={`mailto:${siteConfig.email}`}
                                 eventLabel="email"
                                 eventCategory="footer"
                                 ariaLabel="Написати на пошту"
                             >
                                 {siteConfig.email}
-                            </ExternalLinkWithGA>
+                            </LinkWithGA>
 
-                            <ExternalLinkWithGA
+                            <LinkWithGA
                                 href={`tel:${siteConfig.tel.normalize}`}
                                 eventLabel="phone"
                                 eventCategory="footer"
                                 ariaLabel="Дзвоніть"
                             >
                                 {siteConfig.tel.visual}
-                            </ExternalLinkWithGA>
+                            </LinkWithGA>
 
                             <div className='flex gap-x-2 justify-center'>
-                                <ExternalLinkWithGA
+                                <LinkWithGA
                                     href={siteConfig.viber}
                                     eventLabel="viber"
                                     eventCategory="footer"
@@ -75,9 +75,9 @@ export function Footer() {
                                     className="bg-white p-2 px-3 rounded-full hover:bg-black hover:text-white hover:no-underline"
                                 >
                                     Vb
-                                </ExternalLinkWithGA>
+                                </LinkWithGA>
 
-                                <ExternalLinkWithGA
+                                <LinkWithGA
                                     href={siteConfig.tg}
                                     eventLabel="telegram"
                                     eventCategory="footer"
@@ -85,9 +85,9 @@ export function Footer() {
                                     className="bg-white p-2 px-3 rounded-full hover:bg-black hover:text-white hover:no-underline"
                                 >
                                     Tg
-                                </ExternalLinkWithGA>
+                                </LinkWithGA>
 
-                                <ExternalLinkWithGA
+                                <LinkWithGA
                                     href={siteConfig.fb}
                                     eventLabel="facebook"
                                     eventCategory="footer"
@@ -95,7 +95,7 @@ export function Footer() {
                                     className="bg-white p-2 px-3 rounded-full hover:bg-black hover:text-white hover:no-underline"
                                 >
                                     Fb
-                                </ExternalLinkWithGA>
+                                </LinkWithGA>
                             </div>
                         </div>
 

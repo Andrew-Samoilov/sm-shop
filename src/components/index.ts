@@ -12,4 +12,4 @@ export { BenefitsSection } from "./benefits-section";
 export { ContactForm } from "./contact-form";
 export { Analytics } from "./analytics";
 export { LinkWithGA } from "./link-with-ga";
-export { ExternalLinkWithGA } from "./external-link-with-ga";
+export { ViewItemGA } from "./view-item-ga";

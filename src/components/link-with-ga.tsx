@@ -1,35 +1,83 @@
 'use client'
 
 import Link from 'next/link'
-import { sendGAEvent } from '@/lib/sendGAEvent'
-import type { LinkProps } from 'next/link'
+import { useEffect, useState } from 'react'
+import { sendGAEvent } from '@/lib'
 import type { ReactNode } from 'react'
 
-type LinkWithGAProps = LinkProps & {
+type SmartLinkWithGAProps = {
+    href: string
     children: ReactNode
     eventLabel: string
     eventCategory?: string
+    eventName?: string
+    eventParams?: Record<string, unknown>
     className?: string
     ariaLabel?: string
+    target?: string
+    rel?: string
 }
 
 export function LinkWithGA({
-    children,
     href,
+    children,
     eventLabel,
-    eventCategory = 'navigation',
+    eventCategory,
+    eventName,
+    eventParams,
     className,
     ariaLabel,
-    ...rest
-}: LinkWithGAProps) {
+    target,
+    rel,
+}: SmartLinkWithGAProps) {
+    const [isClient, setIsClient] = useState(false)
+    const [isExternal, setIsExternal] = useState(false)
+
+    useEffect(() => {
+        setIsClient(true)
+
+        try {
+            const url = new URL(href, window.location.origin)
+            setIsExternal(url.origin !== window.location.origin)
+        } catch {
+            setIsExternal(false)
+        }
+    }, [href])
 
     const handleClick = () => {
         sendGAEvent({
-            action: 'click',
-            category: eventCategory,
+            action: eventName ?? 'click',
+            category: eventCategory ?? (isExternal ? 'external_link' : 'navigation'),
             label: eventLabel,
-            // value: 1 // якщо потрібно
+            params: eventParams,
         })
+    }
+
+    if (!isClient) {
+        return (
+            <Link
+                href={href}
+                className={className}
+                aria-label={ariaLabel}
+            >
+                {children}
+            </Link>
+        )
+    }
+
+    if (isExternal) {
+        return (
+            <a
+                href={href}
+                onClick={handleClick}
+                className={className}
+                aria-label={ariaLabel}
+                target={target ?? '_blank'}
+                rel={rel ?? 'noopener noreferrer'}
+            >
+                {children}
+            </a>
+        )
     }
 
     return (
@@ -38,7 +86,6 @@ export function LinkWithGA({
             onClick={handleClick}
             className={className}
             aria-label={ariaLabel}
-            {...rest}
         >
             {children}
         </Link>

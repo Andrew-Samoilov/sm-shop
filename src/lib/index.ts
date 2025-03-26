@@ -30,4 +30,4 @@ export { getModelDescription } from "./get-model-description";
 export { handleClientSubmit } from "./recaptcha/handleClientSubmit";
 export { loadRecaptchaScript } from "./recaptcha/loadRecaptchaScript";
 
-export { sendGAEvent } from "./sendGAEvent";
+export { sendGAEvent } from "./send-ga-event";
