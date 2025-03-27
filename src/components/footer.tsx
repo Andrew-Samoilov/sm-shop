@@ -27,7 +27,7 @@ export function Footer() {
                         <div className='text-lg font-semibold'>Товари</div>
                         <div className='space-y-2 lg:flex-row'>
 
-                            <LinkWithGA href="/tyres" eventLabel="tyres" eventCategory="footer" className='text-lg font-semibold'>
+                            <LinkWithGA href="/tyres" eventLabel="tyres" eventCategory="footer" >
                                 Шини
                             </LinkWithGA>
 
@@ -45,7 +45,7 @@ export function Footer() {
                         <LinkWithGA href="/contacts" eventLabel="contacts" eventCategory="footer" className='text-lg font-semibold'>
                             Контакти
                         </LinkWithGA>
-                       
+
 
                         <div className='space-y-2 flex flex-col items-center'>
                             <LinkWithGA
@@ -108,7 +108,11 @@ export function Footer() {
                     </LinkWithGA>
 
                     <div>
-                        ©&nbsp;2001 - {new Date().getFullYear()}<span className="hidden md:inline"> Шина Мікс. {version}</span>
+                        ©&nbsp;2001 - {new Date().getFullYear()}&nbsp;
+                        <span className="hidden md:inline">
+                            Шина Мікс.
+                            {process.env.NODE_ENV === 'development' && ` ${version}`}
+                        </span>
                     </div>
                 </div>
             </div>
