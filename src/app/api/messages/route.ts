@@ -27,7 +27,10 @@ export async function POST(req: Request) {
             data: { name, email, phone, message },
         });
 
-        console.log("✅ Повідомлення збережено:", newMessage);
+        if (process.env.NODE_ENV === 'development') {
+            console.log("✅ Повідомлення збережено:", newMessage);
+        }
+
         return NextResponse.json({ success: true, data: newMessage });
 
     } catch (error) {
