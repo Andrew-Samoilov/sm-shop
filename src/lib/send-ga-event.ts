@@ -26,7 +26,7 @@ export const sendGAEvent = ({ action, category, label, value, params }: GAEvent)
   };
 
   if (process.env.NODE_ENV === 'development') {
-    console.log('[GA EVENT]', action, JSON.stringify(eventParams, null, 2));
+    console.info('[GA EVENT]', action, JSON.stringify(eventParams, null, 2));
   }
 
   if (typeof window !== 'undefined' && typeof window.gtag !== 'undefined') {

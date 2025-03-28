@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { CartPanel, Logo, Search } from '@/components';
+import { CartPanel, Logo, Search, ThemeSwitcher } from '@/components';
 import siteConfig from '../static-data/site-config.json';
 
 export function Header() {
@@ -9,6 +9,7 @@ export function Header() {
             <Logo text={siteConfig.siteName} />
             <Link href="/tyres">Шини</Link>
             <Search />
+            <ThemeSwitcher />
             <CartPanel />
         </header>
     );

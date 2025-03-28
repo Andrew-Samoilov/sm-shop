@@ -52,7 +52,7 @@ export default function TyresSelectClient({
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (process.env.NODE_ENV === 'development') {
-            console.log("Width:", width, "Profile:", profile, "Diameter:", diameter);
+            console.info("Width:", width, "Profile:", profile, "Diameter:", diameter);
         }       
     };
 

@@ -13,11 +13,11 @@ async function test() {
         },
     });
 
-    console.log("✅ Новий запис додано:", newMessage);
+    console.info("✅ Новий запис додано:", newMessage);
 
     // Отримуємо всі записи
     const allMessages = await prisma.messages.findMany();
-    console.log("📌 Всі повідомлення:", allMessages);
+    console.info("📌 Всі повідомлення:", allMessages);
 }
 
 test()

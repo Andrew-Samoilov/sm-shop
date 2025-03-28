@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 export async function POST(req: Request) {
     try {
         const body = await req.json();
-        // console.log("📥 Отримані дані:", body);
+        // console.info("📥 Отримані дані:", body);
 
         // Переконуємось, що всі необхідні поля є
         const name = body.contact_name?.trim();
@@ -28,7 +28,7 @@ export async function POST(req: Request) {
         });
 
         if (process.env.NODE_ENV === 'development') {
-            console.log("✅ Повідомлення збережено:", newMessage);
+            console.info("✅ Повідомлення збережено:", newMessage);
         }
 
         return NextResponse.json({ success: true, data: newMessage });
