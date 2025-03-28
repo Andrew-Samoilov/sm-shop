@@ -13,7 +13,7 @@ export default function ContactsPage() {
                 defer
             />
 
-            <section className='bg-gradient-to-b from-body to-theme-light'>
+            <section className='bg-gradient-to-b from-body to-theme-light  dark:from-darkmode-body dark:to-darkmode-theme-light'>
                 <h1>Контакти</h1>
             </section>
             <section className="flex flex-col md:container" id='contacts'>
