@@ -1,15 +1,16 @@
 'use client';
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { formatTyreSizeQuery } from "@/lib";
+import { formatTyreSizeQuery, sendGAEvent } from "@/lib";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 export function Search() {
     const [query, setQuery] = useState("");
     const [debouncedQuery, setDebouncedQuery] = useState("");
+    const [debouncedQueryForGA, setDebouncedQueryForGA] = useState("");
     const router = useRouter();
 
-    // ⏱ debounce на 300 мс
+    // 1. debounce на 300 мс
     useEffect(() => {
         const timeout = setTimeout(() => {
             setDebouncedQuery(query);
@@ -18,13 +19,34 @@ export function Search() {
         return () => clearTimeout(timeout);
     }, [query]);
 
-    // 🔁 оновлюємо маршрут тільки після debounce
+    // 2. debounce на 1500мс для GA
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setDebouncedQueryForGA(query);
+        }, 1500); 
+        return () => clearTimeout(timeout);
+    }, [query]);
+
+    // Маршрут (швидко)
     useEffect(() => {
         if (debouncedQuery.trim()) {
             const formatted = formatTyreSizeQuery(debouncedQuery);
             router.push(`/tyres?query=${formatted}`, { scroll: false });
         }
     }, [debouncedQuery, router]);
+
+    // GA подія (повільно)
+    useEffect(() => {
+        if (debouncedQueryForGA.trim()) {
+            sendGAEvent({
+                action: "search",
+                params: {
+                    search_term: debouncedQueryForGA,
+                    debug_mode: true,
+                },
+            });
+        }
+    }, [debouncedQueryForGA]);
 
     return (
         <div className="relative w-full max-w-md">

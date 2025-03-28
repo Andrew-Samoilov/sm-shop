@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { ShoppingCartIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { sendGAEvent } from "@/lib";
 
 interface CartTyre {
     id: number;
@@ -22,6 +23,26 @@ export function CartPanel() {
             }
         }
     }, []);
+    
+    useEffect(() => {
+        if (isOpen && CartTyre) {
+            sendGAEvent({
+                action: 'view_cart',
+                params: {
+                    currency: 'UAH',
+                    debug_mode: true,
+                    items: [
+                        {
+                            item_id: CartTyre.id.toString(),
+                            item_name: CartTyre.title,
+                            price: CartTyre.price,
+                            quantity: CartTyre.quantity,
+                        },
+                    ],
+                },
+            });
+        }
+    }, [isOpen, CartTyre]);
 
     return (
         <>
