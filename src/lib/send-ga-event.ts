@@ -6,18 +6,23 @@ type GAEvent = {
   params?: Record<string, unknown>;
 };
 
-
 declare global {
   interface Window {
     gtag?: (
-      command: 'event' | 'config' | 'js',
+      command: "event" | "config" | "js",
       targetIdOrEventName: string,
-      params?: Record<string, unknown>
+      params?: Record<string, unknown>,
     ) => void;
   }
 }
 
-export const sendGAEvent = ({ action, category, label, value, params }: GAEvent) => {
+export const sendGAEvent = ({
+  action,
+  category,
+  label,
+  value,
+  params,
+}: GAEvent) => {
   const eventParams = {
     ...(category && { event_category: category }),
     ...(label && { event_label: label }),
@@ -25,12 +30,11 @@ export const sendGAEvent = ({ action, category, label, value, params }: GAEvent)
     ...params,
   };
 
-  if (process.env.NODE_ENV === 'development') {
-    console.info('[GA EVENT]', action, JSON.stringify(eventParams, null, 2));
+  if (process.env.NODE_ENV === "development") {
+    console.info("[GA EVENT]", action, JSON.stringify(eventParams, null, 2));
   }
 
-  if (typeof window !== 'undefined' && typeof window.gtag !== 'undefined') {
-    window.gtag('event', action, eventParams);
+  if (typeof window !== "undefined" && typeof window.gtag !== "undefined") {
+    window.gtag("event", action, eventParams);
   }
 };
-

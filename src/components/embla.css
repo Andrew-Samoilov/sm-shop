@@ -1,7 +1,7 @@
 .embla {
   margin: auto;
   --slide-spacing: 1.5rem;
-  
+
   --slide-size: 100%;
   @media (min-width: 768px) {
     --slide-size: 50%;
@@ -27,6 +27,6 @@
   flex: 0 0 var(--slide-size);
   min-width: 0;
   padding-left: var(--slide-spacing);
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
 }

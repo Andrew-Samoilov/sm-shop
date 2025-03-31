@@ -1,45 +1,45 @@
 export interface Tyres {
-    tyres: Tyre[];
+  tyres: Tyre[];
 }
 
 export interface Brand {
-    id: number;
-    name: string;
-    description?: string;
-    website?: string;
-    country?: string;
-    logo?: string;
-    created_at?: Date;
-    updated_at?: Date;
+  id: number;
+  name: string;
+  description?: string;
+  website?: string;
+  country?: string;
+  logo?: string;
+  created_at?: Date;
+  updated_at?: Date;
 }
 
 export type Model = {
-    id: number;
+  id: number;
+  name: string;
+  brand: {
     name: string;
-    brand: {
-        name: string;
-    };
+  };
 };
 
 export type Tyre = {
-    id: number;
-    model: string | null;
-    description: string | null;
-    country: string | null;
-    model_id: number | null;
-    brand_id: number | null;
-    title: string;
-    slug: string;
-    date_code: string | null;
-    type: string | null;
-    price?: number;
+  id: number;
+  model: string | null;
+  description: string | null;
+  country: string | null;
+  model_id: number | null;
+  brand_id: number | null;
+  title: string;
+  slug: string;
+  date_code: string | null;
+  type: string | null;
+  price?: number;
 };
 
 export interface IImage {
-    id: number;
-    documentId: string;
-    url: string;
-    alternativeText: string | null;
-    width?: number;
-    height?: number;
+  id: number;
+  documentId: string;
+  url: string;
+  alternativeText: string | null;
+  width?: number;
+  height?: number;
 }

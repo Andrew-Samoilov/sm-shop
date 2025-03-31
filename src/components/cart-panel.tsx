@@ -5,93 +5,98 @@ import { ShoppingCartIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { sendGAEvent } from "@/lib";
 
 interface CartTyre {
-    id: number;
-    title: string;
-    price: number;
-    quantity: number;
+  id: number;
+  title: string;
+  price: number;
+  quantity: number;
 }
 
 export function CartPanel() {
-    const [isOpen, setIsOpen] = useState(false);
-    const [CartTyre, setCartTyre] = useState<CartTyre | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [CartTyre, setCartTyre] = useState<CartTyre | null>(null);
 
-    useEffect(() => {
-        if (typeof window !== "undefined") {
-            const storedTyre = localStorage.getItem('tyre');
-            if (storedTyre) {
-                setCartTyre(JSON.parse(storedTyre));
-            }
-        }
-    }, []);
-    
-    useEffect(() => {
-        if (isOpen && CartTyre) {
-            sendGAEvent({
-                action: 'view_cart',
-                params: {
-                    currency: 'UAH',
-                    debug_mode: true,
-                    items: [
-                        {
-                            item_id: CartTyre.id.toString(),
-                            item_name: CartTyre.title,
-                            price: CartTyre.price,
-                            quantity: CartTyre.quantity,
-                        },
-                    ],
-                },
-            });
-        }
-    }, [isOpen, CartTyre]);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedTyre = localStorage.getItem("tyre");
+      if (storedTyre) {
+        setCartTyre(JSON.parse(storedTyre));
+      }
+    }
+  }, []);
 
-    return (
-        <>
-            {/* Кнопка відкриття */}
-            <button
-                onClick={() => setIsOpen(true)}
-                className="py-2 px-6 hover:cursor-pointer"
-            >
-                <ShoppingCartIcon className="h-5 w-5" />
-            </button>
+  useEffect(() => {
+    if (isOpen && CartTyre) {
+      sendGAEvent({
+        action: "view_cart",
+        params: {
+          currency: "UAH",
+          debug_mode: true,
+          items: [
+            {
+              item_id: CartTyre.id.toString(),
+              item_name: CartTyre.title,
+              price: CartTyre.price,
+              quantity: CartTyre.quantity,
+            },
+          ],
+        },
+      });
+    }
+  }, [isOpen, CartTyre]);
 
-            {isOpen && (
-                <aside
-                    id="cart-panel"
-                    aria-labelledby="cart-title"
-                    aria-hidden={!isOpen}
-                    tabIndex={-1}
-                    className="p-6 fixed right-0 top-0 h-screen w-96 bg-body/95 backdrop-blur-lg dark:bg-darkmode-body/95 transform transition-transform duration-300 ease-in-out
-                    flex flex-col justify-between ">
-                    {/* Заголовок і кнопка закриття */}
-                    <div>
-                        <div className="flex justify-between items-center pb-6 border-b">
-                            <h2 className="text-lg font-semibold">Кошик</h2>
-                            <button onClick={() => setIsOpen(false)}>
-                                <XMarkIcon className="h-6 w-6 text-light cursor-pointer" />
-                            </button>
-                        </div>
+  return (
+    <>
+      {/* Кнопка відкриття */}
+      <button
+        onClick={() => setIsOpen(true)}
+        className="px-6 py-2 hover:cursor-pointer"
+      >
+        <ShoppingCartIcon className="h-5 w-5" />
+      </button>
 
-                        {/* Контент кошика */}
-                        {CartTyre ? (
-                            <div className="flex flex-col justify-between pt-6">
-                                <p>{CartTyre.title}</p>
-                                <div className="pt-4 flex justify-between"><span>{CartTyre.quantity} шт.</span><span>{CartTyre.price} грн.</span></div>
-                            </div>
-                        ) : (
-                            <p>Кошик порожній</p>
-                        )}
-                    </div>
-                    {CartTyre && (
-                        <div className="flex flex-col justify-between ">
-                            <p className="text-xl ml-auto pb-6">Разом: <strong> {CartTyre.price * CartTyre.quantity}</strong> грн.</p>
-                            <button
-                                className="btn btn-md btn-primary bg-accent border-accent hover:bg-accent-hover hover:border-accent-hover">
-                                Оплатити
-                            </button>
-                        </div>
-                    )}
-                </aside>
+      {isOpen && (
+        <aside
+          id="cart-panel"
+          aria-labelledby="cart-title"
+          aria-hidden={!isOpen}
+          tabIndex={-1}
+          className="bg-body/95 dark:bg-darkmode-body/95 fixed top-0 right-0 flex h-screen w-96 transform flex-col justify-between p-6 backdrop-blur-lg transition-transform duration-300 ease-in-out"
+        >
+          {/* Заголовок і кнопка закриття */}
+          <div>
+            <div className="flex items-center justify-between border-b pb-6">
+              <h2 className="text-lg font-semibold">Кошик</h2>
+              <button onClick={() => setIsOpen(false)}>
+                <XMarkIcon className="text-light h-6 w-6 cursor-pointer" />
+              </button>
+            </div>
+
+            {/* Контент кошика */}
+            {CartTyre ? (
+              <div className="flex flex-col justify-between pt-6">
+                <p>{CartTyre.title}</p>
+                <div className="flex justify-between pt-4">
+                  <span>{CartTyre.quantity} шт.</span>
+                  <span>{CartTyre.price} грн.</span>
+                </div>
+              </div>
+            ) : (
+              <p>Кошик порожній</p>
             )}
-        </>
-    );
+          </div>
+          {CartTyre && (
+            <div className="flex flex-col justify-between">
+              <p className="ml-auto pb-6 text-xl">
+                Разом: <strong> {CartTyre.price * CartTyre.quantity}</strong>{" "}
+                грн.
+              </p>
+              <button className="btn btn-md btn-primary bg-accent border-accent hover:bg-accent-hover hover:border-accent-hover">
+                Оплатити
+              </button>
+            </div>
+          )}
+        </aside>
+      )}
+    </>
+  );
 }
