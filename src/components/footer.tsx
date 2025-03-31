@@ -72,7 +72,7 @@ export function Footer() {
                                     eventLabel="viber"
                                     eventCategory="footer"
                                     ariaLabel="Пишіть у Viber"
-                                    className="bg-white p-2 px-3 rounded-full hover:bg-black hover:text-white hover:no-underline"
+                                    className="text-center font-bold p-2 px-3 rounded-full text-light bg-white border border-border hover:bg-black hover:text-white hover:no-underline duration-300 dark:border-light dark:bg-darkmode-theme-light dark:text-darkmode-light dark:hover:bg-white dark:hover:text-black"
                                 >
                                     Vb
                                 </LinkWithGA>
@@ -82,7 +82,7 @@ export function Footer() {
                                     eventLabel="telegram"
                                     eventCategory="footer"
                                     ariaLabel="Пишіть у Tg"
-                                    className="bg-white p-2 px-3 rounded-full hover:bg-black hover:text-white hover:no-underline"
+                                    className="text-center font-bold p-2 px-3 rounded-full text-light bg-white border border-border hover:bg-black hover:text-white hover:no-underline duration-300 dark:border-light dark:bg-darkmode-theme-light dark:text-darkmode-light dark:hover:bg-white dark:hover:text-black"
                                 >
                                     Tg
                                 </LinkWithGA>
@@ -92,7 +92,7 @@ export function Footer() {
                                     eventLabel="facebook"
                                     eventCategory="footer"
                                     ariaLabel="Завітайте до нас у Fb"
-                                    className="bg-white p-2 px-3 rounded-full hover:bg-black hover:text-white hover:no-underline"
+                                    className="text-center font-bold p-2 px-3 rounded-full text-light bg-white border border-border hover:bg-black hover:text-white hover:no-underline duration-300 dark:border-light dark:bg-darkmode-theme-light dark:text-darkmode-light dark:hover:bg-white dark:hover:text-black"
                                 >
                                     Fb
                                 </LinkWithGA>

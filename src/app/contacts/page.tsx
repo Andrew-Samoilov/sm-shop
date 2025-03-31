@@ -1,7 +1,10 @@
 import Link from "next/link";
-import contacts from '../../static-data/contacts.json';
-import { ContactForm } from "@/components";
 import Script from "next/script";
+
+import { ContactForm } from "@/components";
+
+import contacts from "../../static-data/contacts.json";
+
 
 export default function ContactsPage() {
     return (
@@ -54,7 +57,9 @@ export default function ContactsPage() {
 
                 <h2 className="mt-8 text-center">Лишились питання?</h2>
                 <p className="subHeader text-center">Пишіть, ми завжди готові допомогти!</p>
+
                 <ContactForm />
+
             </section>
         </>
     );
