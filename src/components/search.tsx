@@ -49,14 +49,14 @@ export function Search() {
   }, [debouncedQueryForGA]);
 
   return (
-    <div className="relative w-full max-w-md">
+    <div className="relative ">
       <MagnifyingGlassIcon className="text-light absolute top-1/2 right-4 h-5 w-5 -translate-y-1/2 scale-x-[-1] transform" />
       <input
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Пошук шин..."
-        className="bg-theme-light dark:bg-darkmode-theme-light dark:border-border focus:ring-accent w-full cursor-text rounded-full py-2 pr-10 pl-4 focus:ring-2 focus:outline-none"
+        className="bg-light/10 border border-border dark:border-darkmode-border focus:ring-accent w-full cursor-text rounded-full py-2 pr-10 pl-4 focus:ring-2 focus:outline-none"
       />
     </div>
   );
