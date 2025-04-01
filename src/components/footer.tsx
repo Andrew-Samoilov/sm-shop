@@ -120,12 +120,12 @@ export function Footer() {
 
         <div className="border-border dark:border-darkmode-border flex items-center justify-between border-t py-6">
           <LinkWithGA
-            href="/terms"
-            eventLabel="terms"
-            aria-label="Ознайомитись з умовами користування сайтом"
+            href="/legal"
+            eventLabel="legal"
+            aria-label="Правові умови"
             eventCategory="footer"
           >
-            Умови<span className="hidden md:inline"> користування сайтом</span>
+            Правові умови
           </LinkWithGA>
 
           <div>
