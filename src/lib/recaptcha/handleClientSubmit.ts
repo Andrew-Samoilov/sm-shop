@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { sendGAEvent } from "@/lib";
+import { formatFormData, sendEmail, sendGAEvent } from "@/lib";
 
 declare global {
   interface Window {
@@ -44,6 +44,11 @@ export async function handleClientSubmit(formId: string, formData: FormData) {
         form_location: "contact_page",
         form_type: "contact",
       },
+    });
+
+    sendEmail({
+      subject: 'Нове повідомлення з сайту Shinamix.com',
+      text: formatFormData(formData),
     });
 
     const formEl = document.getElementById(formId) as HTMLFormElement;

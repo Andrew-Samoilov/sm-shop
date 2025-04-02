@@ -126,4 +126,5 @@
   .form-label {
     @apply text-dark dark:text-darkmode-light mb-2 block text-xl font-normal max-md:text-base;
   }
+
 }

@@ -6,10 +6,10 @@ const version = packageData.version;
 
 export function Footer() {
   return (
-    <footer className="bg-theme-light dark:bg-darkmode-theme-light">
+    <footer className="text-light bg-theme-light dark:bg-darkmode-theme-light">
       <div className="container md:mx-auto">
         <nav className="flex flex-col items-center pt-14 pb-12 md:flex-row md:items-start md:justify-between">
-          <span className="hidden md:block">
+          <span className="hidden md:block ">
             <Logo text={siteConfig.siteName} />
           </span>
           <div>
@@ -19,6 +19,7 @@ export function Footer() {
                 href="/contacts"
                 eventLabel="contacts"
                 eventCategory="footer"
+                className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
               >
                 Контакти
               </LinkWithGA>
@@ -26,31 +27,33 @@ export function Footer() {
                 href="/about"
                 eventLabel="about"
                 eventCategory="footer"
+                className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
               >
                 Про нас
               </LinkWithGA>
-              <div className="text-light">Оплата і доставка</div>
-              <div className="text-light">Гарантія</div>
+              <div className="text-light/75">Оплата і доставка</div>
+              <div className="text-light/75">Гарантія</div>
             </div>
           </div>
-          <div className="flex flex-col items-center pt-2">
+          <div className="flex flex-col items-center">
             <div className="text-lg font-semibold">Товари</div>
             <div className="space-y-2 lg:flex-row">
               <LinkWithGA
                 href="/tyres"
                 eventLabel="tyres"
                 eventCategory="footer"
+                className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
               >
                 Шини
               </LinkWithGA>
 
-              <div className="text-light">Диски</div>
+              <div className="text-light/75">Диски</div>
             </div>
             <div className="flex flex-col items-center pt-2">
               <div className="text-lg font-semibold">Послуги</div>
               <div className="flex flex-col items-center space-y-2">
-                <div className="text-light">Шиномонтаж</div>
-                <div className="text-light">Зберігання</div>
+                <div className="text-light/75">Шиномонтаж</div>
+                <div className="text-light/75">Зберігання</div>
               </div>
             </div>
           </div>
@@ -118,7 +121,7 @@ export function Footer() {
           </div>
         </nav>
 
-        <div className="border-border dark:border-darkmode-border flex items-center justify-between border-t py-6">
+        <div className="border-border dark:border-darkmode-border text-light flex items-center justify-between border-t py-6">
           <LinkWithGA
             href="/legal"
             eventLabel="legal"
@@ -128,7 +131,7 @@ export function Footer() {
             Правові умови
           </LinkWithGA>
 
-          <div>
+          <div className="text-sm font-light">
             ©&nbsp;2001 - {new Date().getFullYear()}&nbsp;
             <span className="hidden md:inline">
               Шина Мікс.

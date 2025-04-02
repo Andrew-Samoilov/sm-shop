@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <section className="flex justify-center gap-6">
+    <section className="flex justify-center gap-6 flex-wrap">
       <Link
         className="border-border dark:border-darkmode-border hover:border-accent dark:hover:border-accent rounded-md border-2 px-6 py-2 hover:no-underline"
         href="/tyres"

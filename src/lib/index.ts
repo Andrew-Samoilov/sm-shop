@@ -1,6 +1,7 @@
 export { normalizeUrl } from "./normalize-url";
 export { formatDisplayUrl } from "./format-display-url";
 export { formatTyreSizeQuery } from "./format-tyre-size-query";
+export { formatFormData } from "./format-form-data";
 export { getMdContent } from "./get-md-content";
 
 export { prisma } from "./prisma/prisma";
@@ -30,3 +31,4 @@ export { handleClientSubmit } from "./recaptcha/handleClientSubmit";
 export { loadRecaptchaScript } from "./recaptcha/loadRecaptchaScript";
 
 export { sendGAEvent } from "./send-ga-event";
+export { sendEmail } from "./send-email";
