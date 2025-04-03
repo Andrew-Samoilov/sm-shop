@@ -51,25 +51,22 @@ export default async function BrandPage({
             {brand.name}
           </h1>
           {brand.country && (
-            <p className="text-light dark:text-darkmode-light">
-              Країна походження -{" "}
-              <span className="font-semibold">{brand.country}</span>.
+            <p className="text-light text-sm dark:text-darkmode-light">
+              Країна походження - {brand.country}.
             </p>
           )}
           {brand.website && !["NULL", "null", ""].includes(brand.website) && (
-            <p>
-              <LinkWithGA
-                href={brand.website}
-                className="text-blue-600 hover:underline"
-                target="_blank"
-                rel="noopener noreferrer"
-                eventLabel="brand_website"
-                eventCategory={`brand-${brand.name}`}
-                ariaLabel={`Перейти на сайт бренду ${brand.name}`}
-              >
-                {formatDisplayUrl(brand.website)}
-              </LinkWithGA>
-            </p>
+            <LinkWithGA
+              href={brand.website}
+              className=" hover:underline text-light text-sm"
+              target="_blank"
+              rel="noopener noreferrer"
+              eventLabel="brand_website"
+              eventCategory={`brand-${brand.name}`}
+              ariaLabel={`Перейти на сайт бренду ${brand.name}`}
+            >
+              {formatDisplayUrl(brand.website)}
+            </LinkWithGA>
           )}
         </div>
         {brand.logo && (
@@ -87,7 +84,7 @@ export default async function BrandPage({
 
       <article>
         <h2>
-          Наявні моделі бренду {brand.name} ({brandModels.length})
+          Наявні <strong>моделі</strong> бренду {brand.name} ({brandModels.length})
         </h2>
         {brandModels.map((model) => (
           <LinkWithGA
