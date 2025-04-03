@@ -127,4 +127,8 @@
     @apply text-dark dark:text-darkmode-light mb-2 block text-xl font-normal max-md:text-base;
   }
 
+  blockquote {
+    @apply text-light dark:text-darkmode-light bg-theme-light dark:bg-darkmode-theme-light rounded-lg 
+    px-6 py-12 md:py-20 md:ml-8 md:px-14;
+  }
 }

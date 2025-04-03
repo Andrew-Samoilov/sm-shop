@@ -45,7 +45,7 @@ export default async function BrandPage({
 
   return (
     <section className="container flex flex-col gap-6">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between   flex-col-reverse md:flex-row">
         <div>
           <h1 style={{ viewTransitionName: `title-${brand.name}` }}>
             {brand.name}
