@@ -110,8 +110,7 @@
   }
 
   .container {
-    @apply mx-auto max-w-lg 
-    /* md:max-w-[1320px] px-8 lg:max-w-[1640px]; */
+    @apply mx-auto max-w-lg px-8  xl:max-w-[1640px];
   }
 
   /* this bullshit css special for toaster */

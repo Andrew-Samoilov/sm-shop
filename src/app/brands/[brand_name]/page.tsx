@@ -45,7 +45,7 @@ export default async function BrandPage({
 
   return (
     <section className="container flex flex-col gap-6 ">
-      <div className="flex items-center justify-between   flex-col-reverse md:flex-row p-[-2rem]">
+      <article className="flex items-center justify-between   flex-col-reverse md:flex-row p-[-2rem]">
         <div >
           <h1 style={{ viewTransitionName: `title-${brand.name}` }}>
             {brand.name}
@@ -74,11 +74,11 @@ export default async function BrandPage({
           <img
             src={brand.logo}
             alt={brand.name}
-            className="max-w-1/2"
+            className="max-w-md"
             style={{ viewTransitionName: `logo-${brand.name}` }}
           />
         )}
-      </div>
+      </article>
 
       <ReactMarkdown>{description}</ReactMarkdown>
 
