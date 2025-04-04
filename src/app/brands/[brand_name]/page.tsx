@@ -44,9 +44,9 @@ export default async function BrandPage({
   // console.info(`getTyresByBrandId `,brandTyres);
 
   return (
-    <section className="container flex flex-col gap-6">
-      <div className="flex items-center justify-between   flex-col-reverse md:flex-row">
-        <div>
+    <section className="container flex flex-col gap-6 ">
+      <div className="flex items-center justify-between   flex-col-reverse md:flex-row p-[-2rem]">
+        <div >
           <h1 style={{ viewTransitionName: `title-${brand.name}` }}>
             {brand.name}
           </h1>
@@ -103,7 +103,7 @@ export default async function BrandPage({
         ))}
       </article>
 
-      <article>
+      <article >
         <h2>
           Наявні шини бренду {brand.name} ({brandTyres.length})
         </h2>

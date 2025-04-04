@@ -52,11 +52,6 @@
   --font-primary: Karla, sans-serif;
 }
 
-@utility container {
-  margin-inline: auto;
-  padding-inline: 2rem;
-}
-
 @utility subHeader {
   @apply text-light dark:text-darkmode-light text-xl;
 }
@@ -112,6 +107,11 @@
 
   section {
     @apply mx-auto gap-6 p-6 lg:py-24;
+  }
+
+  .container {
+    @apply mx-auto max-w-lg 
+    /* md:max-w-[1320px] px-8 lg:max-w-[1640px]; */
   }
 
   /* this bullshit css special for toaster */

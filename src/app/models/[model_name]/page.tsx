@@ -37,9 +37,20 @@ export default async function ModelPage({
 
   return (
     <section className="container flex flex-col gap-6">
-      <h1>
-        {brand?.name} {model.name}
-      </h1>
+      <div className="flex items-center justify-between   flex-col-reverse md:flex-row">
+        <h1>
+          {brand?.name} {model.name}
+        </h1>
+        {brand?.logo && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={brand.logo}
+            alt={brand.name}
+            className="max-w-1/4"
+            style={{ viewTransitionName: `logo-${brand.name}` }}
+          />
+        )}
+      </div>
 
       <ReactMarkdown>{description}</ReactMarkdown>
 
@@ -47,6 +58,7 @@ export default async function ModelPage({
         <h2>
           Наявні шини для моделі {model.name} бренду {brand?.name}
         </h2>
+
         <TyresList tyres={modelTyres} />
       </article>
     </section>
