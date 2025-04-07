@@ -1,5 +1,6 @@
-import Link from "next/link";
+
 import React from "react";
+import { LinkWithGA } from "@/components";
 
 function SMTyreIcon(props: Readonly<React.SVGProps<SVGSVGElement>>) {
   return (
@@ -42,19 +43,22 @@ function SMTyreIcon(props: Readonly<React.SVGProps<SVGSVGElement>>) {
 
 interface LogoProps {
   text?: string;
+  eventCategory?: string;
 }
 
 export function Logo({ text = "Шина Мікс" }: Readonly<LogoProps>) {
   return (
-    <Link
+    <LinkWithGA
       href="/"
-      className="group flex items-center gap-2 focus:outline-hidden"
+      eventLabel="logo"
+      eventCategory="header"
+      className="group flex items-center gap-2 focus:outline-hidden pb-4"
       aria-label={`Navigate to ${text}`}
     >
       <SMTyreIcon className="text-accent group-hover:text-accent h-8 w-18" />
       <span className="group-hover:text-accent -mb-3 -ml-6 text-xl font-semibold md:text-2xl">
         {text}
       </span>
-    </Link>
+    </LinkWithGA>
   );
 }

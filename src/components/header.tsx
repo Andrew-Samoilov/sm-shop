@@ -1,24 +1,35 @@
-import Link from "next/link";
-import { CartPanel, Logo, Search, ThemeSwitcher } from "@/components";
+import { CartPanel, LinkWithGA, Logo, Search, ThemeSwitcher } from "@/components";
 import siteConfig from "../static-data/site-config.json";
+import { UserIcon } from "@heroicons/react/24/outline";
 
 export function Header() {
   return (
-    <header className="bg-body/75 dark:bg-darkmode-body/75 sticky top-0 z-30 flex flex-wrap items-center justify-between px-4 py-6 backdrop-blur-sm">
-      <div className="flex items-end order-1  lg:order-1  ">
-        <Logo text={siteConfig.siteName} />
-        <Link href="/tyres">Шини</Link>
-      </div>
-      <div
-        className="order-3 w-full lg:w-[45%] xl:w-[60%] lg:order-2 lg:mx-auto md:mt-6 lg:mt-0"
-      >
-        <Search />
-      </div>
+    <header className="flex gap-6 justify-between items-center flex-wrap 
+    bg-body/75 dark:bg-darkmode-body/75 sticky top-0 z-30  px-4 py-6 backdrop-blur-sm">
+      <Logo
+        text={siteConfig.siteName}
+        eventCategory="header"
+      />
 
-      <div className="order-2  lg:order-3 lg:ml-auto flex items-center">
+      <div className="flex items-center gap-6 ">
+        <LinkWithGA
+          eventLabel="tyres"
+          eventCategory="header"
+          href="/tyres"
+        >Шини</LinkWithGA>
+        <LinkWithGA
+          eventLabel="contacts"
+          eventCategory="header"
+          href="/contacts"
+        >Контакти</LinkWithGA>
+      </div>
+      <Search />
+      <div className="flex items-center gap-6 ">
         <ThemeSwitcher />
         <CartPanel />
-        <Link href="/contacts">Контакти</Link>
+        <button>
+          <UserIcon className="h-5 w-5 text-light/75 cursor-not-allowed" />
+        </button>
       </div>
     </header>
   );

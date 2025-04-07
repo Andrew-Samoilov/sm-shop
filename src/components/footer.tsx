@@ -10,7 +10,10 @@ export function Footer() {
       <div className="container md:mx-auto">
         <nav className="flex flex-col items-center pt-14 pb-12 md:flex-row md:items-start md:justify-between">
           <span className="hidden md:block ">
-            <Logo text={siteConfig.siteName} />
+            <Logo
+              text={siteConfig.siteName}
+              eventCategory="footer"
+            />
           </span>
           <div>
             <div className="text-center text-lg font-semibold">Інформація</div>
@@ -31,8 +34,8 @@ export function Footer() {
               >
                 Про нас
               </LinkWithGA>
-              <div className="text-light/75">Оплата і доставка</div>
-              <div className="text-light/75">Гарантія</div>
+              <div className="text-light/75 cursor-not-allowed">Оплата і доставка</div>
+              <div className="text-light/75 cursor-not-allowed">Гарантія</div>
             </div>
           </div>
           <div className="flex flex-col items-center">
@@ -47,13 +50,13 @@ export function Footer() {
                 Шини
               </LinkWithGA>
 
-              <div className="text-light/75">Диски</div>
+              <div className="text-light/75 cursor-not-allowed">Диски</div>
             </div>
             <div className="flex flex-col items-center pt-2">
               <div className="text-lg font-semibold">Послуги</div>
               <div className="flex flex-col items-center space-y-2">
-                <div className="text-light/75">Шиномонтаж</div>
-                <div className="text-light/75">Зберігання</div>
+                <div className="text-light/75 cursor-not-allowed">Шиномонтаж</div>
+                <div className="text-light/75 cursor-not-allowed">Зберігання</div>
               </div>
             </div>
           </div>

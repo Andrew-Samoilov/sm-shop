@@ -49,7 +49,7 @@ export function CartPanel() {
       {/* Кнопка відкриття */}
       <button
         onClick={() => setIsOpen(true)}
-        className="px-6 py-2 hover:cursor-pointer"
+        className="cursor-pointer"
       >
         <ShoppingCartIcon className="h-5 w-5" />
       </button>
