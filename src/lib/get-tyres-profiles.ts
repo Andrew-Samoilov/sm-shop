@@ -9,7 +9,7 @@ export async function getTyresProfiles() {
 
     return profiles.map(({ profile }) => profile);
   } catch (error) {
-    console.error("Помилка отримання профілів:", error);
+    console.error("[getTyresProfiles] Помилка отримання профілів:", error);
     return [];
   }
 }

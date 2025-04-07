@@ -14,7 +14,7 @@ export async function getMdContent(url: string) {
       return fileContent;
     }
   } catch (error) {
-    console.error("Помилка зчитування файлу:", error);
+    console.error("[getMdContent] Помилка зчитування файлу:", error);
   }
 
   return "";

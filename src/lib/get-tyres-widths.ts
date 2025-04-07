@@ -8,7 +8,7 @@ export async function getTyresWidths(): Promise<string[]> {
         `;
     return widths.map(({ width }) => width);
   } catch (error) {
-    console.error("Помилка отримання ширин:", error);
+    console.error("[getTyresWidths] Помилка отримання ширин:", error);
     return [];
   }
 }

@@ -32,7 +32,7 @@ export async function GET(req: Request) {
 
     return NextResponse.json(tyres);
   } catch (error) {
-    console.error("Database error:", error);
+    console.error("[DB]", error);
     return NextResponse.json({ error: "Database error" }, { status: 500 });
   }
 }

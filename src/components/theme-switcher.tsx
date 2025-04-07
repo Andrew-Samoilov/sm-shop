@@ -9,7 +9,7 @@ export const ThemeSwitcher = () => {
   };
 
   if (process.env.NODE_ENV === "development") {
-    console.info("ThemeSwitcher rendered", theme);
+    console.info("[ThemeSwitcher] rendered", theme);
   }
 
   return (

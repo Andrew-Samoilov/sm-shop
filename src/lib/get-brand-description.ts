@@ -17,7 +17,7 @@ export async function getBrandDescription(
       return fileContent;
     }
   } catch (error) {
-    console.error("Помилка зчитування файлу:", error);
+    console.error("[getBrandDescription] Помилка зчитування файлу:", error);
   }
 
   return dbDescription;

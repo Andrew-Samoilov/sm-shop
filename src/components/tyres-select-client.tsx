@@ -46,14 +46,14 @@ export default function TyresSelectClient({
           }));
           setSelectedTyres(tyresWithPrice);
         })
-        .catch((error) => console.error("Fetch error:", error));
+        .catch((error) => console.error("[Fetch error]", error));
     }
   }, [width, profile, diameter]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (process.env.NODE_ENV === "development") {
-      console.info("Width:", width, "Profile:", profile, "Diameter:", diameter);
+      console.info("[Tyre Select] Width:", width, "Profile:", profile, "Diameter:", diameter);
     }
   };
 

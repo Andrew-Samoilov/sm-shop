@@ -41,7 +41,7 @@ export default async function BrandPage({
   );
   const brandModels = await getModelsByBrandId(brand.id);
   const brandTyres = await getTyresByBrandId(brand.id);
-  // console.info(`getTyresByBrandId `,brandTyres);
+  // console.info(`[getTyresByBrandId]`,brandTyres);
 
   return (
     <section className="container flex flex-col gap-6 ">

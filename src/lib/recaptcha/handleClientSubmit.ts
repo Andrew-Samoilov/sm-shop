@@ -32,7 +32,7 @@ export async function handleClientSubmit(formId: string, formData: FormData) {
 
     if (!result.success) {
       toast.error(result.error || "Не вдалося надіслати форму");
-      console.error("❌ Сервер повернув помилку:", result.error);
+      console.error("[Form] Сервер повернув помилку:", result.error);
       return;
     }
 
@@ -55,7 +55,7 @@ export async function handleClientSubmit(formId: string, formData: FormData) {
     const formEl = document.getElementById(formId) as HTMLFormElement;
     formEl?.reset();
   } catch (error) {
-    console.error("❌ Помилка під час надсилання форми:", error);
+    console.error("[Form] Помилка під час надсилання форми:", error);
     toast.error("Помилка підключення до сервера");
   }
 }

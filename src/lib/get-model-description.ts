@@ -17,7 +17,7 @@ export async function getModelDescription(
       return fileContent;
     }
   } catch (error) {
-    console.error("Помилка зчитування файлу:", error);
+    console.error("[getModelDescription] Помилка зчитування файлу:", error);
   }
 
   return dbDescription;

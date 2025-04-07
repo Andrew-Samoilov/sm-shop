@@ -9,7 +9,7 @@ export async function getTyresDiameters(): Promise<string[]> {
 
     return diameters.map(({ diameter }) => diameter);
   } catch (error) {
-    console.error("Помилка отримання діаметрів:", error);
+    console.error("[getTyresDiameters] Помилка отримання діаметрів:", error);
     return [];
   }
 }

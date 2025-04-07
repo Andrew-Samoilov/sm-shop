@@ -18,7 +18,7 @@ export default async function TyrePage({
   const { tyre_slug } = await params;
   const tyre = await getTyreBySlug(tyre_slug);
 
-  // console.info("getTyreBySlug:", tyre);
+  // console.info("[getTyreBySlug]", tyre);
   if (!tyre) return notFound();
 
   return (

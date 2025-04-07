@@ -21,7 +21,7 @@ export async function getBrands(): Promise<Brand[]> {
       website: brand.website ?? undefined,
     }));
   } catch (error) {
-    console.error(`Помилка під час отримання брендів:`, error);
+    console.error(`[getBrands] Помилка під час отримання брендів:`, error);
     return [];
   }
 }

@@ -33,6 +33,6 @@ export async function sendEmail({
     };
 
     const info = await transporter.sendMail(mailOptions);
-    console.log('Лист надіслано:', info.messageId);
+    console.log('[sendEmail] Лист надіслано:', info.messageId);
     return info;
 }

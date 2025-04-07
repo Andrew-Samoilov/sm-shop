@@ -9,7 +9,7 @@ function handleClick(
   quantity: number,
 ) {
   if (process.env.NODE_ENV === "development") {
-    console.info(`handleClick, tyre id:`, id);
+    console.info(`[handleClick] tyre id:`, id);
   }
 
   const tyreData = JSON.stringify({ id, title, price, quantity });
