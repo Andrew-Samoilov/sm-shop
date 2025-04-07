@@ -47,7 +47,7 @@ export default async function ModelPage({
             src={brand.logo}
             alt={brand.name}
             className="max-w-1/4"
-            style={{ viewTransitionName: `logo-${brand.name}` }}
+            style={{ viewTransitionName: `logo-${brand.name} mr-auto` }}
           />
         )}
       </div>

@@ -83,7 +83,7 @@ export default async function BrandPage({
       <ReactMarkdown>{description}</ReactMarkdown>
 
       <article>
-        <h2>
+        <h2 className="lg:sticky lg:top-[96px] lg:z-20 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
           Наявні <strong>моделі</strong> бренду {brand.name} ({brandModels.length})
         </h2>
         {brandModels.map((model) => (
@@ -104,7 +104,7 @@ export default async function BrandPage({
       </article>
 
       <article >
-        <h2>
+        <h2 className="lg:sticky lg:top-[96px] lg:z-20 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
           Наявні шини бренду {brand.name} ({brandTyres.length})
         </h2>
         <TyresList tyres={brandTyres} />

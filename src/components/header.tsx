@@ -11,7 +11,7 @@ export function Header() {
         eventCategory="header"
       />
 
-      <div className="flex items-center gap-6 ">
+      <div className="flex items-center gap-6 mx-auto ">
         <LinkWithGA
           eventLabel="tyres"
           eventCategory="header"
