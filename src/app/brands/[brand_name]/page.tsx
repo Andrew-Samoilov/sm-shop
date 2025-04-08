@@ -44,9 +44,9 @@ export default async function BrandPage({
   // console.info(`[getTyresByBrandId]`,brandTyres);
 
   return (
-    <section className="container flex flex-col gap-6 ">
-      <article className="flex items-center justify-between   flex-col-reverse md:flex-row p-[-2rem]">
-        <div >
+    <section className=" flex flex-col gap-6 ">
+      <article className="flex items-center justify-between   flex-col-reverse md:flex-row xl:sticky xl:top-[120px] xl:-z-1 bg-body dark:bg-darkmode-body">
+        <div>
           <h1 style={{ viewTransitionName: `title-${brand.name}` }}>
             {brand.name}
           </h1>
@@ -74,15 +74,18 @@ export default async function BrandPage({
           <img
             src={brand.logo}
             alt={brand.name}
-            className="max-w-md"
+            className="md:max-w-md max-w-full h-auto z-20"
             style={{ viewTransitionName: `logo-${brand.name}` }}
           />
         )}
       </article>
 
-      <ReactMarkdown>{description}</ReactMarkdown>
+      <article className="lg:max-w-[65ch] mx-auto sm:text-sm lg:text-lg xl:text-xl  bg-body dark:bg-darkmode-body z-10
+      ">
+        <ReactMarkdown>{description}</ReactMarkdown>
+      </article>
 
-      <article>
+      <article className="container mx-auto">
         <h2 className="lg:sticky lg:top-[96px] lg:z-20 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
           Наявні <strong>моделі</strong> бренду {brand.name} ({brandModels.length})
         </h2>
@@ -103,7 +106,7 @@ export default async function BrandPage({
         ))}
       </article>
 
-      <article >
+      <article className="container mx-auto">
         <h2 className="lg:sticky lg:top-[96px] lg:z-20 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
           Наявні шини бренду {brand.name} ({brandTyres.length})
         </h2>
