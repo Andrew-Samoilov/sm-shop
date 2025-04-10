@@ -32,7 +32,10 @@ export const sendGAEvent = ({
 
   if (process.env.NODE_ENV === "development") {
     console.info("[GA EVENT]", action, JSON.stringify(eventParams, null, 2));
+    console.info("[GA EVENT] navigator.webdriver", navigator.webdriver);
   }
+
+  if (navigator.webdriver) return;
 
   if (typeof window !== "undefined" && typeof window.gtag !== "undefined") {
     window.gtag("event", action, eventParams);

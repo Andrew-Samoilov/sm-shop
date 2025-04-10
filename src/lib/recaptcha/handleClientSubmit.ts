@@ -38,7 +38,7 @@ export async function handleClientSubmit(formId: string, formData: FormData) {
 
     toast.success("Запит успішно надіслано!");
     
-    // 🎯 ВІДПРАВКА ПОДІЇ В GA
+    // ВІДПРАВКА ПОДІЇ В GA
     sendGAEvent({
       action: "submit_contact_form",
       params: {

@@ -4,9 +4,10 @@ import { Analytics, Footer, Header } from "@/components";
 import { ToastContainer } from "react-toastify";
 import Script from "next/script";
 import { Suspense } from "react";
+import siteConfig from "../static-data/site-config.json";
 
 export const metadata: Metadata = {
-  title: "Шина Мікс",
+  title: `${siteConfig.siteName}`,
   description: "Інтернет магазин автошин з власним складом в серці Києва",
   icons: {
     icon: "/favicon.svg",
@@ -14,9 +15,10 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "uk_UA",
-    siteName: "Шина Мікс",
+    siteName: `${siteConfig.siteName}`,
     description: "Інтернет магазин автошин шин з власним складом в серці Києва",
   },
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000"),
 };
 
 export default function RootLayout({

@@ -137,7 +137,7 @@ export function Footer() {
           <div className="text-sm font-light">
             ©&nbsp;2001 - {new Date().getFullYear()}&nbsp;
             <span className="hidden md:inline">
-              Шина Мікс.
+              {siteConfig.siteName}.
               {process.env.NODE_ENV === "development" && ` ${version}`}
             </span>
           </div>

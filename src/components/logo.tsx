@@ -1,6 +1,6 @@
-
 import React from "react";
 import { LinkWithGA } from "@/components";
+import siteConfig from "../static-data/site-config.json";
 
 function SMTyreIcon(props: Readonly<React.SVGProps<SVGSVGElement>>) {
   return (
@@ -46,7 +46,7 @@ interface LogoProps {
   eventCategory?: string;
 }
 
-export function Logo({ text = "Шина Мікс" }: Readonly<LogoProps>) {
+export function Logo({ text = `${siteConfig.siteName}` }: Readonly<LogoProps>) {
   return (
     <LinkWithGA
       href="/"
