@@ -7,6 +7,8 @@ import { getBrands, getBrandByName, getModelsByBrandId, getTyresByBrandId, norma
 import { LinkWithGA, TyresList } from "@/components";
 import siteConfig from "@/static-data/site-config.json";
 
+import Head from "next/head";
+
 export async function generateStaticParams() {
   const brands = await getBrands();
 
@@ -35,20 +37,6 @@ export async function generateMetadata(
       ? brand.logo
       : `${BASE_URL}${brand.logo}`;
   }
-
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Brand",
-    name: brand.name,
-    ...(brand.country && { countryOfOrigin: brand.country }),
-    ...(brand.website && !["null", "NULL", ""].includes(brand.website) && { url: brand.website }),
-    ...(logoUrl && {
-      logo: {
-        "@type": "ImageObject",
-        url: logoUrl,
-      },
-    }),
-  };
 
   return {
     title,
@@ -79,9 +67,6 @@ export async function generateMetadata(
     alternates: {
       canonical: canonicalUrl,
     },
-    other: {
-      "application/ld+json": JSON.stringify(jsonLd),
-    },
   };
 }
 
@@ -103,76 +88,99 @@ export default async function BrandPage({
   );
   const brandModels = await getModelsByBrandId(brand.id);
   const brandTyres = await getTyresByBrandId(brand.id);
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Brand",
+    name: brand.name,
+    ...(brand.country && { countryOfOrigin: brand.country }),
+    ...(brand.website && !["null", "NULL", ""].includes(brand.website) && { url: brand.website }),
+    ...(brand.logo && {
+      logo: {
+        "@type": "ImageObject",
+        url: brand.logo,
+      },
+    }),
+  };
+
   // console.info(`[getTyresByBrandId]`,brandTyres);
 
   return (
-    <section className=" flex flex-col gap-6 ">
-      <article className="flex items-center justify-between   flex-col-reverse md:flex-row xl:sticky xl:top-[120px] xl:-z-1 bg-body dark:bg-darkmode-body">
-        <div>
-          <h1 style={{ viewTransitionName: `title-${brand.name}` }}>
-            {brand.name}
-          </h1>
-          {brand.country && (
-            <p className="text-light text-sm dark:text-darkmode-light">
-              Країна походження - {brand.country}.
-            </p>
+    <>
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </Head>
+      <section className=" flex flex-col gap-6 ">
+        <article className="flex items-center justify-between   flex-col-reverse md:flex-row xl:sticky xl:top-[120px] xl:-z-1 bg-body dark:bg-darkmode-body">
+          <div>
+            <h1 style={{ viewTransitionName: `title-${brand.name}` }}>
+              {brand.name}
+            </h1>
+            {brand.country && (
+              <p className="text-light text-sm dark:text-darkmode-light">
+                Країна походження - {brand.country}.
+              </p>
+            )}
+            {brand.website && !["NULL", "null", ""].includes(brand.website) && (
+              <LinkWithGA
+                href={brand.website}
+                className=" hover:underline text-light text-sm"
+                target="_blank"
+                rel="noopener noreferrer"
+                eventLabel="brand_website"
+                eventCategory={`brand-${brand.name}`}
+                ariaLabel={`Перейти на сайт бренду ${brand.name}`}
+              >
+                {formatDisplayUrl(brand.website)}
+              </LinkWithGA>
+            )}
+          </div>
+          {brand.logo && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={brand.logo}
+              alt={brand.name}
+              className="md:max-w-md max-w-full h-auto z-20"
+              style={{ viewTransitionName: `logo-${brand.name}` }}
+            />
           )}
-          {brand.website && !["NULL", "null", ""].includes(brand.website) && (
+        </article>
+
+        <article className="lg:max-w-[65ch] mx-auto sm:text-sm lg:text-lg xl:text-xl xl:-mt-65 bg-body dark:bg-darkmode-body z-10">
+          <ReactMarkdown>{description}</ReactMarkdown>
+        </article>
+
+        <article className="container mx-auto">
+          <h2 className="lg:sticky lg:top-[96px] lg:z-20 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
+            Наявні <strong>моделі</strong> бренду {brand.name} ({brandModels.length})
+          </h2>
+          {brandModels.map((model) => (
             <LinkWithGA
-              href={brand.website}
-              className=" hover:underline text-light text-sm"
-              target="_blank"
-              rel="noopener noreferrer"
-              eventLabel="brand_website"
+              key={model.id}
+              href={`/models/${normalizeUrl(model.name)}`}
+              eventLabel={model.name}
               eventCategory={`brand-${brand.name}`}
-              ariaLabel={`Перейти на сайт бренду ${brand.name}`}
+              className="block"
+              eventParams={{
+                brand_name: `${brand.name}`,
+                model_id: `${model.id}`,
+              }}
             >
-              {formatDisplayUrl(brand.website)}
+              {model.name}
             </LinkWithGA>
-          )}
-        </div>
-        {brand.logo && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={brand.logo}
-            alt={brand.name}
-            className="md:max-w-md max-w-full h-auto z-20"
-            style={{ viewTransitionName: `logo-${brand.name}` }}
-          />
-        )}
-      </article>
+          ))}
+        </article>
 
-      <article className="lg:max-w-[65ch] mx-auto sm:text-sm lg:text-lg xl:text-xl xl:-mt-65 bg-body dark:bg-darkmode-body z-10">
-        <ReactMarkdown>{description}</ReactMarkdown>
-      </article>
-
-      <article className="container mx-auto">
-        <h2 className="lg:sticky lg:top-[96px] lg:z-20 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
-          Наявні <strong>моделі</strong> бренду {brand.name} ({brandModels.length})
-        </h2>
-        {brandModels.map((model) => (
-          <LinkWithGA
-            key={model.id}
-            href={`/models/${normalizeUrl(model.name)}`}
-            eventLabel={model.name}
-            eventCategory={`brand-${brand.name}`}
-            className="block"
-            eventParams={{
-              brand_name: `${brand.name}`,
-              model_id: `${model.id}`,
-            }}
-          >
-            {model.name}
-          </LinkWithGA>
-        ))}
-      </article>
-
-      <article className="container mx-auto">
-        <h2 className="lg:sticky lg:top-[96px] lg:z-20 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
-          Наявні шини бренду {brand.name} ({brandTyres.length})
-        </h2>
-        <TyresList tyres={brandTyres} />
-      </article>
-    </section>
+        <article className="container mx-auto">
+          <h2 className="lg:sticky lg:top-[96px] lg:z-20 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
+            Наявні шини бренду {brand.name} ({brandTyres.length})
+          </h2>
+          <TyresList tyres={brandTyres} />
+        </article>
+      </section>
+    </>
   );
 }
