@@ -127,7 +127,7 @@
   }
 
   blockquote {
-    @apply text-light dark:text-darkmode-light bg-theme-light dark:bg-darkmode-theme-light relative rounded-lg px-6 py-12 md:ml-8 md:px-14 md:py-20;
+    @apply text-light dark:text-darkmode-light bg-theme-light dark:bg-darkmode-theme-light relative rounded-lg px-6 py-12 md:ml-8 md:px-14 md:py-20 xl:z-20;
   }
   blockquote::before {
     content: "";

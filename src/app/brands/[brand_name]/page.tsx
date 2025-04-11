@@ -142,8 +142,7 @@ export default async function BrandPage({
         )}
       </article>
 
-      <article className="lg:max-w-[65ch] mx-auto sm:text-sm lg:text-lg xl:text-xl  bg-body dark:bg-darkmode-body z-10
-      ">
+      <article className="lg:max-w-[65ch] mx-auto sm:text-sm lg:text-lg xl:text-xl xl:-mt-65 bg-body dark:bg-darkmode-body z-10">
         <ReactMarkdown>{description}</ReactMarkdown>
       </article>
 
