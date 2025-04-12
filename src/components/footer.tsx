@@ -2,7 +2,7 @@ import { LinkWithGA, Logo } from "@/components";
 import siteConfig from "../static-data/site-config.json";
 
 import packageData from "../../package.json";
-const version = packageData.version;
+const VERSION = packageData.version;
 
 export function Footer() {
   return (
@@ -138,7 +138,7 @@ export function Footer() {
             ©&nbsp;2001 - {new Date().getFullYear()}&nbsp;
             <span className="hidden md:inline">
               {siteConfig.siteName}.
-              {process.env.NODE_ENV === "development" && ` ${version}`}
+              {process.env.NODE_ENV === "development" && ` ${VERSION}`}
             </span>
           </div>
         </div>

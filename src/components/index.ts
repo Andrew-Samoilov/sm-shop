@@ -15,3 +15,4 @@ export { TyresList } from "./tyres-list";
 export { TyresSelect } from "./tyres-select";
 export { useTheme } from "./use-theme";
 export { ViewItemGA } from "./view-item-ga";
+export { TwSizeIndicator } from "./tw-size-indicator";
