@@ -1,6 +1,6 @@
 {
   "name": "sm-shop",
-  "version": "0.5.01",
+  "version": "0.5.02",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
