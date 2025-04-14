@@ -1,12 +1,5 @@
 import { TyresList } from "@/components";
-import {
-  getBrandById,
-  getModelByName,
-  getModels,
-  getTyresByModelId,
-  getModelDescription,
-  normalizeUrl,
-} from "@/lib";
+import { getBrandById, getModelByName, getModels, getTyresByModelId, getModelDescription, normalizeUrl } from "@/lib";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 
