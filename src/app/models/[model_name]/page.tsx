@@ -29,8 +29,8 @@ export default async function ModelPage({
   const brand = await getBrandById(model.brandId);
 
   return (
-    <section className="container flex flex-col gap-6">
-      <div className="flex items-center justify-between   flex-col-reverse md:flex-row">
+    <article className=" flex flex-col gap-6 p-6">
+      <header className="lg:max-w-[65ch] mx-auto flex items-center justify-between flex-col-reverse md:flex-row bg-body dark:bg-darkmode-body">
         <h1>
           {brand?.name} {model.name}
         </h1>
@@ -39,21 +39,22 @@ export default async function ModelPage({
           <img
             src={brand.logo}
             alt={brand.name}
-            className="max-w-1/4"
-            style={{ viewTransitionName: `logo-${brand.name} mr-auto` }}
+            className="max-w-1/4 xl:fixed xl:right-6 xl:top-37"
+            style={{ viewTransitionName: `logo-${brand.name} ` }}
           />
         )}
-      </div>
+      </header>
 
-      <ReactMarkdown>{description}</ReactMarkdown>
+      <section className="lg:max-w-[65ch] mx-auto sm:text-sm lg:text-lg xl:text-xl  bg-body dark:bg-darkmode-body z-10">
+        <ReactMarkdown>{description}</ReactMarkdown>
+      </section>
 
-      <article>
+      <section className="lg:max-w-[65ch] mx-auto z-10">
         <h2>
           Наявні шини для моделі {model.name} бренду {brand?.name}
         </h2>
-
         <TyresList tyres={modelTyres} />
-      </article>
-    </section>
+      </section>
+    </article>
   );
 }

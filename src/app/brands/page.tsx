@@ -64,7 +64,7 @@ export default async function BrandsPage() {
   const brands = await getBrands();
 
   return (
-    <section className="mx-auto p-6">
+    <section className="p-6">
       <h1>Список брендів</h1>
       <div className="flex flex-wrap justify-between gap-6">
         {brands.map((brand) => (

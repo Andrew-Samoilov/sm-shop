@@ -104,8 +104,8 @@ export default async function BrandPage({
   // console.info(`[getTyresByBrandId]`,brandTyres);
 
   return (
-    <section className=" flex flex-col gap-6 ">
-      <article className="flex items-center justify-between   flex-col-reverse md:flex-row xl:sticky xl:top-[120px] xl:-z-1 bg-body dark:bg-darkmode-body">
+    <article className="flex flex-col gap-6  mx-auto p-6">
+      <header className="flex items-center justify-between flex-col-reverse md:flex-row xl:sticky xl:top-[120px] xl:-z-1 bg-body dark:bg-darkmode-body">
         <div>
           <h1 style={{ viewTransitionName: `title-${brand.name}` }}>
             {brand.name}
@@ -138,13 +138,13 @@ export default async function BrandPage({
             style={{ viewTransitionName: `logo-${brand.name}` }}
           />
         )}
-      </article>
+      </header>
 
-      <article className="lg:max-w-[65ch] mx-auto sm:text-sm lg:text-lg xl:text-xl xl:-mt-65 bg-body dark:bg-darkmode-body z-10">
+      <section className="lg:max-w-[65ch] mx-auto sm:text-sm lg:text-lg xl:text-xl xl:-mt-65 bg-body dark:bg-darkmode-body z-10 -p-6">
         <ReactMarkdown>{description}</ReactMarkdown>
-      </article>
+      </section>
 
-      <article className="container mx-auto">
+      <section className="container mx-auto">
         <h2 className="lg:sticky lg:top-[96px] lg:z-20 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
           Наявні <strong>моделі</strong> бренду {brand.name} ({brandModels.length})
         </h2>
@@ -163,18 +163,20 @@ export default async function BrandPage({
             {model.name}
           </LinkWithGA>
         ))}
-      </article>
+      </section>
 
-      <article className="container mx-auto">
+      <section className="container mx-auto">
         <h2 className="lg:sticky lg:top-[96px] lg:z-20 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
           Наявні шини бренду {brand.name} ({brandTyres.length})
         </h2>
         <TyresList tyres={brandTyres} />
-      </article>
+      </section>
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-    </section>
+
+    </article>
   );
 }

@@ -7,25 +7,25 @@ export default function Home() {
         className="border-border dark:border-darkmode-border hover:border-accent dark:hover:border-accent rounded-md border-2 px-6 py-2 hover:no-underline"
         href="/tyres"
       >
-        <h2>Tyres</h2>
+        <h2>Шини</h2>
       </Link>
       <Link
         className="border-border dark:border-darkmode-border hover:border-accent dark:hover:border-accent rounded-md border-2 px-6 py-2 hover:no-underline"
         href="/brands"
       >
-        <h2>Brands</h2>
+        <h2>Бренди</h2>
       </Link>
       <Link
         className="border-border dark:border-darkmode-border hover:border-accent dark:hover:border-accent rounded-md border-2 px-6 py-2 hover:no-underline"
         href="/models"
       >
-        <h2>Models</h2>
+        <h2>Моделі</h2>
       </Link>
       <Link
         className="border-border dark:border-darkmode-border hover:border-accent dark:hover:border-accent rounded-md border-2 px-6 py-2 hover:no-underline"
         href="/search"
       >
-        <h2>Search</h2>
+        <h2>Пошук</h2>
       </Link>
     </section>
   );
