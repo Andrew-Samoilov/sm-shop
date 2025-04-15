@@ -7,7 +7,7 @@ export async function generateStaticParams() {
   const models = await getModels();
 
   return models.map((model) => ({
-    model_name: normalizeUrl(model.name),
+    model_name: normalizeUrl(model.brand.name + '-' + model.name),
   }));
 }
 
@@ -19,7 +19,7 @@ export default async function ModelPage({
   const { model_name } = await params;
   const model = await getModelByName(model_name);
   if (!model) return notFound();
-  
+
   const modelSlug = normalizeUrl(model.name);
   const description = await getModelDescription(
     modelSlug,
@@ -40,7 +40,7 @@ export default async function ModelPage({
             src={brand.logo}
             alt={brand.name}
             className="max-w-1/4 xl:fixed xl:right-6 xl:top-37"
-            style={{ viewTransitionName: `logo-${brand.name} ` }}
+            style={{ viewTransitionName: `logo-${brand.name}` }}
           />
         )}
       </header>

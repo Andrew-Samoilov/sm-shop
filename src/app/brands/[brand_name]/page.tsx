@@ -3,7 +3,7 @@ import ReactMarkdown from "react-markdown";
 import { notFound } from "next/navigation";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
 
-import { getBrands, getBrandByName, getModelsByBrandId, getTyresByBrandId, normalizeUrl, formatDisplayUrl, getBrandDescription } from "@/lib";
+import { getBrands, getBrandByName, getModelsByBrandId, getTyresByBrandId, normalizeUrl, formatDisplayUrl, getBrandDescription, normalizeBrandUrl } from "@/lib";
 import { BrandCertificatesSection, LinkWithGA, TyresList } from "@/components";
 import siteConfig from "@/static-data/site-config.json";
 
@@ -13,7 +13,7 @@ export async function generateStaticParams() {
   return brands
     .filter((brand) => brand?.name)
     .map((brand) => ({
-      brand_name: normalizeUrl(brand.name),
+      brand_name: normalizeBrandUrl(brand.name),
     }))
     .filter((param) => param.brand_name !== "");
 }
@@ -37,8 +37,7 @@ export async function generateMetadata(
   }
 
   return {
-    title,
-    description,
+    title, description,
     openGraph: {
       title,
       description,
@@ -145,7 +144,7 @@ export default async function BrandPage({
       </section>
 
       <BrandCertificatesSection brandName={brand.name} />
-      
+
       <section className="container">
         <h2 className="lg:sticky lg:top-[96px] lg:z-20 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
           Наявні <strong>моделі</strong> бренду {brand.name} ({brandModels.length})
@@ -153,7 +152,7 @@ export default async function BrandPage({
         {brandModels.map((model) => (
           <LinkWithGA
             key={model.id}
-            href={`/models/${normalizeUrl(model.name)}`}
+            href={`/models/${normalizeUrl(brand.name + '-' + model.name)}`}
             eventLabel={model.name}
             eventCategory={`brand-${brand.name}`}
             className="block"

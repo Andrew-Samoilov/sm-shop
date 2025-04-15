@@ -1,4 +1,5 @@
 export { normalizeUrl } from "./normalize-url";
+export { normalizeBrandUrl } from "./normalize-brand-url";
 export { formatDisplayUrl } from "./format-display-url";
 export { formatTyreSizeQuery } from "./format-tyre-size-query";
 export { formatFormData } from "./format-form-data";

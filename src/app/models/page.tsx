@@ -25,7 +25,7 @@ export default async function ModelsPage() {
             {brand}({modelList.length})
           </h2>
           {modelList.map((model) => (
-            <Link key={model.id} href={`/models/${normalizeUrl(model.name)}`}>
+            <Link key={model.id} href={`/models/${normalizeUrl(model.brand.name + '-' + model.name)}`}>
               <p>{model.name}</p>
             </Link>
           ))}
