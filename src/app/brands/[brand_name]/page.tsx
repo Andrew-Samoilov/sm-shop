@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
 
 import { getBrands, getBrandByName, getModelsByBrandId, getTyresByBrandId, normalizeUrl, formatDisplayUrl, getBrandDescription } from "@/lib";
-import { LinkWithGA, TyresList } from "@/components";
+import { BrandCertificatesSection, LinkWithGA, TyresList } from "@/components";
 import siteConfig from "@/static-data/site-config.json";
 
 export async function generateStaticParams() {
@@ -140,11 +140,13 @@ export default async function BrandPage({
         )}
       </header>
 
-      <section className="lg:max-w-[65ch] mx-auto sm:text-sm lg:text-lg xl:text-xl xl:-mt-65 bg-body dark:bg-darkmode-body z-10 -p-6">
+      <section className="lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl xl:-mt-65 bg-body dark:bg-darkmode-body z-10 -p-6">
         <ReactMarkdown>{description}</ReactMarkdown>
       </section>
 
-      <section className="container mx-auto">
+      <BrandCertificatesSection brandName={brand.name} />
+      
+      <section className="container">
         <h2 className="lg:sticky lg:top-[96px] lg:z-20 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
           Наявні <strong>моделі</strong> бренду {brand.name} ({brandModels.length})
         </h2>
@@ -165,7 +167,7 @@ export default async function BrandPage({
         ))}
       </section>
 
-      <section className="container mx-auto">
+      <section className="container">
         <h2 className="lg:sticky lg:top-[96px] lg:z-20 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
           Наявні шини бренду {brand.name} ({brandTyres.length})
         </h2>

@@ -1,4 +1,4 @@
-import { TyresList } from "@/components";
+import { BrandCertificatesSection, TyresList } from "@/components";
 import { getBrandById, getModelByName, getModels, getTyresByModelId, getModelDescription, normalizeUrl } from "@/lib";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
@@ -19,7 +19,7 @@ export default async function ModelPage({
   const { model_name } = await params;
   const model = await getModelByName(model_name);
   if (!model) return notFound();
-
+  
   const modelSlug = normalizeUrl(model.name);
   const description = await getModelDescription(
     modelSlug,
@@ -45,11 +45,13 @@ export default async function ModelPage({
         )}
       </header>
 
-      <section className="lg:max-w-[65ch] mx-auto sm:text-sm lg:text-lg xl:text-xl  bg-body dark:bg-darkmode-body z-10">
+      <section className="lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl  bg-body dark:bg-darkmode-body z-10">
         <ReactMarkdown>{description}</ReactMarkdown>
       </section>
 
-      <section className="lg:max-w-[65ch] mx-auto z-10">
+      {brand && <BrandCertificatesSection brandName={brand.name} />}
+
+      <section className="lg:max-w-[65ch] z-10">
         <h2>
           Наявні шини для моделі {model.name} бренду {brand?.name}
         </h2>

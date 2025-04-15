@@ -64,9 +64,9 @@ export default async function BrandsPage() {
   const brands = await getBrands();
 
   return (
-    <section className="p-6">
+    <section>
       <h1>Список брендів</h1>
-      <div className="flex flex-wrap justify-between gap-6">
+      <div className="flex flex-wrap justify-around gap-6">
         {brands.map((brand) => (
           <LinkWithGA
             key={brand.id}
@@ -81,7 +81,7 @@ export default async function BrandsPage() {
                 src={brand.logo}
                 alt={brand.name}
                 height="auto"
-                className="max-w-[400px] min-w-[400px]"
+                className=" md:max-w-[400px] md:min-w-[400px]"
                 style={{ viewTransitionName: `logo-${brand.name}` }}
               />
             )}

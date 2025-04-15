@@ -106,7 +106,7 @@
   }
 
   section {
-    @apply mx-auto gap-6;
+    @apply p-6 mx-auto lg:py-24 gap-6;
   }
 
   .container {
