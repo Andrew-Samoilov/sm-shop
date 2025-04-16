@@ -8,8 +8,10 @@ export async function getModelDescription(
 ) {
   const filePath = path.join(
     process.cwd(),
-    `src/static-data/models/${modelSlug}-description.md`,
+    `src/static-data/models/${modelSlug}/${modelSlug}-description.md`,
   );
+
+  // console.log("[getModelDescription]", filePath);
 
   try {
     if (fs.existsSync(filePath)) {

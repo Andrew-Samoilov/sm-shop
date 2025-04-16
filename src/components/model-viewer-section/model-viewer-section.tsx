@@ -3,29 +3,30 @@ import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
 
-import "./brand-embla.css";
+import "./model-viewer-embla.css"
 import sert from "../../static-data/serts.json";
 
-export function BrandCertificatesSection({ brandName }: { brandName: string }) {
+export function ModelViewerSection({ modelName }: { modelName: string }) {
   const [emblaRef] = useEmblaCarousel(
     { align: "start", dragFree: true, loop: true },
     [Autoplay()],
   );
 
-  if (!brandName) return null;
+  console.log([ModelViewerSection], modelName);
+  if (!modelName) return null;
 
-  const brandSert = sert
-    .filter((item) => item.brand.toLowerCase() === brandName.toLowerCase())
-    .sort((a, b) => b.year - a.year);
+  const modelImg = sert;
   
-  if (brandSert.length === 0) return null;
+  if (modelImg.length === 0) return null;
+
+  console.log([ModelViewerSection], modelImg);
 
   return (
     <section className="embla lg:max-w-1/2 bg-body dark:bg-darkmode-body p-0">
-      <h2 className="text-center">Наші сертифікати {brandName}</h2>
+      <h2 className="text-center">Наявні фото моделі {modelName}</h2>
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
-          {brandSert.map(({ id, url, height = 0, width = 0, text }) => (
+          {modelImg.map(({ id, url, height = 0, width = 0, text }) => (
             <Image
               key={id}
               src={url}

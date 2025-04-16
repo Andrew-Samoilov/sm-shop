@@ -145,14 +145,14 @@ export default async function BrandPage({
 
       <BrandCertificatesSection brandName={brand.name} />
 
-      <section className="container">
+      <section className="container mx-auto">
         <h2 className="lg:sticky lg:top-[96px] lg:z-20 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
           Наявні <strong>моделі</strong> бренду {brand.name} ({brandModels.length})
         </h2>
         {brandModels.map((model) => (
           <LinkWithGA
             key={model.id}
-            href={`/models/${normalizeUrl(brand.name + '-' + model.name)}`}
+            href={`/models/${normalizeUrl(model.name)}`}
             eventLabel={model.name}
             eventCategory={`brand-${brand.name}`}
             className="block"
@@ -166,7 +166,7 @@ export default async function BrandPage({
         ))}
       </section>
 
-      <section className="container">
+      <section className="container mx-auto">
         <h2 className="lg:sticky lg:top-[96px] lg:z-20 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
           Наявні шини бренду {brand.name} ({brandTyres.length})
         </h2>
