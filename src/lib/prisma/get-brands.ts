@@ -3,7 +3,7 @@ import { prisma } from "./prisma";
 
 export async function getBrands(): Promise<Brand[]> {
   try {
-    const brands = await prisma.brands.findMany({
+    const brands = await prisma.brand.findMany({
       select: {
         id: true,
         name: true,

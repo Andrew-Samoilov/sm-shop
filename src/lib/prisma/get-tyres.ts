@@ -1,7 +1,7 @@
 import { prisma } from "./prisma";
 
 export async function getTyres() {
-  return await prisma.tyres.findMany({
+  return await prisma.tyre.findMany({
     select: {
       id: true,
       slug: true,

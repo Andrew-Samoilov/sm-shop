@@ -34,7 +34,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "script.js"
-  ],
+, "src/scripts/generate-images-json.js"  ],
   "exclude": [
     "node_modules",
     ".next"

@@ -1,8 +1,8 @@
 import { prisma } from "@/lib";
-import { tyres } from "@prisma/client";
+import { Tyre } from "@prisma/client";
 
-export async function getTyreById(id: number): Promise<tyres | null> {
-  return await prisma.tyres.findFirst({
+export async function getTyreById(id: number): Promise<Tyre | null> {
+  return await prisma.tyre.findFirst({
     where: { id },
   });
 }

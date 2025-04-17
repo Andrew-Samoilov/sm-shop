@@ -1,11 +1,11 @@
-import { brands } from "@prisma/client";
+import { Brand } from "@prisma/client";
 import { normalizeBrandUrl } from "@/lib";
 import { prisma } from "./prisma";
 
-export async function getBrandByName(name: string): Promise<brands | null> {
+export async function getBrandByName(name: string): Promise<Brand | null> {
   const normalizedName = normalizeBrandUrl(name);
 
-  const result = await prisma.$queryRaw<brands[]>`
+  const result = await prisma.$queryRaw<Brand[]>`
         SELECT * FROM brands 
         WHERE LOWER(REPLACE(name, ' ', '')) = ${normalizedName}
         LIMIT 1;

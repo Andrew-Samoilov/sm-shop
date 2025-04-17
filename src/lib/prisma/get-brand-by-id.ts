@@ -1,8 +1,8 @@
 import { prisma } from "./prisma";
-import { brands } from "@prisma/client";
+import { Brand } from "@prisma/client";
 
-export async function getBrandById(id: number): Promise<brands | null> {
-  return await prisma.brands.findUnique({
+export async function getBrandById(id: number): Promise<Brand | null> {
+  return await prisma.brand.findUnique({
     where: { id },
   });
 }

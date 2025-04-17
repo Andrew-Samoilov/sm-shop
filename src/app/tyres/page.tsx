@@ -10,7 +10,7 @@ export default async function TyresPage({
   const query = resolvedSearchParams.query ?? "";
 
   // const tyres: Tyre[] = await getTyres();
-  const tyres = await prisma.tyres.findMany({
+  const tyres = await prisma.tyre.findMany({
     where: {
       title: {
         contains: query,

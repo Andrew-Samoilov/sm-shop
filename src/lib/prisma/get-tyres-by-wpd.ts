@@ -1,7 +1,7 @@
 import { prisma } from "@/lib";
 
 export async function getTyresByWPD(w: string, p: string, d: string) {
-  return await prisma.tyres.findMany({
+  return await prisma.tyre.findMany({
     where: {
       width: w,
       profile: p,

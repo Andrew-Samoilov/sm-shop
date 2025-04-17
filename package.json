@@ -8,6 +8,7 @@
     "start": "next start",
     "db": "ssh -fN -L 5433:localhost:5432 sms",
     "db:stop": "taskkill /F /IM ssh.exe",
+    "generate:images": "node src/scripts/generate-images-json.js",
     "test": "playwright test",
     "lint": "next lint",
     "format": "prettier --write . && eslint . --fix"
@@ -18,6 +19,7 @@
     "dotenv": "^16.4.7",
     "embla-carousel-autoplay": "^8.5.2",
     "embla-carousel-react": "^8.5.2",
+    "image-size": "^2.0.2",
     "next": "^15.2.4",
     "nodemailer": "^6.10.0",
     "react": "^19.1.0",
@@ -30,7 +32,7 @@
     "@eslint/eslintrc": "^3",
     "@playwright/test": "^1.51.1",
     "@tailwindcss/postcss": "^4.1.3",
-    "@types/node": "^22",
+    "@types/node": "^22.14.1",
     "@types/nodemailer": "^6.4.17",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.1",
@@ -43,6 +45,6 @@
     "prettier-plugin-tailwindcss": "^0.6.11",
     "prisma": "^6.5.0",
     "tailwindcss": "^4.1.3",
-    "typescript": "^5"
+    "typescript": "^5.8.3"
   }
 }

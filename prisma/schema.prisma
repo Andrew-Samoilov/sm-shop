@@ -8,8 +8,9 @@ datasource db {
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
-model brands {
+model Brand {
   id          Int      @id @default(autoincrement())
+  slug        String   @default("") @db.VarChar(100)
   name        String
   logo        String?
   description String?
@@ -17,52 +18,61 @@ model brands {
   country     String?
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
-  models      models[]
-  tyres       tyres[]  @relation("BrandTyres")
+  models      Model[]
+  tyres       Tyre[]   @relation("BrandTyres")
+
+  @@index([slug])
+  @@map("brands")
 }
 
-model tyres {
+model Tyre {
   id                 Int      @id(map: "tires_pkey") @default(autoincrement())
-  model_id           Int?
-  brand_id           Int?
+  slug               String   @default("") @db.VarChar(160)
   title              String
-  slug               String   @default("")
+  sku                String   @unique(map: "tires_sku_key") @db.VarChar(50)
   description        String?
+  price              Float
+  inventory_quantity Int?     @default(0)
   country            String?  @db.VarChar(50)
   date_code          String?  @db.Char(4)
   applicability      String?  @db.VarChar(50)
-  sku                String   @unique(map: "tires_sku_key") @db.VarChar(50)
-  inventory_quantity Int?     @default(0)
-  price              Float
   load_speed_index   String?  @db.VarChar(10)
-  brand              String?  @db.VarChar(50)
-  model              String?  @db.VarChar(100)
-  width              Decimal? @db.Decimal(4, 1)
-  profile            Decimal? @db.Decimal(4, 1)
-  constr             String?  @db.Char(1)
-  diameter           Decimal? @db.Decimal(4, 1)
-  delimiter          String?  @db.Char(1)
   load_index         String?  @db.VarChar(10)
   speed_index        String?  @db.Char(1)
   type               String?  @db.VarChar(50)
-  brand_rel          brands?  @relation("BrandTyres", fields: [brand_id], references: [id])
-  model_rel          models?  @relation(fields: [model_id], references: [id])
+  constr             String?  @db.Char(1)
+  delimiter          String?  @db.Char(1)
+  width              Decimal? @db.Decimal(4, 1)
+  profile            Decimal? @db.Decimal(4, 1)
+  diameter           Decimal? @db.Decimal(4, 1)
+  brand              String?  @db.VarChar(50)
+  model              String?  @db.VarChar(100)
+  brand_id           Int?
+  model_id           Int?
+  brand_rel          Brand?   @relation("BrandTyres", fields: [brand_id], references: [id])
+  model_rel          Model?   @relation(fields: [model_id], references: [id])
 
   @@index([title(ops: raw("gin_trgm_ops"))], map: "tyres_title_trgm_idx", type: Gin)
+  @@map("tyres")
 }
 
-model models {
-  id          Int      @id @default(autoincrement())
-  brandId     Int
+model Model {
+  id          Int           @id @default(autoincrement())
+  slug        String        @default("") @db.VarChar(100)
   name        String
   description String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  brand       brands   @relation(fields: [brandId], references: [id], onDelete: Cascade)
-  tyres       tyres[]
+  brandId     Int
+  brand       Brand         @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  tyres       Tyre[]
+  images      ModelImage[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([slug])
+  @@map("models")
 }
 
-model messages {
+model Message {
   id        String   @id @default(uuid())
   name      String
   email     String
@@ -70,5 +80,18 @@ model messages {
   message   String
   createdAt DateTime @default(now())
 
-  @@map("messages") 
+  @@map("messages")
+}
+
+model ModelImage {
+  id        Int     @id @default(autoincrement())
+  modelId   Int
+  model     Model   @relation(fields: [modelId], references: [id], onDelete: Restrict)
+  url       String
+  alt       String?
+  width     Int?
+  height    Int?
+  position  Int     @default(0)
+
+  @@map("model_images")
 }

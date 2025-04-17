@@ -4,7 +4,7 @@ import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
 
 import "./model-viewer-embla.css"
-import sert from "../../static-data/serts.json";
+import modelImg from "../../static-data/serts.json";
 
 export function ModelViewerSection({ modelName }: { modelName: string }) {
   const [emblaRef] = useEmblaCarousel(
@@ -14,9 +14,6 @@ export function ModelViewerSection({ modelName }: { modelName: string }) {
 
   console.log([ModelViewerSection], modelName);
   if (!modelName) return null;
-
-  const modelImg = sert;
-  
   if (modelImg.length === 0) return null;
 
   console.log([ModelViewerSection], modelImg);

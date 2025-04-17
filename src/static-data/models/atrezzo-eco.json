@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "url": "/models/atrezzo-eco/tyre-sailun-atrezzo-eco-01.jpg",
+    "width": 988,
+    "height": 1496,
+    "text": "Зображення моделі шини atrezzo-eco, фото 1"
+  },
+  {
+    "id": 2,
+    "url": "/models/atrezzo-eco/tyre-sailun-atrezzo-eco-02.jpg",
+    "width": 750,
+    "height": 900,
+    "text": "Зображення моделі шини atrezzo-eco, фото 2"
+  },
+  {
+    "id": 3,
+    "url": "/models/atrezzo-eco/tyre-sailun-atrezzo-eco-03.jpg",
+    "width": 1000,
+    "height": 1499,
+    "text": "Зображення моделі шини atrezzo-eco, фото 3"
+  }
+]
