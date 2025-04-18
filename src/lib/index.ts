@@ -27,6 +27,7 @@ export { getModels } from "./prisma/get-models";
 export { getModelsByBrandId } from "./prisma/get-models-by-brand-id";
 
 export { getModelBySlug } from "./prisma/get-model-by-slug";
+export { getModelsImgByModelId } from "./prisma/get-model-img-by-model-id";
 
 export { handleClientSubmit } from "./recaptcha/handleClientSubmit";
 export { loadRecaptchaScript } from "./recaptcha/loadRecaptchaScript";

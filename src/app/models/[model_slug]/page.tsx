@@ -1,5 +1,5 @@
 import { BrandCertificatesSection, ModelViewerSection, TyresList } from "@/components";
-import { getBrandById, getModels, getTyresByModelId,  getModelBySlug } from "@/lib";
+import { getBrandById, getModels, getTyresByModelId,  getModelBySlug, getModelsImgByModelId } from "@/lib";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 
@@ -23,6 +23,8 @@ export default async function ModelPage({
   const modelTyres = await getTyresByModelId(model.id);
   const brand = await getBrandById(model.brandId);
 
+  const images = await getModelsImgByModelId(model.id);
+  
   return (
     <article className=" flex flex-col gap-6 p-6">
       <header className="lg:max-w-[65ch] mx-auto flex items-center justify-between flex-col-reverse md:flex-row bg-body dark:bg-darkmode-body">
@@ -40,7 +42,7 @@ export default async function ModelPage({
         )}
       </header>
 
-      <ModelViewerSection modelName={model.name} />
+      <ModelViewerSection images={images} />
 
       <section className="lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl  bg-body dark:bg-darkmode-body z-10">
         <ReactMarkdown>{model.description}</ReactMarkdown>

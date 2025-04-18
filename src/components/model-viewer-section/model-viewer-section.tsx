@@ -1,37 +1,40 @@
 "use client";
 import Image from "next/image";
-import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
+import "./model-viewer-embla.css";
 
-import "./model-viewer-embla.css"
-import modelImg from "../../static-data/serts.json";
-
-export function ModelViewerSection({ modelName }: { modelName: string }) {
+export function ModelViewerSection({
+  images,
+}: {
+  images: {
+    id: number;
+    modelId: number;
+    url: string;
+    alt: string | null;
+    width: number | null;
+    height: number | null;
+    position: number;
+  }[];
+}) {
   const [emblaRef] = useEmblaCarousel(
     { align: "start", dragFree: true, loop: true },
     [Autoplay()],
   );
 
-  // console.log([ModelViewerSection], modelName);
-  if (!modelName) return null;
-  if (modelImg.length === 0) return null;
-
-  // console.log([ModelViewerSection], modelImg);
-
   return (
-    <section className="embla lg:max-w-1/2 bg-body dark:bg-darkmode-body p-0">
-      <h2 className="text-center">Наявні фото моделі {modelName}</h2>
+    <section className="embla">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
-          {modelImg.map(({ id, url, height = 0, width = 0, text }) => (
+          {images.map(({ id, url, alt, width, height }) => (
             <Image
               key={id}
               src={url}
-              alt={text}
-              height={height}
-              width={width}
-              sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33.33vw, (min-width: 768px) 50vw, 100vw"
+              alt={alt ?? "Фото моделі"}
+              width={width ?? 800}
+              height={height ?? 800}
               className="embla__slide"
+              sizes="(min-width: 768px) 50vw, 100vw"
             />
           ))}
         </div>
