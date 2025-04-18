@@ -57,16 +57,16 @@ model Tyre {
 }
 
 model Model {
-  id          Int           @id @default(autoincrement())
-  slug        String        @default("") @db.VarChar(100)
+  id          Int          @id @default(autoincrement())
+  slug        String       @default("") @db.VarChar(100)
   name        String
   description String?
   brandId     Int
-  brand       Brand         @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  brand       Brand        @relation(fields: [brandId], references: [id], onDelete: Cascade)
   tyres       Tyre[]
   images      ModelImage[]
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
 
   @@index([slug])
   @@map("models")
@@ -84,14 +84,14 @@ model Message {
 }
 
 model ModelImage {
-  id        Int     @id @default(autoincrement())
-  modelId   Int
-  model     Model   @relation(fields: [modelId], references: [id], onDelete: Restrict)
-  url       String
-  alt       String?
-  width     Int?
-  height    Int?
-  position  Int     @default(0)
+  id       Int     @id @default(autoincrement())
+  modelId  Int
+  model    Model   @relation(fields: [modelId], references: [id], onDelete: Restrict)
+  url      String
+  alt      String?
+  width    Int?
+  height   Int?
+  position Int     @default(0)
 
   @@map("model_images")
 }

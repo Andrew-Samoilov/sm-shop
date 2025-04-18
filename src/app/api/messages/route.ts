@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     // Переконуємось, що всі необхідні поля є
     const name = body.contact_name?.trim();
     const email = body.contact_email?.trim();
-    const phone = body.contact_tel?.trim() || null;
+    const phone = body.contact_tel?.trim() ?? null;
     const message = body.contact_message?.trim();
 
     if (!message) {
@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     }
 
     // Збереження в БД
-    const newMessage = await prisma.messages.create({
+    const newMessage = await prisma.message.create({
       data: { name, email, phone, message },
     });
 

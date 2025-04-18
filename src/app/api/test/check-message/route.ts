@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({ error: 'Email required' }, { status: 400 });
     }
 
-    const message = await prisma.messages.findFirst({
+    const message = await prisma.message.findFirst({
         where: { email },
         orderBy: { createdAt: 'desc' },
     });

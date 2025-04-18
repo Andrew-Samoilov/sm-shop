@@ -1,15 +1,15 @@
 import { prisma } from "./prisma";
 
-export async function getTyres() {
+export async function getTyres(query?: string) {
   return await prisma.tyre.findMany({
-    select: {
-      id: true,
-      slug: true,
-      title: true,
-      date_code: true,
-      price: true,
-      brand_id: true,
-    },
+    where: query
+      ? {
+        title: {
+          contains: query,
+          mode: "insensitive",
+        },
+      }
+      : undefined,
     orderBy: {
       title: "asc",
     },

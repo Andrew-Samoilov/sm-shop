@@ -12,7 +12,7 @@ export async function GET(req: Request) {
   }
 
   try {
-    const tyres = await prisma.tyres.findMany({
+    const tyres = await prisma.tyre.findMany({
       where: { width, profile, diameter },
       select: {
         id: true,
