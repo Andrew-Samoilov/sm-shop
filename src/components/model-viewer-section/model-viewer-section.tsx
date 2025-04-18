@@ -12,7 +12,7 @@ export function ModelViewerSection({ modelName }: { modelName: string }) {
     [Autoplay()],
   );
 
-  console.log([ModelViewerSection], modelName);
+  // console.log([ModelViewerSection], modelName);
   if (!modelName) return null;
   if (modelImg.length === 0) return null;
 
