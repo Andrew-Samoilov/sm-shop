@@ -1,5 +1,5 @@
 import { BrandCertificatesSection, ModelViewerSection, TyresList } from "@/components";
-import { getBrandById, getModelByName, getModels, getTyresByModelId, getModelDescription, normalizeUrl } from "@/lib";
+import { getBrandById, getModels, getTyresByModelId,  getModelBySlug } from "@/lib";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 
@@ -7,24 +7,19 @@ export async function generateStaticParams() {
   const models = await getModels();
 
   return models.map((model) => ({
-    model_name: normalizeUrl(model.name),
+    model_slug: model.slug,
   }));
 }
 
 export default async function ModelPage({
   params,
 }: {
-  params: Promise<{ model_name: string }>;
+  params: Promise<{ model_slug: string }>;
 }) {
-  const { model_name } = await params;
-  const model = await getModelByName(model_name);
+  const { model_slug } = await params;
+  const model = await getModelBySlug(model_slug);
   if (!model) return notFound();
 
-  const modelSlug = normalizeUrl(model.name);
-  const description = await getModelDescription(
-    modelSlug,
-    model.description ?? "",
-  );
   const modelTyres = await getTyresByModelId(model.id);
   const brand = await getBrandById(model.brandId);
 
@@ -46,9 +41,9 @@ export default async function ModelPage({
       </header>
 
       <ModelViewerSection modelName={model.name} />
-      
+
       <section className="lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl  bg-body dark:bg-darkmode-body z-10">
-        <ReactMarkdown>{description}</ReactMarkdown>
+        <ReactMarkdown>{model.description}</ReactMarkdown>
       </section>
 
       {brand && <BrandCertificatesSection brandName={brand.name} />}

@@ -10,7 +10,7 @@ datasource db {
 
 model Brand {
   id          Int      @id @default(autoincrement())
-  slug        String   @default("") @db.VarChar(100)
+  slug        String   @unique @default("") @db.VarChar(100)
   name        String
   logo        String?
   description String?
@@ -58,9 +58,9 @@ model Tyre {
 
 model Model {
   id          Int          @id @default(autoincrement())
-  slug        String       @default("") @db.VarChar(100)
+  slug        String       @unique @db.VarChar(200)
   name        String
-  description String?
+  description String?      @db.Text
   brandId     Int
   brand       Brand        @relation(fields: [brandId], references: [id], onDelete: Cascade)
   tyres       Tyre[]

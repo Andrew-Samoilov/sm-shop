@@ -1,5 +1,6 @@
-import { getModels, normalizeUrl } from "@/lib";
-import { Model } from "@/types";
+import { getModels } from "@/lib";
+import { Model } from "@prisma/client";
+// import { Model } from "@/";
 import Link from "next/link";
 
 export const dynamic = "force-static";
@@ -8,7 +9,7 @@ export default async function ModelsPage() {
   const models: Model[] = await getModels();
 
   const groupedModels = models.reduce<Record<string, Model[]>>((acc, model) => {
-    const brandName = model.brand.name;
+    const brandName = model.brandId;
     if (!acc[brandName]) {
       acc[brandName] = [];
     }
@@ -25,7 +26,7 @@ export default async function ModelsPage() {
             {brand}({modelList.length})
           </h2>
           {modelList.map((model) => (
-            <Link key={model.id} href={`/models/${normalizeUrl(model.brand.name + '-' + model.name)}`}>
+            <Link key={model.id} href={`/models/${model.slug}`}>
               <p>{model.name}</p>
             </Link>
           ))}

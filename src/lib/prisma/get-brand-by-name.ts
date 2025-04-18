@@ -2,7 +2,7 @@ import { Brand } from "@prisma/client";
 import { normalizeBrandUrl } from "@/lib";
 import { prisma } from "./prisma";
 
-export async function getBrandByName(name: string): Promise<Brand | null> {
+export async function DELgetBrandByName(name: string): Promise<Brand | null> {
   const normalizedName = normalizeBrandUrl(name);
 
   const result = await prisma.$queryRaw<Brand[]>`

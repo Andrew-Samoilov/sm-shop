@@ -1,5 +1,5 @@
 import { LinkWithGA } from "@/components";
-import { getBrands, normalizeBrandUrl, normalizeUrl } from "@/lib";
+import { getBrands } from "@/lib";
 import type { Metadata } from "next";
 import siteConfig from "@/static-data/site-config.json";
 
@@ -7,7 +7,7 @@ export async function generateStaticParams() {
   const brands = await getBrands();
 
   return brands.map((brand) => ({
-    name: normalizeUrl(brand.name),
+    name: brand.slug,
   }));
 }
 
@@ -72,7 +72,7 @@ export default async function BrandsPage() {
             key={brand.id}
             eventCategory="brand"
             eventLabel={brand.name}
-            href={`/brands/${normalizeBrandUrl(brand.name)}`}
+            href={`/brands/${brand.slug}`}
             className="border-border dark:border-darkmode-border hover:border-accent flex flex-col items-center justify-center gap-6 rounded-md border-2 p-6 hover:no-underline"
           >
             {brand.logo && (

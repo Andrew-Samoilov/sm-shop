@@ -16,7 +16,7 @@ export function ModelViewerSection({ modelName }: { modelName: string }) {
   if (!modelName) return null;
   if (modelImg.length === 0) return null;
 
-  console.log([ModelViewerSection], modelImg);
+  // console.log([ModelViewerSection], modelImg);
 
   return (
     <section className="embla lg:max-w-1/2 bg-body dark:bg-darkmode-body p-0">

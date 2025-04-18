@@ -3,9 +3,10 @@ import ReactMarkdown from "react-markdown";
 import { notFound } from "next/navigation";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
 
-import { getBrands, getBrandByName, getModelsByBrandId, getTyresByBrandId, normalizeUrl, formatDisplayUrl, getBrandDescription, normalizeBrandUrl } from "@/lib";
+import { getBrands, getModelsByBrandId, getTyresByBrandId, formatDisplayUrl, getBrandDescription } from "@/lib";
 import { BrandCertificatesSection, LinkWithGA, TyresList } from "@/components";
 import siteConfig from "@/static-data/site-config.json";
+import { getBrandBySlug } from "@/lib/prisma/get-brand-by-slug";
 
 export async function generateStaticParams() {
   const brands = await getBrands();
@@ -13,21 +14,21 @@ export async function generateStaticParams() {
   return brands
     .filter((brand) => brand?.name)
     .map((brand) => ({
-      brand_name: normalizeBrandUrl(brand.name),
+      brand_slug: brand.slug,
     }))
-    .filter((param) => param.brand_name !== "");
+    .filter((param) => param.brand_slug !== "");
 }
 
 export async function generateMetadata(
-  { params }: { params: { brand_name: string } }
+  { params }: { params: { brand_slug: string } }
 ): Promise<Metadata> {
-  const { brand_name } = await params;
-  const brand = await getBrandByName(brand_name);
+  const { brand_slug } = await params;
+  const brand = await getBrandBySlug(brand_slug);
   if (!brand) return {};
 
   const title = `${brand.name} – шини, моделі та характеристики | ${siteConfig.siteName}`;
   const description = `Огляд бренду ${brand.name}: країна-виробник, моделі шин, характеристики та наявність у магазині ${siteConfig.siteName}.`;
-  const canonicalUrl = `${BASE_URL}/brands/${normalizeUrl(brand.name)}`;
+  const canonicalUrl = `${BASE_URL}/brands/${brand.slug}`;
 
   let logoUrl: string | undefined = undefined;
   if (brand.logo) {
@@ -70,17 +71,16 @@ export async function generateMetadata(
 export default async function BrandPage({
   params,
 }: {
-  params: { brand_name: string };
+  params: { brand_slug: string };
 }) {
-  const { brand_name } = await params;
-  if (!brand_name) return notFound();
+  const { brand_slug } = await params;
+  if (!brand_slug) return notFound();
 
-  const brand = await getBrandByName(brand_name);
+  const brand = await getBrandBySlug(brand_slug);
   if (!brand) return notFound();
 
-  const brandSlug = normalizeUrl(brand.name);
   const description = await getBrandDescription(
-    brandSlug,
+    brand.slug,
     brand.description ?? "",
   );
   const brandModels = await getModelsByBrandId(brand.id);
@@ -152,12 +152,12 @@ export default async function BrandPage({
         {brandModels.map((model) => (
           <LinkWithGA
             key={model.id}
-            href={`/models/${normalizeUrl(model.name)}`}
+            href={`/models/${model.slug}`}
             eventLabel={model.name}
             eventCategory={`brand-${brand.name}`}
             className="block"
             eventParams={{
-              brand_name: `${brand.name}`,
+              brand_slug: `${brand.name}`,
               model_id: `${model.id}`,
             }}
           >
