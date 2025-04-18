@@ -2,16 +2,17 @@ export interface Tyres {
   tyres: Tyre[];
 }
 
-export interface Brand {
+export type Brand = {
   id: number;
   name: string;
-  description?: string;
-  website?: string;
-  country?: string;
-  logo?: string;
-  created_at?: Date;
-  updated_at?: Date;
-}
+  slug: string;
+  logo?: string | null;
+  website?: string | null;
+  description?: string | null;
+  country?: string | null;
+  created_at: Date;
+  updated_at: Date;
+};
 
 export type Model = {
   id: number;
