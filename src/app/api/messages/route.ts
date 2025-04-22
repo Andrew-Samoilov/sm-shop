@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     if (!message) {
       console.error("[PRISMA] Помилка: Обовязкове поле message НЕ передано.");
       return NextResponse.json(
-        { success: false, error: "Заповність поле повідомлення" },
+        { success: false, error: "Будь ласка, введіть текст повідомлення." },
         { status: 400 },
       );
     }
@@ -35,7 +35,7 @@ export async function POST(req: Request) {
   } catch (error) {
     console.error("[PRISMA] Помилка в API:", error);
     return NextResponse.json(
-      { success: false, error: "Помилка збереження повідомлення" },
+      { success: false, error: "Сталася помилка на сервері. Спробуйте, будь ласка, ще раз пізніше або звяжіться з нами електронною поштою webmaster@shinamix.com" },
       { status: 500 },
     );
   }

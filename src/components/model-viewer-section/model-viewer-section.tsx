@@ -35,43 +35,42 @@ export function ModelViewerSection({
   }, [emblaApi, onSelect]);
 
   return (
-    <section className="relative w-full overflow-hidden p-0">
-      <div className="flex flex-col lg:flex-row gap-6">
+    <section className="relative w-full overflow-hidden m-0 ml-auto lg:h-[50vh] 2xl:h-[60vh] 2xl:w-2/3 ">
+      <div className="flex flex-col lg:flex-row gap-6  h-full">
+        <button
+          onClick={scrollPrev}
+          className="hidden lg:block z-10 bg-white/80 px-2 py-1 text-xl rounded-full cursor-pointer"
+          aria-label="Попереднє зображення"
+        >
+          ◀
+        </button>
+
         {/* Viewport */}
-        <div className="relative w-full overflow-hidden max-h-[60vh]" ref={emblaRef}>
+        <div className="relative w-full overflow-hidden h-full" ref={emblaRef}>
           <div className="flex">
             {images.map(({ id, url, alt }) => (
-              <div key={id} className="relative w-full flex-[0_0_100%] aspect-video">
+              <div key={id} className="relative flex-[0_0_100%] aspect-[4/5] max-h-full">
                 <Image
                   src={url}
                   alt={alt ?? "Фото моделі"}
                   fill
-                  sizes="100%"
                   className="object-contain"
                 />
               </div>
             ))}
           </div>
-
-          <button
-            onClick={scrollPrev}
-            className="absolute top-1/2 -translate-y-1/2 left-4 md:left-12 z-10 bg-white/80 px-2 py-1 text-xl rounded-full"
-            aria-label="Попереднє зображення"
-          >
-            ◀
-          </button>
-
-          <button
-            onClick={scrollNext}
-            className="absolute top-1/2 -translate-y-1/2 right-4 md:right-12 z-10 bg-white/80 px-2 py-1 text-xl rounded-full"
-            aria-label="Наступне зображення"
-          >
-            ▶
-          </button>
         </div>
 
-        {/* Thumbnails  */}
-        <div className="flex flex-row lg:flex-col gap-6 overflow-x-auto py-2">
+        <button
+          onClick={scrollNext}
+          className="hidden lg:block z-10 bg-white/80 px-2 py-1 text-xl rounded-full cursor-pointer"
+          aria-label="Наступне зображення"
+        >
+          ▶
+        </button>
+
+        {/* Thumbnails */}
+        <div className="flex flex-row gap-6 overflow-x-auto lg:py-2 lg:flex-col ">
           {images.map((img, index) => (
             <Image
               key={img.id}

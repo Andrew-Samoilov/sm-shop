@@ -56,6 +56,6 @@ export async function handleClientSubmit(formId: string, formData: FormData) {
     formEl?.reset();
   } catch (error) {
     console.error("[Form] Помилка під час надсилання форми:", error);
-    toast.error("Помилка підключення до сервера");
+    toast.error("Не вдалося зв’язатися із сервером. Перевірте, будь ласка, ваше інтернет‑з’єднання та спробуйте ще раз.");
   }
 }
