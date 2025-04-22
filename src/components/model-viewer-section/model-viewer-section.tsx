@@ -35,8 +35,8 @@ export function ModelViewerSection({
   }, [emblaApi, onSelect]);
 
   return (
-    <section className="relative w-full overflow-hidden m-0 ml-auto lg:h-[50vh] 2xl:h-[60vh] 2xl:w-2/3 ">
-      <div className="flex flex-col lg:flex-row gap-6  h-full">
+    <section className="relative w-full overflow-hidden m-0 p-0 ml-auto lg:h-[50vh]  2xl:w-3/4 ">
+      <div className="flex flex-col lg:flex-row gap-6  h-full 2xl:items-center">
         <button
           onClick={scrollPrev}
           className="hidden lg:block z-10 bg-white/80 px-2 py-1 text-xl rounded-full cursor-pointer"
@@ -48,13 +48,14 @@ export function ModelViewerSection({
         {/* Viewport */}
         <div className="relative w-full overflow-hidden h-full" ref={emblaRef}>
           <div className="flex">
-            {images.map(({ id, url, alt }) => (
-              <div key={id} className="relative flex-[0_0_100%] aspect-[4/5] max-h-full">
+            {images.map(({ id, url, alt, width, height }) => (
+              <div key={id} className="relative flex-[0_0_100%] h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] 2xl:h-[600px]">
                 <Image
                   src={url}
                   alt={alt ?? "Фото моделі"}
-                  fill
-                  className="object-contain"
+                  width={width ?? 800}
+                  height={height ?? 600}
+                  className="h-full w-full object-contain"
                 />
               </div>
             ))}
@@ -70,7 +71,7 @@ export function ModelViewerSection({
         </button>
 
         {/* Thumbnails */}
-        <div className="flex flex-row gap-6 overflow-x-auto lg:py-2 lg:flex-col ">
+        <div className="flex flex-row gap-2 lg:gap-6 overflow-x-auto lg:py-2 lg:flex-col ">
           {images.map((img, index) => (
             <Image
               key={img.id}
@@ -79,7 +80,8 @@ export function ModelViewerSection({
               width={0}
               height={0}
               sizes="6rem"
-              className={`w-[6rem] h-[6rem] rounded border-2 transition-all shrink-0 cursor-pointer ${index === selectedIndex ? "opacity-100 border-accent" : "opacity-50 border-transparent"
+              className={`w-15 h-12 lg:w-25 lg:h-20
+                rounded border-2 transition-all shrink-0 cursor-pointer ${index === selectedIndex ? "opacity-100 border-accent" : "opacity-50 border-transparent"
                 }`}
               onClick={() => scrollTo(index)}
             />

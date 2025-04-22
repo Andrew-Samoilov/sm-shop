@@ -26,7 +26,7 @@ export default async function ModelPage({
   const images = await getModelsImgByModelId(model.id);
   
   return (
-    <article className=" flex flex-col gap-6 p-6">
+    <article className=" flex flex-col gap-6 md:p-6">
       <header className="lg:max-w-[65ch] mx-auto flex items-center justify-between flex-col-reverse md:flex-row bg-body dark:bg-darkmode-body">
         <h1>
           {brand?.name} {model.name}

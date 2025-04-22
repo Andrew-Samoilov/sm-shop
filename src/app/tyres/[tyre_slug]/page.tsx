@@ -1,5 +1,5 @@
-import { ViewItemGA } from "@/components";
-import { getTyres, getTyreBySlug } from "@/lib";
+import { ModelViewerSection, ViewItemGA } from "@/components";
+import { getTyres, getTyreBySlug, getModelsImgByModelId } from "@/lib";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
@@ -20,6 +20,9 @@ export default async function TyrePage({
 
   // console.info("[getTyreBySlug]", tyre);
   if (!tyre) return notFound();
+  const images = tyre.model_id !== null
+    ? await getModelsImgByModelId(tyre.model_id)
+    : [];
 
   return (
     <section>
@@ -31,6 +34,8 @@ export default async function TyrePage({
         model={tyre.model ?? "unknown"}
         price={Number(tyre.price)}
       />
+
+      {tyre.model_id !== null && <ModelViewerSection images={images} />}
 
       {Object.entries(tyre).map(([key, value]) => (
         <p key={key}>
