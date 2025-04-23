@@ -2,6 +2,7 @@
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import { useCallback, useEffect, useState } from "react";
+import { ArrowLeftCircleIcon, ArrowRightCircleIcon } from "@heroicons/react/24/outline";
 
 export function ModelViewerSection({
   images,
@@ -39,10 +40,13 @@ export function ModelViewerSection({
       <div className="flex flex-col lg:flex-row gap-6  h-full 2xl:items-center">
         <button
           onClick={scrollPrev}
-          className="hidden lg:block z-10 bg-white/80 px-2 py-1 text-xl rounded-full cursor-pointer"
+          className="hidden lg:block z-10"
           aria-label="Попереднє зображення"
         >
-          ◀
+          {/* ◀ */}
+          <ArrowLeftCircleIcon
+            className="text-light h-10 w-10 cursor-pointer hover:text-dark
+                       dark:text-darkmode-light dark:hover:text-darkmode-dark" />
         </button>
 
         {/* Viewport */}
@@ -64,10 +68,12 @@ export function ModelViewerSection({
 
         <button
           onClick={scrollNext}
-          className="hidden lg:block z-10 bg-white/80 px-2 py-1 text-xl rounded-full cursor-pointer"
+          className="hidden lg:block z-10  "
           aria-label="Наступне зображення"
         >
-          ▶
+          <ArrowRightCircleIcon
+            className="text-light h-10 w-10 cursor-pointer hover:text-dark
+                       dark:text-darkmode-light dark:hover:text-darkmode-dark" />
         </button>
 
         {/* Thumbnails */}

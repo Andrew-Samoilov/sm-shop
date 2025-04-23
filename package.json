@@ -1,9 +1,9 @@
 {
   "name": "sm-shop",
-  "version": "0.5.53",
+  "version": "0.5.54",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "taskkill /F /IM ssh.exe & ssh -fN -L 5433:localhost:5432 sms && next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "db": "ssh -fN -L 5433:localhost:5432 sms",
