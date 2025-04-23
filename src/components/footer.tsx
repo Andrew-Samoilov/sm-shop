@@ -49,7 +49,24 @@ export function Footer() {
               >
                 Шини
               </LinkWithGA>
-
+              <div className="flex gap-2 pl-2">
+                <LinkWithGA
+                  href="/brands"
+                  eventLabel="brands"
+                  eventCategory="footer"
+                  className="text-xs md:text-sm font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+                >
+                  Бренди
+                </LinkWithGA>
+                <LinkWithGA
+                  href="/models"
+                  eventLabel="models"
+                  eventCategory="footer"
+                  className="text-xs md:text-sm font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+                >
+                  Моделі
+                </LinkWithGA>
+              </div>
               <div className="text-light/75 cursor-not-allowed">Диски</div>
             </div>
             <div className="flex flex-col items-center pt-2">

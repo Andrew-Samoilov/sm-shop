@@ -47,9 +47,9 @@ export function AddToCartButton({
     <button
       type="button"
       onClick={() => handleClick(id, title, price, quantity)}
-      className={`btn btn-primary btn-sm hover:text-accent`}
+      className={`btn btn-outline-primary  justify-self-start`}
     >
-      Add to cart
+      Купити
     </button>
   );
 }

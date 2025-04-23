@@ -1,8 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { SubmitButton } from "./submit-button";
+// import { SubmitButton } from "./submit-button"
 import { TyresList } from "./tyres-list";
 import { Tyre } from "@/types";
+import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
 
 type TyresSelectClientProps = {
   widths: string[];
@@ -59,52 +60,82 @@ export default function TyresSelectClient({
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="flex justify-center gap-6 pt-6">
-        <select
-          name="width"
-          value={width}
-          onChange={(e) => setWidth(e.target.value)}
-          className="border-border rounded-md border-2 px-4 py-2 focus:ring-2 focus:outline-none"
-        >
-          <option value="">Оберіть ширину</option>
-          {widths.map((w) => (
-            <option key={w} value={w}>
-              {w}
-            </option>
-          ))}
-        </select>
+      <h2>Пошук шин за розміром:</h2>
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col py-6 gap-6  "
+      >
+        <div className="flex  gap-6">
+          <div className="flex flex-col gap-2">
+            <label
+              htmlFor="width"
+              className="block text-sm text-light pl-2">
+              Ширина
+            </label>
+            <select
+              name="width"
+              value={width}
+              onChange={(e) => setWidth(e.target.value)}
+              className="border border-gray-300 rounded-md px-4 py-2"
+            >
+              {widths.map((w) => (
+                <option key={w} value={w}>
+                  {w}
+                </option>
+              ))}
+            </select>
+          </div>
 
-        <select
-          name="profile"
-          value={profile}
-          onChange={(e) => setProfile(e.target.value)}
-          className="border-border rounded-md border-2 px-4 py-2 focus:ring-2 focus:outline-none"
-        >
-          <option value="">Оберіть профіль</option>
-          {profiles.map((p) => (
-            <option key={p} value={p}>
-              {p}
-            </option>
-          ))}
-        </select>
+          <div className="flex flex-col gap-2">
+            <label
+              htmlFor="width"
+              className="block text-sm text-light pl-2">
+              Профіль
+            </label>
+            <select
+              name="profile"
+              value={profile}
+              onChange={(e) => setProfile(e.target.value)}
+              className="border-border rounded-md border-2 px-4 py-2 focus:ring-2 focus:outline-none "
+            >
+              {profiles.map((p) => (
+                <option key={p} value={p}>
+                  {p}
+                </option>
+              ))}
+            </select>
+          </div>
 
-        <select
-          name="diameter"
-          value={diameter}
-          onChange={(e) => setDiameter(e.target.value)}
-          className="border-border rounded-md border-2 px-4 py-2 focus:ring-2 focus:outline-none"
-        >
-          <option value="">Оберіть діаметр</option>
-          {diameters.map((d) => (
-            <option key={d} value={d}>
-              {d}
-            </option>
-          ))}
-        </select>
+          <div className="flex flex-col gap-2">
+            <label
+              htmlFor="width"
+              className="block text-sm text-light pl-2">
+              Діаметр
+            </label>
+            <select
+              name="diameter"
+              value={diameter}
+              onChange={(e) => setDiameter(e.target.value)}
+              className="border-border rounded-md border-2 px-4 py-2 focus:ring-2 focus:outline-none"
+            >
+              {diameters.map((d) => (
+                <option key={d} value={d}>
+                  {d}
+                </option>
+              ))}
+            </select>
+          </div>
 
-        <SubmitButton>Шукати</SubmitButton>
+          {/* <SubmitButton>Шукати</SubmitButton> */}
+        </div>
+
+        <div className="flex flex-row items-center gap-2 text-sm text-accent/75 cursor-not-allowed  ">
+          <QuestionMarkCircleIcon className=" h-6 w-6 cursor-pointer" />
+          Потрібна допомога?
+        </div>
       </form>
-      <div className="flex justify-center">
+
+      <div className="flex w-full justify-center bg-white dark:bg-black rounded-lg p-6">
         <TyresList tyres={selectedTyres} />
       </div>
     </>

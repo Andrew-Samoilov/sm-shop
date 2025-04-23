@@ -105,8 +105,12 @@
     box-shadow: 0 0 2rem var(--color-accent);
   }
 
+  .btn-outline-primary {
+    @apply border-dark text-dark hover:bg-dark dark:hover:text-dark bg-transparent hover:text-white dark:border-white dark:text-white dark:hover:bg-white;
+  }
+
   section {
-    @apply p-6 mx-auto lg:py-24 gap-6;
+    @apply mx-auto gap-6 p-6 lg:py-24;
   }
 
   .container {
