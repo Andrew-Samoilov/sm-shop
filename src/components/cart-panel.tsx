@@ -60,20 +60,20 @@ export function CartPanel() {
           aria-labelledby="cart-title"
           aria-hidden={!isOpen}
           tabIndex={-1}
-          className="bg-body/95 dark:bg-darkmode-body/95 fixed top-0 right-0 flex h-screen w-96 transform flex-col justify-between p-6 backdrop-blur-lg transition-transform duration-300 ease-in-out"
+          className="bg-body/95 dark:bg-darkmode-body/95 fixed top-0 right-0 flex h-screen w-96 transform flex-col justify-between  backdrop-blur-lg transition-transform duration-300 ease-in-out"
         >
           {/* Заголовок і кнопка закриття */}
-          <div>
-            <div className="flex items-center justify-between border-b pb-6">
-              <h2 className="text-lg font-semibold">Кошик</h2>
+          <div >
+            <div className="flex items-center justify-between border-b pb-6 text-white bg-accent p-6">
+              <h2 className="text-lg font-semibold text-white">Кошик</h2>
               <button onClick={() => setIsOpen(false)}>
-                <XMarkIcon className="text-light h-6 w-6 cursor-pointer" />
+                <XMarkIcon className=" h-6 w-6 cursor-pointer" />
               </button>
             </div>
 
             {/* Контент кошика */}
             {CartTyre ? (
-              <div className="flex flex-col justify-between pt-6">
+              <div className="flex flex-col justify-between p-6">
                 <p>{CartTyre.title}</p>
                 <div className="flex justify-between pt-4">
                   <span>{CartTyre.quantity} шт.</span>
@@ -85,7 +85,7 @@ export function CartPanel() {
             )}
           </div>
           {CartTyre && (
-            <div className="flex flex-col justify-between">
+            <div className="flex flex-col justify-between p-6">
               <p className="ml-auto pb-6 text-xl">
                 Разом: <strong> {CartTyre.price * CartTyre.quantity}</strong>{" "}
                 грн.

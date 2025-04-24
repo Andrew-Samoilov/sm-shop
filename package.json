@@ -1,14 +1,14 @@
 {
   "name": "sm-shop",
-  "version": "0.5.55",
+  "version": "0.5.56",
   "private": true,
   "scripts": {
     "dev": "taskkill /F /IM ssh.exe || echo ssh не працює && ssh -fN -L 5433:localhost:5432 sms && echo Тунель відкрито && next dev --turbopack",
     "build": "next build",
+    "// note": "rarely used, but useful",
     "start": "next start",
     "db": "ssh -fN -L 5433:localhost:5432 sms",
     "db:stop": "taskkill /F /IM ssh.exe",
-    "generate:images": "node src/scripts/generate-images-json.js",
     "test": "playwright test",
     "lint": "next lint",
     "format": "prettier --write . && eslint . --fix"

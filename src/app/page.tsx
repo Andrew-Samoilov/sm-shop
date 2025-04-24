@@ -7,7 +7,7 @@ export default function Home() {
       <div
         className="bg-theme-light dark:bg-darkmode-theme-light w-full p-6 flex flex-col gap-6 items-center">
 
-        <TyresSelect/>
+        <TyresSelect />
       </div>
 
       <div className="flex flex-row gap-4 flex-wrap px-6">
