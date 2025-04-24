@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 // import { SubmitButton } from "./submit-button"
 import { TyresList } from "./tyres-list";
 import { Tyre } from "@/types";
-import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
+// import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
+import { HelpWindow } from "./help-window";
 
 type TyresSelectClientProps = {
   widths: string[];
@@ -73,6 +74,7 @@ export default function TyresSelectClient({
               Ширина
             </label>
             <select
+              id="width"
               name="width"
               value={width}
               onChange={(e) => setWidth(e.target.value)}
@@ -88,11 +90,12 @@ export default function TyresSelectClient({
 
           <div className="flex flex-col gap-2">
             <label
-              htmlFor="width"
+              htmlFor="profile"
               className="block text-sm text-light pl-2">
               Профіль
             </label>
             <select
+              id="profile"
               name="profile"
               value={profile}
               onChange={(e) => setProfile(e.target.value)}
@@ -108,11 +111,12 @@ export default function TyresSelectClient({
 
           <div className="flex flex-col gap-2">
             <label
-              htmlFor="width"
+              htmlFor="diameter"
               className="block text-sm text-light pl-2">
               Діаметр
             </label>
             <select
+              id="diameter"
               name="diameter"
               value={diameter}
               onChange={(e) => setDiameter(e.target.value)}
@@ -129,11 +133,13 @@ export default function TyresSelectClient({
           {/* <SubmitButton>Шукати</SubmitButton> */}
         </div>
 
-        <div className="flex flex-row items-center gap-2 text-sm text-accent/75 cursor-not-allowed  ">
+        {/* <div className="flex flex-row items-center gap-2 text-sm text-accent/75 cursor-not-allowed  ">
           <QuestionMarkCircleIcon className=" h-6 w-6 cursor-pointer" />
           Потрібна допомога?
-        </div>
+        </div> */}
       </form>
+
+      <HelpWindow />
 
       <div className="flex w-full justify-center bg-white dark:bg-black rounded-lg p-6">
         <TyresList tyres={selectedTyres} />

@@ -52,7 +52,8 @@ export function Search() {
     <div className="relative xl:ml-auto">
       <MagnifyingGlassIcon className=" text-light/75 absolute top-1/2 right-4 h-5 w-5 -translate-y-1/2 scale-x-[-1] transform" />
       <input
-        type="text"
+        id="search"
+        type="search"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Пошук шин..."
