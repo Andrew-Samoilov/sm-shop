@@ -137,9 +137,9 @@ export default function TyresSelectClient({
           <QuestionMarkCircleIcon className=" h-6 w-6 cursor-pointer" />
           Потрібна допомога?
         </div> */}
-      </form>
+        <HelpWindow />
 
-      <HelpWindow />
+      </form>
 
       <div className="flex w-full justify-center bg-white dark:bg-black rounded-lg p-6">
         <TyresList tyres={selectedTyres} />

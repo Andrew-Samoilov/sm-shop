@@ -6,7 +6,6 @@ export default function Home() {
     <section className="flex justify-center flex-wrap p-0 ">
       <div
         className="bg-theme-light dark:bg-darkmode-theme-light w-full p-6 flex flex-col gap-6 items-center">
-
         <TyresSelect />
       </div>
 
