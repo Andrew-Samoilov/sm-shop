@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
 
 import { getBrands, getModelsByBrandId, getTyresByBrandId, formatDisplayUrl, getBrandDescription } from "@/lib";
-import { BrandCertificatesSection, LinkWithGA, TyresList } from "@/components";
+import {CertificatesSection, LinkWithGA, TyresList } from "@/components";
 import siteConfig from "@/static-data/site-config.json";
 import { getBrandBySlug } from "@/lib/prisma/get-brand-by-slug";
 
@@ -143,7 +143,7 @@ export default async function BrandPage({
         <ReactMarkdown>{description}</ReactMarkdown>
       </section>
 
-      <BrandCertificatesSection brandName={brand.name} />
+      <CertificatesSection brandName={brand.name} />
 
       <section className="container mx-auto">
         <h2 className="lg:sticky lg:top-[96px] lg:z-20 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">

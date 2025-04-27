@@ -1,4 +1,4 @@
-import { BrandCertificatesSection, ModelViewerSection, TyresList } from "@/components";
+import { CertificatesSection, ModelViewerSection, TyresList } from "@/components";
 import { getBrandById, getModels, getTyresByModelId,  getModelBySlug, getModelsImgByModelId } from "@/lib";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
@@ -48,7 +48,7 @@ export default async function ModelPage({
         <ReactMarkdown>{model.description}</ReactMarkdown>
       </section>
 
-      {brand && <BrandCertificatesSection brandName={brand.name} />}
+      {brand && <CertificatesSection brandName={brand.name} />}
 
       <section className="container z-10">
         <h2>

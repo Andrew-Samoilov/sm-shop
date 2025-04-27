@@ -16,6 +16,5 @@ export { TyresSelect } from "./tyres-select";
 export { useTheme } from "./use-theme";
 export { ViewItemGA } from "./view-item-ga";
 export { TwSizeIndicator } from "./tw-size-indicator";
-export { BrandCertificatesSection } from "./brand-certificates-section/brand-certificates-section";
 export { ModelViewerSection } from "./model-viewer-section/model-viewer-section";
 export { HelpWindow } from "./help-window";
