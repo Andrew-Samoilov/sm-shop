@@ -104,7 +104,7 @@ export default async function BrandPage({
 
   return (
     <article className="flex flex-col gap-6  mx-auto p-6">
-      <header className="gap-6 xl:gap-0 flex items-center justify-center xl:justify-between flex-col-reverse md:flex-row xl:sticky xl:top-[120px] xl:-z-1 bg-body dark:bg-darkmode-body">
+      <header className="gap-6 xl:gap-0 flex items-center xl:items-start  justify-center xl:justify-between flex-col-reverse md:flex-row xl:sticky xl:top-[120px] xl:-z-1 bg-body dark:bg-darkmode-body">
         <div>
           <h1 style={{ viewTransitionName: `title-${brand.name}` }}>
             {brand.name}
