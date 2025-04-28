@@ -1,5 +1,3 @@
-export { normalizeUrl } from "./normalize-url";
-export { normalizeBrandUrl } from "./normalize-brand-url";
 export { formatDisplayUrl } from "./format-display-url";
 export { formatTyreSizeQuery } from "./format-tyre-size-query";
 export { formatFormData } from "./format-form-data";
@@ -14,9 +12,9 @@ export { getTyres } from "./prisma/get-tyres";
 export { getTyresByBrandId } from "./prisma/get-tyres-by-brand-id";
 export { getTyresByModelId } from "./prisma/get-tyres-by-model-id";
 export { getTyresByWPD } from "./prisma/get-tyres-by-wpd";
-export { getTyresWidths } from "./get-tyres-widths";
-export { getTyresProfiles } from "./get-tyres-profiles";
-export { getTyresDiameters } from "./get-tyres-diameters";
+export { getTyresWidths } from "./prisma/get-tyres-widths";
+export { getTyresProfiles } from "./prisma/get-tyres-profiles";
+export { getTyresDiameters } from "./prisma/get-tyres-diameters";
 
 export { getBrands } from "./prisma/get-brands";
 
