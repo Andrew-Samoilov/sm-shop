@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import ReactMarkdown from "react-markdown";
 import { notFound } from "next/navigation";
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
-
-import { getBrands, getModelsByBrandId, getTyresByBrandId, formatDisplayUrl, getBrandDescription } from "@/lib";
-import {CertificatesSection, LinkWithGA, TyresList } from "@/components";
+import { getBrands, getBrandBySlug, getModelsByBrandId, getTyresByBrandId, formatDisplayUrl, getBrandDescription } from "@/lib";
+import { CertificatesSection, LinkWithGA, TyresList } from "@/components";
 import siteConfig from "@/static-data/site-config.json";
-import { getBrandBySlug } from "@/lib/prisma/get-brand-by-slug";
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
 
 export async function generateStaticParams() {
   const brands = await getBrands();
@@ -68,11 +67,7 @@ export async function generateMetadata(
   };
 }
 
-export default async function BrandPage({
-  params,
-}: {
-  params: { brand_slug: string };
-}) {
+export default async function BrandPage({ params, }: { params: { brand_slug: string }; }) {
   const { brand_slug } = await params;
   if (!brand_slug) return notFound();
 

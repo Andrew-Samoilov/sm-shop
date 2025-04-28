@@ -13,7 +13,7 @@ model Brand {
   slug        String   @unique @default("") @db.VarChar(100)
   name        String
   logo        String?
-  description String?
+  description String? @db.Text
   website     String?
   country     String?
   created_at  DateTime @default(now())
