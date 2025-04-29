@@ -5,23 +5,19 @@ import { getBrands, getBrandBySlug, getModelsByBrandId, getTyresByBrandId, forma
 import { CertificatesSection, LinkWithGA, TyresList } from "@/components";
 import siteConfig from "@/static-data/site-config.json";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
-
 export async function generateStaticParams() {
   const brands = await getBrands();
 
-  return brands
-    .filter((brand) => brand?.name)
-    .map((brand) => ({
-      brand_slug: brand.slug,
-    }))
-    .filter((param) => param.brand_slug !== "");
+  return brands.map((brand) => ({
+    brand_slug: brand.slug,
+  }))
 }
 
 export async function generateMetadata(
   { params }: { params: { brand_slug: string } }
 ): Promise<Metadata> {
-  const { brand_slug } = await params;
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
+  const { brand_slug } = params;
   const brand = await getBrandBySlug(brand_slug);
   if (!brand) return {};
 
@@ -74,16 +70,13 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
   const brand = await getBrandBySlug(brand_slug);
   if (!brand) return notFound();
 
-  // const description = await getBrandDescription(
-  //   brand.slug,
-  //   brand.description ?? "",
-  // );
   const brandModels = await getModelsByBrandId(brand.id);
   const brandTyres = await getTyresByBrandId(brand.id);
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Brand",
+    
     name: brand.name,
     ...(brand.country && { countryOfOrigin: brand.country }),
     ...(brand.website && !["null", "NULL", ""].includes(brand.website) && { url: brand.website }),
