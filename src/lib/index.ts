@@ -20,7 +20,6 @@ export { getBrands } from "./prisma/get-brands";
 
 export { getBrandById } from "./prisma/get-brand-by-id";
 export { getBrandBySlug } from "./prisma/get-brand-by-slug";
-export { getBrandDescription } from "./get-brand-description";
 
 export { getModels } from "./prisma/get-models";
 export { getModelsByBrandId } from "./prisma/get-models-by-brand-id";

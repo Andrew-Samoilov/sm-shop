@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import ReactMarkdown from "react-markdown";
 import { notFound } from "next/navigation";
-import { getBrands, getBrandBySlug, getModelsByBrandId, getTyresByBrandId, formatDisplayUrl, getBrandDescription } from "@/lib";
+import { getBrands, getBrandBySlug, getModelsByBrandId, getTyresByBrandId, formatDisplayUrl } from "@/lib";
 import { CertificatesSection, LinkWithGA, TyresList } from "@/components";
 import siteConfig from "@/static-data/site-config.json";
 
@@ -74,10 +74,10 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
   const brand = await getBrandBySlug(brand_slug);
   if (!brand) return notFound();
 
-  const description = await getBrandDescription(
-    brand.slug,
-    brand.description ?? "",
-  );
+  // const description = await getBrandDescription(
+  //   brand.slug,
+  //   brand.description ?? "",
+  // );
   const brandModels = await getModelsByBrandId(brand.id);
   const brandTyres = await getTyresByBrandId(brand.id);
 
@@ -135,7 +135,7 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
       </header>
 
       <section className="lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl xl:-mt-65 bg-body dark:bg-darkmode-body z-10 -p-6">
-        <ReactMarkdown>{description}</ReactMarkdown>
+        <ReactMarkdown>{brand.description}</ReactMarkdown>
       </section>
 
       <CertificatesSection brandName={brand.name} />

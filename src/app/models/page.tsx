@@ -1,6 +1,5 @@
 import { getModels } from "@/lib";
 import { Model } from "@prisma/client";
-// import { Model } from "@/";
 import Link from "next/link";
 
 export const dynamic = "force-static";
