@@ -51,13 +51,14 @@ export function ModelViewerSection({
         {/* Viewport */}
         <div className="relative w-full overflow-hidden h-full" ref={emblaRef}>
           <div className="flex">
-            {images.map(({ id, url, alt, width, height }) => (
+            {images.map(({ id, url, alt, width, height }, index) => (
               <div key={id} className="relative flex-[0_0_100%] h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] 2xl:h-[600px]">
                 <Image
                   src={url}
                   alt={alt ?? "Фото моделі"}
                   width={width ?? 800}
                   height={height ?? 600}
+                  priority={index === 0}
                   className="h-full w-full object-contain"
                 />
               </div>
