@@ -70,8 +70,6 @@ export async function generateMetadata(
   };
 }
 
-
-
 export default async function ModelPage({
   params,
 }: {

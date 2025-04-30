@@ -14,10 +14,10 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata(
-  { params }: { params: { brand_slug: string } }
+  { params }: { params: Promise<{ brand_slug: string }> }
 ): Promise<Metadata> {
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
-  const { brand_slug } = params;
+  const { brand_slug } = await params;
   const brand = await getBrandBySlug(brand_slug);
   if (!brand) return {};
 
@@ -89,6 +89,7 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
   };
 
   // console.info(`[getTyresByBrandId]`,brandTyres);
+  // console.log(`[getTyresByBrandId]`, brand);
 
   return (
     <article className="flex flex-col gap-6  mx-auto p-6">
@@ -116,10 +117,10 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
             </LinkWithGA>
           )}
         </div>
-        {brand.logo && (
+        {brand.logo && brand.logo.startsWith("http") && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={brand.logo}
+            src={`Логотип ${brand.logo} у магазині ${siteConfig.siteName}`}
             alt={brand.name}
             className="md:max-w-md max-w-full h-auto z-20"
             style={{ viewTransitionName: `logo-${brand.name}` }}
