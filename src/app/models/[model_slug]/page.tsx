@@ -18,7 +18,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
 export async function generateMetadata(
   { params }: { params: { model_slug: string } }
 ): Promise<Metadata> {
-  const { model_slug } = params;
+  const { model_slug } = await params;
   const model = await getModelBySlug(model_slug);
   if (!model) return {};
   const brand = await getBrandById(model.brandId);
@@ -112,7 +112,6 @@ export default async function ModelPage({
       },
   };
 
-
   return (
     <article className=" flex flex-col gap-6 md:p-6">
       <header className="lg:max-w-[65ch] mx-auto flex items-center justify-between flex-col-reverse md:flex-row bg-body dark:bg-darkmode-body">
@@ -130,11 +129,13 @@ export default async function ModelPage({
         )}
       </header>
 
-      <ModelViewerSection images={images} />
-
-      <section className="lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl  bg-body dark:bg-darkmode-body z-10">
-        <ReactMarkdown>{model.description}</ReactMarkdown>
-      </section>
+      {images && images.length > 0 && <ModelViewerSection images={images}/>}
+      
+      {model.description && (
+        <section className="lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl  bg-body dark:bg-darkmode-body z-10">
+          <ReactMarkdown>{model.description}</ReactMarkdown>
+        </section>
+      )}
 
       {brand && <CertificatesSection brandName={brand.name} />}
 

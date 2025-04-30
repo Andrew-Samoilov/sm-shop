@@ -43,7 +43,6 @@ export function ModelViewerSection({
           className="hidden lg:block z-10"
           aria-label="Попереднє зображення"
         >
-          {/* ◀ */}
           <ArrowLeftCircleIcon
             className="text-light h-10 w-10 cursor-pointer hover:text-dark
                        dark:text-darkmode-light dark:hover:text-darkmode-dark" />
