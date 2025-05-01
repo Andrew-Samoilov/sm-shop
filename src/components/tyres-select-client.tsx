@@ -130,20 +130,16 @@ export default function TyresSelectClient({
             </select>
           </div>
 
-          {/* <SubmitButton>Шукати</SubmitButton> */}
         </div>
 
-        {/* <div className="flex flex-row items-center gap-2 text-sm text-accent/75 cursor-not-allowed  ">
-          <QuestionMarkCircleIcon className=" h-6 w-6 cursor-pointer" />
-          Потрібна допомога?
-        </div> */}
         <HelpWindow />
-
       </form>
 
-      <div className="flex w-full justify-center bg-white dark:bg-black rounded-lg p-6">
-        <TyresList tyres={selectedTyres} />
-      </div>
+      {selectedTyres && selectedTyres.length > 0 &&
+        <div className="flex w-full justify-center bg-white dark:bg-black rounded-lg p-6">
+          <TyresList tyres={selectedTyres} />
+        </div>
+      }
     </>
   );
 }

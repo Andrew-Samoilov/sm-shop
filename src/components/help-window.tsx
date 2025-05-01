@@ -23,7 +23,7 @@ export function HelpWindow() {
         }}
         className="flex flex-row items-center gap-2 text-sm text-accent/75 cursor-pointer">
         <QuestionMarkCircleIcon className=" h-6 w-6" />
-        Потрібна допомога?
+        <span>Потрібна допомога?</span>
       </button>
 
       {HelpOpen && (

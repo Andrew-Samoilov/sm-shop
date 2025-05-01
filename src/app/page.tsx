@@ -5,7 +5,8 @@ export default function Home() {
   return (
     <section className="flex justify-center flex-wrap p-0 ">
       <div
-        className="bg-theme-light dark:bg-darkmode-theme-light w-full p-6 flex flex-col gap-6 items-center">
+        className="from-body to-theme-light dark:from-darkmode-body dark:to-darkmode-theme-light bg-gradient-to-b
+        w-full p-6 flex flex-col gap-6 items-center">
         <TyresSelect />
       </div>
 
