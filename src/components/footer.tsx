@@ -35,7 +35,14 @@ export function Footer() {
                 Про нас
               </LinkWithGA>
               <div className="text-light/75 cursor-not-allowed">Оплата і доставка</div>
-              <div className="text-light/75 cursor-not-allowed">Гарантія</div>
+              <LinkWithGA
+                href="/warranty"
+                eventLabel="warranty"
+                eventCategory="footer"
+                className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+              >
+                Гарантія
+              </LinkWithGA>
             </div>
           </div>
           <div className="flex flex-col items-center">
