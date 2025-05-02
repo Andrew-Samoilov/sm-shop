@@ -1,4 +1,5 @@
 import { prisma } from "@/lib";
+import { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
@@ -7,32 +8,31 @@ export async function GET(req: Request) {
   const profile = searchParams.get("profile");
   const diameter = searchParams.get("diameter");
 
-  if (!width || !profile || !diameter) {
-    return NextResponse.json({ error: "Missing parameters" }, { status: 400 });
+  // if (!width || !profile || !diameter) {return NextResponse.json({ error: "Missing parameters" }, { status: 400 }); }
+
+  const where: Prisma.TyreWhereInput = {};
+
+  if (width && !isNaN(Number(width))) {
+    where.width = Number(width);
+  }
+
+  if (profile && !isNaN(Number(profile))) {
+    where.profile = Number(profile);
+  }
+
+  if (diameter && !isNaN(Number(diameter))) {
+    where.diameter = Number(diameter);
   }
 
   try {
     const tyres = await prisma.tyre.findMany({
-      where: { width, profile, diameter },
-      select: {
-        id: true,
-        model: true,
-        description: true,
-        country: true,
-        model_id: true,
-        brand_id: true,
-        title: true,
-        slug: true,
-        date_code: true,
-        type: true,
-        price: true,
-      },
-      orderBy: { title: "asc" },
+      where,
+      orderBy: { width: "asc" }, // або інше сортування
     });
 
     return NextResponse.json(tyres);
   } catch (error) {
     console.error("[DB]", error);
-    return NextResponse.json({ error: "Database error" }, { status: 500 });
+    return NextResponse.json({ error: `[api\tyres] Database error` }, { status: 500 });
   }
 }

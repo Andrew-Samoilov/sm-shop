@@ -12,9 +12,7 @@ export { getTyres } from "./prisma/get-tyres";
 export { getTyresByBrandId } from "./prisma/get-tyres-by-brand-id";
 export { getTyresByModelId } from "./prisma/get-tyres-by-model-id";
 export { getTyresByWPD } from "./prisma/get-tyres-by-wpd";
-export { getTyresWidths } from "./prisma/get-tyres-widths";
-export { getTyresProfiles } from "./prisma/get-tyres-profiles";
-export { getTyresDiameters } from "./prisma/get-tyres-diameters";
+export { getTyresOptions } from "./prisma/get-tyres-options";
 
 export { getBrands } from "./prisma/get-brands";
 

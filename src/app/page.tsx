@@ -1,4 +1,5 @@
-import { TyresSelect } from "@/components";
+// import { TyresSelect } from "@/components";
+import TyresSelect from "@/components/tyres-select";
 import Link from "next/link";
 
 export default function Home() {

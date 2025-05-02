@@ -12,7 +12,7 @@ export { Search } from "./search";
 export { CertificatesSection } from "./certificates-section/certificates-section";
 export { ThemeSwitcher } from "./theme-switcher";
 export { TyresList } from "./tyres-list";
-export { TyresSelect } from "./tyres-select";
+// export { TyresSelect } from "./tyres-select";
 export { useTheme } from "./use-theme";
 export { ViewItemGA } from "./view-item-ga";
 export { TwSizeIndicator } from "./tw-size-indicator";
