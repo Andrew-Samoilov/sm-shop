@@ -86,7 +86,7 @@ export default function TyresSelect() {
         // onSubmit={handleSubmit}
         className="flex flex-col py-6 gap-6  "
       >
-        <div className="flex gap-6">
+        <div className="flex gap-6 flex-col md:flex-row">
           <div className="flex flex-col gap-2">
             <label
               htmlFor="width"
