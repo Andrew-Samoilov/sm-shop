@@ -117,11 +117,12 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
             </LinkWithGA>
           )}
         </div>
-        {brand.logo && brand.logo.startsWith("http") && (
+        {/* {console.log(`[BrandPage]`,brand.logo)} */}
+        {brand.logo &&  (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={`Логотип ${brand.logo} у магазині ${siteConfig.siteName}`}
-            alt={brand.name}
+            src={brand.logo}
+            alt={`Логотип ${brand.logo} у магазині ${siteConfig.siteName}`}
             className="md:max-w-md max-w-full h-auto z-20"
             style={{ viewTransitionName: `logo-${brand.name}` }}
           />
