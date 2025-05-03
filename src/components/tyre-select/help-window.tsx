@@ -1,18 +1,31 @@
 "use client";
 
-import { useState } from "react";
 import { QuestionMarkCircleIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { sendGAEvent } from "@/lib";
+import { useEffect } from "react";
 
-export function HelpWindow() {
-  const [HelpOpen, setHelpOpen] = useState(false);
+export function HelpWindow({ isOpen, setIsOpen }: {
+  isOpen: boolean;
+  setIsOpen: (v: boolean) => void;
+}) {
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [setIsOpen]);
 
   return (
     <>
       {/* Кнопка відкриття */}
       <button
+        type="button"
         onClick={() => {
-          setHelpOpen(true);
+          setIsOpen(true);
           sendGAEvent({
             action: "help_window_open",
             params: {
@@ -26,14 +39,19 @@ export function HelpWindow() {
         <span>Потрібна допомога?</span>
       </button>
 
-      {HelpOpen && (
-        <dialog open className="bg-theme-dark/50 dark:bg-theme-light/50 fixed inset-0 z-50 flex w-full h-full items-center justify-center">
+      {isOpen && (
+        <dialog
+          open
+          tabIndex={-1}
+          aria-modal="true"
+          aria-labelledby="help-title"
+          
+          className="bg-theme-dark/50 dark:bg-theme-light/50 fixed inset-0 z-50 flex w-full h-full items-center justify-center">
           <div className="w-full max-w-[75ch] bg-theme-light dark:bg-theme-dark text-light p-6 rounded-lg max-h-[95vh] overflow-y-auto">
 
             <header className="flex items-center justify-between mb-4 ">
               <h2>Пояснення параметрів пошуку</h2>
-              <button onClick={() => setHelpOpen(false)}
-                aria-label="Закрити"
+              <button onClick={() => setIsOpen(false)} aria-label="Закрити"
                 className="cursor-pointer"
               >
                 <XMarkIcon className="h-6 w-6" />
@@ -67,7 +85,6 @@ export function HelpWindow() {
             </div>
           </div>
         </dialog>
-
       )}
     </>
   );

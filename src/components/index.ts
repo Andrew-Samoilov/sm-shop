@@ -12,9 +12,10 @@ export { Search } from "./search";
 export { CertificatesSection } from "./certificates-section/certificates-section";
 export { ThemeSwitcher } from "./theme-switcher";
 export { TyresList } from "./tyres-list";
-// export { TyresSelect } from "./tyres-select";
+
 export { useTheme } from "./use-theme";
 export { ViewItemGA } from "./view-item-ga";
 export { TwSizeIndicator } from "./tw-size-indicator";
 export { ModelViewerSection } from "./model-viewer-section/model-viewer-section";
-export { HelpWindow } from "./help-window";
+export { HelpWindow } from "./tyre-select/help-window";
+export { OptionSelect } from "./tyre-select/option-select";
