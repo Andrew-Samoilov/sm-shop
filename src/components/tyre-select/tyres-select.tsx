@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { getTyresOptions } from "@/lib";
 import { HelpWindow, TyresList, OptionSelect } from "@/components";
-import { Tyre } from "@prisma/client";
+import { Tyre } from "@/types";
+
 
 export default function TyresSelect() {
   const [width, setWidth] = useState("");

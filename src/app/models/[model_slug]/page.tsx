@@ -99,8 +99,8 @@ export default async function ModelPage({
         "@type": "AggregateOffer",
         "url": canonicalUrl,
         "priceCurrency": "UAH",
-        "lowPrice": Math.min(...modelTyres.map((t) => t.price)),
-        "highPrice": Math.max(...modelTyres.map((t) => t.price)),
+        "lowPrice": Math.min(...modelTyres.map((t) => t.price ?? 0)),
+        "highPrice": Math.max(...modelTyres.map((t) => t.price ?? 0)),
         "offerCount": modelTyres.length,
         "availability": "https://schema.org/InStock",
       }
@@ -129,8 +129,8 @@ export default async function ModelPage({
         )}
       </header>
 
-      {images && images.length > 0 && <ModelViewerSection images={images}/>}
-      
+      {images && images.length > 0 && <ModelViewerSection images={images} />}
+
       {model.description && (
         <section className="lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl  bg-body dark:bg-darkmode-body z-10">
           <ReactMarkdown>{model.description}</ReactMarkdown>

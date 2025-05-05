@@ -27,7 +27,7 @@ export async function GET(req: Request) {
   try {
     const tyres = await prisma.tyre.findMany({
       where,
-      orderBy: { width: "asc" }, // або інше сортування
+      orderBy: { width: "asc" }, 
     });
 
     return NextResponse.json(tyres);

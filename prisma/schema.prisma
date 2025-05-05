@@ -45,15 +45,13 @@ model Tyre {
   width              Decimal? @db.Decimal(4, 1)
   profile            Decimal? @db.Decimal(4, 1)
   diameter           Decimal? @db.Decimal(4, 1)
-  brand              String?  @db.VarChar(50)
-  model              String?  @db.VarChar(100)
   brand_id           Int?
   model_id           Int?
   brand_rel          Brand?   @relation("BrandTyres", fields: [brand_id], references: [id])
   model_rel          Model?   @relation(fields: [model_id], references: [id])
 
   @@index([title(ops: raw("gin_trgm_ops"))], map: "tyres_title_trgm_idx", type: Gin)
-  @@index([brand_id, model_id]) // ❗ Без season
+  @@index([brand_id, model_id]) 
   @@index([width, profile, diameter]) 
   
   @@map("tyres")

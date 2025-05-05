@@ -76,7 +76,7 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Brand",
-    
+
     name: brand.name,
     ...(brand.country && { countryOfOrigin: brand.country }),
     ...(brand.website && !["null", "NULL", ""].includes(brand.website) && { url: brand.website }),
@@ -118,7 +118,7 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
           )}
         </div>
         {/* {console.log(`[BrandPage]`,brand.logo)} */}
-        {brand.logo &&  (
+        {brand.logo && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={brand.logo}

@@ -1,9 +1,14 @@
 import { ModelViewerSection, ViewItemGA } from "@/components";
-import { getTyres, getTyreBySlug, getModelsImgByModelId } from "@/lib";
+import { getTyreBySlug, getModelsImgByModelId, prisma } from "@/lib";
 import { notFound } from "next/navigation";
 
+
 export async function generateStaticParams() {
-  const tyres = await getTyres();
+  const tyres = await prisma.tyre.findMany({
+    select: {
+      slug: true,
+    },
+  });
 
   return tyres.map((tyre) => ({
     tyre_slug: tyre.slug,
@@ -24,14 +29,16 @@ export default async function TyrePage({
     ? await getModelsImgByModelId(tyre.model_id)
     : [];
 
+  // console.info("[TyrePage]", tyre);
+
   return (
     <section>
       <h1>{tyre.title}</h1>
       <ViewItemGA
         item_id={tyre.id}
         item_name={tyre.title}
-        brand={tyre.brand ?? "unknown"}
-        model={tyre.model ?? "unknown"}
+        brand={tyre.brand_rel?.name ?? "unknown"}
+        model={tyre.model_rel?.name ?? "unknown"}
         price={Number(tyre.price)}
       />
 
@@ -39,9 +46,13 @@ export default async function TyrePage({
 
       {Object.entries(tyre).map(([key, value]) => (
         <p key={key}>
-          <strong>{key}:</strong> {value !== null ? value.toString() : "N/A"}
+          <strong>{key}:</strong>{" "}
+          {typeof value === "object" && value !== null
+            ? `[об'єкт: ${Object.keys(value).join(", ")}]`
+            : value?.toString() ?? "N/A"}
         </p>
       ))}
+
     </section>
   );
 }
