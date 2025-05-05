@@ -10,8 +10,8 @@ export type Brand = {
   website?: string | null;
   description?: string | null;
   country?: string | null;
-  created_at: Date;
-  updated_at: Date;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 export type Model = {

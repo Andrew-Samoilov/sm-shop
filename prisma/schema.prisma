@@ -16,18 +16,17 @@ model Brand {
   description String? @db.Text
   website     String?
   country     String?
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt     @map("updated_at")
   models      Model[]
   tyres       Tyre[]   @relation("BrandTyres")
 
-  @@index([slug])
   @@map("brands")
 }
 
 model Tyre {
   id                 Int      @id(map: "tires_pkey") @default(autoincrement())
-  slug               String   @default("") @db.VarChar(160)
+  slug               String   @unique @default("") @db.VarChar(160)
   title              String
   sku                String   @unique(map: "tires_sku_key") @db.VarChar(50)
   description        String?
@@ -66,8 +65,8 @@ model Model {
   brand       Brand        @relation(fields: [brandId], references: [id], onDelete: Cascade)
   tyres       Tyre[]
   images      ModelImage[]
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt     @map("updated_at")
 
   @@index([brandId])
   @@map("models")
@@ -79,7 +78,8 @@ model Message {
   email     String
   phone     String?
   message   String
-  createdAt DateTime @default(now())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt     @map("updated_at")
 
   @@map("messages")
 }
