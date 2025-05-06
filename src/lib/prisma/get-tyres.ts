@@ -7,14 +7,14 @@ export async function getTyres(query?: string): Promise<Tyre[]> {
       ? { title: { contains: query, mode: "insensitive", }, }
       : undefined,
     include: {
-      brand_rel: { select: { name: true } },
-      model_rel: { select: { name: true } }
+      brand: { select: { name: true } },
+      model: { select: { name: true } }
     },
     orderBy: { title: "asc", },
   });
 
-  return tyres.map(({ model_rel, ...rest }) => ({
+  return tyres.map(({ model, ...rest }) => ({
     ...rest,
-    model: model_rel?.name ?? null,
+    model: model?.name ?? null,
   }));
 }

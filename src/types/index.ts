@@ -27,11 +27,11 @@ export type Tyre = {
   model: string | null;
   description: string | null;
   country: string | null;
-  model_id: number | null;
-  brand_id: number | null;
+  modelId: number | null;
+  brandId: number | null;
   title: string;
   slug: string;
-  date_code: string | null;
+  dateCode: string | null;
   type: string | null;
   price?: number;
 };

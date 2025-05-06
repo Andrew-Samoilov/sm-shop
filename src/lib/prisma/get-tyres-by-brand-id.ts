@@ -1,18 +1,22 @@
 import { prisma } from "@/lib";
 import type { Tyre } from "@/types";
 
-export async function getTyresByBrandId(brandId: number): Promise<Tyre[]> {
+type TyreWithModel = Tyre & {
+  model: string | null;
+};
+
+export async function getTyresByBrandId(brandId: number): Promise<TyreWithModel[]> {
   const tyresWithRel = await prisma.tyre.findMany({
-    where: { brand_id: brandId },
+    where: { brandId },
     orderBy: { title: "asc" },
     include: {
-      model_rel: {
+      model: {
         select: { name: true }
       }
     }
   });
-  return tyresWithRel.map(({ model_rel, ...rest }) => ({
+  return tyresWithRel.map(({ model, ...rest }) => ({
     ...rest,
-    model: model_rel?.name ?? null,
+    model: model?.name ?? null,
   }));
 }

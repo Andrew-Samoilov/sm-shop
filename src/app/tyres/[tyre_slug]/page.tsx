@@ -25,8 +25,8 @@ export default async function TyrePage({
 
   // console.info("[getTyreBySlug]", tyre);
   if (!tyre) return notFound();
-  const images = tyre.model_id !== null
-    ? await getModelsImgByModelId(tyre.model_id)
+  const images = tyre.modelId !== null
+    ? await getModelsImgByModelId(tyre.modelId)
     : [];
 
   // console.info("[TyrePage]", tyre);
@@ -37,12 +37,12 @@ export default async function TyrePage({
       <ViewItemGA
         item_id={tyre.id}
         item_name={tyre.title}
-        brand={tyre.brand_rel?.name ?? "unknown"}
-        model={tyre.model_rel?.name ?? "unknown"}
+        brand={tyre.brand?.name ?? ""}
+        model={tyre.model?.name ?? ""}
         price={Number(tyre.price)}
       />
 
-      {tyre.model_id !== null && <ModelViewerSection images={images} />}
+      {tyre.modelId !== null && <ModelViewerSection images={images} />}
 
       {Object.entries(tyre).map(([key, value]) => (
         <p key={key}>

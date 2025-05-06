@@ -17,7 +17,7 @@ export function TyresList({ tyres }: Tyres) {
             className="self-center"
           >
               <p>
-                {tyre.title} - {tyre.date_code ?? ""} - {tyre.price.toString()}{" "}
+                {tyre.title} - {tyre.dateCode ?? ""} - {tyre.price.toString()}{" "}
                 грн.
               </p>
             </Link>

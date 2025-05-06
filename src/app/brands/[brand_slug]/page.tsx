@@ -148,7 +148,7 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
             className="block"
             eventParams={{
               brand_slug: `${brand.name}`,
-              model_id: `${model.id}`,
+              modelId: `${model.id}`,
             }}
           >
             {model.name}
