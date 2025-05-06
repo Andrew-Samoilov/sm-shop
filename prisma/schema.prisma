@@ -10,7 +10,7 @@ datasource db {
 
 model Brand {
   id          Int      @id @default(autoincrement())
-  slug        String   @unique @default("") @db.VarChar(100)
+  slug        String   @unique @db.VarChar(100)
   name        String
   logo        String?
   description String? @db.Text
@@ -26,7 +26,7 @@ model Brand {
 
 model Tyre {
   id                 Int      @id(map: "tires_pkey") @default(autoincrement())
-  slug               String   @unique @default("") @db.VarChar(160)
+  slug               String   @unique @db.VarChar(160)
   title              String
   sku                String   @unique(map: "tires_sku_key") @db.VarChar(50)
   description        String?
