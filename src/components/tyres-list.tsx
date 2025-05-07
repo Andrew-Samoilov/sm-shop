@@ -9,17 +9,14 @@ export function TyresList({ tyres }: Tyres) {
   }));
 
   return (
-    <div className="p-6 lg:p-0">
+    <div className="p-6 lg:p-0 flex flex-col gap-2 lg:max-w-[75ch] mx-auto">
       {formattedTyres.map((tyre) => (
-        <div key={tyre.id} className="grid grid-cols-2 gap-2 py-2 ">
+        <div key={tyre.id} className="flex justify-between ">
           <Link
             href={`/tyres/${tyre.slug}`}
-            className="self-center"
+            className="self-center pr-2"
           >
-            <p>
-              {tyre.title} - {tyre.dateCode ?? ""} - {tyre.price.toString()}{" "}
-              грн.
-            </p>
+            {tyre.title} - {tyre.dateCode ?? ""} - {tyre.price.toString()}{" грн."}
           </Link>
           <AddToCartButton
             id={tyre.id}
@@ -27,7 +24,6 @@ export function TyresList({ tyres }: Tyres) {
             price={tyre.price}
             quantity={4}
           />
-
         </div>
       ))}
     </div>

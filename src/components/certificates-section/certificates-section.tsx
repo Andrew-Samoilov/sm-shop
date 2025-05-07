@@ -28,16 +28,6 @@ export function CertificatesSection({ brandName }: { brandName?: string }) {
       .sort((a, b) => b.year - a.year);
   }
 
-  // if (brandName) filteredSert === sert
-  //   .filter((item) => item.brand.toLowerCase() === brandName.toLowerCase())
-  //   .sort((a, b) => b.year - a.year);
-
-
-
-  // const filteredSert = sert
-  //   .filter((item) => item.brand.toLowerCase() === brandName.toLowerCase())
-  //   .sort((a, b) => b.year - a.year);
-
   if (filteredSert.length === 0) return null;
 
   return (

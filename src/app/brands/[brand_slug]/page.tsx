@@ -135,29 +135,31 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
 
       <CertificatesSection brandName={brand.name} />
 
-      <section className="container mx-auto ">
-        <h2 className="lg:sticky lg:top-[96px] lg:z-20 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
+      <section className=" mx-auto ">
+        <h2 className="text-center lg:sticky lg:top-[96px] lg:z-20 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
           Наявні <strong>моделі</strong> бренду {brand.name} ({brandModels.length})
         </h2>
-        {brandModels.map((model) => (
-          <LinkWithGA
-            key={model.id}
-            href={`/models/${model.slug}`}
-            eventLabel={model.name}
-            eventCategory={`brand-${brand.name}`}
-            className="block px-6"
-            eventParams={{
-              brand_slug: `${brand.name}`,
-              modelId: `${model.id}`,
-            }}
-          >
-            {model.name}
-          </LinkWithGA>
-        ))}
+        <div className="flex flex-wrap ">
+          {brandModels.map((model) => (
+            <LinkWithGA
+              key={model.id}
+              href={`/models/${model.slug}`}
+              eventLabel={model.name}
+              eventCategory={`brand-${brand.name}`}
+              className=" px-6"
+              eventParams={{
+                brand_slug: `${brand.name}`,
+                modelId: `${model.id}`,
+              }}
+            >
+              {model.name}
+            </LinkWithGA>
+          ))}
+        </div>
       </section>
 
-      <section className="container mx-auto">
-        <h2 className="lg:sticky lg:top-[96px] lg:z-20 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
+      <section className="container  ">
+        <h2 className=" text-center  lg:sticky lg:top-[96px] lg:z-20 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
           Наявні шини бренду {brand.name} ({brandTyres.length})
         </h2>
         <TyresList tyres={brandTyres} />
