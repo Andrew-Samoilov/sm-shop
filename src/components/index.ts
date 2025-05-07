@@ -19,3 +19,4 @@ export { TwSizeIndicator } from "./tw-size-indicator";
 export { ModelViewerSection } from "./model-viewer-section/model-viewer-section";
 export { HelpWindow } from "./tyre-select/help-window";
 export { OptionSelect } from "./tyre-select/option-select";
+export { SeasonCheckbox } from "./tyre-select/season-checkbox";

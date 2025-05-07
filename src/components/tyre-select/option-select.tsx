@@ -8,8 +8,8 @@ type Props = {
 
 export function OptionSelect({ id, label, options, value, onChange }: Props) {
     return (
-        <div className="flex flex-col gap-2">
-            <label htmlFor={id} className="block text-sm text-light pl-2">
+        <div className="flex flex-col gap-2 ">
+            <label htmlFor={id} className="block text-sm text-light pl-2 ">
                 {label}
             </label>
             <select

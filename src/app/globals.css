@@ -57,6 +57,7 @@
 }
 
 @layer base {
+
   h1,
   h2,
   h3,
@@ -87,12 +88,15 @@
   .btn {
     @apply inline-block cursor-pointer rounded-md border border-transparent px-5 py-2 font-medium no-underline transition;
   }
+
   .btn:hover {
     @apply no-underline;
   }
+
   .btn-sm {
     @apply px-4 py-1.5 text-sm font-medium;
   }
+
   .btn-lg {
     @apply px-12 py-4 text-xl;
   }
@@ -100,6 +104,7 @@
   .btn-primary {
     @apply border-primary bg-primary dark:border-darkmode-primary dark:bg-darkmode-primary dark:text-dark text-center text-white;
   }
+
   .btn:focus-visible {
     @apply relative shadow-lg outline-hidden transition-shadow;
     box-shadow: 0 0 2rem var(--color-accent);
@@ -110,7 +115,11 @@
   }
 
   section {
-    @apply mx-auto gap-6 p-6 lg:py-24;
+    @apply mx-auto gap-6 lg:py-24;
+  }
+
+  .section {
+    @apply p-6;
   }
 
   .container {
@@ -133,6 +142,7 @@
   blockquote {
     @apply text-light dark:text-darkmode-light bg-theme-light dark:bg-darkmode-theme-light relative rounded-lg px-6 py-12 md:ml-8 md:px-14 md:py-20 xl:z-20;
   }
+
   blockquote::before {
     content: "";
     position: absolute;

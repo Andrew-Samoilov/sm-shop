@@ -92,7 +92,7 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
   // console.log(`[getTyresByBrandId]`, brand);
 
   return (
-    <article className="flex flex-col gap-6  mx-auto p-6">
+    <article className="flex flex-col gap-6  mx-auto">
       <header className="gap-6 xl:gap-0 flex items-center xl:items-start  justify-center xl:justify-between flex-col-reverse md:flex-row xl:sticky xl:top-[120px] xl:-z-1 bg-body dark:bg-darkmode-body">
         <div>
           <h1 style={{ viewTransitionName: `title-${brand.name}` }}>
@@ -129,13 +129,13 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
         )}
       </header>
 
-      <section className="lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl xl:-mt-65 bg-body dark:bg-darkmode-body z-10 -p-6">
+      <section className=" p-6 lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl xl:-mt-65 bg-body dark:bg-darkmode-body z-10 -p-6">
         <ReactMarkdown>{brand.description}</ReactMarkdown>
       </section>
 
       <CertificatesSection brandName={brand.name} />
 
-      <section className="container mx-auto">
+      <section className="container mx-auto ">
         <h2 className="lg:sticky lg:top-[96px] lg:z-20 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
           Наявні <strong>моделі</strong> бренду {brand.name} ({brandModels.length})
         </h2>
@@ -145,7 +145,7 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
             href={`/models/${model.slug}`}
             eventLabel={model.name}
             eventCategory={`brand-${brand.name}`}
-            className="block"
+            className="block px-6"
             eventParams={{
               brand_slug: `${brand.name}`,
               modelId: `${model.id}`,

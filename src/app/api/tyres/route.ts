@@ -1,12 +1,17 @@
 import { prisma } from "@/lib";
-import { Prisma } from "@prisma/client";
+import { Prisma, Season } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
+
   const width = searchParams.get("width");
   const profile = searchParams.get("profile");
   const diameter = searchParams.get("diameter");
+  const season = searchParams
+    .getAll("season")
+    .map((s) => s.toUpperCase())
+    .filter((s): s is Season => (s in Season));
 
   // if (!width || !profile || !diameter) {return NextResponse.json({ error: "Missing parameters" }, { status: 400 }); }
 
@@ -22,6 +27,12 @@ export async function GET(req: Request) {
 
   if (diameter && !isNaN(Number(diameter))) {
     where.diameter = Number(diameter);
+  }
+
+  if (season.length > 0) {
+    where.season = {
+      in: season,
+    };
   }
 
   try {

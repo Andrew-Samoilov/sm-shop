@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { getTyresOptions } from "@/lib";
-import { HelpWindow, TyresList, OptionSelect } from "@/components";
+import { HelpWindow, TyresList, OptionSelect, SeasonCheckbox } from "@/components";
 import { Tyre } from "@/types";
 
 
@@ -9,6 +9,7 @@ export default function TyresSelect() {
   const [width, setWidth] = useState("");
   const [profile, setProfile] = useState("");
   const [diameter, setDiameter] = useState("");
+  const [seasons, setSeasons] = useState<string[]>([]);
 
   const [options, setOptions] = useState({
     widths: [] as number[],
@@ -42,7 +43,7 @@ export default function TyresSelect() {
   }, [width, profile, diameter]);
 
   useEffect(() => {
-    if (!width && !profile && !diameter) {
+    if (!width && !profile && !diameter && !seasons) {
       setSelectedTyres([]);
       return;
     }
@@ -52,6 +53,9 @@ export default function TyresSelect() {
     if (width) params.append("width", width);
     if (profile) params.append("profile", profile);
     if (diameter) params.append("diameter", diameter);
+    if (seasons.length > 0) {
+      seasons.forEach((s) => params.append("season", s));
+    }
 
     fetch(`/api/tyres?${params.toString()}`)
       .then((res) => res.json())
@@ -59,13 +63,13 @@ export default function TyresSelect() {
       .catch((error) =>
         console.error("[TyresSelect] Помилка завантаження шин:", error)
       );
-  }, [width, profile, diameter]);
+  }, [width, profile, diameter, seasons]);
 
   return (
     <>
       <h2>Пошук шин за розміром:</h2>
-      <form className="flex flex-col py-6 gap-6">
-        <div className="flex gap-6 flex-col md:flex-row">
+      <form className="flex flex-col py-6 gap-6 w-full lg:max-w-[65ch]">
+        <div className="flex gap-6 flex-col md:flex-row justify-between">
           <OptionSelect
             id="width"
             label="Ширина"
@@ -88,7 +92,8 @@ export default function TyresSelect() {
             options={options.diameters}
           />
         </div>
-
+        <SeasonCheckbox defaultValues={[]} onChange={setSeasons} />
+        
         <HelpWindow isOpen={helpOpen} setIsOpen={setHelpOpen} />
       </form>
 

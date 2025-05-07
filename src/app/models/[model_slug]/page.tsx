@@ -132,7 +132,7 @@ export default async function ModelPage({
       {images && images.length > 0 && <ModelViewerSection images={images} />}
 
       {model.description && (
-        <section className="lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl  bg-body dark:bg-darkmode-body z-10">
+        <section className="p-6 lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl  bg-body dark:bg-darkmode-body z-10">
           <ReactMarkdown>{model.description}</ReactMarkdown>
         </section>
       )}
