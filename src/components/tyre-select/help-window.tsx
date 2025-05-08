@@ -58,7 +58,7 @@ export function HelpWindow({ isOpen, setIsOpen }: {
               </button>
             </header>
 
-            <div className="prose prose-sm dark:prose-invert">
+            <div>
               <h3>1. Ширина</h3>
               Ширина шини перед установкою на автомобіль.
               <h3>2. Профіль</h3>
