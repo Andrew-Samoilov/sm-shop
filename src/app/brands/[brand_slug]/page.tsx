@@ -93,7 +93,7 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
 
   return (
     <article className="flex flex-col gap-6  mx-auto">
-      <header className="gap-6 xl:gap-0 flex items-center xl:items-start  justify-center xl:justify-between flex-col-reverse md:flex-row xl:sticky xl:top-[120px] xl:-z-1 bg-body dark:bg-darkmode-body">
+      <header className="gap-6 xl:gap-0 flex items-center xl:items-start  justify-center xl:justify-between flex-col-reverse md:flex-row xl:sticky xl:top-[120px] xl:-z-1 bg-body dark:bg-darkmode-body md:p-2">
         <div>
           <h1 style={{ viewTransitionName: `title-${brand.name}` }}>
             {brand.name}
@@ -139,7 +139,7 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
         <h2 className="text-center lg:sticky lg:top-[96px] lg:z-20 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
           Наявні <strong>моделі</strong> бренду {brand.name} ({brandModels.length})
         </h2>
-        <div className="flex flex-wrap ">
+        <div className="flex flex-wrap">
           {brandModels.map((model) => (
             <LinkWithGA
               key={model.id}
