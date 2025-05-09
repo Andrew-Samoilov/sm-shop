@@ -55,7 +55,10 @@ export function LinkWithGA({
 
   if (!isClient) {
     return (
-      <Link href={href} className={className} aria-label={ariaLabel}>
+      <Link
+        href={href}
+        className={className}
+        aria-label={ariaLabel}>
         {children}
       </Link>
     );

@@ -65,29 +65,33 @@ export default async function BrandsPage() {
 
   return (
     <section>
-      <h1>Список брендів</h1>
-      <div className="flex flex-wrap justify-around gap-6">
+      <h1 className="pb-6">Список брендів</h1>
+      <div className="flex flex-wrap justify-around gap-6 p-2 lg:p-6">
         {brands.map((brand) => (
           <LinkWithGA
             key={brand.id}
             eventCategory="brand"
             eventLabel={brand.name}
+            className="group flex flex-col items-center justify-center border-2 p-6 border-border dark:border-darkmode-border hover:border-accent  rounded-md  hover:no-underline"
             href={`/brands/${brand.slug}`}
-            className="border-border dark:border-darkmode-border hover:border-accent flex flex-col items-center justify-center gap-6 rounded-md border-2 p-6 hover:no-underline"
           >
+            <figure className="flex flex-col items-center gap-6">
             {brand.logo && (
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={brand.logo}
                 alt={brand.name}
-                height="auto"
-                className=" md:max-w-[400px] md:min-w-[400px]"
+                  className=" md:max-w-[400px] md:min-w-[400px] h-auto"
                 style={{ viewTransitionName: `logo-${brand.name}` }}
               />
             )}
-            <p style={{ viewTransitionName: `title-${brand.name}` }}>
+              <figcaption
+                className="text-light group-hover:text-accent transition-colors"
+              style={{ viewTransitionName: `title-${brand.name}` }}
+            >
               {brand.name}
-            </p>
+              </figcaption>
+            </figure>
           </LinkWithGA>
         ))}
       </div>
