@@ -44,3 +44,8 @@ export interface IImage {
   width?: number;
   height?: number;
 }
+
+export interface Benefit {
+  id: number
+  title: string
+}

@@ -1,6 +1,13 @@
-import benefits from "../static-data/benefits.json";
+'use server'
 
-export function BenefitsSection() {
+import { getContentBlock } from "@/lib";
+import { Benefit } from "@/types";
+
+// import benefits from "../static-data/benefits.json";
+
+export async function BenefitsSection() {
+  const benefits = await getContentBlock<Benefit[]>('benefit', [])
+  
   return (
     <section className="container flex flex-col md:flex-row 2xl:justify-around ">
       <div>
