@@ -1,7 +1,9 @@
 import { LinkWithGA } from "@/components";
-import { getBrands } from "@/lib";
+import { getBrands, getContentBlock } from "@/lib";
 import type { Metadata } from "next";
-import siteConfig from "@/static-data/site-config.json";
+// import siteConfig from "@/static-data/site-config.json";
+
+const siteConfig = await getContentBlock('site-config', { siteName: '', });
 
 export async function generateStaticParams() {
   const brands = await getBrands();
@@ -20,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     name: "Бренди шин",
-    description: `Сторінка з переліком брендів шин, представлених у магазині ${siteConfig.siteName}.`,
+    description: `Сторінка з переліком брендів шин, представлених у магазині ${siteConfig?.siteName}.`,
     url: `/brands`,
     mainEntity: {
       "@type": "ItemList",
@@ -45,13 +47,13 @@ export async function generateMetadata(): Promise<Metadata> {
       url: `/brands`,
       siteName: siteConfig.siteName,
       type: "website",
-     
+
     },
     twitter: {
       card: "summary_large_image",
       title: `Бренди шин | ${siteConfig.siteName}`,
       description: `Ознайомтесь з переліком брендів шин, доступних у магазині ${siteConfig.siteName}.`,
-     
+
     },
     other: {
       "application/ld+json": JSON.stringify(jsonLd),
@@ -76,20 +78,20 @@ export default async function BrandsPage() {
             href={`/brands/${brand.slug}`}
           >
             <figure className="flex flex-col items-center gap-6">
-            {brand.logo && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={brand.logo}
-                alt={brand.name}
+              {brand.logo && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={brand.logo}
+                  alt={brand.name}
                   className=" md:max-w-[400px] md:min-w-[400px] h-auto"
-                style={{ viewTransitionName: `logo-${brand.name}` }}
-              />
-            )}
+                  style={{ viewTransitionName: `logo-${brand.name}` }}
+                />
+              )}
               <figcaption
                 className="text-light group-hover:text-accent transition-colors"
-              style={{ viewTransitionName: `title-${brand.name}` }}
-            >
-              {brand.name}
+                style={{ viewTransitionName: `title-${brand.name}` }}
+              >
+                {brand.name}
               </figcaption>
             </figure>
           </LinkWithGA>

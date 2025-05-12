@@ -105,3 +105,11 @@ model ModelImage {
 
   @@map("model_images")
 }
+
+model ContentBlock {
+  id      Int    @id @default(autoincrement())
+  key     String @unique
+  value   Json   @db.JsonB
+
+  @@map("content_blocks")
+}

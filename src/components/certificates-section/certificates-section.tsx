@@ -4,7 +4,18 @@ import Autoplay from "embla-carousel-autoplay";
 import useEmblaCarousel from "embla-carousel-react";
 
 import "./embla.css";
+// import { getContentBlock } from "@/lib";
 import sert from "../../static-data/serts.json";
+// const sert = await getContentBlock<Array<{
+//   id: string | number;
+//   text: string;
+//   url: string;
+//   brand: string;
+//   year: number;
+//   width: number;
+//   height: number;
+// }>>('sert', []);
+
 
 export function CertificatesSection({ brandName }: { brandName?: string }) {
   let filteredSert = sert;

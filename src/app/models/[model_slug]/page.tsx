@@ -1,8 +1,9 @@
 import { CertificatesSection, ModelViewerSection, TyresList } from "@/components";
-import { getBrandById, getModels, getTyresByModelId, getModelBySlug, getModelsImgByModelId } from "@/lib";
+import { getBrandById, getModels, getTyresByModelId, getModelBySlug, getModelsImgByModelId, getContentBlock } from "@/lib";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
-import siteConfig from "@/static-data/site-config.json";
+// import siteConfig from "@/static-data/site-config.json";
+const siteConfig = await getContentBlock('site-config', { siteName: '', });
 import { Metadata } from "next";
 
 export async function generateStaticParams() {

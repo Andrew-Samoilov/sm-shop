@@ -4,7 +4,9 @@ import { Analytics, Footer, Header, TwSizeIndicator } from "@/components";
 import { ToastContainer } from "react-toastify";
 import Script from "next/script";
 import { Suspense } from "react";
-import siteConfig from "../static-data/site-config.json";
+import { getContentBlock } from "@/lib";
+// import siteConfig from "../static-data/site-config.json";
+const siteConfig = await getContentBlock('site-config', { siteName: '', });
 
 export const metadata: Metadata = {
   title: `${siteConfig.siteName}`,
