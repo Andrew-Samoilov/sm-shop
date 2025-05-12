@@ -1,5 +1,12 @@
-import features from "../static-data/features.json";
-export function FeatureSection() {
+'use server'
+
+import { getContentBlock } from "@/lib";
+import { Feature } from "@/types";
+
+// import features from "../static-data/features.json";
+export async function FeatureSection() {
+  const features = await getContentBlock<Feature[]>('feature', [])
+
   return (
     <section className="bg-theme-light dark:bg-darkmode-theme-light ">
       <div className="grid gap-6 md:grid-cols-2 lg:container lg:grid-cols-4 mx-auto">

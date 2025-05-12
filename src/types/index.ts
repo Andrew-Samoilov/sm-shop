@@ -49,3 +49,10 @@ export interface Benefit {
   id: number
   title: string
 }
+
+export interface Feature {
+  id: number
+  number: string
+  header: string
+  subHeader: string
+}
