@@ -3,20 +3,10 @@ import Script from "next/script";
 
 import { ContactForm } from "@/components";
 import { getContentBlock } from "@/lib";
+import { ContactBlock } from "@/types";
 
 // import contacts from "../../static-data/contacts.json";
-export interface ContactLink {
-  id: number
-  text: string
-  url: string
-}
 
-/** Група контактів (Email, Телефон тощо) */
-export interface ContactBlock {
-  id: number
-  name: string
-  link: ContactLink[]
-}
 
 export default async function ContactsPage() {
   const contacts = await getContentBlock<ContactBlock[]>('contacts', [])

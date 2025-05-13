@@ -1,7 +1,6 @@
 export { formatDisplayUrl } from "./format-display-url";
 export { formatTyreSizeQuery } from "./format-tyre-size-query";
 export { formatFormData } from "./format-form-data";
-export { getMdContent } from "./get-md-content";
 export { getContentBlock } from "./get-content-block";
 
 export { prisma } from "./prisma/prisma";

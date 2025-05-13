@@ -5,9 +5,7 @@ import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
   const tyres = await prisma.tyre.findMany({
-    select: {
-      slug: true,
-    },
+    select: { slug: true, },
   });
 
   return tyres.map((tyre) => ({

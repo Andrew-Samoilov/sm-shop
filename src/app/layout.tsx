@@ -23,11 +23,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000"),
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
   return (
     <html lang="uk">
       <body className="bg-body dark:bg-darkmode-body font-primary dark:text-darkmode-text flex min-h-screen flex-col scroll-smooth leading-relaxed">

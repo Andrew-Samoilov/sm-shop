@@ -21,7 +21,7 @@ export function ContactForm() {
         await loadRecaptchaScript(siteKey);
         setRecaptchaReady(true);
       } catch (e) {
-        console.error(`[Recaptcha]`,e);
+        console.error(`[Recaptcha]`, e);
       }
     }
   };

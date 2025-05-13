@@ -56,3 +56,16 @@ export interface Feature {
   header: string
   subHeader: string
 }
+
+export type Block = { markdown: string }
+
+export interface ContactLink {
+  id: number
+  text: string
+  url: string
+}
+export interface ContactBlock {
+  id: number
+  name: string
+  link: ContactLink[]
+}
