@@ -3,7 +3,7 @@ import { getBrandById, getModels, getTyresByModelId, getModelBySlug, getModelsIm
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 // import siteConfig from "@/static-data/site-config.json";
-const siteConfig = await getContentBlock('site-config', { siteName: '', });
+const siteConfig = await getContentBlock('site_config', { siteName: '', });
 import { Metadata } from "next";
 
 export async function generateStaticParams() {

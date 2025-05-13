@@ -5,7 +5,7 @@ import { getBrands, getBrandBySlug, getModelsByBrandId, getTyresByBrandId, forma
 import { CertificatesSection, LinkWithGA, TyresList } from "@/components";
 // import siteConfig from "@/static-data/site-config.json";
 
-const siteConfig = await getContentBlock('site-config', { siteName: '', });
+const siteConfig = await getContentBlock('site_config', { siteName: '', });
 
 export async function generateStaticParams() {
   const brands = await getBrands();

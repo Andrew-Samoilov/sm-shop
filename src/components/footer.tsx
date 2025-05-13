@@ -2,7 +2,7 @@
 import { LinkWithGA, Logo } from "@/components";
 // import siteConfig from "../static-data/site-config.json";
 const siteConfig = await getContentBlock(
-  'site-config', {
+  'site_config', {
   siteName: '',
   email: '',
   tel: { visual: '', normalize: '', },

@@ -7,7 +7,6 @@ import { ContactBlock } from "@/types";
 
 // import contacts from "../../static-data/contacts.json";
 
-
 export default async function ContactsPage() {
   const contacts = await getContentBlock<ContactBlock[]>('contacts', [])
 

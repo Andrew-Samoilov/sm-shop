@@ -6,7 +6,7 @@ import Script from "next/script";
 import { Suspense } from "react";
 import { getContentBlock } from "@/lib";
 // import siteConfig from "../static-data/site-config.json";
-const siteConfig = await getContentBlock('site-config', { siteName: '', });
+const siteConfig = await getContentBlock('site_config', { siteName: '', });
 
 export const metadata: Metadata = {
   title: `${siteConfig.siteName}`,
@@ -22,6 +22,13 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000"),
 };
+
+export const viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#4169e1' },
+    { media: '(prefers-color-scheme: dark)', color: '#4169e1' },
+  ],
+}
 
 export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
   return (

@@ -2,7 +2,7 @@
 import { CartPanel, LinkWithGA, Logo, Search, ThemeSwitcher } from "@/components";
 import { getContentBlock } from "@/lib";
 // import siteConfig from "../static-data/site-config.json";
-const siteConfig = await getContentBlock('site-config', { siteName: '', });
+const siteConfig = await getContentBlock('site_config', { siteName: '', });
 import { UserIcon } from "@heroicons/react/24/outline";
 
 export async function Header() {

@@ -5,7 +5,7 @@ import useEmblaCarousel from "embla-carousel-react";
 
 import "./embla.css";
 // import { getContentBlock } from "@/lib";
-import sert from "../../static-data/serts.json";
+import sert from "./serts.json";
 // const sert = await getContentBlock<Array<{
 //   id: string | number;
 //   text: string;
