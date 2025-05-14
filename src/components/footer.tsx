@@ -45,7 +45,14 @@ export async function Footer() {
               >
                 Про нас
               </LinkWithGA>
-              <div className="text-light/75 cursor-not-allowed">Оплата і доставка</div>
+              <LinkWithGA
+                href="/payment-delivery"
+                eventLabel="payment-delivery"
+                eventCategory="footer"
+                className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+              >
+                Оплата і доставка
+              </LinkWithGA>
               <LinkWithGA
                 href="/warranty"
                 eventLabel="warranty"

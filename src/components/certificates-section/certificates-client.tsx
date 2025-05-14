@@ -24,8 +24,8 @@ export function CertificatesClient({ cert }: Props) {
 
     return (
         <section className="embla w-full max-w-[min(100%,640px)] px-4 mx-auto bg-body dark:bg-darkmode-body">
-            <h2 className="text-center">
-                {isSingle ? "Наш сертифікат" : "Наші сертифікати"} {cert[0].brand}
+            <h2 className="text-center pb-6">
+                {isSingle ? "Наш сертифікат" : `Наші сертифікати`}
             </h2>
 
             {isSingle ? (
