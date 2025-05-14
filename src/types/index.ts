@@ -69,3 +69,13 @@ export interface ContactBlock {
   name: string
   link: ContactLink[]
 }
+
+export interface Certificate {
+  id: number
+  text: string
+  url: string
+  brand: string
+  year: number
+  width: number
+  height: number
+}
