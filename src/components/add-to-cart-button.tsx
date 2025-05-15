@@ -47,7 +47,7 @@ export function AddToCartButton({
     <button
       type="button"
       onClick={() => handleClick(id, title, price, quantity)}
-      className={`btn btn-outline-primary  justify-self-start`}
+      className={`btn btn-outline-primary `}
     >
       Купити
     </button>

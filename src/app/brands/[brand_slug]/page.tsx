@@ -160,7 +160,7 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
         </div>
       </section>
 
-      <section className="container  ">
+      <section>
         <h2 className=" text-center  lg:sticky lg:top-[96px] lg:z-20 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
           Наявні шини бренду {brand.name} ({brandTyres.length})
         </h2>

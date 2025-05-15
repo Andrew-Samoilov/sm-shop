@@ -97,7 +97,7 @@ export default function TyresSelect() {
       </form>
 
       {selectedTyres?.length > 0 && (
-        <div className="flex w-full justify-center bg-white dark:bg-black rounded-lg p-6">
+        <div className=" bg-white dark:bg-black rounded-lg p-6">
           <TyresList tyres={selectedTyres} />
         </div>
       )}
