@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import { QuestionMarkCircleIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { sendGAEvent } from "@/lib";
 import { useEffect } from "react";
@@ -34,7 +34,7 @@ export function HelpWindow({ isOpen, setIsOpen }: {
             }
           });
         }}
-        className="flex flex-row items-center gap-2 text-sm text-accent/75 cursor-pointer">
+        className="pl-10 md:pl-4 flex flex-row items-center gap-2 text-sm text-accent/75 cursor-pointer">
         <QuestionMarkCircleIcon className=" h-6 w-6" />
         <span>Потрібна допомога?</span>
       </button>
@@ -45,9 +45,8 @@ export function HelpWindow({ isOpen, setIsOpen }: {
           tabIndex={-1}
           aria-modal="true"
           aria-labelledby="help-title"
-          
           className="bg-theme-dark/50 dark:bg-theme-light/50 fixed inset-0 z-50 flex w-full h-full items-center justify-center">
-          <div className="w-full max-w-[75ch] bg-theme-light dark:bg-theme-dark text-light p-6 rounded-lg max-h-[95vh] overflow-y-auto">
+          <div className="w-full max-w-[85ch] bg-theme-light dark:bg-theme-dark text-light p-6 rounded-lg max-h-[95vh] overflow-y-auto">
 
             <header className="flex items-center justify-between mb-4 ">
               <h2>Пояснення параметрів пошуку</h2>
@@ -57,31 +56,70 @@ export function HelpWindow({ isOpen, setIsOpen }: {
                 <XMarkIcon className="h-6 w-6" />
               </button>
             </header>
-
+            <Image
+              src='/others/tire-size.png'
+              alt='зображення розміру шини'
+              height='127'
+              width='547'
+              priority={true}
+              className="mx-auto pb-6 md:pb-2  bg-theme-light dark:bg-theme-dark"
+            />
             <div>
               <h3>1. Ширина</h3>
-              Ширина шини перед установкою на автомобіль.
+              <p>Ширина шини перед установкою на автомобіль.</p>
               <h3>2. Профіль</h3>
-              Висота шини вказана у відсотках від ширини.
+              <p>Висота шини вказана у відсотках від ширини.</p>
               <h3>3. Діаметр</h3>
               Діаметр обода, на який ви монтуєте шину.
-              <h3>4. Вантажопідйомність</h3>
+              <h3>4. Індекс навантаження</h3>
               Індекс навантаження вказує на максимальне навантаження, яке може витримати шина під час руху з максимальною швидкістю, дозволеною виробником шин.Детальніше про індекс навантаження
-              <h3>5. Швидкість</h3>
+              <h3>5. Індекс швидкості</h3>
               Індекс швидкості вказує на максимально допустиму швидкість для даної шини.Докладніше про рейтинг швидкості
-              <p>Ширина, профіль і діаметр складають розмір шини.</p>
+              <blockquote>Ширина, профіль і діаметр складають розмір шини.</blockquote>
               <h3>XL</h3>
-              Посилені шини мають підвищену вантажопідйомність. Завдяки цьому вони краще відповідають вимогам до шин, що використовуються в транспортних засобах, таких як фургони. Посилені шини зазвичай маркуються літерами XL (додаткове навантаження), але в залежності від виробника можуть використовуватися й інші символи.Детальніше про армовані шини
+              Посилені шини мають підвищену вантажопідйомність. Завдяки цьому вони краще відповідають вимогам до шин, що використовуються в транспортних засобах, таких як фургони. Посилені шини зазвичай маркуються літерами <abbr title="Extra Loaded">XL</abbr> , але в залежності від виробника можуть використовуватися й інші символи.
+              {/* Детальніше. */}
               <h3>Run on flat</h3>
-              Шини Run on flat дають змогу продовжувати рух, навіть коли вони повністю спущені. Це дозволяє проїхати в середньому 80 км з максимальною швидкістю 80 км/год.Докладніше про біг на спущених шинах
-              <h3>Де знайти свій розмір шин?</h3>
-              <ul>
-                <li>На кожній шині Розмір шини</li>
-                <li>В інструкції до автомобіля Розмір в інструкції</li>
-                <li>На кришку паливної горловини Розмір на кришку горловини</li>
-                <li>У деяких автомобілях ця інформація міститься на порозі з боку водія або на стійці позаду водія. Інколи інформація про розмір міститься на внутрішній стороні дверей з боку водія.</li>
-              </ul>
-              Детальніше про перевірку розміру шин
+              Шини Run on flat дають змогу продовжувати рух, навіть коли вони повністю спущені. Це дозволяє проїхати в середньому 80 км з максимальною швидкістю 80 км/год.
+              {/* Докладніше про біг на спущених шинах */}
+              <article>
+                <h2>Де знайти свій розмір шин?</h2>
+                <div className="flex flex-col md:flex-row flex-wrap gap-4 list-none">
+                  <figure className="flex flex-col items-center text-center">
+                    <figcaption>На кожній шині</figcaption>
+                    <Image
+                      src='/others/tire-zoom.webp'
+                      alt='зображення розміру шини На кожній шині'
+                      height='260'
+                      width='160'
+                      className="p-2"
+                    />
+                  </figure>
+                  <figure className="flex flex-col items-center text-center">
+                    <figcaption>В інструкції до автомобіля</figcaption>
+                    <Image
+                      src='/others/data-paper.webp'
+                      alt='зображення розміру шини у інструкції до автомобіля'
+                      height='280'
+                      width='160'
+                      className="p-2"
+                    />
+                  </figure>
+                  <figure className="flex flex-col items-center text-center">
+                    <figcaption>На кришці паливної горловини</figcaption>
+                    <Image
+                      src='/others/fuel-zoom.webp'
+                      alt='зображення розміру шини на кришці паливної горловини'
+                      height='260'
+                      width='160'
+                      className="p-2"
+                    />
+                  </figure>
+                  <div>
+                    У деяких автомобілях ця інформація міститься на порозі з боку водія або на стійці позаду водія.
+                  </div>
+                </div>
+              </article>
             </div>
           </div>
         </dialog>

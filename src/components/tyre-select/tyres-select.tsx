@@ -42,7 +42,7 @@ export default function TyresSelect() {
   }, [width, profile, diameter]);
 
   useEffect(() => {
-    if (!width && !profile && !diameter && !seasons) {
+    if (!width && !profile && !diameter && seasons.length === 0) {
       setSelectedTyres([]);
       return;
     }
@@ -67,7 +67,7 @@ export default function TyresSelect() {
   return (
     <>
       <h2>Пошук шин за розміром:</h2>
-      <form className="flex flex-col py-6 gap-6 w-full lg:max-w-[65ch]">
+      <form className="flex flex-col gap-2 w-full lg:max-w-[65ch]">
         <div className="flex gap-6 flex-col md:flex-row justify-between">
           <OptionSelect
             id="width"

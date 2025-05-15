@@ -23,15 +23,15 @@ export  function SeasonCheckbox({ defaultValues = [], onChange, }: {
 
     return (
         <fieldset>
-            <legend className="text-sm text-light pl-6 ">Сезон</legend>
-            <div className="flex flex-row flex-wrap  gap-6 px-4 py-2 ">
+            <legend className="text-sm text-light pl-6 text-center md:text-start">Сезон</legend>
+            <div className="flex flex-row flex-wrap justify-center md:justify-start gap-6 md:px-4 py-2 ">
                 {SEASONS.map(({ value, label }) => (
                     <label key={value} className="flex items-center gap-2 cursor-pointer ">
                         <input
                             type="checkbox"
                             checked={selected.includes(value)}
                             onChange={() => handleToggle(value)}
-                            className=" rounded-sm"
+                            className=" rounded-md "
                         />
                         <span >{label}</span>
                     </label>
