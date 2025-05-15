@@ -40,7 +40,7 @@ export default async function TyrePage({
         price={Number(tyre.price)}
       />
 
-      {tyre.modelId !== null && <ModelViewerSection images={images} />}
+      {tyre.modelId !== null && images.length > 0 && <ModelViewerSection images={images} />}
 
       {Object.entries(tyre).map(([key, value]) => (
         <p key={key}>
