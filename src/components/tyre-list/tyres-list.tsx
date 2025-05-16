@@ -12,11 +12,11 @@ export function TyresList({ tyres }: Tyres) {
 
   return (
     <>
-      <div
-        className="flex justify-between lg:max-w-[75ch] mx-auto p-2"
+      <header
+        className="flex justify-between lg:max-w-[75ch] mx-auto p-2 "
       >
         <div className="flex gap-2 content-baseline">
-          <span className="pr-2 hidden md:block">Вигляд</span>
+          <span className="pr-2 hidden md:block text-light">Вигляд</span>
           <button className="btn btn-outline-primary p-0.5 hover:scale-105 duration-300">
             <Squares2X2Icon className="h-6 w-6" />
           </button>
@@ -24,11 +24,11 @@ export function TyresList({ tyres }: Tyres) {
             <ListBulletIcon className="h-6 w-6" />
           </button>
         </div>
-        <div>Сортування</div>
-      </div>
+        <div className="text-light">Сортування</div>
+      </header>
       <div className="py-6 lg:p-0 flex flex-col gap-2 lg:max-w-[75ch] mx-auto ">
         {formattedTyres.map((tyre) => (
-          <div key={tyre.id} className="flex justify-between gap-6 items-center p-2">
+          <div key={tyre.id} className="flex justify-between gap-6 items-center p-2 bg-theme-light dark:bg-theme-dark rounded-lg">
 
             <TyreThumbnail modelId={tyre.modelId} />
 

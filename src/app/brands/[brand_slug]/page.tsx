@@ -137,7 +137,7 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
 
       <CertificatesSection brandName={brand.name} />
 
-      <section className=" mx-auto ">
+      <section className="mx-auto">
         <h2 className="text-center lg:sticky lg:top-[96px] lg:z-20 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
           Наявні <strong>моделі</strong> бренду {brand.name} ({brandModels.length})
         </h2>
