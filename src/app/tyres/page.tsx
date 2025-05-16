@@ -4,7 +4,7 @@ import { getTyres } from "@/lib";
 export default async function TyresPage({  searchParams,}: {
   searchParams: Promise<{ query?: string }>;
 }) {
-  const resolvedSearchParams = await searchParams; // Очікуємо параметри явно
+  const resolvedSearchParams = await searchParams; 
   const query = resolvedSearchParams.query ?? "";
 
   const tyres = await getTyres(query); 
