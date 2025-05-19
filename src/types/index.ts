@@ -33,7 +33,7 @@ export type Tyre = {
   slug: string;
   dateCode: string | null;
   type: string | null;
-  price?: number;
+  price: number;
 };
 
 export interface IImage {

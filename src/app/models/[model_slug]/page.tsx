@@ -1,5 +1,5 @@
 import { CertificatesSection, ModelViewerSection, TyresList } from "@/components";
-import { getBrandById, getModels, getTyresByModelId, getModelBySlug, getModelsImgByModelId, getContentBlock } from "@/lib";
+import { getBrandById, getModels, getTyresByModelId, getModelBySlug, getModelImgByModelId, getContentBlock } from "@/lib";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 // import siteConfig from "@/static-data/site-config.json";
@@ -26,19 +26,19 @@ export async function generateMetadata(
   const title = `${brand?.name} ${model.name} – характеристики, ціна та відгуки | ${siteConfig.siteName}`;
   const description = `Детальний огляд шини ${brand?.name} ${model.name}: характеристики, переваги, особливості експлуатації та наявність у магазині ${siteConfig.siteName}.`;
   const canonicalUrl = `${BASE_URL}/brands/${model.slug}`;
-  const images = await getModelsImgByModelId(model.id);
+  // const images = await getModelImgByModelId(model.id);
 
   let mainImageUrl: string | undefined;
 
-  if (images?.[0]?.url) {
-    mainImageUrl = images[0].url.startsWith('http')
-      ? images[0].url
-      : `${BASE_URL}${images[0].url}`;
-  } else {
-    mainImageUrl = undefined;
-  }
+  // if (images?.[0]?.url) {
+  //   mainImageUrl = images[0].url.startsWith('http')
+  //     ? images[0].url
+  //     : `${BASE_URL}${images[0].url}`;
+  // } else {
+  //   mainImageUrl = undefined;
+  // }
 
-  const imageAlt = images?.[0]?.alt ?? `${brand?.name} ${model.name} – купити в магазині ${siteConfig.siteName}`;
+  // const imageAlt = images?.[0]?.alt ?? `${brand?.name} ${model.name} – купити в магазині ${siteConfig.siteName}`;
 
   return {
     title, description,
@@ -48,22 +48,22 @@ export async function generateMetadata(
       url: canonicalUrl,
       siteName: siteConfig.siteName,
       type: "website",
-      images: mainImageUrl
-        ? [
-          {
-            url: mainImageUrl,
-            alt: imageAlt,
-            width: images[0].width ?? 800,
-            height: images[0].height ?? 600,
-          },
-        ]
-        : undefined,
+      // images: mainImageUrl
+      //   ? [
+      //     {
+      //       url: mainImageUrl,
+      //       alt: imageAlt,
+      //       width: images[0].width ?? 800,
+      //       height: images[0].height ?? 600,
+      //     },
+      //   ]
+      //   : undefined,
     },
     twitter: {
       card: mainImageUrl ? "summary_large_image" : "summary",
       title,
       description,
-      images: mainImageUrl ? [{ url: mainImageUrl, alt: imageAlt }] : undefined,
+      // images: mainImageUrl ? [{ url: mainImageUrl, alt: imageAlt }] : undefined,
     },
     alternates: {
       canonical: canonicalUrl,
@@ -83,7 +83,7 @@ export default async function ModelPage({
   const modelTyres = await getTyresByModelId(model.id);
   const brand = await getBrandById(model.brandId);
   const canonicalUrl = `${BASE_URL}/brands/${model.slug}`;
-  const images = await getModelsImgByModelId(model.id);
+  const images = await getModelImgByModelId(model.id);
 
   const jsonLd = {
     "@context": "https://schema.org",

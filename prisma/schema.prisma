@@ -104,6 +104,7 @@ model ModelImage {
   position Int     @default(0)
 
   @@map("model_images")
+  @@index([modelId])
 }
 
 model ContentBlock {

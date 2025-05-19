@@ -92,7 +92,7 @@ export async function Footer() {
                   Моделі
                 </LinkWithGA>
               </div>
-              <div className="text-light/75 cursor-not-allowed">Диски</div>
+              {/* <div className="text-light/75 cursor-not-allowed">Диски</div> */}
             </div>
             <div className="flex flex-col items-center pt-2">
               <div className="text-lg font-semibold">Послуги</div>

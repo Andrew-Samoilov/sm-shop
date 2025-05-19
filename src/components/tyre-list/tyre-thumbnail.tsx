@@ -1,14 +1,13 @@
-import { getModelsImgByModelId } from "@/lib";
+import { getModelImgByModelId } from "@/lib";
 import Image from "next/image";
 
 type TyreThumbnailProps = {
     modelId: number | null;
 };
 
-
-export async function TyreThumbnail({ modelId }: TyreThumbnailProps) {
+export async function __TyreThumbnail({ modelId }: TyreThumbnailProps) {
     const images = modelId !== null
-        ? await getModelsImgByModelId(modelId)
+        ? await getModelImgByModelId(modelId)
         : [];
 
     return (
@@ -20,8 +19,8 @@ export async function TyreThumbnail({ modelId }: TyreThumbnailProps) {
                     src={images[0].url}
                     alt={images[0].alt ?? "Фото моделі"}
                     width={193}
-                        height={193}
-                        className="rounded-md"
+                    height={193}
+                    className="rounded-md"
                 />
             )}
         </>

@@ -1,7 +1,6 @@
 import { ModelViewerSection, ViewItemGA } from "@/components";
-import { getTyreBySlug, getModelsImgByModelId, prisma } from "@/lib";
+import { getTyreBySlug, getModelImgByModelId, prisma } from "@/lib";
 import { notFound } from "next/navigation";
-
 
 export async function generateStaticParams() {
   const tyres = await prisma.tyre.findMany({
@@ -24,7 +23,7 @@ export default async function TyrePage({
   // console.info("[getTyreBySlug]", tyre);
   if (!tyre) return notFound();
   const images = tyre.modelId !== null
-    ? await getModelsImgByModelId(tyre.modelId)
+    ? await getModelImgByModelId(tyre.modelId)
     : [];
 
   // console.info("[TyrePage]", tyre);

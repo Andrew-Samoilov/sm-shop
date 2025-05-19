@@ -2,7 +2,7 @@ import { Tyres } from "@/types";
 import Link from "next/link";
 import { ListBulletIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
 import { AddToCartButton } from "../add-to-cart-button";
-import { TyreThumbnail } from "./tyre-thumbnail";
+// import { TyreThumbnail } from "./tyre-thumbnail";
 
 export function TyresList({ tyres }: Tyres) {
 
@@ -26,7 +26,7 @@ export function TyresList({ tyres }: Tyres) {
         {tyres.map((tyre) => (
           <div key={tyre.id} className="flex justify-between gap-6 items-center p-2 bg-theme-light dark:bg-theme-dark rounded-lg">
 
-            <TyreThumbnail modelId={tyre.modelId} />
+            {/* <TyreThumbnail modelId={tyre.modelId} /> */}
 
             <Link
               href={`/tyres/${tyre.slug}`}
@@ -39,7 +39,7 @@ export function TyresList({ tyres }: Tyres) {
             <AddToCartButton
               id={tyre.id}
               title={tyre.title}
-              price={tyre.price ?? 0}
+              price={tyre.price}
               quantity={4}
             />
           </div>

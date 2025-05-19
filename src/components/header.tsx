@@ -30,9 +30,9 @@ export async function Header() {
       <div className="flex items-center gap-6 ">
         <ThemeSwitcher />
         <CartPanel />
-        <button>
+        {/* <button>
           <UserIcon className="h-5 w-5 text-light/75 cursor-not-allowed" />
-        </button>
+        </button> */}
       </div>
     </header>
   );

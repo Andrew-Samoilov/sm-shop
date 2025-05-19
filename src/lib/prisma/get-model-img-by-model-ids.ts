@@ -1,9 +1,9 @@
 import { prisma } from "./prisma";
 
-export async function getModelImgByModelId(modelId: number) {
+export async function getModelImagesByIds(modelIds: number[]) {
   return await prisma.modelImage.findMany({
     where: {
-      modelId,
+      modelId: { in: modelIds },
     },
     orderBy: {
       position: "asc",

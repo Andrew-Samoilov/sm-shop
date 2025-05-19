@@ -11,7 +11,6 @@ export { getTyreById } from "./prisma/get-tyre-by-id";
 export { getTyres } from "./prisma/get-tyres";
 export { getTyresByBrandId } from "./prisma/get-tyres-by-brand-id";
 export { getTyresByModelId } from "./prisma/get-tyres-by-model-id";
-export { getTyresByWPD } from "./prisma/get-tyres-by-wpd";
 export { getTyresOptions } from "./prisma/get-tyres-options";
 
 export { getBrands } from "./prisma/get-brands";
@@ -23,7 +22,7 @@ export { getModels } from "./prisma/get-models";
 export { getModelsByBrandId } from "./prisma/get-models-by-brand-id";
 
 export { getModelBySlug } from "./prisma/get-model-by-slug";
-export { getModelsImgByModelId } from "./prisma/get-model-img-by-model-id";
+export { getModelImgByModelId } from "./prisma/get-model-img-by-model-id";
 
 export { handleClientSubmit } from "./recaptcha/handleClientSubmit";
 export { loadRecaptchaScript } from "./recaptcha/loadRecaptchaScript";

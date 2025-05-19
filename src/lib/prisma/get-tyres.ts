@@ -7,8 +7,7 @@ export async function getTyres(query?: string): Promise<Tyre[]> {
       ? { title: { contains: query, mode: "insensitive", }, }
       : undefined,
     include: {
-      brand: { select: { name: true } },
-      model: { select: { name: true } }
+      model: { select: { name: true } },
     },
     orderBy: { title: "asc", },
   });
