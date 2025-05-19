@@ -5,10 +5,6 @@ import { AddToCartButton } from "../add-to-cart-button";
 import { TyreThumbnail } from "./tyre-thumbnail";
 
 export function TyresList({ tyres }: Tyres) {
-  const formattedTyres = tyres.map((tyre) => ({
-    ...tyre,
-    price: Number(tyre.price),
-  }));
 
   return (
     <>
@@ -27,7 +23,7 @@ export function TyresList({ tyres }: Tyres) {
         <div className="text-light">Сортування</div>
       </header>
       <div className="py-6 lg:p-0 flex flex-col gap-2 lg:max-w-[75ch] mx-auto ">
-        {formattedTyres.map((tyre) => (
+        {tyres.map((tyre) => (
           <div key={tyre.id} className="flex justify-between gap-6 items-center p-2 bg-theme-light dark:bg-theme-dark rounded-lg">
 
             <TyreThumbnail modelId={tyre.modelId} />
@@ -38,12 +34,12 @@ export function TyresList({ tyres }: Tyres) {
             >
               <span>{tyre.title}</span>
               <span className="text-light">{tyre.dateCode ?? ""}</span>
-              <span className="font-semibold">{tyre.price.toString()}{" грн."}</span>
+              <span className="font-semibold">{tyre.price?.toString()}{" грн."}</span>
             </Link>
             <AddToCartButton
               id={tyre.id}
               title={tyre.title}
-              price={tyre.price}
+              price={tyre.price ?? 0}
               quantity={4}
             />
           </div>

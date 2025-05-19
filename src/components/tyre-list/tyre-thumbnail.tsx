@@ -20,7 +20,8 @@ export async function TyreThumbnail({ modelId }: TyreThumbnailProps) {
                     src={images[0].url}
                     alt={images[0].alt ?? "Фото моделі"}
                     width={193}
-                    height={193}
+                        height={193}
+                        className="rounded-md"
                 />
             )}
         </>

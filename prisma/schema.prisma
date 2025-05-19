@@ -37,7 +37,7 @@ model Tyre {
   title              String
   sku                String   @unique(map: "tires_sku_key") @db.VarChar(50)
   description        String?
-  price              Float
+  price              Float    @default(0)
   inventoryQuantity  Int?     @default(0)            @map("inventory_quantity")
   country            String?  @db.VarChar(50)
   dateCode           String?  @db.Char(4)            @map("date_code")
