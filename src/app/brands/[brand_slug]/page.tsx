@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import ReactMarkdown from "react-markdown";
 import { notFound } from "next/navigation";
-import { getBrands, getBrandBySlug, getModelsByBrandId, getTyresByBrandId, formatDisplayUrl, getContentBlock } from "@/lib";
+import { getBrands, getBrandBySlug, getModelsByBrandId, getTyresByBrandId, formatDisplayUrl, getContentBlock, getModelImagesByIds } from "@/lib";
 import { CertificatesSection, LinkWithGA, TyresList } from "@/components";
 
 const siteConfig = await getContentBlock('site_config', { siteName: '', });
@@ -64,6 +64,7 @@ export async function generateMetadata(
   };
 }
 
+
 export default async function BrandPage({ params, }: { params: { brand_slug: string }; }) {
   const { brand_slug } = await params;
   if (!brand_slug) return notFound();
@@ -73,6 +74,10 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
 
   const brandModels = await getModelsByBrandId(brand.id);
   const brandTyres = await getTyresByBrandId(brand.id);
+
+  const modelId = brandTyres.map(t => t.modelId)
+
+  const images = await getModelImagesByIds(modelId);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -163,7 +168,7 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
         <h2 className=" text-center  lg:sticky lg:top-[96px] lg:z-20 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
           Наявні шини бренду {brand.name} ({brandTyres.length})
         </h2>
-        <TyresList tyres={brandTyres} />
+        <TyresList tyres={brandTyres} images={images} />
       </section>
 
       <script

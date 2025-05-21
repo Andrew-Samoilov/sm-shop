@@ -1,5 +1,6 @@
 import { TyresList } from "@/components";
-import { getTyres } from "@/lib";
+import { getTyres, getModelImagesByIds } from "@/lib";
+
 
 export default async function TyresPage({ searchParams, }: {
   searchParams: Promise<{ query?: string }>;
@@ -8,13 +9,15 @@ export default async function TyresPage({ searchParams, }: {
   const query = resolvedSearchParams.query ?? "";
   const tyres = await getTyres(query);
 
-  const uniqueModelIds = [...new Set(tyres.map(tyre => tyre.modelId).filter((id): id is number => id !== null))];
+  const modelId = tyres.map(t => t.modelId)
 
-  console.dir(`[TyresPage] uniqueModelIds`, uniqueModelIds);
+  const images = await getModelImagesByIds(modelId);
+
+  // console.log(`[TyresPage] images`, images.length, images);
 
   return (
     <section className="container">
-      <TyresList tyres={tyres} />
+      <TyresList tyres={tyres} images={images} />
     </section>
   );
 }

@@ -36,15 +36,6 @@ export type Tyre = {
   price: number;
 };
 
-export interface IImage {
-  id: number;
-  documentId: string;
-  url: string;
-  alternativeText: string | null;
-  width?: number;
-  height?: number;
-}
-
 export interface Benefit {
   id: number
   title: string

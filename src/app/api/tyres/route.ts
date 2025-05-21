@@ -38,10 +38,21 @@ export async function GET(req: Request) {
   try {
     const tyres = await prisma.tyre.findMany({
       where,
-      orderBy: { width: "asc" }, 
+      orderBy: { width: "asc" },
     });
 
-    return NextResponse.json(tyres);
+    const modelIds = [
+      ...new Set(tyres.map((t) => t.modelId).filter((id): id is number => id !== null)),
+    ];
+
+    const images = await prisma.modelImage.findMany({
+      where: {
+        modelId: { in: modelIds },
+      },
+      orderBy: { position: "asc", },
+    });
+
+    return NextResponse.json({ tyres, images });
   } catch (error) {
     console.error("[DB]", error);
     return NextResponse.json({ error: `[api\tyres] Database error` }, { status: 500 });

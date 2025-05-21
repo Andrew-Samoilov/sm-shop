@@ -143,7 +143,7 @@ export default async function ModelPage({
         <h2>
           Наявні шини для моделі {model.name} бренду {brand?.name}
         </h2>
-        <TyresList tyres={modelTyres} />
+        <TyresList tyres={modelTyres} images={images} />
       </section>
 
       <script

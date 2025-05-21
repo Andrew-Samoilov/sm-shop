@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { getTyresOptions } from "@/lib";
 import { HelpWindow, TyresList, OptionSelect, SeasonCheckbox } from "@/components";
 import { Tyre } from "@/types";
+import { ModelImage } from "@prisma/client"; 
 
 export function TyresSelect() {
   const [width, setWidth] = useState("");
@@ -18,6 +19,7 @@ export function TyresSelect() {
 
   const [helpOpen, setHelpOpen] = useState(false);
   const [selectedTyres, setSelectedTyres] = useState<Tyre[]>([]);
+  const [images, setImages] = useState<ModelImage[]>([]);
 
   const toNum = (v: string) => (v ? Number(v) : undefined);
 
@@ -44,6 +46,7 @@ export function TyresSelect() {
   useEffect(() => {
     if (!width && !profile && !diameter && seasons.length === 0) {
       setSelectedTyres([]);
+      setImages([]);
       return;
     }
 
@@ -58,7 +61,10 @@ export function TyresSelect() {
 
     fetch(`/api/tyres?${params.toString()}`)
       .then((res) => res.json())
-      .then(setSelectedTyres)
+      .then(async (data) => {
+        setSelectedTyres(data.tyres);
+        setImages(data.images);
+      })      
       .catch((error) =>
         console.error("[TyresSelect] Помилка завантаження шин:", error)
       );
@@ -98,7 +104,7 @@ export function TyresSelect() {
 
       {selectedTyres?.length > 0 && (
         <div className=" bg-white dark:bg-black rounded-lg p-6">
-          <TyresList tyres={selectedTyres} />
+          <TyresList tyres={selectedTyres} images={images} />
         </div>
       )}
     </>

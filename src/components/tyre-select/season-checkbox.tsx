@@ -28,6 +28,7 @@ export  function SeasonCheckbox({ defaultValues = [], onChange, }: {
                 {SEASONS.map(({ value, label }) => (
                     <label key={value} className="flex items-center gap-2 cursor-pointer ">
                         <input
+                            id={value}
                             type="checkbox"
                             checked={selected.includes(value)}
                             onChange={() => handleToggle(value)}
