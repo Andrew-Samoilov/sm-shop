@@ -3,7 +3,6 @@
 import { getContentBlock } from "@/lib";
 import { Feature } from "@/types";
 
-// import features from "../static-data/features.json";
 export async function FeatureSection() {
   const features = await getContentBlock<Feature[]>('feature', [])
 

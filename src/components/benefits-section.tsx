@@ -3,8 +3,6 @@
 import { getContentBlock } from "@/lib";
 import { Benefit } from "@/types";
 
-// import benefits from "../static-data/benefits.json";
-
 export async function BenefitsSection() {
   const benefits = await getContentBlock<Benefit[]>('benefit', [])
   

@@ -4,7 +4,7 @@ import { getTyresOptions } from "@/lib";
 import { HelpWindow, TyresList, OptionSelect, SeasonCheckbox } from "@/components";
 import { Tyre } from "@/types";
 
-export default function TyresSelect() {
+export function TyresSelect() {
   const [width, setWidth] = useState("");
   const [profile, setProfile] = useState("");
   const [diameter, setDiameter] = useState("");

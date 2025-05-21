@@ -5,7 +5,6 @@ import { ToastContainer } from "react-toastify";
 import Script from "next/script";
 import { Suspense } from "react";
 import { getContentBlock } from "@/lib";
-// import siteConfig from "../static-data/site-config.json";
 const siteConfig = await getContentBlock('site_config', { siteName: '', });
 
 export const metadata: Metadata = {

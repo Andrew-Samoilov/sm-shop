@@ -1,7 +1,6 @@
 export function formatFormData(formData: FormData): string {
     const raw = Object.fromEntries(formData.entries());
 
-    // Видаляємо технічні поля
     delete raw.recaptcha;
     delete raw.contact_ok;
 

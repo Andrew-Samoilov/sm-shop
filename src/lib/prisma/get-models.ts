@@ -8,7 +8,7 @@ export async function getModels() {
       },
       orderBy: {
         brand: {
-          name: 'asc', // <-- Сортування по brand.name
+          name: 'asc',
         },
       },
     });

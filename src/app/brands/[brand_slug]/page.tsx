@@ -3,7 +3,6 @@ import ReactMarkdown from "react-markdown";
 import { notFound } from "next/navigation";
 import { getBrands, getBrandBySlug, getModelsByBrandId, getTyresByBrandId, formatDisplayUrl, getContentBlock } from "@/lib";
 import { CertificatesSection, LinkWithGA, TyresList } from "@/components";
-// import siteConfig from "@/static-data/site-config.json";
 
 const siteConfig = await getContentBlock('site_config', { siteName: '', });
 

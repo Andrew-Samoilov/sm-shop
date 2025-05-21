@@ -2,7 +2,6 @@
 import React from "react";
 import { LinkWithGA } from "@/components";
 import { getContentBlock } from "@/lib";
-// import siteConfig from "../static-data/site-config.json";
 const siteConfig = await getContentBlock('site_config', { siteName: '', });
 
 function SMTyreIcon(props: Readonly<React.SVGProps<SVGSVGElement>>) {

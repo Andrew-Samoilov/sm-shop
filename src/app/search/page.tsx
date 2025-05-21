@@ -1,10 +1,9 @@
-// import { TyresSelect } from "@/components";
-import TyresSelectNew from "@/components/tyre-select/tyres-select";
+import { TyresSelect } from "@/components";
 
 export default function SearchPage() {
   return (
     <section className="container mx-auto">
-      <TyresSelectNew />
+      <TyresSelect />
     </section>
   );
 }

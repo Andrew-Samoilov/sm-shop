@@ -1,4 +1,4 @@
-import TyresSelect from "@/components/tyre-select/tyres-select";
+import { TyresSelect } from "@/components";
 
 export default function Home() {
   return (

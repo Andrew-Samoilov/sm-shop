@@ -1,7 +1,6 @@
 import { LinkWithGA } from "@/components";
 import { getBrands, getContentBlock } from "@/lib";
 import type { Metadata } from "next";
-// import siteConfig from "@/static-data/site-config.json";
 
 const siteConfig = await getContentBlock('site_config', { siteName: '', });
 

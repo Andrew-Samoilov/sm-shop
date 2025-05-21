@@ -2,7 +2,6 @@ import { CertificatesSection, ModelViewerSection, TyresList } from "@/components
 import { getBrandById, getModels, getTyresByModelId, getModelBySlug, getModelImgByModelId, getContentBlock } from "@/lib";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
-// import siteConfig from "@/static-data/site-config.json";
 const siteConfig = await getContentBlock('site_config', { siteName: '', });
 import { Metadata } from "next";
 
