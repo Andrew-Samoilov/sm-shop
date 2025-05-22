@@ -8,10 +8,13 @@ export async function GET(req: Request) {
   const width = searchParams.get("width");
   const profile = searchParams.get("profile");
   const diameter = searchParams.get("diameter");
-  const season = searchParams
-    .getAll("season")
-    .map((s) => s.toUpperCase())
-    .filter((s): s is Season => (s in Season));
+  
+  const rawSeasons = searchParams.getAll("season");
+
+  const season = rawSeasons.length
+    ? { in: rawSeasons as Season[] }
+    : undefined;
+  
 
   // if (!width || !profile || !diameter) {return NextResponse.json({ error: "Missing parameters" }, { status: 400 }); }
 

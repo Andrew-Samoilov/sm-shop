@@ -63,7 +63,6 @@ export function TyresList({ tyres, images }: TyresListProps) {
               )}
 
 
-
               <Link
                 href={`/tyres/${tyre.slug}`}
                 className="self-center pr-2 flex flex-col mr-auto"
@@ -83,7 +82,6 @@ export function TyresList({ tyres, images }: TyresListProps) {
           );
         })}
 
-  
       </div>
     </>
   );
