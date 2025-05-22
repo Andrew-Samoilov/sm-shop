@@ -8,13 +8,11 @@ export async function GET(req: Request) {
   const width = searchParams.get("width");
   const profile = searchParams.get("profile");
   const diameter = searchParams.get("diameter");
-  
-  const rawSeasons = searchParams.getAll("season");
 
-  const season = rawSeasons.length
-    ? { in: rawSeasons as Season[] }
-    : undefined;
-  
+  const allowedSeasons: Season[] = ["SUMMER", "WINTER", "ALLSEASON"];
+  const season = searchParams.getAll("season");
+  const validSeasons = season.filter((s): s is Season => allowedSeasons.includes(s as Season));
+
 
   // if (!width || !profile || !diameter) {return NextResponse.json({ error: "Missing parameters" }, { status: 400 }); }
 
@@ -32,10 +30,8 @@ export async function GET(req: Request) {
     where.diameter = Number(diameter);
   }
 
-  if (season.length > 0) {
-    where.season = {
-      in: season,
-    };
+  if (validSeasons.length > 0) {
+    where.season = { in: validSeasons };
   }
 
   try {
