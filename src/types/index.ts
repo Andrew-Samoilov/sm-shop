@@ -1,7 +1,3 @@
-export interface Tyres {
-  tyres: Tyre[];
-}
-
 export type Brand = {
   id: number;
   name: string;
@@ -20,20 +16,6 @@ export type Model = {
   brand: {
     name: string;
   };
-};
-
-export type Tyre = {
-  id: number;
-  model: string | null;
-  description: string | null;
-  country: string | null;
-  modelId: number | null;
-  brandId: number | null;
-  title: string;
-  slug: string;
-  dateCode: string | null;
-  type: string | null;
-  price: number;
 };
 
 export interface Benefit {

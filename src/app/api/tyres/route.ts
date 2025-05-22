@@ -13,9 +13,6 @@ export async function GET(req: Request) {
   const season = searchParams.getAll("season");
   const validSeasons = season.filter((s): s is Season => allowedSeasons.includes(s as Season));
 
-
-  // if (!width || !profile || !diameter) {return NextResponse.json({ error: "Missing parameters" }, { status: 400 }); }
-
   const where: Prisma.TyreWhereInput = {};
 
   if (width && !isNaN(Number(width))) {
@@ -50,6 +47,8 @@ export async function GET(req: Request) {
       },
       orderBy: { position: "asc", },
     });
+    
+    // console.log(`[DB] GET`,tyres[0])
 
     return NextResponse.json({ tyres, images });
   } catch (error) {

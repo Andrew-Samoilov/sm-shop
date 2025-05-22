@@ -1,10 +1,9 @@
-import { Tyre } from "@/types";
 import Link from "next/link";
 import Image from "next/image";
 import { ListBulletIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
 import { AddToCartButton } from "../add-to-cart-button";
-// import { TyreThumbnail } from "./tyre-thumbnail";
-import { ModelImage } from "@prisma/client";
+import { ModelImage, Tyre } from "@prisma/client";
+import SeasonIcon from "../tyre-select/season-icon";
 
 type TyresListProps = {
   tyres: Tyre[];
@@ -32,7 +31,6 @@ export function TyresList({ tyres, images }: TyresListProps) {
       <div className="py-6 lg:p-0 flex flex-col gap-2 lg:max-w-[75ch] mx-auto ">
         {tyres.map((tyre) => {
           const modelImages = images.filter((img) => img.modelId === tyre.modelId);
-
 
           return (
             <div
@@ -62,13 +60,13 @@ export function TyresList({ tyres, images }: TyresListProps) {
                 </div>
               )}
 
-
               <Link
                 href={`/tyres/${tyre.slug}`}
                 className="self-center pr-2 flex flex-col mr-auto"
               >
                 <span>{tyre.title}</span>
-                <span className="text-light">{tyre.dateCode ?? ""}</span>
+                <span><SeasonIcon season={tyre.season} /></span>
+                <span className="text-light">{tyre.country} {tyre.dateCode}</span>
                 <span className="font-semibold">{tyre.price?.toString()} грн.</span>
               </Link>
 

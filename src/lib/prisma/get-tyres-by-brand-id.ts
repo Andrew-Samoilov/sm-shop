@@ -1,5 +1,5 @@
 import { prisma } from "@/lib";
-import type { Tyre } from "@/types";
+import { Tyre } from "@prisma/client";
 
 type TyreWithModel = Tyre & {
   model: string | null;

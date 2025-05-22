@@ -1,5 +1,5 @@
+import { Tyre } from "@prisma/client";
 import { prisma } from "./prisma";
-import type { Tyre } from "@/types";
 
 export async function getTyres(query?: string): Promise<Tyre[]> {
   const tyres = await prisma.tyre.findMany({
