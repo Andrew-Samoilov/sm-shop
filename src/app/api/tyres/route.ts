@@ -1,5 +1,5 @@
 import { prisma } from "@/lib";
-import { Prisma, Season } from "@prisma/client";
+import { Prisma, season } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
@@ -9,9 +9,9 @@ export async function GET(req: Request) {
   const profile = searchParams.get("profile");
   const diameter = searchParams.get("diameter");
 
-  const allowedSeasons: Season[] = ["SUMMER", "WINTER", "ALLSEASON"];
+  const allowedSeasons: season[] = ["SUMMER", "WINTER", "ALLSEASON"];
   const season = searchParams.getAll("season");
-  const validSeasons = season.filter((s): s is Season => allowedSeasons.includes(s as Season));
+  const validSeasons = season.filter((s): s is season => allowedSeasons.includes(s as season));
 
   const where: Prisma.TyreWhereInput = {};
 

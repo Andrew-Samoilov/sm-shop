@@ -49,7 +49,6 @@ const AllSeasonIcon = () => (
     </svg>
 );
 
-
 const iconMap: Record<NonNullable<Season>, ReactElement> = {
     SUMMER: <SunIcon className="size-5 text-yellow-500" />,
     WINTER: <WinterIcon />,

@@ -55,7 +55,7 @@ export function TyresSelect() {
     if (profile) params.append("profile", profile);
     if (diameter) params.append("diameter", diameter);
     if (seasons.length > 0) {
-      seasons.forEach((s) => params.append("season", s));
+      seasons.forEach((s) => params.append("season", s.toUpperCase()));
     }
 
     fetch(`/api/tyres?${params.toString()}`)

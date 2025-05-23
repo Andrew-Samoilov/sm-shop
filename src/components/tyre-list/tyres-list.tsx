@@ -13,9 +13,7 @@ export function TyresList({ tyres, images }: TyresListProps) {
 
   return (
     <>
-      <header
-        className="flex justify-between lg:max-w-[75ch] mx-auto p-2 "
-      >
+      <header className="flex justify-between lg:max-w-[75ch] mx-auto p-2 ">
         <div className="flex gap-2 content-baseline">
           <span className="pr-2 hidden md:block text-light">Вигляд</span>
           <button className="btn btn-outline-primary p-0.5 hover:scale-105 duration-300">
@@ -27,6 +25,7 @@ export function TyresList({ tyres, images }: TyresListProps) {
         </div>
         <div className="text-light">Сортування</div>
       </header>
+
       <div className="py-6 lg:p-0 flex flex-col gap-2 lg:max-w-[75ch] mx-auto ">
         {tyres.map((tyre) => {
           const modelImages = images.filter((img) => img.modelId === tyre.modelId);
@@ -66,12 +65,14 @@ export function TyresList({ tyres, images }: TyresListProps) {
 
               <Link
                 href={`/tyres/${tyre.slug}`}
-                className="self-center pr-2 flex flex-col mr-auto"
+                className="pr-2 flex flex-col mr-auto"
               >
-                <span>{tyre.title}</span>
+                <span>{tyre.title} <span
+                  title="Країна виробництва"
+                  className="text-light text-sm">{tyre.country} <span title="Тиждень та рік виробництва">{tyre.dateCode}</span></span></span>
                 {!modelImages.length && <SeasonIcon season={tyre.season} />}
-                <span className="text-light">{tyre.country} {tyre.dateCode}</span>
-                <span className="font-semibold">{tyre.price?.toString()} грн.</span>
+
+                <div className="pt-2 font-semibold">{tyre.price?.toString()} грн.</div>
               </Link>
 
               <AddToCartButton
@@ -80,6 +81,7 @@ export function TyresList({ tyres, images }: TyresListProps) {
                 price={tyre.price}
                 quantity={4}
               />
+
             </div>
           );
         })}

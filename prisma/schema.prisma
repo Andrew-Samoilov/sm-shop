@@ -2,7 +2,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
-enum Season {
+enum season {
   SUMMER
   WINTER
   ALLSEASON
@@ -45,7 +45,7 @@ model Tyre {
   loadSpeedIndex     String?  @db.VarChar(10)        @map("load_speed_index")
   loadIndex          String?  @db.VarChar(10)        @map("load_index")
   speedIndex         String?  @db.Char(1)            @map("speed_index")
-  season             Season?
+  season             season?
   type               String?  @db.VarChar(50)
   constr             String?  @db.Char(1)
   delimiter          String?  @db.Char(1)
@@ -71,7 +71,7 @@ model Model {
   description String?      @db.Text
   brandId     Int          @map("brand_id")
   brand       Brand        @relation(fields: [brandId], references: [id], onDelete: Cascade)
-  season      Season?
+  season      season?
   tyres       Tyre[]
   images      ModelImage[]
   createdAt   DateTime     @default(now()) @map("created_at")
