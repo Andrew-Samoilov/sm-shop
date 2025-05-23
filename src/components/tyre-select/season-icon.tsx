@@ -5,6 +5,7 @@ type Season = "SUMMER" | "WINTER" | "ALLSEASON" | null;
 
 interface SeasonIconProps {
     season: Season;
+    className?: string;
 }
 
 const WinterIcon = () => (
@@ -55,8 +56,9 @@ const iconMap: Record<NonNullable<Season>, ReactElement> = {
     ALLSEASON: <AllSeasonIcon />,
 };
 
-export function SeasonIcon({ season }: SeasonIconProps) {
+export function SeasonIcon({ season, className }: SeasonIconProps) {
     if (!season) return null;
 
-    return <span title={season}>{iconMap[season]}</span>;
+    return <span title={season} className={className}
+    >{iconMap[season]}</span>;
 }

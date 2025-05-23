@@ -17,6 +17,9 @@ export function TyresSelect() {
   });
 
   const [helpOpen, setHelpOpen] = useState(false);
+  const [view, setView] = useState<"list" | "gallery">("list");
+
+
   const [selectedTyres, setSelectedTyres] = useState<Tyre[]>([]);
   const [images, setImages] = useState<ModelImage[]>([]);
 
@@ -103,7 +106,7 @@ export function TyresSelect() {
 
       {selectedTyres?.length > 0 && (
         <div className="bg-white dark:bg-black rounded-lg p-6">
-          <TyresList tyres={selectedTyres} images={images} />
+          <TyresList tyres={selectedTyres} images={images} view={view} setView={setView} />
         </div>
       )}
     </>

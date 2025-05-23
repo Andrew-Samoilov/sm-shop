@@ -12,6 +12,9 @@ export { Search } from "./search";
 export { CertificatesSection } from "./certificates-section/certificates-section";
 export { ThemeSwitcher } from "./theme-switcher";
 export { TyresList } from "./tyre-list/tyres-list";
+export { TyreListItem } from "./tyre-list/tyre-list-Item"
+export { TyreGalleryItem } from "./tyre-list/tyre-gallery-Item"
+
 export { TyresSelect } from "./tyre-select/tyres-select"
 
 export { useTheme } from "./use-theme";
