@@ -44,7 +44,7 @@ export function TyresList({ tyres, images }: TyresListProps) {
                     fill
                     sizes="193px, 193px"
                     className={`
-                      absolute h-auto inset-0 object-contain  
+                      absolute z-0 h-auto inset-0 object-contain  
                       ${modelImages[1] ? "opacity-100 group-hover:opacity-0 transition-opacity duration-300" : "opacity-100"}`}
                   />
                   {modelImages[1] && (
@@ -53,9 +53,14 @@ export function TyresList({ tyres, images }: TyresListProps) {
                       alt={modelImages[1].alt ?? "Фото моделі 2"}
                       fill
                       sizes="193px, 193px"
-                      className="absolute inset-0 object-contain object-top transition-opacity duration-300 opacity-0 group-hover:opacity-100 "
+                      className="absolute z-0 inset-0 object-contain object-top transition-opacity duration-300 opacity-0 group-hover:opacity-100 "
                     />
                   )}
+
+                  <div className="absolute top-2 left-2 z-10">
+                    <SeasonIcon season={tyre.season} />
+                  </div>
+
                 </div>
               )}
 
@@ -64,7 +69,7 @@ export function TyresList({ tyres, images }: TyresListProps) {
                 className="self-center pr-2 flex flex-col mr-auto"
               >
                 <span>{tyre.title}</span>
-                <span><SeasonIcon season={tyre.season} /></span>
+                {!modelImages.length && <SeasonIcon season={tyre.season} />}
                 <span className="text-light">{tyre.country} {tyre.dateCode}</span>
                 <span className="font-semibold">{tyre.price?.toString()} грн.</span>
               </Link>
