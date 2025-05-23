@@ -21,3 +21,4 @@ export { ModelViewerSection } from "./model-viewer-section";
 export { HelpWindow } from "./tyre-select/help-window";
 export { OptionSelect } from "./tyre-select/option-select";
 export { SeasonCheckbox } from "./tyre-select/season-checkbox";
+export { SeasonIcon } from "./tyre-select/season-icon";

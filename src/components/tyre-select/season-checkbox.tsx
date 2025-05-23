@@ -7,7 +7,7 @@ const SEASONS = [
     { value: 'allseason', label: 'Всесезон' },
 ];
 
-export  function SeasonCheckbox({ defaultValues = [], onChange, }: {
+export function SeasonCheckbox({ defaultValues = [], onChange, }: {
     defaultValues?: string[];
     onChange?: (values: string[]) => void;
 }) {
@@ -32,7 +32,7 @@ export  function SeasonCheckbox({ defaultValues = [], onChange, }: {
                             type="checkbox"
                             checked={selected.includes(value)}
                             onChange={() => handleToggle(value)}
-                            className=" rounded-md "
+                            className="rounded-md"
                         />
                         <span >{label}</span>
                     </label>

@@ -48,7 +48,7 @@ const AllSeasonIcon = () => (
         </defs>
     </svg>
 );
-  
+
 
 const iconMap: Record<NonNullable<Season>, ReactElement> = {
     SUMMER: <SunIcon className="size-5 text-yellow-500" />,
@@ -56,7 +56,7 @@ const iconMap: Record<NonNullable<Season>, ReactElement> = {
     ALLSEASON: <AllSeasonIcon />,
 };
 
-export default function SeasonIcon({ season }: SeasonIconProps) {
+export function SeasonIcon({ season }: SeasonIconProps) {
     if (!season) return null;
 
     return <span title={season}>{iconMap[season]}</span>;

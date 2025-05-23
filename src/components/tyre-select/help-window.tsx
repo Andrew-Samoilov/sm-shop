@@ -84,7 +84,7 @@ export function HelpWindow({ isOpen, setIsOpen }: {
               {/* Докладніше про біг на спущених шинах */}
               <article>
                 <h2>Де знайти свій розмір шин?</h2>
-                <div className="flex flex-col md:flex-row flex-wrap gap-4 list-none">
+                <div className="flex flex-col md:flex-row flex-wrap gap-4 justify-between">
                   <figure className="flex flex-col items-center text-center">
                     <figcaption>На кожній шині</figcaption>
                     <Image
@@ -115,9 +115,7 @@ export function HelpWindow({ isOpen, setIsOpen }: {
                       className="p-2"
                     />
                   </figure>
-                  <div>
-                    У деяких автомобілях ця інформація міститься на порозі з боку водія або на стійці позаду водія.
-                  </div>
+                  <p>У деяких автомобілях ця інформація міститься на порозі з боку водія або на стійці позаду водія.</p>
                 </div>
               </article>
             </div>
