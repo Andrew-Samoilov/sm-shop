@@ -1,5 +1,5 @@
 "use client";
-import { useTheme } from ".";
+import { useTheme } from "..";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
 
 export const ThemeSwitcher = () => {

@@ -1,22 +1,33 @@
-import { ListBulletIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
-import { TyreGalleryItem, TyreListItem } from "@/components";
+import { TyreGalleryItem, TyreListItem, ViewSwitcher } from "@/components";
 import { ModelImage, Tyre } from "@prisma/client";
+import { useState } from "react";
 
 type TyresListProps = {
   tyres: Tyre[];
   images: ModelImage[];
-  view: "list" | "gallery";
-  setView: (view: "list" | "gallery") => void;
+  view?: "list" | "gallery";
+  setView?: (view: "list" | "gallery") => void;
 }
 
-export function TyresList({ tyres, images, view, setView }: TyresListProps) {
+export function TyresList({
+  tyres,
+  images,
+  view: controlledView,
+  setView: setControlledView,
+}: TyresListProps) {
+  const [localView, setLocalView] = useState<"list" | "gallery">("list");
+
+  const view = controlledView ?? localView;
+  const setView = setControlledView ?? setLocalView;
 
   return (
     <>
       <header className="flex justify-between lg:max-w-[75ch] mx-auto p-2">
         <div className="flex gap-2 content-baseline">
           <span className="pr-2 hidden md:block text-light">Вигляд</span>
-          <button
+          
+          <ViewSwitcher view={view} onChange={setView} />
+          {/* <button
             onClick={() => setView("gallery")}
             // className="btn btn-outline-primary p-0.5 hover:scale-105 duration-300">
             className={`btn p-0.5 hover:scale-105 duration-300 ${view === "gallery"
@@ -30,7 +41,8 @@ export function TyresList({ tyres, images, view, setView }: TyresListProps) {
               "btn-primary" : "btn-outline-primary"
               }`} >
             <ListBulletIcon className="h-6 w-6" />
-          </button>
+
+          </button> */}
         </div>
         <div className="text-light">Сортування</div>
       </header >
