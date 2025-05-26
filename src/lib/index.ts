@@ -9,6 +9,7 @@ export { getTyreBySlug } from "./prisma/get-tyre-by-slug";
 export { getTyreById } from "./prisma/get-tyre-by-id";
 
 export { getTyres } from "./prisma/get-tyres";
+export { getTyresFromApi } from "./prisma/get-tyres-from-api"
 export { getTyresByBrandId } from "./prisma/get-tyres-by-brand-id";
 export { getTyresByModelId } from "./prisma/get-tyres-by-model-id";
 export { getTyresOptions } from "./prisma/get-tyres-options";

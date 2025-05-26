@@ -1,69 +1,35 @@
-import { TyreGalleryItem, TyreListItem, ViewSwitcher } from "@/components";
+
+import { TyreGalleryItem, TyreListItem } from "@/components";
 import { ModelImage, Tyre } from "@prisma/client";
-import { useState } from "react";
+
 
 type TyresListProps = {
   tyres: Tyre[];
   images: ModelImage[];
   view?: "list" | "gallery";
-  setView?: (view: "list" | "gallery") => void;
+
 }
 
-export function TyresList({
-  tyres,
-  images,
-  view: controlledView,
-  setView: setControlledView,
-}: TyresListProps) {
-  const [localView, setLocalView] = useState<"list" | "gallery">("list");
-
-  const view = controlledView ?? localView;
-  const setView = setControlledView ?? setLocalView;
+export function TyresList({ tyres, images, view }: TyresListProps) {
 
   return (
-    <>
-      <header className="flex justify-between lg:max-w-[75ch] mx-auto p-2">
-        <div className="flex gap-2 content-baseline">
-          <span className="pr-2 hidden md:block text-light">Вигляд</span>
-          
-          <ViewSwitcher view={view} onChange={setView} />
-          {/* <button
-            onClick={() => setView("gallery")}
-            // className="btn btn-outline-primary p-0.5 hover:scale-105 duration-300">
-            className={`btn p-0.5 hover:scale-105 duration-300 ${view === "gallery"
-              ? "btn-primary" : "btn-outline-primary"
-              }`} >
-            <Squares2X2Icon className="h-6 w-6" />
-          </button>
-          <button
-            onClick={() => setView("list")}
-            className={`btn p-0.5 hover:scale-105 duration-300 ${view === "list" ?
-              "btn-primary" : "btn-outline-primary"
-              }`} >
-            <ListBulletIcon className="h-6 w-6" />
 
-          </button> */}
-        </div>
-        <div className="text-light">Сортування</div>
-      </header >
+    < div className={view === "list"
+      ? "p-6 flex flex-col gap-2"
+      : "p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4"
+    }>
 
-      {/* <div className="py-6 lg:p-0 flex flex-col gap-2 lg:max-w-[75ch] mx-auto "> */}
-      < div className={view === "list"
-        ? "py-6 flex flex-col gap-2"
-        : "py-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4"
-      }>
+      {
+        tyres.map((tyre) => {
+          const modelImages = images.filter((img) => img.modelId === tyre.modelId);
 
-        {
-          tyres.map((tyre) => {
-            const modelImages = images.filter((img) => img.modelId === tyre.modelId);
+          return (
+            <div key={tyre.id}>
+              {view === "list" ?
+                <TyreListItem key={tyre.id} tyre={tyre} modelImages={modelImages} />
+                : <TyreGalleryItem key={tyre.id} tyre={tyre} modelImages={modelImages} />}
 
-            return (
-              <div key={tyre.id}>
-                {view === "list" ?
-                  <TyreListItem key={tyre.id} tyre={tyre} modelImages={modelImages} />
-                  : <TyreGalleryItem key={tyre.id} tyre={tyre} modelImages={modelImages} />}
-
-                {/* <div
+              {/* <div
                   key={tyre.id}
                   className="flex justify-between gap-6 items-center p-2 bg-theme-light dark:bg-theme-dark rounded-lg"
                 >
@@ -117,13 +83,12 @@ export function TyresList({
 
                 </div> */}
 
-              </div>
-            )
+            </div>
+          )
 
-          })
-        }
+        })
+      }
 
-      </div >
-    </>
+    </div >
   );
 }
