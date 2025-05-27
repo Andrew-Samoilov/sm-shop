@@ -1,10 +1,9 @@
-import { TyresList } from "@/components";
+import { ListHeader, TyresList } from "@/components";
 import { getTyres, getModelImagesByIds } from "@/lib";
 
 
-export default async function TyresPage({ searchParams, }: {
-  searchParams: Promise<{ query?: string }>;
-}) {
+export default async function TyresPage({ searchParams, }:
+  { searchParams: { [key: string]: string } }) {
   const resolvedSearchParams = await searchParams;
   const query = resolvedSearchParams.query ?? "";
   const tyres = await getTyres(query);
@@ -14,10 +13,11 @@ export default async function TyresPage({ searchParams, }: {
   const images = await getModelImagesByIds(modelId);
 
   // console.log(`[TyresPage] images`, images.length, images);
-
+  const view = await searchParams.view === "gallery" ? "gallery" : "list";
   return (
-    <section className="container">
-      <TyresList tyres={tyres} images={images} />
+    <section className="lg:p-6">
+      <ListHeader currentView={view} />
+      <TyresList tyres={tyres} images={images} view={view} />
     </section>
   );
 }

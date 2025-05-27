@@ -9,8 +9,8 @@ export function ViewSwitcher({
 }: {
     view: View;
     onChange: (next: View) => void;
-    }) {
-    
+}) {
+
     // const router = useRouter();
     // const searchParams = useSearchParams();
     // const current = searchParams.get("view") ?? "list";

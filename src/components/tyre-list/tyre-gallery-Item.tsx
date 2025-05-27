@@ -12,7 +12,7 @@ export function TyreGalleryItem({ tyre, modelImages }: TyreListItemProps) {
     return (
         <div className="flex flex-col overflow-hidden items-center gap-6 p-6 bg-theme-light dark:bg-theme-dark rounded-lg">
             {modelImages.length > 0 && (
-                <div className="relative w-[293px] h-[293px] overflow-hidden group shrink-0 ">
+                <div className="relative  w-full aspect-square max-w-[293px] overflow-hidden group shrink-0 ">
                     <Image
                         src={modelImages[0].url}
                         alt={modelImages[0].alt ?? "Фото моделі"}

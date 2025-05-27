@@ -13,6 +13,7 @@ export { CertificatesSection } from "./certificates-section/certificates-section
 export { ThemeSwitcher } from "./theme-switcher/theme-switcher";
 export { TyresList } from "./tyre-list/tyres-list"
 export { ViewSwitcher } from "./tyre-list/view-switcher"
+export { ListHeader } from "./tyre-list/list-header"
 export { TyreListItem } from "./tyre-list/tyre-list-Item"
 export { TyreGalleryItem } from "./tyre-list/tyre-gallery-Item"
 

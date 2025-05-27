@@ -10,7 +10,7 @@ type TyreListItemProps = {
 
 export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
     return (
-        <div className="flex justify-between gap-6 items-center p-2 bg-theme-light dark:bg-theme-dark rounded-lg">
+        <div className="flex justify-between gap-6 items-center p-6 bg-theme-light dark:bg-theme-dark rounded-lg">
             {modelImages.length > 0 && (
                 <div className="relative w-[193px] h-[193px] overflow-hidden group shrink-0">
                     <Image
