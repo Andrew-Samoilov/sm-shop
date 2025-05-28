@@ -2,12 +2,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-enum season {
-  SUMMER
-  WINTER
-  ALLSEASON
-}
-
 datasource db {
   provider          = "postgresql"
   url               = env("DATABASE_URL")
@@ -19,48 +13,46 @@ model Brand {
   slug        String   @unique @db.VarChar(100)
   name        String
   logo        String?
-  description String? @db.Text
+  description String?
   website     String?
   country     String?
   createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt     @map("updated_at")
-
+  updatedAt   DateTime @updatedAt @map("updated_at")
   models      Model[]
-  tyres       Tyre[]   @relation("BrandTyres")
+  tyres       Tyre[]
 
   @@map("brands")
 }
 
 model Tyre {
-  id                 Int      @id(map: "tires_pkey") @default(autoincrement())
-  slug               String   @unique @db.VarChar(160)
-  title              String
-  sku                String   @unique(map: "tires_sku_key") @db.VarChar(50)
-  description        String?
-  price              Float    @default(0)
-  inventoryQuantity  Int?     @default(0)            @map("inventory_quantity")
-  country            String?  @db.VarChar(50)
-  dateCode           String?  @db.Char(4)            @map("date_code")
-  applicability      String?  @db.VarChar(50)
-  loadSpeedIndex     String?  @db.VarChar(10)        @map("load_speed_index")
-  loadIndex          String?  @db.VarChar(10)        @map("load_index")
-  speedIndex         String?  @db.Char(1)            @map("speed_index")
-  season             season?
-  type               String?  @db.VarChar(50)
-  constr             String?  @db.Char(1)
-  delimiter          String?  @db.Char(1)
-  width              Decimal? @db.Decimal(4, 1)
-  profile            Decimal? @db.Decimal(4, 1)
-  diameter           Decimal? @db.Decimal(4, 1)
-  brandId            Int?     @map("brand_id")
-  modelId            Int?     @map("model_id")
-  brand              Brand?   @relation("BrandTyres", fields: [brandId], references: [id])
-  model              Model?   @relation(fields: [modelId], references: [id])
+  id                Int     @id(map: "tires_pkey") @default(autoincrement())
+  modelId           Int?    @map("model_id")
+  brandId           Int?    @map("brand_id")
+  title             String
+  slug              String  @default("")
+  description       String?
+  country           String? @db.VarChar(50)
+  dateCode          String? @map("date_code") @db.Char(4)
+  applicability     String? @db.VarChar(50)
+  sku               String  @unique(map: "tires_sku_key") @db.VarChar(50)
+  inventoryQuantity Int?    @default(0) @map("inventory_quantity")
+  price             Float
+  loadSpeedIndex    String? @map("load_speed_index") @db.VarChar(10)
+  brand             String? @db.VarChar(50)
+  model             String? @db.VarChar(100)
+  width             Float?  @db.Real
+  profile           Float?  @db.Real
+  constr            String? @db.Char(1)
+  diameter          Float?  @db.Real
+  delimiter         String? @db.Char(1)
+  loadIndex         String? @map("load_index") @db.VarChar(10)
+  speedIndex        String? @map("speed_index") @db.Char(1)
+  type              String? @db.VarChar(50)
+  season            season?
+  brands            Brand?  @relation(fields: [brandId], references: [id], onUpdate: NoAction)
+  models            Model?  @relation(fields: [modelId], references: [id], onUpdate: NoAction)
 
   @@index([title(ops: raw("gin_trgm_ops"))], map: "tyres_title_trgm_idx", type: Gin)
-  @@index([brandId, modelId]) 
-  @@index([width, profile, diameter]) 
-  
   @@map("tyres")
 }
 
@@ -68,14 +60,14 @@ model Model {
   id          Int          @id @default(autoincrement())
   slug        String       @unique @db.VarChar(200)
   name        String
-  description String?      @db.Text
+  description String?
   brandId     Int          @map("brand_id")
-  brand       Brand        @relation(fields: [brandId], references: [id], onDelete: Cascade)
-  season      season?
-  tyres       Tyre[]
-  images      ModelImage[]
   createdAt   DateTime     @default(now()) @map("created_at")
-  updatedAt   DateTime     @updatedAt     @map("updated_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
+  season      season?
+  images      ModelImage[]
+  brand       Brand        @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  tyres       Tyre[]
 
   @@index([brandId])
   @@map("models")
@@ -87,8 +79,7 @@ model Message {
   email     String
   phone     String?
   message   String
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime? @updatedAt     @map("updated_at")
+  createdAt DateTime @default(now())
 
   @@map("messages")
 }
@@ -96,21 +87,27 @@ model Message {
 model ModelImage {
   id       Int     @id @default(autoincrement())
   modelId  Int     @map("model_id")
-  model    Model   @relation(fields: [modelId], references: [id], onDelete: Restrict)
   url      String
   alt      String?
   width    Int?
   height   Int?
   position Int     @default(0)
+  model    Model   @relation(fields: [modelId], references: [id])
 
-  @@map("model_images")
   @@index([modelId])
+  @@map("model_images")
 }
 
 model ContentBlock {
-  id      Int    @id @default(autoincrement())
-  key     String @unique
-  value   Json   @db.JsonB
+  id    Int    @id @default(autoincrement())
+  key   String @unique
+  value Json
 
   @@map("content_blocks")
+}
+
+enum season {
+  SUMMER
+  WINTER
+  ALLSEASON
 }
