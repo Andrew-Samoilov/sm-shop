@@ -2,18 +2,26 @@ import { ListHeader, TyresList } from "@/components";
 import { getTyres, getModelImagesByIds } from "@/lib";
 
 
-export default async function TyresPage({ searchParams, }:
-  { searchParams: { [key: string]: string } }) {
-  const resolvedSearchParams = await searchParams;
-  const query = resolvedSearchParams.query ?? "";
+export default async function TyresPage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | undefined };
+  }) {
+  
+  const entries = Object.entries(searchParams).filter(
+    (entry): entry is [string, string] => typeof entry[1] === "string"
+  );
+  const params = new URLSearchParams(entries);
+  const query = params.get("query") ?? "";
+  const view = params.get("view") === "gallery" ? "gallery" : "list";
+  
+
   const tyres = await getTyres(query);
-
   const modelId = tyres.map(t => t.modelId)
-
   const images = await getModelImagesByIds(modelId);
 
-  // console.log(`[TyresPage] images`, images.length, images);
-  const view = await searchParams.view === "gallery" ? "gallery" : "list";
+  console.log(`[TyresPage]`, tyres.length, images.length, view);
+
   return (
     <section className="lg:p-6">
       <ListHeader currentView={view} />

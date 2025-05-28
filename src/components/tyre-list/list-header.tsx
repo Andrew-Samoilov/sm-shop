@@ -2,8 +2,6 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { ListBulletIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
 
-// type View = "list" | "gallery";
-
 export function ListHeader({ currentView }: { currentView: string }) {
 
     const router = useRouter();
@@ -11,7 +9,11 @@ export function ListHeader({ currentView }: { currentView: string }) {
     const setView = (view: string) => {
         const p = new URLSearchParams(params.toString());
         p.set("view", view);
-        router.replace(`?${p.toString()}`); // або push
+        router.push(`${window.location.pathname}?${p.toString()}`); 
+
+        if (process.env.NODE_ENV === "development") {
+            console.info("[ListHeader] view", view);
+          }
     };
 
     return (
@@ -23,7 +25,7 @@ export function ListHeader({ currentView }: { currentView: string }) {
                     disabled={currentView === "list"}
                     onClick={() => setView("list")}
                     className={`btn p-0.5 ${currentView === "list"
-                        ? "btn-primary cursor-not-allowed" :
+                        ? "btn-primary" :
                         "btn-outline-primary hover:scale-105 duration-300"
                         }`}
                 >
@@ -35,7 +37,7 @@ export function ListHeader({ currentView }: { currentView: string }) {
                     aria-label="Галерея"
                     disabled={currentView === "gallery"}
                     className={`btn p-0.5  ${currentView === "gallery"
-                        ? "btn-primary cursor-not-allowed"
+                        ? "btn-primary"
                         : "btn-outline-primary hover:scale-105 duration-300"
                         }`}
                 >
