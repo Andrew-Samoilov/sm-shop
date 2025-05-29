@@ -1,11 +1,12 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
+import React, { useState, useEffect, useRef } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { getTyresOptions } from "@/lib";
 import { HelpWindow, TyresList, OptionSelect, SeasonCheckbox } from "@/components";
 import { ModelImage, Tyre } from "@prisma/client";
 
 export function TyresSelect() {
+  const router = useRouter();
   const searchParams = useSearchParams();
 
   const [width, setWidth] = useState(searchParams.get("width") ?? "");
@@ -22,12 +23,62 @@ export function TyresSelect() {
   const [helpOpen, setHelpOpen] = useState(false);
   const [selectedTyres, setSelectedTyres] = useState<Tyre[]>([]);
   const [images, setImages] = useState<ModelImage[]>([]);
+  const [view, setView] = useState<"list" | "gallery">("list");
 
-  const view = searchParams.get("view") === "gallery" ? "gallery" : "list";
+  // const view = searchParams.get("view") === "gallery" ? "gallery" : "list";
+
+  // Для уникнення циклічних апдейтів
+  const skipNextSync = useRef(false);
 
   const toNum = (v: string) => (v ? Number(v) : undefined);
 
+  // Оновлюємо URL при зміні state
+  useEffect(() => {
+    if (skipNextSync.current) {
+      skipNextSync.current = false;
+      return;
+    }
 
+    const params = new URLSearchParams();
+    if (width) params.set("width", width);
+    if (profile) params.set("profile", profile);
+    if (diameter) params.set("diameter", diameter);
+    seasons.forEach((s) => params.append("season", s));
+    params.set("view", view);
+
+    // replace замість push, щоб не плодити історію
+    router.replace(`?${params.toString()}`, { scroll: false });
+    // eslint-disable-next-line
+  }, [width, profile, diameter, seasons, view]);
+
+  // Оновлюємо state при зміні searchParams (наприклад, back/forward або direct link)
+  useEffect(() => {
+    // Перевіряємо, чи реально змінились параметри
+    const widthParam = searchParams.get("width") ?? "";
+    const profileParam = searchParams.get("profile") ?? "";
+    const diameterParam = searchParams.get("diameter") ?? "";
+    const seasonsParam = searchParams.getAll("season");
+    const viewParam = searchParams.get("view") === "gallery" ? "gallery" : "list";
+
+    const stateChanged =
+      widthParam !== width ||
+      profileParam !== profile ||
+      diameterParam !== diameter ||
+      JSON.stringify(seasonsParam) !== JSON.stringify(seasons) ||
+      viewParam !== view;
+
+    if (stateChanged) {
+      skipNextSync.current = true; // Щоб не запускати router.replace одразу після цього
+      setWidth(widthParam);
+      setProfile(profileParam);
+      setDiameter(diameterParam);
+      setSeasons(seasonsParam);
+      setView(viewParam);
+    }
+    // eslint-disable-next-line
+  }, [searchParams]);
+
+  // Динамічно підтягуємо опції для селектів
   useEffect(() => {
     const filter = {
       width: toNum(width),
@@ -48,6 +99,7 @@ export function TyresSelect() {
       );
   }, [width, profile, diameter]);
 
+  // Отримуємо результати шин
   useEffect(() => {
     const params = new URLSearchParams();
 
@@ -103,7 +155,7 @@ export function TyresSelect() {
             options={options.diameters}
           />
         </div>
-        <SeasonCheckbox value={seasons}  onChange={setSeasons} />
+        <SeasonCheckbox value={seasons} onChange={setSeasons} />
 
         <HelpWindow isOpen={helpOpen} setIsOpen={setHelpOpen} />
       </form>
