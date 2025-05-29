@@ -2,12 +2,18 @@
 import Image from "next/image";
 import { QuestionMarkCircleIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { sendGAEvent } from "@/lib";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export function HelpWindow({ isOpen, setIsOpen }: {
   isOpen: boolean;
   setIsOpen: (v: boolean) => void;
 }) {
+
+  const ref = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    if (isOpen) ref.current?.focus();
+  }, [isOpen]);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -42,6 +48,7 @@ export function HelpWindow({ isOpen, setIsOpen }: {
       {isOpen && (
         <dialog
           open
+          ref={ref}
           tabIndex={-1}
           aria-modal="true"
           aria-labelledby="help-title"

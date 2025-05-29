@@ -1,13 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { getTyresOptions } from "@/lib";
-import { HelpWindow, TyresList, OptionSelect, SeasonCheckbox, ViewSwitcher } from "@/components";
+import { HelpWindow, TyresList, OptionSelect, SeasonCheckbox } from "@/components";
 import { ModelImage, Tyre } from "@prisma/client";
 
 export function TyresSelect() {
   const searchParams = useSearchParams();
-  const router = useRouter();
 
   const [width, setWidth] = useState(searchParams.get("width") ?? "");
   const [profile, setProfile] = useState(searchParams.get("profile") ?? "");
@@ -112,27 +111,7 @@ export function TyresSelect() {
       </form>
 
       {selectedTyres?.length > 0 && (
-        <>
-          <div className="flex w-full  p-6 justify-between ">
-
-            <div className="flex  gap-2 content-baseline ">
-              <span className="pr-2 hidden md:block text-light">Вигляд</span>
-              <ViewSwitcher
-                view={view}
-                onChange={(newView) => {
-                  const params = new URLSearchParams(searchParams.toString());
-                  params.set("view", newView);
-                  router.replace(`?${params.toString()}`);
-                }}
-              />
-            </div>
-
-            <div className="text-light">Сортування</div>
-
-          </div>
-
-          <TyresList tyres={selectedTyres} images={images} view={view} />
-        </>
+        <TyresList tyres={selectedTyres} images={images} view={view} />
       )}
     </>
   );
