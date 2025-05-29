@@ -11,9 +11,7 @@ export function TyresSelect() {
   const [width, setWidth] = useState(searchParams.get("width") ?? "");
   const [profile, setProfile] = useState(searchParams.get("profile") ?? "");
   const [diameter, setDiameter] = useState(searchParams.get("diameter") ?? "");
-  const [seasons, setSeasons] = useState<string[]>(
-    searchParams.getAll("season") ?? []
-  );
+  const [seasons, setSeasons] = useState<string[]>([]);
 
   const [options, setOptions] = useState({
     widths: [] as number[],
@@ -105,7 +103,7 @@ export function TyresSelect() {
             options={options.diameters}
           />
         </div>
-        <SeasonCheckbox defaultValues={[]} onChange={setSeasons} />
+        <SeasonCheckbox value={seasons}  onChange={setSeasons} />
 
         <HelpWindow isOpen={helpOpen} setIsOpen={setHelpOpen} />
       </form>

@@ -1,5 +1,4 @@
 'use client';
-import { useState } from 'react';
 
 const SEASONS = [
     { value: 'summer', label: 'Літо' },
@@ -7,31 +6,33 @@ const SEASONS = [
     { value: 'allseason', label: 'Всесезон' },
 ];
 
-export function SeasonCheckbox({ defaultValues = [], onChange, }: {
-    defaultValues?: string[];
-    onChange?: (values: string[]) => void;
+export function SeasonCheckbox({
+    value,
+    onChange,
+}: {
+    value: string[];
+    onChange: (values: string[]) => void;
 }) {
-    const [selected, setSelected] = useState<string[]>(defaultValues);
 
-    const handleToggle = (value: string) => {
-        const newSelected = selected.includes(value)
-            ? selected.filter((v) => v !== value)
-            : [...selected, value];
-        setSelected(newSelected);
-        onChange?.(newSelected);
+    const handleToggle = (season: string) => {
+        if (value.includes(season)) {
+            onChange(value.filter((v) => v !== season));
+        } else {
+            onChange([...value, season]);
+        }
     };
 
     return (
         <fieldset>
             <legend className="text-sm text-light pl-6 text-center md:text-start">Сезон</legend>
             <div className="flex flex-row flex-wrap justify-center md:justify-start gap-6 md:px-4 py-2 ">
-                {SEASONS.map(({ value, label }) => (
-                    <label key={value} className="flex items-center gap-2 cursor-pointer ">
+                {SEASONS.map(({ value: v, label }) => (
+                    <label key={v} className="flex items-center gap-2 cursor-pointer ">
                         <input
-                            id={value}
+                            id={v}
                             type="checkbox"
-                            checked={selected.includes(value)}
-                            onChange={() => handleToggle(value)}
+                            checked={value.includes(v)}
+                            onChange={() => handleToggle(v)}
                             className="rounded-md"
                         />
                         <span >{label}</span>
