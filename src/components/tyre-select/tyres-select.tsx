@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getTyresOptions } from "@/lib";
-import { HelpWindow, TyresList, OptionSelect, SeasonCheckbox } from "@/components";
+import { HelpWindow, TyresList, OptionSelect, SeasonCheckbox, ListHeader } from "@/components";
 import { ModelImage, Tyre } from "@prisma/client";
 
 export function TyresSelect() {
@@ -161,7 +161,10 @@ export function TyresSelect() {
       </form>
 
       {selectedTyres?.length > 0 && (
-        <TyresList tyres={selectedTyres} images={images} view={view} />
+        <>
+          <ListHeader />
+          <TyresList tyres={selectedTyres} images={images} view={view} />
+        </>
       )}
     </>
   );

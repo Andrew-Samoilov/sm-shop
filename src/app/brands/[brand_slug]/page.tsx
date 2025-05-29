@@ -64,7 +64,6 @@ export async function generateMetadata(
   };
 }
 
-
 export default async function BrandPage({ params, }: { params: { brand_slug: string }; }) {
   const { brand_slug } = await params;
   if (!brand_slug) return notFound();
@@ -98,7 +97,7 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
   // console.log(`[getTyresByBrandId]`, brand);
 
   return (
-    <article className="flex flex-col gap-6  mx-auto">
+    <article className="flex flex-col gap-6 mx-auto">
       <header className="gap-6 xl:gap-0 flex items-center xl:items-start  justify-center xl:justify-between flex-col-reverse md:flex-row xl:sticky xl:top-[120px] xl:-z-1 bg-body dark:bg-darkmode-body md:p-2">
         <div>
           <h1 style={{ viewTransitionName: `title-${brand.name}` }}>

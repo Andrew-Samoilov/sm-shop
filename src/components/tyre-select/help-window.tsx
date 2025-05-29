@@ -52,7 +52,12 @@ export function HelpWindow({ isOpen, setIsOpen }: {
           tabIndex={-1}
           aria-modal="true"
           aria-labelledby="help-title"
-          className="bg-theme-dark/50 dark:bg-theme-light/50 fixed inset-0 z-50 flex w-full h-full items-center justify-center">
+          className="bg-theme-dark/50 dark:bg-theme-light/50 fixed inset-0 z-50 flex w-full h-full items-center justify-center"
+          onClick={e => {
+            if (e.target === e.currentTarget) setIsOpen(false);
+          }}
+        >
+
           <div className="w-full max-w-[85ch] bg-theme-light dark:bg-theme-dark text-light p-6 rounded-lg max-h-[95vh] overflow-y-auto">
 
             <header className="flex items-center justify-between mb-4 ">

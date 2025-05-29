@@ -6,14 +6,14 @@ export async function getTyresByModelId(modelId: number): Promise<Tyre[]> {
     where: { modelId: modelId },
     orderBy: { title: "asc" },
     include: {
-      model: {
+      models: {
         select: { name: true }
       }
     }
   });
 
-  return tyres.map(({ model, ...rest }) => ({
+  return tyres.map(({ models, ...rest }) => ({
     ...rest,
-    model: model?.name ?? null,
+    model: models?.name ?? null,
   }));
 }

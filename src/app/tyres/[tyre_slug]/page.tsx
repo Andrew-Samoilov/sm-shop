@@ -34,8 +34,8 @@ export default async function TyrePage({
       <ViewItemGA
         item_id={tyre.id}
         item_name={tyre.title}
-        brand={tyre.brand?.name ?? ""}
-        model={tyre.model?.name ?? ""}
+        brand={tyre.brand ?? ""}
+        model={tyre.model ?? ""}
         price={Number(tyre.price)}
       />
 

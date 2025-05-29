@@ -10,13 +10,13 @@ export async function getTyresByBrandId(brandId: number): Promise<TyreWithModel[
     where: { brandId },
     orderBy: { title: "asc" },
     include: {
-      model: {
+      models: {
         select: { name: true }
       }
     }
   });
-  return tyresWithRel.map(({ model, ...rest }) => ({
+  return tyresWithRel.map(({ models, ...rest }) => ({
     ...rest,
-    model: model?.name ?? null,
+    model: models?.name ?? null,
   }));
 }
