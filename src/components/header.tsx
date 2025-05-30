@@ -20,6 +20,11 @@ export async function Header() {
           href="/tyres"
         >Шини</LinkWithGA>
         <LinkWithGA
+          eventLabel="search"
+          eventCategory="header"
+          href="/search"
+        >Пошук</LinkWithGA>
+        <LinkWithGA
           eventLabel="contacts"
           eventCategory="header"
           href="/contacts"
