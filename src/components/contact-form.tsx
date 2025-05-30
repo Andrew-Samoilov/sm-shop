@@ -43,7 +43,8 @@ export function ContactForm() {
             type="text"
             id="contact_name"
             autoComplete="name"
-            className="form-input"
+            placeholder="Введіть імя..."
+            className="form-input bg-theme-light dark:bg-darkmode-theme-light"
           />
         </div>
         <div>
@@ -55,7 +56,8 @@ export function ContactForm() {
             type="email"
             id="contact_email"
             autoComplete="email"
-            className="form-input"
+            placeholder="example@domain.com"
+            className="form-input bg-theme-light dark:bg-darkmode-theme-light"
           />
         </div>
         <div>
@@ -67,7 +69,8 @@ export function ContactForm() {
             type="tel"
             id="contact_tel"
             autoComplete="tel"
-            className="form-input"
+            placeholder="Введіть телефон..."
+            className="form-input bg-theme-light dark:bg-darkmode-theme-light"
           />
         </div>
       </div>
@@ -78,9 +81,10 @@ export function ContactForm() {
         required={true}
         name="contact_message"
         id="contact_message"
+        placeholder="Введіть повідомлення..."
         onFocus={initRecaptcha}
         rows={4}
-        className="form-input mb-6"
+        className="form-input mb-6 bg-theme-light dark:bg-darkmode-theme-light"
       />
       <div className="mb-6">
         <input
