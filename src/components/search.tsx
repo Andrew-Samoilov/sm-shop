@@ -50,14 +50,30 @@ export function Search() {
 
   return (
     <div className="relative xl:ml-auto w-full md:w-auto">
-      <MagnifyingGlassIcon className=" text-light/75 absolute top-1/2 right-4 h-5 w-5 -translate-y-1/2 scale-x-[-1] transform" />
+      {query === "" && (
+        <MagnifyingGlassIcon className=" text-light/75 absolute top-1/2 right-3 h-5 w-5 -translate-y-1/2 scale-x-[-1] transform" />
+      )}
       <input
         id="search"
         type="search"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && query.trim()) {
+            const formatted = formatTyreSizeQuery(query);
+            router.push(`/tyres?query=${formatted}`, { scroll: false });
+            sendGAEvent({
+              action: "search",
+              params: {
+                search_term: query,
+                debug_mode: true,
+              },
+            });
+          }
+        }}
         placeholder="Пошук шин..."
-        className="bg-light/10 border border-border dark:border-darkmode-border focus:ring-accent w-full cursor-text rounded-full py-2 pr-10 pl-4 focus:ring-2 focus:outline-none
+        className="bg-light/10 border border-border dark:border-darkmode-border focus:ring-accent w-full cursor-text rounded-full
+        py-2 px-4 focus:ring-2 focus:outline-none
          "
       />
     </div>
