@@ -69,7 +69,7 @@ export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
 
             </Link>
 
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-6 ">
                 <div className="flex flex-row gap-2 items-end mx-auto">
                     <span
                         className="font-semibold text-2xl"

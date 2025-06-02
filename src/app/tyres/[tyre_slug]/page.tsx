@@ -1,6 +1,7 @@
-import { ModelViewerSection, ViewItemGA } from "@/components";
+import { AddToCartButton, CertificatesSection, ModelViewerSection, ViewItemGA } from "@/components";
 import { getTyreBySlug, getModelImgByModelId, prisma } from "@/lib";
 import { notFound } from "next/navigation";
+import ReactMarkdown from "react-markdown";
 
 export async function generateStaticParams() {
   const tyres = await prisma.tyre.findMany({
@@ -29,8 +30,26 @@ export default async function TyrePage({
   // console.info("[TyrePage]", tyre);
 
   return (
-    <section>
-      <h1>{tyre.title}</h1>
+    <article >
+      <div className="flex items-center content-center gap-6 pb-6 mx-auto">
+        <h1>{tyre.title}</h1>
+        <div className="flex flex-col gap-2">
+          <div className="flex flex-row gap-2 items-center">
+            <span
+              className="font-semibold text-h1"
+            >{tyre.price?.toString()}</span>
+            <span className="text-light">грн</span>
+          </div>
+
+          <AddToCartButton
+            id={tyre.id}
+            title={tyre.title}
+            price={tyre.price}
+            quantity={4}
+          />
+        </div>
+      </div>
+
       <ViewItemGA
         item_id={tyre.id}
         item_name={tyre.title}
@@ -41,6 +60,14 @@ export default async function TyrePage({
 
       {tyre.modelId !== null && images.length > 0 && <ModelViewerSection images={images} />}
 
+      {tyre.models?.description && (
+        <section className="p-6 lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl  bg-body dark:bg-darkmode-body z-10">
+          <ReactMarkdown>{tyre.models.description}</ReactMarkdown>
+        </section>
+      )}
+
+      <CertificatesSection brandName={tyre.brand ?? undefined} />
+
       {Object.entries(tyre).map(([key, value]) => (
         <p key={key}>
           <strong>{key}:</strong>{" "}
@@ -50,6 +77,7 @@ export default async function TyrePage({
         </p>
       ))}
 
-    </section>
+
+    </article>
   );
 }

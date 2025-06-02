@@ -14,6 +14,6 @@ export async function CertificatesSection({ brandName }: { brandName?: string })
     // console.log(`[CertificatesSection]`, filteredSert[0]);
 
     if (filteredSert.length === 0) return null;
-    
+
     return <CertificatesClient cert={filteredSert} />;
 }
