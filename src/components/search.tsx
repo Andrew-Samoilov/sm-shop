@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { formatTyreSizeQuery, sendGAEvent } from "@/lib";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
+
 export function Search() {
   const [query, setQuery] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
@@ -31,7 +32,7 @@ export function Search() {
   useEffect(() => {
     if (debouncedQuery.trim()) {
       const formatted = formatTyreSizeQuery(debouncedQuery);
-      router.push(`/tyres?query=${formatted}`, { scroll: false });
+      router.push(`/search?query=${formatted}`, { scroll: false });
     }
   }, [debouncedQuery, router]);
 
@@ -61,7 +62,7 @@ export function Search() {
         onKeyDown={(e) => {
           if (e.key === "Enter" && query.trim()) {
             const formatted = formatTyreSizeQuery(query);
-            router.push(`/tyres?query=${formatted}`, { scroll: false });
+            router.push(`/search?query=${formatted}`, { scroll: false });
             sendGAEvent({
               action: "search",
               params: {

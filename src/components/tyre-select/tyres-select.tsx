@@ -161,8 +161,8 @@ export function TyresSelect() {
 
   return (
     <>
-      <h2>Пошук шин за розміром:</h2>
-      <form className="flex flex-col gap-2 w-full lg:max-w-[65ch] pb-2 ">
+      <h2 className="text-center">Пошук шин за розміром:</h2>
+      <form className="flex flex-col gap-2 w-full lg:max-w-[65ch] pb-2 mx-auto">
         <div className="flex gap-6 flex-col md:flex-row justify-between">
           <OptionSelect
             id="width"

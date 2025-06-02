@@ -1,7 +1,7 @@
 import { TyresList } from "@/components";
 import { getTyres, getModelImagesByIds } from "@/lib";
 
-  export default async function SearchPage({
+export default async function TyresPage({
   searchParams,
 }: {
   searchParams: Record<string, string | string[] | undefined>;

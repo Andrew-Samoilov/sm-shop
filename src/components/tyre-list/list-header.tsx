@@ -40,7 +40,7 @@ export function ListHeader() {
 
 
     return (
-        <div className="flex justify-between py-6">
+        <header className="flex justify-between py-6">
             <div className="flex gap-2 items-center">
                 <span className="hidden md:block text-light">Вигляд</span>
                 <button
@@ -71,6 +71,6 @@ export function ListHeader() {
             <div className="flex gap-2 items-center">
                 <span className="hidden md:block text-light">Сортування</span>
             </div>
-        </div>
+        </header>
     );
 }
