@@ -3,6 +3,15 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { ListBulletIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 
+// const SORT_KEY = "tyres_sort_order";
+
+const SORT_OPTIONS = [
+    { label: "За назвою (А-Я)", value: "title_asc" },
+    { label: "За назвою (Я-А)", value: "title_desc" },
+    { label: "За ціною (зростання)", value: "price_asc" },
+    { label: "За ціною (спадання)", value: "price_desc" },
+];
+
 export function ListHeader() {
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -42,7 +51,7 @@ export function ListHeader() {
     return (
         <header className="flex justify-between py-6">
             <fieldset className="flex gap-2 items-center">
-                <span className="hidden md:block text-light">Вигляд</span>
+                <span className="hidden md:block text-light text-sm">Вигляд</span>
 
                 <label
                     className={`btn p-0.5 ${view === "list"
@@ -82,7 +91,18 @@ export function ListHeader() {
             </fieldset>
 
             <div className="flex gap-2 items-center">
-                <span className="hidden md:block text-light">Сортування</span>
+                <span className="hidden md:block text-light text-sm">Сортування</span>
+                <select
+                    className="rounded-md border border-border dark:border-darkmode-border px-2 py-1"
+                    // value={sort}
+                    // onChange={(e) => setSort(e.target.value)}
+                >
+                    {SORT_OPTIONS.map((option) => (
+                        <option key={option.value} value={option.value}>
+                            {option.label}
+                        </option>
+                    ))}
+                </select>
             </div>
         </header>
     );

@@ -41,14 +41,6 @@ export function TyresSelect() {
 
     queryHandled.current = true;
 
-    // const regex = /(\d{3})\/(\d{2})R(\d{2})/i;
-    // const match = regex.exec(query);
-    // if (match) {
-    //   const [, w, p, d] = match;
-    //   setWidth(w);
-    //   setProfile(p);
-    //   setDiameter(d);
-    // } else {
       fetch(`/api/tyres?query=${encodeURIComponent(query)}`)
         .then((res) => res.json())
         .then((data) => {

@@ -10,7 +10,7 @@ type TyreListItemProps = {
 
 export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
     return (
-        <div className="flex justify-between gap-6 items-center p-6 bg-theme-light dark:bg-theme-dark rounded-lg">
+        <div className="flex justify-between gap-12 items-center p-6 bg-theme-light dark:bg-theme-dark rounded-lg">
             {modelImages.length > 0 && (
                 <div className="relative w-[193px] h-[193px] overflow-hidden group shrink-0">
                     <Image
@@ -30,7 +30,7 @@ export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
                             className="absolute z-0 inset-0 object-contain object-top transition-opacity duration-300 opacity-0 group-hover:opacity-100"
                         />
                     )}
-                    
+
                     <SeasonIcon
                         season={tyre.season}
                         className="absolute top-2 left-2 z-10"
@@ -39,24 +39,51 @@ export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
                 </div>
             )}
 
-            <Link href={`/tyres/${tyre.slug}`} className="pr-2 flex flex-col mr-auto">
-                <span>
-                    {tyre.title}{" "}
-                    <span title="Країна виробництва" className="text-light text-sm">
-                        {tyre.country}{" "}
-                        <span title="Номер тижня та рік виробництва">{tyre.dateCode}</span>
+            <Link href={`/tyres/${tyre.slug}`} className="gap-2 flex flex-col mr-auto">
+                <span className="text-2xl font-semibold">{tyre.brand}</span>
+                <span className="text-lg font-semibold">{tyre.model}</span>
+                <span>{tyre.title}</span>
+                {tyre.season && (
+                    <div
+                        className="text-light text-sm flex gap-2">
+                        Сезон: {tyre.season}
+                        {!modelImages.length && <SeasonIcon season={tyre.season} />}
+                    </div>
+                )}
+
+                {tyre.country && (
+                    <span
+                        className="text-light text-sm">
+                        Країна виробництва: {tyre.country}
                     </span>
-                </span>
-                {!modelImages.length && <SeasonIcon season={tyre.season} />}
-                <div className="pt-2 font-semibold">{tyre.price?.toString()} грн.</div>
+                )}
+
+
+                {tyre.dateCode && (
+                    <span
+                        title="Номер тижня та рік виробництва"
+                        className="text-light text-sm">
+                        Дата виробництва: {tyre.dateCode}
+                    </span>
+                )}
+
             </Link>
 
-            <AddToCartButton
-                id={tyre.id}
-                title={tyre.title}
-                price={tyre.price}
-                quantity={4}
-            />
+            <div className="flex flex-col gap-6">
+                <div className="flex flex-row gap-2 items-end mx-auto">
+                    <span
+                        className="font-semibold text-2xl"
+                    >{tyre.price?.toString()}</span>
+                    <span className="text-light">грн</span>
+                </div>
+
+                <AddToCartButton
+                    id={tyre.id}
+                    title={tyre.title}
+                    price={tyre.price}
+                    quantity={4}
+                />
+            </div>
         </div>
     );
 }

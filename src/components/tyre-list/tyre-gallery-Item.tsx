@@ -48,7 +48,12 @@ export function TyreGalleryItem({ tyre, modelImages }: TyreListItemProps) {
                     </span>
                 </span>
                 {!modelImages.length && <SeasonIcon season={tyre.season} />}
-                <div className="pt-2 font-semibold">{tyre.price?.toString()} грн.</div>
+                <div className="flex flex-row gap-2 items-end mr-auto">
+                    <span
+                        className="font-semibold text-2xl"
+                    >{tyre.price?.toString()}</span>
+                    <span className="text-light">грн</span>
+                </div>
             </Link>
 
             <AddToCartButton
