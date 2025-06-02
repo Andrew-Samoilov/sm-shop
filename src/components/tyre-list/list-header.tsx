@@ -41,32 +41,45 @@ export function ListHeader() {
 
     return (
         <header className="flex justify-between py-6">
-            <div className="flex gap-2 items-center">
+            <fieldset className="flex gap-2 items-center">
                 <span className="hidden md:block text-light">Вигляд</span>
-                <button
-                    aria-label="Список"
-                    disabled={view === "list"}
-                    onClick={() => handleViewChange("list")}
+
+                <label
                     className={`btn p-0.5 ${view === "list"
                         ? "btn-primary" :
                         "btn-outline-primary hover:scale-105 duration-300"
                         }`}
                 >
+                    <input
+                        type="radio"
+                        name="view"
+                        value="list"
+                        checked={view === "list"}
+                        onChange={() => handleViewChange("list")}
+                        className="sr-only"
+                        aria-label="Список"
+                    />
                     <ListBulletIcon className="h-6 w-6" />
-                </button>
-
-                <button
-                    onClick={() => handleViewChange("gallery")}
-                    aria-label="Галерея"
-                    disabled={view === "gallery"}
-                    className={`btn p-0.5  ${view === "gallery"
+                </label>
+                
+                <label
+                    className={`btn p-0.5 ${view === "gallery"
                         ? "btn-primary"
-                        : "btn-outline-primary hover:scale-105 duration-300"
-                        }`}
+                        : "btn-outline-primary hover:scale-105 duration-300"}`}
                 >
+                    <input
+                        type="radio"
+                        name="view"
+                        value="gallery"
+                        checked={view === "gallery"}
+                        onChange={() => handleViewChange("gallery")}
+                        className="sr-only"
+                        aria-label="Галерея"
+                    />
                     <Squares2X2Icon className="h-6 w-6" />
-                </button>
-            </div>
+                </label>
+
+            </fieldset>
 
             <div className="flex gap-2 items-center">
                 <span className="hidden md:block text-light">Сортування</span>
