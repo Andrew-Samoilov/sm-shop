@@ -31,8 +31,8 @@ export default async function TyrePage({
 
   return (
     <article >
-      <div className="flex items-center content-center gap-6 pb-6 mx-auto">
-        <h1>{tyre.title}</h1>
+      <div className="flex items-center justify-center gap-6 pb-6 ">
+        <h1 >{tyre.title}</h1>
         <div className="flex flex-col gap-2">
           <div className="flex flex-row gap-2 items-center">
             <span

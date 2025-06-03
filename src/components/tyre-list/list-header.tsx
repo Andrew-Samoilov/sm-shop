@@ -5,12 +5,12 @@ import { useEffect, useState } from "react";
 
 // const SORT_KEY = "tyres_sort_order";
 
-const SORT_OPTIONS = [
-    { label: "За назвою (А-Я)", value: "title_asc" },
-    { label: "За назвою (Я-А)", value: "title_desc" },
-    { label: "За ціною (зростання)", value: "price_asc" },
-    { label: "За ціною (спадання)", value: "price_desc" },
-];
+// const SORT_OPTIONS = [
+//     { label: "За назвою (А-Я)", value: "title_asc" },
+//     { label: "За назвою (Я-А)", value: "title_desc" },
+//     { label: "За ціною (зростання)", value: "price_asc" },
+//     { label: "За ціною (спадання)", value: "price_desc" },
+// ];
 
 export function ListHeader() {
     const router = useRouter();
@@ -70,7 +70,7 @@ export function ListHeader() {
                     />
                     <ListBulletIcon className="h-6 w-6" />
                 </label>
-                
+
                 <label
                     className={`btn p-0.5 ${view === "gallery"
                         ? "btn-primary"
@@ -92,17 +92,18 @@ export function ListHeader() {
 
             <div className="flex gap-2 items-center">
                 <span className="hidden md:block text-light text-sm">Сортування</span>
-                <select
+                {/* <select
+                    disabled
                     className="rounded-md border border-border dark:border-darkmode-border px-2 py-1"
-                    // value={sort}
-                    // onChange={(e) => setSort(e.target.value)}
+                // value={sort}
+                // onChange={(e) => setSort(e.target.value)}
                 >
                     {SORT_OPTIONS.map((option) => (
                         <option key={option.value} value={option.value}>
                             {option.label}
                         </option>
                     ))}
-                </select>
+                </select> */}
             </div>
         </header>
     );

@@ -32,8 +32,7 @@ export function SeasonCheckbox({
                             id={v}
                             type="checkbox"
                             checked={value.includes(v)}
-                            onChange={() => handleToggle(v)}
-                            className="rounded-md"
+                            onChange={() => handleToggle(v)}                       
                         />
                         <span >{label}</span>
                     </label>

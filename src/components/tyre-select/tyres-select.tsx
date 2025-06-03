@@ -1,18 +1,36 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getTyresOptions } from "@/lib";
 import { HelpWindow, TyresList, OptionSelect, SeasonCheckbox, ListHeader } from "@/components";
 import { ModelImage, Tyre } from "@prisma/client";
 
+
 export function TyresSelect() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const [width, setWidth] = useState(searchParams.get("width") ?? "");
-  const [profile, setProfile] = useState(searchParams.get("profile") ?? "");
-  const [diameter, setDiameter] = useState(searchParams.get("diameter") ?? "");
-  const [seasons, setSeasons] = useState<string[]>([]);
+  const params = useMemo(() => {
+    return {
+      width: searchParams.get("width") ?? "",
+      profile: searchParams.get("profile") ?? "",
+      diameter: searchParams.get("diameter") ?? "",
+      seasons: searchParams.getAll("season"),
+      view: searchParams.get("view") === "gallery" ? "gallery" : "list",
+    };
+  }, [searchParams]);
+
+
+  // console.log(`[TyresSelect] searchParams`, ...searchParams);
+
+  const [width, setWidth] = useState(params.width);
+  const [profile, setProfile] = useState(params.profile);
+  const [diameter, setDiameter] = useState(params.diameter);
+  const [seasons, setSeasons] = useState<string[]>(params.seasons);
+  const [view, setView] = useState<"list" | "gallery">(
+    params.view === "gallery" ? "gallery" : "list"
+  );
+
 
   const [options, setOptions] = useState({
     widths: [] as number[],
@@ -23,36 +41,29 @@ export function TyresSelect() {
   const [helpOpen, setHelpOpen] = useState(false);
   const [selectedTyres, setSelectedTyres] = useState<Tyre[]>([]);
   const [images, setImages] = useState<ModelImage[]>([]);
-  const [view, setView] = useState<"list" | "gallery">("list");
+
 
   // Для уникнення циклічних апдейтів
   const skipNextSync = useRef(false);
 
   const toNum = (v: string) => (v ? Number(v) : undefined);
 
-  const queryHandled = useRef(false);
 
   // розбираємо query
-  useEffect(() => {
-    if (queryHandled.current) return;
+  // useEffect(() => {
+  //   const queryParam = searchParams.get("query") ?? "";
+  //   if (!queryParam.trim()) return;
 
-    const query = searchParams.get("query");
-    if (!query) return;
-
-    queryHandled.current = true;
-
-      fetch(`/api/tyres?query=${encodeURIComponent(query)}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setSelectedTyres(data.tyres);
-          setImages(data.images);
-        })
-        .catch((error) =>
-          console.error("[TyresSelect] Помилка запиту по текстовому query:", error)
-        );
-    // }
-   
-  }, [searchParams]);
+  //   fetch(`/api/tyres?query=${encodeURIComponent(queryParam)}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setSelectedTyres(data.tyres);
+  //       setImages(data.images);
+  //     })
+  //     .catch((error) =>
+  //       console.error("[TyresSelect] Помилка запиту по текстовому query:", error)
+  //     );
+  // }, [searchParams]);
 
 
   // Оновлюємо URL при зміні state
@@ -67,16 +78,16 @@ export function TyresSelect() {
     if (profile) params.set("profile", profile);
     if (diameter) params.set("diameter", diameter);
     seasons.forEach((s) => params.append("season", s));
-    params.set("view", view);
+    if (view) params.set("view", view);
 
     // replace замість push, щоб не плодити історію
     router.replace(`?${params.toString()}`, { scroll: false });
-    // eslint-disable-next-line
-  }, [width, profile, diameter, seasons, view]);
 
-  // Оновлюємо state при зміні searchParams (наприклад, back/forward або direct link)
+  }, [width, profile, diameter, seasons, view, router]);
+
+
+  // Зміна searchParams (наприклад, back/forward або direct link)
   useEffect(() => {
-    // Перевіряємо, чи реально змінились параметри
     const widthParam = searchParams.get("width") ?? "";
     const profileParam = searchParams.get("profile") ?? "";
     const diameterParam = searchParams.get("diameter") ?? "";
@@ -87,6 +98,7 @@ export function TyresSelect() {
       widthParam !== width ||
       profileParam !== profile ||
       diameterParam !== diameter ||
+
       JSON.stringify(seasonsParam) !== JSON.stringify(seasons) ||
       viewParam !== view;
 
@@ -98,10 +110,11 @@ export function TyresSelect() {
       setSeasons(seasonsParam);
       setView(viewParam);
     }
-    // eslint-disable-next-line
-  }, [searchParams]);
 
-  // Динамічно підтягуємо опції для селектів
+  }, [diameter, profile,  searchParams, seasons, view, width]);
+
+
+  // Динамічно підтягуємо опції для селектів: width profile diameter
   useEffect(() => {
     const filter = {
       width: toNum(width),
@@ -122,8 +135,11 @@ export function TyresSelect() {
       );
   }, [width, profile, diameter]);
 
+
   // Отримуємо результати шин
   useEffect(() => {
+    // if (query) return;
+
     const params = new URLSearchParams();
 
     if (!width && !profile && !diameter && seasons.length === 0) {
@@ -138,7 +154,7 @@ export function TyresSelect() {
     if (seasons.length > 0) {
       seasons.forEach((s) => params.append("season", s.toUpperCase()));
     }
-    params.append("view", view);
+    // if (view) params.append("view", view);
 
     fetch(`/api/tyres?${params.toString()}`)
       .then((res) => res.json())
@@ -149,12 +165,15 @@ export function TyresSelect() {
       .catch((error) =>
         console.error("[TyresSelect] Помилка завантаження шин:", error)
       );
-  }, [width, profile, diameter, seasons, view]);
+  }, [width, profile, diameter, seasons, searchParams]);
 
   return (
     <>
       <h2 className="text-center">Пошук шин за розміром:</h2>
-      <form className="flex flex-col gap-2 w-full lg:max-w-[65ch] pb-2 mx-auto">
+      <form
+        className="flex flex-col gap-2 w-full lg:max-w-[65ch] pb-2 mx-auto"
+        onSubmit={(e) => e.preventDefault()}
+      >
         <div className="flex gap-6 flex-col md:flex-row justify-between">
           <OptionSelect
             id="width"
