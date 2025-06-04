@@ -30,6 +30,7 @@ export function TyresSelect() {
   const [view, setView] = useState<"list" | "gallery">(
     params.view === "gallery" ? "gallery" : "list"
   );
+  const [sort, setSort] = useState(searchParams.get("sort") ?? "title_asc");
 
 
   const [options, setOptions] = useState({
@@ -79,11 +80,12 @@ export function TyresSelect() {
     if (diameter) params.set("diameter", diameter);
     seasons.forEach((s) => params.append("season", s));
     if (view) params.set("view", view);
+    if (sort) params.set("sort", sort);
 
     // replace замість push, щоб не плодити історію
     router.replace(`?${params.toString()}`, { scroll: false });
 
-  }, [width, profile, diameter, seasons, view, router]);
+  }, [width, profile, diameter, seasons, view, router, sort]);
 
 
   // Зміна searchParams (наприклад, back/forward або direct link)
@@ -93,6 +95,7 @@ export function TyresSelect() {
     const diameterParam = searchParams.get("diameter") ?? "";
     const seasonsParam = searchParams.getAll("season");
     const viewParam = searchParams.get("view") === "gallery" ? "gallery" : "list";
+    const sortParam = searchParams.get("sort") ?? "title_asc";
 
     const stateChanged =
       widthParam !== width ||
@@ -109,6 +112,7 @@ export function TyresSelect() {
       setDiameter(diameterParam);
       setSeasons(seasonsParam);
       setView(viewParam);
+      setSort(sortParam);
     }
 
   }, [diameter, profile,  searchParams, seasons, view, width]);
@@ -154,7 +158,7 @@ export function TyresSelect() {
     if (seasons.length > 0) {
       seasons.forEach((s) => params.append("season", s.toUpperCase()));
     }
-    // if (view) params.append("view", view);
+    if (sort) params.append("sort", sort);
 
     fetch(`/api/tyres?${params.toString()}`)
       .then((res) => res.json())
@@ -165,7 +169,7 @@ export function TyresSelect() {
       .catch((error) =>
         console.error("[TyresSelect] Помилка завантаження шин:", error)
       );
-  }, [width, profile, diameter, seasons, searchParams]);
+  }, [width, profile, diameter, seasons, searchParams, sort]);
 
   return (
     <>
@@ -204,7 +208,7 @@ export function TyresSelect() {
 
       {selectedTyres?.length > 0 && (
         <>
-          <ListHeader view={view} onChangeView={setView} />
+          <ListHeader view={view} onChangeView={setView} sort={sort} onChangeSort={setSort} />
           <TyresList tyres={selectedTyres} images={images} view={view} />
         </>
       )}

@@ -13,13 +13,8 @@ export async function GET(req: NextRequest) {
   const season = searchParams.getAll("season");
   const validSeasons = season.filter((s): s is season => allowedSeasons.includes(s as season));
 
-  const where: Prisma.TyreWhereInput = {
-    ...(width && !isNaN(Number(width)) && { width: Number(width) }),
-    ...(profile && !isNaN(Number(profile)) && { profile: Number(profile) }),
-    ...(diameter && !isNaN(Number(diameter)) && { diameter: Number(diameter) }),
-    ...(validSeasons.length > 0 && { season: { in: validSeasons } }),
-  };
- 
+  const where: Prisma.TyreWhereInput = {};
+
   const sort = searchParams.get("sort");
 
   let orderBy: Prisma.TyreOrderByWithRelationInput;
@@ -38,6 +33,22 @@ export async function GET(req: NextRequest) {
       break;
     default:
       orderBy = { title: "asc" };
+  }
+
+  if (width && !isNaN(Number(width))) {
+    where.width = Number(width);
+  }
+
+  if (profile && !isNaN(Number(profile))) {
+    where.profile = Number(profile);
+  }
+
+  if (diameter && !isNaN(Number(diameter))) {
+    where.diameter = Number(diameter);
+  }
+
+  if (validSeasons.length > 0) {
+    where.season = { in: validSeasons };
   }
 
   try {
