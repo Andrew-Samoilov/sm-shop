@@ -12,7 +12,7 @@ export default async function Home() {
         <h2>Купити шини</h2>
         <div className="flex flex-row gap-6">
           <LinkWithGA
-            href={'/tyres?season=summer'}
+            href={'/tyres?season=summer&view=gallery'}
             eventLabel="summer"
             eventCategory="season_tyres_section"
             aria-label="Перейти до каталогу літніх шин"
@@ -22,7 +22,7 @@ export default async function Home() {
           </LinkWithGA>
 
           <LinkWithGA
-            href={'/tyres?season=winter'}
+            href={'/tyres?season=winter&view=gallery'}
             eventLabel="winter"
             eventCategory="season_tyres_section"
             aria-label="Перейти до каталогу зимових шин"
@@ -32,7 +32,7 @@ export default async function Home() {
           </LinkWithGA>
 
           <LinkWithGA
-            href={'/tyres?season=allseason'}
+            href={'/tyres?season=allseason&view=gallery'}
             eventLabel="allseason"
             eventCategory="season_tyres_section"
             aria-label="Перейти до каталогу всесезонних шин"

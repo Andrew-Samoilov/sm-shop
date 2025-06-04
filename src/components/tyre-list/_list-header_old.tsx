@@ -1,4 +1,7 @@
+"use client";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ListBulletIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
+import { useEffect, useState } from "react";
 
 // const SORT_KEY = "tyres_sort_order";
 // const SORT_OPTIONS = [
@@ -8,17 +11,39 @@ import { ListBulletIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
 //     { label: "За ціною (спадання)", value: "price_desc" },
 // ];
 
-type Props = {
-    view: "list" | "gallery";
-    onChangeView: (view: "list" | "gallery") => void;git
-};
+export function ListHeader() {
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const urlView = searchParams.get("view");
 
-export function ListHeader({ view, onChangeView }: Props) {
+    const [view, setView] = useState<"list" | "gallery">("list");
+
+    useEffect(() => {
+        const stored = localStorage.getItem("view") as "list" | "gallery" | null;
+        const initial = (urlView as "list" | "gallery") ?? stored ?? "list";
+
+        setView(initial);
+
+        if (!urlView) {
+            const newParams = new URLSearchParams(searchParams);
+            newParams.set("view", initial);
+            router.replace(`?${newParams.toString()}`);
+        }
+    }, [urlView, searchParams, router]);
 
     const handleViewChange = (newView: "list" | "gallery") => {
-        onChangeView(newView); 
-        localStorage.setItem("view", newView); 
+        setView(newView);
+        localStorage.setItem("view", newView);
+
+        const newParams = new URLSearchParams(searchParams);
+        newParams.set("view", newView);
+        router.replace(`?${newParams.toString()}`);
+
+        if (process.env.NODE_ENV === "development") {
+            console.info("[handleViewChange]", newView);
+        }
     };
+
 
     return (
         <header className="flex justify-between py-6">
