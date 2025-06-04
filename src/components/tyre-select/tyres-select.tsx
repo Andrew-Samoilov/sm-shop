@@ -64,17 +64,7 @@ export function TyresSelect() {
   //       console.error("[TyresSelect] Помилка запиту по текстовому query:", error)
   //     );
   // }, [searchParams]);
-
-  //читаємо local storage якщо view не задано в URL
-  useEffect(() => {
-    if (!searchParams.get("view")) {
-      const stored = localStorage.getItem("view");
-      if (stored === "gallery" || stored === "list") {
-        setView(stored);
-      }
-    }
-  }, [searchParams]);
-
+  
   
   // Оновлюємо URL при зміні state
   useEffect(() => {

@@ -10,15 +10,22 @@ import { ListBulletIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
 
 type Props = {
     view: "list" | "gallery";
-    onChangeView: (view: "list" | "gallery") => void;git
+    onChangeView: (view: "list" | "gallery") => void;
 };
 
 export function ListHeader({ view, onChangeView }: Props) {
 
     const handleViewChange = (newView: "list" | "gallery") => {
-        onChangeView(newView); 
-        localStorage.setItem("view", newView); 
-    };
+        onChangeView(newView);
+
+        const newParams = new URLSearchParams(window.location.search);
+        newParams.set("view", newView);
+        window.history.replaceState(null, "", `?${newParams.toString()}`);
+
+        if (process.env.NODE_ENV === "development") {
+            console.info("[handleViewChange]", newView);
+        }
+      };
 
     return (
         <header className="flex justify-between py-6">

@@ -2,31 +2,25 @@ import { TyresSelect } from "@/components";
 import { Suspense } from "react";
 import type { Metadata } from "next";
 
-type Props = {
-  searchParams: {
-    width?: string;
-    profile?: string;
-    diameter?: string;
-    season?: string | string[];
-  };
-};
-
 export async function generateMetadata(
-  { searchParams }: Props,
+  { searchParams }: { searchParams: URLSearchParams }
 ): Promise<Metadata> {
-  const { width, profile, diameter, season } = searchParams;
+  const search = searchParams.toString();
+  const url = new URL(`https://dummy.com?${search}`);
+
+  const width = url.searchParams.get("width") ?? "";
+  const profile = url.searchParams.get("profile") ?? "";
+  const diameter = url.searchParams.get("diameter") ?? "";
+  const season = url.searchParams.getAll("season");
 
   const sizeParts = [width, profile, diameter].filter(Boolean).join("/");
   const readableSize = sizeParts ? ` ${sizeParts}` : "";
-  const readableSeason = Array.isArray(season)
-    ? season.map((s) => s.toLowerCase()).join(", ")
-    : season?.toLowerCase();
-
+  const readableSeason = season.join(", ").toLowerCase();
   const readableSeasonText = readableSeason ? ` – ${readableSeason}` : "";
   const readableSeasonDesc = readableSeason ? ` для сезону ${readableSeason}` : "";
 
   const title = `Шини${readableSize}${readableSeasonText} | Shina Mix`;
-  const description = `Підібрати шини${readableSize}${readableSeasonDesc}. Великий вибір, доступні ціни, доставка по Україні.`;    
+  const description = `Підібрати шини${readableSize}${readableSeasonDesc}. Великий вибір, доступні ціни, доставка по Україні.`;
 
   return {
     title,
@@ -37,13 +31,15 @@ export async function generateMetadata(
     openGraph: {
       title,
       description,
-      url: "/tyres",
+      url: `https://yourdomain.com/tyres?${search}`,
       siteName: "Shina Mix",
       locale: "uk_UA",
       type: "website",
     },
   };
 }
+
+
 
 export default function TyresPage() {
   return (

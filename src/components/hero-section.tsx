@@ -13,7 +13,7 @@ export function HeroSection() {
                 <p className="text-sm text-light pb-4"
                 >* - на сезон, при купівлі комплекту шин (докладніше)</p>
                 <LinkWithGA
-                    href={'/tyres'}
+                    href={'/tyres?view=gallery'}
                     eventLabel="hero_button"
                     eventCategory="hero"
                     aria-label="Перейти до каталогу шин"
