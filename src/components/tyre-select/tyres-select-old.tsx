@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getTyresOptions } from "@/lib";
 import { HelpWindow, TyresList, OptionSelect, SeasonCheckbox, ListHeader } from "@/components";
@@ -10,33 +10,29 @@ export function TyresSelect() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
+  const params = useMemo(() => {
+    return {
+      width: searchParams.get("width") ?? "",
+      profile: searchParams.get("profile") ?? "",
+      diameter: searchParams.get("diameter") ?? "",
+      seasons: searchParams.getAll("season"),
+      view: searchParams.get("view") === "gallery" ? "gallery" : "list",
+    };
+  }, [searchParams]);
 
-  // Зчитуємо значення тільки один раз при завантаженні
-  const initialParams = useRef<{
-    width: string;
-    profile: string;
-    diameter: string;
-    seasons: string[];
-    view: "gallery" | "list";
-    sort: string;
-  }>({
-    width: searchParams.get("width") ?? "",
-    profile: searchParams.get("profile") ?? "",
-    diameter: searchParams.get("diameter") ?? "",
-    seasons: searchParams.getAll("season"),
-    view: searchParams.get("view") === "gallery" ? "gallery" : "list",
-    sort: searchParams.get("sort") ?? "price_asc",
-  });
-  
-  
-  const [width, setWidth] = useState(initialParams.current.width);
-  const [profile, setProfile] = useState(initialParams.current.profile);
-  const [diameter, setDiameter] = useState(initialParams.current.diameter);
-  const [seasons, setSeasons] = useState<string[]>(initialParams.current.seasons);
-  const [view, setView] = useState<"list" | "gallery">(initialParams.current.view);
-  const [sort, setSort] = useState(initialParams.current.sort);
 
   // console.log(`[TyresSelect] searchParams`, ...searchParams);
+
+  const [width, setWidth] = useState(params.width);
+  const [profile, setProfile] = useState(params.profile);
+  const [diameter, setDiameter] = useState(params.diameter);
+  const [seasons, setSeasons] = useState<string[]>(params.seasons);
+  const [view, setView] = useState<"list" | "gallery">(
+    params.view === "gallery" ? "gallery" : "list"
+  );
+  const [sort, setSort] = useState(searchParams.get("sort") ?? "title_asc");
+
+
   const [options, setOptions] = useState({
     widths: [] as number[],
     profiles: [] as number[],
@@ -46,6 +42,10 @@ export function TyresSelect() {
   const [helpOpen, setHelpOpen] = useState(false);
   const [selectedTyres, setSelectedTyres] = useState<Tyre[]>([]);
   const [images, setImages] = useState<ModelImage[]>([]);
+
+
+  // Для уникнення циклічних апдейтів
+  const skipNextSync = useRef(false);
 
   const toNum = (v: string) => (v ? Number(v) : undefined);
 
@@ -65,41 +65,15 @@ export function TyresSelect() {
   //       console.error("[TyresSelect] Помилка запиту по текстовому query:", error)
   //     );
   // }, [searchParams]);
-
-
   
-  // 1. Завантаження шин (або очищення)
+  
+  // Оновлюємо URL при зміні state
   useEffect(() => {
-    const isEmpty = !width && !profile && !diameter && seasons.length === 0;
-    if (isEmpty) {
-      setSelectedTyres([]);
-      setImages([]);
+    if (skipNextSync.current) {
+      skipNextSync.current = false;
       return;
     }
 
-    const params = new URLSearchParams();
-    if (width) params.set("width", width);
-    if (profile) params.set("profile", profile);
-    if (diameter) params.set("diameter", diameter);
-    if (seasons.length > 0) {
-      seasons.forEach((s) => params.append("season", s.toUpperCase()));
-    }
-    if (sort) params.set("sort", sort);
-
-    fetch(`/api/tyres?${params.toString()}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setSelectedTyres(data.tyres);
-        setImages(data.images);
-      })
-      .catch((error) => {
-        console.error("Помилка фетча шин:", error);
-      });
-  }, [width, profile, diameter, seasons, sort]);
-
- 
-  // 2. Оновлення URL
-  useEffect(() => {
     const params = new URLSearchParams();
     if (width) params.set("width", width);
     if (profile) params.set("profile", profile);
@@ -108,11 +82,43 @@ export function TyresSelect() {
     if (view) params.set("view", view);
     if (sort) params.set("sort", sort);
 
+    // replace замість push, щоб не плодити історію
     router.replace(`?${params.toString()}`, { scroll: false });
-  }, [width, profile, diameter, seasons, view, sort, router]);
+
+  }, [width, profile, diameter, seasons, view, router, sort]);
 
 
-  // 3. Завантаження опції для селектів: width profile diameter
+  // Зміна searchParams (наприклад, back/forward або direct link)
+  useEffect(() => {
+    const widthParam = searchParams.get("width") ?? "";
+    const profileParam = searchParams.get("profile") ?? "";
+    const diameterParam = searchParams.get("diameter") ?? "";
+    const seasonsParam = searchParams.getAll("season");
+    const viewParam = searchParams.get("view") === "gallery" ? "gallery" : "list";
+    const sortParam = searchParams.get("sort") ?? "title_asc";
+
+    const stateChanged =
+      widthParam !== width ||
+      profileParam !== profile ||
+      diameterParam !== diameter ||
+
+      JSON.stringify(seasonsParam) !== JSON.stringify(seasons) ||
+      viewParam !== view;
+
+    if (stateChanged) {
+      skipNextSync.current = true; // Щоб не запускати router.replace одразу після цього
+      setWidth(widthParam);
+      setProfile(profileParam);
+      setDiameter(diameterParam);
+      setSeasons(seasonsParam);
+      setView(viewParam);
+      setSort(sortParam);
+    }
+
+  }, [diameter, profile,  searchParams, seasons, view, width]);
+
+
+  // Динамічно підтягуємо опції для селектів: width profile diameter
   useEffect(() => {
     const filter = {
       width: toNum(width),
@@ -133,6 +139,36 @@ export function TyresSelect() {
       );
   }, [width, profile, diameter]);
 
+  // Отримуємо результати шин
+  useEffect(() => {
+    // if (query) return;
+
+    if (!width && !profile && !diameter && seasons.length === 0) {
+      setSelectedTyres([]);
+      setImages([]);
+      return;
+    }
+
+    const params = new URLSearchParams();
+    
+    if (width) params.append("width", width);
+    if (profile) params.append("profile", profile);
+    if (diameter) params.append("diameter", diameter);
+    if (seasons.length > 0) {
+      seasons.forEach((s) => params.append("season", s.toUpperCase()));
+    }
+    if (sort) params.append("sort", sort);
+
+    fetch(`/api/tyres?${params.toString()}`)
+      .then((res) => res.json())
+      .then(async (data) => {
+        setSelectedTyres(data.tyres);
+        setImages(data.images);
+      })
+      .catch((error) =>
+        console.error("[TyresSelect] Помилка завантаження шин:", error)
+      );
+  }, [width, profile, diameter, seasons, sort]);
 
   return (
     <>
