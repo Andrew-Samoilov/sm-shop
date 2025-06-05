@@ -5,23 +5,21 @@ import { getTyresOptions } from "@/lib";
 import { HelpWindow, TyresList, OptionSelect, SeasonCheckbox, ListHeader } from "@/components";
 import { ModelImage, Tyre } from "@prisma/client";
 
-type ViewType = "list" | "gallery";
-
-type FilterState = {
-  width: string;
-  profile: string;
-  diameter: string;
-  seasons: string[];
-  view: ViewType;
-  sort: string;
-};
 
 export function TyresSelect() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  // console.log(`[TyresSelect] searchParams`, ...searchParams);
 
-  const initial = useRef<FilterState>({
+
+  // Зчитуємо значення тільки один раз при завантаженні
+  const initialParams = useRef<{
+    width: string;
+    profile: string;
+    diameter: string;
+    seasons: string[];
+    view: "gallery" | "list";
+    sort: string;
+  }>({
     width: searchParams.get("width") ?? "",
     profile: searchParams.get("profile") ?? "",
     diameter: searchParams.get("diameter") ?? "",
@@ -30,7 +28,15 @@ export function TyresSelect() {
     sort: searchParams.get("sort") ?? "price_asc",
   });
   
-  const [filters, setFilters] = useState<FilterState>(initial.current);
+  
+  const [width, setWidth] = useState(initialParams.current.width);
+  const [profile, setProfile] = useState(initialParams.current.profile);
+  const [diameter, setDiameter] = useState(initialParams.current.diameter);
+  const [seasons, setSeasons] = useState<string[]>(initialParams.current.seasons);
+  const [view, setView] = useState<"list" | "gallery">(initialParams.current.view);
+  const [sort, setSort] = useState(initialParams.current.sort);
+
+  // console.log(`[TyresSelect] searchParams`, ...searchParams);
   const [options, setOptions] = useState({
     widths: [] as number[],
     profiles: [] as number[],
@@ -43,14 +49,27 @@ export function TyresSelect() {
 
   const toNum = (v: string) => (v ? Number(v) : undefined);
 
-  //  Зміна одного параметра
-  const updateFilter = <K extends keyof FilterState>(key: K, value: FilterState[K]) =>
-    setFilters((prev) => ({ ...prev, [key]: value }));
+
+  // розбираємо query
+  // useEffect(() => {
+  //   const queryParam = searchParams.get("query") ?? "";
+  //   if (!queryParam.trim()) return;
+
+  //   fetch(`/api/tyres?query=${encodeURIComponent(queryParam)}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setSelectedTyres(data.tyres);
+  //       setImages(data.images);
+  //     })
+  //     .catch((error) =>
+  //       console.error("[TyresSelect] Помилка запиту по текстовому query:", error)
+  //     );
+  // }, [searchParams]);
 
 
+  
   // 1. Завантаження шин (або очищення)
   useEffect(() => {
-    const { width, profile, diameter, seasons, sort } = filters;
     const isEmpty = !width && !profile && !diameter && seasons.length === 0;
     if (isEmpty) {
       setSelectedTyres([]);
@@ -62,8 +81,10 @@ export function TyresSelect() {
     if (width) params.set("width", width);
     if (profile) params.set("profile", profile);
     if (diameter) params.set("diameter", diameter);
-    seasons.forEach((s) => params.append("season", s.toUpperCase()));
-    params.set("sort", sort);
+    if (seasons.length > 0) {
+      seasons.forEach((s) => params.append("season", s.toUpperCase()));
+    }
+    if (sort) params.set("sort", sort);
 
     fetch(`/api/tyres?${params.toString()}`)
       .then((res) => res.json())
@@ -72,31 +93,31 @@ export function TyresSelect() {
         setImages(data.images);
       })
       .catch((error) => {
-        console.error("[Tyres Select] Помилка фетча шин:", error);
+        console.error("Помилка фетча шин:", error);
       });
-  }, [filters]);
+  }, [width, profile, diameter, seasons, sort]);
 
-   
+ 
   // 2. Оновлення URL
   useEffect(() => {
     const params = new URLSearchParams();
-    if (filters.width) params.set("width", filters.width);
-    if (filters.profile) params.set("profile", filters.profile);
-    if (filters.diameter) params.set("diameter", filters.diameter);
-    filters.seasons.forEach((s) => params.append("season", s));
-    params.set("view", filters.view);
-    params.set("sort", filters.sort);
+    if (width) params.set("width", width);
+    if (profile) params.set("profile", profile);
+    if (diameter) params.set("diameter", diameter);
+    seasons.forEach((s) => params.append("season", s));
+    if (view) params.set("view", view);
+    if (sort) params.set("sort", sort);
 
     router.replace(`?${params.toString()}`, { scroll: false });
-  }, [filters, router]);
+  }, [width, profile, diameter, seasons, view, sort, router]);
 
 
   // 3. Завантаження опції для селектів: width profile diameter
   useEffect(() => {
     const filter = {
-      width: toNum(filters.width),
-      profile: toNum(filters.profile),
-      diameter: toNum(filters.diameter),
+      width: toNum(width),
+      profile: toNum(profile),
+      diameter: toNum(diameter),
     };
 
     Promise.all([
@@ -110,7 +131,7 @@ export function TyresSelect() {
       .catch((err) =>
         console.error("[TyresSelect] Помилка завантаження опцій:", err)
       );
-  }, [filters.width, filters.profile, filters.diameter]);
+  }, [width, profile, diameter]);
 
 
   return (
@@ -124,39 +145,34 @@ export function TyresSelect() {
           <OptionSelect
             id="width"
             label="Ширина"
-            value={filters.width}
-            onChange={(v) => updateFilter("width", v)}
+            value={width}
+            onChange={setWidth}
             options={options.widths}
           />
           <OptionSelect
             id="profile"
             label="Профіль"
-            value={filters.profile}
-            onChange={(v) => updateFilter("profile", v)}
+            value={profile}
+            onChange={setProfile}
             options={options.profiles}
           />
           <OptionSelect
             id="diameter"
             label="Діаметр"
-            value={filters.diameter}
-            onChange={(v) => updateFilter("diameter", v)}
+            value={diameter}
+            onChange={setDiameter}
             options={options.diameters}
           />
         </div>
-        <SeasonCheckbox value={filters.seasons} onChange={(v) => updateFilter("seasons", v)} />
+        <SeasonCheckbox value={seasons} onChange={setSeasons} />
 
         <HelpWindow isOpen={helpOpen} setIsOpen={setHelpOpen} />
       </form>
 
       {selectedTyres?.length > 0 && (
         <>
-          <ListHeader
-            view={filters.view}
-            onChangeView={(v) => updateFilter("view", v)}
-            sort={filters.sort}
-            onChangeSort={(v) => updateFilter("sort", v)}
-          />
-          <TyresList tyres={selectedTyres} images={images} view={filters.view} />
+          <ListHeader view={view} onChangeView={setView} sort={sort} onChangeSort={setSort} />
+          <TyresList tyres={selectedTyres} images={images} view={view} />
         </>
       )}
     </>
