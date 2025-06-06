@@ -21,7 +21,7 @@ import { getTyres, getModelImagesByIds } from "@/lib";
   // console.log(`[TyresPage]`, tyres.length, images.length, view);
 
   return (
-    <section className="lg:p-6">
+    <section className="container">
       <TyresList tyres={tyres} images={images} view={view} />
     </section>
   );

@@ -6,7 +6,7 @@ import { Suspense } from "react";
 
 export default function SearchPage() {
   return (
-    <section className="container mx-auto">
+    <section className="container">
       <Suspense fallback={<div>Завантаження...</div>}>
         <TyresSelect />
       </Suspense>

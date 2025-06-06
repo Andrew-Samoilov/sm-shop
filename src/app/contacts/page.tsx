@@ -20,7 +20,7 @@ export default async function ContactsPage() {
       <section className="from-body to-theme-light dark:from-darkmode-body dark:to-darkmode-theme-light bg-gradient-to-b">
         <h1>Контакти</h1>
       </section>
-      <section className="flex flex-col md:container" id="contacts">
+      <section className="flex flex-col container" id="contacts">
         <div className="grid gap-6 lg:grid-cols-2">
           {contacts.map(({ id, link, name }) => (
             <div

@@ -123,7 +123,7 @@
   }
 
   .container {
-    @apply md:ml-8 md:px-4;
+    @apply  md:px-4 mx-auto;
   }
 
   /* this bullshit css special for toaster */

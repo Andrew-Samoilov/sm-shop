@@ -1,4 +1,4 @@
-import { AddToCartButton, CertificatesSection, ModelViewerSection, ViewItemGA } from "@/components";
+import { AddToCartButton, BreadCrumbs, CertificatesSection, ModelViewerSection, ViewItemGA } from "@/components";
 import { getTyreBySlug, getModelImgByModelId, prisma } from "@/lib";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
@@ -21,6 +21,10 @@ export default async function TyrePage({
   const { tyre_slug } = await params;
   const tyre = await getTyreBySlug(tyre_slug);
 
+  const tyreSize = tyre?.width && tyre.profile && tyre.diameter && tyre.loadSpeedIndex
+    ? `${tyre.width}${tyre.delimiter ?? '/'}${tyre.profile} R${tyre.diameter} ${tyre.loadIndex}${tyre.speedIndex}`
+    : null;
+
   // console.info("[getTyreBySlug]", tyre);
   if (!tyre) return notFound();
   const images = tyre.modelId !== null
@@ -30,9 +34,15 @@ export default async function TyrePage({
   // console.info("[TyrePage]", tyre);
 
   return (
-    <article >
-      <div className="flex items-center justify-center gap-6 pb-6 ">
-        <h1 >{tyre.title}</h1>
+    <article>
+      <BreadCrumbs tyreSlug={tyre_slug} />
+
+      <div className="container flex items-center justify-center gap-18 py-6 ">
+        <h1 className="flex flex-col items-start ">
+          <span>{tyre.brand}</span>
+          <span>{tyre.model}</span>
+          <span className="font-normal text-[75%]">{tyreSize}</span>
+        </h1>
         <div className="flex flex-col gap-2">
           <div className="flex flex-row gap-2 items-center">
             <span

@@ -17,7 +17,7 @@ const version = packageData.version;
 export async function Footer() {
   return (
     <footer className="text-light bg-theme-light dark:bg-darkmode-theme-light">
-      <div className="container md:mx-auto">
+      <div className="container">
         <nav className="flex flex-col items-center pt-14 pb-12 md:flex-row md:items-start md:justify-between">
           <span className="hidden md:block ">
             <Logo

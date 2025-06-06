@@ -43,7 +43,7 @@ export async function generateMetadata(
 
 export default function TyresPage() {
   return (
-    <section className="container mx-auto">
+    <section className="container">
       <Suspense fallback={<div>Завантаження...</div>}>
         <TyresSelect />
       </Suspense>

@@ -1,6 +1,8 @@
 export { AddToCartButton } from "./add-to-cart-button"
 export { Analytics } from "./analytics"
 export { BenefitsSection } from "./benefits-section"
+export { BreadCrumbs } from "./bread-crumbs"
+
 export { CartPanel } from "./cart-panel"
 export { ContactForm } from "./contact-form"
 export { FeatureSection } from "./features-section"
