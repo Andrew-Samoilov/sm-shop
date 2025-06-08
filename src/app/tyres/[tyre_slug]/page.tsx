@@ -39,8 +39,8 @@ export default async function TyrePage({
 
       <div className="container flex items-center justify-center gap-18 py-6 ">
         <h1 className="flex flex-col items-start ">
-          <span>{tyre.brand}</span>
-          <span>{tyre.model}</span>
+          <span>{tyre.brand?.name}</span>
+          <span>{tyre.model?.name}</span>
           <span className="font-normal text-[75%]">{tyreSize}</span>
         </h1>
         <div className="flex flex-col gap-2">
@@ -63,20 +63,20 @@ export default async function TyrePage({
       <ViewItemGA
         item_id={tyre.id}
         item_name={tyre.title}
-        brand={tyre.brand ?? ""}
-        model={tyre.model ?? ""}
+        brand={tyre.brand?.name ?? ""}
+        model={tyre.model?.name ?? ""}
         price={Number(tyre.price)}
       />
 
       {tyre.modelId !== null && images.length > 0 && <ModelViewerSection images={images} />}
 
-      {tyre.models?.description && (
+      {tyre.model?.description && (
         <section className="p-6 lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl  bg-body dark:bg-darkmode-body z-10">
-          <ReactMarkdown>{tyre.models.description}</ReactMarkdown>
+          <ReactMarkdown>{tyre.model.description}</ReactMarkdown>
         </section>
       )}
 
-      <CertificatesSection brandName={tyre.brand ?? undefined} />
+      <CertificatesSection brandName={tyre.brand?.name ?? undefined} />
 
       {Object.entries(tyre).map(([key, value]) => (
         <p key={key}>

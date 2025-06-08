@@ -1,4 +1,5 @@
-import { Brand } from "@/types";
+
+import { Brand } from "@prisma/client";
 import { prisma } from "./prisma";
 
 export async function getBrands(): Promise<Brand[]> {

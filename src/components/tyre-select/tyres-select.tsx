@@ -3,7 +3,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getTyresOptions } from "@/lib";
 import { HelpWindow, TyresList, OptionSelect, SeasonCheckbox, ListHeader } from "@/components";
-import { ModelImage, Tyre } from "@prisma/client";
+import { ModelImage } from "@prisma/client";
+import { TyreWithRelations } from "@/types";
+
+
+
+
 
 type ViewType = "list" | "gallery";
 
@@ -38,7 +43,7 @@ export function TyresSelect() {
   });
 
   const [helpOpen, setHelpOpen] = useState(false);
-  const [selectedTyres, setSelectedTyres] = useState<Tyre[]>([]);
+  const [selectedTyres, setSelectedTyres] = useState<TyreWithRelations[]>([]);
   const [images, setImages] = useState<ModelImage[]>([]);
 
   const toNum = (v: string) => (v ? Number(v) : undefined);

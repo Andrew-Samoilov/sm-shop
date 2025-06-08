@@ -1,8 +1,10 @@
 import { TyreGalleryItem, TyreListItem } from "@/components";
-import { ModelImage, Tyre } from "@prisma/client";
+import { ModelImage } from "@prisma/client";
+
+import { TyreWithRelations } from "@/types";
 
 type TyresListProps = {
-  tyres: Tyre[];
+  tyres: TyreWithRelations[];
   images: ModelImage[];
   view?: "list" | "gallery";
 }

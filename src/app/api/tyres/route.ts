@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
     ...(diameter && !isNaN(Number(diameter)) && { diameter: Number(diameter) }),
     ...(validSeasons.length > 0 && { season: { in: validSeasons } }),
   };
- 
+
   const sort = searchParams.get("sort");
 
   let orderBy: Prisma.TyreOrderByWithRelationInput;
@@ -43,6 +43,10 @@ export async function GET(req: NextRequest) {
   try {
     const tyres = await prisma.tyre.findMany({
       where,
+      include: {
+        brand: true,
+        model: true,
+      },
       orderBy,
     });
 
@@ -56,7 +60,7 @@ export async function GET(req: NextRequest) {
       },
       orderBy: { position: "asc", },
     });
-    
+
     // console.log(`[DB] GET`,tyres[0])
 
     return NextResponse.json({ tyres, images });

@@ -1,22 +1,8 @@
-export type Brand = {
-  id: number;
-  name: string;
-  slug: string;
-  logo?: string | null;
-  website?: string | null;
-  description?: string | null;
-  country?: string | null;
-  createdAt: Date;
-  updatedAt: Date;
-};
+import { Prisma } from "@prisma/client";
 
-export type Model = {
-  id: number;
-  name: string;
-  brand: {
-    name: string;
-  };
-};
+export type TyreWithRelations = Prisma.TyreGetPayload<{
+    include: { brand: true; model: true }
+}>;
 
 export interface Benefit {
   id: number

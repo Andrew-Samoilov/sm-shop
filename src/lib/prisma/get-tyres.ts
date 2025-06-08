@@ -1,10 +1,9 @@
-import { PrismaClient, Prisma } from "@prisma/client";
+import { TyreWithRelations } from "@/types";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export type TyreWithModel = Prisma.TyreGetPayload<{ include: { models: true } }>;
-
-export async function getTyres(query?: string): Promise<TyreWithModel[]> {
+export async function getTyres(query?: string): Promise<TyreWithRelations[]> {
   const tyres = await prisma.tyre.findMany({
     where: query
       ? {
@@ -14,7 +13,7 @@ export async function getTyres(query?: string): Promise<TyreWithModel[]> {
         },
       }
       : undefined,
-    include: { models: true },
+    include: { model: true, brand: true },
     orderBy: {
       title: "asc",
     },
