@@ -16,9 +16,9 @@ export async function generateStaticParams() {
 export default async function TyrePage({
   params,
 }: {
-  params: Promise<{ tyre_slug: string }>;
+  params: { tyre_slug: string };
 }) {
-  const { tyre_slug } = await params;
+  const { tyre_slug } =  params;
   const tyre = await getTyreBySlug(tyre_slug);
 
   const tyreSize = tyre?.width && tyre.profile && tyre.diameter && tyre.loadSpeedIndex

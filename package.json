@@ -1,6 +1,6 @@
 {
   "name": "sm-shop",
-  "version": "0.6.5.2",
+  "version": "0.6.5.4",
   "private": true,
   "scripts": {
     "dev": "( taskkill /F /IM ssh.exe || echo ssh не працює ) && ssh -fN -L 5433:localhost:5432 sms && echo Тунель відкрито && next dev --turbopack",
@@ -20,7 +20,7 @@
     "embla-carousel-autoplay": "^8.5.2",
     "embla-carousel-react": "^8.5.2",
     "image-size": "^2.0.2",
-    "next": "^15.2.4",
+    "next": "^15.3.3",
     "nodemailer": "^6.10.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

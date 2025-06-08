@@ -19,7 +19,7 @@ function translateSeasonToUkrainian(season?: string): string {
             return "";
     }
 }
-  
+
 export async function BreadCrumbs({ tyreSlug }: Props) {
     const tyre = await getTyreBySlug(tyreSlug);
     const season = tyre?.season?.toLowerCase();
