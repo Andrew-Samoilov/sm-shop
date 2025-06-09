@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getTyresOptions } from "@/lib";
-import { HelpWindow, TyresList, OptionSelect, SeasonCheckbox, ListHeader } from "@/components";
+import { HelpWindow, TyresList, OptionSelect, SeasonCheckbox, ListHeader, Search } from "@/components";
 import { ModelImage } from "@prisma/client";
 import { TyreWithRelations } from "@/types";
 
@@ -32,7 +32,7 @@ export function TyresSelect() {
     sort: searchParams.get("sort") ?? "price_asc",
     query: searchParams.get("query") ?? "",
   });
-  
+
   const [filters, setFilters] = useState<FilterState>(initial.current);
   const [options, setOptions] = useState({
     widths: [] as number[],
@@ -67,7 +67,7 @@ export function TyresSelect() {
     if (diameter) params.set("diameter", diameter);
     seasons.forEach((s) => params.append("season", s.toUpperCase()));
     params.set("sort", sort);
-    if (query) params.set("query", query); 
+    if (query) params.set("query", query);
 
     fetch(`/api/tyres?${params.toString()}`)
       .then((res) => res.json())
@@ -80,7 +80,7 @@ export function TyresSelect() {
       });
   }, [filters]);
 
-   
+
   // 2. Оновлення URL
   useEffect(() => {
     const params = new URLSearchParams();
@@ -90,7 +90,7 @@ export function TyresSelect() {
     filters.seasons.forEach((s) => params.append("season", s));
     params.set("view", filters.view);
     params.set("sort", filters.sort);
-    params.set("query", filters.query); 
+    params.set("query", filters.query);
 
     router.replace(`?${params.toString()}`, { scroll: false });
   }, [filters, router]);
@@ -119,13 +119,17 @@ export function TyresSelect() {
 
 
   return (
-    <>
-      <h2 className="text-center">Пошук шин за розміром:</h2>
+    <aside className="gap-6 flex flex-col md:flex-col lg:flex-row ">
       <form
-        className="flex flex-col gap-2 w-full lg:max-w-[65ch] pb-2 mx-auto"
+        aria-label="Фільтри пошуку шин"
+        className="flex flex-col  gap-2 w-full lg:max-w-[65ch] pb-2 mx-auto lg:pt-6"
         onSubmit={(e) => e.preventDefault()}
       >
-        <div className="flex gap-6 flex-col md:flex-row justify-between">
+        <div className="hidden lg:block ">
+          <Search />
+        </ div>
+        <h2 className="text-center">Пошук:</h2>
+        <div className="flex gap-6 flex-col md:flex-row lg:flex-col justify-between">
           <OptionSelect
             id="width"
             label="Ширина"
@@ -153,17 +157,19 @@ export function TyresSelect() {
         <HelpWindow isOpen={helpOpen} setIsOpen={setHelpOpen} />
       </form>
 
-      {selectedTyres?.length > 0 && (
-        <>
-          <ListHeader
-            view={filters.view}
-            onChangeView={(v) => updateFilter("view", v)}
-            sort={filters.sort}
-            onChangeSort={(v) => updateFilter("sort", v)}
-          />
-          <TyresList tyres={selectedTyres} images={images} view={filters.view} />
-        </>
-      )}
-    </>
+      {
+        selectedTyres?.length > 0 && (
+          <div>
+            <ListHeader
+              view={filters.view}
+              onChangeView={(v) => updateFilter("view", v)}
+              sort={filters.sort}
+              onChangeSort={(v) => updateFilter("sort", v)}
+            />
+            <TyresList tyres={selectedTyres} images={images} view={filters.view} />
+          </div>
+        )
+      }
+    </aside >
   );
 }

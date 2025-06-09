@@ -30,9 +30,13 @@ export async function Header() {
           href="/contacts"
         >Контакти</LinkWithGA>
       </div>
-      <Search />
+      <div className="bloch lg:hidden">
+        <Search />
+      </div>
       <div className="flex items-center gap-6 ">
+
         <ThemeSwitcher />
+
         <CartPanel />
         {/* <button>
           <UserIcon className="h-5 w-5 text-light/75 cursor-not-allowed" />
