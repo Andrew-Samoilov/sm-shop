@@ -8,16 +8,23 @@ export async function GET(req: NextRequest) {
   const width = searchParams.get("width");
   const profile = searchParams.get("profile");
   const diameter = searchParams.get("diameter");
-
   const allowedSeasons: season[] = ["SUMMER", "WINTER", "ALLSEASON"];
   const season = searchParams.getAll("season");
   const validSeasons = season.filter((s): s is season => allowedSeasons.includes(s as season));
+  const query = searchParams.get("query");
 
   const where: Prisma.TyreWhereInput = {
     ...(width && !isNaN(Number(width)) && { width: Number(width) }),
     ...(profile && !isNaN(Number(profile)) && { profile: Number(profile) }),
     ...(diameter && !isNaN(Number(diameter)) && { diameter: Number(diameter) }),
     ...(validSeasons.length > 0 && { season: { in: validSeasons } }),
+    ...(query && {
+      OR: [
+        { title: { contains: query, mode: "insensitive" } },
+        { brands: { name: { contains: query, mode: "insensitive" } } },
+        { models: { name: { contains: query, mode: "insensitive" } } },
+      ],
+    }),
   };
 
   const sort = searchParams.get("sort");
@@ -41,11 +48,14 @@ export async function GET(req: NextRequest) {
   }
 
   try {
+    console.log('[api GET] query', query);
+    console.log('[api GET] where', where);
+
     const tyres = await prisma.tyre.findMany({
       where,
       include: {
-        brand: true,
-        model: true,
+        brands: true,
+        models: true,
       },
       orderBy,
     });

@@ -6,10 +6,6 @@ import { HelpWindow, TyresList, OptionSelect, SeasonCheckbox, ListHeader } from 
 import { ModelImage } from "@prisma/client";
 import { TyreWithRelations } from "@/types";
 
-
-
-
-
 type ViewType = "list" | "gallery";
 
 type FilterState = {
@@ -19,6 +15,7 @@ type FilterState = {
   seasons: string[];
   view: ViewType;
   sort: string;
+  query: string;
 };
 
 export function TyresSelect() {
@@ -33,6 +30,7 @@ export function TyresSelect() {
     seasons: searchParams.getAll("season"),
     view: searchParams.get("view") === "gallery" ? "gallery" : "list",
     sort: searchParams.get("sort") ?? "price_asc",
+    query: searchParams.get("query") ?? "",
   });
   
   const [filters, setFilters] = useState<FilterState>(initial.current);
@@ -55,8 +53,8 @@ export function TyresSelect() {
 
   // 1. Завантаження шин (або очищення)
   useEffect(() => {
-    const { width, profile, diameter, seasons, sort } = filters;
-    const isEmpty = !width && !profile && !diameter && seasons.length === 0;
+    const { width, profile, diameter, seasons, sort, query } = filters;
+    const isEmpty = !width && !profile && !query && !diameter && seasons.length === 0;
     if (isEmpty) {
       setSelectedTyres([]);
       setImages([]);
@@ -69,6 +67,7 @@ export function TyresSelect() {
     if (diameter) params.set("diameter", diameter);
     seasons.forEach((s) => params.append("season", s.toUpperCase()));
     params.set("sort", sort);
+    if (query) params.set("query", query); 
 
     fetch(`/api/tyres?${params.toString()}`)
       .then((res) => res.json())
@@ -91,6 +90,7 @@ export function TyresSelect() {
     filters.seasons.forEach((s) => params.append("season", s));
     params.set("view", filters.view);
     params.set("sort", filters.sort);
+    params.set("query", filters.query); 
 
     router.replace(`?${params.toString()}`, { scroll: false });
   }, [filters, router]);

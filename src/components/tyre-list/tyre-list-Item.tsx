@@ -47,8 +47,8 @@ export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
             </div>
 
             <Link href={`/tyres/${tyre.slug}`} className="gap-2 flex flex-col mr-auto">
-                <span className="text-2xl font-semibold">{tyre.brand?.name}</span>
-                <span className="text-lg font-semibold">{tyre.model?.name}</span>
+                <span className="text-2xl font-semibold">{tyre.brand}</span>
+                <span className="text-lg font-semibold">{tyre.model}</span>
                 <span>{tyre.title}</span>
                 {tyre.season && (
                     <div

@@ -1,7 +1,7 @@
 import { Prisma } from "@prisma/client";
 
 export type TyreWithRelations = Prisma.TyreGetPayload<{
-    include: { brand: true; model: true }
+    include: { brands: true; models: true }
 }>;
 
 export interface Benefit {

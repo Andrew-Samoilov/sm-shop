@@ -62,8 +62,8 @@ export async function generateMetadata(
       ? `${tyre.width}${tyre.delimiter ?? '/'}${tyre.profile} R${tyre.diameter} ${tyre.loadIndex}${tyre.speedIndex}`
       : "";
 
-    const name = `${tyre.brand?.name ?? ""} ${tyre.model?.name ?? ""} ${tyreSize}`.trim();
-    const description = tyre.model?.description ??
+    const name = `${tyre.brands?.name ?? ""} ${tyre.models?.name ?? ""} ${tyreSize}`.trim();
+    const description = tyre.models?.description ??
       `Шина ${name} для легкового авто. Доставка по Україні.`;
     const canonical = `https://shina-mix.com.ua/tyres/${tyre.slug}`;
     const siteUrl = "https://shina-mix.com.ua"; // Заміни якщо твій сайт інший
@@ -94,9 +94,9 @@ export async function generateMetadata(
       "name": name,
       "image": [imageUrl],
       "description": description,
-      "brand": {
+      "brands": {
         "@type": "Brand",
-        "name": tyre.brand?.name ?? ""
+        "name": tyre.brands?.name ?? ""
       },
       "sku": tyre.slug,
       "offers": {
@@ -161,8 +161,8 @@ export default async function TyrePage({
 
       <div className="container flex items-center justify-center gap-18 py-6 ">
         <h1 className="flex flex-col items-start ">
-          <span>{tyre.brand?.name}</span>
-          <span>{tyre.model?.name}</span>
+          <span>{tyre.brands?.name}</span>
+          <span>{tyre.models?.name}</span>
           <span className="font-normal text-[75%]">{tyreSize}</span>
         </h1>
         <div className="flex flex-col gap-2">
@@ -185,20 +185,20 @@ export default async function TyrePage({
       <ViewItemGA
         item_id={tyre.id}
         item_name={tyre.title}
-        brand={tyre.brand?.name ?? ""}
-        model={tyre.model?.name ?? ""}
+        brand={tyre.brands?.name ?? ""}
+        model={tyre.models?.name ?? ""}
         price={Number(tyre.price)}
       />
 
       {tyre.modelId !== null && images.length > 0 && <ModelViewerSection images={images} />}
 
-      {tyre.model?.description && (
+      {tyre.models?.description && (
         <section className="p-6 lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl  bg-body dark:bg-darkmode-body z-10">
-          <ReactMarkdown>{tyre.model.description}</ReactMarkdown>
+          <ReactMarkdown>{tyre.models.description}</ReactMarkdown>
         </section>
       )}
 
-      <CertificatesSection brandName={tyre.brand?.name ?? undefined} />
+      <CertificatesSection brandName={tyre.brands?.name ?? undefined} />
 
       {Object.entries(tyre).map(([key, value]) => (
         <p key={key}>

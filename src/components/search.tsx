@@ -32,7 +32,7 @@ export function Search() {
   useEffect(() => {
     if (debouncedQuery.trim()) {
       const formatted = formatTyreSizeQuery(debouncedQuery);
-      router.push(`/search?query=${formatted}`, { scroll: false });
+      window.location.href = `/tyres?view=list&sort=price_asc&query=${formatted}`;
     }
   }, [debouncedQuery, router]);
 
@@ -62,7 +62,7 @@ export function Search() {
         onKeyDown={(e) => {
           if (e.key === "Enter" && query.trim()) {
             const formatted = formatTyreSizeQuery(query);
-            router.push(`/search?query=${formatted}`, { scroll: false });
+            window.location.href = `/tyres?view=list&sort=price_asc&query=${formatted}`;
             sendGAEvent({
               action: "search",
               params: {
