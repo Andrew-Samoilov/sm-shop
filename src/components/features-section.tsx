@@ -1,5 +1,3 @@
-'use server'
-
 import { getContentBlock } from "@/lib";
 import { Feature } from "@/types";
 

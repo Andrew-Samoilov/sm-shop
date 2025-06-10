@@ -13,6 +13,8 @@ export { LinkWithGA } from "./link-with-ga"
 export { Logo } from "./logo"
 export { Search } from "./search"
 export { CertificatesSection } from "./certificates-section/certificates-section"
+export { InfoSection } from "./info-section";
+
 export { ThemeSwitcher } from "./theme-switcher/theme-switcher";
 
 export { TyresList } from "./tyre-list/tyres-list"

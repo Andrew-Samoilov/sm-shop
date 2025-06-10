@@ -1,4 +1,4 @@
-import { HeroSection, LinkWithGA } from "@/components";
+import { HeroSection, InfoSection, LinkWithGA } from "@/components";
 
 export default async function Home() {
 
@@ -42,6 +42,23 @@ export default async function Home() {
           </LinkWithGA>
         </div>
       </section>
+      
+      <InfoSection />
+      
+      {/* <section className=" flex flex-col items-center">
+        <h2>Інформація</h2>
+        <div className="flex flex-row gap-6">
+          <LinkWithGA
+            href={'/tyres?season=summer&view=gallery'}
+            eventLabel="summer"
+            eventCategory="season_tyres_section"
+            aria-label="Перейти до каталогу літніх шин"
+            className="bg-theme-light w-auto h-auto rounded-md p-6"
+          >
+            <h3>Літні</h3>
+          </LinkWithGA>
+        </div>
+        </section> */}
     </>
   );
 }
