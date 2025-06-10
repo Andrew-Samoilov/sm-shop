@@ -6,14 +6,14 @@ const siteConfig = await getContentBlock('site_config', { siteName: '', });
 
 export async function Header() {
   return (
-    <header className="flex gap-6 justify-between items-center flex-wrap 
+    <header className="flex w-full flex-wrap justify-between items-center  gap-6 
     bg-body/75 dark:bg-darkmode-body/75 sticky top-0 z-30  px-4 py-6 backdrop-blur-sm">
       <Logo
         text={siteConfig.siteName}
         eventCategory="header"
       />
 
-      <div className="flex items-center gap-6 ">
+      <div className="flex items-center gap-6">
         <LinkWithGA
           eventLabel="tyres"
           eventCategory="header"

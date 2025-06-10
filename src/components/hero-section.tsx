@@ -4,8 +4,8 @@ import { LinkWithGA } from "@/components";
 export function HeroSection() {
     return (
         <div
-            className="w-fit flex flex-row mx-auto items-center
-              p-18 gap-18  rounded-md
+            className="w-full md:w-fit flex flex-col-reverse md:flex-row mx-auto items-center
+             p-6 gap-6 md:p-18 md:gap-18  rounded-md
             from-body to-theme-light dark:from-darkmode-body dark:to-darkmode-theme-light bg-gradient-to-l
             ">
             <div className="lg:max-w-[70ch] flex flex-col items-center gap-2">

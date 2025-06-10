@@ -114,22 +114,18 @@
     @apply border-dark text-dark hover:bg-dark dark:hover:text-dark bg-transparent hover:text-white dark:border-white dark:text-white dark:hover:bg-white;
   }
 
-  section {
-    @apply mx-auto gap-6 lg:py-24;
-  }
-
   .section {
-    @apply p-6;
-  }
-
-  .container {
-    @apply  md:px-4 mx-auto;
+    @apply w-full mx-auto p-6 gap-6 lg:py-24;
   }
 
   /* this bullshit css special for toaster */
-  section:last-of-type {
+  .section:last-of-type {
     padding-bottom: 0 !important;
   }
+
+    .container {
+      @apply md:px-4 mx-auto;
+    }
 
   .form-input {
     @apply border-border text-dark placeholder:text-light dark:border-darkmode-border dark:bg-darkmode-theme-light dark:text-darkmode-light focus:ring-accent w-full rounded-sm border bg-transparent px-4 py-2 focus:ring focus:outline-none md:px-6 md:py-4;

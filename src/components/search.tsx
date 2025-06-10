@@ -50,7 +50,7 @@ export function Search() {
   }, [debouncedQueryForGA]);
 
   return (
-    <div className="relative xl:ml-auto w-full md:w-auto">
+    <div className="relative xl:ml-auto">
       {query === "" && (
         <MagnifyingGlassIcon className=" text-light/75 absolute top-1/2 right-3 h-5 w-5 -translate-y-1/2 scale-x-[-1] transform" />
       )}
