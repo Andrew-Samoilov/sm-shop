@@ -24,7 +24,7 @@ export function HeroSection() {
             </div>
 
             <div className="bg-theme-light w-auto h-auto rounded-md max-w-100">
-                <p className="font-bold text-lg p-18 text-white">Картинка, шо показує наскільки шинам краще в нас, ніж бозна де ;-)</p>
+                <p className="font-bold text-lg p-6 md:p-12 lg:p-18 text-white">Картинка, шо показує наскільки шинам краще в нас, ніж бозна де ;-)</p>
             </div>
 
         </div>

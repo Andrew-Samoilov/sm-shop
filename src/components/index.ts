@@ -3,6 +3,8 @@ export { Analytics } from "./analytics"
 export { BenefitsSection } from "./benefits-section"
 export { BreadCrumbs } from "./bread-crumbs"
 
+export { MobileMenu } from "./mobile-menu"
+
 export { CartPanel } from "./cart-panel"
 export { ContactForm } from "./contact-form"
 export { FeatureSection } from "./features-section"

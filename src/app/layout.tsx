@@ -55,11 +55,11 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
         <TwSizeIndicator />
         <Header />
         <main className="flex-1">{children}</main>
-        <ToastContainer />
         <Footer />
         <Suspense fallback={null}>
           <Analytics />
         </Suspense>
+        <ToastContainer />
       </body>
     </html>
   );

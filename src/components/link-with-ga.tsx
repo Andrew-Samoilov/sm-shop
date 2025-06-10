@@ -16,6 +16,7 @@ type SmartLinkWithGAProps = {
   ariaLabel?: string;
   target?: string;
   rel?: string;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => void;
 };
 
 export function LinkWithGA({
@@ -29,6 +30,7 @@ export function LinkWithGA({
   ariaLabel,
   target,
   rel,
+  onClick,
 }: SmartLinkWithGAProps) {
   const [isClient, setIsClient] = useState(false);
   const [isExternal, setIsExternal] = useState(false);
@@ -44,13 +46,14 @@ export function LinkWithGA({
     }
   }, [href]);
 
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
     sendGAEvent({
       action: eventName ?? "click",
       category: eventCategory ?? (isExternal ? "external_link" : "navigation"),
       label: eventLabel,
       params: eventParams,
     });
+    if (onClick) onClick(e);
   };
 
   if (!isClient) {
@@ -58,6 +61,7 @@ export function LinkWithGA({
       <Link
         href={href}
         className={className}
+        onClick={handleClick}
         aria-label={ariaLabel}>
         {children}
       </Link>
