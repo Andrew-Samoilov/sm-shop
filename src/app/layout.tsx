@@ -4,23 +4,11 @@ import { Analytics, Footer, Header, TwSizeIndicator } from "@/components";
 import { ToastContainer } from "react-toastify";
 import Script from "next/script";
 import { Suspense } from "react";
-import { getContentBlock } from "@/lib";
-const siteConfig = await getContentBlock('site_config', { siteName: '', });
+import { getBaseMetadata } from "@/lib";
 
-export const metadata: Metadata = {
-  title: `${siteConfig.siteName}`,
-  description: "Інтернет магазин автошин з власним складом в серці Києва",
-  icons: {
-    icon: "/favicon.svg",
-  },
-  openGraph: {
-    type: "website",
-    locale: "uk_UA",
-    siteName: `${siteConfig.siteName}`,
-    description: "Інтернет магазин автошин шин з власним складом в серці Києва",
-  },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000"),
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return getBaseMetadata(); 
+}
 
 export const viewport = {
   themeColor: [

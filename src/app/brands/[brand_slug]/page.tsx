@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import ReactMarkdown from "react-markdown";
 import { notFound } from "next/navigation";
-import { getBrands, getBrandBySlug, getModelsByBrandId, getTyresByBrandId, formatDisplayUrl, getContentBlock, getModelImagesByIds } from "@/lib";
+import { getBrands, getBrandBySlug, getModelsByBrandId, getTyresByBrandId, formatDisplayUrl, getModelImagesByIds, getBaseMetadata } from "@/lib";
 import { CertificatesSection, LinkWithGA, TyresList } from "@/components";
 
-const siteConfig = await getContentBlock('site_config', { siteName: '', });
 
 export async function generateStaticParams() {
   const brands = await getBrands();
@@ -14,16 +13,18 @@ export async function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata(
-  { params }: { params: Promise<{ brand_slug: string }> }
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ brand_slug: string }>;
+}): Promise<Metadata> {
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
   const { brand_slug } = await params;
   const brand = await getBrandBySlug(brand_slug);
   if (!brand) return {};
 
-  const title = `${brand.name} – шини, моделі та характеристики | ${siteConfig.siteName}`;
-  const description = `Огляд бренду ${brand.name}: країна-виробник, моделі шин, характеристики та наявність у магазині ${siteConfig.siteName}.`;
+  const title = `${brand.name} – шини, моделі та характеристики`;
+  const description = `Огляд бренду ${brand.name}: країна-виробник, моделі шин, характеристики та наявність у магазині.`;
   const canonicalUrl = `${BASE_URL}/brands/${brand.slug}`;
 
   let logoUrl: string | undefined = undefined;
@@ -33,19 +34,18 @@ export async function generateMetadata(
       : `${BASE_URL}${brand.logo}`;
   }
 
-  return {
-    title, description,
+  return getBaseMetadata({
+    title,
+    description,
     openGraph: {
       title,
       description,
       url: canonicalUrl,
-      siteName: siteConfig.siteName,
-      type: "website",
       images: logoUrl
         ? [
           {
             url: logoUrl,
-            alt: `Шини ${brand.name} – купити в магазині ${siteConfig.siteName}`,
+            alt: `Шини ${brand.name} – купити в магазині`,
             width: 800,
             height: 600,
           },
@@ -61,7 +61,7 @@ export async function generateMetadata(
     alternates: {
       canonical: canonicalUrl,
     },
-  };
+  });
 }
 
 export default async function BrandPage({ params, }: { params: { brand_slug: string }; }) {
@@ -127,7 +127,7 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={brand.logo}
-            alt={`Логотип ${brand.logo} у магазині ${siteConfig.siteName}`}
+            alt={`Логотип ${brand.logo} у нашому магазині`}
             className="md:max-w-md max-w-full h-auto z-20"
             style={{ viewTransitionName: `logo-${brand.name}` }}
           />

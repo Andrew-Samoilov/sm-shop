@@ -19,7 +19,7 @@ export async function generateMetadata(
   const readableSeasonText = readableSeason ? ` – ${readableSeason}` : "";
   const readableSeasonDesc = readableSeason ? ` для сезону ${readableSeason}` : "";
 
-  const title = `Шини${readableSize}${readableSeasonText} | Shina Mix`;
+  const title = `Шини${readableSize}${readableSeasonText} | Шина Мікс`;
   const description = `Підібрати шини${readableSize}${readableSeasonDesc}. Великий вибір, доступні ціни, доставка по Україні.`;
 
   return {
@@ -31,14 +31,18 @@ export async function generateMetadata(
     openGraph: {
       title,
       description,
-      url: `https://yourdomain.com/tyres?${search}`,
-      siteName: "Shina Mix",
+      url: `https://shinamix.com/tyres?${search}`,
+      siteName: "Шина Мікс",
       locale: "uk_UA",
       type: "website",
     },
+    twitter: {
+      card: "summary",
+      title,
+      description,
+    },
   };
 }
-
 
 
 export default function TyresPage() {

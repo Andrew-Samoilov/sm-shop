@@ -1,5 +1,17 @@
 import { Prisma } from "@prisma/client";
 
+export type SiteConfig = {
+  siteName: string;
+  fb: string;
+  tg: string;
+  viber: string;
+  email: string;
+  tel: {
+    visual: string;
+    normalize: string;
+  };
+};
+
 export type TyreWithRelations = Prisma.TyreGetPayload<{
     include: { brands: true; models: true }
 }>;

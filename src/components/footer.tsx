@@ -1,20 +1,14 @@
 'use server'
 import { LinkWithGA, Logo } from "@/components";
-const siteConfig = await getContentBlock(
-  'site_config', {
-  siteName: '',
-  email: '',
-  tel: { visual: '', normalize: '', },
-  viber: '',
-  tg: '',
-  fb: '',
-});
+
 
 import packageData from "../../package.json";
-import { getContentBlock } from "@/lib";
+import { getSiteConfig } from "@/lib";
 const version = packageData.version;
 
 export async function Footer() {
+  const siteConfig = await getSiteConfig();
+  
   return (
     <footer className="text-light bg-theme-light dark:bg-darkmode-theme-light">
       <div className="container">

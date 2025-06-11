@@ -1,7 +1,5 @@
 import { CartPanel, LinkWithGA, Logo, Search, ThemeSwitcher, MobileMenu } from "@/components";
-import { getContentBlock } from "@/lib";
 
-const siteConfig = await getContentBlock('site_config', { siteName: '', });
 // import { UserIcon } from "@heroicons/react/24/outline";
 
 export async function Header() {
@@ -9,7 +7,6 @@ export async function Header() {
     <header className="flex w-full flex-wrap justify-between items-center  gap-6 
     bg-body/75 dark:bg-darkmode-body/75 sticky top-0 z-30  px-2 py-6 backdrop-blur-sm">
       <Logo
-        text={siteConfig.siteName}
         eventCategory="header"
       />
 

@@ -1,8 +1,6 @@
 import { LinkWithGA } from "@/components";
-import { getBrands, getContentBlock } from "@/lib";
+import { getBaseMetadata, getBrands } from "@/lib";
 import type { Metadata } from "next";
-
-const siteConfig = await getContentBlock('site_config', { siteName: '', });
 
 export async function generateStaticParams() {
   const brands = await getBrands();
@@ -12,7 +10,6 @@ export async function generateStaticParams() {
   }));
 }
 
-
 export async function generateMetadata(): Promise<Metadata> {
   const brands = await getBrands();
   const brandNames = brands.map((b) => b.name).filter(Boolean);
@@ -21,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     name: "Бренди шин",
-    description: `Сторінка з переліком брендів шин, представлених у магазині ${siteConfig?.siteName}.`,
+    description: `Сторінка з переліком брендів шин, представлених у нашому магазині.`,
     url: `/brands`,
     mainEntity: {
       "@type": "ItemList",
@@ -37,27 +34,23 @@ export async function generateMetadata(): Promise<Metadata> {
     },
   };
 
-  return {
-    title: `Бренди шин | ${siteConfig.siteName}`,
-    description: `Ознайомтесь з переліком брендів шин, доступних у магазині ${siteConfig.siteName}.`,
+  return getBaseMetadata({
+    title: "Бренди шин",
+    description: "Ознайомтесь з переліком брендів шин, доступних у нашому магазині.",
     openGraph: {
-      title: `Бренди шин | ${siteConfig.siteName}`,
-      description: `Ознайомтесь з переліком брендів шин, доступних у магазині ${siteConfig.siteName}.`,
-      url: `/brands`,
-      siteName: siteConfig.siteName,
-      type: "website",
-
+      title: "Бренди шин",
+      description: "Ознайомтесь з переліком брендів шин, доступних у нашому магазині.",
+      url: "/brands",
     },
     twitter: {
       card: "summary_large_image",
-      title: `Бренди шин | ${siteConfig.siteName}`,
-      description: `Ознайомтесь з переліком брендів шин, доступних у магазині ${siteConfig.siteName}.`,
-
+      title: "Бренди шин",
+      description: "Ознайомтесь з переліком брендів шин, доступних у нашому магазині.",
     },
     other: {
       "application/ld+json": JSON.stringify(jsonLd),
     },
-  };
+  });
 }
 
 

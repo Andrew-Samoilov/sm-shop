@@ -39,7 +39,7 @@ export async function generateMetadata(
 
   if (!tyre) {
     return {
-      title: "Шина не знайдена — Shina Mix",
+      title: "Шина не знайдена — Шина Мікс",
       description: "Сторінка не знайдена або сталася помилка."
     };
   }
@@ -57,82 +57,82 @@ export async function generateMetadata(
   }
 
 
-    const seasonUA = translateSeasonToUkrainian(tyre.season ?? "");
-    const tyreSize = tyre?.width && tyre.profile && tyre.diameter && tyre.loadSpeedIndex
-      ? `${tyre.width}${tyre.delimiter ?? '/'}${tyre.profile} R${tyre.diameter} ${tyre.loadIndex}${tyre.speedIndex}`
-      : "";
+  const seasonUA = translateSeasonToUkrainian(tyre.season ?? "");
+  const tyreSize = tyre?.width && tyre.profile && tyre.diameter && tyre.loadSpeedIndex
+    ? `${tyre.width}${tyre.delimiter ?? '/'}${tyre.profile} R${tyre.diameter} ${tyre.loadIndex}${tyre.speedIndex}`
+    : "";
 
-    const name = `${tyre.brands?.name ?? ""} ${tyre.models?.name ?? ""} ${tyreSize}`.trim();
-    const description = tyre.models?.description ??
-      `Шина ${name} для легкового авто. Доставка по Україні.`;
-    const canonical = `https://shina-mix.com.ua/tyres/${tyre.slug}`;
-    const siteUrl = "https://shina-mix.com.ua"; // Заміни якщо твій сайт інший
+  const name = `${tyre.brands?.name ?? ""} ${tyre.models?.name ?? ""} ${tyreSize}`.trim();
+  const description = tyre.models?.description ??
+    `Шина ${name} для легкового авто. Доставка по Україні.`;
+  const canonical = `https://shina-mix.com.ua/tyres/${tyre.slug}`;
+  const siteUrl = "https://shina-mix.com.ua"; // Заміни якщо твій сайт інший
 
-    // Breadcrumbs JSON-LD
-    const breadcrumbs = [
-      { name: "Головна", url: "/" },
-      { name: "Шини", url: "/tyres" },
-      { name: `${seasonUA} шини`, url: `/tyres?season=${tyre.season?.toLowerCase()}&view=list&sort=price_asc` },
-      { name: `${seasonUA} шини ${tyreSize}`, url: `/tyres?season=${tyre.season?.toLowerCase()}&width=${tyre.width}&profile=${tyre.profile}&diameter=${tyre.diameter}&view=list&sort=price_asc` },
-      { name, url: `/tyres/${tyre.slug}` },
-    ];
-    const breadcrumbsJsonLd = {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": breadcrumbs.map((crumb, idx) => ({
-        "@type": "ListItem",
-        "position": idx + 1,
-        "name": crumb.name,
-        "item": siteUrl + crumb.url,
-      })),
-    };
+  // Breadcrumbs JSON-LD
+  const breadcrumbs = [
+    { name: "Головна", url: "/" },
+    { name: "Шини", url: "/tyres" },
+    { name: `${seasonUA} шини`, url: `/tyres?season=${tyre.season?.toLowerCase()}&view=list&sort=price_asc` },
+    { name: `${seasonUA} шини ${tyreSize}`, url: `/tyres?season=${tyre.season?.toLowerCase()}&width=${tyre.width}&profile=${tyre.profile}&diameter=${tyre.diameter}&view=list&sort=price_asc` },
+    { name, url: `/tyres/${tyre.slug}` },
+  ];
+  const breadcrumbsJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": breadcrumbs.map((crumb, idx) => ({
+      "@type": "ListItem",
+      "position": idx + 1,
+      "name": crumb.name,
+      "item": siteUrl + crumb.url,
+    })),
+  };
 
-    // Product JSON-LD
-    const productJsonLd = {
-      "@context": "https://schema.org/",
-      "@type": "Product",
-      "name": name,
-      "image": [imageUrl],
-      "description": description,
-      "brands": {
-        "@type": "Brand",
-        "name": tyre.brands?.name ?? ""
-      },
-      "sku": tyre.slug,
-      "offers": {
-        "@type": "Offer",
-        "url": canonical,
-        "priceCurrency": "UAH",
-        "price": tyre.price?.toString(),
-        "availability": tyre.inventoryQuantity && tyre.inventoryQuantity > 0
-          ? "https://schema.org/InStock"
-          : "https://schema.org/OutOfStock"
-      }
-    };
+  // Product JSON-LD
+  const productJsonLd = {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": name,
+    "image": [imageUrl],
+    "description": description,
+    "brands": {
+      "@type": "Brand",
+      "name": tyre.brands?.name ?? ""
+    },
+    "sku": tyre.slug,
+    "offers": {
+      "@type": "Offer",
+      "url": canonical,
+      "priceCurrency": "UAH",
+      "price": tyre.price?.toString(),
+      "availability": tyre.inventoryQuantity && tyre.inventoryQuantity > 0
+        ? "https://schema.org/InStock"
+        : "https://schema.org/OutOfStock"
+    }
+  };
 
-    return {
-      title: `${name} — купити шини в Україні | Shina Mix`,
+  return {
+    title: `${name} — купити шини в Україні | Шина Мікс`,
+    description,
+    alternates: { canonical },
+    openGraph: {
+      title: name,
       description,
-      alternates: { canonical },
-      openGraph: {
-        title: name,
-        description,
-        url: canonical,
-        images: [{ url: imageUrl }],
-        type: "website",
-      },
-      twitter: {
-        card: "summary_large_image",
-        title: name,
-        description,
-        images: [imageUrl],
-      },
-      other: {
-        "application/ld+json": JSON.stringify(productJsonLd),
-        "application/ld+json-breadcrumbs": JSON.stringify(breadcrumbsJsonLd),
-      }
-    };
-  }
+      url: canonical,
+      images: [{ url: imageUrl }],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: name,
+      description,
+      images: [imageUrl],
+    },
+    other: {
+      "application/ld+json": JSON.stringify(productJsonLd),
+      "application/ld+json-breadcrumbs": JSON.stringify(breadcrumbsJsonLd),
+    }
+  };
+}
 
 
 export default async function TyrePage({

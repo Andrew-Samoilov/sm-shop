@@ -1,8 +1,7 @@
 import { CertificatesSection, ModelViewerSection, TyresList } from "@/components";
-import { getBrandById, getModels, getTyresByModelId, getModelBySlug, getModelImgByModelId, getContentBlock } from "@/lib";
+import { getBrandById, getModels, getTyresByModelId, getModelBySlug, getModelImgByModelId, getSiteConfig } from "@/lib";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
-const siteConfig = await getContentBlock('site_config', { siteName: '', });
 import { Metadata } from "next";
 
 export async function generateStaticParams() {
@@ -18,51 +17,39 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
 export async function generateMetadata(
   { params }: { params: { model_slug: string } }
 ): Promise<Metadata> {
-  const { model_slug } = await params;
+  const siteConfig = await getSiteConfig();
+  const { model_slug } = params;
   const model = await getModelBySlug(model_slug);
   if (!model) return {};
   const brand = await getBrandById(model.brandId);
   const title = `${brand?.name} ${model.name} – характеристики, ціна та відгуки | ${siteConfig.siteName}`;
   const description = `Детальний огляд шини ${brand?.name} ${model.name}: характеристики, переваги, особливості експлуатації та наявність у магазині ${siteConfig.siteName}.`;
   const canonicalUrl = `${BASE_URL}/brands/${model.slug}`;
-  // const images = await getModelImgByModelId(model.id);
 
-  let mainImageUrl: string | undefined;
-
-  // if (images?.[0]?.url) {
-  //   mainImageUrl = images[0].url.startsWith('http')
-  //     ? images[0].url
-  //     : `${BASE_URL}${images[0].url}`;
-  // } else {
-  //   mainImageUrl = undefined;
-  // }
-
-  // const imageAlt = images?.[0]?.alt ?? `${brand?.name} ${model.name} – купити в магазині ${siteConfig.siteName}`;
+  const images = await getModelImgByModelId(model.id);
+  const ogImages = images?.map((img) => ({
+    url: img.url.startsWith("http") ? img.url : `${BASE_URL}${img.url}`,
+    alt: img.alt ?? `${brand?.name} ${model.name} – купити в магазині ${siteConfig.siteName}`,
+    width: img.width ?? 800,
+    height: img.height ?? 600,
+  })) ?? [];
 
   return {
-    title, description,
+    title,
+    description,
     openGraph: {
       title,
       description,
       url: canonicalUrl,
       siteName: siteConfig.siteName,
       type: "website",
-      // images: mainImageUrl
-      //   ? [
-      //     {
-      //       url: mainImageUrl,
-      //       alt: imageAlt,
-      //       width: images[0].width ?? 800,
-      //       height: images[0].height ?? 600,
-      //     },
-      //   ]
-      //   : undefined,
+      images: ogImages,
     },
     twitter: {
-      card: mainImageUrl ? "summary_large_image" : "summary",
+      card: ogImages.length ? "summary_large_image" : "summary",
       title,
       description,
-      // images: mainImageUrl ? [{ url: mainImageUrl, alt: imageAlt }] : undefined,
+      images: ogImages.length ? ogImages.map(i => i.url) : undefined,
     },
     alternates: {
       canonical: canonicalUrl,
