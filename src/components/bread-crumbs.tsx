@@ -1,24 +1,11 @@
 import { HomeIcon } from "@heroicons/react/24/outline";
 
-import { getTyreBySlug } from "@/lib";
+import { getTyreBySlug, translateSeasonToUkrainian } from "@/lib";
 import { LinkWithGA } from "./link-with-ga";
 
 type Props = {
     tyreSlug: string;
 };
-
-function translateSeasonToUkrainian(season?: string): string {
-    switch (season?.toLowerCase()) {
-        case "summer":
-            return "літні";
-        case "winter":
-            return "зимові";
-        case "allseason":
-            return "всесезонні";
-        default:
-            return "";
-    }
-}
 
 export async function BreadCrumbs({ tyreSlug }: Props) {
     const tyre = await getTyreBySlug(tyreSlug);

@@ -1,5 +1,5 @@
 import { AddToCartButton, BreadCrumbs, CertificatesSection, ModelViewerSection, ViewItemGA } from "@/components";
-import { getTyreBySlug, getModelImgByModelId, prisma } from "@/lib";
+import { getTyreBySlug, getModelImgByModelId, prisma, translateSeasonToUkrainian } from "@/lib";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
@@ -14,25 +14,8 @@ export async function generateStaticParams() {
   }));
 }
 
-function translateSeasonToUkrainian(season?: string): string {
-  switch (season?.toLowerCase()) {
-    case "summer":
-      return "літні";
-    case "winter":
-      return "зимові";
-    case "allseason":
-      return "всесезонні";
-    default:
-      return "";
-  }
-}
-
-type Props = {
-  params: { tyre_slug: string }
-};
-
 export async function generateMetadata(
-  { params }: Props
+  { params }: { params: { tyre_slug: string } }
 ): Promise<Metadata> {
   const { tyre_slug } = params;
   const tyre = await getTyreBySlug(tyre_slug);
@@ -44,18 +27,17 @@ export async function generateMetadata(
     };
   }
 
-
-
   let imageUrl = "https://shina-mix.com.ua/default.jpg";
+  let imageAlt = "Зображення шини";
   if (tyre.modelId) {
     const images = await getModelImgByModelId(tyre.modelId);
     if (images?.[0]?.url) {
       imageUrl = images[0].url.startsWith("http")
         ? images[0].url
         : `https://shina-mix.com.ua${images[0].url}`;
+      imageAlt = images[0].alt ?? imageAlt;
     }
   }
-
 
   const seasonUA = translateSeasonToUkrainian(tyre.season ?? "");
   const tyreSize = tyre?.width && tyre.profile && tyre.diameter && tyre.loadSpeedIndex
@@ -66,9 +48,8 @@ export async function generateMetadata(
   const description = tyre.models?.description ??
     `Шина ${name} для легкового авто. Доставка по Україні.`;
   const canonical = `https://shina-mix.com.ua/tyres/${tyre.slug}`;
-  const siteUrl = "https://shina-mix.com.ua"; // Заміни якщо твій сайт інший
+  const siteUrl = "https://shina-mix.com.ua";
 
-  // Breadcrumbs JSON-LD
   const breadcrumbs = [
     { name: "Головна", url: "/" },
     { name: "Шини", url: "/tyres" },
@@ -79,35 +60,34 @@ export async function generateMetadata(
   const breadcrumbsJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": breadcrumbs.map((crumb, idx) => ({
+    itemListElement: breadcrumbs.map((crumb, idx) => ({
       "@type": "ListItem",
-      "position": idx + 1,
-      "name": crumb.name,
-      "item": siteUrl + crumb.url,
+      position: idx + 1,
+      name: crumb.name,
+      item: siteUrl + crumb.url,
     })),
   };
 
-  // Product JSON-LD
   const productJsonLd = {
     "@context": "https://schema.org/",
     "@type": "Product",
-    "name": name,
-    "image": [imageUrl],
-    "description": description,
-    "brands": {
+    name,
+    image: [imageUrl],
+    description,
+    brand: {
       "@type": "Brand",
-      "name": tyre.brands?.name ?? ""
+      name: tyre.brands?.name ?? ""
     },
-    "sku": tyre.slug,
-    "offers": {
+    sku: tyre.slug,
+    offers: {
       "@type": "Offer",
-      "url": canonical,
-      "priceCurrency": "UAH",
-      "price": tyre.price?.toString(),
-      "availability": tyre.inventoryQuantity && tyre.inventoryQuantity > 0
+      url: canonical,
+      priceCurrency: "UAH",
+      price: tyre.price?.toString(),
+      availability: tyre.inventoryQuantity && tyre.inventoryQuantity > 0
         ? "https://schema.org/InStock"
-        : "https://schema.org/OutOfStock"
-    }
+        : "https://schema.org/OutOfStock",
+    },
   };
 
   return {
@@ -118,8 +98,8 @@ export async function generateMetadata(
       title: name,
       description,
       url: canonical,
-      images: [{ url: imageUrl }],
       type: "website",
+      images: [{ url: imageUrl, alt: imageAlt }],
     },
     twitter: {
       card: "summary_large_image",
@@ -130,7 +110,7 @@ export async function generateMetadata(
     other: {
       "application/ld+json": JSON.stringify(productJsonLd),
       "application/ld+json-breadcrumbs": JSON.stringify(breadcrumbsJsonLd),
-    }
+    },
   };
 }
 
@@ -191,6 +171,10 @@ export default async function TyrePage({
       />
 
       {tyre.modelId !== null && images.length > 0 && <ModelViewerSection images={images} />}
+      
+      <section className="flex justify-center p-6">
+        Детальний опис / Наші сертифікати {tyre.brands?.name ?? undefined} / Параметри
+      </section>
 
       {tyre.models?.description && (
         <section className="p-6 lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl  bg-body dark:bg-darkmode-body z-10">
@@ -208,7 +192,6 @@ export default async function TyrePage({
             : value?.toString() ?? "N/A"}
         </p>
       ))}
-
 
     </article>
   );
