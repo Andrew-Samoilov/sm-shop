@@ -50,6 +50,18 @@ export function TyresSelect() {
   const updateFilter = <K extends keyof FilterState>(key: K, value: FilterState[K]) =>
     setFilters((prev) => ({ ...prev, [key]: value }));
 
+  const sortLabels: Record<string, string> = {
+    price_asc: "за ціною ↑ (зроростання)",
+    price_desc: "за ціною ↓ (спадання)",
+    title_asc: "за назвою (А-Я)",
+    title_desc: "за назвою (Я-А)",
+  };
+
+  const viewLabels: Record<ViewType, string> = {
+    list: "у вигляді списку",
+    gallery: "у вигляді галереї",
+  };
+
 
   // 1. Завантаження шин (або очищення)
   useEffect(() => {
@@ -120,9 +132,25 @@ export function TyresSelect() {
 
   return (
     <div className="flex flex-col w-auto">
-      <h1>Пошук:</h1>
+      <h1 className="text-left">
+        Пошук:
+        {filters.query && ` «${filters.query}»`}
+        {(filters.width || filters.profile || filters.diameter) && (
+          <> {filters.width}/{filters.profile} R{filters.diameter}</>
+        )}
+        {filters.seasons.length > 0 && (
+          <> ({filters.seasons.map(s =>
+            s === "summer" ? "літні" :
+              s === "winter" ? "зимові" :
+                "всесезонні").join(", ")})</>
+        )}
+      </h1>
+      <span className=" ">
+        {` сортування ${sortLabels[filters.sort] ?? filters.sort}`}
+        {` / ${viewLabels[filters.view]}`}
+      </span>
 
-      <div className="flex gap-6 md:flex-col lg:flex-row">
+      <div className="flex gap-6 flex-col lg:flex-row">
         <aside className="gap-6 flex flex-col lg:flex-row w-auto">
           <form
             aria-label="Фільтри пошуку шин"
