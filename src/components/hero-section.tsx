@@ -11,7 +11,16 @@ export function HeroSection() {
             <div className="lg:max-w-[70ch] flex flex-col items-center gap-2">
                 <h1>-50% на зберігання*</h1>
                 <p className="text-sm text-light pb-4"
-                >* - на сезон, при купівлі комплекту шин (докладніше)</p>
+                >* - на сезон, при купівлі комплекту шин  
+                    <LinkWithGA
+                        href={'/info/storage-50'}
+                        eventLabel="storage-50"
+                        eventCategory="hero"
+                        aria-label="Перейти до каталогу шин"
+                        className=""
+                    >(докладніше)
+                    </LinkWithGA>
+                    </p>
                 <LinkWithGA
                     href={'/tyres?view=gallery&price_asc'}
                     eventLabel="hero_button"

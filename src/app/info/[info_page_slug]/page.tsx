@@ -2,9 +2,6 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib";
 import ReactMarkdown from "react-markdown";
 
-type Props = {
-    params: { info_page_slug: string };
-};
 
 export async function generateStaticParams() {
     const pages = await prisma.staticPage.findMany({
@@ -15,7 +12,7 @@ export async function generateStaticParams() {
     return pages.map((page) => ({ info_page_slug: page.slug }));
 }
 
-export default async function InfoPage({ params }: Props) {
+export default async function InfoPage({ params }: { params: { info_page_slug: string } }) {
     const page = await prisma.staticPage.findUnique({
         where: { slug: params.info_page_slug },
     });
@@ -27,7 +24,7 @@ export default async function InfoPage({ params }: Props) {
         const parsed = JSON.parse(page.content);
         markdown = parsed.markdown ?? "";
     } catch (e) {
-        console.error("Помилка парсингу markdown JSON:", e);
+        console.error("[InfoPage] Помилка парсингу markdown JSON: params.info_page_slug", params.info_page_slug, e);
         notFound();
     }
 
