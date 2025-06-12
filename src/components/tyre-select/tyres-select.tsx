@@ -119,57 +119,63 @@ export function TyresSelect() {
 
 
   return (
-    <aside className="gap-6 flex flex-col md:flex-col lg:flex-row ">
-      <form
-        aria-label="Фільтри пошуку шин"
-        className="flex flex-col  gap-2 w-full lg:max-w-[65ch] pb-2 mx-auto lg:pt-6"
-        onSubmit={(e) => e.preventDefault()}
-      >
-        <div className="hidden lg:block ">
-          <Search />
-        </ div>
-        <h2 className="text-center">Пошук:</h2>
-        <div className="flex gap-6 flex-col md:flex-row lg:flex-col justify-between">
-          <OptionSelect
-            id="width"
-            label="Ширина"
-            value={filters.width}
-            onChange={(v) => updateFilter("width", v)}
-            options={options.widths}
-          />
-          <OptionSelect
-            id="profile"
-            label="Профіль"
-            value={filters.profile}
-            onChange={(v) => updateFilter("profile", v)}
-            options={options.profiles}
-          />
-          <OptionSelect
-            id="diameter"
-            label="Діаметр"
-            value={filters.diameter}
-            onChange={(v) => updateFilter("diameter", v)}
-            options={options.diameters}
-          />
-        </div>
-        <SeasonCheckbox value={filters.seasons} onChange={(v) => updateFilter("seasons", v)} />
+    <div className="flex flex-col w-auto">
+      <h1>Пошук:</h1>
 
-        <HelpWindow isOpen={helpOpen} setIsOpen={setHelpOpen} />
-      </form>
+      <div className="flex gap-6 md:flex-col lg:flex-row">
+        <aside className="gap-6 flex flex-col lg:flex-row w-auto">
+          <form
+            aria-label="Фільтри пошуку шин"
+            className="flex flex-col  gap-2 w-full pb-2 mx-auto lg:pt-6"
+            onSubmit={(e) => e.preventDefault()}
+          >
+            <div className="hidden lg:block ">
+              <Search />
+            </ div>
 
-      {
-        selectedTyres?.length > 0 && (
-          <div>
-            <ListHeader
-              view={filters.view}
-              onChangeView={(v) => updateFilter("view", v)}
-              sort={filters.sort}
-              onChangeSort={(v) => updateFilter("sort", v)}
-            />
-            <TyresList tyres={selectedTyres} images={images} view={filters.view} />
-          </div>
-        )
-      }
-    </aside >
+            <div className="flex gap-6 flex-col md:flex-row lg:flex-col justify-between">
+              <OptionSelect
+                id="width"
+                label="Ширина"
+                value={filters.width}
+                onChange={(v) => updateFilter("width", v)}
+                options={options.widths}
+              />
+              <OptionSelect
+                id="profile"
+                label="Профіль"
+                value={filters.profile}
+                onChange={(v) => updateFilter("profile", v)}
+                options={options.profiles}
+              />
+              <OptionSelect
+                id="diameter"
+                label="Діаметр"
+                value={filters.diameter}
+                onChange={(v) => updateFilter("diameter", v)}
+                options={options.diameters}
+              />
+            </div>
+            <SeasonCheckbox value={filters.seasons} onChange={(v) => updateFilter("seasons", v)} />
+
+            <HelpWindow isOpen={helpOpen} setIsOpen={setHelpOpen} />
+          </form>
+        </aside >
+
+        {
+          selectedTyres?.length > 0 && (
+            <div>
+              <ListHeader
+                view={filters.view}
+                onChangeView={(v) => updateFilter("view", v)}
+                sort={filters.sort}
+                onChangeSort={(v) => updateFilter("sort", v)}
+              />
+              <TyresList tyres={selectedTyres} images={images} view={filters.view} />
+            </div>
+          )
+        }
+      </div>
+    </div>
   );
 }

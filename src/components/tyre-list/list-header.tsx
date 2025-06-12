@@ -1,10 +1,10 @@
 import { ListBulletIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
 
 const SORT_OPTIONS = [
-    { label: "За назвою (А-Я)", value: "title_asc" },
-    { label: "За назвою (Я-А)", value: "title_desc" },
-    { label: "За ціною (зростання)", value: "price_asc" },
-    { label: "За ціною (спадання)", value: "price_desc" },
+    { label: "(А-Я)", value: "title_asc" },
+    { label: "(Я-А)", value: "title_desc" },
+    { label: "Ціна ↑", value: "price_asc" },
+    { label: "Ціна ↓", value: "price_desc" },
 ];
 
 type Props = {
@@ -41,7 +41,7 @@ export function ListHeader({ view, onChangeView, sort, onChangeSort }: Props) {
     return (
         <header className="flex justify-between py-6">
             <fieldset className="flex gap-2 items-center">
-                <span className="hidden md:block text-light text-sm">Вигляд</span>
+                <span className="hidden xl:block text-light text-sm">Вигляд</span>
 
                 <label
                     className={`btn p-0.5 ${view === "list"
@@ -81,7 +81,7 @@ export function ListHeader({ view, onChangeView, sort, onChangeSort }: Props) {
             </fieldset>
 
             <div className="flex gap-2 items-center">
-                <span className="hidden md:block text-light text-sm">Сортування</span>
+                <span className="hidden xl:block text-light text-sm">Сортування</span>
                 <select
                     className="rounded-md border border-border dark:border-darkmode-border px-2 py-1"
                     value={sort}

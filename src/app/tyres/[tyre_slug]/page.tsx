@@ -171,28 +171,29 @@ export default async function TyrePage({
       />
 
       {tyre.modelId !== null && images.length > 0 && <ModelViewerSection images={images} />}
-      
-      <section className="flex justify-center p-6">
-        Детальний опис / Наші сертифікати {tyre.brands?.name ?? undefined} / Параметри
+
+      <section className="flex justify-center p-6 mx-auto">
+        Характеристики / Детальний опис / Наші сертифікати {tyre.brands?.name ?? undefined}
       </section>
 
       {tyre.models?.description && (
-        <section className="p-6 lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl  bg-body dark:bg-darkmode-body z-10">
+        <section className="p-6 lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl  bg-body dark:bg-darkmode-body z-10 mx-auto">
           <ReactMarkdown>{tyre.models.description}</ReactMarkdown>
         </section>
       )}
 
       <CertificatesSection brandName={tyre.brands?.name ?? undefined} />
 
-      {Object.entries(tyre).map(([key, value]) => (
-        <p key={key}>
-          <strong>{key}:</strong>{" "}
-          {typeof value === "object" && value !== null
-            ? `[об'єкт: ${Object.keys(value).join(", ")}]`
-            : value?.toString() ?? "N/A"}
-        </p>
-      ))}
-
+      <section className="mx-auto">
+        {Object.entries(tyre).map(([key, value]) => (
+          <p key={key}>
+            <strong>{key}:</strong>{" "}
+            {typeof value === "object" && value !== null
+              ? `[об'єкт: ${Object.keys(value).join(", ")}]`
+              : value?.toString() ?? "N/A"}
+          </p>
+        ))}
+      </section>
     </article>
   );
 }

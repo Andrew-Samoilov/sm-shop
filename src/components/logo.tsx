@@ -58,7 +58,7 @@ export async function Logo({ text, eventCategory = "header" }: Readonly<LogoProp
       href="/"
       eventLabel="logo"
       eventCategory={eventCategory}
-      className="group flex items-center gap-2 focus:outline-hidden pb-4"
+      className="group flex items-center gap-2 focus:outline-hidden"
       aria-label={`Navigate to ${label}`}
     >
       <SMTyreIcon className="text-accent group-hover:text-accent h-8 w-18" />
