@@ -106,6 +106,20 @@ model ContentBlock {
   @@map("content_blocks")
 }
 
+model StaticPage {
+  id          Int      @id @default(autoincrement())
+  slug        String   @unique
+  title       String
+  content     String
+  description String?
+  visible     Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("static_page")
+}
+
+
 enum season {
   SUMMER
   WINTER

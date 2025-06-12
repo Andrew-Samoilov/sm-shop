@@ -20,16 +20,24 @@ export async function Footer() {
             />
           </span>
           <div>
-            <div className="text-center text-lg font-semibold">Інформація</div>
+            {/* <div className="text-center text-lg font-semibold">Інформація</div> */}
+            <LinkWithGA
+              href="/info"
+              eventLabel="info"
+              eventCategory="footer"
+              className="text-center text-lg font-semibold  text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+            >
+              Інформація
+            </LinkWithGA>
             <div className="flex flex-col items-center space-y-2">
-              <LinkWithGA
+              {/* <LinkWithGA
                 href="/contacts"
                 eventLabel="contacts"
                 eventCategory="footer"
                 className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
               >
                 Контакти
-              </LinkWithGA>
+              </LinkWithGA> */}
               <LinkWithGA
                 href="/about"
                 eventLabel="about"
@@ -39,7 +47,7 @@ export async function Footer() {
                 Про нас
               </LinkWithGA>
               <LinkWithGA
-                href="/payment-delivery"
+                href="/info/payment-delivery"
                 eventLabel="payment-delivery"
                 eventCategory="footer"
                 className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
@@ -47,7 +55,7 @@ export async function Footer() {
                 Оплата і доставка
               </LinkWithGA>
               <LinkWithGA
-                href="/warranty"
+                href="/info/warranty"
                 eventLabel="warranty"
                 eventCategory="footer"
                 className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
@@ -161,7 +169,7 @@ export async function Footer() {
 
         <div className="border-border dark:border-darkmode-border text-light flex items-center justify-between border-t py-6">
           <LinkWithGA
-            href="/legal"
+            href="/info/legal"
             eventLabel="legal"
             aria-label="Правові умови"
             eventCategory="footer"

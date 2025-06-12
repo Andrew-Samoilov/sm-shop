@@ -59,9 +59,19 @@ export function MobileMenu() {
                                     href={'/tyres?view=gallery'}
                                     eventLabel="tyres"
                                     eventCategory="mobile_menu"
-                                    aria-label="Перейти до каталогу лшин"
+                                    aria-label="Перейти до каталогу шин"
                                     onClick={() => setIsMenuOpen(false)}
                                 >Шини</LinkWithGA>
+                            </li>
+
+                            <li>
+                                <LinkWithGA
+                                    href={'/info'}
+                                    eventLabel="info"
+                                    eventCategory="mobile_menu"
+                                    aria-label="Перейти до інформаційних сторінок"
+                                    onClick={() => setIsMenuOpen(false)}
+                                >Інфо</LinkWithGA>
                             </li>
 
                             <li>
