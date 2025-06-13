@@ -15,10 +15,12 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata(
-  { params }: { params: { tyre_slug: string } }
-): Promise<Metadata> {
-  const { tyre_slug } = params;
+export async function generateMetadata({
+  params,
+}: {
+  params: { tyre_slug: string };
+}): Promise<Metadata> {
+  const { tyre_slug } = params; 
   const tyre = await getTyreBySlug(tyre_slug);
 
   if (!tyre) {
@@ -177,6 +179,20 @@ export default async function TyrePage({
 
       {tyre.modelId !== null && images.length > 0 && <ModelViewerSection images={images} />}
 
+      <section className="section container flex flex-col w-fit gap-2 text-light">
+        <div>Сезон: <span className="text-theme-dark">{tyre.season}</span></div>
+        <div>Бренд: {tyre.brand}</div>
+        <div>Модель: {tyre.model}</div>
+        <div>Країна виробництва: {tyre.country}</div>
+        <div>Тиждень та рік виробництва: {tyre.dateCode}</div>
+        <div>Індекс швидкості: {tyre.speedIndex}</div>
+        <div>Індекс навантаження: {tyre.loadIndex}</div>
+        <div>Застосовуваність: {tyre.applicability}</div>
+        <div>Ширина: {tyre.width}</div>
+        <div>Профіль: {tyre.profile}</div>
+        <div>Діаметр: {tyre.diameter}</div>
+      </section>
+
       {tyre.models?.description && (
         <section className="section container max-w-[65ch] border-b border-border">
           <details className="group">
@@ -191,7 +207,7 @@ export default async function TyrePage({
 
 
       {filteredCerts.length > 0 && (
-        <section className="section container  border-b border-border">
+        <section className="section container ">
           <details className="group">
             <summary className="flex flex-between justify-center items-center marker:content-none gap-6 cursor-pointer ">
               <h2 className="text-center">{`Наші сертифікати ${tyre.brand}`}</h2>
@@ -200,16 +216,10 @@ export default async function TyrePage({
             <CertificatesClient cert={filteredCerts} />
           </details>
         </section>
-
-        // <section>
-        //   <h2 className="text-center pb-6">{`Наші сертифікати ${tyre.brand}`}</h2>
-        //   <CertificatesClient cert={filteredCerts} />
-        // </section>
       )}
 
-      {/* <CertificatesSection brandName={tyre.brands?.name ?? undefined} /> */}
 
-      <section className="section container">
+      {/* <section className="section container lg:max-w-[65ch]">
         {Object.entries(tyre).map(([key, value]) => (
           <p key={key}>
             <strong>{key}:</strong>{" "}
@@ -218,7 +228,7 @@ export default async function TyrePage({
               : value?.toString() ?? "N/A"}
           </p>
         ))}
-      </section>
+      </section> */}
     </article>
   );
 }
