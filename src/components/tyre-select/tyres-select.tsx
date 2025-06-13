@@ -135,18 +135,32 @@ export function TyresSelect() {
       <h1 className="text-left">
         Пошук:
         {filters.query && ` «${filters.query}»`}
-        {(filters.width || filters.profile || filters.diameter) && (
-          <> {filters.width}/{filters.profile} R{filters.diameter}</>
+
+        {(filters.width && filters.profile) && (
+          <> {filters.width}/{filters.profile}</>
         )}
+        {filters.diameter && (
+          <> R{filters.diameter}</>
+        )}
+
         {filters.seasons.length > 0 && (
-          <> ({filters.seasons.map(s =>
-            s === "summer" ? "літні" :
-              s === "winter" ? "зимові" :
-                "всесезонні").join(", ")})</>
+          <>
+            {" "}
+            ({
+              filters.seasons
+                .map((s) => {
+                  if (s === "summer") return "літні";
+                  if (s === "winter") return "зимові";
+                  return "всесезонні";
+                })
+                .join(", ")
+            })
+          </>
         )}
+
       </h1>
-      <span className=" ">
-        {` сортування ${sortLabels[filters.sort] ?? filters.sort}`}
+      <span className=" text-light text-sm hidden md:block">
+        {`сортування ${sortLabels[filters.sort] ?? filters.sort}`}
         {` / ${viewLabels[filters.view]}`}
       </span>
 
