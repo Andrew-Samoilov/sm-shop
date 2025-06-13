@@ -1,5 +1,6 @@
-import { AddToCartButton, BreadCrumbs, CertificatesSection, ModelViewerSection, ViewItemGA } from "@/components";
-import { getTyreBySlug, getModelImgByModelId, prisma, translateSeasonToUkrainian } from "@/lib";
+import { AddToCartButton, BreadCrumbs, CertificatesClient, ModelViewerSection, ViewItemGA } from "@/components";
+import { getTyreBySlug, getModelImgByModelId, prisma, translateSeasonToUkrainian, getContentBlock } from "@/lib";
+import { Certificate } from "@/types";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
@@ -132,6 +133,10 @@ export default async function TyrePage({
   const images = tyre.modelId !== null
     ? await getModelImgByModelId(tyre.modelId)
     : [];
+  const cert = await getContentBlock<Certificate[]>('certificates', []);
+  const filteredCerts = tyre.brand
+    ? cert.filter(c => c.brand.toLowerCase() === tyre.brand?.toLowerCase())
+    : cert;
 
   // console.info("[TyrePage]", tyre);
 
@@ -172,19 +177,39 @@ export default async function TyrePage({
 
       {tyre.modelId !== null && images.length > 0 && <ModelViewerSection images={images} />}
 
-      <section className="flex justify-center p-6 mx-auto">
-        Характеристики / Детальний опис / Наші сертифікати {tyre.brands?.name ?? undefined}
-      </section>
-
       {tyre.models?.description && (
-        <section className="p-6 lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl  bg-body dark:bg-darkmode-body z-10 mx-auto">
-          <ReactMarkdown>{tyre.models.description}</ReactMarkdown>
+        <section className="section container max-w-[65ch] border-b border-border">
+          <details className="group">
+            <summary className="flex flex-between  justify-center items-center marker:content-none gap-6 cursor-pointer ">
+              <h2 >Детальний опис</h2>
+              <span className="text-4xl transition-transform group-open:rotate-45">+</span>
+            </summary>
+            <ReactMarkdown>{tyre.models.description}</ReactMarkdown>
+          </details>
         </section>
       )}
 
-      <CertificatesSection brandName={tyre.brands?.name ?? undefined} />
 
-      <section className="mx-auto">
+      {filteredCerts.length > 0 && (
+        <section className="section container  border-b border-border">
+          <details className="group">
+            <summary className="flex flex-between justify-center items-center marker:content-none gap-6 cursor-pointer ">
+              <h2 className="text-center">{`Наші сертифікати ${tyre.brand}`}</h2>
+              <span className="text-4xl transition-transform group-open:rotate-45">+</span>
+            </summary>
+            <CertificatesClient cert={filteredCerts} />
+          </details>
+        </section>
+
+        // <section>
+        //   <h2 className="text-center pb-6">{`Наші сертифікати ${tyre.brand}`}</h2>
+        //   <CertificatesClient cert={filteredCerts} />
+        // </section>
+      )}
+
+      {/* <CertificatesSection brandName={tyre.brands?.name ?? undefined} /> */}
+
+      <section className="section container">
         {Object.entries(tyre).map(([key, value]) => (
           <p key={key}>
             <strong>{key}:</strong>{" "}

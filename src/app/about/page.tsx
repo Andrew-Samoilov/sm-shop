@@ -1,5 +1,8 @@
-import { BenefitsSection, FeatureSection, CertificatesSection } from "@/components";
-
+import { BenefitsSection, FeatureSection,  CertificatesClient } from "@/components";
+import { getContentBlock } from "@/lib";
+import { Certificate } from "@/types";
+const cert = await getContentBlock<Certificate[]>('certificates', [])
+    
 export default async function AboutPage() {
   return (
     <>
@@ -7,7 +10,10 @@ export default async function AboutPage() {
         <h1>Про нас</h1>
       </section>
       <FeatureSection />
-      <CertificatesSection />
+      <section>
+        <h2 className="text-center pb-6">Наші сертифікати</h2>
+        <CertificatesClient cert={cert} />
+      </section>
       <BenefitsSection />
     </>
   );

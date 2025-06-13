@@ -1,8 +1,11 @@
-import { CertificatesSection, ModelViewerSection, TyresList } from "@/components";
-import { getBrandById, getModels, getTyresByModelId, getModelBySlug, getModelImgByModelId, getSiteConfig } from "@/lib";
+import { CertificatesClient, ModelViewerSection, TyresList } from "@/components";
+import { getBrandById, getModels, getTyresByModelId, getModelBySlug, getModelImgByModelId, getSiteConfig, getContentBlock } from "@/lib";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import { Metadata } from "next";
+import { Certificate } from "@/types";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
+
 
 export async function generateStaticParams() {
   const models = await getModels();
@@ -12,7 +15,7 @@ export async function generateStaticParams() {
   }));
 }
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
+
 
 export async function generateMetadata(
   { params }: { params: { model_slug: string } }
@@ -64,10 +67,16 @@ export default async function ModelPage({
 }) {
   const { model_slug } = await params;
   const model = await getModelBySlug(model_slug);
+
+  
   if (!model) return notFound();
 
   const modelTyres = await getTyresByModelId(model.id);
   const brand = await getBrandById(model.brandId);
+  const cert = await getContentBlock<Certificate[]>('certificates', []);
+  const filteredCerts = model?.name
+    ? cert.filter(c => c.brand.toLowerCase() === brand?.name.toLowerCase())
+    : cert;
   const canonicalUrl = `${BASE_URL}/brands/${model.slug}`;
   const images = await getModelImgByModelId(model.id);
 
@@ -124,7 +133,12 @@ export default async function ModelPage({
         </section>
       )}
 
-      {brand && <CertificatesSection brandName={brand.name} />}
+      {filteredCerts.length > 0 && (
+        <section>
+          <h2 className="text-center pb-6">{`Наші сертифікати ${brand?.name}`}</h2>
+          <CertificatesClient cert={filteredCerts} />
+        </section>
+      )}
 
       <section className="container z-10">
         <h2>

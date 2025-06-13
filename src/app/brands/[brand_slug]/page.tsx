@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import ReactMarkdown from "react-markdown";
 import { notFound } from "next/navigation";
-import { getBrands, getBrandBySlug, getModelsByBrandId, getTyresByBrandId, formatDisplayUrl, getModelImagesByIds, getBaseMetadata } from "@/lib";
-import { CertificatesSection, LinkWithGA, TyresList } from "@/components";
+import { getBrands, getBrandBySlug, getModelsByBrandId, getTyresByBrandId, formatDisplayUrl, getModelImagesByIds, getBaseMetadata, getContentBlock } from "@/lib";
+import { LinkWithGA, TyresList, CertificatesClient } from "@/components"; 
+import { Certificate } from "@/types";
 
 
 export async function generateStaticParams() {
@@ -73,10 +74,12 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
 
   const brandModels = await getModelsByBrandId(brand.id);
   const brandTyres = await getTyresByBrandId(brand.id);
-
   const modelId = brandTyres.map(t => t.modelId)
-
   const images = await getModelImagesByIds(modelId);
+  const cert = await getContentBlock<Certificate[]>('certificates', []);
+  const filteredCerts = brand?.name
+    ? cert.filter(c => c.brand.toLowerCase() === brand.name.toLowerCase())
+    : cert;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -134,11 +137,17 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
         )}
       </header>
 
-      <section className=" p-6 lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl xl:-mt-65 bg-body dark:bg-darkmode-body z-10 -p-6">
+      <section className="section container p-6 lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl xl:-mt-65 bg-body dark:bg-darkmode-body z-10 -p-6">
         <ReactMarkdown>{brand.description}</ReactMarkdown>
       </section>
 
-      <CertificatesSection brandName={brand.name} />
+      {filteredCerts.length > 0 && (
+        <section>
+          <h2 className="text-center pb-6">{`Наші сертифікати ${brand.name}`}</h2>
+          <CertificatesClient cert={filteredCerts} />
+        </section>
+      )}
+
 
       <section className="mx-auto">
         <h2 className="text-center lg:sticky lg:top-[96px] lg:z-20 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">

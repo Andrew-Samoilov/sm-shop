@@ -4,11 +4,9 @@ export default async function Home() {
 
   return (
     <>
-      <section className="section">
-        <HeroSection />
-      </section>
+      <HeroSection />
 
-      <section className="  flex flex-col items-center pb-6">
+      <section className="section  flex flex-col items-center">
         <h2>Купити шини</h2>
         <div className="flex flex-col md:flex-row gap-6">
           <LinkWithGA
@@ -44,6 +42,10 @@ export default async function Home() {
       </section>
 
       <InfoSection />
+
+      <section>
+         {/* this bullshit section special for toaster */}
+      </section>
     </>
   );
 }

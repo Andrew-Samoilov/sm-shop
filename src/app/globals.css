@@ -119,9 +119,9 @@
   }
 
   /* this bullshit css special for toaster */
-  .section:last-of-type {
+  /* .section:last-of-type {
     padding-bottom: 0 !important;
-  }
+  } */
 
     .container {
       @apply px-2 py-6 md:px-4 mx-auto;

@@ -11,9 +11,9 @@ export default async function InfoPageList() {
     });
 
     return (
-        <section className=" container">
+        <section className=" container ">
             <h1>Інформаційні сторінки</h1>
-            <ul className="flex flex-col gap-6 list-none">
+            <ul className="flex flex-col gap-6 list-none p-6">
                 {pages.map((page) => (
                     <li key={page.slug}>
                         <Link
