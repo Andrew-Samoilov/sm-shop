@@ -8,7 +8,7 @@ const version = packageData.version;
 
 export async function Footer() {
   const siteConfig = await getSiteConfig();
-  
+
   return (
     <footer className="text-light bg-theme-light dark:bg-darkmode-theme-light">
       <div className="container">
@@ -48,7 +48,7 @@ export async function Footer() {
               </LinkWithGA>
               <LinkWithGA
                 href="/info/payment-delivery"
-                eventLabel="payment-delivery"
+                eventLabel="payment_delivery"
                 eventCategory="footer"
                 className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
               >

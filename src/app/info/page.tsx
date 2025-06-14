@@ -9,7 +9,7 @@ export default async function InfoPageList() {
         orderBy: { title: "asc" },
         select: { slug: true, title: true },
     });
-
+    // console.log(`[infoPages generateStaticParams]pages`, pages);
     return (
         <section className=" container ">
             <h1>Інформаційні сторінки</h1>

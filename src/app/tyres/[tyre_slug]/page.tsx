@@ -1,4 +1,4 @@
-import { AddToCartButton, BreadCrumbs, CertificatesClient, ModelViewerSection, ViewItemGA } from "@/components";
+import { AddToCartButton, BreadCrumbs, CertificatesClient, LinkWithGA, ModelViewerSection, ViewItemGA } from "@/components";
 import { getTyreBySlug, getModelImgByModelId, prisma, translateSeasonToUkrainian, getContentBlock } from "@/lib";
 import { Certificate } from "@/types";
 import { Metadata } from "next";
@@ -20,7 +20,7 @@ export async function generateMetadata({
 }: {
   params: { tyre_slug: string };
 }): Promise<Metadata> {
-  const { tyre_slug } = params; 
+  const { tyre_slug } = params;
   const tyre = await getTyreBySlug(tyre_slug);
 
   if (!tyre) {
@@ -185,8 +185,31 @@ export default async function TyrePage({
         <div>Модель: {tyre.model}</div>
         <div>Країна виробництва: {tyre.country}</div>
         <div>Тиждень та рік виробництва: {tyre.dateCode}</div>
-        <div>Індекс швидкості: {tyre.speedIndex}</div>
-        <div>Індекс навантаження: {tyre.loadIndex}</div>
+
+        <div>
+          <LinkWithGA
+            href="/info/speed-index"
+            eventLabel="speed-index"
+            eventCategory="TyrePage"
+            className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+          >
+            Індекс швидкості:
+          </LinkWithGA>
+          {tyre.speedIndex}
+        </div>
+
+        <div>
+          <LinkWithGA
+            href="/info/load-index"
+            eventLabel="speed-index"
+            eventCategory="TyrePage"
+            className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+          >
+            Індекс навантаження:
+          </LinkWithGA>
+          {tyre.loadIndex}
+        </div>
+
         <div>Застосовуваність: {tyre.applicability}</div>
         <div>Ширина: {tyre.width}</div>
         <div>Профіль: {tyre.profile}</div>
