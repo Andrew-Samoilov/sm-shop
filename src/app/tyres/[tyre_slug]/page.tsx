@@ -179,7 +179,7 @@ export default async function TyrePage({
 
       {tyre.modelId !== null && images.length > 0 && <ModelViewerSection images={images} />}
 
-      <section className="section container flex flex-col w-fit gap-2 text-light">
+      <section className="section container flex flex-col w-fit  text-light gap-2">
         <div>Сезон: <span className="text-theme-dark">{tyre.season}</span></div>
         <div>Бренд: {tyre.brand}</div>
         <div>Модель: {tyre.model}</div>
@@ -191,9 +191,10 @@ export default async function TyrePage({
             href="/info/speed-index"
             eventLabel="speed-index"
             eventCategory="TyrePage"
+            // target="_blank"
             className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
           >
-            Індекс швидкості:
+            Індекс швидкості:&nbsp;
           </LinkWithGA>
           {tyre.speedIndex}
         </div>
@@ -203,9 +204,10 @@ export default async function TyrePage({
             href="/info/load-index"
             eventLabel="speed-index"
             eventCategory="TyrePage"
+            // target="_blank"
             className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
           >
-            Індекс навантаження:
+            Індекс навантаження:&nbsp;
           </LinkWithGA>
           {tyre.loadIndex}
         </div>
