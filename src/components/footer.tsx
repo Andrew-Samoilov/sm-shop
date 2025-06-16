@@ -66,17 +66,17 @@ export async function Footer() {
           </div>
           <div className="flex flex-col items-center">
             <div className="text-lg font-semibold">Товари</div>
-            <div className="space-y-2 lg:flex-row">
+            <div className="gap-2 flex flex-col items-center justify-center">
               <LinkWithGA
                 href="/tyres"
                 eventLabel="tyres"
                 eventCategory="footer"
-                className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+                className=" text-sm md:text-base font-medium  text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
               >
                 Шини
               </LinkWithGA>
               <div className="flex gap-2 pl-2">
-                <LinkWithGA
+                                <LinkWithGA
                   href="/brands"
                   eventLabel="brands"
                   eventCategory="footer"

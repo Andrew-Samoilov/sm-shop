@@ -143,11 +143,11 @@ export default async function TyrePage({
   // console.info("[TyrePage]", tyre);
 
   return (
-    <article>
+    <article >
       <BreadCrumbs tyreSlug={tyre_slug} />
 
-      <div className="container flex items-center justify-center gap-18 py-6 ">
-        <h1 className="flex flex-col items-start ">
+      <div className=" flex flex-col md:flex-row items-center justify-center gap-2 md:gap-18 py-6 text-3xl ">
+        <h1 className="flex flex-col items-center md:items-start  ">
           <span>{tyre.brands?.name}</span>
           <span>{tyre.models?.name}</span>
           <span className="font-normal text-[75%]">{tyreSize}</span>
@@ -177,83 +177,72 @@ export default async function TyrePage({
         price={Number(tyre.price)}
       />
 
-      {tyre.modelId !== null && images.length > 0 && <ModelViewerSection images={images} />}
+      <div className="container flex flex-col md:flex-row">
+        {/* {tyre.modelId !== null && images.length > 0 && <ModelViewerSection images={images} />} */}
+        <ModelViewerSection images={images} />
 
-      <section className="section container flex flex-col w-fit  text-light gap-2">
-        <div>Сезон: <span className="text-theme-dark">{tyre.season}</span></div>
-        <div>Бренд: {tyre.brand}</div>
-        <div>Модель: {tyre.model}</div>
-        <div>Країна виробництва: {tyre.country}</div>
-        <div>Тиждень та рік виробництва: {tyre.dateCode}</div>
-
-        <div>
-          <LinkWithGA
-            href="/info/speed-index"
-            eventLabel="speed-index"
-            eventCategory="TyrePage"
-            // target="_blank"
-            className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
-          >
-            Індекс швидкості:&nbsp;
-          </LinkWithGA>
-          {tyre.speedIndex}
-        </div>
-
-        <div>
-          <LinkWithGA
-            href="/info/load-index"
-            eventLabel="speed-index"
-            eventCategory="TyrePage"
-            // target="_blank"
-            className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
-          >
-            Індекс навантаження:&nbsp;
-          </LinkWithGA>
-          {tyre.loadIndex}
-        </div>
-
-        <div>Застосовуваність: {tyre.applicability}</div>
-        <div>Ширина: {tyre.width}</div>
-        <div>Профіль: {tyre.profile}</div>
-        <div>Діаметр: {tyre.diameter}</div>
-      </section>
-
-      {tyre.models?.description && (
-        <section className="section container max-w-[65ch] border-b border-border">
-          <details className="group">
-            <summary className="flex flex-between  justify-center items-center marker:content-none gap-6 cursor-pointer ">
-              <h2 >Детальний опис</h2>
-              <span className="text-4xl transition-transform group-open:rotate-45">+</span>
-            </summary>
-            <ReactMarkdown>{tyre.models.description}</ReactMarkdown>
-          </details>
+        <section className=" container flex flex-col  min-w-fit  text-light gap-2">
+          <div>Сезон: <span className="text-theme-dark">{tyre.season}</span></div>
+          <div>Бренд: {tyre.brand}</div>
+          <div>Модель: {tyre.model}</div>
+          <div>Країна виробництва: {tyre.country}</div>
+          <div>Тиждень та рік виробництва: {tyre.dateCode}</div>
+          <div>
+            <LinkWithGA
+              href="/info/speed-index"
+              eventLabel="speed-index"
+              eventCategory="TyrePage"
+              className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+            >
+              Індекс швидкості:&nbsp;
+            </LinkWithGA>
+            {tyre.speedIndex}
+          </div>
+          <div>
+            <LinkWithGA
+              href="/info/load-index"
+              eventLabel="speed-index"
+              eventCategory="TyrePage"
+              className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+            >
+              Індекс навантаження:&nbsp;
+            </LinkWithGA>
+            {tyre.loadIndex}
+          </div>
+          <div>Застосовуваність: {tyre.applicability}</div>
+          <div>Ширина: {tyre.width}</div>
+          <div>Профіль: {tyre.profile}</div>
+          <div>Діаметр: {tyre.diameter}</div>
         </section>
-      )}
+
+      </div>
+
+      <div>
+        {tyre.models?.description && (
+          <section className="section container max-w-[65ch] border-b border-border">
+            <details className="group">
+              <summary className="flex flex-between  justify-center items-center marker:content-none gap-6 cursor-pointer ">
+                <h2 >Детальний опис</h2>
+                <span className="text-4xl transition-transform group-open:rotate-45">+</span>
+              </summary>
+              <ReactMarkdown>{tyre.models.description}</ReactMarkdown>
+            </details>
+          </section>
+        )}
 
 
-      {filteredCerts.length > 0 && (
-        <section className="section container ">
-          <details className="group">
-            <summary className="flex flex-between justify-center items-center marker:content-none gap-6 cursor-pointer ">
-              <h2 className="text-center">{`Наші сертифікати ${tyre.brand}`}</h2>
-              <span className="text-4xl transition-transform group-open:rotate-45">+</span>
-            </summary>
-            <CertificatesClient cert={filteredCerts} />
-          </details>
-        </section>
-      )}
-
-
-      {/* <section className="section container lg:max-w-[65ch]">
-        {Object.entries(tyre).map(([key, value]) => (
-          <p key={key}>
-            <strong>{key}:</strong>{" "}
-            {typeof value === "object" && value !== null
-              ? `[об'єкт: ${Object.keys(value).join(", ")}]`
-              : value?.toString() ?? "N/A"}
-          </p>
-        ))}
-      </section> */}
+        {filteredCerts.length > 0 && (
+          <section className="  ">
+            <details className="group">
+              <summary className="flex flex-between justify-center items-center marker:content-none gap-6 cursor-pointer ">
+                <h2 className="text-center">{`Наші сертифікати ${tyre.brand}`}</h2>
+                <span className="text-4xl transition-transform group-open:rotate-45">+</span>
+              </summary>
+              <CertificatesClient cert={filteredCerts} />
+            </details>
+          </section>
+        )}
+      </div>
     </article>
   );
 }

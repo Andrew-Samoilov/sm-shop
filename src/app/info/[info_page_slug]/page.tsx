@@ -23,7 +23,13 @@ export default async function InfoPage({ params }: Awaited<{ params: { info_page
     return (
         <section className="lg:max-w-[70ch] mx-auto p-4">
             <h1>{page.title}</h1>
-            <ReactMarkdown>{markdown}</ReactMarkdown>
+            <ReactMarkdown
+                components={{
+                    a: ({ ...props }) => (
+                        <a {...props} target="_blank" rel="noopener noreferrer" />
+                    ),
+                }}
+            >{markdown}</ReactMarkdown>
         </section>
     );
 }
