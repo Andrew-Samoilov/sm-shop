@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 // import { ArrowLeftCircleIcon, ArrowRightCircleIcon } from "@heroicons/react/24/outline";
 import { NoPhoto, OnePhoto } from "@/components";
 
-export function ModelViewerSection({
+export function ModelViewer({
   images,
 }: {
   images: {
@@ -43,10 +43,11 @@ export function ModelViewerSection({
 
   return (
     // <section className="relative  overflow-hidden m-0 p-0 ml-auto lg:h-[50vh]  2xl:w-3/4 flex items-center justify-center content-center">
-    <section className="relative h-[300px] lg:h-[50vh] overflow-hidden m-0 p-0 flex items-center justify-center">
+    // <section className=" relative h-[300px] lg:h-[50vh] overflow-hidden m-0 p-0 flex items-center justify-center content-center">
+    <>
       {images.length === 0 && <NoPhoto />}
       {images.length === 1 && <OnePhoto image={images[0]} />}
-
-    </section>
+    </>
+ // </section> 
   );
 }

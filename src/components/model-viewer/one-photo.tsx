@@ -14,7 +14,7 @@ export function OnePhoto({
     };
 }) {
     return (
-        <div className="relative w-screen aspect-[3/4]">
+        <div className="relative w-full md:w-[50vh] md:max-w-[40vw] h-[60vh] overflow-hidden rounded-md">
             <Image
                 key={image.id}
                 src={image.url}
@@ -22,8 +22,7 @@ export function OnePhoto({
                 fill
                 priority
                 sizes="100vw"
-                // sizes=" (min-width: 1280px) 25vw, (min-width: 1024px) 33.33vw, (min-width: 768px) 50vw, 100vw"
-                className="object-contain"
+                className="object-contain mx-auto"
             />
         </div>
     )

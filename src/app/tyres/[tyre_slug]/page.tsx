@@ -1,4 +1,4 @@
-import { AddToCartButton, BreadCrumbs, CertificatesClient, LinkWithGA, ModelViewerSection, ViewItemGA } from "@/components";
+import { AddToCartButton, BreadCrumbs, CertificatesClient, LinkWithGA, ModelViewer, ViewItemGA } from "@/components";
 import { getTyreBySlug, getModelImgByModelId, prisma, translateSeasonToUkrainian, getContentBlock } from "@/lib";
 import { Certificate } from "@/types";
 import { Metadata } from "next";
@@ -146,7 +146,7 @@ export default async function TyrePage({
     <article >
       <BreadCrumbs tyreSlug={tyre_slug} />
 
-      <div className=" flex flex-col md:flex-row items-center justify-center gap-2 md:gap-18 py-6 text-3xl ">
+      <div className=" flex flex-col md:flex-row items-center justify-center gap-2 md:gap-18 md:py-6 text-3xl ">
         <h1 className="flex flex-col items-center md:items-start  ">
           <span>{tyre.brands?.name}</span>
           <span>{tyre.models?.name}</span>
@@ -177,11 +177,11 @@ export default async function TyrePage({
         price={Number(tyre.price)}
       />
 
-      <div className=" flex flex-col md:flex-row items-center">
+      <div className=" flex flex-col md:flex-row items-center content-center justify-center">
         {/* {tyre.modelId !== null && images.length > 0 && <ModelViewerSection images={images} />} */}
-        <ModelViewerSection images={images} />
+        <ModelViewer images={images} />
 
-        <section className=" container flex flex-col  min-w-fit  text-light gap-2">
+        <div className=" flex flex-col min-w-fit  text-light gap-1">
           <div>Сезон: <span className="text-theme-dark">{tyre.season}</span></div>
           <div>Бренд: {tyre.brand}</div>
           <div>Модель: {tyre.model}</div>
@@ -213,7 +213,7 @@ export default async function TyrePage({
           <div>Ширина: {tyre.width}</div>
           <div>Профіль: {tyre.profile}</div>
           <div>Діаметр: {tyre.diameter}</div>
-        </section>
+        </div>
 
       </div>
 
