@@ -14,7 +14,7 @@ export function OnePhoto({
     };
 }) {
     return (
-        <div className="relative w-full md:w-[50vh] md:max-w-[40vw] h-[60vh] overflow-hidden rounded-md">
+        <div className="relative w-full md:w-[50vh] md:max-w-[40vw] h-[50vh] overflow-hidden rounded-md">
             <Image
                 key={image.id}
                 src={image.url}
