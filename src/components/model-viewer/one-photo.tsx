@@ -1,18 +1,7 @@
+import { IImage } from "@/types";
 import Image from "next/image";
 
-export function OnePhoto({
-    image,
-}: {
-    image: {
-        id: number;
-        modelId: number;
-        url: string;
-        alt: string | null;
-        width: number | null;
-        height: number | null;
-        position: number;
-    };
-}) {
+export function OnePhoto({ image }: { image: IImage }) {
     return (
         <div className="relative w-full md:w-[50vh] md:max-w-[40vw] h-[50vh] overflow-hidden rounded-md">
             <Image

@@ -15,12 +15,11 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { tyre_slug: string };
-}): Promise<Metadata> {
-  const { tyre_slug } = params;
+export async function generateMetadata(
+  _context: { params: { tyre_slug: string } }
+): Promise<Metadata> {
+  const { tyre_slug } = _context.params;
+
   const tyre = await getTyreBySlug(tyre_slug);
 
   if (!tyre) {
@@ -177,17 +176,17 @@ export default async function TyrePage({
         price={Number(tyre.price)}
       />
 
-      <div className=" flex flex-col md:flex-row items-center content-center justify-center">
+      <div className=" flex flex-col md:flex-row md:gap-6 items-start content-center justify-center pb-6">
         {/* {tyre.modelId !== null && images.length > 0 && <ModelViewerSection images={images} />} */}
         <ModelViewer images={images} />
 
         <div className=" flex flex-col min-w-fit  text-light gap-1">
-          <div>Сезон: <span className="font-semibold text-theme-dark">{tyre.season}</span></div>
+          <div className="pb-2 md:pb-6">Сезон: <span className="font-semibold text-theme-dark">{tyre.season}</span></div>
           <div>Бренд: {tyre.brand}</div>
           <div>Модель: {tyre.model}</div>
-          <div>Країна виробництва: {tyre.country}</div>
-          <div>Тиждень та рік виробництва: {tyre.dateCode}</div>
-          <hr></hr>
+          <div >Країна виробництва: {tyre.country}</div>
+          <div className="pb-2 md:pb-6">Тиждень та рік виробництва: {tyre.dateCode}</div>
+          {/* <hr className="pb-2 md:pb-6"></hr> */}
           <div>Застосовуваність: {tyre.applicability}</div>
           <div>Ширина: {tyre.width}</div>
           <div>Профіль: {tyre.profile}</div>
@@ -220,14 +219,10 @@ export default async function TyrePage({
       </div>
 
       <div>
-
-
-
-
         {tyre.models?.description && (
-          <section className=" max-w-[65ch] border-b border-border">
+          <section className="pb-6 max-w-[65ch] mx-auto">
             <details className="group">
-              <summary className="flex flex-between  justify-center items-center marker:content-none cursor-pointer ">
+              <summary className="flex flex-between justify-center items-center marker:content-none cursor-pointer ">
                 <h2>Детальний опис</h2>
                 <span className="text-4xl transition-transform group-open:rotate-45">+</span>
               </summary>
@@ -237,11 +232,11 @@ export default async function TyrePage({
         )}
 
 
-        <div className="w-full max-w-2xl mx-auto">
+        {/* <div className="w-full max-w-2xl mx-auto">
           {/* Таби */}
-          <div className="flex ">
+          {/* <div className="flex "> */}
             {/* Вкладка 1 */}
-            <div className="">
+            {/* <div className="">
               <input
                 type="radio"
                 id="tab1"
@@ -262,10 +257,10 @@ export default async function TyrePage({
                   Завдяки асиметричному малюнку протектора та м’якій гумі — ідеальний вибір для комфортної їзди.
                 </p>
               </div>
-            </div>
+            </div> */}
 
             {/* Вкладка 2 */}
-            <div>
+            {/* <div>
               <input type="radio" id="tab2" name="tabs" className="peer hidden" />
               <label
                 htmlFor="tab2"
@@ -283,17 +278,12 @@ export default async function TyrePage({
               </div>
             </div>
           </div>
-        </div>
-
-        <br />
-        <hr />
-        <br />
-
-        
+        </div>  */}
+       
         
 
         {filteredCerts.length > 0 && (
-          <section >
+          <section className="pb-6">
             <details className="group">
               <summary className="flex flex-between justify-center items-center marker:content-none cursor-pointer ">
                 <h2>{`Наші сертифікати ${tyre.brand}`}</h2>

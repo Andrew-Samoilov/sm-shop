@@ -13,7 +13,7 @@ export type SiteConfig = {
 };
 
 export type TyreWithRelations = Prisma.TyreGetPayload<{
-    include: { brands: true; models: true }
+  include: { brands: true; models: true }
 }>;
 
 export interface Benefit {
@@ -50,3 +50,13 @@ export interface Certificate {
   width: number
   height: number
 }
+
+export type IImage = {
+  id: number
+  modelId: number
+  url: string
+  alt: string | null
+  width: number | null
+  height: number | null
+  position: number
+};
