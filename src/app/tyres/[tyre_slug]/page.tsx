@@ -176,16 +176,16 @@ export default async function TyrePage({
         price={Number(tyre.price)}
       />
 
-      <div className=" flex flex-col md:flex-row md:gap-6 items-start content-center justify-center pb-6">
+      <div className=" flex flex-col md:flex-row md:gap-6 2xl:gap-12 items-start content-center justify-center pb-6">
         {/* {tyre.modelId !== null && images.length > 0 && <ModelViewerSection images={images} />} */}
         <ModelViewer images={images} />
 
         <div className=" flex flex-col min-w-fit  text-light gap-1">
-          <div className="pb-2 md:pb-6">Сезон: <span className="font-semibold text-theme-dark">{tyre.season}</span></div>
+          <div className="pb-2 md:pb-6 2xl:gap-12">Сезон: <span className="font-semibold text-theme-dark">{tyre.season}</span></div>
           <div>Бренд: {tyre.brand}</div>
           <div>Модель: {tyre.model}</div>
           <div >Країна виробництва: {tyre.country}</div>
-          <div className="pb-2 md:pb-6">Тиждень та рік виробництва: {tyre.dateCode}</div>
+          <div className="pb-2 md:pb-6 2xl:gap-12">Тиждень та рік виробництва: {tyre.dateCode}</div>
           {/* <hr className="pb-2 md:pb-6"></hr> */}
           <div>Застосовуваність: {tyre.applicability}</div>
           <div>Ширина: {tyre.width}</div>
@@ -196,6 +196,7 @@ export default async function TyrePage({
               href="/info/speed-index"
               eventLabel="speed-index"
               eventCategory="TyrePage"
+              target="_blanc"
               className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
             >
               Індекс швидкості:&nbsp;
@@ -207,6 +208,7 @@ export default async function TyrePage({
               href="/info/load-index"
               eventLabel="speed-index"
               eventCategory="TyrePage"
+              target="_blanc"
               className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
             >
               Індекс навантаження:&nbsp;
@@ -221,7 +223,7 @@ export default async function TyrePage({
       <div>
         {tyre.models?.description && (
           <section className="pb-6 max-w-[65ch] mx-auto">
-            <details className="group">
+            <details className="group" open>
               <summary className="flex flex-between justify-center items-center marker:content-none cursor-pointer ">
                 <h2>Детальний опис</h2>
                 <span className="text-4xl transition-transform group-open:rotate-45">+</span>
@@ -231,60 +233,9 @@ export default async function TyrePage({
           </section>
         )}
 
-
-        {/* <div className="w-full max-w-2xl mx-auto">
-          {/* Таби */}
-          {/* <div className="flex "> */}
-            {/* Вкладка 1 */}
-            {/* <div className="">
-              <input
-                type="radio"
-                id="tab1"
-                name="tabs"
-                className="peer hidden"
-                defaultChecked
-              />
-              <label
-                htmlFor="tab1"
-                className="inline-block px-4 py-2 text-sm font-medium text-light border-border border-t border-l border-r rounded-t-md  cursor-pointer"
-              >
-                Опис
-              </label>
-
-              <div className="hidden peer-checked:block border-b border-l border-r border-border rounded-b-md p-6 ">
-                <p className="text-sm text-light">
-                  Цей літній комплект шин створено для оптимального зчеплення на сухій і вологій дорозі.
-                  Завдяки асиметричному малюнку протектора та м’якій гумі — ідеальний вибір для комфортної їзди.
-                </p>
-              </div>
-            </div> */}
-
-            {/* Вкладка 2 */}
-            {/* <div>
-              <input type="radio" id="tab2" name="tabs" className="peer hidden" />
-              <label
-                htmlFor="tab2"
-                className="inline-block px-4 py-2 text-sm font-medium text-light border-border border-t border-l border-r rounded-t-md  cursor-pointer"
-              >
-                Сертифікати
-              </label>
-
-              <div className=" hidden peer-checked:block border-b border-l border-r border-gray-300 rounded-b-md p-6">
-                <ul className="list-disc list-inside text-sm text-light">
-                  <li>Сертифікат відповідності ISO 9001</li>
-                  <li>Європейський стандарт ECE R30</li>
-                  <li>Сертифікат відповідності УкрСЕПРО</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>  */}
-       
-        
-
         {filteredCerts.length > 0 && (
           <section className="pb-6">
-            <details className="group">
+            <details className="group" open>
               <summary className="flex flex-between justify-center items-center marker:content-none cursor-pointer ">
                 <h2>{`Наші сертифікати ${tyre.brand}`}</h2>
                 <span className="text-4xl transition-transform group-open:rotate-45">+</span>
@@ -294,37 +245,7 @@ export default async function TyrePage({
           </section>
         )}
 
-
-
       </div>
-
-      {/* <input type="radio" id="tab1" name="tabs" className="peer/tab1 hidden" defaultChecked />
-      <label
-        htmlFor="tab1"
-        className="px-4 py-2 cursor-pointer text-sm font-medium text-gray-400 border-b-2 border-transparent peer-checked/tab1:text-black peer-checked/tab1:border-black"
-      >
-        Опис
-      </label>
-
-      <input type="radio" id="tab2" name="tabs" className="peer/tab2 hidden" />
-      <label
-        htmlFor="tab2"
-        className="px-4 py-2 cursor-pointer text-sm font-medium text-gray-400 border-b-2 border-transparent peer-checked/tab2:text-black peer-checked/tab2:border-black"
-      >
-        Сертифікати
-      </label> */}
-
-      {/* <div className="mt-4">
-        <div className="hidden peer-checked/tab1:block">
-          <p>Це опис товару. Можна рендерити Markdown, або HTML з бази.</p>
-        </div>
-        <div className="hidden peer-checked/tab2:block">
-          <p>Список сертифікатів або інша інформація.</p>
-        </div>
-      </div> */}
-
-
-
     </article>
   );
 }
