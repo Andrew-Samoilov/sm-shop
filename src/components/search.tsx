@@ -5,7 +5,7 @@ import { formatTyreSizeQuery, sendGAEvent } from "@/lib";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 
-export function Search() {
+export function Search({ className = "" }: { className?: string }) {
   const [query, setQuery] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
   const [debouncedQueryForGA, setDebouncedQueryForGA] = useState("");
@@ -50,7 +50,7 @@ export function Search() {
   }, [debouncedQueryForGA]);
 
   return (
-    <div className="relative ">
+    <div className={`relative ${className}`}>
       {query === "" && (
         <MagnifyingGlassIcon className=" text-light/75 absolute top-1/2 right-3 h-5 w-5 -translate-y-1/2 scale-x-[-1] transform" />
       )}

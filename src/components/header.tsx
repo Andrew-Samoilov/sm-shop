@@ -23,10 +23,7 @@ export async function Header() {
         >Контакти</LinkWithGA>
       </div>
 
-      {/* <div className="block w-full order-3 lg:hidden xl:block xl:w-45 xl:order-1"> */}
-      <div className="block w-full order-3 lg:hidden xl:block lg:order-none lg:w-auto xl:w-45 ">
-        <Search />
-      </div>
+      <Search className="block w-full order-3 lg:hidden xl:block lg:order-none lg:w-auto xl:w-45 " />
 
       <div className="flex items-center gap-2">
         <ThemeSwitcher />

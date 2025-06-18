@@ -171,9 +171,8 @@ export function TyresSelect() {
             className="flex flex-col  gap-2 w-full pb-2 mx-auto lg:pt-6"
             onSubmit={(e) => e.preventDefault()}
           >
-            <div className="hidden lg:block ">
-              <Search />
-            </ div>
+
+            <Search className="hidden lg:block" />
 
             <div className="flex gap-6 flex-col md:flex-row lg:flex-col justify-between">
               <OptionSelect

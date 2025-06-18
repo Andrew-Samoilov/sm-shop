@@ -152,11 +152,12 @@ export default async function TyrePage({
           <span className="font-normal text-[75%]">{tyreSize}</span>
         </h1>
         <div className="flex flex-col gap-2">
-          <div className="flex flex-row gap-2 items-center">
+          <div className="flex flex-col gap-2 items-center">
+            <div>4 шт</div>
             <span
               className="font-semibold text-h1"
-            >{tyre.price?.toString()}</span>
-            <span className="text-light">грн</span>
+            >{tyre.price?.toString()} <span className="text-h3 font-normal text-light">грн</span></span>
+
           </div>
 
           <AddToCartButton
@@ -176,16 +177,16 @@ export default async function TyrePage({
         price={Number(tyre.price)}
       />
 
-      <div className=" flex flex-col md:flex-row md:gap-6 2xl:gap-12 items-start content-center justify-center pb-6">
+      <div className=" flex flex-col md:flex-row md:gap-6 2xl:p-12 items-start content-center justify-center pb-6">
         {/* {tyre.modelId !== null && images.length > 0 && <ModelViewerSection images={images} />} */}
         <ModelViewer images={images} />
 
-        <div className=" flex flex-col min-w-fit  text-light gap-1">
-          <div className="pb-2 md:pb-6 2xl:gap-12">Сезон: <span className="font-semibold text-theme-dark">{tyre.season}</span></div>
+        <div className=" flex flex-col min-w-fit p-2 md:p-0 text-light gap-1">
+          <div className="pb-2 md:pb-6 2xl:pb-12">Сезон: <span className="font-semibold text-theme-dark">{tyre.season}</span></div>
           <div>Бренд: {tyre.brand}</div>
           <div>Модель: {tyre.model}</div>
           <div >Країна виробництва: {tyre.country}</div>
-          <div className="pb-2 md:pb-6 2xl:gap-12">Тиждень та рік виробництва: {tyre.dateCode}</div>
+          <div className="pb-2 md:pb-6 2xl:pb-12">Тиждень та рік виробництва: {tyre.dateCode}</div>
           {/* <hr className="pb-2 md:pb-6"></hr> */}
           <div>Застосовуваність: {tyre.applicability}</div>
           <div>Ширина: {tyre.width}</div>
@@ -203,19 +204,24 @@ export default async function TyrePage({
             </LinkWithGA>
             {tyre.speedIndex}
           </div>
-          <div>
+          <div className="md:pb-6 2xl:p-12">
             <LinkWithGA
               href="/info/load-index"
               eventLabel="speed-index"
               eventCategory="TyrePage"
               target="_blanc"
-              className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
             >
               Індекс навантаження:&nbsp;
             </LinkWithGA>
             {tyre.loadIndex}
           </div>
-
+          <AddToCartButton
+            id={tyre.id}
+            title={tyre.title}
+            price={tyre.price}
+            quantity={4}
+            label="Купити в 1 клік"
+          />
         </div>
 
       </div>

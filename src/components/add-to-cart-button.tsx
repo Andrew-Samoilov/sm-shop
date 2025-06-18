@@ -37,11 +37,13 @@ export function AddToCartButton({
   title,
   price,
   quantity,
+  label = "Купити",
 }: {
   id: number;
   title: string;
   price: number;
-  quantity: number;
+    quantity: number;
+    label?: string;
 }) {
   return (
     <button
@@ -55,7 +57,7 @@ export function AddToCartButton({
       dark:md:hover:bg-white dark:md:hover:text-dark
    "
     >
-      Купити
+      {label}
     </button>
   );
 }
