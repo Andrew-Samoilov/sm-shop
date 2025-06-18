@@ -16,11 +16,6 @@ export async function Header() {
           eventCategory="header"
           href="/tyres"
         >Шини</LinkWithGA>
-        {/* <LinkWithGA
-          eventLabel="search"
-          eventCategory="header"
-          href="/search"
-        >Пошук</LinkWithGA> */}
         <LinkWithGA
           eventLabel="contacts"
           eventCategory="header"
@@ -28,7 +23,8 @@ export async function Header() {
         >Контакти</LinkWithGA>
       </div>
 
-      <div className="bloch w-full order-3 lg:hidden xl:block xl:w-45 xl:order-2">
+      {/* <div className="block w-full order-3 lg:hidden xl:block xl:w-45 xl:order-1"> */}
+      <div className="block w-full order-3 lg:hidden xl:block lg:order-none lg:w-auto xl:w-45 ">
         <Search />
       </div>
 

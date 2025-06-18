@@ -88,7 +88,7 @@ export function LinkWithGA({
       href={href}
       onClick={handleClick}
       className={className}
-      target={target ?? "_blank"}
+      {...(target ? { target } : {})}
       aria-label={ariaLabel}
     >
       {children}
