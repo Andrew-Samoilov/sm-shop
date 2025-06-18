@@ -33,6 +33,10 @@ export async function sendEmail({
     };
 
     const info = await transporter.sendMail(mailOptions);
-    console.log('[sendEmail] Лист надіслано:', info.messageId);
+    
+    if (process.env.NODE_ENV === "development") {
+        console.log('[sendEmail] Лист надіслано:', info.messageId);
+    }
+    
     return info;
 }

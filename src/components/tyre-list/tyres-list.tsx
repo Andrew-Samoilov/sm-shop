@@ -10,6 +10,7 @@ type TyresListProps = {
 }
 
 export function TyresList({ tyres, images, view }: TyresListProps) {
+  
   // console.log("[TyresList]", tyres.length, images.length, view);
 
   return (

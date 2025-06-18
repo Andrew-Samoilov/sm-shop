@@ -48,8 +48,11 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    console.log('[api GET] query', query);
-    console.log('[api GET] where', where);
+
+    if (process.env.NODE_ENV === "development") {
+      console.log('[api GET] query', query);
+      console.log('[api GET] where', where);
+    }
 
     const tyres = await prisma.tyre.findMany({
       where,
