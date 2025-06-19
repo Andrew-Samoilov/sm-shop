@@ -54,7 +54,7 @@ export function TyreGalleryItem({ tyre, modelImages }: TyreListItemProps) {
                         <span title="Номер тижня та рік виробництва">{tyre.dateCode}</span>
                     </span>
                 </span>
-                {!modelImages.length && <SeasonIcon season={tyre.season} />}
+                {/* {!modelImages.length && <SeasonIcon season={tyre.season} />} */}
                 <div className="flex flex-row gap-2 items-end mx-auto">
                     <span
                         className="font-semibold text-2xl"
