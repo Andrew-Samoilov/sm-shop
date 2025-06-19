@@ -44,7 +44,6 @@ export async function generateMetadata(
   };
 }
 
-
 export default function TyresPage() {
   return (
     <section className="container">

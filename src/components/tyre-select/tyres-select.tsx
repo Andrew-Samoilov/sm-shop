@@ -15,13 +15,24 @@ type FilterState = {
   seasons: string[];
   view: ViewType;
   sort: string;
-  query: string;
 };
 
 export function TyresSelect() {
   const router = useRouter();
   const searchParams = useSearchParams();
   // console.log(`[TyresSelect] searchParams`, ...searchParams);
+
+  const queryRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    const current = searchParams.get("query");
+    if (current === null || current === "") {
+      queryRef.current = "";
+    } else {
+      queryRef.current = current;
+    }
+  }, [searchParams]);
+  
 
   const initial = useRef<FilterState>({
     width: searchParams.get("width") ?? "",
@@ -30,10 +41,17 @@ export function TyresSelect() {
     seasons: searchParams.getAll("season"),
     view: searchParams.get("view") === "gallery" ? "gallery" : "list",
     sort: searchParams.get("sort") ?? "price_asc",
-    query: searchParams.get("query") ?? "",
   });
 
   const [filters, setFilters] = useState<FilterState>(initial.current);
+
+  const isFilterActive =
+    filters.width !== "" ||
+    filters.profile !== "" ||
+    filters.diameter !== "" ||
+    filters.seasons.length > 0;
+
+
   const [options, setOptions] = useState({
     widths: [] as number[],
     profiles: [] as number[],
@@ -65,8 +83,10 @@ export function TyresSelect() {
 
   // 1. Завантаження шин (або очищення)
   useEffect(() => {
-    const { width, profile, diameter, seasons, sort, query } = filters;
-    const isEmpty = !width && !profile && !query && !diameter && seasons.length === 0;
+    const query = searchParams.get("query") ?? "";
+    const { width, profile, diameter, seasons, sort } = filters;
+
+    const isEmpty = !width && !profile && !diameter && seasons.length === 0 && !query;
     if (isEmpty) {
       setSelectedTyres([]);
       setImages([]);
@@ -90,11 +110,13 @@ export function TyresSelect() {
       .catch((error) => {
         console.error("[Tyres Select] Помилка фетча шин:", error);
       });
-  }, [filters]);
+  }, [filters, searchParams]);
 
 
   // 2. Оновлення URL
   useEffect(() => {
+    const query = queryRef.current ?? "";
+
     const params = new URLSearchParams();
     if (filters.width) params.set("width", filters.width);
     if (filters.profile) params.set("profile", filters.profile);
@@ -102,10 +124,10 @@ export function TyresSelect() {
     filters.seasons.forEach((s) => params.append("season", s));
     params.set("view", filters.view);
     params.set("sort", filters.sort);
-    params.set("query", filters.query);
+    if (query) params.set("query", query);
 
     router.replace(`?${params.toString()}`, { scroll: false });
-  }, [filters, router]);
+  }, [filters, router, searchParams]);
 
 
   // 3. Завантаження опції для селектів: width profile diameter
@@ -129,12 +151,14 @@ export function TyresSelect() {
       );
   }, [filters.width, filters.profile, filters.diameter]);
 
+  const query = searchParams.get("query") ?? "";
+  const isSearchDisabled = !isFilterActive && query === "";
 
   return (
     <div className="flex flex-col w-auto">
       <h1 className="text-left">
         Пошук:
-        {filters.query && ` «${filters.query}»`}
+        {query && ` «${query}»`}
 
         {(filters.width && filters.profile) && (
           <> {filters.width}/{filters.profile}</>
@@ -168,13 +192,15 @@ export function TyresSelect() {
         <aside className="gap-6 flex flex-col lg:flex-row w-auto">
           <form
             aria-label="Фільтри пошуку шин"
-            className="flex flex-col  gap-2 w-full pb-2 mx-auto lg:pt-6"
+            className="flex flex-col  gap-2 lg:gap-6 w-full pb-2 mx-auto lg:pt-6"
             onSubmit={(e) => e.preventDefault()}
           >
 
-            <Search className="hidden lg:block" />
-
             <div className="flex gap-6 flex-col md:flex-row lg:flex-col justify-between">
+              <Search
+                className="hidden lg:block"
+                filtersActive={isFilterActive}
+              />
               <OptionSelect
                 id="width"
                 label="Ширина"
@@ -197,25 +223,48 @@ export function TyresSelect() {
                 options={options.diameters}
               />
             </div>
-            <SeasonCheckbox value={filters.seasons} onChange={(v) => updateFilter("seasons", v)} />
+            <SeasonCheckbox
+              value={filters.seasons}
+              onChange={(v) => updateFilter("seasons", v)}
+            />
 
             <HelpWindow isOpen={helpOpen} setIsOpen={setHelpOpen} />
-          </form>
-        </aside >
 
-        {
-          selectedTyres?.length > 0 && (
-            <div>
-              <ListHeader
-                view={filters.view}
-                onChangeView={(v) => updateFilter("view", v)}
-                sort={filters.sort}
-                onChangeSort={(v) => updateFilter("sort", v)}
-              />
-              <TyresList tyres={selectedTyres} images={images} view={filters.view} />
-            </div>
-          )
-        }
+            <button
+              type="button"
+              disabled={isSearchDisabled}
+              onClick={() => {
+                const query = searchParams.get("query") ?? "";
+                const params = new URLSearchParams();
+                if (filters.width) params.set("width", filters.width);
+                if (filters.profile) params.set("profile", filters.profile);
+                if (filters.diameter) params.set("diameter", filters.diameter);
+                filters.seasons.forEach((s) => params.append("season", s));
+                params.set("view", filters.view);
+                params.set("sort", filters.sort);
+                if (query) params.set("query", query);
+                router.replace(`?${params.toString()}`);
+              }}
+              className="btn btn-primary bg-accent border-accent transition-all duration-200 hover:scale-105 hover:shadow-lg
+              disabled:opacity-50 disabled:pointer-events-none"
+            >
+              Знайти
+            </button>
+
+          </form>
+        </aside>
+
+        {selectedTyres?.length > 0 && (
+          <div>
+            <ListHeader
+              view={filters.view}
+              onChangeView={(v) => updateFilter("view", v)}
+              sort={filters.sort}
+              onChangeSort={(v) => updateFilter("sort", v)}
+            />
+            <TyresList tyres={selectedTyres} images={images} view={filters.view} />
+          </div>
+        )}
       </div>
     </div>
   );

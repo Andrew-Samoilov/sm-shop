@@ -39,7 +39,7 @@ export function ListHeader({ view, onChangeView, sort, onChangeSort }: Props) {
     };
 
     return (
-        <header className="flex justify-between py-6">
+        <header className="flex justify-between py-2 xl:py-6">
             <fieldset className="flex gap-2 items-center">
                 <span className="hidden xl:block text-light text-sm">Вигляд</span>
 

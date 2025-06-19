@@ -24,15 +24,15 @@ export function SeasonCheckbox({
 
     return (
         <fieldset>
-            <legend className="text-sm text-light pl-6 text-center md:text-start">Сезон</legend>
-            <div className="flex flex-row flex-wrap justify-center md:justify-start gap-6 md:px-4 py-2 ">
+            <legend className="text-sm text-light md:pl-6 text-center md:text-start">Сезон</legend>
+            <div className="flex flex-row flex-wrap justify-center md:justify-start gap-6  lg:flex-nowrap">
                 {SEASONS.map(({ value: v, label }) => (
                     <label key={v} className="flex items-center gap-2 cursor-pointer ">
                         <input
                             id={v}
                             type="checkbox"
                             checked={value.includes(v)}
-                            onChange={() => handleToggle(v)}                       
+                            onChange={() => handleToggle(v)}
                         />
                         <span >{label}</span>
                     </label>
