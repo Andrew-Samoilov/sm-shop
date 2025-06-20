@@ -16,7 +16,7 @@ export function HeroSection() {
                         href={'/info/storage-50'}
                         eventLabel="storage-50"
                         eventCategory="hero"
-                        aria-label="Перейти до каталогу шин"
+                        aria-label="Докладніше про детальні умови акції"
                     >(докладніше)
                     </LinkWithGA>
                     </p>

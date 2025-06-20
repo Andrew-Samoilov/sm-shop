@@ -1,8 +1,7 @@
 "use client";
 import Form from "next/form";
-
 import { useState } from "react";
-import { SubmitButton } from "./submit-button";
+import { SubmitButton, LinkWithGA } from "@/components";
 import { handleClientSubmit, loadRecaptchaScript } from "@/lib";
 
 const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!;
@@ -13,13 +12,13 @@ export function ContactForm() {
     setIsChecked(event.target.checked);
   };
 
-  const [isRecaptchaReady, setRecaptchaReady] = useState(false);
+  const [isRecaptchaReady, setIsRecaptchaReady] = useState(false);
 
   const initRecaptcha = async () => {
     if (!isRecaptchaReady) {
       try {
         await loadRecaptchaScript(siteKey);
-        setRecaptchaReady(true);
+        setIsRecaptchaReady(true);
       } catch (e) {
         console.error(`[Recaptcha]`, e);
       }
@@ -54,6 +53,7 @@ export function ContactForm() {
           <input
             name="contact_email"
             type="email"
+            inputMode="email"
             id="contact_email"
             autoComplete="email"
             placeholder="example@domain.com"
@@ -68,6 +68,7 @@ export function ContactForm() {
             name="contact_tel"
             type="tel"
             id="contact_tel"
+            inputMode="tel"
             autoComplete="tel"
             placeholder="Введіть телефон..."
             className="form-input bg-theme-light dark:bg-darkmode-theme-light"
@@ -81,6 +82,7 @@ export function ContactForm() {
         required={true}
         name="contact_message"
         id="contact_message"
+        inputMode="text"
         placeholder="Введіть повідомлення..."
         onFocus={initRecaptcha}
         rows={4}
@@ -99,7 +101,14 @@ export function ContactForm() {
           htmlFor="contact_ok"
           className="text-dark dark:text-darkmode-light font-normal max-md:text-base"
         >
-          Погоджуюсь з умовами використання
+          Погоджуюсь з
+          <LinkWithGA
+            href={'/info/legal'}
+            eventLabel="legal"
+            eventCategory="hero"
+            aria-label="Умови використання сайту"
+          >&nbsp;умовами використання
+          </LinkWithGA>
         </label>
       </div>
 
