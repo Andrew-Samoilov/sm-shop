@@ -2,7 +2,7 @@ import { ManyPhoto, NoPhoto, OnePhoto } from "@/components";
 import { IImage } from "@/types";
 
 export function ModelViewer({ images }: { images?: IImage[] }) {
-  console.log("[ModelViewer] images.length", images?.length);
+  // console.log("[ModelViewer] images.length", images?.length);
 
   if (!images || images.length === 0) {
     return <NoPhoto />;

@@ -1,5 +1,4 @@
 export { formatDisplayUrl } from "./format-display-url";
-export { formatTyreSizeQuery } from "./format-tyre-size-query";
 export { formatFormData } from "./format-form-data";
 export { translateSeasonToUkrainian } from "./translate-season-to-ukrainian"
 

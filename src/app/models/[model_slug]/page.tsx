@@ -1,4 +1,4 @@
-import { CertificatesClient, ModelViewerSection, TyresList } from "@/components";
+import { CertificatesClient, ModelViewer, TyresList } from "@/components";
 import { getBrandById, getModels, getTyresByModelId, getModelBySlug, getModelImgByModelId, getSiteConfig, getContentBlock } from "@/lib";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
@@ -125,7 +125,7 @@ export default async function ModelPage({
         )}
       </header>
 
-      {images && images.length > 0 && <ModelViewerSection images={images} />}
+      {images && images.length > 0 && <ModelViewer images={images} />}
 
       {model.description && (
         <section className="p-6 lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl  bg-body dark:bg-darkmode-body z-10">

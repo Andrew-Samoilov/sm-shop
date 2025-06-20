@@ -43,9 +43,6 @@ export default async function Home() {
 
       <InfoSection />
 
-      <section>
-         {/* this bullshit section special for toaster */}
-      </section>
     </>
   );
 }
