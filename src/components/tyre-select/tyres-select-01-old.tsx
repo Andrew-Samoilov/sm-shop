@@ -2,7 +2,13 @@
 import React, { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getTyresOptions } from "@/lib";
-import { HelpWindow, TyresList, OptionSelect, SeasonCheckbox, ListHeader, } from "@/components";
+import {
+  HelpWindow,
+  TyresList,
+  OptionSelect,
+  SeasonCheckbox,
+  ListHeader,
+} from "@/components";
 import { ModelImage } from "@prisma/client";
 import { TyreWithRelations } from "@/types";
 
@@ -139,44 +145,28 @@ export function TyresSelect() {
     gallery: "у вигляді галереї",
   };
 
-  type FiltersType = {
-    width?: string;
-    profile?: string;
-    diameter?: string;
-    seasons: string[];
-  };
-
-  function formatSearchTitle(query: string, filters: FiltersType): string {
-    const parts: string[] = [];
-
-    if (query) parts.push(`«${query}»`);
-
-    if (filters.width && filters.profile) {
-      parts.push(`${filters.width}/${filters.profile}`);
-    }
-
-    if (filters.diameter) {
-      parts.push(`R${filters.diameter}`);
-    }
-
-    function getSeasonLabel(s: string): string {
-      if (s === "summer") return "літні";
-      if (s === "winter") return "зимові";
-      return "всесезонні";
-    }
-
-    if (filters.seasons.length > 0) {
-      const seasons = filters.seasons.map(getSeasonLabel).join(", ");
-      parts.push(`(${seasons})`);
-    }
-    
-    return parts.join(" ");
-  }
-
   return (
     <div className="flex flex-col w-auto">
       <h1 className="text-left">
-        Пошук: {formatSearchTitle(query, filters)}
+        Пошук:
+        {query && ` «${query}»`}
+        {(filters.width && filters.profile) && (
+          <> {filters.width}/{filters.profile}</>
+        )}
+        {filters.diameter && <> R{filters.diameter}</>}
+        {filters.seasons.length > 0 && (
+          <> ({
+            filters.seasons
+              .map((s) =>
+                s === "summer"
+                  ? "літні"
+                  : s === "winter"
+                    ? "зимові"
+                    : "всесезонні"
+              )
+              .join(", ")
+          })</>
+        )}
       </h1>
 
       <span className="text-light text-sm hidden md:block">
