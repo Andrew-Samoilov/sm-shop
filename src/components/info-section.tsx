@@ -11,7 +11,7 @@ export async function InfoSection() {
   return (
     <section className="section">
       <h2 className="text-center pb-6">Інформаційні сторінки</h2>
-      <ul className="flex flex-flex-wrap gap-6 list-none justify-center">
+      <ul className="flex flex-col md:flex-row flex-wrap gap-6 list-none justify-center">
         {pages.map((page) => (
           <li key={page.slug}>
             <Link href={`/info/${page.slug}`}>
