@@ -38,24 +38,28 @@ export function AddToCartButton({
   price,
   quantity,
   label = "Купити",
+  className,
 }: {
   id: number;
   title: string;
   price: number;
-    quantity: number;
-    label?: string;
-}) {
+  quantity: number;
+  label?: string;
+  className?: string;
+  }) {
+  const defaultClasses = `
+    btn max-md:btn-sm btn-primary
+    z-10
+    fixed bottom-2 left-2 right-2 bg-theme-light dark:bg-theme-dark
+    md:relative md:bottom-auto md:left-auto md:right-auto md:bg-transparent
+    md:hover:bg-dark md:hover:text-white
+    dark:md:hover:bg-white dark:md:hover:text-dark
+  `;
   return (
     <button
       type="button"
       onClick={() => handleClick(id, title, price, quantity)}
-      className="
-      btn btn-outline-primary z-10
-      fixed bottom-2 left-2 right-2 bg-theme-light dark:bg-theme-dark
-      md:relative md:bottom-auto md:left-auto md:right-auto md:bg-transparent
-      md:hover:bg-dark md:hover:text-white
-      dark:md:hover:bg-white dark:md:hover:text-dark
-   "
+      className={className ?? defaultClasses}
     >
       {label}
     </button>

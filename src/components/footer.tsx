@@ -166,7 +166,7 @@ export async function Footer() {
         </div>
       </nav>
 
-      <div className="border-border dark:border-darkmode-border text-light flex items-center justify-between border-t py-6">
+      <div className="container border-border dark:border-darkmode-border text-light flex items-center justify-between border-t py-6">
         <LinkWithGA
           href="/info/legal"
           eventLabel="legal"

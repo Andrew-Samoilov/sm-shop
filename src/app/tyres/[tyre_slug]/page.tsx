@@ -144,7 +144,7 @@ export default async function TyrePage({
     <article >
       <BreadCrumbs tyreSlug={tyre_slug} />
 
-      <div className=" flex flex-col md:flex-row items-center justify-center gap-2 md:gap-18 md:py-6 text-3xl ">
+      {/* <div className=" flex flex-col md:flex-row items-center justify-center gap-2 md:gap-18 md:py-6 text-3xl ">
         <h1 className="flex flex-col items-center md:items-start  ">
           <span>{tyre.brands?.name}</span>
           <span>{tyre.models?.name}</span>
@@ -166,7 +166,7 @@ export default async function TyrePage({
             quantity={4}
           />
         </div>
-      </div>
+      </div> */}
 
       <ViewItemGA
         item_id={tyre.id}
@@ -180,14 +180,95 @@ export default async function TyrePage({
         {/* {tyre.modelId !== null && images.length > 0 && <ModelViewerSection images={images} />} */}
         <ModelViewer images={images} />
 
-        <div className=" flex flex-col min-w-fit p-2 md:p-0 text-light gap-1">
-          <div className="pb-2 md:pb-6 2xl:pb-12">Сезон: <span className="font-semibold text-theme-dark">{tyre.season}</span></div>
+        <div className=" flex flex-col w-full md:w-auto min-w-fit p-2 md:p-0 gap-1">
+          <h1 className="flex flex-col items-center md:items-start  ">
+            <span>{tyre.brands?.name}</span>
+            <span>{tyre.models?.name}</span>
+            <span className="font-normal text-[75%]">{tyreSize}</span>
+          </h1>
+
+          <div
+            className="md:pt-6 text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+          >Країна виробництва: <span
+            className="text-dark"
+          >{tyre.country}</span></div>
+          <div
+            className=" text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+          >Тиждень та рік виробництва: {tyre.dateCode}</div>
+          <div
+            className="md:pt-6 text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+          >
+            <LinkWithGA
+              href="/info/speed-index"
+              eventLabel="speed-index"
+              eventCategory="TyrePage"
+              target="_blank"
+              title="Докладніше про індекси швидкості"
+
+            >
+              Індекс швидкості:&nbsp;
+            </LinkWithGA>
+            {tyre.speedIndex}
+          </div>
+          <div
+            className=" text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+          >
+            <LinkWithGA
+              href="/info/load-index"
+              eventLabel="load-index"
+              eventCategory="TyrePage"
+              target="_blank"
+              title="Докладніше про індекси навантаження"
+            >
+              Індекс навантаження:&nbsp;
+            </LinkWithGA>
+            {tyre.loadIndex}
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 items-center">
+              <div>4 шт</div>
+              <span
+                className="font-semibold text-h1"
+              >{tyre.price?.toString()} <span className="text-h3 font-normal text-light">грн</span></span>
+            </div>
+
+
+
+            <AddToCartButton
+              id={tyre.id}
+              title={tyre.title}
+              price={tyre.price}
+              quantity={4}
+              className="btn btn-lg btn-primary bg-accent border-accent w-auto mx-auto mb-6"
+            />
+
+            <LinkWithGA
+              // className="flex flex-wrap flex-col lg:flex-row  flex-between justify-center items-center gap-2 lg:gap-6  mx-auto
+              //  hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+              className="flex flex-wrap justify-center items-center gap-2 lg:gap-6 text-center max-w-full"
+              href={"/info/payment-delivery"}
+              target="_blank"
+              eventLabel={""}>
+              <span
+                className="text-h5 max-md:text-base"
+              >Доставка: </span>
+              <span
+                className="px-2 py-1 rounded-md border border-border dark:border-border/40 text-text-light dark:text-darkmode-text-light "
+              > Наступного дня.</span>
+              <span
+                className="px-2 py-1 rounded-md border border-border dark:border-border/40 text-text-light dark:text-darkmode-text-light"
+              >Самовивіз: вже сьогодні.</span>
+            </LinkWithGA>
+
+          </div>
+          {/* <div className="pb-2 md:pb-6 2xl:pb-12">Сезон: <span className="font-semibold text-theme-dark">{tyre.season}</span></div>
           <div>Бренд: {tyre.brand}</div>
           <div>Модель: {tyre.model}</div>
           <div >Країна виробництва: {tyre.country}</div>
           <div className="pb-2 md:pb-6 2xl:pb-12">Тиждень та рік виробництва: {tyre.dateCode}</div>
           {/* <hr className="pb-2 md:pb-6"></hr> */}
-          <div>Застосовуваність: {tyre.applicability}</div>
+          {/*      <div>Застосовуваність: {tyre.applicability}</div>
           <div>Ширина: {tyre.width}</div>
           <div>Профіль: {tyre.profile}</div>
           <div>Діаметр: {tyre.diameter}</div>
@@ -222,7 +303,7 @@ export default async function TyrePage({
             price={tyre.price}
             quantity={4}
             label="Купити в 1 клік"
-          />
+          /> */}
         </div>
 
       </div>
@@ -232,8 +313,8 @@ export default async function TyrePage({
           <section className="pb-6 max-w-[65ch] mx-auto">
             <details className="group" open>
               <summary className="flex flex-between justify-center items-center marker:content-none cursor-pointer ">
-                <h2>Детальний опис</h2>
-                <span className="text-4xl transition-transform group-open:rotate-45">+</span>
+                <h2 className="pr-2 md:pr-6">Детальний опис</h2>
+                <span className="text-light text-4xl transition-transform group-open:rotate-45">+</span>
               </summary>
               <ReactMarkdown>{tyre.models.description}</ReactMarkdown>
             </details>
@@ -244,8 +325,8 @@ export default async function TyrePage({
           <section className="pb-6">
             <details className="group" open>
               <summary className="flex flex-between justify-center items-center marker:content-none cursor-pointer ">
-                <h2>{`Наші сертифікати ${tyre.brand}`}</h2>
-                <span className="text-4xl transition-transform group-open:rotate-45">+</span>
+                <h2 className="pr-2 md:pr-6">{`Наші сертифікати ${tyre.brand}`}</h2>
+                <span className="text-light text-4xl transition-transform group-open:rotate-45">+</span>
               </summary>
               <CertificatesClient cert={filteredCerts} />
             </details>
