@@ -14,6 +14,7 @@ type SmartLinkWithGAProps = {
   eventParams?: Record<string, unknown>;
   className?: string;
   ariaLabel?: string;
+  title?: string;
   target?: string;
   rel?: string;
   onClick?: (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => void;
@@ -29,6 +30,7 @@ export function LinkWithGA({
   className,
   ariaLabel,
   target,
+  title,
   rel,
   onClick,
 }: SmartLinkWithGAProps) {
@@ -62,6 +64,7 @@ export function LinkWithGA({
         href={href}
         className={className}
         onClick={handleClick}
+        {...(title ? { title } : {})}
         aria-label={ariaLabel}>
         {children}
       </Link>
@@ -77,6 +80,7 @@ export function LinkWithGA({
         aria-label={ariaLabel}
         target={target ?? "_blank"}
         rel={rel ?? "noopener noreferrer"}
+        {...(title ? { title } : {})}
       >
         {children}
       </a>
@@ -89,6 +93,7 @@ export function LinkWithGA({
       onClick={handleClick}
       className={className}
       {...(target ? { target } : {})}
+      {...(title ? { title } : {})}
       aria-label={ariaLabel}
     >
       {children}
