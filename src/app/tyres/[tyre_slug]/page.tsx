@@ -240,7 +240,8 @@ export default async function TyrePage({
               title={tyre.title}
               price={tyre.price}
               quantity={4}
-              className="btn btn-lg btn-primary bg-accent border-accent w-auto mx-auto mb-6"
+              className="btn btn-lg btn-primary bg-accent  w-auto mx-auto mb-6
+              transition-transform duration-200 hover:scale-110"
             />
 
             <LinkWithGA

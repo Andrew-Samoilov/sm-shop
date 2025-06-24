@@ -12,7 +12,7 @@ type TyreListItemProps = {
 export function TyreGalleryItem({ tyre, modelImages }: TyreListItemProps) {
     return (
         <div className="flex flex-col overflow-hidden items-center gap-6 p-6 border border-transparent hover:border-theme-light dark:hover:border-theme-dark rounded-lg">
-            {/* {modelImages.length > 0 && ( */}
+ 
             <div className="relative  w-full aspect-square max-w-[293px] overflow-hidden group shrink-0 ">
                 {modelImages.length > 0 ? (
                     <>
@@ -54,7 +54,7 @@ export function TyreGalleryItem({ tyre, modelImages }: TyreListItemProps) {
                         <span title="Номер тижня та рік виробництва">{tyre.dateCode}</span>
                     </span>
                 </span>
-                {/* {!modelImages.length && <SeasonIcon season={tyre.season} />} */}
+             
                 <div className="flex flex-row gap-2 items-end mx-auto">
                     <span
                         className="font-semibold text-2xl"
