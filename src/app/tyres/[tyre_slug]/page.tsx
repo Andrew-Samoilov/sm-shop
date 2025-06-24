@@ -176,8 +176,9 @@ export default async function TyrePage({
         price={Number(tyre.price)}
       />
 
-      <div className=" flex flex-col md:flex-row md:gap-6 2xl:p-12 items-start content-center justify-center pb-6">
-        {/* {tyre.modelId !== null && images.length > 0 && <ModelViewerSection images={images} />} */}
+      <div className=" flex flex-col md:flex-row md:gap-6 pb-6 2xl:p-12
+       items-center  justify-center ">
+       
         <ModelViewer images={images} />
 
         <div className=" flex flex-col w-full md:w-auto min-w-fit p-2 md:p-0 gap-1">
