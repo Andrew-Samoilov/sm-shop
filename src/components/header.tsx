@@ -23,7 +23,6 @@ export async function Header() {
         >Контакти</LinkWithGA>
       </div>
 
-      {/* <Search className="block w-full order-3 lg:hidden xl:block lg:order-none lg:w-full xl:w-45 " /> */}
       <Search className="block w-full order-3 lg:order-none lg:w-[45%] xl:w-[60%]" />
 
       <div className="flex items-center gap-2">

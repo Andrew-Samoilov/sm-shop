@@ -241,14 +241,15 @@ export default async function TyrePage({
               title={tyre.title}
               price={tyre.price}
               quantity={4}
-              className="btn btn-lg btn-primary bg-accent  w-auto mx-auto mb-6
+              className="btn btn-lg border-2 border-accent bg-accent mb-6 max-w-xs mx-auto
+              sm:absolute sm:bottom-2
               transition-transform duration-200 hover:scale-110"
             />
 
             <LinkWithGA
               // className="flex flex-wrap flex-col lg:flex-row  flex-between justify-center items-center gap-2 lg:gap-6  mx-auto
               //  hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
-              className="flex flex-wrap justify-center items-center gap-2 lg:gap-6 text-center max-w-full hover:no-underline"
+              className="flex flex-wrap flex-col lg:flex-row justify-center items-center gap-2 lg:gap-6 text-center max-w-full hover:no-underline"
               href={"/info/payment-delivery"}
               target="_blank"
               eventLabel={""}>
@@ -312,7 +313,7 @@ export default async function TyrePage({
 
       <div>
         {tyre.models?.description && (
-          <section className="pb-6 max-w-[65ch] mx-auto">
+          <section className="p-2 pb-6 max-w-[65ch] mx-auto">
             <details className="group" open>
               <summary className="flex flex-between justify-center items-center marker:content-none cursor-pointer ">
                 <h2 className="pr-2 md:pr-6">Детальний опис</h2>
