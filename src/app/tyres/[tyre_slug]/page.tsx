@@ -246,7 +246,7 @@ export default async function TyrePage({
             <LinkWithGA
               // className="flex flex-wrap flex-col lg:flex-row  flex-between justify-center items-center gap-2 lg:gap-6  mx-auto
               //  hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
-              className="flex flex-wrap justify-center items-center gap-2 lg:gap-6 text-center max-w-full"
+              className="flex flex-wrap justify-center items-center gap-2 lg:gap-6 text-center max-w-full hover:no-underline"
               href={"/info/payment-delivery"}
               target="_blank"
               eventLabel={""}>

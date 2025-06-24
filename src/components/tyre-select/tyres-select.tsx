@@ -39,6 +39,7 @@ export function TyresSelect() {
   const [helpOpen, setHelpOpen] = useState(false);
   const [selectedTyres, setSelectedTyres] = useState<TyreWithRelations[]>([]);
   const [images, setImages] = useState<ModelImage[]>([]);
+  const [initialized, setInitialized] = useState(false);
 
   const query = searchParams.get("query") ?? "";
 
@@ -52,10 +53,13 @@ export function TyresSelect() {
       view: searchParams.get("view") === "gallery" ? "gallery" : "list",
       sort: searchParams.get("sort") ?? "price_asc",
     });
+    setInitialized(true);
   }, [searchParams]);
 
   // Оновлюємо URL при зміні filters
   useEffect(() => {
+    if (!initialized) return;
+    
     const params = new URLSearchParams();
     if (filters.width) params.set("width", filters.width);
     if (filters.profile) params.set("profile", filters.profile);
@@ -66,7 +70,7 @@ export function TyresSelect() {
     if (query) params.set("query", query);
 
     router.replace(`?${params.toString()}`, { scroll: false });
-  }, [filters, query, router]);
+  }, [filters, initialized, query, router]);
 
   // Завантаження опцій для фільтрів
   useEffect(() => {
