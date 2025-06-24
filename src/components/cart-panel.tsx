@@ -44,14 +44,25 @@ export function CartPanel() {
     }
   }, [isOpen, CartTyre]);
 
+  useEffect(() => {
+    const openCart = () => setIsOpen(true);
+    window.addEventListener("open-cart", openCart);
+    return () => window.removeEventListener("open-cart", openCart);
+  }, []);
+
   return (
     <>
+      
       {/* Кнопка відкриття */}
       <button
-        onClick={() => setIsOpen(true)}
-        className="cursor-pointer"
+        onClick={() => CartTyre && setIsOpen(true)}
+        className="cursor-pointer disabled:cursor-not-allowed"
+        disabled={!CartTyre}
       >
-        <ShoppingCartIcon className="h-5 w-5" />
+        <ShoppingCartIcon
+          className={`h-5 w-5 transition-colors 
+            ${CartTyre ? "text-accent" : "text-gray-400"}`}
+        />
       </button>
 
       {isOpen && (
@@ -66,7 +77,12 @@ export function CartPanel() {
           <div >
             <div className="flex items-center justify-between border-b pb-6 text-white bg-accent p-6">
               <h2 className="text-lg font-semibold text-white">Кошик</h2>
-              <button onClick={() => setIsOpen(false)}>
+              <button
+  onClick={() => CartTyre && setIsOpen(false)}
+  className="cursor-pointer disabled:cursor-not-allowed"
+  disabled={!CartTyre}
+>
+
                 <XMarkIcon className=" h-6 w-6 cursor-pointer" />
               </button>
             </div>
@@ -77,7 +93,7 @@ export function CartPanel() {
                 <p>{CartTyre.title}</p>
                 <div className="flex justify-between pt-4">
                   <span>{CartTyre.quantity} шт.</span>
-                  <span>{CartTyre.price} грн.</span>
+                  <span>{CartTyre.price.toLocaleString("uk-UA")} грн.</span>
                 </div>
               </div>
             ) : (
@@ -87,7 +103,7 @@ export function CartPanel() {
           {CartTyre && (
             <div className="flex flex-col justify-between p-6">
               <p className="ml-auto pb-6 text-xl">
-                Разом: <strong> {CartTyre.price * CartTyre.quantity}</strong>{" "}
+                Разом: <strong> {(CartTyre.price * CartTyre.quantity).toLocaleString("uk-UA")}</strong>{" "}
                 грн.
               </p>
               <button className="btn btn-md btn-primary bg-accent border-accent hover:bg-accent-hover hover:border-accent-hover">

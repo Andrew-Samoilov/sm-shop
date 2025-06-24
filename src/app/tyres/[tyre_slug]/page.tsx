@@ -178,7 +178,7 @@ export default async function TyrePage({
 
       <div className=" flex flex-col md:flex-row md:gap-6 pb-6 2xl:p-12
        items-center  justify-center ">
-       
+
         <ModelViewer images={images} />
 
         <div className=" flex flex-col w-full md:w-auto min-w-fit p-2 md:p-0 gap-1">
@@ -194,7 +194,8 @@ export default async function TyrePage({
             className="text-dark"
           >{tyre.country}</span></div>
           <div
-            className=" text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+            className=" text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary 
+            hover:no-underline"
           >Тиждень та рік виробництва: {tyre.dateCode}</div>
           <div
             className="md:pt-6 text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
@@ -241,7 +242,7 @@ export default async function TyrePage({
               title={tyre.title}
               price={tyre.price}
               quantity={4}
-              className="btn btn-lg border-2 border-accent bg-accent mb-6 max-w-xs mx-auto
+              className="btn btn-lg border-2 border-accent mb-6 max-w-xs mx-auto
               sm:absolute sm:bottom-2
               transition-transform duration-200 hover:scale-110"
             />

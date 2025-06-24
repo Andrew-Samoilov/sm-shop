@@ -2,6 +2,10 @@
 
 import { sendGAEvent } from "@/lib";
 
+const openCart = () => {
+  window.dispatchEvent(new Event("open-cart"));
+};
+
 function handleClick(
   id: number,
   title: string,
@@ -14,6 +18,7 @@ function handleClick(
 
   const tyreData = JSON.stringify({ id, title, price, quantity });
   localStorage.setItem("tyre", tyreData);
+  openCart();
 
   sendGAEvent({
     action: "add_to_cart",
