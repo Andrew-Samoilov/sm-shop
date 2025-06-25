@@ -52,7 +52,7 @@ export function CartPanel() {
 
   return (
     <>
-      
+
       {/* Кнопка відкриття */}
       <button
         onClick={() => CartTyre && setIsOpen(true)}
@@ -66,23 +66,34 @@ export function CartPanel() {
       </button>
 
       {isOpen && (
+        // овелей
+<>
+        <button
+          onClick={() => setIsOpen(false)}
+          className="fixed inset-0 z-50 w-screen h-screen bg-theme-dark/75"
+          aria-label="Закрити кошик"
+        >
+          {/* Порожній блок для перекриття */}
+        </button>
+
+
         <aside
           id="cart-panel"
           aria-labelledby="cart-title"
           aria-hidden={!isOpen}
           tabIndex={-1}
-          className="bg-body/95 dark:bg-darkmode-body/95 fixed top-0 right-0 flex h-screen w-96 transform flex-col justify-between  backdrop-blur-lg transition-transform duration-300 ease-in-out"
+          className="z-60 absolute top-2 right-2 min-h-1/2 
+          bg-white dark:bg-darkmode-body/95 transform flex-col justify-between  backdrop-blur-lg  ease-in-out"
         >
           {/* Заголовок і кнопка закриття */}
-          <div >
-            <div className="flex items-center justify-between border-b pb-6 text-white bg-accent p-6">
-              <h2 className="text-lg font-semibold text-white">Кошик</h2>
+          <div>
+            <div className="flex items-center justify-between border-b pb-6 text-theme p-6">
+              <h2 className="text-lg font-semibold">Кошик</h2>
               <button
-  onClick={() => CartTyre && setIsOpen(false)}
-  className="cursor-pointer disabled:cursor-not-allowed"
-  disabled={!CartTyre}
->
-
+                onClick={() => CartTyre && setIsOpen(false)}
+                className="cursor-pointer disabled:cursor-not-allowed"
+                disabled={!CartTyre}
+              >
                 <XMarkIcon className=" h-6 w-6 cursor-pointer" />
               </button>
             </div>
@@ -107,12 +118,12 @@ export function CartPanel() {
                 грн.
               </p>
               <button className="btn btn-md btn-primary bg-accent border-accent hover:bg-accent-hover hover:border-accent-hover">
-                Оплатити
+                Оформити замовлення
               </button>
             </div>
           )}
         </aside>
-      )}
+      </>)}
     </>
   );
 }

@@ -73,6 +73,7 @@ export function ManyPhoto({ images }: { images: IImage[] }) {
                     ))}
                 </div>
 
+                {/* стрілки */}
                 <div className="hidden lg:block">
                     <button
                         id="prev"
@@ -98,7 +99,6 @@ export function ManyPhoto({ images }: { images: IImage[] }) {
                 </div>
 
 
-
             </div>
 
             {/* Превʼю слайдер */}
@@ -109,7 +109,7 @@ export function ManyPhoto({ images }: { images: IImage[] }) {
                             key={i}
                             onClick={() => scrollTo(i)}
                             className={`relative aspect-square h-16 sm:h-20 rounded-md overflow-hidden flex-shrink-0 w-[22vw] max-w-[72px] 
-                                ${i === selectedIndex ? "ring-2 ring-accent ring-offset-2" : "border border-gray-300/25"}`}
+                                ${i === selectedIndex ? "ring-2 ring-accent ring-offset-2" : ""}`}
                         >
                             <Image src={img.url} alt="" fill className="object-cover" />
                         </button>

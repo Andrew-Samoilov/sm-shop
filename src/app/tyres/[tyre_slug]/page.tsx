@@ -1,5 +1,5 @@
 import { AddToCartButton, BreadCrumbs, CertificatesClient, LinkWithGA, ModelViewer, ViewItemGA } from "@/components";
-import { getTyreBySlug, getModelImgByModelId, prisma, translateSeasonToUkrainian, getContentBlock } from "@/lib";
+import { getTyreBySlug, getModelImgByModelId, prisma, translateSeasonToUkrainian, getContentBlock, getTyreSize } from "@/lib";
 import { Certificate } from "@/types";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -124,10 +124,6 @@ export default async function TyrePage({
   const { tyre_slug } = params;
   const tyre = await getTyreBySlug(tyre_slug);
 
-  const tyreSize = tyre?.width && tyre.profile && tyre.diameter && tyre.loadSpeedIndex
-    ? `${tyre.width}${tyre.delimiter ?? '/'}${tyre.profile} R${tyre.diameter} ${tyre.loadIndex}${tyre.speedIndex}`
-    : null;
-
   // console.info("[getTyreBySlug]", tyre);
   if (!tyre) return notFound();
   const images = tyre.modelId !== null
@@ -139,34 +135,12 @@ export default async function TyrePage({
     : cert;
 
   // console.info("[TyrePage]", tyre);
+  
+  const tyreSize = getTyreSize(tyre);
 
   return (
     <article >
       <BreadCrumbs tyreSlug={tyre_slug} />
-
-      {/* <div className=" flex flex-col md:flex-row items-center justify-center gap-2 md:gap-18 md:py-6 text-3xl ">
-        <h1 className="flex flex-col items-center md:items-start  ">
-          <span>{tyre.brands?.name}</span>
-          <span>{tyre.models?.name}</span>
-          <span className="font-normal text-[75%]">{tyreSize}</span>
-        </h1>
-        <div className="flex flex-col gap-2">
-          <div className="flex flex-col gap-2 items-center">
-            <div>4 шт</div>
-            <span
-              className="font-semibold text-h1"
-            >{tyre.price?.toString()} <span className="text-h3 font-normal text-light">грн</span></span>
-
-          </div>
-
-          <AddToCartButton
-            id={tyre.id}
-            title={tyre.title}
-            price={tyre.price}
-            quantity={4}
-          />
-        </div>
-      </div> */}
 
       <ViewItemGA
         item_id={tyre.id}
@@ -208,9 +182,9 @@ export default async function TyrePage({
               title="Докладніше про індекси швидкості"
 
             >
-              Індекс швидкості:&nbsp;
+              Індекс швидкості:
             </LinkWithGA>
-            {tyre.speedIndex}
+            &nbsp;{tyre.speedIndex}
           </div>
           <div
             className=" text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
@@ -222,9 +196,9 @@ export default async function TyrePage({
               target="_blank"
               title="Докладніше про індекси навантаження"
             >
-              Індекс навантаження:&nbsp;
+              Індекс навантаження:
             </LinkWithGA>
-            {tyre.loadIndex}
+            &nbsp;{tyre.loadIndex}
           </div>
 
           <div className="flex flex-col gap-2">
@@ -232,10 +206,8 @@ export default async function TyrePage({
               <div>4 шт</div>
               <span
                 className="font-semibold text-h1"
-              >{tyre.price?.toString()} <span className="text-h3 font-normal text-light">грн</span></span>
+              >{tyre.price?.toLocaleString("uk-UA")} <span className="text-h3 font-normal text-light">грн</span></span>
             </div>
-
-
 
             <AddToCartButton
               id={tyre.id}
@@ -244,7 +216,7 @@ export default async function TyrePage({
               quantity={4}
               className="btn btn-lg border-2 border-accent mb-6 max-w-xs mx-auto
               sm:absolute sm:bottom-2
-              transition-transform duration-200 hover:scale-110"
+              transition-transform duration-200 hover:scale-110 font-bold"
             />
 
             <LinkWithGA
