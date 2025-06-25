@@ -66,64 +66,70 @@ export function CartPanel() {
       </button>
 
       {isOpen && (
-        // овелей
-<>
-        <button
-          onClick={() => setIsOpen(false)}
-          className="fixed inset-0 z-50 w-screen h-screen bg-theme-dark/75"
-          aria-label="Закрити кошик"
-        >
-          {/* Порожній блок для перекриття */}
-        </button>
+        <>
+          {/* Оверлей */}
+          <button
+            onClick={() => setIsOpen(false)}
+            className="fixed inset-0 z-50 w-screen h-screen bg-theme-dark/75 backdrop-blur-sm"
+            aria-label="Закрити кошик"
+          >
+          </button>
 
 
-        <aside
-          id="cart-panel"
-          aria-labelledby="cart-title"
-          aria-hidden={!isOpen}
-          tabIndex={-1}
-          className="z-60 absolute top-2 right-2 min-h-1/2 
-          bg-white dark:bg-darkmode-body/95 transform flex-col justify-between  backdrop-blur-lg  ease-in-out"
-        >
-          {/* Заголовок і кнопка закриття */}
-          <div>
-            <div className="flex items-center justify-between border-b pb-6 text-theme p-6">
-              <h2 className="text-lg font-semibold">Кошик</h2>
-              <button
-                onClick={() => CartTyre && setIsOpen(false)}
-                className="cursor-pointer disabled:cursor-not-allowed"
-                disabled={!CartTyre}
-              >
-                <XMarkIcon className=" h-6 w-6 cursor-pointer" />
-              </button>
-            </div>
+          <aside
+            id="cart-panel"
+            aria-labelledby="cart-title"
+            aria-hidden={!isOpen}
+            tabIndex={-1}
+            className="z-60 absolute top-2 right-2 min-h-1/2 rounded-md
+          bg-white dark:bg-darkmode-body/95 transform flex-col justify-between backdrop-blur-lg ease-in-out"
+          >
 
-            {/* Контент кошика */}
-            {CartTyre ? (
-              <div className="flex flex-col justify-between p-6">
-                <p>{CartTyre.title}</p>
-                <div className="flex justify-between pt-4">
-                  <span>{CartTyre.quantity} шт.</span>
-                  <span>{CartTyre.price.toLocaleString("uk-UA")} грн.</span>
-                </div>
+
+            {/* Заголовок і кнопка закриття */}
+            <div>
+              <div className="flex items-center justify-between border-b pb-6 text-theme p-6">
+                <h2 className="text-lg font-semibold">Кошик</h2>
+                <button
+                  onClick={() => CartTyre && setIsOpen(false)}
+                  className="cursor-pointer disabled:cursor-not-allowed"
+                  disabled={!CartTyre}
+                >
+                  <XMarkIcon className=" h-6 w-6 cursor-pointer" />
+                </button>
               </div>
-            ) : (
-              <p>Кошик порожній</p>
-            )}
-          </div>
-          {CartTyre && (
-            <div className="flex flex-col justify-between p-6">
-              <p className="ml-auto pb-6 text-xl">
-                Разом: <strong> {(CartTyre.price * CartTyre.quantity).toLocaleString("uk-UA")}</strong>{" "}
-                грн.
-              </p>
-              <button className="btn btn-md btn-primary bg-accent border-accent hover:bg-accent-hover hover:border-accent-hover">
-                Оформити замовлення
-              </button>
+
+
+              {/* Контент кошика */}
+              {CartTyre ? (
+                <div className="flex flex-col justify-between p-6">
+                  <p>{CartTyre.title}</p>
+                  <div className="flex justify-between pt-4">
+                    <span>{CartTyre.quantity} шт.</span>
+                    <span>{CartTyre.price.toLocaleString("uk-UA")} грн.</span>
+                  </div>
+                </div>
+              ) : (
+                <p>Кошик порожній</p>
+              )}
             </div>
-          )}
-        </aside>
-      </>)}
+
+
+            {CartTyre && (
+              <div className="flex flex-col justify-between p-6">
+                <p className="ml-auto pb-6 text-xl">
+                  Разом: <strong> {(CartTyre.price * CartTyre.quantity).toLocaleString("uk-UA")}</strong>{" "}
+                  грн.
+                </p>
+                <button className="btn btn-md btn-primary bg-accent border-accent hover:bg-accent-hover hover:border-accent-hover">
+                  Оформити замовлення
+                </button>
+              </div>
+            )}
+
+
+          </aside>
+        </>)}
     </>
   );
 }
