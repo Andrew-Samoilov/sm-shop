@@ -210,10 +210,15 @@ export default async function TyrePage({
             </div>
 
             <AddToCartButton
-              id={tyre.id}
-              title={tyre.title}
-              price={tyre.price}
-              quantity={4}
+              tyre={{
+                id: tyre.id,
+                title: tyre.title,
+                brand: tyre.brands?.name ?? "",
+                model: tyre.models?.name ?? "",
+                tyreSize: tyreSize ?? "",
+                price: tyre.price,
+                quantity: 4,
+                }}
               className="btn btn-lg border-2 border-accent mb-6 max-w-xs mx-auto
               sm:absolute sm:bottom-2
               transition-transform duration-200 hover:scale-110 font-bold"
@@ -238,48 +243,7 @@ export default async function TyrePage({
             </LinkWithGA>
 
           </div>
-          {/* <div className="pb-2 md:pb-6 2xl:pb-12">Сезон: <span className="font-semibold text-theme-dark">{tyre.season}</span></div>
-          <div>Бренд: {tyre.brand}</div>
-          <div>Модель: {tyre.model}</div>
-          <div >Країна виробництва: {tyre.country}</div>
-          <div className="pb-2 md:pb-6 2xl:pb-12">Тиждень та рік виробництва: {tyre.dateCode}</div>
-          {/* <hr className="pb-2 md:pb-6"></hr> */}
-          {/*      <div>Застосовуваність: {tyre.applicability}</div>
-          <div>Ширина: {tyre.width}</div>
-          <div>Профіль: {tyre.profile}</div>
-          <div>Діаметр: {tyre.diameter}</div>
-          <div>
-            <LinkWithGA
-              href="/info/speed-index"
-              eventLabel="speed-index"
-              eventCategory="TyrePage"
-              target="_blank"
-              title="Докладніше про індекси швидкості"
-              className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
-            >
-              Індекс швидкості:&nbsp;
-            </LinkWithGA>
-            {tyre.speedIndex}
-          </div>
-          <div>
-            <LinkWithGA
-              href="/info/load-index"
-              eventLabel="load-index"
-              eventCategory="TyrePage"
-              target="_blank"
-              title="Докладніше про індекси навантаження"
-            >
-              Індекс навантаження:&nbsp;
-            </LinkWithGA>
-            {tyre.loadIndex}
-          </div>
-          <AddToCartButton
-            id={tyre.id}
-            title={tyre.title}
-            price={tyre.price}
-            quantity={4}
-            label="Купити в 1 клік"
-          /> */}
+      
         </div>
 
       </div>

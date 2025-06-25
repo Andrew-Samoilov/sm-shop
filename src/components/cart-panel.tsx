@@ -4,12 +4,7 @@ import { useState, useEffect } from "react";
 import { ShoppingCartIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { sendGAEvent } from "@/lib";
 
-interface CartTyre {
-  id: number;
-  title: string;
-  price: number;
-  quantity: number;
-}
+import { CartTyre } from "@/types";
 
 export function CartPanel() {
   const [isOpen, setIsOpen] = useState(false);
@@ -102,12 +97,20 @@ export function CartPanel() {
 
               {/* Контент кошика */}
               {CartTyre ? (
-                <div className="flex flex-col justify-between p-6">
-                  <p>{CartTyre.title}</p>
-                  <div className="flex justify-between pt-4">
-                    <span>{CartTyre.quantity} шт.</span>
-                    <span>{CartTyre.price.toLocaleString("uk-UA")} грн.</span>
+                <div className="flex flex-col justify-between">
+                  <div className="flex flex-col justify-between p-6 space-y-1 text-base">
+                    <p className="text-h3">{CartTyre.brand}</p>
+                    <p className="text-h2">{CartTyre.model}</p>
+                    <p >{CartTyre.tyreSize}</p>
+
+
+                    <div className="flex justify-between pt-4">
+                      <span>{CartTyre.quantity} шт.</span>
+                      <span>{CartTyre.price.toLocaleString("uk-UA")} грн.</span>
+                    </div>
+
                   </div>
+
                 </div>
               ) : (
                 <p>Кошик порожній</p>
@@ -117,7 +120,7 @@ export function CartPanel() {
 
             {CartTyre && (
               <div className="flex flex-col justify-between p-6">
-                <p className="ml-auto pb-6 text-xl">
+                <p className="ml-auto pb-6 ">
                   Разом: <strong> {(CartTyre.price * CartTyre.quantity).toLocaleString("uk-UA")}</strong>{" "}
                   грн.
                 </p>

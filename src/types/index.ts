@@ -60,3 +60,13 @@ export type IImage = {
   height: number | null
   position: number
 };
+
+export interface CartTyre {
+  id: number;
+  title: string;
+  brand: string;
+  model: string;
+  tyreSize: string;
+  price: number;
+  quantity: number;
+}
