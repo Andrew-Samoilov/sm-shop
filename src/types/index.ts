@@ -67,6 +67,7 @@ export interface CartTyre {
   brand: string;
   model: string;
   tyreSize: string;
+  tyreImageUrl?: string;
   price: number;
   quantity: number;
 }

@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import { ShoppingCartIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { sendGAEvent } from "@/lib";
-
 import { CartTyre } from "@/types";
+import Image from "next/image";
 
 export function CartPanel() {
   const [isOpen, setIsOpen] = useState(false);
@@ -76,51 +76,58 @@ export function CartPanel() {
             aria-labelledby="cart-title"
             aria-hidden={!isOpen}
             tabIndex={-1}
-            className="z-60 absolute top-2 right-2 min-h-1/2 rounded-md
+            className="gap-2 lg:gap-6 p-2 md:p-6 flex z-60 absolute top-2 right-2 min-h-1/2 rounded-md
           bg-white dark:bg-darkmode-body/95 transform flex-col justify-between backdrop-blur-lg ease-in-out"
           >
 
-
             {/* Заголовок і кнопка закриття */}
-            <div>
-              <div className="flex items-center justify-between border-b pb-6 text-theme p-6">
-                <h2 className="text-lg font-semibold">Кошик</h2>
-                <button
-                  onClick={() => CartTyre && setIsOpen(false)}
-                  className="cursor-pointer disabled:cursor-not-allowed"
-                  disabled={!CartTyre}
-                >
-                  <XMarkIcon className=" h-6 w-6 cursor-pointer" />
-                </button>
-              </div>
-
-
-              {/* Контент кошика */}
-              {CartTyre ? (
-                <div className="flex flex-col justify-between">
-                  <div className="flex flex-col justify-between p-6 space-y-1 text-base">
-                    <p className="text-h3">{CartTyre.brand}</p>
-                    <p className="text-h2">{CartTyre.model}</p>
-                    <p >{CartTyre.tyreSize}</p>
-
-
-                    <div className="flex justify-between pt-4">
-                      <span>{CartTyre.quantity} шт.</span>
-                      <span>{CartTyre.price.toLocaleString("uk-UA")} грн.</span>
-                    </div>
-
-                  </div>
-
-                </div>
-              ) : (
-                <p>Кошик порожній</p>
-              )}
+            <div className="flex items-center justify-between border-b lg:pb-6 border-theme-light">
+              <h2 className="text-lg font-semibold">Кошик</h2>
+              <button
+                onClick={() => CartTyre && setIsOpen(false)}
+                className="cursor-pointer disabled:cursor-not-allowed"
+                disabled={!CartTyre}
+              >
+                <XMarkIcon className=" h-6 w-6 cursor-pointer" />
+              </button>
             </div>
 
 
+            {/* Контент кошика */}
+            {CartTyre ? (
+              <div className="flex flex-col md:flex-row gap-2 lg:gap-6 items-center ">
+
+                {CartTyre.tyreImageUrl && (
+                  <Image
+                    src={CartTyre.tyreImageUrl}
+                    alt={CartTyre.title}
+                    width={100}
+                    height={100}
+                    className="rounded-md"
+                  />
+                )}
+
+                <div className="flex flex-col ">
+                  <p className="text-h4">{CartTyre.brand}</p>
+                  <p className="text-h3">{CartTyre.model}</p>
+                  <p>{CartTyre.tyreSize}</p>
+                </div>
+
+                <div className="flex flex-col items-center ">
+                  <span>{CartTyre.quantity} шт.</span>
+                  <span>{CartTyre.price.toLocaleString("uk-UA")} грн.</span>
+                </div>
+
+              </div>
+            ) : (
+              <p>Кошик порожній</p>
+            )}
+
+
+            {/* футер */}
             {CartTyre && (
-              <div className="flex flex-col justify-between p-6">
-                <p className="ml-auto pb-6 ">
+              <div className="flex flex-col justify-between gap-2 border-t border-theme-light">
+                <p className="ml-auto ">
                   Разом: <strong> {(CartTyre.price * CartTyre.quantity).toLocaleString("uk-UA")}</strong>{" "}
                   грн.
                 </p>
@@ -130,9 +137,9 @@ export function CartPanel() {
               </div>
             )}
 
-
           </aside>
-        </>)}
+        </>)
+      }
     </>
   );
 }

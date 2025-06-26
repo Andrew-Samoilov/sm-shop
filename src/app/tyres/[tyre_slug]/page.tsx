@@ -216,6 +216,7 @@ export default async function TyrePage({
                 brand: tyre.brands?.name ?? "",
                 model: tyre.models?.name ?? "",
                 tyreSize: tyreSize ?? "",
+                tyreImageUrl: images[0]?.url ?? "",  
                 price: tyre.price,
                 quantity: 4,
                 }}
