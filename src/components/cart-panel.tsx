@@ -47,7 +47,7 @@ export function CartPanel() {
   }, []);
 
   return (
-    <>
+    <div>
 
       {/* Кнопка відкриття */}
       <button
@@ -62,22 +62,16 @@ export function CartPanel() {
       </button>
 
       {isOpen && (
-        <>
+        <div>
           {/* Оверлей */}
-          <button
-            onClick={() => setIsOpen(false)}
-            className="fixed inset-0 z-50 w-screen h-screen bg-theme-dark/75 backdrop-blur-sm"
-            aria-label="Закрити кошик"
-          >
-          </button>
-
+          <div className="fixed inset-0 bg-black/50 z-40" onClick={() => setIsOpen(false)}></div>
 
           <aside
             id="cart-panel"
             aria-labelledby="cart-title"
             aria-hidden={!isOpen}
             tabIndex={-1}
-            className="gap-2 lg:gap-6 p-2 md:p-6 flex z-60 absolute top-2 right-2 min-h-1/2 rounded-md
+            className="z-50 gap-2 lg:gap-6 p-2 md:p-6 flex fixed top-2 right-2 w-auto lg:min-w-1/2 rounded-md
           bg-white dark:bg-darkmode-body/95 transform flex-col justify-between backdrop-blur-lg ease-in-out"
           >
 
@@ -102,8 +96,8 @@ export function CartPanel() {
                   <Image
                     src={CartTyre.tyreImageUrl}
                     alt={CartTyre.title}
-                    width={100}
-                    height={100}
+                    width={160}
+                    height={160}
                     className="rounded-md"
                   />
                 )}
@@ -116,7 +110,7 @@ export function CartPanel() {
 
                 <div className="flex flex-col items-center ">
                   <span>{CartTyre.quantity} шт.</span>
-                  <span>{CartTyre.price.toLocaleString("uk-UA")} грн.</span>
+                  <span >{CartTyre.price.toLocaleString("uk-UA")} грн.</span>
                 </div>
 
               </div>
@@ -127,8 +121,8 @@ export function CartPanel() {
 
             {/* футер */}
             {CartTyre && (
-              <div className="flex flex-col justify-between gap-2 border-t border-theme-light">
-                <p className="ml-auto ">
+              <div className="flex flex-col justify-between gap-2 lg:gap-6 border-b border-theme-light">
+                <p className="ml-auto text-h5">
                   Разом: <strong> {(CartTyre.price * CartTyre.quantity).toLocaleString("uk-UA")}</strong>{" "}
                   грн.
                 </p>
@@ -141,8 +135,8 @@ export function CartPanel() {
             )}
 
           </aside>
-        </>)
+        </div>)
       }
-    </>
+    </div>
   );
 }

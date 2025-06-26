@@ -1,7 +1,7 @@
 "use client";
 import Form from "next/form";
 import { useState } from "react";
-import {  LinkWithGA } from "@/components";
+import { LinkWithGA } from "@/components";
 import { handleClientSubmit, loadRecaptchaScript } from "@/lib";
 
 const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!;
@@ -26,12 +26,12 @@ export function OrderForm() {
       id="order-form"
       action={(formData) => handleClientSubmit("order-form", formData)}
       aria-label="Форма зворотнього звязку"
-      className=" gap-2 xl:gap-6 mx-auto flex   flex-col items-center  lg:w-auto xl:min-w-[40vw]"
+      className=" gap-2 xl:gap-6 mx-auto flex  flex-col items-start w-full  "
     >
 
-      <div>
+      <div className="flex flex-row items-center w-full gap-2 md:gap-6">
         <label htmlFor="order_name" className="form-label">
-          Ім&apos;я <span className="text-accent">*</span>
+          Ім&apos;я<span className="text-accent">*</span>
         </label>
         <input
           name="order_name"
@@ -39,41 +39,43 @@ export function OrderForm() {
           id="order_name"
           autoComplete="name"
           placeholder="Введіть імя..."
-          className="form-input bg-theme-light dark:bg-darkmode-theme-light"
+          className="form-input border-theme-light dark:bg-darkmode-theme-light"
         />
       </div>
 
-        <div>
-          <label htmlFor="order_email" className="form-label">
-            Email
-          </label>
-          <input
-            name="order_email"
-            type="email"
-            inputMode="email"
-            id="order_email"
-            autoComplete="email"
-            placeholder="example@domain.com"
-            className="form-input bg-theme-light dark:bg-darkmode-theme-light"
-          />
-        </div>
-        <div>
-          <label htmlFor="order_tel" className="form-label">
-            Тел
-          </label>
-          <input
-            name="order_tel"
-            type="tel"
-            id="order_tel"
-            inputMode="tel"
-            autoComplete="tel"
-            placeholder="Введіть телефон..."
-            className="form-input bg-theme-light dark:bg-darkmode-theme-light"
-          />
-        </div>
-      
+      <div className="flex flex-row items-center w-full gap-2 md:gap-6">
+        <label htmlFor="order_email" className="form-label">
+          Email
+        </label>
+        <input
+          name="order_email"
+          type="email"
+          inputMode="email"
+          id="order_email"
+          autoComplete="email"
+          placeholder="example@domain.com"
+          className="form-input border-theme-light dark:bg-darkmode-theme-light"
+        />
+      </div>
 
-      <div>
+
+      <div className="flex flex-row items-center w-full gap-2 md:gap-6">
+        <label htmlFor="order_tel" className="form-label">
+          Тел
+        </label>
+        <input
+          name="order_tel"
+          type="tel"
+          id="order_tel"
+          inputMode="tel"
+          autoComplete="tel"
+          placeholder="Введіть телефон..."
+          className="form-input border-theme-light dark:bg-darkmode-theme-light"
+        />
+      </div>
+
+
+      <div className="flex flex-row w-full gap-2 md:gap-6">
         <label htmlFor="order_message" className="form-label">
           Повідомлення
         </label>
@@ -84,8 +86,8 @@ export function OrderForm() {
           inputMode="text"
           placeholder="Введіть повідомлення..."
           onFocus={initRecaptcha}
-          rows={3}
-          className="form-input  bg-theme-light dark:bg-darkmode-theme-light"
+   
+          className=" form-input  border-theme-light dark:bg-darkmode-theme-light"
         />
       </div>
 

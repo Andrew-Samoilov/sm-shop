@@ -74,11 +74,11 @@ export function ManyPhoto({ images }: { images: IImage[] }) {
                 </div>
 
                 {/* стрілки */}
-                <div className="hidden lg:block">
+                <div className="hidden lg:block z-10">
                     <button
                         id="prev"
                         onClick={scrollPrev}
-                        className="p-2 lg:p-4 absolute left-6 top-1/2 -translate-y-1/2 bg-white/75   z-10 rounded-md hover:bg-gray-100 
+                        className="p-2 lg:p-4 absolute left-6 top-1/2 -translate-y-1/2 bg-white/75   rounded-md hover:bg-gray-100 
                     cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed
                     "
                     >
