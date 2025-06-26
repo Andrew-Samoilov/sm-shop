@@ -126,11 +126,11 @@
 
 
   .form-input {
-    @apply border-border text-dark placeholder:text-light dark:border-darkmode-border dark:bg-darkmode-theme-light dark:text-darkmode-light focus:ring-accent w-full rounded-sm border bg-transparent px-4 py-2 focus:ring focus:outline-none md:px-6 md:py-4;
+    @apply border-border text-dark placeholder:text-light dark:border-darkmode-border dark:bg-darkmode-theme-light dark:text-darkmode-light focus:ring-accent w-full rounded-sm border bg-transparent px-4 py-2 focus:ring focus:outline-none xl:px-6 xl:py-4;
   }
 
   .form-label {
-    @apply text-dark dark:text-darkmode-light mb-2 block text-xl font-normal max-md:text-base;
+    @apply text-dark dark:text-darkmode-light block font-normal max-md:text-base;
   }
 
   blockquote {

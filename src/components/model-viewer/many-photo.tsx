@@ -102,7 +102,7 @@ export function ManyPhoto({ images }: { images: IImage[] }) {
             </div>
 
             {/* Превʼю слайдер */}
-            <div className="overflow-x-auto mt-2 lg:mt-6 p-2" ref={thumbRef}>
+            <div className="max-w-screen overflow-x-auto mt-2 lg:mt-6 p-2" ref={thumbRef}>
                 <div className="flex gap-2 sm:gap-3 md:gap-4">
                     {images.map((img, i) => (
                         <button

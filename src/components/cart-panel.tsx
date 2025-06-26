@@ -5,6 +5,7 @@ import { ShoppingCartIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { sendGAEvent } from "@/lib";
 import { CartTyre } from "@/types";
 import Image from "next/image";
+import { OrderForm } from "@/components";
 
 export function CartPanel() {
   const [isOpen, setIsOpen] = useState(false);
@@ -131,8 +132,10 @@ export function CartPanel() {
                   Разом: <strong> {(CartTyre.price * CartTyre.quantity).toLocaleString("uk-UA")}</strong>{" "}
                   грн.
                 </p>
+
+                <OrderForm />
                 <button className="btn btn-md btn-primary bg-accent border-accent hover:bg-accent-hover hover:border-accent-hover">
-                  Оформити замовлення
+                  Надіслати замовлення
                 </button>
               </div>
             )}
