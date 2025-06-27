@@ -4,7 +4,7 @@ import { CartPanel, LinkWithGA, Logo, Search, ThemeSwitcher, MobileMenu } from "
 
 export async function Header() {
   return (
-    <header className="container flex w-full flex-wrap justify-between items-center  gap-6 
+    <header className="container flex flex-wrap justify-between items-center  gap-6 
     bg-body/75 dark:bg-darkmode-body/75 sticky top-0 z-30   backdrop-blur-sm">
       <Logo
         eventCategory="header"

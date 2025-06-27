@@ -64,15 +64,16 @@ export function CartPanel() {
       {isOpen && (
         <div>
           {/* Оверлей */}
-          <div className="fixed inset-0 bg-black/50 z-40" onClick={() => setIsOpen(false)}></div>
+          {/* <button className="fixed inset-0 bg-black/50 z-40" onClick={() => setIsOpen(false)}></button> */}
 
           <aside
             id="cart-panel"
             aria-labelledby="cart-title"
             aria-hidden={!isOpen}
             tabIndex={-1}
-            className="z-50 gap-2 lg:gap-6 p-2 md:p-6 flex fixed top-2 right-2 w-auto lg:min-w-1/2 rounded-md
-          bg-white dark:bg-darkmode-body/95 transform flex-col justify-between backdrop-blur-lg ease-in-out"
+            className="z-50 gap-2 lg:gap-6 p-2 md:p-6 flex fixed top-0 right-0 w-auto lg:min-w-1/2 
+            h-[calc(100vh-3rem)]
+          bg-white dark:bg-darkmode-body/95 transform flex-col justify-between rounded-md"
           >
 
             {/* Заголовок і кнопка закриття */}

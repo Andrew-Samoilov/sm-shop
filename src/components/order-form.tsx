@@ -1,7 +1,6 @@
 "use client";
 import Form from "next/form";
 import { useState } from "react";
-import { LinkWithGA } from "@/components";
 import { handleClientSubmit, loadRecaptchaScript } from "@/lib";
 
 const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!;
@@ -25,7 +24,7 @@ export function OrderForm() {
     <Form
       id="order-form"
       action={(formData) => handleClientSubmit("order-form", formData)}
-      aria-label="Форма зворотнього звязку"
+      aria-label="Форма замовлення звязку"
       className=" gap-2 xl:gap-6 mx-auto flex  flex-col items-start w-full  "
     >
 
@@ -39,7 +38,7 @@ export function OrderForm() {
           id="order_name"
           autoComplete="name"
           placeholder="Введіть імя..."
-          className="form-input border-theme-light dark:bg-darkmode-theme-light"
+          className="border-b  border-theme-light dark:bg-darkmode-theme-light"
         />
       </div>
 
@@ -54,14 +53,14 @@ export function OrderForm() {
           id="order_email"
           autoComplete="email"
           placeholder="example@domain.com"
-          className="form-input border-theme-light dark:bg-darkmode-theme-light"
+          className="border-b  border-theme-light dark:bg-darkmode-theme-light"
         />
       </div>
 
 
       <div className="flex flex-row items-center w-full gap-2 md:gap-6">
         <label htmlFor="order_tel" className="form-label">
-          Тел
+          Тел<span className="text-accent">*</span>
         </label>
         <input
           name="order_tel"
@@ -70,7 +69,7 @@ export function OrderForm() {
           inputMode="tel"
           autoComplete="tel"
           placeholder="Введіть телефон..."
-          className="form-input border-theme-light dark:bg-darkmode-theme-light"
+          className="border-b  border-theme-light dark:bg-darkmode-theme-light"
         />
       </div>
 
@@ -86,8 +85,8 @@ export function OrderForm() {
           inputMode="text"
           placeholder="Введіть повідомлення..."
           onFocus={initRecaptcha}
-   
-          className=" form-input  border-theme-light dark:bg-darkmode-theme-light"
+
+          className="border-b border-theme-light dark:bg-darkmode-theme-light"
         />
       </div>
 
