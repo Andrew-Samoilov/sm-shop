@@ -7,7 +7,7 @@ import { useCallback, useEffect, useState } from "react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/solid";
 
 
-export function ManyPhoto({ images }: { images: IImage[] }) {
+export function ManyModelPhoto({ images }: { images: IImage[] }) {
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
     const [thumbRef, thumbApi] = useEmblaCarousel({
         containScroll: "keepSnaps",
