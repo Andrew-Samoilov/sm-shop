@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { AddToCartButton, SeasonIcon } from "@/components";
+import { AddToCartButton } from "@/components";
 import type { ModelImage } from "@prisma/client";
 import { TyreWithRelations } from "@/types";
 import { TyreViewer } from "./tyre-viewer";
@@ -11,7 +11,8 @@ type TyreListItemProps = {
 
 export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
     return (
-        <div className="flex justify-between gap-1 md:gap-2 xl:gap-12 items-center md:p-2 xl:p-6 border border-white dark:border-darkmode-body hover:border-theme-light dark:hover:border-theme-dark rounded-lg">
+        <div
+            className="flex justify-between gap-1 md:gap-2 xl:gap-12 items-center md:p-2 xl:p-6 border border-white dark:border-darkmode-body hover:border-theme-light dark:hover:border-theme-dark rounded-lg">
            
             <TyreViewer images={modelImages} />
 
