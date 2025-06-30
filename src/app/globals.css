@@ -114,6 +114,10 @@
     @apply border-dark text-dark hover:bg-dark dark:hover:text-dark bg-transparent hover:text-white dark:border-white dark:text-white dark:hover:bg-white;
   }
 
+  .btn-accent {
+    @apply border-2 bg-accent text-white hover:scale-110 border-accent dark:bg-accent dark:text-dark dark:hover:bg-accent/70 transition-transform duration-200  font-bold;
+  }
+
   .section {
     @apply w-full mx-auto p-6 gap-6 lg:py-24;
   }

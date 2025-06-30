@@ -25,7 +25,7 @@ export async function Header() {
 
       <Search className="block w-full order-3 lg:order-none lg:w-[45%] xl:w-[60%]" />
 
-      <div className="flex items-center gap-2">
+      <div className="flex items-center ustify-center not-first:gap-2">
         <ThemeSwitcher />
         <CartPanel />
         <MobileMenu />

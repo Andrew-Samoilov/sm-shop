@@ -52,7 +52,7 @@ export function CartPanel() {
       {/* Кнопка відкриття */}
       <button
         onClick={() => CartTyre && setIsOpen(true)}
-        className="cursor-pointer disabled:cursor-not-allowed"
+        className="cursor-pointer disabled:cursor-not-allowed flex items-center justify-center"
         disabled={!CartTyre}
       >
         <ShoppingCartIcon

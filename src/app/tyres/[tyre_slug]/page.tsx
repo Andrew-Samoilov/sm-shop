@@ -135,7 +135,7 @@ export default async function TyrePage({
     : cert;
 
   // console.info("[TyrePage]", tyre);
-  
+
   const tyreSize = getTyreSize(tyre);
 
   return (
@@ -201,50 +201,50 @@ export default async function TyrePage({
             &nbsp;{tyre.loadIndex}
           </div>
 
-          <div className="flex flex-col gap-2">
-            <div className="flex flex-col gap-2 items-center">
-              <div>4 шт</div>
-              <span
-                className="font-semibold text-h1"
-              >{tyre.price?.toLocaleString("uk-UA")} <span className="text-h3 font-normal text-light">грн</span></span>
-            </div>
 
-            <AddToCartButton
-              tyre={{
-                id: tyre.id,
-                title: tyre.title,
-                brand: tyre.brands?.name ?? "",
-                model: tyre.models?.name ?? "",
-                tyreSize: tyreSize ?? "",
-                tyreImageUrl: images[0]?.url ?? "",  
-                price: tyre.price,
-                quantity: 4,
-                }}
-              className="btn btn-lg border-2 border-accent mb-6 max-w-xs mx-auto
-              sm:absolute sm:bottom-2
-              transition-transform duration-200 hover:scale-110 font-bold"
-            />
-
-            <LinkWithGA
-              // className="flex flex-wrap flex-col lg:flex-row  flex-between justify-center items-center gap-2 lg:gap-6  mx-auto
-              //  hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
-              className="flex flex-wrap flex-col lg:flex-row justify-center items-center gap-2 lg:gap-6 text-center max-w-full hover:no-underline"
-              href={"/info/payment-delivery"}
-              target="_blank"
-              eventLabel={""}>
-              <span
-                className="text-h5 max-md:text-base"
-              >Доставка: </span>
-              <span
-                className="px-2 py-1 rounded-md border border-border dark:border-border/40 text-text-light dark:text-darkmode-text-light "
-              > Наступного дня.</span>
-              <span
-                className="px-2 py-1 rounded-md border border-border dark:border-border/40 text-text-light dark:text-darkmode-text-light"
-              >Самовивіз: вже сьогодні.</span>
-            </LinkWithGA>
-
+          <div className="flex flex-col gap-2 items-center">
+            <div>4 шт</div>
+            <span
+              className="font-semibold text-h1"
+            >{tyre.price?.toLocaleString("uk-UA")} <span className="text-h3 font-normal text-light">грн</span></span>
           </div>
-      
+
+          <AddToCartButton
+            tyre={{
+              id: tyre.id,
+              title: tyre.title,
+              brand: tyre.brands?.name ?? "",
+              model: tyre.models?.name ?? "",
+              tyreSize: tyreSize ?? "",
+              tyreImageUrl: images[0]?.url ?? "",
+              price: tyre.price,
+              quantity: 4,
+            }}
+            className="btn btn-lg btn-accent max-w-xs mx-auto
+      fixed bottom-2 left-2 right-2 z-10
+      md:relative md:bottom-auto md:left-auto md:right-auto"
+          />
+
+          <LinkWithGA
+            // className="flex flex-wrap flex-col lg:flex-row  flex-between justify-center items-center gap-2 lg:gap-6  mx-auto
+            //  hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+            className="flex flex-wrap flex-col lg:flex-row justify-center items-center gap-2 lg:gap-6 text-center max-w-full hover:no-underline"
+            href={"/info/payment-delivery"}
+            target="_blank"
+            eventLabel={""}>
+            <span
+              className="text-h5 max-md:text-base"
+            >Доставка: </span>
+            <span
+              className="px-2 py-1 rounded-md border border-border dark:border-border/40 text-text-light dark:text-darkmode-text-light "
+            > Наступного дня.</span>
+            <span
+              className="px-2 py-1 rounded-md border border-border dark:border-border/40 text-text-light dark:text-darkmode-text-light"
+            >Самовивіз: вже сьогодні.</span>
+          </LinkWithGA>
+
+
+
         </div>
 
       </div>
