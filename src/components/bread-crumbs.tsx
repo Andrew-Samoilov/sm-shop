@@ -16,7 +16,8 @@ export async function BreadCrumbs({ tyreSlug }: Props) {
 
     return (
         <div
-            className="bg-theme-light dark:bg-darkmode-theme-light p-2 text-center text-sm
+            className="sticky top-[24] z-40
+            bg-theme-light dark:bg-darkmode-theme-light p-2 text-center text-sm
         flex flex-row justify-center items-center gap-2">
             <LinkWithGA
                 href={'/'}
