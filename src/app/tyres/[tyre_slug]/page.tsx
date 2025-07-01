@@ -155,7 +155,7 @@ export default async function TyrePage({
 
         <ModelViewer images={images} />
 
-        <div className=" flex flex-col w-full md:w-auto min-w-fit p-2 md:p-0 gap-1">
+        <div className=" flex flex-col w-full md:w-auto min-w-fit p-2 md:p-0 gap-1 lg:gap-6">
           <h1 className="flex flex-col items-center md:items-start  ">
             <span>{tyre.brands?.name}</span>
             <span>{tyre.models?.name}</span>
@@ -166,7 +166,9 @@ export default async function TyrePage({
             className="md:pt-6 text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
           >Країна виробництва: <span
             className="text-dark"
-          >{tyre.country}</span></div>
+          >{tyre.country}</span>
+          </div>
+
           <div
             className=" text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary 
             hover:no-underline"
@@ -186,8 +188,9 @@ export default async function TyrePage({
             </LinkWithGA>
             &nbsp;{tyre.speedIndex}
           </div>
+
           <div
-            className=" text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+            className=" text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline gap-6"
           >
             <LinkWithGA
               href="/info/load-index"
@@ -202,33 +205,33 @@ export default async function TyrePage({
           </div>
 
 
-          <div className="flex flex-col gap-2 items-center">
-            <div>4 шт</div>
-            <span
-              className="font-semibold text-h1"
-            >{tyre.price?.toLocaleString("uk-UA")} <span className="text-h3 font-normal text-light">грн</span></span>
+          <div className="flex flex-col md:flex-row md:items-center">
+            <div className="flex flex-col gap-2 xl:gap-6 items-center">
+              <div>4 шт</div>
+              <span
+                className="font-semibold text-h1"
+              >{tyre.price?.toLocaleString("uk-UA")} <span className="text-h3 font-normal text-light">грн</span></span>
+            </div>
+
+            <AddToCartButton
+              tyre={{
+                id: tyre.id,
+                title: tyre.title,
+                brand: tyre.brands?.name ?? "",
+                model: tyre.models?.name ?? "",
+                tyreSize: tyreSize ?? "",
+                tyreImageUrl: images[0]?.url ?? "",
+                price: tyre.price,
+                quantity: 4,
+              }}
+              className="btn btn-lg btn-accent max-w-xs mx-auto 
+            fixed bottom-2 left-2 right-2 z-10
+              md:relative md:bottom-auto md:left-auto md:right-auto "
+            />
           </div>
 
-          <AddToCartButton
-            tyre={{
-              id: tyre.id,
-              title: tyre.title,
-              brand: tyre.brands?.name ?? "",
-              model: tyre.models?.name ?? "",
-              tyreSize: tyreSize ?? "",
-              tyreImageUrl: images[0]?.url ?? "",
-              price: tyre.price,
-              quantity: 4,
-            }}
-            className="btn btn-lg btn-accent max-w-xs mx-auto
-      fixed bottom-2 left-2 right-2 z-10
-      md:relative md:bottom-auto md:left-auto md:right-auto"
-          />
-
           <LinkWithGA
-            // className="flex flex-wrap flex-col lg:flex-row  flex-between justify-center items-center gap-2 lg:gap-6  mx-auto
-            //  hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
-            className="flex flex-wrap flex-col lg:flex-row justify-center items-center gap-2 lg:gap-6 text-center max-w-full hover:no-underline"
+            className="flex flex-wrap flex-col md:flex-row justify-center items-center gap-2 lg:gap-6 text-center max-w-full hover:no-underline"
             href={"/info/payment-delivery"}
             target="_blank"
             eventLabel={""}>
@@ -242,8 +245,6 @@ export default async function TyrePage({
               className="px-2 py-1 rounded-md border border-border dark:border-border/40 text-text-light dark:text-darkmode-text-light"
             >Самовивіз: вже сьогодні.</span>
           </LinkWithGA>
-
-
 
         </div>
 

@@ -14,16 +14,16 @@ export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
 
     return (
         <div
-            className="flex justify-between gap-1 md:gap-2 xl:gap-12 items-center md:p-2 xl:p-6 border border-white dark:border-darkmode-body hover:border-theme-light dark:hover:border-theme-dark rounded-lg">
+            className="flex justify-between gap-1 md:gap-2 xl:gap-12 items-center md:p-2 2xl:p-6 border border-white dark:border-darkmode-body hover:border-theme-light dark:hover:border-theme-dark rounded-lg">
            
             <TyreViewer images={modelImages} />
 
-            <Link href={`/tyres/${tyre.slug}`} className="gap-0 md:gap-2 xl:gap-6 flex flex-col mr-auto">
+            <Link href={`/tyres/${tyre.slug}`} className="gap-0 md:gap-2 2xl:gap-6 flex flex-col mr-auto">
                 <span className="hidden md:block text-md md:text-2xl font-semibold">{tyre.brand}</span>
                 <span className="hidden md:block text-md md:text-lg font-semibold">{tyre.model}</span>
                 <span>{tyre.title}</span>
                  
-                <div className="flex flex-row md:flex-col gap-2 xl:gap-6">
+                <div className="flex flex-row md:flex-col gap-2 2xl:gap-6">
                     {tyre.season && (
                         <div
                             className="text-light text-sm flex gap-2">

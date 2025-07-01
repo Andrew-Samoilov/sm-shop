@@ -86,7 +86,7 @@ export function Search({ className = "" }: { className?: string }) {
           </div>
         ) : (
           <button
-            className="flex items-center justify-center w-10 h-10 "
+            className="flex items-center justify-center w-5 h-5 "
             onClick={() => setIsOpen(true)}
           >
             <MagnifyingGlassIcon className="h-5 w-5 " />

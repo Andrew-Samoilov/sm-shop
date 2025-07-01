@@ -24,7 +24,7 @@ export async function Header() {
       </div>
 
 
-      <div className="flex items-center ustify-center gap-0 md:gap-2">
+      <div className="flex items-center ustify-center gap-2 ">
         <Search className="block w-full lg:w-[45%] xl:w-[60%]" />
         <ThemeSwitcher />
         <CartPanel />

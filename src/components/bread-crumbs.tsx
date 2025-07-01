@@ -3,9 +3,7 @@ import { HomeIcon } from "@heroicons/react/24/outline";
 import { getTyreBySlug, translateSeasonToUkrainian } from "@/lib";
 import { LinkWithGA } from "./link-with-ga";
 
-type Props = {
-    tyreSlug: string;
-};
+type Props = { tyreSlug: string; };
 
 export async function BreadCrumbs({ tyreSlug }: Props) {
     const tyre = await getTyreBySlug(tyreSlug);
