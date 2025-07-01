@@ -71,13 +71,12 @@ export function CartPanel() {
             aria-labelledby="cart-title"
             aria-hidden={!isOpen}
             tabIndex={-1}
-            className="z-50 gap-2 lg:gap-6 p-2 md:p-6 flex fixed top-0 right-0 w-auto lg:min-w-1/2 
-            h-[calc(100vh-3rem)]
-          bg-white dark:bg-darkmode-body/95 transform flex-col justify-between rounded-md"
+            className="z-50 gap-2 lg:gap-6 p-2 md:p-6 flex fixed top-0 right-0  w-full md:w-auto lg:min-w-1/2 
+          bg-white dark:bg-darkmode-body/95 transform flex-col justify-between md:rounded-md"
           >
 
             {/* Заголовок і кнопка закриття */}
-            <div className="flex items-center justify-between border-b lg:pb-6 border-theme-light">
+            <div className="flex items-center justify-between border-b pb-2 lg:pb-6 border-theme-light">
               <h2 className="text-lg font-semibold">Кошик</h2>
               <button
                 onClick={() => CartTyre && setIsOpen(false)}

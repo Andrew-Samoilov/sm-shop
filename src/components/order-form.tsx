@@ -25,7 +25,7 @@ export function OrderForm() {
       id="order-form"
       action={(formData) => handleClientSubmit("order-form", formData)}
       aria-label="Форма замовлення звязку"
-      className=" gap-2 xl:gap-6 mx-auto flex  flex-col items-start w-full  "
+      className="md:ml-6 gap-2 xl:gap-6 mx-auto flex  flex-col items-start w-full  "
     >
 
       <div className="flex flex-row items-center w-full gap-2 md:gap-6">
@@ -38,7 +38,7 @@ export function OrderForm() {
           id="order_name"
           autoComplete="name"
           placeholder="Введіть імя..."
-          className="border-b  border-theme-light dark:bg-darkmode-theme-light"
+          className="w-full border-b  border-theme-light dark:bg-darkmode-theme-light"
         />
       </div>
 
@@ -53,7 +53,7 @@ export function OrderForm() {
           id="order_email"
           autoComplete="email"
           placeholder="example@domain.com"
-          className="border-b  border-theme-light dark:bg-darkmode-theme-light"
+          className="w-full border-b  border-theme-light dark:bg-darkmode-theme-light"
         />
       </div>
 
@@ -69,7 +69,7 @@ export function OrderForm() {
           inputMode="tel"
           autoComplete="tel"
           placeholder="Введіть телефон..."
-          className="border-b  border-theme-light dark:bg-darkmode-theme-light"
+          className="w-full border-b  border-theme-light dark:bg-darkmode-theme-light"
         />
       </div>
 
@@ -86,7 +86,7 @@ export function OrderForm() {
           placeholder="Введіть повідомлення..."
           onFocus={initRecaptcha}
 
-          className="border-b border-theme-light dark:bg-darkmode-theme-light"
+          className="w-full border-b border-theme-light dark:bg-darkmode-theme-light"
         />
       </div>
 
