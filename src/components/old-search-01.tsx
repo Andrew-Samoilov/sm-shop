@@ -7,9 +7,8 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 export function Search({ className = "" }: { className?: string }) {
   const router = useRouter();
   const [inputValue, setInputValue] = useState("");
-  const [isOpen, setIsOpen] = useState(false); // для мобільної версії
 
-  // Google Analytics пошук
+  // 1. GA подія (через 1.5 сек)
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (inputValue.trim()) {
@@ -36,7 +35,7 @@ export function Search({ className = "" }: { className?: string }) {
       params.set("width", width);
       params.set("profile", profile);
       params.set("diameter", diameter);
-      setInputValue(""); // очищаємо після розпізнавання
+      setInputValue(""); // очищаємо поле після розпізнавання розміру
     } else if (clean) {
       params.set("query", clean);
     } else {
@@ -44,13 +43,13 @@ export function Search({ className = "" }: { className?: string }) {
     }
 
     router.push(`/tyres?${params.toString()}`);
-    setIsOpen(false); // закриваємо мобільне поле
   };
+ 
 
-  const renderInput = () => (
-    <div className="relative w-full">
+  return (
+    <div className={`relative ${className}`}>
       {inputValue === "" && (
-        <MagnifyingGlassIcon className="text-light/75 absolute top-1/2 right-3 h-5 w-5 -translate-y-1/2 scale-x-[-1] transform pointer-events-none" />
+        <MagnifyingGlassIcon className="text-light/75 absolute top-1/2 right-3 h-5 w-5 -translate-y-1/2 scale-x-[-1] transform" />
       )}
       <input
         id="search"
@@ -67,37 +66,6 @@ export function Search({ className = "" }: { className?: string }) {
           }
         }}
       />
-    </div>
-  );
-
-  return (
-    <div >
-      {/* Mobile version (sm) */}
-      <div className="block md:hidden">
-        {isOpen ? (
-          <div >
-            {renderInput()}
-            <button
-              onClick={() => setIsOpen(false)}
-              className="text-accent text-sm underline"
-            >
-              Закрити
-            </button>
-          </div>
-        ) : (
-          <button
-            className="flex items-center justify-center w-10 h-10 "
-            onClick={() => setIsOpen(true)}
-          >
-            <MagnifyingGlassIcon className="h-5 w-5 " />
-          </button>
-        )}
-      </div>
-
-      {/* Desktop version (md+) */}
-      <div className={`hidden md:block ${className}`}>
-        {renderInput()}
-      </div>
     </div>
   );
 }

@@ -23,11 +23,9 @@ export async function Header() {
         >Контакти</LinkWithGA>
       </div>
 
-      <div className="transition-all duration-300 ease-in-out sticky top-12 max-h-12 overflow-hidden">
-        <Search className="block w-full order-3 lg:order-none lg:w-[45%] xl:w-[60%]" />
-      </div>
 
-      <div className="flex items-center ustify-center not-first:gap-2">
+      <div className="flex items-center ustify-center gap-0 md:gap-2">
+        <Search className="block w-full lg:w-[45%] xl:w-[60%]" />
         <ThemeSwitcher />
         <CartPanel />
         <MobileMenu />

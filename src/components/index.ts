@@ -17,7 +17,6 @@ export { HeroSection } from "./hero-section"
 export { LinkWithGA } from "./link-with-ga"
 export { Logo } from "./logo"
 export { Search } from "./search"
-// export { CertificatesSection } from "./certificates-section/certificates-section"
 export { CertificatesClient } from "./certificates-section/certificates-client"
 export { InfoSection } from "./info-section";
 
