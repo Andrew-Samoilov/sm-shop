@@ -14,7 +14,7 @@ export function TyreGalleryItem({ tyre, modelImages }: TyreListItemProps) {
     const tyreSize = getTyreSize(tyre);
     
     return (
-        <div className="flex flex-col overflow-hidden items-center gap-6 p-6 border border-transparent hover:border-theme-light dark:hover:border-theme-dark rounded-lg">
+        <div className="flex flex-col overflow-hidden items-center gap-1 xl:gap-6 border border-transparent hover:border-theme-light dark:hover:border-theme-dark rounded-lg p-1 xl:p-6">
  
             <div className="relative  w-full aspect-square max-w-[293px] overflow-hidden group shrink-0 ">
                 {modelImages.length > 0 ? (

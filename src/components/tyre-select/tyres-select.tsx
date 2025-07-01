@@ -183,7 +183,7 @@ export function TyresSelect() {
         Пошук: {formatSearchTitle(query, filters)}
       </h1>
 
-      <span className="text-light text-sm hidden md:block">
+      <span className="text-light text-sm hidden md:block pl-2">
         {`сортування ${sortLabels[filters.sort] ?? filters.sort}`}
         {` / ${viewLabels[filters.view]}`}
       </span>
