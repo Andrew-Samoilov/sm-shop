@@ -58,7 +58,7 @@ export function ManyModelPhoto({ images }: { images: IImage[] }) {
 
 
     return (
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-0 md:gap-6">
             <div className="w-full h-[50vh] md:h-[65vh] overflow-hidden rounded-md" ref={emblaRef}>
                 <div className="flex h-full">
                     {images.map((img) => (
@@ -102,8 +102,8 @@ export function ManyModelPhoto({ images }: { images: IImage[] }) {
             </div>
 
             {/* Превʼю слайдер */}
-            <div className="max-w-screen overflow-x-auto mt-2 lg:mt-6 p-2" ref={thumbRef}>
-                <div className="flex gap-2 sm:gap-3 md:gap-4">
+            <div className="max-w-screen overflow-x-auto md:mt-2 lg:mt-6 p-2" ref={thumbRef}>
+                <div className="flex gap-0 sm:gap-2 md:gap-4">
                     {images.map((img, i) => (
                         <button
                             key={i}
