@@ -28,6 +28,7 @@ export { ListHeader } from "./tyre-list/list-header"
 export { TyreListItem } from "./tyre-list/tyre-list-Item"
 export { TyreGalleryItem } from "./tyre-list/tyre-gallery-Item"
 export { OneTyrePhoto } from "./tyre-list/one-tyre-photo"
+export { TyreViewer } from "./tyre-list/tyre-viewer"
 
 export { TyresSelect } from "./tyre-select/tyres-select"
 export { HelpWindow } from "./tyre-select/help-window"

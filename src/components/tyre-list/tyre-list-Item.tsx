@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { AddToCartButton } from "@/components";
+import { AddToCartButton, TyreViewer } from "@/components";
 import type { ModelImage } from "@prisma/client";
 import { TyreWithRelations } from "@/types";
-import { TyreViewer } from "./tyre-viewer";
+import { getTyreSize } from "@/lib";
 
 type TyreListItemProps = {
     tyre: TyreWithRelations;
@@ -10,6 +10,8 @@ type TyreListItemProps = {
 };
 
 export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
+    const tyreSize = getTyreSize(tyre);
+
     return (
         <div
             className="flex justify-between gap-1 md:gap-2 xl:gap-12 items-center md:p-2 xl:p-6 border border-white dark:border-darkmode-body hover:border-theme-light dark:hover:border-theme-dark rounded-lg">
@@ -58,15 +60,20 @@ export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
                 <div className="flex flex-row gap-2 items-end mx-auto">
                     <span
                         className="font-semibold text-2xl"
-                    >{tyre.price?.toString()}</span>
+                    >{tyre.price?.toLocaleString("uk-UA")}</span>
                     <span className="text-light">грн</span>
                 </div>
 
                 <AddToCartButton
-                    id={tyre.id}
-                    title={tyre.title}
-                    price={tyre.price}
-                    quantity={4}
+                    tyre={{
+                        id: tyre.id,
+                        title: tyre.title,
+                        price: tyre.price,
+                        brand: tyre.brands?.name ?? "",
+                        model: tyre.models?.name ?? "",
+                        tyreSize: tyreSize ?? "",
+                        quantity: 4,
+                    }}
                     className="btn max-md:btn-sm btn-primary z-10
     fixed bottom-2 left-2 right-2 bg-theme-light dark:bg-theme-dark
     md:relative md:bottom-auto md:left-auto md:right-auto md:bg-transparent
