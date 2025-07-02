@@ -25,10 +25,10 @@ export function OrderForm() {
       id="order-form"
       action={(formData) => handleClientSubmit("order-form", formData)}
       aria-label="Форма замовлення звязку"
-      className="md:ml-6 gap-2 xl:gap-6 mx-auto flex  flex-col items-start w-full  "
+      className="gap-2 xl:gap-6  flex  flex-col items-start  md:p-6"
     >
 
-      <div className="flex flex-row items-center w-full gap-2 md:gap-6">
+      <div className="flex flex-row items-center w-full  gap-2 md:gap-6 ">
         <label htmlFor="order_name" className="form-label">
           Ім&apos;я<span className="text-accent">*</span>
         </label>

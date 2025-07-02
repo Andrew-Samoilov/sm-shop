@@ -155,7 +155,7 @@ export default async function TyrePage({
 
         <ModelViewer images={images} />
 
-        <div className=" flex flex-col w-full md:w-auto min-w-fit p-2 md:p-0 gap-1 lg:gap-6">
+        <div className=" flex flex-col w-full md:w-auto min-w-fit p-2 md:p-0 gap-1 lg:gap-2">
           <h1 className="flex flex-col items-center md:items-start  ">
             <span>{tyre.brands?.name}</span>
             <span>{tyre.models?.name}</span>
@@ -163,18 +163,17 @@ export default async function TyrePage({
           </h1>
 
           <div
-            className="md:pt-6 text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+            className="md:pt-2 text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
           >Країна виробництва: <span
             className="text-dark"
           >{tyre.country}</span>
           </div>
 
           <div
-            className=" text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary 
-            hover:no-underline"
+            className=" text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary  hover:no-underline"
           >Тиждень та рік виробництва: {tyre.dateCode}</div>
           <div
-            className="md:pt-6 text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+            className="md:pt-2 text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary  hover:no-underline"
           >
             <LinkWithGA
               href="/info/speed-index"
@@ -182,7 +181,7 @@ export default async function TyrePage({
               eventCategory="TyrePage"
               target="_blank"
               title="Докладніше про індекси швидкості"
-
+              className="hover:no-underline"
             >
               Індекс швидкості:
             </LinkWithGA>
@@ -197,6 +196,7 @@ export default async function TyrePage({
               eventLabel="load-index"
               eventCategory="TyrePage"
               target="_blank"
+              className="hover:no-underline"
               title="Докладніше про індекси навантаження"
             >
               Індекс навантаження:
