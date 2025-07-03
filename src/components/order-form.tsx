@@ -28,7 +28,7 @@ export function OrderForm() {
       className="gap-2 xl:gap-6  flex  flex-col items-start  md:p-6"
     >
 
-      <div className="flex flex-row items-center w-full  gap-2 md:gap-6 ">
+      <div className="flex flex-col items-left w-full  gap-0 md:gap-2 ">
         <label htmlFor="order_name" className="form-label">
           Ім&apos;я<span className="text-accent">*</span>
         </label>
@@ -42,7 +42,7 @@ export function OrderForm() {
         />
       </div>
 
-      <div className="flex flex-row items-center w-full gap-2 md:gap-6">
+      <div className="flex flex-col items-left w-full gap-0 md:gap-2">
         <label htmlFor="order_email" className="form-label">
           Email
         </label>
@@ -58,7 +58,7 @@ export function OrderForm() {
       </div>
 
 
-      <div className="flex flex-row items-center w-full gap-2 md:gap-6">
+      <div className="flex flex-col items-left w-full gap-0 md:gap-2">
         <label htmlFor="order_tel" className="form-label">
           Тел<span className="text-accent">*</span>
         </label>
@@ -68,13 +68,13 @@ export function OrderForm() {
           id="order_tel"
           inputMode="tel"
           autoComplete="tel"
-          placeholder="Введіть телефон..."
+          placeholder="+380__ ___ ____ ___"
           className="w-full border-b  border-theme-light dark:bg-darkmode-theme-light"
         />
       </div>
 
 
-      <div className="flex flex-row w-full gap-2 md:gap-6">
+      <div className="flex flex-left w-full gap-0 md:gap-2">
         <label htmlFor="order_message" className="form-label">
           Повідомлення
         </label>
@@ -83,7 +83,7 @@ export function OrderForm() {
           name="order_message"
           id="order_message"
           inputMode="text"
-          placeholder="Введіть повідомлення..."
+          placeholder="Введіть повідомлення"
           onFocus={initRecaptcha}
 
           className="w-full border-b border-theme-light dark:bg-darkmode-theme-light"
