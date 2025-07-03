@@ -206,7 +206,7 @@ export default async function TyrePage({
 
 
           <div className="flex flex-col md:flex-row md:items-center">
-            <div className="flex flex-col gap-2 xl:gap-6 items-center">
+            <div className="flex flex-row md:flex-col gap-2 xl:gap-6 items-center">
               <div>4 шт</div>
               <span
                 className="font-semibold text-h1"
