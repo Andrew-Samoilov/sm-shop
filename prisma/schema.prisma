@@ -17,7 +17,7 @@ model Brand {
   website     String?
   country     String?
   createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+  updatedAt   DateTime @updatedAt @default(now()) @map("updated_at")
   models      Model[]
   tyres       Tyre[]
 
@@ -52,6 +52,8 @@ model Tyre {
   brands            Brand?  @relation(fields: [brandId], references: [id], onUpdate: NoAction)
   models            Model?  @relation(fields: [modelId], references: [id], onUpdate: NoAction)
 
+  orders Order[]
+
   @@index([title(ops: raw("gin_trgm_ops"))], map: "tyres_title_trgm_idx", type: Gin)
   @@map("tyres")
 }
@@ -61,12 +63,12 @@ model Model {
   slug        String       @unique @db.VarChar(200)
   name        String
   description String?
-  brandId     Int          @map("brand_id")
+  brandId     Int?          @map("brand_id")
   createdAt   DateTime     @default(now()) @map("created_at")
-  updatedAt   DateTime     @updatedAt @map("updated_at")
+  updatedAt   DateTime     @updatedAt @default(now()) @map("updated_at")
   season      season?
   images      ModelImage[]
-  brand       Brand        @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  brand       Brand?        @relation(fields: [brandId], references: [id], onDelete: Cascade)
   tyres       Tyre[]
 
   @@index([brandId])
@@ -114,14 +116,36 @@ model StaticPage {
   description String?
   visible     Boolean  @default(true)
   createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  updatedAt   DateTime @updatedAt @default(now())
 
   @@map("static_page")
 }
-
 
 enum season {
   SUMMER
   WINTER
   ALLSEASON
+}
+
+model Order {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+
+  tyreId    Int
+  tyreTitle String
+  tyreSlug  String
+  tyreSize  String
+  tyrePrice Int
+  quantity  Int
+
+  name    String
+  phone   String
+  email   String?
+  comment String?
+  status  String  @default("pending")
+
+  tyre Tyre @relation(fields: [tyreId], references: [id])
+
+  @@map("orders")
 }

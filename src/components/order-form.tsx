@@ -2,6 +2,7 @@
 import Form from "next/form";
 import { useState } from "react";
 import { handleClientSubmit, loadRecaptchaScript } from "@/lib";
+import { SubmitButton } from "@/components";
 
 const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!;
 
@@ -90,13 +91,13 @@ export function OrderForm() {
         />
       </div>
 
-      {/* <SubmitButton
+      <SubmitButton
 
         pendingText="Надсилання ..."
         className="btn btn-primary ml-auto"
       >
         Надіслати
-      </SubmitButton> */}
+      </SubmitButton>
     </Form>
   );
 }

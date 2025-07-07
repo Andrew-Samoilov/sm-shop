@@ -31,7 +31,7 @@ export async function handleOrderSubmit(formId: string, formData: FormData) {
     const result = await response.json();
 
     if (!result.success) {
-      toast.error(result.error || "Не вдалося надіслати форму");
+      toast.error(result.error ?? "Не вдалося надіслати форму");
       console.error("[Form] Сервер повернув помилку:", result.error);
       return;
     }
