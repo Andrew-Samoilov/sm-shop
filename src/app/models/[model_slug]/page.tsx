@@ -24,7 +24,10 @@ export async function generateMetadata(
   const { model_slug } = params;
   const model = await getModelBySlug(model_slug);
   if (!model) return {};
-  const brand = await getBrandById(model.brandId);
+  const brand = typeof model.brandId === "number"
+    ? await getBrandById(model.brandId)
+    : null;
+
   const title = `${brand?.name} ${model.name} – характеристики, ціна та відгуки | ${siteConfig.siteName}`;
   const description = `Детальний огляд шини ${brand?.name} ${model.name}: характеристики, переваги, особливості експлуатації та наявність у магазині ${siteConfig.siteName}.`;
   const canonicalUrl = `${BASE_URL}/brands/${model.slug}`;
@@ -72,7 +75,9 @@ export default async function ModelPage({
   if (!model) return notFound();
 
   const modelTyres = await getTyresByModelId(model.id);
-  const brand = await getBrandById(model.brandId);
+
+  const brand = model.brandId ? await getBrandById(model.brandId) : null;
+
   const cert = await getContentBlock<Certificate[]>('certificates', []);
   const filteredCerts = model?.name
     ? cert.filter(c => c.brand.toLowerCase() === brand?.name.toLowerCase())

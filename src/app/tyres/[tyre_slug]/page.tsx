@@ -130,9 +130,13 @@ export default async function TyrePage({
     ? await getModelImgByModelId(tyre.modelId)
     : [];
   const cert = await getContentBlock<Certificate[]>('certificates', []);
-  const filteredCerts = tyre.brand
-    ? cert.filter(c => c.brand.toLowerCase() === tyre.brand?.toLowerCase())
-    : cert;
+  const filteredCerts =
+    tyre.brand
+      ? cert.filter(
+        c =>
+          (c.brand?.toLowerCase?.() ?? '') === (tyre.brand?.toLowerCase?.() ?? '')
+      )
+      : cert;
 
   // console.info("[TyrePage]", tyre);
 
