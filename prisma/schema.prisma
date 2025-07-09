@@ -134,7 +134,6 @@ model Order {
 
   tyreId    Int
   tyreTitle String
-  tyreSlug  String
   tyreSize  String
   tyrePrice Int
   quantity  Int
@@ -143,7 +142,7 @@ model Order {
   phone   String
   email   String?
   comment String?
-  status  String  @default("pending")
+  status  String?  @default("pending")
 
   tyre Tyre @relation(fields: [tyreId], references: [id])
 

@@ -22,7 +22,7 @@ export async function handleOrderSubmit(formId: string, formData: FormData) {
 
     formData.append("recaptcha", recaptchaToken);
 
-    const response = await fetch("/api/messages", {
+    const response = await fetch("/api/orders", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(Object.fromEntries(formData.entries())),
@@ -31,31 +31,31 @@ export async function handleOrderSubmit(formId: string, formData: FormData) {
     const result = await response.json();
 
     if (!result.success) {
-      toast.error(result.error ?? "Не вдалося надіслати форму");
+      toast.error(result.error ?? "Не вдалося надіслати замовлення");
       console.error("[Form] Сервер повернув помилку:", result.error);
       return;
     }
 
-    toast.success("Запит успішно надіслано!");
+    toast.success("Замовлення успішно надіслано!");
     
     // ВІДПРАВКА ПОДІЇ В GA
     sendGAEvent({
-      action: "submit_contact_form",
+      action: "order",
       params: {
-        form_location: "contact_page",
-        form_type: "contact",
+
+        form_type: "order",
       },
     });
 
     sendEmail({
-      subject: 'Нове повідомлення з сайту Shinamix.com',
+      subject: `Нове замовлення з сайту ShinaMix`,
       text: formatFormData(formData),
     });
 
     const formEl = document.getElementById(formId) as HTMLFormElement;
     formEl?.reset();
   } catch (error) {
-    console.error("[Form] Помилка під час надсилання форми:", error);
+    console.error("[Form] Помилка під час надсилання замовлення :", error);
     toast.error("Не вдалося зв’язатися із сервером. Перевірте, будь ласка, ваше інтернет‑з’єднання та спробуйте ще раз.");
   }
 }

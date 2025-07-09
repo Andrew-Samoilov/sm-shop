@@ -9,29 +9,45 @@ export async function POST(req: Request) {
     // console.info("[PRISMA] Отримані дані:", body);
 
     // Переконуємось, що всі необхідні поля є
-    const name = body.contact_name?.trim();
-    const email = body.contact_email?.trim();
-    const phone = body.contact_tel?.trim() ?? null;
-    const message = body.contact_message?.trim();
+    const name = body.order_name?.trim();
+    const email = body.order_email?.trim() || null;
+    const phone = body.order_tel?.trim() ?? null;
+    const comment = body.order_comment?.trim() || null; ;
+    const tyreId = Number(body.tyreId);
+    const tyreTitle = body.tyreTitle;
+    const tyreSize = body.tyreSize;
+    const tyrePrice = Number(body.tyrePrice);
+    const quantity = Number(body.quantity);
 
-    if (!message) {
-      console.error("[PRISMA] Помилка: Обовязкове поле message НЕ передано.");
+    if (!name) {
+      console.error("[PRISMA] Помилка: Обовязкове поле name НЕ передано.");
       return NextResponse.json(
-        { success: false, error: "Будь ласка, введіть текст повідомлення." },
+        { success: false, error: "Будь ласка представтесь." },
+        { status: 400 },
+      );
+    }
+
+    if (!phone) {
+      console.error("[PRISMA] Помилка: Обовязкове поле phone НЕ передано.");
+      return NextResponse.json(
+        { success: false, error: "Будь ласка, введіть номер телефону." },
         { status: 400 },
       );
     }
 
     // Збереження в БД
-    const newMessage = await prisma.message.create({
-      data: { name, email, phone, message },
+    const newOrder = await prisma.order.create({
+      data: {
+        name, email, phone, comment, tyreId, tyreTitle, tyreSize, tyrePrice, quantity
+      },
     });
 
+
     if (process.env.NODE_ENV === "development") {
-      console.info("[PRISMA] Повідомлення збережено:", newMessage);
+      console.info("[PRISMA] Замовленнея збережено:", newOrder);
     }
 
-    return NextResponse.json({ success: true, data: newMessage });
+    return NextResponse.json({ success: true, data: newOrder });
   } catch (error) {
     console.error("[PRISMA] Помилка в API:", error);
     return NextResponse.json(

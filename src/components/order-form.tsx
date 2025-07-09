@@ -1,12 +1,13 @@
 "use client";
 import Form from "next/form";
 import { useState } from "react";
-import { handleClientSubmit, loadRecaptchaScript } from "@/lib";
+import { handleOrderSubmit, loadRecaptchaScript } from "@/lib";
 import { LinkWithGA, SubmitButton } from "@/components";
+import { CartTyre } from "@/types";
 
 const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!;
 
-export function OrderForm() {
+export function OrderForm({ tyre }: { tyre: CartTyre }){
 
   const [isRecaptchaReady, setIsRecaptchaReady] = useState(false);
 
@@ -24,8 +25,8 @@ export function OrderForm() {
   return (
     <Form
       id="order-form"
-      action={(formData) => handleClientSubmit("order-form", formData)}
-      aria-label="Форма замовлення звязку"
+      action={(formData) => handleOrderSubmit("order-form", formData)}
+      aria-label="Форма замовлення"
       className="gap-2 xl:gap-6  flex  flex-col items-start  md:p-6"
     >
 
@@ -34,6 +35,7 @@ export function OrderForm() {
           Ім&apos;я<span className="text-accent">*</span>
         </label>
         <input
+          required={true}
           name="order_name"
           type="text"
           id="order_name"
@@ -66,6 +68,7 @@ export function OrderForm() {
         <input
           name="order_tel"
           type="tel"
+          required={true}
           id="order_tel"
           inputMode="tel"
           autoComplete="tel"
@@ -76,13 +79,12 @@ export function OrderForm() {
 
 
       <div className="flex flex-left w-full gap-0 md:gap-2">
-        <label htmlFor="order_message" className="form-label">
+        <label htmlFor="order_comment" className="form-label">
           Повідомлення
         </label>
         <textarea
-          required={true}
-          name="order_message"
-          id="order_message"
+          name="order_comment"
+          id="order_comment"
           inputMode="text"
           placeholder="Введіть повідомлення"
           onFocus={initRecaptcha}
@@ -92,8 +94,13 @@ export function OrderForm() {
 
       </div>
 
-      <SubmitButton
+      <input type="hidden" name="tyreId" value={tyre.id} />
+      <input type="hidden" name="tyreTitle" value={tyre.title} />
+      <input type="hidden" name="tyreSize" value={tyre.tyreSize} />
+      <input type="hidden" name="tyrePrice" value={tyre.price} />
+      <input type="hidden" name="quantity" value={tyre.quantity} />
 
+      <SubmitButton
         pendingText="Надсилання ..."
         className="w-2/3 mx-auto btn btn-md btn-primary bg-accent border-accent hover:bg-accent-hover hover:border-accent-hover"
       >
