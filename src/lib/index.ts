@@ -1,6 +1,6 @@
 export { formatDisplayUrl } from "./format-display-url";
 export { formatFormData } from "./format-form-data";
-export { filteredCerts } from "./filtered-sert";
+export { normalizedCerts } from "./normalized-sert";
 export { translateSeasonToUkrainian } from "./translate-season-to-ukrainian"
 export { getTyreSize } from "./get-tyre-size";
 

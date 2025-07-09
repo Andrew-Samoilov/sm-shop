@@ -1,5 +1,5 @@
 import { CertificatesClient, ModelViewer, TyresList } from "@/components";
-import { getBrandById, getModels, getTyresByModelId, getModelBySlug, getModelImgByModelId, getSiteConfig, getContentBlock } from "@/lib";
+import { getBrandById, getModels, getTyresByModelId, getModelBySlug, getModelImgByModelId, getSiteConfig, getContentBlock, normalizedCerts } from "@/lib";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import { Metadata } from "next";
@@ -79,9 +79,9 @@ export default async function ModelPage({
   const brand = model.brandId ? await getBrandById(model.brandId) : null;
 
   const cert = await getContentBlock<Certificate[]>('certificates', []);
-  const filteredCerts = model?.name
-    ? cert.filter(c => c.brand.toLowerCase() === brand?.name.toLowerCase())
-    : cert;
+  const filteredCerts  =normalizedCerts(cert, brand?.name);
+  
+  
   const canonicalUrl = `${BASE_URL}/brands/${model.slug}`;
   const images = await getModelImgByModelId(model.id);
 

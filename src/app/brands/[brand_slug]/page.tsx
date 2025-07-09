@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import ReactMarkdown from "react-markdown";
 import { notFound } from "next/navigation";
-import { filteredCerts,  getBrands, getBrandBySlug, getModelsByBrandId, getTyresByBrandId, formatDisplayUrl, getModelImagesByIds, getBaseMetadata, getContentBlock } from "@/lib";
+import {  getBrands, getBrandBySlug, getModelsByBrandId, getTyresByBrandId, formatDisplayUrl, getModelImagesByIds, getBaseMetadata, getContentBlock, normalizedCerts } from "@/lib";
 import { LinkWithGA, TyresList, CertificatesClient } from "@/components"; 
 import { Certificate } from "@/types";
 
@@ -77,9 +77,9 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
   const modelId = brandTyres.map(t => t.modelId)
   const images = await getModelImagesByIds(modelId);
   const cert = await getContentBlock<Certificate[]>('certificates', []);
-  console.log(cert, brand.name);
+  // console.log(cert, brand.name);
 
-  const filteredCerts = filteredCerts(cert, brand.name);
+  const filteredCerts =normalizedCerts(cert, brand.name);
 
 
   const jsonLd = {
