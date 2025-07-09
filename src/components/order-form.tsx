@@ -2,7 +2,7 @@
 import Form from "next/form";
 import { useState } from "react";
 import { handleClientSubmit, loadRecaptchaScript } from "@/lib";
-import { SubmitButton } from "@/components";
+import { LinkWithGA, SubmitButton } from "@/components";
 
 const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!;
 
@@ -89,15 +89,27 @@ export function OrderForm() {
 
           className="w-full border-b border-theme-light dark:bg-darkmode-theme-light"
         />
+
       </div>
 
       <SubmitButton
 
         pendingText="Надсилання ..."
-        className="btn btn-primary ml-auto"
+        className="w-2/3 mx-auto btn btn-md btn-primary bg-accent border-accent hover:bg-accent-hover hover:border-accent-hover"
       >
-        Надіслати
+        Надіслати замовлення
       </SubmitButton>
+      <p
+        className="text-light"
+      >Натискаючи &ldquo;Надіслати замовлення&ldquo;, Ви погоджуєтесь з&nbsp;
+        <LinkWithGA
+          href={'/info/legal'}
+          eventLabel="legal"
+          eventCategory="cart"
+          aria-label="Умови використання сайту"
+        >умовами
+        </LinkWithGA>
+      </p>
     </Form>
   );
 }
