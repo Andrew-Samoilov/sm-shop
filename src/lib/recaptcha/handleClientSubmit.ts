@@ -20,6 +20,10 @@ export async function handleClientSubmit(formId: string, formData: FormData) {
       action: "submit",
     });
 
+    const email = formData.get('contact_email') as string;
+    const name = formData.get('contact_name') as string;
+    const message = formData.get('contact_message') as string;
+
     formData.append("recaptcha", recaptchaToken);
 
     const response = await fetch("/api/messages", {
@@ -50,6 +54,15 @@ export async function handleClientSubmit(formId: string, formData: FormData) {
     sendEmail({
       subject: 'Нове повідомлення з сайту Shinamix.com',
       text: formatFormData(formData),
+    });
+
+    sendEmail({
+      to: email,
+      subject: "Ваше повідомлення надіслано",
+      html: `<p>Дякуємо, ${name}! Ваше замовлення надіслано. Ми відповімо найближчим часом.</p>
+             <hr />
+             <p><b>Ваше повідомлення:</b></p>
+             <p>${message}</p>`
     });
 
     const formEl = document.getElementById(formId) as HTMLFormElement;

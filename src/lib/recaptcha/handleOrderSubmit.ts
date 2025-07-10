@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { formatFormData, sendEmail, sendGAEvent } from "@/lib";
+import { sendEmail, sendGAEvent } from "@/lib";
 
 declare global {
   interface Window {
@@ -21,6 +21,46 @@ export async function handleOrderSubmit(formId: string, formData: FormData) {
     });
 
     formData.append("recaptcha", recaptchaToken);
+
+    const email = formData.get('order_email') as string;
+    const name = formData.get('order_name') as string;
+    const tel = formData.get("order_tel") as string;
+    const comment = formData.get('order_message') as string;
+
+    // Дані про товар з прихованих полів
+    const tyreId = formData.get("tyreId") as string | null;
+    const tyreTitle = formData.get("tyreTitle") as string | null;
+    const tyreSize = formData.get("tyreSize") as string | null;
+    const tyrePrice = formData.get("tyrePrice") as string | null;
+    const quantity = formData.get("quantity") as string | null;
+
+    let productHtml = "";
+    if (tyreId || tyreTitle || tyreSize || tyrePrice || quantity) {
+      productHtml = `
+        <hr/>
+        <b>Дані про товар:</b>
+        <ul>
+          ${tyreId ? `<li><b>ID:</b> ${tyreId}</li>` : ""}
+          ${tyreTitle ? `<li><b>Назва:</b> ${tyreTitle}</li>` : ""}
+          ${tyreSize ? `<li><b>Розмір:</b> ${tyreSize}</li>` : ""}
+          ${tyrePrice ? `<li><b>Ціна:</b> ${tyrePrice} грн</li>` : ""}
+          ${quantity ? `<li><b>Кількість:</b> ${quantity}</li>` : ""}
+        </ul>
+        
+      `;
+    }
+
+    const orderHtml = `
+      <p>Дякуємо, <b>${name}</b>! Ваше замовлення надіслано. Ми відповімо найближчим часом.</p>
+      <hr/>
+      <ul>
+        <li><b>Ім'я:</b> ${name}</li>
+        <li><b>Email:</b> ${email}</li>
+        <li><b>Телефон:</b> ${tel}</li>
+        <li><b>Повідомлення:</b> ${comment}</li>
+      </ul>
+      ${productHtml}
+    `;
 
     const response = await fetch("/api/orders", {
       method: "POST",
@@ -49,7 +89,13 @@ export async function handleOrderSubmit(formId: string, formData: FormData) {
 
     sendEmail({
       subject: `Нове замовлення з сайту ShinaMix`,
-      text: formatFormData(formData),
+      text: orderHtml,
+    });
+
+    sendEmail({
+      to: email,
+      subject: "Ваше замовлення надіслано",
+      html: orderHtml
     });
 
     const formEl = document.getElementById(formId) as HTMLFormElement;
