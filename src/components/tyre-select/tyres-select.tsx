@@ -59,7 +59,7 @@ export function TyresSelect() {
   // Оновлюємо URL при зміні filters
   useEffect(() => {
     if (!initialized) return;
-    
+
     const params = new URLSearchParams();
     if (filters.width) params.set("width", filters.width);
     if (filters.profile) params.set("profile", filters.profile);
@@ -116,11 +116,13 @@ export function TyresSelect() {
     fetch(`/api/tyres?${params.toString()}`)
       .then((res) => res.json())
       .then((data) => {
-        setSelectedTyres(data.tyres);
-        setImages(data.images);
+        setSelectedTyres(Array.isArray(data?.tyres) ? data.tyres : []);
+        setImages(Array.isArray(data?.images) ? data.images : []);
       })
       .catch((error) => {
         console.error("[Tyres Select] fetch error:", error);
+        setSelectedTyres([]);
+        setImages([]);
       });
   }, [filters, query]);
 
@@ -163,30 +165,45 @@ export function TyresSelect() {
       parts.push(`R${filters.diameter}`);
     }
 
-    function getSeasonLabel(s: string): string {
+    function getSeasonLabel(s: string): string | undefined {
       if (s === "summer") return "літні";
       if (s === "winter") return "зимові";
-      return "всесезонні";
+      if (s === "allseason") return "всесезонні";
     }
 
     if (filters.seasons.length > 0) {
-      const seasons = filters.seasons.map(getSeasonLabel).join(", ");
-      parts.push(`(${seasons})`);
+      const seasons = filters.seasons
+        .map(getSeasonLabel)
+        .filter(Boolean) // видаляє undefined/порожні
+        .join(", ");
+      if (seasons.length > 0) {
+        parts.push(`(${seasons})`);
+      }
     }
-    
+
+
     return parts.join(" ");
+
   }
+
+  //  console.log(`[formatSearchTitle]`, formatSearchTitle.length);
+  const searchTitle = formatSearchTitle(query, filters);
 
   return (
     <div className="flex flex-col w-auto">
-      <h1 className="text-left">
-        Пошук: {formatSearchTitle(query, filters)}
-      </h1>
 
-      <span className="text-light text-sm hidden md:block pl-2">
-        {`сортування ${sortLabels[filters.sort] ?? filters.sort}`}
-        {` / ${viewLabels[filters.view]}`}
-      </span>
+      {searchTitle.length > 0 && (
+        <>
+          <h1 className="text-left">
+            Пошук: {searchTitle}
+          </h1>
+
+          <span className="text-light text-sm hidden md:block pl-2">
+            {`сортування ${sortLabels[filters.sort] ?? filters.sort}`}
+            {` / ${viewLabels[filters.view]}`}
+          </span>
+        </>
+      )}
 
       <div className="flex gap-0 md:gap-2 lg:gap-6 flex-col lg:flex-row">
         <aside className="gap-0 md:gap-2 lg:gap-6 flex flex-col lg:flex-row w-auto">
