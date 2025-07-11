@@ -49,7 +49,7 @@ export function TyresSelect() {
       width: searchParams.get("width") ?? "",
       profile: searchParams.get("profile") ?? "",
       diameter: searchParams.get("diameter") ?? "",
-      seasons: searchParams.getAll("season"),
+      seasons: searchParams.getAll("season").filter(s => !!s && s !== "undefined"), 
       view: searchParams.get("view") === "gallery" ? "gallery" : "list",
       sort: searchParams.get("sort") ?? "price_asc",
     });
