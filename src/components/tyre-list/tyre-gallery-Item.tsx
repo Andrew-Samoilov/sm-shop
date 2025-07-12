@@ -30,7 +30,7 @@ export function TyreGalleryItem({ tyre, modelImages }: TyreListItemProps) {
                                 alt={modelImages[1].alt ?? "Фото моделі 2"}
                                 fill
                                 sizes="293px"
-                                className="absolute z-5 inset-0 object-contain transition-opacity duration-300 opacity-0 group-hover:opacity-100"
+                                className="absolute z-0 inset-0 object-contain transition-opacity duration-300 opacity-0 group-hover:opacity-100"
                             />
                         )}
                     </>

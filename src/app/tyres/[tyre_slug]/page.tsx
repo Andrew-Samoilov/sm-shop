@@ -136,7 +136,7 @@ export default async function TyrePage({
     : [];
   const cert = await getContentBlock<Certificate[]>('certificates', []);
   const filteredCerts = tyre.brand
-    ? cert.filter(c => c.brand.toLowerCase() === tyre.brand?.toLowerCase())
+    ? cert.filter(c => typeof c.brand === 'string' && c.brand.toLowerCase() === c.brand)
     : cert;
 
   // console.info("[TyrePage]", tyre);

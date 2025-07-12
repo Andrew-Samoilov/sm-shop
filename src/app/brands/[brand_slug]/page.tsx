@@ -77,10 +77,12 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
   const modelId = brandTyres.map(t => t.modelId)
   const images = await getModelImagesByIds(modelId);
   const cert = await getContentBlock<Certificate[]>('certificates', []);
+  console.log(`[certs]`, cert)
   const filteredCerts = brand?.name
-    ? cert.filter(c => c.brand.toLowerCase() === brand.name.toLowerCase())
+    ? cert.filter(c => typeof c.brand === 'string' && c.brand.toLowerCase() === brand.name.toLowerCase())
     : cert;
 
+  console.log(`[filteredCerts]`, filteredCerts)
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Brand",
