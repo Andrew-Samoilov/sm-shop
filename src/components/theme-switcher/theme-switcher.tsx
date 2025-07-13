@@ -16,7 +16,7 @@ export const ThemeSwitcher = () => {
     <button
       suppressHydrationWarning
       onClick={toggleTheme}
-      className="cursor-pointer"
+      className="cursor-pointer flex items-center justify-center"
       aria-label={`Перемикач теми: ${theme === "light" ? "увімкнути темну тему" : "увімкнути світлу тему"}`}
     >
       {theme === "light" ? (

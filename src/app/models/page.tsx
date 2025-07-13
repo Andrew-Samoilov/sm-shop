@@ -4,16 +4,18 @@ import Link from "next/link";
 
 export const dynamic = "force-static";
 
-type ModelWithBrand = Model & { brand: Brand };
+type ModelWithBrand = Model & { brand: Brand | null };
 
 export default async function ModelsPage() {
   const models: ModelWithBrand[] = await getModels();
 
   const groupedModels = models.reduce<Record<string, Model[]>>((acc, model) => {
+    if (!model.brand) return acc;  
     const brandName = model.brand.name;
     if (!acc[brandName]) {
       acc[brandName] = [];
     }
+    
     acc[brandName].push(model);
     return acc;
   }, {});

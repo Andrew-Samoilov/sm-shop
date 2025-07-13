@@ -1,6 +1,8 @@
 export { formatDisplayUrl } from "./format-display-url";
 export { formatFormData } from "./format-form-data";
+export { normalizedCerts } from "./normalized-sert";
 export { translateSeasonToUkrainian } from "./translate-season-to-ukrainian"
+export { getTyreSize } from "./get-tyre-size";
 
 export { getContentBlock } from "./get-content-block";
 
@@ -30,6 +32,7 @@ export { getModelImgByModelId } from "./prisma/get-model-img-by-model-id";
 export { getModelImagesByIds } from "./prisma/get-model-img-by-model-ids";
 
 export { handleClientSubmit } from "./recaptcha/handleClientSubmit";
+export { handleOrderSubmit } from "./recaptcha/handleOrderSubmit";
 export { loadRecaptchaScript } from "./recaptcha/loadRecaptchaScript";
 
 export { sendGAEvent } from "./send-ga-event";

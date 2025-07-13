@@ -1,16 +1,16 @@
 import { IImage } from "@/types";
 import Image from "next/image";
 
-export function OnePhoto({ image }: { image: IImage }) {
+export function OneTyrePhoto({ image }: { image: IImage }) {
     return (
-        <div className="relative w-full md:w-[50vh] md:max-w-[40vw] h-[50vh] overflow-hidden rounded-md">
+        <div className="relative w-full  max-w-[15vw]  h-[15vh] md:h-[20vh] overflow-hidden rounded-md">
             <Image
                 key={image.id}
                 src={image.url}
                 alt={image.alt ?? "Фото моделі"}
                 fill
                 priority
-                sizes="100vw"
+                sizes="(min-width: 768px) 15vw, 30vw"
                 className="object-contain mx-auto"
             />
         </div>

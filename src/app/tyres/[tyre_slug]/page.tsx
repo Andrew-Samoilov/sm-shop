@@ -1,5 +1,5 @@
 import { AddToCartButton, BreadCrumbs, CertificatesClient, LinkWithGA, ModelViewer, ViewItemGA } from "@/components";
-import { getTyreBySlug, getModelImgByModelId, prisma, translateSeasonToUkrainian, getContentBlock } from "@/lib";
+import { getTyreBySlug, getModelImgByModelId, prisma, translateSeasonToUkrainian, getContentBlock, getTyreSize } from "@/lib";
 import { Certificate } from "@/types";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -116,7 +116,6 @@ export async function generateMetadata(
   };
 }
 
-
 export default async function TyrePage({
   params,
 }: {
@@ -124,10 +123,6 @@ export default async function TyrePage({
 }) {
   const { tyre_slug } = params;
   const tyre = await getTyreBySlug(tyre_slug);
-
-  const tyreSize = tyre?.width && tyre.profile && tyre.diameter && tyre.loadSpeedIndex
-    ? `${tyre.width}${tyre.delimiter ?? '/'}${tyre.profile} R${tyre.diameter} ${tyre.loadIndex}${tyre.speedIndex}`
-    : null;
 
   // console.info("[getTyreBySlug]", tyre);
   if (!tyre) return notFound();
@@ -141,33 +136,11 @@ export default async function TyrePage({
 
   // console.info("[TyrePage]", tyre);
 
+  const tyreSize = getTyreSize(tyre);
+
   return (
     <article >
       <BreadCrumbs tyreSlug={tyre_slug} />
-
-      <div className=" flex flex-col md:flex-row items-center justify-center gap-2 md:gap-18 md:py-6 text-3xl ">
-        <h1 className="flex flex-col items-center md:items-start  ">
-          <span>{tyre.brands?.name}</span>
-          <span>{tyre.models?.name}</span>
-          <span className="font-normal text-[75%]">{tyreSize}</span>
-        </h1>
-        <div className="flex flex-col gap-2">
-          <div className="flex flex-col gap-2 items-center">
-            <div>4 шт</div>
-            <span
-              className="font-semibold text-h1"
-            >{tyre.price?.toString()} <span className="text-h3 font-normal text-light">грн</span></span>
-
-          </div>
-
-          <AddToCartButton
-            id={tyre.id}
-            title={tyre.title}
-            price={tyre.price}
-            quantity={4}
-          />
-        </div>
-      </div>
 
       <ViewItemGA
         item_id={tyre.id}
@@ -177,62 +150,113 @@ export default async function TyrePage({
         price={Number(tyre.price)}
       />
 
-      <div className=" flex flex-col md:flex-row md:gap-6 2xl:p-12 items-start content-center justify-center pb-6">
-        {/* {tyre.modelId !== null && images.length > 0 && <ModelViewerSection images={images} />} */}
+      <div className=" flex flex-col md:flex-row md:gap-6 pb-6 2xl:p-12
+       items-center  justify-center ">
+
         <ModelViewer images={images} />
 
-        <div className=" flex flex-col min-w-fit p-2 md:p-0 text-light gap-1">
-          <div className="pb-2 md:pb-6 2xl:pb-12">Сезон: <span className="font-semibold text-theme-dark">{tyre.season}</span></div>
-          <div>Бренд: {tyre.brand}</div>
-          <div>Модель: {tyre.model}</div>
-          <div >Країна виробництва: {tyre.country}</div>
-          <div className="pb-2 md:pb-6 2xl:pb-12">Тиждень та рік виробництва: {tyre.dateCode}</div>
-          {/* <hr className="pb-2 md:pb-6"></hr> */}
-          <div>Застосовуваність: {tyre.applicability}</div>
-          <div>Ширина: {tyre.width}</div>
-          <div>Профіль: {tyre.profile}</div>
-          <div>Діаметр: {tyre.diameter}</div>
-          <div>
+        <div className=" flex flex-col w-full md:w-auto min-w-fit p-2 md:p-0 gap-1 lg:gap-2">
+          <h1 className="flex flex-col items-center md:items-start  ">
+            <span>{tyre.brands?.name}</span>
+            <span>{tyre.models?.name}</span>
+            <span className="font-normal text-[75%]">{tyreSize}</span>
+          </h1>
+
+          <div
+            className="md:pt-2 text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+          >Країна виробництва: <span
+            className="text-dark"
+          >{tyre.country}</span>
+          </div>
+
+          <div
+            className=" text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary  hover:no-underline"
+          >Тиждень та рік виробництва: {tyre.dateCode}</div>
+          <div
+            className="md:pt-2 text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary  hover:no-underline"
+          >
             <LinkWithGA
               href="/info/speed-index"
               eventLabel="speed-index"
               eventCategory="TyrePage"
-              target="_blanc"
-              className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+              target="_blank"
+              title="Докладніше про індекси швидкості"
+              className="hover:no-underline"
             >
-              Індекс швидкості:&nbsp;
+              Індекс швидкості:
             </LinkWithGA>
-            {tyre.speedIndex}
+            &nbsp;{tyre.speedIndex}
           </div>
-          <div className="md:pb-6 2xl:p-12">
+
+          <div
+            className=" text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline gap-6"
+          >
             <LinkWithGA
               href="/info/load-index"
-              eventLabel="speed-index"
+              eventLabel="load-index"
               eventCategory="TyrePage"
-              target="_blanc"
+              target="_blank"
+              className="hover:no-underline"
+              title="Докладніше про індекси навантаження"
             >
-              Індекс навантаження:&nbsp;
+              Індекс навантаження:
             </LinkWithGA>
-            {tyre.loadIndex}
+            &nbsp;{tyre.loadIndex}
           </div>
-          <AddToCartButton
-            id={tyre.id}
-            title={tyre.title}
-            price={tyre.price}
-            quantity={4}
-            label="Купити в 1 клік"
-          />
+
+
+          <div className="flex flex-col md:flex-row md:items-center">
+            <div className="flex flex-row md:flex-col gap-2 xl:gap-6 items-center">
+              <div>4 шт</div>
+              <span
+                className="font-semibold text-h1"
+              >{tyre.price?.toLocaleString("uk-UA")} <span className="text-h3 font-normal text-light">грн</span></span>
+            </div>
+
+            <AddToCartButton
+              tyre={{
+                id: tyre.id,
+                title: tyre.title,
+                brand: tyre.brands?.name ?? "",
+                model: tyre.models?.name ?? "",
+                tyreSize: tyreSize ?? "",
+                tyreImageUrl: images[0]?.url ?? "",
+                price: tyre.price,
+                quantity: 4,
+              }}
+              className="btn btn-lg btn-accent max-w-xs mx-auto 
+            fixed bottom-2 left-2 right-2 z-10
+              md:relative md:bottom-auto md:left-auto md:right-auto "
+            />
+          </div>
+
+          <LinkWithGA
+            className="flex flex-wrap flex-col md:flex-row justify-center items-center gap-2 lg:gap-6 text-center max-w-full hover:no-underline"
+            href={"/info/payment-delivery"}
+            target="_blank"
+            eventLabel={""}>
+            <span
+              className="text-h5 max-md:text-base"
+            >Доставка: </span>
+            <span
+              className="px-2 py-1 rounded-md border border-border dark:border-border/40 text-text-light dark:text-darkmode-text-light "
+            > Наступного дня.</span>
+            <span
+              className="px-2 py-1 rounded-md border border-border dark:border-border/40 text-text-light dark:text-darkmode-text-light"
+            >Самовивіз: вже сьогодні.</span>
+          </LinkWithGA>
+
         </div>
 
       </div>
 
       <div>
         {tyre.models?.description && (
-          <section className="pb-6 max-w-[65ch] mx-auto">
+          <section className="p-2 pb-6 max-w-[65ch] mx-auto">
             <details className="group" open>
               <summary className="flex flex-between justify-center items-center marker:content-none cursor-pointer ">
-                <h2>Детальний опис</h2>
-                <span className="text-4xl transition-transform group-open:rotate-45">+</span>
+                <h2 className="pr-2 md:pr-6">Детальний опис</h2>
+                <span className="text-light text-4xl transition-transform group-open:rotate-45">+</span>
               </summary>
               <ReactMarkdown>{tyre.models.description}</ReactMarkdown>
             </details>
@@ -243,8 +267,8 @@ export default async function TyrePage({
           <section className="pb-6">
             <details className="group" open>
               <summary className="flex flex-between justify-center items-center marker:content-none cursor-pointer ">
-                <h2>{`Наші сертифікати ${tyre.brand}`}</h2>
-                <span className="text-4xl transition-transform group-open:rotate-45">+</span>
+                <h2 className="pr-2 md:pr-6">{`Наші сертифікати ${tyre.brand}`}</h2>
+                <span className="text-light text-4xl transition-transform group-open:rotate-45">+</span>
               </summary>
               <CertificatesClient cert={filteredCerts} />
             </details>

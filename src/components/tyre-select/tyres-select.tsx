@@ -39,6 +39,7 @@ export function TyresSelect() {
   const [helpOpen, setHelpOpen] = useState(false);
   const [selectedTyres, setSelectedTyres] = useState<TyreWithRelations[]>([]);
   const [images, setImages] = useState<ModelImage[]>([]);
+  const [initialized, setInitialized] = useState(false);
 
   const query = searchParams.get("query") ?? "";
 
@@ -48,14 +49,17 @@ export function TyresSelect() {
       width: searchParams.get("width") ?? "",
       profile: searchParams.get("profile") ?? "",
       diameter: searchParams.get("diameter") ?? "",
-      seasons: searchParams.getAll("season"),
+      seasons: searchParams.getAll("season").filter(s => !!s && s !== "undefined"), 
       view: searchParams.get("view") === "gallery" ? "gallery" : "list",
       sort: searchParams.get("sort") ?? "price_asc",
     });
+    setInitialized(true);
   }, [searchParams]);
 
   // Оновлюємо URL при зміні filters
   useEffect(() => {
+    if (!initialized) return;
+
     const params = new URLSearchParams();
     if (filters.width) params.set("width", filters.width);
     if (filters.profile) params.set("profile", filters.profile);
@@ -66,7 +70,7 @@ export function TyresSelect() {
     if (query) params.set("query", query);
 
     router.replace(`?${params.toString()}`, { scroll: false });
-  }, [filters, query, router]);
+  }, [filters, initialized, query, router]);
 
   // Завантаження опцій для фільтрів
   useEffect(() => {
@@ -112,11 +116,13 @@ export function TyresSelect() {
     fetch(`/api/tyres?${params.toString()}`)
       .then((res) => res.json())
       .then((data) => {
-        setSelectedTyres(data.tyres);
-        setImages(data.images);
+        setSelectedTyres(Array.isArray(data?.tyres) ? data.tyres : []);
+        setImages(Array.isArray(data?.images) ? data.images : []);
       })
       .catch((error) => {
         console.error("[Tyres Select] fetch error:", error);
+        setSelectedTyres([]);
+        setImages([]);
       });
   }, [filters, query]);
 
@@ -159,39 +165,54 @@ export function TyresSelect() {
       parts.push(`R${filters.diameter}`);
     }
 
-    function getSeasonLabel(s: string): string {
+    function getSeasonLabel(s: string): string | undefined {
       if (s === "summer") return "літні";
       if (s === "winter") return "зимові";
-      return "всесезонні";
+      if (s === "allseason") return "всесезонні";
     }
 
     if (filters.seasons.length > 0) {
-      const seasons = filters.seasons.map(getSeasonLabel).join(", ");
-      parts.push(`(${seasons})`);
+      const seasons = filters.seasons
+        .map(getSeasonLabel)
+        .filter(Boolean) // видаляє undefined/порожні
+        .join(", ");
+      if (seasons.length > 0) {
+        parts.push(`(${seasons})`);
+      }
     }
-    
+
+
     return parts.join(" ");
+
   }
+
+  //  console.log(`[formatSearchTitle]`, formatSearchTitle.length);
+  const searchTitle = formatSearchTitle(query, filters);
 
   return (
     <div className="flex flex-col w-auto">
-      <h1 className="text-left">
-        Пошук: {formatSearchTitle(query, filters)}
-      </h1>
 
-      <span className="text-light text-sm hidden md:block">
-        {`сортування ${sortLabels[filters.sort] ?? filters.sort}`}
-        {` / ${viewLabels[filters.view]}`}
-      </span>
+      {searchTitle.length > 0 && (
+        <>
+          <h1 className="text-left">
+            Пошук: {searchTitle}
+          </h1>
 
-      <div className="flex gap-6 flex-col lg:flex-row">
-        <aside className="gap-6 flex flex-col lg:flex-row w-auto">
+          <span className="text-light text-sm hidden md:block pl-2">
+            {`сортування ${sortLabels[filters.sort] ?? filters.sort}`}
+            {` / ${viewLabels[filters.view]}`}
+          </span>
+        </>
+      )}
+
+      <div className="flex gap-0 md:gap-2 lg:gap-6 flex-col lg:flex-row">
+        <aside className="gap-0 md:gap-2 lg:gap-6 flex flex-col lg:flex-row w-auto">
           <form
             aria-label="Фільтри пошуку шин"
-            className="flex flex-col gap-2 lg:gap-6 w-full pb-2 mx-auto lg:pt-6"
+            className="flex flex-col gap-0 md:gap-2 lg:gap-6 w-full mx-auto lg:pt-6"
             onSubmit={(e) => e.preventDefault()}
           >
-            <div className="flex gap-6 flex-col md:flex-row lg:flex-col justify-between">
+            <div className="flex gap-0 md:gap-2 lg:gap-6 flex-col md:flex-row lg:flex-col justify-between">
               <OptionSelect
                 id="width"
                 label="Ширина"

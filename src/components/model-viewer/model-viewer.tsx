@@ -1,4 +1,4 @@
-import { ManyPhoto, NoPhoto, OnePhoto } from "@/components";
+import { ManyModelPhoto, NoPhoto, OneModelPhoto } from "@/components";
 import { IImage } from "@/types";
 
 export function ModelViewer({ images }: { images?: IImage[] }) {
@@ -9,11 +9,11 @@ export function ModelViewer({ images }: { images?: IImage[] }) {
   }
 
   if (images.length === 1) {
-    return <OnePhoto image={images[0]} />;
+    return <OneModelPhoto image={images[0]} />;
   }
 
   if (images.length > 1) {
-    return <ManyPhoto images={images} />;
+    return <ManyModelPhoto images={images} />;
   }
 
   return null;

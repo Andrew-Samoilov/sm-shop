@@ -24,11 +24,6 @@ export function CertificatesClient({ cert }: Props) {
 
     return (
         <div className="embla w-full max-w-[min(100%,640px)] px-4 mx-auto bg-body dark:bg-darkmode-body">
-            {/* <h2 className="text-center pb-6">
-                {isSingle
-                    ? "Наш сертифікат"
-                    : `Наші сертифікати ${cert[0].brand.charAt(0).toUpperCase() + cert[0].brand.slice(1)}`}
-            </h2> */}
 
             {isSingle ? (
                 <div className="relative w-full max-w-[640px] mx-auto px-4 aspect-[3/4]">
