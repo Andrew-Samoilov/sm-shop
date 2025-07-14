@@ -35,12 +35,12 @@ export async function handleClientSubmit(formId: string, formData: FormData) {
     const result = await response.json();
 
     if (!result.success) {
-      toast.error(result.error ?? "Не вдалося надіслати форму");
-      console.error("[Form] Сервер повернув помилку:", result.error);
+      toast.error(result.error ?? "Не вдалося надіслати форму / Failed to submit the form");
+      console.error("[Form] Server returned an error:", result.error);
       return;
     }
 
-    toast.success("Запит успішно надіслано!");
+    toast.success("Запит успішно надіслано! / Request sent successfully!");
     
     // ВІДПРАВКА ПОДІЇ В GA
     sendGAEvent({
@@ -68,7 +68,7 @@ export async function handleClientSubmit(formId: string, formData: FormData) {
     const formEl = document.getElementById(formId) as HTMLFormElement;
     formEl?.reset();
   } catch (error) {
-    console.error("[Form] Помилка під час надсилання форми:", error);
-    toast.error("Не вдалося зв’язатися із сервером. Перевірте, будь ласка, ваше інтернет‑з’єднання та спробуйте ще раз.");
+    console.error("[Form] Error while submitting the form:", error);
+    toast.error("Не вдалося зв’язатися із сервером. Перевірте, будь ласка, ваше інтернет‑з’єднання та спробуйте ще раз. Failed to connect to the server. / Please check your internet connection and try again.");
   }
 }

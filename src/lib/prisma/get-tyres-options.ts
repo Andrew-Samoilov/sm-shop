@@ -34,7 +34,7 @@ export async function getTyresOptions(
 
     return tyres.map((item) => Number(item[field]));
   } catch (error) {
-    console.error(`[getTyreOptions] Помилка для ${field}:`, error);
+    console.error(`[getTyreOptions] Error for ${field}:`, error);
     return [];
   }
 }

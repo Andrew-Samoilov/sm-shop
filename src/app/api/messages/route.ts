@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    // console.info("[PRISMA] Отримані дані:", body);
+    // console.info("[PRISMA] Incoming data:", body);
 
     // Переконуємось, що всі необхідні поля є
     const name = body.contact_name?.trim();
@@ -15,9 +15,9 @@ export async function POST(req: Request) {
     const message = body.contact_message?.trim();
 
     if (!message) {
-      console.error("[PRISMA] Помилка: Обовязкове поле message НЕ передано.");
+      console.error("[PRISMA] Error: Required field message is missing.");
       return NextResponse.json(
-        { success: false, error: "Будь ласка, введіть текст повідомлення." },
+        { success: false, error: "Please enter a message." },
         { status: 400 },
       );
     }
@@ -28,14 +28,14 @@ export async function POST(req: Request) {
     });
 
     if (process.env.NODE_ENV === "development") {
-      console.info("[PRISMA] Повідомлення збережено:", newMessage);
+      console.info("[PRISMA] Message saved:", newMessage);
     }
 
     return NextResponse.json({ success: true, data: newMessage });
   } catch (error) {
-    console.error("[PRISMA] Помилка в API:", error);
+    console.error("[PRISMA] Error in API:", error);
     return NextResponse.json(
-      { success: false, error: "Сталася помилка на сервері. Спробуйте, будь ласка, ще раз пізніше або звяжіться з нами електронною поштою webmaster@shinamix.com" },
+      { success: false, error: "An error occurred on the server. Please try again later or contact us at webmaster@shinamix.com" },
       { status: 500 },
     );
   }

@@ -89,7 +89,7 @@ export function TyresSelect() {
         setOptions({ widths, profiles, diameters });
       })
       .catch((err) =>
-        console.error("[TyresSelect] Помилка завантаження опцій:", err)
+        console.error("[TyresSelect] Option loading error:", err)
       );
   }, [filters.width, filters.profile, filters.diameter]);
 

@@ -11,7 +11,7 @@ export async function getBrands(): Promise<Brand[]> {
     return brands;
 
   } catch (error) {
-    console.error(`[getBrands] Помилка під час отримання брендів:`, error);
+    console.error(`[getBrands] Error while fetching brands:`, error);
     return [];
   }
 }

@@ -16,7 +16,7 @@ export async function getModels() {
     return models;
 
   } catch (error) {
-    console.error(`[getModels] Помилка під час отримання моделей:`, error);
+    console.error(`[getModels] Error while fetching models:`, error);
     return [];
   }
 }

@@ -38,7 +38,7 @@ export async function sendEmail({
     const info = await transporter.sendMail(mailOptions);
     
     if (process.env.NODE_ENV === "development") {
-        console.log('[sendEmail] Лист надіслано:', info.messageId);
+        console.log('[sendEmail] Letter sent:', info.messageId);
     }
     
     return info;
