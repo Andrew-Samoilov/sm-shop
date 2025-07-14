@@ -11,6 +11,7 @@ type TyreListItemProps = {
 
 export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
     const tyreSize = getTyreSize(tyre);
+    // console.log(`[TyreListItem] tyre.season`, tyre.season)
 
     return (
         <div

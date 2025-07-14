@@ -1,7 +1,7 @@
+import { Season } from "@/types";
 import { SunIcon } from "@heroicons/react/24/solid";
 import type { ReactElement } from "react";
 
-type Season = "SUMMER" | "WINTER" | "ALLSEASON" | null;
 
 interface SeasonIconProps {
     season: Season;

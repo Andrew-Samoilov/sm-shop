@@ -61,6 +61,8 @@ export type IImage = {
   position: number
 };
 
+export type Season = "SUMMER" | "WINTER" | "ALLSEASON" | null;
+
 export interface CartTyre {
   id: number;
   title: string;

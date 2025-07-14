@@ -1,6 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
-import { AddToCartButton, SeasonIcon } from "@/components";
+import { AddToCartButton, SeasonIcon, TyreViewer } from "@/components";
 import type { ModelImage } from "@prisma/client";
 import { TyreWithRelations } from "@/types";
 import { getTyreSize } from "@/lib";
@@ -17,7 +16,7 @@ export function TyreGalleryItem({ tyre, modelImages }: TyreListItemProps) {
         <div className="flex flex-col overflow-hidden items-center gap-1 xl:gap-6 border border-transparent hover:border-theme-light dark:hover:border-theme-dark rounded-lg p-1 xl:p-6">
 
             <div className="relative  w-full aspect-square max-w-[293px] overflow-hidden group shrink-0 ">
-                {modelImages.length > 0 ? (
+                {/* {modelImages.length > 0 ? (
                     <>
                         <Image
                             src={modelImages[0].url}
@@ -41,11 +40,11 @@ export function TyreGalleryItem({ tyre, modelImages }: TyreListItemProps) {
                     <div className="w-[193px] h-[193px] text-light  flex items-center justify-center">
                         Фото немає
                     </div>
-                )}
-
+                )} */}
+                <TyreViewer images={modelImages} />
                 <SeasonIcon
                     season={tyre.season}
-                    className="absolute top-2 left-2 z-10"
+                    className="absolute top-2 left-2 z-99"
                 />
             </div>
 

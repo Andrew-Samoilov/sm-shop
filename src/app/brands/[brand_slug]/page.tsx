@@ -80,9 +80,8 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
   // console.log(cert, brand.name);
 
   const filteredCerts =normalizedCerts(cert, brand.name);
+  // console.log(`[filteredCerts]`, filteredCerts)
 
-
-  console.log(`[filteredCerts]`, filteredCerts)
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Brand",
