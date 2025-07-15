@@ -4,13 +4,13 @@ import { CartPanel, LinkWithGA, Logo, Search, ThemeSwitcher, MobileMenu } from "
 
 export async function Header() {
   return (
-    <header className="container flex flex-wrap justify-between items-center  gap-6 
+    <header className="w-full px-1 flex flex-wrap justify-between items-center  gap-1 
     bg-body/75 dark:bg-darkmode-body/75 sticky top-0 z-30   backdrop-blur-sm">
       <Logo
         eventCategory="header"
       />
 
-      <div className="items-center gap-6 hidden md:flex">
+      <div className="items-center gap-1 hidden md:flex">
         <LinkWithGA
           eventLabel="tyres"
           eventCategory="header"
@@ -24,7 +24,7 @@ export async function Header() {
       </div>
 
 
-      <div className="flex items-center ustify-center gap-2 ">
+      <div className="flex items-center ustify-center gap-1 ">
         <Search className="block w-full lg:w-[45%] xl:w-[60%]" />
         <ThemeSwitcher />
         <CartPanel />
