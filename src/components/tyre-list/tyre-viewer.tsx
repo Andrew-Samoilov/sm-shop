@@ -3,16 +3,16 @@ import { NoPhoto } from "../model-viewer/no-photo";
 import { OneTyrePhoto, SeasonIcon } from "@/components";
 
 export function TyreViewer({ images, season }: { images?: IImage[], season?: Season }) {
-    console.log(`[TyreViewer]`, images);
+    // console.log(`[TyreViewer]`, images);
     return (
-        <div className="relative w-full aspect-square max-w-[293px] overflow-hidden group shrink-0">
+        <div className="relative w-full aspect-square max-w-xs mx-auto overflow-hidden group shrink-0">
             {!images || images.length === 0 ? (
                 <NoPhoto />
             ) : (
-                <OneTyrePhoto image={images[0]} />
+                <OneTyrePhoto image={images[0]} />kj
             )}
 
-    
+
             {season && (
                 <SeasonIcon
                     season={season}
