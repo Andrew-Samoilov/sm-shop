@@ -9,7 +9,7 @@ export { getContentBlock } from "./get-content-block";
 export { prisma } from "./prisma/prisma";
 export { getSiteConfig } from "./get-site-сonfig";
 export { getBaseMetadata } from "./get-base-metadata";
-export { mapPrismaSeason } from "./map-prisma-season";
+// export { mapPrismaSeason } from "./map-prisma-season";
 
 export { getTyreBySlug } from "./prisma/get-tyre-by-slug";
 export { getTyreById } from "./prisma/get-tyre-by-id";

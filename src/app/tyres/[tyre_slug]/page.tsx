@@ -1,6 +1,6 @@
 import { AddToCartButton, BreadCrumbs, CertificatesClient, LinkWithGA, ModelViewer, ViewItemGA } from "@/components";
-import { getTyreBySlug, getModelImgByModelId, prisma, translateSeasonToUkrainian, getContentBlock, getTyreSize, mapPrismaSeason } from "@/lib";
-import { Certificate , } from "@/types";
+import { getTyreBySlug, getModelImgByModelId, prisma, translateSeasonToUkrainian, getContentBlock, getTyreSize } from "@/lib";
+import { Certificate, } from "@/types";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
@@ -153,7 +153,7 @@ export default async function TyrePage({
       <div className=" flex flex-col md:flex-row md:gap-6 pb-6 2xl:p-12
        items-center  justify-center ">
 
-        <ModelViewer images={images} season={mapPrismaSeason(tyre.season)}/>
+        <ModelViewer images={images} />
 
         <div className=" flex flex-col w-full md:w-auto min-w-fit p-2 md:p-0 gap-1 lg:gap-2">
           <h1 className="flex flex-col items-center md:items-start  ">

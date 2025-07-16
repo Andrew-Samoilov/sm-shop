@@ -13,9 +13,9 @@ export function TyreGalleryItem({ tyre, modelImages }: TyreListItemProps) {
     const tyreSize = getTyreSize(tyre);
 
     return (
-        <div className="flex flex-col overflow-hidden  items-center gap-1 xl:gap-6 border border-transparent hover:border-theme-light dark:hover:border-theme-dark rounded-lg xl:p-6">
+        <div className="flex flex-col overflow-hidden content-between items-center gap-1 xl:gap-6 border border-transparent hover:border-theme-light dark:hover:border-theme-dark rounded-lg xl:p-6">
 
-            <div className="relative  w-full aspect-square max-w-[293px] overflow-hidden group shrink-0 ">
+            <div className="relative w-full  max-w-[293px] overflow-hidden group shrink-0 ">
                 <TyreViewer images={modelImages} />
                 <SeasonIcon
                     season={tyre.season}

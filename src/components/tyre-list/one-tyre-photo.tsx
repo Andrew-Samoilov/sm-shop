@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export function OneTyrePhoto({ image }: { image: IImage }) {
     return (
-        <div className="relative w-full h-full overflow-hidden rounded-md">
+        <div className="w-full h-full overflow-hidden rounded-md">
             <Image
                 key={image.id}
                 src={image.url}
