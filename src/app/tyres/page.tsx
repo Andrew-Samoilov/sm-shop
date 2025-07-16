@@ -46,7 +46,7 @@ export async function generateMetadata(
 
 export default function TyresPage() {
   return (
-    <section className="container">
+    <section className="">
       <Suspense fallback={<div>Завантаження...</div>}>
         <TyresSelect />
       </Suspense>

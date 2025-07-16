@@ -15,11 +15,11 @@ export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
 
     return (
         <div
-            className="flex justify-between gap-1 xl:gap-2 items-center border border-white dark:border-darkmode-body hover:border-theme-light dark:hover:border-theme-dark rounded-lg">
+            className="w-full min-w-0 flex flex-1  justify-between gap-1 p-1 xl:p-2 xl:gap-2 items-center border border-white dark:border-darkmode-body hover:border-accent rounded-lg">
            
             <TyreViewer images={modelImages} />
 
-            <Link href={`/tyres/${tyre.slug}`} className="gap-0 xl:gap-2 2xl:gap-6 flex flex-col mr-auto">
+            <Link href={`/tyres/${tyre.slug}`} className="flex-1 min-w-0 gap-0 xl:gap-2 flex  flex-col hover:no-underline">
                 <span className="hidden md:block text-md md:text-2xl font-semibold">{tyre.brand}</span>
                 <span className="hidden md:block text-md md:text-lg font-semibold">{tyre.model}</span>
                 <span>{tyre.title}</span>
@@ -58,7 +58,7 @@ export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
             </Link>
 
             <div className="flex flex-col gap-6 ">
-                <div className="flex flex-row gap-2 items-end mx-auto">
+                <div className="flex flex-col md:flex-row gap-2 items-end mx-auto">
                     <span
                         className="font-semibold text-2xl"
                     >{tyre.price?.toLocaleString("uk-UA")}</span>
@@ -77,9 +77,7 @@ export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
                         quantity: 4,
                     }}
                     className="btn max-md:btn-sm btn-primary z-10
-    fixed bottom-2 left-2 right-2 bg-theme-light dark:bg-theme-dark
-    md:relative md:bottom-auto md:left-auto md:right-auto md:bg-transparent
-    text-dark hover:bg-dark hover:text-white dark:hover:bg-white dark:hover:text-dark"
+     bg-theme-light dark:bg-theme-dark    text-dark hover:bg-dark hover:text-white dark:hover:bg-white dark:hover:text-dark"
                 />
             </div>
         </div>

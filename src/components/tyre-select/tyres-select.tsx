@@ -246,7 +246,7 @@ export function TyresSelect() {
         </aside>
 
         {selectedTyres.length > 0 && (
-          <div>
+          <div className="w-full max-w-none">
             <ListHeader
               view={filters.view}
               onChangeView={(v) => updateFilter("view", v)}

@@ -9,11 +9,10 @@ export function TyreViewer({ images, season }: { images?: IImage[], season?: Sea
         <div
             className={
                 noPhoto
-                    ? "relative w-full h-auto py-5 flex items-center justify-center"
+                    ? "relative h-auto w-auto py-5 flex items-center justify-center"
                     : "relative w-full aspect-square max-w-xs mx-auto overflow-hidden group shrink-0"
             }
             // className="relative w-full h-auto py-5 flex items-center justify-center"
-
         >
             {noPhoto ? <NoPhoto /> : <OneTyrePhoto image={images[0]} />}
             {season && (
