@@ -23,44 +23,10 @@ export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
                 <span className="hidden md:block text-md md:text-2xl font-semibold">{tyre.brand}</span>
                 <span className="hidden md:block text-md md:text-lg font-semibold">{tyre.model}</span>
                 <TyreTitle title={tyre.title} country={tyre.country} date={tyre.dateCode} season={tyre.season} />
-                {/* <span
-                    className="flex flex-row md:flex-col gap-1 2xl:gap-6"
-                >{tyre.title}
-
-                    <span className="gap-1 2xl:gap-6 text-light text-sm ">
-                        {tyre.season && (
-                            <span>
-                                <span className="hidden md:block">Сезон: </span>
-                                <span>
-                                    {tyre.season}
-                                </span>
-                            </span>
-                        )}
-                        {tyre.country && (
-                            <span>
-                                <span className="hidden md:block">Країна виробництва: </span>
-                                <span>
-                                    {tyre.country}
-                                </span>
-                            </span>
-                        )}
-
-
-                        {tyre.dateCode && (
-                            <div
-                                className="text-light text-sm flex flex-row gap-2 md:gap-6">
-                                <span className="hidden md:block">Дата виробництва: </span>
-                                <span title="Номер тижня та рік виробництва">
-                                    {tyre.dateCode}
-                                </span>
-                            </div>
-                        )}
-                    </span>
-                </span> */}
             </Link>
 
             <div className="flex flex-col gap-0  ">
-                <div className="flex flex-row md:flex-col gap-2 md:gap-0 items-center md:items-end mx-auto">
+                <div className="flex flex-row gap-2 md:gap-2 items-center md:items-end mx-auto">
                     <span
                         className="font-semibold text-2xl"
                     >{tyre.price?.toLocaleString("uk-UA")}</span>
