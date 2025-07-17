@@ -73,3 +73,10 @@ export interface CartTyre {
   price: number;
   quantity: number;
 }
+
+export type TyreTitleProps = {
+  title: string;
+  country: string | null | undefined;
+  date: string | null | undefined;
+  season: Season | null | undefined;
+};

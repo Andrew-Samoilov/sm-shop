@@ -2,7 +2,7 @@ import Link from "next/link";
 import { AddToCartButton, TyreViewer } from "@/components";
 import type { ModelImage } from "@prisma/client";
 import { TyreWithRelations } from "@/types";
-import { getTyreSize } from "@/lib";
+import { getTyreSize, TyreTitle } from "@/lib";
 
 type TyreListItemProps = {
     tyre: TyreWithRelations;
@@ -24,13 +24,14 @@ export function TyreGalleryItem({ tyre, modelImages }: TyreListItemProps) {
             </div>
 
             <Link href={`/tyres/${tyre.slug}`} className=" flex flex-row hover:no-underline">
-                <p >
+                <TyreTitle title={tyre.title} country={tyre.country} date={tyre.dateCode} season={tyre.season} />
+                {/* <p >
                     {tyre.title}{" "}
                     <span title="Країна виробництва" className="text-light text-sm">
                         {tyre.country}{" "}
                         <span title="Номер тижня та рік виробництва">{tyre.dateCode}</span>
                     </span>
-                </p>
+                </p> */}
             </Link>
 
             <div className="flex flex-row gap-2 mx-auto items-center">

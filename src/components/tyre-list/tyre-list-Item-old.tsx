@@ -2,7 +2,7 @@ import Link from "next/link";
 import { AddToCartButton, TyreViewer } from "@/components";
 import type { ModelImage } from "@prisma/client";
 import { TyreWithRelations } from "@/types";
-import { getTyreSize, TyreTitle } from "@/lib";
+import { getTyreSize } from "@/lib";
 
 type TyreListItemProps = {
     tyre: TyreWithRelations;
@@ -19,48 +19,47 @@ export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
 
             <TyreViewer images={modelImages} />
 
-            <Link href={`/tyres/${tyre.slug}`} className="flex-2  min-w-0 gap-0 xl:gap-2 flex flex-row md:flex-col hover:no-underline">
+            <Link href={`/tyres/${tyre.slug}`} className="flex-2 min-w-0 gap-0 xl:gap-2 flex  flex-col hover:no-underline">
                 <span className="hidden md:block text-md md:text-2xl font-semibold">{tyre.brand}</span>
                 <span className="hidden md:block text-md md:text-lg font-semibold">{tyre.model}</span>
-                <TyreTitle title={tyre.title} country={tyre.country} date={tyre.dateCode} season={tyre.season} />
-                {/* <span
-                    className="flex flex-row md:flex-col gap-1 2xl:gap-6"
-                >{tyre.title}
+                <p>{tyre.title}
 
-                    <span className="gap-1 2xl:gap-6 text-light text-sm ">
-                        {tyre.season && (
+                <span className="flex flex-row md:flex-col gap-1 2xl:gap-6">
+                    {tyre.season && (
+                        <div
+                            className="text-light text-sm flex gap-1">
+                            <span className="hidden md:block">Сезон: </span>
                             <span>
-                                <span className="hidden md:block">Сезон: </span>
-                                <span>
-                                    {tyre.season}
-                                </span>
+                                {tyre.season}
                             </span>
-                        )}
-                        {tyre.country && (
+                        </div>
+                    )}
+                    {tyre.country && (
+                        <div
+                            className="text-light text-sm flex gap-2 xl:gap-6">
+                            <span className="hidden md:block">Країна виробництва: </span>
                             <span>
-                                <span className="hidden md:block">Країна виробництва: </span>
-                                <span>
-                                    {tyre.country}
-                                </span>
+                                {tyre.country}
                             </span>
-                        )}
+                        </div>
+                    )}
 
 
-                        {tyre.dateCode && (
-                            <div
-                                className="text-light text-sm flex flex-row gap-2 md:gap-6">
-                                <span className="hidden md:block">Дата виробництва: </span>
-                                <span title="Номер тижня та рік виробництва">
-                                    {tyre.dateCode}
-                                </span>
-                            </div>
-                        )}
+                    {tyre.dateCode && (
+                        <div
+                            className="text-light text-sm flex flex-row gap-2 md:gap-6">
+                            <span className="hidden md:block">Дата виробництва: </span>
+                            <span title="Номер тижня та рік виробництва">
+                                {tyre.dateCode}
+                            </span>
+                        </div>
+                    )}
                     </span>
-                </span> */}
+                </p>
             </Link>
 
-            <div className="flex flex-col gap-0  ">
-                <div className="flex flex-row md:flex-col gap-2 md:gap-0 items-center md:items-end mx-auto">
+            <div className="flex flex-col gap-0 md:gap-6 ">
+                <div className="flex flex-col md:flex-row gap-0 md:gap-2 items-end mx-auto">
                     <span
                         className="font-semibold text-2xl"
                     >{tyre.price?.toLocaleString("uk-UA")}</span>
