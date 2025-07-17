@@ -20,7 +20,8 @@ export const viewport = {
 export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
   return (
     <html lang="uk">
-      <body className="bg-body dark:bg-darkmode-body font-primary dark:text-darkmode-text flex min-h-screen flex-col scroll-smooth leading-relaxed">
+      <body className="bg-body dark:bg-darkmode-body font-primary dark:text-darkmode-text flex 
+    flex-col scroll-smooth ">
         {/* Google Analytics */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}

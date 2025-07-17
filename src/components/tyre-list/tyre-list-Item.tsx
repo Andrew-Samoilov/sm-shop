@@ -19,7 +19,7 @@ export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
            
             <TyreViewer images={modelImages} />
 
-            <Link href={`/tyres/${tyre.slug}`} className="flex-1 min-w-0 gap-0 xl:gap-2 flex  flex-col hover:no-underline">
+            <Link href={`/tyres/${tyre.slug}`} className="flex-2 min-w-0 gap-0 xl:gap-2 flex  flex-col hover:no-underline">
                 <span className="hidden md:block text-md md:text-2xl font-semibold">{tyre.brand}</span>
                 <span className="hidden md:block text-md md:text-lg font-semibold">{tyre.model}</span>
                 <span>{tyre.title}</span>
@@ -57,8 +57,8 @@ export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
                 </div>
             </Link>
 
-            <div className="flex flex-col gap-6 ">
-                <div className="flex flex-col md:flex-row gap-2 items-end mx-auto">
+            <div className="flex flex-col gap-0 md:gap-6 ">
+                <div className="flex flex-col md:flex-row gap-0 md:gap-2 items-end mx-auto">
                     <span
                         className="font-semibold text-2xl"
                     >{tyre.price?.toLocaleString("uk-UA")}</span>

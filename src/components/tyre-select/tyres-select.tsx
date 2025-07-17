@@ -190,7 +190,7 @@ export function TyresSelect() {
   const searchTitle = formatSearchTitle(query, filters);
 
   return (
-    <div className="flex flex-col w-auto">
+    <div className="flex flex-col w-auto  px-1">
 
       {searchTitle.length > 0 && (
         <>
@@ -198,7 +198,7 @@ export function TyresSelect() {
             Пошук: {searchTitle}
           </h1>
 
-          <span className="text-light text-sm hidden md:block pl-2">
+          <span className="text-light text-sm hidden md:block">
             {`сортування ${sortLabels[filters.sort] ?? filters.sort}`}
             {` / ${viewLabels[filters.view]}`}
           </span>
@@ -246,7 +246,7 @@ export function TyresSelect() {
         </aside>
 
         {selectedTyres.length > 0 && (
-          <div className="w-full max-w-none">
+          <div className="">
             <ListHeader
               view={filters.view}
               onChangeView={(v) => updateFilter("view", v)}
