@@ -143,13 +143,13 @@ export async function Footer() {
               </LinkWithGA>
 
               <LinkWithGA
-                href={siteConfig.tg}
-                eventLabel="telegram"
+                href={siteConfig.signal}
+                eventLabel="signal"
                 eventCategory="footer"
-                ariaLabel="Пишіть у Tg"
-                className="text-light border-border dark:border-light dark:bg-darkmode-theme-light dark:text-darkmode-light rounded-full border bg-white p-2 px-3 text-center font-bold duration-300 hover:bg-black hover:text-white hover:no-underline dark:hover:bg-white dark:hover:text-black"
+                ariaLabel="Пишіть у Signal"
+                className="text-[#3A76F0] border-border dark:border-light dark:bg-darkmode-theme-light dark:text-darkmode-light rounded-full border bg-white p-2 px-3 text-center font-bold duration-300 hover:bg-black hover:text-white hover:no-underline dark:hover:bg-white dark:hover:text-black"
               >
-                Tg
+                S
               </LinkWithGA>
 
               <LinkWithGA

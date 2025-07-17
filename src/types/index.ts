@@ -3,7 +3,7 @@ import { Prisma } from "@prisma/client";
 export type SiteConfig = {
   siteName: string;
   fb: string;
-  tg: string;
+  signal: string;
   viber: string;
   email: string;
   tel: {
