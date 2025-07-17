@@ -23,16 +23,16 @@ export function TyreGalleryItem({ tyre, modelImages }: TyreListItemProps) {
                 /> */}
             </div>
 
-            <Link href={`/tyres/${tyre.slug}`} className=" flex flex-col hover:no-underline">
-                <p className="w-full break-words whitespace-normal max-w-full">
-                    {tyre.title}
+            <Link href={`/tyres/${tyre.slug}`} className=" flex flex-row hover:no-underline">
+                <p >
+                    {tyre.title}{" "}
+                    <span title="Країна виробництва" className="text-light text-sm">
+                        {tyre.country}{" "}
+                        <span title="Номер тижня та рік виробництва">{tyre.dateCode}</span>
+                    </span>
                 </p>
-                <div title="Країна виробництва" className="text-light text-sm">
-                    {tyre.country}{" "}
-                    <span title="Номер тижня та рік виробництва">{tyre.dateCode}</span>
-                </div>
-
             </Link>
+
             <div className="flex flex-row gap-2 mx-auto items-center">
                 <span
                     className="font-semibold text-2xl"
