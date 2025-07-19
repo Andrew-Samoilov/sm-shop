@@ -14,7 +14,7 @@ export default async function Home() {
             eventLabel="summer"
             eventCategory="season_tyres_section"
             aria-label="Перейти до каталогу літніх шин"
-            className="bg-theme-light text-center rounded-md p-12"
+            className="flex content-center items-center bg-theme-light  rounded-md p-12 md:w-1/3 aspect-square"
           >
             <h3>Літні</h3>
           </LinkWithGA>
@@ -24,7 +24,7 @@ export default async function Home() {
             eventLabel="winter"
             eventCategory="season_tyres_section"
             aria-label="Перейти до каталогу зимових шин"
-            className="bg-theme-light  text-center rounded-md p-12"
+            className="bg-theme-light  flex content-center items-center rounded-md p-12 md:w-1/3 aspect-square"
           >
             <h3>Зимові</h3>
           </LinkWithGA>
@@ -34,7 +34,7 @@ export default async function Home() {
             eventLabel="allseason"
             eventCategory="season_tyres_section"
             aria-label="Перейти до каталогу всесезонних шин"
-            className="bg-theme-light text-center rounded-md p-12"
+            className="bg-theme-light flex content-center items-center rounded-md p-12 md:w-1/3 aspect-square"
           >
             <h3>Всесезон</h3>
           </LinkWithGA>

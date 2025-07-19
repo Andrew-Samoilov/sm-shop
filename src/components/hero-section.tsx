@@ -3,14 +3,16 @@ import { LinkWithGA } from "@/components";
 
 export function HeroSection() {
     return (
-        <section className="flex flex-col  items-center">
+        <section className="flex flex-col  items-center ">
             <div className=" flex flex-col-reverse md:flex-row items-center 
-             md:p-18 md:gap-18  rounded-md
+             md:p-18 md:gap-18  rounded-md px-7 xl:px-16 py-10
             from-body to-theme-light dark:from-darkmode-body dark:to-darkmode-theme-light bg-gradient-to-l
             ">
-                <div className="lg:max-w-[70ch] flex flex-col items-center gap-2">
-                    <h1>-50% на зберігання*</h1>
-                    <p className="text-sm text-light pb-4"
+                <div className="lg:max-w-[70ch] flex flex-col items-center gap-2 ">
+                    <p className="mb-2 lg:mb-3 text-light dark:text-darkmode-light font-medium md:text-xl"
+                    >Постійно діюча пропозиція</p>
+                    <h1>-50%<br/>на зберігання*</h1>
+                    <p className="text-sm text-light "
                     >* - на сезон, при купівлі комплекту шин&nbsp;
                         <LinkWithGA
                             href={'/info/storage-50'}
@@ -25,7 +27,7 @@ export function HeroSection() {
                         eventLabel="hero_button"
                         eventCategory="hero"
                         aria-label="Перейти до каталогу шин"
-                        className="btn lg:btn-lg btn-primary"
+                        className="btn btn-sm lg:btn-lg btn-primary font-medium"
                     >
                         Купити шини
                     </LinkWithGA>
