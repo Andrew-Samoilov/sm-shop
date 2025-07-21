@@ -11,7 +11,7 @@ export async function generateStaticParams() {
     return pages.map((page) => ({ info_page_slug: page.slug }));
 }
 
-export default async function InfoPage({ params }: Awaited<{ params: { info_page_slug: string } }>) {
+export default async function InfoPage({ params }: { params: { info_page_slug: string } }) {
     const page = await prisma.staticPage.findUnique({
         where: { slug: params.info_page_slug },
     });

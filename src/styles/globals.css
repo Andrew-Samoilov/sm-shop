@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "./buttons.css";
+@tailwind utilities;
 
 @source './**/*.{js,ts,jsx,tsx,mdx,css}';
 
@@ -85,7 +87,7 @@
     @apply decoration-accent underline decoration-2;
   }
 
-  .btn {
+  /* .btn {
     @apply inline-block cursor-pointer rounded-md border border-transparent px-5 py-2 font-medium no-underline transition;
   }
 
@@ -116,7 +118,7 @@
 
   .btn-accent {
     @apply border-2 bg-accent text-white hover:scale-110 border-accent dark:bg-accent dark:text-dark dark:hover:bg-accent/70 transition-transform duration-200  font-bold;
-  }
+  } */
 
   .section {
     @apply w-full mx-auto p-6 gap-6 lg:py-24;

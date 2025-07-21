@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import "./globals.css";
+// import "@/styles/globals.css";
+import "../styles/globals.css"
 import { Analytics, Footer, Header, TwSizeIndicator } from "@/components";
 import { ToastContainer } from "react-toastify";
 import Script from "next/script";

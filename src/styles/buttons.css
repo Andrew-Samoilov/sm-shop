@@ -1,0 +1,33 @@
+@layer base {
+  .btn {
+    @apply inline-flex items-center justify-center font-medium rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary/90 focus:ring-primary;
+  }
+
+  .btn-outline {
+    @apply border border-gray-300 text-gray-900 bg-white hover:bg-gray-100 focus:ring-gray-300;
+  }
+
+  .btn-accent {
+    @apply bg-accent text-white hover:bg-accent/90 focus:ring-accent;
+  }
+
+  .btn-sm {
+    @apply text-sm px-3 py-1.5;
+  }
+
+  .btn-md {
+    @apply text-base px-5 py-2;
+  }
+
+  .btn-lg {
+    @apply text-lg px-8 py-3;
+  }
+
+  .btn-block {
+    @apply w-full;
+  }
+}

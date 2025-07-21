@@ -10,12 +10,17 @@ export async function Header() {
         eventCategory="header"
       />
 
-      <div className="items-center gap-1 hidden md:flex">
+      <div className="items-center gap-6 hidden md:flex">
         <LinkWithGA
           eventLabel="tyres"
           eventCategory="header"
           href="/tyres"
         >Шини</LinkWithGA>
+        <LinkWithGA
+          eventLabel="info"
+          eventCategory="header"
+          href="/info"
+        >Інфо</LinkWithGA>
         <LinkWithGA
           eventLabel="contacts"
           eventCategory="header"

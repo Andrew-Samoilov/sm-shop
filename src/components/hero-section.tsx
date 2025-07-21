@@ -27,14 +27,15 @@ export function HeroSection() {
                         eventLabel="hero_button"
                         eventCategory="hero"
                         aria-label="Перейти до каталогу шин"
-                        className="btn btn-sm lg:btn-lg btn-primary font-medium"
+                        // className="btn btn-sm md:btn-lg btn-primary font-medium"
+                        className="inline-flex items-center justify-center px-12 py-4 text-xl font-medium text-white bg-primary rounded-md hover:bg-primary/90 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                     >
                         Купити шини
                     </LinkWithGA>
                 </div>
 
-                <div className="bg-theme-light w-auto h-auto rounded-md max-w-100">
-                    <p className="font-bold text-xl p-6 md:p-12 lg:p-18 text-white">Картинка, шо показує наскільки шинам краще в нас, ніж бозна де ;-)</p>
+                <div className="bg-theme-light dark:bg-darkmode-theme-dark text-theme-dark dark:text-theme-light w-auto h-auto rounded-md max-w-100">
+                    <p className="font-bold text-xl p-6 md:p-12 lg:p-18 ">Картинка, шо показує наскільки шинам краще в нас, ніж бозна де ;-)</p>
                 </div>
             </div>
         </section>
