@@ -25,16 +25,20 @@ model Brand {
 }
 
 model Tyre {
+
   id                Int     @id(map: "tires_pkey") @default(autoincrement())
+  externalId String?  @db.Uuid @map("external_id")// 1с ід
+  sku               String  @unique @db.VarChar(50) //у 1с = code
+  slug              String  @default("")
+
   modelId           Int?    @map("model_id")
   brandId           Int?    @map("brand_id")
+
   title             String
-  slug              String  @default("")
   description       String?
   country           String? @db.VarChar(50)
   dateCode          String? @map("date_code") @db.Char(4)
   applicability     String? @db.VarChar(50)
-  sku               String  @unique(map: "tires_sku_key") @db.VarChar(50)
   inventoryQuantity Int?    @default(0) @map("inventory_quantity")
   price             Float
   loadSpeedIndex    String? @map("load_speed_index") @db.VarChar(10)
@@ -49,9 +53,9 @@ model Tyre {
   speedIndex        String? @map("speed_index") @db.Char(1)
   type              String? @db.VarChar(50)
   season            season?
+
   brands            Brand?  @relation(fields: [brandId], references: [id], onUpdate: NoAction)
   models            Model?  @relation(fields: [modelId], references: [id], onUpdate: NoAction)
-
   orders Order[]
 
   @@index([title(ops: raw("gin_trgm_ops"))], map: "tyres_title_trgm_idx", type: Gin)
@@ -147,4 +151,34 @@ model Order {
   tyre Tyre @relation(fields: [tyreId], references: [id])
 
   @@map("orders")
+}
+
+model TyreImport {
+  id          Int     @id @default(autoincrement())
+  externalId String   // поле id з 1С
+  name       String
+  code       String   // артикул
+  price      Int
+  quantity   Int
+
+  model            String?
+  manufacturer     String?
+  yearOfProduction String?
+  season           String?
+  typeSize         String?
+  diameter         String?
+  load             String?
+  speed            String?
+  additionalIndex  String?
+  applicability    String?
+  diskProtection   String?
+  country          String?
+  rof              String?
+
+  itemType    String?
+  raw         Json?     // повний оригінальний запис
+  processed   Boolean   @default(false)
+  importedAt  DateTime  @default(now())
+  
+  @@map("tyre_import")
 }

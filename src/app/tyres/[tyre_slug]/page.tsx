@@ -7,6 +7,9 @@ import ReactMarkdown from "react-markdown";
 
 export async function generateStaticParams() {
   const tyres = await prisma.tyre.findMany({
+    where: {
+      inventoryQuantity: { gt: 0 }, 
+    },
     select: { slug: true, },
   });
 
@@ -126,6 +129,11 @@ export default async function TyrePage({
 
   // console.info("[getTyreBySlug]", tyre);
   if (!tyre) return notFound();
+
+  if (tyre.inventoryQuantity === 0) {
+    notFound();
+  }
+  
   const images = tyre.modelId !== null
     ? await getModelImgByModelId(tyre.modelId)
     : [];

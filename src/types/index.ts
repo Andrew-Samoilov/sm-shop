@@ -80,3 +80,26 @@ export type TyreTitleProps = {
   date: string | null | undefined;
   season: Season | null | undefined;
 };
+
+export interface OneCTyreData {
+  id: string;
+  name: string;
+  code: string;
+  price?: number;
+  quantity?: number;
+  model?: string;
+  manufacturer?: string;
+  yearOfProduction?: string;
+  season?: string;
+  typeSize?: string;
+  diameter?: string;
+  load?: string;
+  speed?: string;
+  additionalIndex?: string;
+  applicability?: string;
+  diskProtection?: string;
+  country?: string;
+  rof?: string;
+  itemType?: string;
+  [key: string]: unknown; // щоб зберегти raw
+}
