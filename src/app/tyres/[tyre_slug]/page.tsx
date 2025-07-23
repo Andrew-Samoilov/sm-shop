@@ -8,7 +8,7 @@ import ReactMarkdown from "react-markdown";
 export async function generateStaticParams() {
   const tyres = await prisma.tyre.findMany({
     where: {
-      inventoryQuantity: { gt: 0 }, 
+      inventoryQuantity: { gt: 0 },
     },
     select: { slug: true, },
   });
@@ -133,7 +133,7 @@ export default async function TyrePage({
   if (tyre.inventoryQuantity === 0) {
     notFound();
   }
-  
+
   const images = tyre.modelId !== null
     ? await getModelImgByModelId(tyre.modelId)
     : [];
@@ -187,8 +187,17 @@ export default async function TyrePage({
           <div
             className=" text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary  hover:no-underline"
           >Тиждень та рік виробництва: {tyre.dateCode}</div>
+
+
+          {tyre.applicability && (
+            <span className=" text-light">{"Застосовуваність: "}{tyre.applicability}</span>
+          )}
+          {tyre.diskProtection && (
+            <span className=" text-light">{"Захист диска: "}{tyre.diskProtection}</span>
+          )}
+
           <div
-            className="md:pt-2 text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary  hover:no-underline"
+            className=" text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary  hover:no-underline"
           >
             <LinkWithGA
               href="/info/speed-index"
@@ -218,7 +227,6 @@ export default async function TyrePage({
             </LinkWithGA>
             &nbsp;{tyre.loadIndex}
           </div>
-
 
           <div className="flex flex-col md:flex-row md:items-center">
             <div className="flex flex-row md:flex-col gap-2 xl:gap-6 items-center">

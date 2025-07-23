@@ -24,7 +24,7 @@ export function TyreGalleryItem({ tyre, modelImages }: TyreListItemProps) {
             </div>
 
             <Link href={`/tyres/${tyre.slug}`} className=" flex flex-row hover:no-underline">
-                <TyreTitle title={tyre.title} country={tyre.country} date={tyre.dateCode} season={tyre.season} />
+                <TyreTitle title={tyre.title} country={tyre.country} date={tyre.dateCode} season={tyre.season} diskProtection={tyre.diskProtection} applicability={tyre.applicability}/>
                 {/* <p >
                     {tyre.title}{" "}
                     <span title="Країна виробництва" className="text-light text-sm">

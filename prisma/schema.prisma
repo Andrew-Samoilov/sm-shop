@@ -53,6 +53,8 @@ model Tyre {
   speedIndex        String? @map("speed_index") @db.Char(1)
   type              String? @db.VarChar(50)
   season            season?
+  diskProtection    String? @map("disk_protection") @db.VarChar(50)
+  rof               String? @db.VarChar(50)
 
   brands            Brand?  @relation(fields: [brandId], references: [id], onUpdate: NoAction)
   models            Model?  @relation(fields: [modelId], references: [id], onUpdate: NoAction)

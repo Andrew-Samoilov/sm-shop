@@ -22,7 +22,7 @@ export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
             <Link href={`/tyres/${tyre.slug}`} className="flex-2  min-w-0 gap-0 xl:gap-2 flex flex-row md:flex-col hover:no-underline">
                 <span className="hidden md:block text-md md:text-2xl font-semibold">{tyre.brand}</span>
                 <span className="hidden md:block text-md md:text-lg font-semibold">{tyre.model}</span>
-                <TyreTitle title={tyre.title} country={tyre.country} date={tyre.dateCode} season={tyre.season} />
+                <TyreTitle title={tyre.title} country={tyre.country} date={tyre.dateCode} season={tyre.season} applicability={tyre.applicability} diskProtection={tyre.diskProtection}/>
             </Link>
 
             <div className="flex flex-col gap-0  ">
