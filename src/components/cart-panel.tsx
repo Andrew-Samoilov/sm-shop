@@ -5,7 +5,7 @@ import { ShoppingCartIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { sendGAEvent } from "@/lib";
 import { CartTyre } from "@/types";
 import Image from "next/image";
-import { OrderForm } from "@/components";
+import { OrderForm, QuantitySelector } from "@/components";
 import { createPortal } from "react-dom";
 
 export function CartPanel() {
@@ -109,7 +109,8 @@ export function CartPanel() {
                   </div>
 
                   <div className="flex flex-col items-center ">
-                    <span>{CartTyre.quantity} шт.</span>
+                    {/* <span>{CartTyre.quantity} шт.</span> */}
+                     <QuantitySelector/>
                     <span >{CartTyre.price.toLocaleString("uk-UA")} грн.</span>
                   </div>
                 </div>

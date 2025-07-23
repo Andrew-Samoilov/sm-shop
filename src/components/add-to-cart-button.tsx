@@ -12,7 +12,23 @@ function handleClick(tyre: CartTyre) {
     console.info(`[handleClick] tyre id:`, tyre.id);
   }
 
-  localStorage.setItem("tyre", JSON.stringify(tyre));
+  // Отримуємо поточну кількість із localStorage
+  let quantity = tyre.quantity ?? 1;
+  try {
+    const stored = localStorage.getItem("tyre");
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      if (typeof parsed.quantity === "number") {
+        quantity = parsed.quantity;
+      }
+    }
+  } catch (err) {
+    console.error("Помилка читання quantity з localStorage:", err);
+  }
+
+  const tyreWithQuantity = { ...tyre, quantity };
+
+  localStorage.setItem("tyre", JSON.stringify(tyreWithQuantity));
   openCart();
 
   sendGAEvent({
@@ -24,13 +40,14 @@ function handleClick(tyre: CartTyre) {
           item_id: tyre.id.toString(),
           item_name: tyre.title,
           item_price: tyre.price,
-          item_quantity: tyre.quantity,
+          item_quantity: quantity,
           currency: "UAH",
         },
       ],
     },
   });
 }
+
 
 export function AddToCartButton({
   tyre,

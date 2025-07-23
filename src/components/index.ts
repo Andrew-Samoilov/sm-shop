@@ -9,6 +9,7 @@ export { MobileMenu } from "./mobile-menu"
 export { CartPanel } from "./cart-panel"
 export { ContactForm } from "./contact-form"
 export { OrderForm } from "./order-form"
+export { QuantitySelector } from "./quantity-selector"
 
 export { FeatureSection } from "./features-section"
 export { Footer } from "./footer"

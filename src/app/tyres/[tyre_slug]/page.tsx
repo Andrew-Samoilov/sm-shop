@@ -1,4 +1,4 @@
-import { AddToCartButton, BreadCrumbs, CertificatesClient, LinkWithGA, ModelViewer, ViewItemGA } from "@/components";
+import { AddToCartButton, BreadCrumbs, CertificatesClient, LinkWithGA, ModelViewer, QuantitySelector, ViewItemGA } from "@/components";
 import { getTyreBySlug, getModelImgByModelId, prisma, translateSeasonToUkrainian, getContentBlock, getTyreSize } from "@/lib";
 import { Certificate, } from "@/types";
 import { Metadata } from "next";
@@ -230,7 +230,8 @@ export default async function TyrePage({
 
           <div className="flex flex-col md:flex-row md:items-center">
             <div className="flex flex-row md:flex-col gap-2 xl:gap-6 items-center">
-              <div>4 шт</div>
+        
+              <QuantitySelector/>
               <span
                 className="font-semibold text-h1"
               >{tyre.price?.toLocaleString("uk-UA")} <span className="text-h3 font-normal text-light">грн</span></span>

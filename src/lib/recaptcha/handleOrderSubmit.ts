@@ -89,7 +89,7 @@ export async function handleOrderSubmit(formId: string, formData: FormData) {
 
     sendEmail({
       subject: `Нове замовлення з сайту ShinaMix`,
-      text: orderHtml,
+      html: orderHtml,
     });
 
     sendEmail({

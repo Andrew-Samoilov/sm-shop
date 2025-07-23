@@ -42,6 +42,7 @@ export function OrderForm({ tyre }: { tyre: CartTyre }){
           autoComplete="name"
           placeholder="Введіть імя..."
           className="w-full border-b  border-theme-light dark:bg-darkmode-theme-light"
+          onFocus={initRecaptcha}
         />
       </div>
 
@@ -87,7 +88,7 @@ export function OrderForm({ tyre }: { tyre: CartTyre }){
           id="order_comment"
           inputMode="text"
           placeholder="Введіть повідомлення"
-          onFocus={initRecaptcha}
+
 
           className="w-full border-b border-theme-light dark:bg-darkmode-theme-light"
         />
