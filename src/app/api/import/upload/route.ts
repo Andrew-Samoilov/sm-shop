@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { saveTyreImportItems } from '@/lib';
+import { addMissingTyresFromImport, saveTyreImportItems } from '@/lib';
 
 
 export async function POST(req: NextRequest) {
@@ -41,11 +41,13 @@ export async function POST(req: NextRequest) {
 
     try {
         const inserted = await saveTyreImportItems(data);
+        const result = await addMissingTyresFromImport()
 
         return NextResponse.json({
             status: 'ok',
             ip: clientIp,
             inserted,
+            imported: result.added,
         });
     } catch (error) {
         console.error('❌ DB error in import:', error);

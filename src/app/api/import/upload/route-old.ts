@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
         price: item.price ?? 0,
         quantity: item.quantity ?? 0,
         model: item.model,
-        manufacturer: item.manufacturer,
+        manufacturer: item.manufacturer ?? null,
         yearOfProduction: item.yearOfProduction,
         season: item.season,
         typeSize: item.typeSize,
