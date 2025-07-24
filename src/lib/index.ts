@@ -12,6 +12,8 @@ export { getSiteConfig } from "./get-site-сonfig";
 export { getBaseMetadata } from "./get-base-metadata";
 // export { mapPrismaSeason } from "./map-prisma-season";
 
+export { saveTyreImportItems } from "./import/save-tyre-import";
+
 export { getTyreBySlug } from "./prisma/get-tyre-by-slug";
 export { getTyreById } from "./prisma/get-tyre-by-id";
 
@@ -22,7 +24,6 @@ export { getTyresByModelId } from "./prisma/get-tyres-by-model-id";
 export { getTyresOptions } from "./prisma/get-tyres-options";
 
 export { getBrands } from "./prisma/get-brands";
-
 export { getBrandById } from "./prisma/get-brand-by-id";
 export { getBrandBySlug } from "./prisma/get-brand-by-slug";
 
