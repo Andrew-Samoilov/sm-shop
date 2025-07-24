@@ -10,7 +10,7 @@ declare global {
 }
 
 // потрібен порожній export, щоб файл став модулем і TypeScript не сварився
-export {};
+export { };
 
 export async function handleOrderSubmit(formId: string, formData: FormData) {
   try {
@@ -53,11 +53,11 @@ export async function handleOrderSubmit(formId: string, formData: FormData) {
     const orderHtml = `
       <p>Дякуємо, <b>${name}</b>! Ваше замовлення надіслано. Ми відповімо найближчим часом.</p>
       <hr/>
-      <ul>
+      <ul> 
         <li><b>Ім'я:</b> ${name}</li>
         <li><b>Email:</b> ${email}</li>
         <li><b>Телефон:</b> ${tel}</li>
-        <li><b>Повідомлення:</b> ${comment}</li>
+       {comment&&(<li><b>Повідомлення:</b> ${comment}</li>)} 
       </ul>
       ${productHtml}
     `;
@@ -77,12 +77,11 @@ export async function handleOrderSubmit(formId: string, formData: FormData) {
     }
 
     toast.success("Замовлення успішно надіслано!");
-    
+
     // ВІДПРАВКА ПОДІЇ В GA
     sendGAEvent({
       action: "order",
       params: {
-
         form_type: "order",
       },
     });

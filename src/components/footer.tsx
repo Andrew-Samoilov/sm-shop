@@ -147,7 +147,7 @@ export async function Footer() {
                 eventLabel="signal"
                 eventCategory="footer"
                 ariaLabel="Пишіть у Signal"
-                className="text-[#3A76F0] border-border dark:border-light dark:bg-darkmode-theme-light dark:text-darkmode-light rounded-full border bg-white p-2 px-3 text-center font-bold duration-300 hover:bg-black hover:text-white hover:no-underline dark:hover:bg-white dark:hover:text-black"
+                className="text-[#3A76F0] border-border dark:border-light dark:bg-darkmode-theme-light dark:text-darkmode-light rounded-full border bg-white p-2 px-4 text-center font-bold duration-300 hover:bg-black hover:text-white hover:no-underline dark:hover:bg-white dark:hover:text-black"
               >
                 S
               </LinkWithGA>
