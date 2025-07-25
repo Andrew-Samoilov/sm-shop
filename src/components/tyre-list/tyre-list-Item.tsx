@@ -44,8 +44,8 @@ export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
                         tyreSize: tyreSize ?? "",
                         quantity: 4,
                     }}
-                    className="btn max-md:btn-sm btn-primary z-10
-     bg-theme-light dark:bg-theme-dark    text-dark hover:bg-dark hover:text-white dark:hover:bg-white dark:hover:text-dark"
+                    className="btn btn-sm btn-primary z-10
+     "
                 />
             </div>
         </div>

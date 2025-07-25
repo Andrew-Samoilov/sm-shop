@@ -13,7 +13,7 @@ export function TyreGalleryItem({ tyre, modelImages }: TyreListItemProps) {
     const tyreSize = getTyreSize(tyre);
 
     return (
-        <div className=" p-1 flex flex-col h-full  overflow-hidden justify-between items-center gap-1 xl:gap-6 border border-transparent  rounded-lg xl:p-6 hover:border-accent">
+        <div className="z-10 bg-white dark:bg-dark  p-1 flex flex-col h-full  overflow-hidden justify-between items-center gap-1 xl:gap-6 border border-transparent  rounded-lg xl:p-6 hover:border-accent">
 
             <div className="relative w-full  max-w-[293px] overflow-hidden group shrink-0 ">
                 <TyreViewer images={modelImages} />
@@ -25,16 +25,9 @@ export function TyreGalleryItem({ tyre, modelImages }: TyreListItemProps) {
 
             <Link href={`/tyres/${tyre.slug}`} className=" flex flex-row hover:no-underline">
                 <TyreTitle title={tyre.title} country={tyre.country} date={tyre.dateCode} season={tyre.season} diskProtection={tyre.diskProtection} applicability={tyre.applicability}/>
-                {/* <p >
-                    {tyre.title}{" "}
-                    <span title="Країна виробництва" className="text-light text-sm">
-                        {tyre.country}{" "}
-                        <span title="Номер тижня та рік виробництва">{tyre.dateCode}</span>
-                    </span>
-                </p> */}
             </Link>
 
-            <div className="flex flex-row gap-2 mx-auto items-center">
+            <div className="flex flex-row gap-2 mx-auto items-center ">
                 <span
                     className="font-semibold text-2xl"
                 >{tyre.price?.toLocaleString("uk-UA")}</span>
@@ -51,10 +44,7 @@ export function TyreGalleryItem({ tyre, modelImages }: TyreListItemProps) {
                         tyreSize: tyreSize ?? "",
                         quantity: 4,
                     }}
-                    className="btn max-md:btn-sm btn-primary z-10
-    bg-theme-light dark:bg-theme-dark 
-    md:relative md:bottom-auto md:left-auto md:right-auto md:bg-transparent
-    text-dark hover:bg-dark hover:text-white dark:hover:bg-white dark:hover:text-dark"
+                    className="btn btn-sm btn-primary"
                 />
             </div>
         </div>

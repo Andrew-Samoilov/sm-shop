@@ -25,7 +25,7 @@ export async function addMissingTyresFromImport() {
         });
 
         if (!brand) {
-            console.error("❌ Бренд не знайдено:", item.manufacturer);
+            // console.error("❌ Бренд не знайдено:", item.manufacturer);
             continue;
         }
 
@@ -33,7 +33,7 @@ export async function addMissingTyresFromImport() {
             where: { slug: slugify(`${brand.slug}-${item.model ?? ""}`) },
         });
         if (!model) {
-            console.error("❌ Модель не знайдено:", item.model);
+            // console.error("❌ Модель не знайдено:", item.model);
             continue;
         }
 

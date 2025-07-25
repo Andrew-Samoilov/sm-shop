@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import ReactMarkdown from "react-markdown";
 import { notFound } from "next/navigation";
-import {  getBrands, getBrandBySlug, getModelsByBrandId, getTyresByBrandId, formatDisplayUrl, getModelImagesByIds, getBaseMetadata, getContentBlock, normalizedCerts } from "@/lib";
-import { LinkWithGA, TyresList, CertificatesClient } from "@/components"; 
+import { getBrands, getBrandBySlug, getModelsByBrandId, getTyresByBrandId, formatDisplayUrl, getModelImagesByIds, getBaseMetadata, getContentBlock, normalizedCerts } from "@/lib";
+import { LinkWithGA, TyresList, CertificatesClient } from "@/components";
 import { Certificate } from "@/types";
 
 
@@ -79,7 +79,7 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
   const cert = await getContentBlock<Certificate[]>('certificates', []);
   // console.log(cert, brand.name);
 
-  const filteredCerts =normalizedCerts(cert, brand.name);
+  const filteredCerts = normalizedCerts(cert, brand.name);
   // console.log(`[filteredCerts]`, filteredCerts)
 
   const jsonLd = {
@@ -102,9 +102,11 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
 
   return (
     <article className="flex flex-col gap-6 mx-auto">
-      <header className="gap-6 xl:gap-0 flex items-center xl:items-start  justify-center xl:justify-between flex-col-reverse md:flex-row xl:sticky xl:top-[120px] xl:-z-1 bg-body dark:bg-darkmode-body md:p-2">
+      <header className="xl:-z-20 gap-6 xl:gap-0 flex items-center xl:items-start  justify-center xl:justify-between flex-col-reverse md:flex-row xl:sticky xl:top-[120px]  bg-body dark:bg-darkmode-body md:p-2">
         <div>
-          <h1 style={{ viewTransitionName: `title-${brand.name}` }}>
+          <h1
+            style={{ viewTransitionName: `title-${brand.name}` }}
+          className="">
             {brand.name}
           </h1>
           {brand.country && (
@@ -132,13 +134,13 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
           <img
             src={brand.logo}
             alt={`Логотип ${brand.logo} у нашому магазині`}
-            className="md:max-w-md max-w-full h-auto z-20"
+            className="md:max-w-md max-w-full h-auto z-30"
             style={{ viewTransitionName: `logo-${brand.name}` }}
           />
         )}
       </header>
 
-      <section className="section container p-6 lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl xl:-mt-65 bg-body dark:bg-darkmode-body z-10 -p-6">
+      <section className="section container z-10 p-6 lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl xl:-mt-65 bg-body dark:bg-darkmode-body ">
         <ReactMarkdown>{brand.description}</ReactMarkdown>
       </section>
 
@@ -174,7 +176,7 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
       </section>
 
       <section>
-        <h2 className=" text-center  lg:sticky lg:top-[96px] lg:z-20 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
+        <h2 className=" text-center  mx:auto lg:sticky lg:top-[90px] lg:z-40 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
           Наявні шини бренду {brand.name} ({brandTyres.length})
         </h2>
         <TyresList tyres={brandTyres} images={images} />

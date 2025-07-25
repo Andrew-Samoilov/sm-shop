@@ -5,7 +5,8 @@ export { translateSeasonToUkrainian } from "./translate-season-to-ukrainian"
 export { TyreTitle } from "./tyre-title";
 export { getTyreSize } from "./get-tyre-size";
 export { simpleSlug } from "./simple-slug";
-
+export { findMissingBrandsFromImport } from "./import/find-missing-brands-from-import";
+export { findMissingModelsFromImport } from "./import/find-missing-models-from-import";
 export { getContentBlock } from "./get-content-block";
 
 export { prisma } from "./prisma/prisma";

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { addMissingTyresFromImport, saveTyreImportItems } from '@/lib';
+import { addMissingTyresFromImport, findMissingBrandsFromImport, findMissingModelsFromImport, saveTyreImportItems } from '@/lib';
 
 
 export async function POST(req: NextRequest) {
@@ -40,9 +40,16 @@ export async function POST(req: NextRequest) {
 
 
     try {
+        const missing = await findMissingBrandsFromImport()
+        console.log('❌ Відсутні бренди:', missing)
+        
+        const missingModels = await findMissingModelsFromImport()
+        console.log('❌ Відсутні моделі:', missingModels)
+
         const inserted = await saveTyreImportItems(data);
         const result = await addMissingTyresFromImport()
 
+       
         return NextResponse.json({
             status: 'ok',
             ip: clientIp,
