@@ -146,8 +146,6 @@ export default async function TyrePage({
     )
     : cert;
 
-
-
   // console.info("[TyrePage]", tyre.brand);
   // console.info("[TyrePage]", cert);
 
