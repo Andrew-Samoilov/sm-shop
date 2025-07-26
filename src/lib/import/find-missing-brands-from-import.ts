@@ -1,34 +1,29 @@
-import { prisma, simpleSlug } from '@/lib'
+import { prisma } from '@/lib'
 
 export async function findMissingBrandsFromImport() {
     const imported = await prisma.tyreImport.findMany({
         where: {
             itemType: 'Товар',
-            manufacturer: {
-                not: null,
-                notIn: [''],
-            },
+            processed: false, 
+            manufacturer: { not: null, notIn: [""] }
         },
-        select: {
-            manufacturer: true,
-        },
-        distinct: ['manufacturer'],
-    })
-
-    const importedBrandSlugs = imported.map((item) => ({
-        name: item.manufacturer!,
-        slug: simpleSlug(item.manufacturer!),
-    }))
-
-    const existingBrands = await prisma.brand.findMany({
         select: {
             slug: true,
+            manufacturer: true,
         },
+        distinct: ['slug'],
     })
 
-    const existingSlugs = new Set(existingBrands.map((b) => b.slug))
+    const importedSlugs = imported
+        .map((i) => i.slug)
+        .filter((slug): slug is string => !!slug);
+    
+    const existingSlugs = new Set(
+        (await prisma.brand.findMany({
+            where: { slug: { in: importedSlugs } },
+            select: { slug: true },
+        })).map((b) => b.slug)
+    );
 
-    const missing = importedBrandSlugs.filter((b) => !existingSlugs.has(b.slug))
-
-    return missing 
+    return imported.filter((i) => i.slug && !existingSlugs.has(i.slug));
 }

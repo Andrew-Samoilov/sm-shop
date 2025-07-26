@@ -1,17 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { addMissingTyresFromImport, findMissingBrandsFromImport, saveTyreImportItems } from '@/lib';
+import { addMissingTyresFromImport, findMissingBrandsFromImport, findMissingModelsFromImport, saveTyreImportItems } from '@/lib';
 
 
 export async function POST(req: NextRequest) {
-    const ALLOWED_IPS = (process.env.ALLOWED_IPS || '')
-        .split(',')
-        .map(ip => ip.trim())
-        .filter(Boolean);
-
-    const forwardedFor = req.headers.get('x-forwarded-for') || '';
+    
+    const forwardedFor = req.headers.get('x-forwarded-for')
     const clientIp = forwardedFor?.split(',')[0].trim() || 'невідомо'
 
-    console.log('x-forwarded-for:', forwardedFor)
+    const API_TOKEN = process.env.IMPORT_API_SECRET;
+    const allowedIpEnv = process.env.ALLOWED_IPS || ''
+    const ALLOWED_IPS = allowedIpEnv.split(',').map(ip => ip.trim())
+
+    console.log('x-forwarded-for:', req.headers.get('x-forwarded-for'))
     console.log('Client IP:', clientIp)
 
     if (!ALLOWED_IPS.includes(clientIp)) {
@@ -19,13 +19,11 @@ export async function POST(req: NextRequest) {
         return new NextResponse('Forbidden', { status: 403 })
     }
 
-    const API_TOKEN = process.env.IMPORT_API_SECRET;
     const authHeader = req.headers.get('authorization');
     if (authHeader !== `Bearer ${API_TOKEN}`) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-  
     let data;
     try {
         data = await req.json();
@@ -33,18 +31,21 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
     }
 
-    if (!Array.isArray(data) || data.length === 0) {
+    if (!Array.isArray(data)) {
         return NextResponse.json({ error: 'Expected array' }, { status: 400 });
     }
 
-    //////////////
-    
+    if (data.length === 0) {
+        return NextResponse.json({ error: 'Empty array' }, { status: 400 })
+    }
+
+
     try {
         const missing = await findMissingBrandsFromImport()
         console.log('❌ Відсутні бренди:', missing)
         
-        // const missingModels = await findMissingModelsFromImport()
-        // console.log('❌ Відсутні моделі:', missingModels)
+        const missingModels = await findMissingModelsFromImport()
+        console.log('❌ Відсутні моделі:', missingModels)
 
         const inserted = await saveTyreImportItems(data);
         const result = await addMissingTyresFromImport()

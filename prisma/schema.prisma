@@ -25,7 +25,6 @@ model Brand {
 }
 
 model Tyre {
-
   id                Int     @id(map: "tires_pkey") @default(autoincrement())
   externalId String?  @db.Uuid @map("external_id")// 1с ід
   sku               String  @unique @db.VarChar(50) //у 1с = code
@@ -162,6 +161,7 @@ model TyreImport {
   code       String   // артикул
   price      Int
   quantity   Int
+  slug       String? @db.VarChar(100)
 
   model            String?
   manufacturer     String?
