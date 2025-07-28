@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { addMissingTyresFromImport, findMissingBrandsFromImport, saveTyreImportItems } from '@/lib';
+import { addMissingBrands, addMissingModels, addMissingTyresFromImport, findMissingBrandsFromImport, findMissingModelsFromImport, saveTyreImportItems } from '@/lib';
 
 
 export async function POST(req: NextRequest) {
@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-  
+
     let data;
     try {
         data = await req.json();
@@ -37,22 +37,22 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: 'Expected array' }, { status: 400 });
     }
 
-    //////////////
-    
     try {
-     await findMissingBrandsFromImport()
-        // console.log('❌ Відсутні бренди:', missing.length, missing)
-        
-        // const missingModels = await findMissingModelsFromImport()
-        // console.log('❌ Відсутні моделі:', missingModels)
+        const missingBrands = await findMissingBrandsFromImport();
+        await addMissingBrands(missingBrands);
 
-        const inserted = await saveTyreImportItems(data);
+        const missingModels = await findMissingModelsFromImport();
+        await addMissingModels(missingModels);
+
+   
         const result = await addMissingTyresFromImport()
+        const inserted = await saveTyreImportItems(data);
 
-       
         return NextResponse.json({
             status: 'ok',
             ip: clientIp,
+            brandsAdded: missingBrands.length,
+            modelsAdded: missingModels.length,
             inserted,
             imported: result.added,
         });

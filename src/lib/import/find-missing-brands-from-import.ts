@@ -33,7 +33,7 @@ export async function findMissingBrandsFromImport(): Promise<{ name: string; slu
 
 
     // 5. Лог та повернення
-    console.log(`❗ Відсутні бренди (${missing.length}):`);
+    console.log(`[findMissingBrandsFromImport] ❗ Відсутні бренди (${missing.length}):`);
     missing.forEach((b) => console.log(`❌ ${b.slug} (${b.name})`));
 
     return missing;

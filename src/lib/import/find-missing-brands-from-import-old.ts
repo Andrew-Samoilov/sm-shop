@@ -27,8 +27,7 @@ export async function findMissingBrandsFromImport() {
     })
 
     const existingSlugs = new Set(existingBrands.map((b) => b.slug))
+    const missingBrands = importedBrandSlugs.filter((b) => !existingSlugs.has(b.slug))
 
-    const missing = importedBrandSlugs.filter((b) => !existingSlugs.has(b.slug))
-
-    return missing 
+    return missingBrands
 }

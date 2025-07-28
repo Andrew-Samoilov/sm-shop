@@ -12,6 +12,8 @@ export { getContentBlock } from "./get-content-block";
 export { prisma } from "./prisma/prisma";
 export { getSiteConfig } from "./get-site-сonfig";
 export { getBaseMetadata } from "./get-base-metadata";
+export { addMissingBrands } from "./import/add-missing-brands";
+export { addMissingModels } from "./import/add-missing-models";
 
 export { saveTyreImportItems } from "./import/save-tyre-import";
 export { addMissingTyresFromImport } from "./import/add-missing-tyres";
