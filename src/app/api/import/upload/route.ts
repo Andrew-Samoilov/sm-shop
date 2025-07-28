@@ -44,7 +44,8 @@ export async function POST(req: NextRequest) {
         const missingModels = await findMissingModelsFromImport();
         await addMissingModels(missingModels);
 
-   
+        /////
+        
         const result = await addMissingTyresFromImport()
         const inserted = await saveTyreImportItems(data);
 
@@ -54,7 +55,7 @@ export async function POST(req: NextRequest) {
             brandsAdded: missingBrands.length,
             modelsAdded: missingModels.length,
             inserted,
-            imported: result.added,
+            imported: result,
         });
     } catch (error) {
         console.error('❌ DB error in import:', error);

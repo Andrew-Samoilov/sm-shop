@@ -1,69 +1,83 @@
-import { prisma } from "@/lib"
+import { prisma, simpleSlug } from "@/lib"
 
 export async function addMissingTyresFromImport() {
-    const existing = await prisma.tyre.findMany({
+    // 1. Кеш брендів
+    const brands = await prisma.brand.findMany();
+    const brandMap = new Map(brands.map((b) => [b.slug, b.id]));
+
+    // 2. Кеш моделей
+    const models = await prisma.model.findMany();
+    const modelMap = new Map(models.map((m) => [m.slug, m.id]));
+
+    // 3. Кеш існуючих шин по externalId
+    const existingTyres = await prisma.tyre.findMany({
         select: { externalId: true },
     });
+    const existingIds = new Set(existingTyres.map((t) => t.externalId));
+    
 
-    const existingIds = new Set(
-        existing.map((t) => t.externalId).filter((id): id is string => !!id)
-    );
 
-    const missing = await prisma.tyreImport.findMany({
+    // 4. Отримуємо шини з імпорту, які ще не імпортовані
+    const importItems = await prisma.tyreImport.findMany({
         where: {
-            externalId: { notIn: Array.from(existingIds) },
+            itemType: 'Товар',
+            processed: false,
+            externalId: {
+                notIn: Array.from(existingIds).filter((id): id is string => !!id)
+            }
         },
     });
 
-    let added = 0;
+    const tyresToInsert = [];
 
-    for (const item of missing) {
-        if (item.itemType !== "Товар") continue;
+    for (const item of importItems) {
+        const manufacturer = item.manufacturer?.trim() || 'Unknown';
+        const modelName = item.model?.trim() || 'unknown';
+        const brandSlug = simpleSlug(manufacturer);
+        const modelSlug = simpleSlug(`${brandSlug}-${modelName}`);
 
-        const brand = await prisma.brand.findUnique({
-            where: { slug: slugify(item.manufacturer ?? "unknown") },
-        });
+        const brandId = brandMap.get(brandSlug);
+        const modelId = modelMap.get(modelSlug);
 
-        if (!brand) {
-            // console.error("❌ Бренд не знайдено:", item.manufacturer);
+        if (!brandId || !modelId) {
+            // Пропускаємо, якщо не знайдено
             continue;
         }
 
-        const model = await prisma.model.findUnique({
-            where: { slug: slugify(`${brand.slug}-${item.model ?? ""}`) },
+        tyresToInsert.push({
+            externalId: item.externalId,
+            sku: item.code,
+            title: item.name ?? 'назва відсутня',
+            price: item.price ?? 0,
+            inventoryQuantity: item.quantity ?? 0,
+            width: parseWidth(item.typeSize),
+            profile: parseHeight(item.typeSize),
+            diameter: parseInt(item.diameter ?? '') || null,
+            loadIndex: item.load ?? null,
+            speedIndex: item.speed ?? null,
+            season: mapSeason(item.season),
+            type: item.applicability ?? null,
+            dateCode: item.yearOfProduction ?? null,
+            country: item.country ?? null,
+            diskProtection: item.diskProtection ?? null,
+            rof: item.rof ?? null,
+            brandId,
+            modelId,
         });
-        if (!model) {
-            // console.error("❌ Модель не знайдено:", item.model);
-            continue;
-        }
-
-        await prisma.tyre.create({
-            data: {
-                externalId: item.externalId,
-                sku: item.code,
-                title: item.name ?? "назва відсутня",
-                price: item.price ?? 0,
-                inventoryQuantity: item.quantity ?? 0,
-                width: parseWidth(item.typeSize),
-                profile: parseHeight(item.typeSize),
-                diameter: parseInt(item.diameter ?? "") || null,
-                loadIndex: item.load ?? null,
-                speedIndex: item.speed ?? null,
-                season: mapSeason(item.season),
-                type: item.applicability ?? null,
-                dateCode: item.yearOfProduction ?? null,
-                country: item.country ?? null,
-                diskProtection: item.diskProtection ?? null,
-                rof: item.rof ?? null,
-                brandId: brand.id,
-                modelId: model.id,
-            },
-        });
-
-        added++;
     }
 
-    return { added };
+    if (tyresToInsert.length === 0) {
+        console.log('[addMissingTyresFromImport] Немає нових шин для додавання');
+        return;
+    }
+
+    await prisma.tyre.createMany({
+        data: tyresToInsert,
+        skipDuplicates: true,
+    });
+
+    console.log(`[addMissingTyresFromImport] Додано шин: ${tyresToInsert.length}`);
+    return tyresToInsert.length;
 }
 
 // 🛠 Хелпери
@@ -82,15 +96,4 @@ function mapSeason(season: string | null | undefined): "SUMMER" | "WINTER" | "AL
     if (season.includes("Winter") || season.includes("3.")) return "WINTER";
     if (season.includes("AllSeason") || season.includes("2.")) return "ALLSEASON";
     return null;
-}
-
-function slugify(str: string): string {
-    return str
-        .toLowerCase()
-        .normalize("NFKD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(/\s+/g, "-")
-        .replace(/[^a-z0-9-]/g, "")
-        .replace(/--+/g, "-")
-        .replace(/^-+|-+$/g, "");
 }
