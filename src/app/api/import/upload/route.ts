@@ -40,8 +40,8 @@ export async function POST(req: NextRequest) {
     //////////////
     
     try {
-        const missing = await findMissingBrandsFromImport()
-        console.log('❌ Відсутні бренди:', missing)
+     await findMissingBrandsFromImport()
+        // console.log('❌ Відсутні бренди:', missing.length, missing)
         
         // const missingModels = await findMissingModelsFromImport()
         // console.log('❌ Відсутні моделі:', missingModels)

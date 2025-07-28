@@ -10,7 +10,7 @@ export async function saveTyreImportItems(items: OneCTyreData[]) {
             externalId: item.id,
             code: item.code,
             model: item.model,
-            manufacturer: item.manufacturer ?? null,
+            manufacturer: simpleSlug(item.manufacturer||"unknown"),
             price: item.price ?? 0,
             quantity: item.quantity ?? 0,
             season: item.season,
