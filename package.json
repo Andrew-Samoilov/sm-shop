@@ -8,7 +8,9 @@
     "start": "next start",
     "db": "ssh -fN -L 5433:localhost:5432 sms",
     "db:stop": "taskkill /F /IM ssh.exe",
+    "db:dump-old": "bash -c 'pg_dump -U smshopuser -h localhost -p 5433 -d smshopdb -Fc -f ./backups/smshopdb-$(date +%d-%m-%Y_%H-%M-%S).dump'",
     "db:dump": "bash -c 'pg_dump -U smshopuser -h localhost -p 5433 -d smshopdb -Fc -f ./backups/smshopdb-$(date +%d-%m-%Y_%H-%M-%S).dump'",
+   
     "test": "playwright test",
     "lint": "next lint",
     "format": "prettier --write . && eslint . --fix"
