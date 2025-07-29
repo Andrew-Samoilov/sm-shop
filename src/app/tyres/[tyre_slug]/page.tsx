@@ -176,22 +176,27 @@ export default async function TyrePage({
           </h1>
 
           <div
-            className="md:pt-2 text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+            className="md:pt-2 text-light   hover:no-underline"
           >Країна виробництва: <span
-            className="text-dark"
+            className="text-dark dark:text-darkmode-dark"
           >{tyre.country}</span>
           </div>
 
           <div
-            className=" text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary  hover:no-underline"
+            className=" text-light    hover:no-underline"
           >Тиждень та рік виробництва: {tyre.dateCode}</div>
 
+          {tyre.season && (
+            <span className=" text-light">{"Сезон: "}<span
+              className="text-dark dark:text-darkmode-dark"
+            >{tyre.season}</span></span>
+          )}
 
           {tyre.applicability && (
-            <span className=" text-light">{"Застосовуваність: "}{tyre.applicability}</span>
+            <span className=" text-light">Застосовуваність:{tyre.applicability}</span>
           )}
           {tyre.diskProtection && (
-            <span className=" text-light">{"Захист диска: "}{tyre.diskProtection}</span>
+            <span className=" text-light">Захист диска: {tyre.diskProtection}</span>
           )}
 
           <div
@@ -203,7 +208,7 @@ export default async function TyrePage({
               eventCategory="TyrePage"
               target="_blank"
               title="Докладніше про індекси швидкості"
-              className="hover:no-underline"
+              className=" text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary  hover:no-underline"
             >
               Індекс швидкості:
             </LinkWithGA>
@@ -211,14 +216,14 @@ export default async function TyrePage({
           </div>
 
           <div
-            className=" text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline gap-6"
+            className=" gap-6"
           >
             <LinkWithGA
               href="/info/load-index"
               eventLabel="load-index"
               eventCategory="TyrePage"
               target="_blank"
-              className="hover:no-underline"
+              className=" text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary  hover:no-underline"
               title="Докладніше про індекси навантаження"
             >
               Індекс навантаження:

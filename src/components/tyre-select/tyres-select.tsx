@@ -246,7 +246,7 @@ export function TyresSelect() {
         </aside>
 
         {selectedTyres.length > 0 && (
-          <div className="">
+          <div className="mx-auto">
             <ListHeader
               view={filters.view}
               onChangeView={(v) => updateFilter("view", v)}

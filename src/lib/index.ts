@@ -7,6 +7,8 @@ export { getTyreSize } from "./get-tyre-size";
 export { simpleSlug } from "./simple-slug";
 export { findMissingBrandsFromImport } from "./import/find-missing-brands-from-import";
 export { findMissingModelsFromImport } from "./import/find-missing-models-from-import";
+export {updateExistingTyresFromImportBatch} from "./import/update-existing-tyres-from-import-batch";
+
 export { getContentBlock } from "./get-content-block";
 
 export { prisma } from "./prisma/prisma";

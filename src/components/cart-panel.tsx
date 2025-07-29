@@ -90,7 +90,7 @@ export function CartPanel() {
             {/* Контент кошика */}
             <div className="w-full mx-auto flex-1 overflow-y-auto p-2 md:p-4 lg:p-6">
               {CartTyre ? (
-                <div className="w-2/3 mx-auto flex flex-col  md:flex-row gap-2 lg:gap-6 items-center justify-between ">
+                <div className="w-2/3 mx-auto h-fit flex flex-col  md:flex-row gap-2 lg:gap-6 items-center justify-between ">
 
                   {CartTyre.tyreImageUrl && (
                     <Image

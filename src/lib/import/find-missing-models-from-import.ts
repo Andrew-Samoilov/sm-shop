@@ -4,6 +4,7 @@ export async function findMissingModelsFromImport() {
     const imported = await prisma.tyreImport.findMany({
         where: {
             itemType: 'Товар',
+            processed: false,
             model: {
                 not: null,
                 notIn: [''],

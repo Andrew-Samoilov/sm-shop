@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { addMissingBrands, addMissingModels, addMissingTyresFromImport, findMissingBrandsFromImport, findMissingModelsFromImport, saveTyreImportItems } from '@/lib';
+import { addMissingBrands, addMissingModels, addMissingTyresFromImport, findMissingBrandsFromImport, findMissingModelsFromImport, saveTyreImportItems, updateExistingTyresFromImportBatch } from '@/lib';
 
 
 export async function POST(req: NextRequest) {
@@ -38,16 +38,17 @@ export async function POST(req: NextRequest) {
     }
 
     try {
+        const inserted = await saveTyreImportItems(data);
+
         const missingBrands = await findMissingBrandsFromImport();
         await addMissingBrands(missingBrands);
-
+    
         const missingModels = await findMissingModelsFromImport();
-        await addMissingModels(missingModels);
+        await addMissingModels(missingModels)            
 
-        /////
-        
-        const result = await addMissingTyresFromImport()
-        const inserted = await saveTyreImportItems(data);
+        const imported = await addMissingTyresFromImport()
+
+        const updated = await updateExistingTyresFromImportBatch();
 
         return NextResponse.json({
             status: 'ok',
@@ -55,7 +56,8 @@ export async function POST(req: NextRequest) {
             brandsAdded: missingBrands.length,
             modelsAdded: missingModels.length,
             inserted,
-            imported: result,
+            imported,
+            updated,
         });
     } catch (error) {
         console.error('❌ DB error in import:', error);

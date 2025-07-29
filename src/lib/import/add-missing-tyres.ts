@@ -39,10 +39,13 @@ export async function addMissingTyresFromImport() {
         const brandId = brandMap.get(brandSlug);
         const modelId = modelMap.get(modelSlug);
 
-        if (!brandId || !modelId) {
-            // Пропускаємо, якщо не знайдено
-            continue;
-        }
+        // if (!brandId || !modelId) {
+        //     // Пропускаємо, якщо не знайдено
+        //     continue;
+        // }
+        if (!brandId) console.warn(`⚠️ Бренд не знайдено: ${manufacturer} → ${brandSlug}`);
+        if (!modelId) console.warn(`⚠️ Модель не знайдено: ${modelName} → ${modelSlug}`);
+        if (!brandId || !modelId) continue;
 
         tyresToInsert.push({
             externalId: item.externalId,

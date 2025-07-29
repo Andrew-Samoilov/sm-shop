@@ -15,11 +15,11 @@ export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
 
     return (
         <div
-            className="w-full min-w-0 flex flex-1 flex-col md:flex-row justify-between gap-1 p-1 xl:p-2 xl:gap-2 items-center border border-white dark:border-darkmode-body hover:border-accent rounded-lg">
+            className="w-full min-w-0 flex flex-1 flex-col md:flex-row justify-between gap-1 p-1 xl:p-6 xl:gap-6 items-center border border-white dark:border-darkmode-body hover:border-accent rounded-lg">
 
             <TyreViewer images={modelImages} />
 
-            <Link href={`/tyres/${tyre.slug}`} className="flex-2  min-w-0 gap-0 xl:gap-2 flex flex-row md:flex-col hover:no-underline">
+            <Link href={`/tyres/${tyre.slug}`} className="flex-2  min-w-0  gap-0 xl:gap-2 flex flex-row md:flex-col hover:no-underline">
                 <span className="hidden md:block text-md md:text-2xl font-semibold">{tyre.brand}</span>
                 <span className="hidden md:block text-md md:text-lg font-semibold">{tyre.model}</span>
                 <TyreTitle title={tyre.title} country={tyre.country} date={tyre.dateCode} season={tyre.season} applicability={tyre.applicability} diskProtection={tyre.diskProtection}/>
@@ -38,8 +38,8 @@ export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
                         id: tyre.id,
                         title: tyre.title,
                         price: tyre.price,
-                        brand: tyre.brands?.name ?? "",
-                        model: tyre.models?.name ?? "",
+                        brand: tyre.brand??"unknown" ,
+                        model: tyre.model ?? "unknown",
                         tyreImageUrl: modelImages[0]?.url ?? "",
                         tyreSize: tyreSize ?? "",
                         quantity: 4,
