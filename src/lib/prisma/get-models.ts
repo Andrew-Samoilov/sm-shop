@@ -3,16 +3,29 @@ import { prisma } from "./prisma";
 export async function getModels() {
   try {
     const models = await prisma.model.findMany({
-      include: {
-        brand: true,
-      },
-      orderBy: {
-        brand: {
-          name: 'asc',
+      where: {
+        tyres: {
+          some: {
+            inventoryQuantity: {
+              gt: 0,
+            },
+          },
         },
       },
+      include: {
+        brand: true,
+        tyres: {
+          where: {
+            inventoryQuantity: {
+              gt: 0,
+            },
+          },
+        },
+      },
+      orderBy: {
+        name: "asc",
+      },
     });
-
     return models;
 
   } catch (error) {

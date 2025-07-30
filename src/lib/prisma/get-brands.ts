@@ -5,6 +5,15 @@ import { prisma } from "./prisma";
 export async function getBrands(): Promise<Brand[]> {
   try {
     const brands = await prisma.brand.findMany({
+      where: {
+        tyres: {
+          some: {
+            inventoryQuantity: {
+              gt: 0,
+            },
+          },
+        },
+      },
       orderBy: { name: "asc" },
     });
 

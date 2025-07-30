@@ -43,8 +43,8 @@ export async function addMissingTyresFromImport() {
         //     // Пропускаємо, якщо не знайдено
         //     continue;
         // }
-        if (!brandId) console.warn(`⚠️ Бренд не знайдено: ${manufacturer} → ${brandSlug}`);
-        if (!modelId) console.warn(`⚠️ Модель не знайдено: ${modelName} → ${modelSlug}`);
+        if (!brandId) console.warn(`[addMissingTyresFromImport]⚠️ Бренд не знайдено: ${manufacturer} → ${brandSlug}`);
+        if (!modelId) console.warn(`[addMissingTyresFromImport]⚠️ Модель не знайдено: ${modelName} → ${modelSlug}`);
         if (!brandId || !modelId) continue;
 
         tyresToInsert.push({
@@ -56,12 +56,16 @@ export async function addMissingTyresFromImport() {
             width: parseWidth(item.typeSize),
             profile: parseHeight(item.typeSize),
             diameter: parseInt(item.diameter ?? '') || null,
+            typeSize: item.typeSize ?? null,
+            additionalIndex: item.additionalIndex ?? null,
             loadIndex: item.load ?? null,
+            appicability: item.applicability ?? null,
             speedIndex: item.speed ?? null,
             season: mapSeason(item.season),
             type: item.applicability ?? null,
             dateCode: item.yearOfProduction ?? null,
             country: item.country ?? null,
+            itemType: item.itemType ?? null,
             diskProtection: item.diskProtection ?? null,
             rof: item.rof ?? null,
             brandId,

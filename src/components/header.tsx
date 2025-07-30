@@ -28,15 +28,11 @@ export async function Header() {
         >Контакти</LinkWithGA>
       </div>
 
-
       <div className="flex items-center ustify-center gap-1 ">
         <Search className="block w-full lg:w-[45%] xl:w-[60%]" />
         <ThemeSwitcher />
         <CartPanel />
         <MobileMenu />
-        {/* <button>
-          <UserIcon className="h-5 w-5 text-light/75 cursor-not-allowed" />
-        </button> */}
       </div>
 
     </header >

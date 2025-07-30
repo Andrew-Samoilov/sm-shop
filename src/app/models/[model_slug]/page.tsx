@@ -16,7 +16,6 @@ export async function generateStaticParams() {
 }
 
 
-
 export async function generateMetadata(
   { params }: { params: { model_slug: string } }
 ): Promise<Metadata> {

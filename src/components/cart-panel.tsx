@@ -110,7 +110,7 @@ export function CartPanel() {
 
                   <div className="flex flex-col items-center ">
                     {/* <span>{CartTyre.quantity} шт.</span> */}
-                     <QuantitySelector/>
+                    <QuantitySelector />
                     <span >{CartTyre.price.toLocaleString("uk-UA")} грн.</span>
                   </div>
                 </div>
@@ -128,10 +128,6 @@ export function CartPanel() {
                 </p>
 
                 <OrderForm tyre={CartTyre} />
-                
-                {/* <button className="w-2/3 mx-auto btn btn-md btn-primary bg-accent border-accent hover:bg-accent-hover hover:border-accent-hover">
-                  Надіслати замовлення
-                </button> */}
 
               </footer>
             )}
