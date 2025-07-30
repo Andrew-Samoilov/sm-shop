@@ -200,7 +200,7 @@ export default async function TyrePage({
           )}
 
           <div
-            className=" text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary  hover:no-underline"
+            className=" text-light hover:text-dark dark:text-drkmode-text dark:hover:text-darkmode-primary  "
           >
             <LinkWithGA
               href="/info/speed-index"
@@ -208,7 +208,7 @@ export default async function TyrePage({
               eventCategory="TyrePage"
               target="_blank"
               title="Докладніше про індекси швидкості"
-              className=" text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary  hover:no-underline"
+              className="hover:no-underline"
             >
               Індекс швидкості:
             </LinkWithGA>
@@ -216,15 +216,15 @@ export default async function TyrePage({
           </div>
 
           <div
-            className=" gap-6"
+            className=" text-light  hover:text-dark dark:text-drkmode-text dark:hover:text-darkmode-primary"
           >
             <LinkWithGA
               href="/info/load-index"
               eventLabel="load-index"
               eventCategory="TyrePage"
               target="_blank"
-              className=" text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary  hover:no-underline"
               title="Докладніше про індекси навантаження"
+              className="hover:no-underline"
             >
               Індекс навантаження:
             </LinkWithGA>
@@ -233,8 +233,8 @@ export default async function TyrePage({
 
           <div className="flex flex-col md:flex-row md:items-center">
             <div className="flex flex-row md:flex-col gap-2 xl:gap-6 items-center">
-        
-              <QuantitySelector/>
+
+              <QuantitySelector />
               <span
                 className="font-semibold text-h1"
               >{tyre.price?.toLocaleString("uk-UA")} <span className="text-h3 font-normal text-light">грн</span></span>
