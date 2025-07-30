@@ -14,18 +14,16 @@ export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
     // console.log(`[TyreListItem] tyre.season`, tyre.season)
 
     return (
-        <Link
-            href={`/tyres/${tyre.slug}`}
-            className="w-full min-w-0 flex flex-1 flex-col md:flex-row justify-between gap-1 p-1 xl:p-6 xl:gap-6 items-center border border-white dark:border-darkmode-body hover:border-accent rounded-lg hover:no-underline">
+        <div
+            className="w-full min-w-0 flex flex-1 flex-col md:flex-row justify-between gap-1 p-1 xl:p-6 xl:gap-6 items-center border border-white dark:border-darkmode-body hover:border-accent rounded-lg">
 
             <TyreViewer images={modelImages} />
 
-            <div 
-                className="flex-2  min-w-0  gap-0 xl:gap-2 flex flex-row md:flex-col ">
+            <Link href={`/tyres/${tyre.slug}`} className="flex-2  min-w-0  gap-0 xl:gap-2 flex flex-row md:flex-col hover:no-underline">
                 <span className="hidden md:block text-md md:text-2xl font-semibold">{tyre.brand}</span>
                 <span className="hidden md:block text-md md:text-lg font-semibold">{tyre.model}</span>
                 <TyreTitle title={tyre.title} country={tyre.country} date={tyre.dateCode} season={tyre.season} applicability={tyre.applicability} diskProtection={tyre.diskProtection}/>
-            </div>
+            </Link>
 
             <div className="flex flex-col gap-0  ">
                 <div className="flex flex-row gap-2 md:gap-2 items-center md:items-end mx-auto">
@@ -50,6 +48,6 @@ export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
      "
                 />
             </div>
-        </Link>
+        </div>
     );
 }

@@ -13,7 +13,9 @@ export function TyreGalleryItem({ tyre, modelImages }: TyreListItemProps) {
     const tyreSize = getTyreSize(tyre);
 
     return (
-        <div className="z-10 bg-white dark:bg-dark  p-1 flex flex-col h-full  overflow-hidden justify-between items-center gap-1 xl:gap-6 border border-transparent  rounded-lg xl:p-6 hover:border-accent">
+        <Link
+            href={`/tyres/${tyre.slug}`}
+            className="z-10 bg-white dark:bg-dark  p-1 flex flex-col h-full  overflow-hidden justify-between items-center gap-1 xl:gap-6 border border-transparent  rounded-lg xl:p-6 hover:border-accent hover:no-underline">
 
             <div className="relative w-full  max-w-[293px] overflow-hidden group shrink-0 ">
                 <TyreViewer images={modelImages} />
@@ -23,9 +25,9 @@ export function TyreGalleryItem({ tyre, modelImages }: TyreListItemProps) {
                 /> */}
             </div>
 
-            <Link href={`/tyres/${tyre.slug}`} className=" flex flex-row hover:no-underline">
-                <TyreTitle title={tyre.title} country={tyre.country} date={tyre.dateCode} season={tyre.season} diskProtection={tyre.diskProtection} applicability={tyre.applicability}/>
-            </Link>
+            <div className=" flex flex-row">
+                <TyreTitle title={tyre.title} country={tyre.country} date={tyre.dateCode} season={tyre.season} diskProtection={tyre.diskProtection} applicability={tyre.applicability} />
+            </div>
 
             <div className="flex flex-row gap-2 mx-auto items-center ">
                 <span
@@ -47,6 +49,6 @@ export function TyreGalleryItem({ tyre, modelImages }: TyreListItemProps) {
                     className="btn btn-sm btn-primary"
                 />
             </div>
-        </div>
+        </Link>
     );
 }
