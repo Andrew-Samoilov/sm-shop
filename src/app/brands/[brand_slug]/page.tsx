@@ -24,8 +24,8 @@ export async function generateMetadata({
   const brand = await getBrandBySlug(brand_slug);
   if (!brand) return {};
 
-  const title = `${brand.name} – шини, моделі та характеристики`;
-  const description = `Огляд бренду ${brand.name}: країна-виробник, моделі шин, характеристики та наявність у магазині.`;
+  const title = `${brand.brand_name} – шини, моделі та характеристики`;
+  const description = `Огляд бренду ${brand.brand_name}: країна-виробник, моделі шин, характеристики та наявність у магазині.`;
   const canonicalUrl = `${BASE_URL}/brands/${brand.slug}`;
 
   let logoUrl: string | undefined = undefined;
@@ -46,7 +46,7 @@ export async function generateMetadata({
         ? [
           {
             url: logoUrl,
-            alt: `Шини ${brand.name} – купити в магазині`,
+            alt: `Шини ${brand.brand_name} – купити в магазині`,
             width: 800,
             height: 600,
           },
@@ -77,16 +77,16 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
   const modelId = brandTyres.map(t => t.modelId)
   const images = await getModelImagesByIds(modelId);
   const cert = await getContentBlock<Certificate[]>('certificates', []);
-  // console.log(cert, brand.name);
+  // console.log(cert, brand.brand_name);
 
-  const filteredCerts = normalizedCerts(cert, brand.name);
+  const filteredCerts = normalizedCerts(cert, brand.brand_name);
   // console.log(`[filteredCerts]`, filteredCerts)
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Brand",
 
-    name: brand.name,
+    name: brand.brand_name,
     ...(brand.country && { countryOfOrigin: brand.country }),
     ...(brand.website && !["null", "NULL", ""].includes(brand.website) && { url: brand.website }),
     ...(brand.logo && {
@@ -105,9 +105,9 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
       <header className="xl:-z-20 gap-6 xl:gap-0 flex items-center xl:items-start  justify-center xl:justify-between flex-col-reverse md:flex-row xl:sticky xl:top-[120px]  bg-body dark:bg-darkmode-body md:p-2">
         <div>
           <h1
-            style={{ viewTransitionName: `title-${brand.name}` }}
-          className="">
-            {brand.name}
+            style={{ viewTransitionName: `title-${brand.brand_name}` }}
+            className="">
+            {brand.brand_name}
           </h1>
           {brand.country && (
             <p className="text-light text-sm dark:text-darkmode-light">
@@ -121,8 +121,8 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
               target="_blank"
               rel="noopener noreferrer"
               eventLabel="brand_website"
-              eventCategory={`brand-${brand.name}`}
-              ariaLabel={`Перейти на сайт бренду ${brand.name}`}
+              eventCategory={`brand-${brand.brand_name}`}
+              ariaLabel={`Перейти на сайт бренду ${brand.brand_name}`}
             >
               {formatDisplayUrl(brand.website)}
             </LinkWithGA>
@@ -135,7 +135,7 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
             src={brand.logo}
             alt={`Логотип ${brand.logo} у нашому магазині`}
             className="md:max-w-md max-w-full h-auto z-30"
-            style={{ viewTransitionName: `logo-${brand.name}` }}
+            style={{ viewTransitionName: `logo-${brand.brand_name}` }}
           />
         )}
       </header>
@@ -146,7 +146,7 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
 
       {filteredCerts.length > 0 && (
         <section>
-          <h2 className="text-center pb-6">{`Наші сертифікати ${brand.name}`}</h2>
+          <h2 className="text-center pb-6">{`Наші сертифікати ${brand.brand_name}`}</h2>
           <CertificatesClient cert={filteredCerts} />
         </section>
       )}
@@ -154,7 +154,7 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
 
       <section className="mx-auto">
         <h2 className="text-center lg:sticky lg:top-[96px] lg:z-20 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
-          Наявні <strong>моделі</strong> бренду {brand.name} ({brandModels.length})
+          Наявні <strong>моделі</strong> бренду {brand.brand_name} ({brandModels.length})
         </h2>
         <div className="flex flex-wrap">
           {brandModels.map((model) => (
@@ -162,10 +162,10 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
               key={model.id}
               href={`/models/${model.slug}`}
               eventLabel={model.name}
-              eventCategory={`brand-${brand.name}`}
+              eventCategory={`brand-${brand.brand_name}`}
               className=" px-6"
               eventParams={{
-                brand_slug: `${brand.name}`,
+                brand_slug: `${brand.brand_name}`,
                 modelId: `${model.id}`,
               }}
             >
@@ -177,7 +177,7 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
 
       <section>
         <h2 className=" text-center  mx:auto lg:sticky lg:top-[90px] lg:z-40 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
-          Наявні шини бренду {brand.name} ({brandTyres.length})
+          Наявні шини бренду {brand.brand_name} ({brandTyres.length})
         </h2>
         <TyresList tyres={brandTyres} images={images} />
       </section>

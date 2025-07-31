@@ -27,14 +27,14 @@ export async function generateMetadata(
     ? await getBrandById(model.brandId)
     : null;
 
-  const title = `${brand?.name} ${model.name} – характеристики, ціна та відгуки | ${siteConfig.siteName}`;
-  const description = `Детальний огляд шини ${brand?.name} ${model.name}: характеристики, переваги, особливості експлуатації та наявність у магазині ${siteConfig.siteName}.`;
+  const title = `${brand?.brand_name} ${model.name} – характеристики, ціна та відгуки | ${siteConfig.siteName}`;
+  const description = `Детальний огляд шини ${brand?.brand_name} ${model.name}: характеристики, переваги, особливості експлуатації та наявність у магазині ${siteConfig.siteName}.`;
   const canonicalUrl = `${BASE_URL}/brands/${model.slug}`;
 
   const images = await getModelImgByModelId(model.id);
   const ogImages = images?.map((img) => ({
     url: img.url.startsWith("http") ? img.url : `${BASE_URL}${img.url}`,
-    alt: img.alt ?? `${brand?.name} ${model.name} – купити в магазині ${siteConfig.siteName}`,
+    alt: img.alt ?? `${brand?.brand_name} ${model.name} – купити в магазині ${siteConfig.siteName}`,
     width: img.width ?? 800,
     height: img.height ?? 600,
   })) ?? [];
@@ -70,7 +70,7 @@ export default async function ModelPage({
   const { model_slug } = await params;
   const model = await getModelBySlug(model_slug);
 
-  
+
   if (!model) return notFound();
 
   const modelTyres = await getTyresByModelId(model.id);
@@ -78,21 +78,21 @@ export default async function ModelPage({
   const brand = model.brandId ? await getBrandById(model.brandId) : null;
 
   const cert = await getContentBlock<Certificate[]>('certificates', []);
-  const filteredCerts  =normalizedCerts(cert, brand?.name);
-  
-  
+  const filteredCerts = normalizedCerts(cert, brand?.brand_name);
+
+
   const canonicalUrl = `${BASE_URL}/brands/${model.slug}`;
   const images = await getModelImgByModelId(model.id);
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
-    "name": `${brand?.name} ${model.name}`,
+    "name": `${brand?.brand_name} ${model.name}`,
     "description": model.description,
     "image": images?.[0]?.url,
     "brand": {
       "@type": "Brand",
-      "name": brand?.name,
+      "name": brand?.brand_name,
     },
     "offers": modelTyres?.length
       ? {
@@ -116,15 +116,15 @@ export default async function ModelPage({
     <article className=" flex flex-col gap-6 md:p-6">
       <header className="lg:max-w-[65ch] mx-auto flex items-center justify-between flex-col-reverse md:flex-row bg-body dark:bg-darkmode-body">
         <h1>
-          {brand?.name} {model.name}
+          {brand?.brand_name} {model.name}
         </h1>
         {brand?.logo && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={brand.logo}
-            alt={brand.name}
+            alt={brand.brand_name}
             className="max-w-1/4 xl:fixed xl:left-6 xl:top-37"
-            style={{ viewTransitionName: `logo-${brand.name}` }}
+            style={{ viewTransitionName: `logo-${brand.brand_name}` }}
           />
         )}
       </header>
@@ -139,14 +139,14 @@ export default async function ModelPage({
 
       {filteredCerts.length > 0 && (
         <section>
-          <h2 className="text-center pb-6">{`Наші сертифікати ${brand?.name}`}</h2>
+          <h2 className="text-center pb-6">{`Наші сертифікати ${brand?.brand_name}`}</h2>
           <CertificatesClient cert={filteredCerts} />
         </section>
       )}
 
       <section className="container z-10">
         <h2>
-          Наявні шини для моделі {model.name} бренду {brand?.name}
+          Наявні шини для моделі {model.name} бренду {brand?.brand_name}
         </h2>
         <TyresList tyres={modelTyres} images={images} />
       </section>

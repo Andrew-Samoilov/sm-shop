@@ -12,7 +12,7 @@ export default async function ModelsPage() {
 
   const groupedModels = models.reduce<Record<string, { brand: Brand; models: Model[] }>>((acc, model) => {
     if (!model.brand) return acc;
-    const brandName = model.brand.name;
+    const brandName = model.brand.brand_name;
     if (!acc[brandName]) {
       acc[brandName] = {
         brand: model.brand,
@@ -30,13 +30,13 @@ export default async function ModelsPage() {
         <div key={brandName}>
           <div className="flex items-center gap-2">
             <h2>
-              {brand.name}
+              {brand.brand_name}
             </h2>
 
             {brand.logo && (
               <Image
                 src={brand.logo}
-                alt={brand.name}
+                alt={brand.brand_name}
                 width={20}
                 height={20}
                 className="h-[2.2em] w-auto align-middle"

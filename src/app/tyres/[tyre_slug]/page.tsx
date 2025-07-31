@@ -49,7 +49,7 @@ export async function generateMetadata(
     ? `${tyre.width}${tyre.delimiter ?? '/'}${tyre.profile} R${tyre.diameter} ${tyre.loadIndex}${tyre.speedIndex}`
     : "";
 
-  const name = `${tyre.brands?.name ?? ""} ${tyre.models?.name ?? ""} ${tyreSize}`.trim();
+  const name = `${tyre.brands?.brand_name ?? ""} ${tyre.models?.name ?? ""} ${tyreSize}`.trim();
   const description = tyre.models?.description ??
     `Шина ${name} для легкового авто. Доставка по Україні.`;
   const canonical = `https://shina-mix.com.ua/tyres/${tyre.slug}`;
@@ -81,7 +81,7 @@ export async function generateMetadata(
     description,
     brand: {
       "@type": "Brand",
-      name: tyre.brands?.name ?? ""
+      name: tyre.brands?.brand_name ?? ""
     },
     sku: tyre.slug,
     offers: {
@@ -158,7 +158,7 @@ export default async function TyrePage({
       <ViewItemGA
         item_id={tyre.id}
         item_name={tyre.title}
-        brand={tyre.brands?.name ?? ""}
+        brand={tyre.brands?.brand_name ?? ""}
         model={tyre.models?.name ?? ""}
         price={Number(tyre.price)}
       />
@@ -244,7 +244,7 @@ export default async function TyrePage({
               tyre={{
                 id: tyre.id,
                 title: tyre.title,
-                brand: tyre.brands?.name ?? "",
+                brand: tyre.brands?.brand_name ?? "",
                 model: tyre.models?.name ?? "",
                 tyreSize: tyreSize ?? "",
                 tyreImageUrl: images[0]?.url ?? "",

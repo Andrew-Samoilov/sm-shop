@@ -12,7 +12,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata(): Promise<Metadata> {
   const brands = await getBrands();
-  const brandNames = brands.map((b) => b.name).filter(Boolean);
+  const brandNames = brands.map((b) => b.brand_name).filter(Boolean);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -65,7 +65,7 @@ export default async function BrandsPage() {
           <LinkWithGA
             key={brand.id}
             eventCategory="brand"
-            eventLabel={brand.name}
+            eventLabel={brand.brand_name}
             className="group flex flex-col items-center justify-center border-2 p-6 border-border dark:border-darkmode-border hover:border-accent  rounded-md  hover:no-underline"
             href={`/brands/${brand.slug}`}
           >
@@ -74,16 +74,16 @@ export default async function BrandsPage() {
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={brand.logo}
-                  alt={brand.name}
+                  alt={brand.brand_name}
                   className=" md:max-w-[400px] md:min-w-[400px] h-auto"
-                  style={{ viewTransitionName: `logo-${brand.name}` }}
+                  style={{ viewTransitionName: `logo-${brand.brand_name}` }}
                 />
               )}
               <figcaption
                 className="text-light group-hover:text-accent transition-colors"
-                style={{ viewTransitionName: `title-${brand.name}` }}
+                style={{ viewTransitionName: `title-${brand.brand_name}` }}
               >
-                {brand.name}
+                {brand.brand_name}
               </figcaption>
             </figure>
           </LinkWithGA>

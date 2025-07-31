@@ -11,7 +11,7 @@ datasource db {
 model Brand {
   id          Int      @id @default(autoincrement())
   slug        String   @unique @db.VarChar(100)
-  name        String
+  brand_name  String
   logo        String?
   description String?
   website     String?

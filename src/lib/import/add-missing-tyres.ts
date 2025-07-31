@@ -39,14 +39,12 @@ export async function addMissingTyresFromImport() {
         const brandId = brandMap.get(brandSlug);
         const modelId = modelMap.get(modelSlug);
 
-        // if (!brandId || !modelId) {
-        //     // Пропускаємо, якщо не знайдено
-        //     continue;
-        // }
         if (!brandId) console.warn(`[addMissingTyresFromImport]⚠️ Бренд не знайдено: ${manufacturer} → ${brandSlug}`);
         if (!modelId) console.warn(`[addMissingTyresFromImport]⚠️ Модель не знайдено: ${modelName} → ${modelSlug}`);
         if (!brandId || !modelId) continue;
 
+        if (item.code === 'SM000016178') console.log(`[addMissingTyresFromImport] Бачимо шину: ${item.name}`);
+        
         tyresToInsert.push({
             externalId: item.externalId,
             sku: item.code,
