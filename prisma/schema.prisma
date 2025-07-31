@@ -11,7 +11,7 @@ datasource db {
 model Brand {
   id          Int      @id @default(autoincrement())
   slug        String   @unique @db.VarChar(100)
-  brand_name  String
+  brand_name  String  
   logo        String?
   description String?
   website     String?
@@ -30,7 +30,7 @@ model Tyre {
   sku               String  @unique @db.VarChar(50) //у 1с = code
   slug              String  @default("")
 
-  modelId           Int?    @map("model_id")
+  modelId           Int?    @map("model_id") 
   brandId           Int?    @map("brand_id")
 
   title             String
