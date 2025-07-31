@@ -22,25 +22,28 @@ export default async function ModelsPage() {
     acc[brandName].models.push(model);
     return acc;
   }, {});
- 
+
   return (
     <section className="container">
       <h1>Models</h1>
       {Object.entries(groupedModels).map(([brandName, { brand, models }]) => (
         <div key={brandName}>
-          <h2>
-            {brand.name}
-          </h2>
-    
-          {brand.logo && (
-            <Image
-              src={brand.logo}
-              alt={brand.name}
-              width={24}
-              height={24}
-              className="h-6 w-auto"
-            />
-          )}
+          <div className="flex items-center gap-2">
+            <h2>
+              {brand.name}
+            </h2>
+
+            {brand.logo && (
+              <Image
+                src={brand.logo}
+                alt={brand.name}
+                width={20}
+                height={20}
+                className="h-[2.2em] w-auto align-middle"
+              />
+            )}
+          </div>
+
 
           <span className="text-light text-sm">({models.length})</span>
           {models.map((model) => (
