@@ -10,18 +10,24 @@ export async function findMissingModelsFromImport() {
                 notIn: [''],
             },
         },
-        select: { model: true, },
+        select: {
+            model: true, 
+            manufacturer: true,
+        },
         distinct: ['model'],
     })
 
     // 2. Очищаємо та нормалізуємо: формуємо slug для кожного
-    const slugPairs = imported
-        .map((item) => item.model?.trim())
-        .filter((name): name is string => !!name)
-        .map((name) => ({
-            name,
-            slug: simpleSlug(name),
-        }));
+    // const slugPairs = imported
+    //     .map((item) => item.model?.trim())
+    // const name = item.model.trim();
+    // const brand_name = item.manufacturer?.trim();
+    //     .filter((name): name is string => !!name)
+    //     .map((name) => ({
+    //         name,
+    //         slug: simpleSlug(name),
+    //         brand
+    //     }));
 
     // 3. Отримуємо список усіх існуючих slug моделей
     const existing = await prisma.model.findMany({

@@ -129,10 +129,10 @@ export default async function ModelPage({
         )}
       </header>
 
-      {images && images.length > 0 && <ModelViewer images={images} />}
+      <ModelViewer images={images} season={model.season} />
 
       {model.description && (
-        <section className="p-6 lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl  bg-body dark:bg-darkmode-body z-10">
+        <section className="mx-auto p-6 lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl  bg-body dark:bg-darkmode-body z-10">
           <ReactMarkdown>{model.description}</ReactMarkdown>
         </section>
       )}
@@ -144,7 +144,7 @@ export default async function ModelPage({
         </section>
       )}
 
-      <section className="container z-10">
+      <section className="mx-auto z-10">
         <h2>
           Наявні шини для моделі {model.name} бренду {brand?.brand_name}
         </h2>

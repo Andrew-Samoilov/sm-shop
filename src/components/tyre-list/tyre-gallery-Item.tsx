@@ -18,7 +18,7 @@ export function TyreGalleryItem({ tyre, modelImages }: TyreListItemProps) {
             className="z-10 bg-white dark:bg-dark  p-1 flex flex-col h-full  overflow-hidden justify-between items-center gap-1 xl:gap-6 border border-transparent  rounded-lg xl:p-6 hover:border-accent hover:no-underline">
 
             <div className="relative w-full  max-w-[293px] overflow-hidden group shrink-0 ">
-                <TyreViewer images={modelImages} />
+                <TyreViewer images={modelImages} season={tyre.season} />
                 {/* <SeasonIcon
                     season={tyre.season}
                     className="absolute top-2 left-2 z-99"

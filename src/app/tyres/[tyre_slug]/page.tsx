@@ -1,4 +1,4 @@
-import { AddToCartButton, BreadCrumbs, CertificatesClient, LinkWithGA, ModelViewer, QuantitySelector, ViewItemGA } from "@/components";
+import { AddToCartButton, BreadCrumbs, CertificatesClient, LinkWithGA, ModelViewer, QuantitySelector, SeasonIcon, ViewItemGA } from "@/components";
 import { getTyreBySlug, getModelImgByModelId, prisma, getContentBlock, getTyreSize, getSeasonLabel } from "@/lib";
 import { Certificate, } from "@/types";
 import { Metadata } from "next";
@@ -166,7 +166,7 @@ export default async function TyrePage({
       <div className=" flex flex-col md:flex-row md:gap-6 pb-6 2xl:p-12
        items-center  justify-center ">
 
-        <ModelViewer images={images} />
+        <ModelViewer images={images} season={tyre.season} />
 
         <div className=" flex flex-col w-full md:w-auto min-w-fit p-2 md:p-0 gap-1 lg:gap-2">
           <h1 className="flex flex-col items-center md:items-start  ">
@@ -187,9 +187,15 @@ export default async function TyrePage({
           >Тиждень та рік виробництва: {tyre.dateCode}</div>
 
           {tyre.season && (
-            <span className=" text-light">{"Сезон: "}<span
-              className="text-dark dark:text-darkmode-dark"
-            > {getSeasonLabel(tyre.season)}</span></span>
+            <span className=" text-light flex gap-2">{"Сезон: "}
+              <span>
+                {getSeasonLabel(tyre.season)}
+              </span>
+              <SeasonIcon
+                season={tyre.season}
+              // className="absolute top-2 left-2 z-99"
+              />
+            </span>
           )}
 
           {tyre.applicability && (

@@ -1,12 +1,5 @@
-import { Season } from "@/types";
 import { SunIcon } from "@heroicons/react/24/solid";
 import type { ReactElement } from "react";
-
-
-interface SeasonIconProps {
-    season: Season;
-    className?: string;
-}
 
 const WinterIcon = () => (
     <svg
@@ -50,13 +43,13 @@ const AllSeasonIcon = () => (
     </svg>
 );
 
-const iconMap: Record<NonNullable<Season>, ReactElement> = {
+const iconMap: Record<string, ReactElement> = {
     SUMMER: <SunIcon className="size-5 text-yellow-500" />,
     WINTER: <WinterIcon />,
     ALLSEASON: <AllSeasonIcon />,
 };
 
-export function SeasonIcon({ season, className }: SeasonIconProps) {
+export function SeasonIcon({ season, className }: { season?: string; className?: string }) {
     if (!season) return null;
 
     return <span title={season} className={className}

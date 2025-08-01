@@ -67,6 +67,7 @@ model Model {
   id          Int          @id @default(autoincrement())
   slug        String       @unique @db.VarChar(200)
   name        String
+  brand_name  String 
   description String?
   brandId     Int?          @map("brand_id")
   createdAt   DateTime     @default(now()) @map("created_at")

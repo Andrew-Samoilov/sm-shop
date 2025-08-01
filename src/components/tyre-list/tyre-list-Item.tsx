@@ -18,7 +18,7 @@ export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
             href={`/tyres/${tyre.slug}`}
             className="w-full min-w-0 flex flex-1 flex-col md:flex-row justify-between gap-1 p-1 xl:p-6 xl:gap-6 items-center border border-white dark:border-darkmode-body hover:border-accent rounded-lg hover:no-underline">
 
-            <TyreViewer images={modelImages} />
+            <TyreViewer images={modelImages} season={tyre.season}/>
 
             <div 
                 className="flex-2  min-w-0  gap-0 xl:gap-2 flex flex-row md:flex-col ">
