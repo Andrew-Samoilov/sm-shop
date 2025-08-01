@@ -1,4 +1,5 @@
 import { TyreTitleProps } from "@/types";
+import { getSeasonLabel } from "@/lib";
 
 
 export function TyreTitle({ title, country, date, season, applicability, diskProtection }: TyreTitleProps) {
@@ -6,7 +7,7 @@ export function TyreTitle({ title, country, date, season, applicability, diskPro
     <p>
       {title}
       {season && (
-        <span title="Сезон" className="text-light text-sm">{" "}{season} </span>
+        <span title="Сезон" className="text-light text-sm">{" "}{getSeasonLabel(season)} </span>
       )}
       {
         country && (

@@ -1,7 +1,6 @@
 export { formatDisplayUrl } from "./format-display-url";
 export { formatFormData } from "./format-form-data";
 export { normalizedCerts } from "./normalized-sert";
-export { translateSeasonToUkrainian } from "./translate-season-to-ukrainian"
 export { TyreTitle } from "./tyre-title";
 export { getTyreSize } from "./get-tyre-size";
 export { simpleSlug } from "./simple-slug";
@@ -38,6 +37,7 @@ export { getModelsByBrandId } from "./prisma/get-models-by-brand-id";
 export { getModelBySlug } from "./prisma/get-model-by-slug";
 export { getModelImgByModelId } from "./prisma/get-model-img-by-model-id";
 export { getModelImagesByIds } from "./prisma/get-model-img-by-model-ids";
+export { getSeasonLabel } from "./get-season-label";
 
 export { handleClientSubmit } from "./recaptcha/handleClientSubmit";
 export { handleOrderSubmit } from "./recaptcha/handleOrderSubmit";

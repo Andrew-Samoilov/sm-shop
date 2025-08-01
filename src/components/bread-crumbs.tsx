@@ -1,6 +1,6 @@
 import { HomeIcon } from "@heroicons/react/24/outline";
 
-import { getTyreBySlug, translateSeasonToUkrainian } from "@/lib";
+import { getSeasonLabel, getTyreBySlug} from "@/lib";
 import { LinkWithGA } from "./link-with-ga";
 
 type Props = { tyreSlug: string; };
@@ -8,7 +8,7 @@ type Props = { tyreSlug: string; };
 export async function BreadCrumbs({ tyreSlug }: Props) {
     const tyre = await getTyreBySlug(tyreSlug);
     const season = tyre?.season?.toLowerCase();
-    const seasonUA = translateSeasonToUkrainian(season);
+    const seasonUA = getSeasonLabel(season);
 
     const tyreSize = tyre?.width && tyre.profile && tyre.diameter && tyre.loadSpeedIndex
         ? `${tyre.width}${tyre.delimiter ?? '/'}${tyre.profile} R${tyre.diameter}`

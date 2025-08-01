@@ -1,5 +1,5 @@
 import { AddToCartButton, BreadCrumbs, CertificatesClient, LinkWithGA, ModelViewer, QuantitySelector, ViewItemGA } from "@/components";
-import { getTyreBySlug, getModelImgByModelId, prisma, translateSeasonToUkrainian, getContentBlock, getTyreSize } from "@/lib";
+import { getTyreBySlug, getModelImgByModelId, prisma, getContentBlock, getTyreSize, getSeasonLabel } from "@/lib";
 import { Certificate, } from "@/types";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -44,7 +44,7 @@ export async function generateMetadata(
     }
   }
 
-  const seasonUA = translateSeasonToUkrainian(tyre.season ?? "");
+  const seasonUA = getSeasonLabel(tyre.season);
   const tyreSize = tyre?.width && tyre.profile && tyre.diameter && tyre.loadSpeedIndex
     ? `${tyre.width}${tyre.delimiter ?? '/'}${tyre.profile} R${tyre.diameter} ${tyre.loadIndex}${tyre.speedIndex}`
     : "";
@@ -189,7 +189,7 @@ export default async function TyrePage({
           {tyre.season && (
             <span className=" text-light">{"Сезон: "}<span
               className="text-dark dark:text-darkmode-dark"
-            >{tyre.season}</span></span>
+            > {getSeasonLabel(tyre.season)}</span></span>
           )}
 
           {tyre.applicability && (
@@ -237,7 +237,8 @@ export default async function TyrePage({
               <QuantitySelector />
               <span
                 className="font-semibold text-h1"
-              >{tyre.price?.toLocaleString("uk-UA")} <span className="text-h3 font-normal text-light">грн</span></span>
+              >{tyre.price?.toLocaleString("uk-UA")} <span className="text-h3 font-normal text-light">грн<span
+                className="text-[75%] opacity-75">/шт</span></span></span>
             </div>
 
             <AddToCartButton

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { AddToCartButton, TyreViewer } from "@/components";
 import type { ModelImage } from "@prisma/client";
 import { TyreWithRelations } from "@/types";
-import { getTyreSize, TyreTitle } from "@/lib";
+import {  getTyreSize, TyreTitle } from "@/lib";
 
 type TyreListItemProps = {
     tyre: TyreWithRelations;
