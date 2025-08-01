@@ -14,7 +14,7 @@ export async function getBrands(): Promise<Brand[]> {
           },
         },
       },
-      orderBy: { name: "asc" },
+      orderBy: { brand_name: "asc" },
     });
 
     return brands;

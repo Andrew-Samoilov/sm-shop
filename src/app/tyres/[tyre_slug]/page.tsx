@@ -170,7 +170,7 @@ export default async function TyrePage({
 
         <div className=" flex flex-col w-full md:w-auto min-w-fit p-2 md:p-0 gap-1 lg:gap-2">
           <h1 className="flex flex-col items-center md:items-start  ">
-            <span>{tyre.brands?.name}</span>
+            <span>{tyre.brands?.brand_name}</span>
             <span>{tyre.models?.name}</span>
             <span className="font-normal text-[75%]">{tyreSize}</span>
           </h1>
@@ -193,7 +193,7 @@ export default async function TyrePage({
           )}
 
           {tyre.applicability && (
-            <span className=" text-light">Застосовуваність:{tyre.applicability}</span>
+            <span className=" text-light">Застосовуваність: {tyre.applicability}</span>
           )}
           {tyre.diskProtection && (
             <span className=" text-light">Захист диска: {tyre.diskProtection}</span>

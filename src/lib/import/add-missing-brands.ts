@@ -1,6 +1,6 @@
 import { prisma } from '@/lib'
 
-export async function addMissingBrands(brands: { name: string; slug: string }[]) {
+export async function addMissingBrands(brands: { brand_name: string; slug: string }[]) {
     if (brands.length === 0) {
         console.log("[addMissingBrands] Немає нових брендів для додавання");
         return;

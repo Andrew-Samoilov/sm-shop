@@ -1,6 +1,6 @@
 import { prisma, simpleSlug } from '@/lib'
 
-export async function findMissingBrandsFromImport(): Promise<{ name: string; slug: string }[]> {
+export async function findMissingBrandsFromImport(): Promise<{ brand_name: string; slug: string }[]> {
     // 1. Витягуємо унікальні значення manufacturer з імпорту
     const imported = await prisma.tyreImport.findMany({
         distinct: ['manufacturer'],
@@ -16,9 +16,9 @@ export async function findMissingBrandsFromImport(): Promise<{ name: string; slu
     const slugPairs = imported
         .map((item) => item.manufacturer?.trim())
         .filter((name): name is string => !!name)
-        .map((name) => ({
-            name,
-            slug: simpleSlug(name),
+        .map((brand_name) => ({
+            brand_name,
+            slug: simpleSlug(brand_name),
         }));
 
     // 3. Отримуємо список усіх існуючих slug брендів
@@ -34,7 +34,7 @@ export async function findMissingBrandsFromImport(): Promise<{ name: string; slu
 
     // 5. Лог та повернення
     console.log(`[findMissingBrandsFromImport] ❗ Відсутні бренди (${missing.length}):`);
-    missing.forEach((b) => console.log(`❌ ${b.slug} (${b.name})`));
+    missing.forEach((b) => console.log(`❌ ${b.slug} (${b.brand_name})`));
 
     return missing;
 }
