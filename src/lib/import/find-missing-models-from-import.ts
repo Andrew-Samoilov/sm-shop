@@ -1,47 +1,36 @@
-import { prisma, simpleSlug } from '@/lib'
+import { prisma } from '@/lib'
 
-export async function findMissingModelsFromImport() {
-    const imported = await prisma.tyreImport.findMany({
-        where: {
-            itemType: 'Товар',
-            processed: false,
-            model: {
-                not: null,
-                notIn: [''],
-            },
-        },
-        select: {
-            model: true, 
-            manufacturer: true,
-        },
-        distinct: ['model'],
-    })
-
-    // 2. Очищаємо та нормалізуємо: формуємо slug для кожного
-    // const slugPairs = imported
-    //     .map((item) => item.model?.trim())
-    // const name = item.model.trim();
-    // const brand_name = item.manufacturer?.trim();
-    //     .filter((name): name is string => !!name)
-    //     .map((name) => ({
-    //         name,
-    //         slug: simpleSlug(name),
-    //         brand
-    //     }));
-
-    // 3. Отримуємо список усіх існуючих slug моделей
+export async function findMissingModelsFromImport(): Promise<
+    { model_name: string; slug: string }[]
+> {
+   
+    // 1. Отримуємо унікальні назви моделей з імпорту (trim + lowercase)
+    const importedModels = await prisma.$queryRaw<
+        { model_name: string; slug: string }[]
+    >`
+    SELECT DISTINCT 
+      TRIM(model) AS model_name,
+      LOWER(REGEXP_REPLACE(TRIM(model), '[^a-z0-9]+', '-', 'gi')) AS slug
+    FROM tyre_import
+    WHERE item_type = 'Товар'
+      AND processed = false
+      AND model IS NOT NULL
+      AND model <> ''
+  `;
+    console.log(`[findMissingModelsFromImport] Імпортовані моделі:`, importedModels);
+    
+    // 2. Отримуємо список усіх існуючих slug моделей
     const existing = await prisma.model.findMany({
         select: { slug: true },
     });
 
     const existingSlugs = new Set(existing.map((b) => b.slug))
 
-    // 4. Фільтруємо ті, яких ще немає
-    const missingModels = slugPairs.filter((b) => !existingSlugs.has(b.slug))
+    // 3. Фільтруємо ті, яких ще немає
+    const missingModels = importedModels.filter((b) => !existingSlugs.has(b.slug))
 
-    // 5. Лог та повернення
-    console.log(`[findMissingModelsFromImport] ❗ Відсутні моделі (${missingModels.length}):`);
-    missingModels.forEach((b) => console.log(`❌ ${b.slug} (${b.name})`));
+    // 4. Лог та повернення
+    console.log(`[findMissingModelsFromImport] ❗ models to add:`, missingModels);
 
     return missingModels
 }

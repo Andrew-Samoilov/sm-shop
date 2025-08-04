@@ -19,9 +19,9 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata(
-  _context: { params: { tyre_slug: string } }
+  { params }: { params: { tyre_slug: string } }
 ): Promise<Metadata> {
-  const { tyre_slug } = _context.params;
+  const { tyre_slug } = params;
 
   const tyre = await getTyreBySlug(tyre_slug);
 

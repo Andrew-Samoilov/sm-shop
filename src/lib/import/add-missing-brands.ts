@@ -1,15 +1,20 @@
-import { prisma } from '@/lib'
+import { capitalizeFirstLetter, prisma } from '@/lib'
 
-export async function addMissingBrands(brands: { brand_name: string; slug: string }[]) {
+export async function addMissingBrands(brands: { slug: string }[]) {
     if (brands.length === 0) {
         console.log("[addMissingBrands] Немає нових брендів для додавання");
         return;
     }
 
+    const formatted = brands.map(({ slug }) => ({
+        brand_name: capitalizeFirstLetter(slug.replace(/-/g, ' ')),
+        slug,
+    }));
+
     await prisma.brand.createMany({
-        data: brands,
-        skipDuplicates: true, // <- не створює, якщо slug вже є
+        data: formatted,
+        skipDuplicates: true, 
     });
 
-    console.log(`[addMissingBrands] Створено (або пропущено дублікати): ${brands.length} брендів`);
+    console.log(`[addMissingBrands] Створено (або пропущено дублікати): ${formatted.length} брендів`);
 }

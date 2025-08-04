@@ -1,40 +1,45 @@
-import { prisma, simpleSlug } from '@/lib'
+import { prisma } from '@/lib'
 
-export async function findMissingBrandsFromImport(): Promise<{ brand_name: string; slug: string }[]> {
-    // 1. Витягуємо унікальні значення manufacturer з імпорту
-    const imported = await prisma.tyreImport.findMany({
-        distinct: ['manufacturer'],
-        where: {
-            itemType: 'Товар',
-            processed: false,
-            manufacturer: { not: null, notIn: [''] },
-        },
-        select: { manufacturer: true, },
-    });
+export async function findMissingBrandsFromImport(): Promise<{ slug: string }[]> {
 
-    // 2. Очищаємо та нормалізуємо: формуємо slug для кожного
-    const slugPairs = imported
-        .map((item) => item.manufacturer?.trim())
-        .filter((name): name is string => !!name)
-        .map((brand_name) => ({
-            brand_name,
-            slug: simpleSlug(brand_name),
-        }));
+  // 1. Витягуємо унікальні значення manufacturer з імпорту, очищаємо та нормалізуємо
+  const importedBrands = await prisma.$queryRaw<
+    { slug: string }[]
+  >`
+    SELECT DISTINCT
+      LOWER(
+        REGEXP_REPLACE(
+          TRIM(manufacturer),
+          '[^a-z0-9]+',
+          '-',
+          'gi'
+        )
+      ) AS slug
+    FROM tyre_import
+    WHERE item_type = 'Товар'
+      AND processed = false
+      AND manufacturer IS NOT NULL
+      AND manufacturer <> '';
+  `;
+  // console.log(`[findMissingBrandsFromImport]  importedBrands:`, importedBrands);
 
-    // 3. Отримуємо список усіх існуючих slug брендів
-    const existing = await prisma.brand.findMany({
-        select: { slug: true },
-    });
+  // 2. Отримуємо список усіх існуючих slug брендів
+  const existing = await prisma.brand.findMany({
+    select: { slug: true },
+  });
+  // console.log(`[findMissingBrandsFromImport]  existing brands slug:`, existing);
 
-    const existingSlugs = new Set(existing.map((b) => b.slug));
+  const existingSlugs = new Set(existing.map((b) => b.slug));
 
-    // 4. Фільтруємо ті, яких ще немає
-    const missing = slugPairs.filter((b) => !existingSlugs.has(b.slug))
+  // 3. Фільтруємо ті, яких ще немає
+  const missingBrands = importedBrands.filter((b) => !existingSlugs.has(b.slug))
 
 
-    // 5. Лог та повернення
-    console.log(`[findMissingBrandsFromImport] ❗ Відсутні бренди (${missing.length}):`);
-    missing.forEach((b) => console.log(`❌ ${b.slug} (${b.brand_name})`));
+  // 4. Лог та повернення
+  console.log(`[findMissingBrandsFromImport] ❗ Brands to add :`, missingBrands);
 
-    return missing;
+
+  // missing.forEach((b) => console.log(`❌ ${b.slug} (${b.brand_name})`));
+
+  return missingBrands;
 }

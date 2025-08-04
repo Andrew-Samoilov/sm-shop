@@ -1,6 +1,6 @@
 import { prisma } from '@/lib'
 
-export async function addMissingModels(models: { name: string; slug: string }[]) {
+export async function addMissingModels(models: { brand_name: string; slug: string }[]) {
     if (models.length === 0) {
         console.log("[addMissingModels] Немає нових моделей для додавання");
         return;

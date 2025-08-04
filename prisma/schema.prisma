@@ -67,7 +67,7 @@ model Model {
   id          Int          @id @default(autoincrement())
   slug        String       @unique @db.VarChar(200)
   name        String
-  brand_name  String 
+  brand_name  String       @map("brand_name")
   description String?
   brandId     Int?          @map("brand_id")
   createdAt   DateTime     @default(now()) @map("created_at")
@@ -157,7 +157,7 @@ model Order {
 
 model TyreImport {
   id          Int     @id @default(autoincrement())
-  externalId String   // поле id з 1С
+  externalId String   @map("external_id")// поле id з 1С
   name       String
   code       String   // артикул
   price      Int
@@ -166,20 +166,20 @@ model TyreImport {
 
   model            String?
   manufacturer     String?
-  yearOfProduction String?
+  yearOfProduction String? @map("year_of_production")
   season           String?
-  typeSize         String?
+  typeSize         String? @map("type_size")
   diameter         String?
   load             String?
   speed            String?
-  additionalIndex  String?
+  additionalIndex  String? @map("additional_index")
   applicability    String?
-  diskProtection   String?
+  diskProtection   String? @map("disk_protection")
   country          String?
   rof              String?
 
-  itemType    String?
-  raw         Json?     // повний оригінальний запис
+  itemType         String? @map("item_type")  
+  raw              Json?     
   processed   Boolean   @default(false)
   importedAt  DateTime  @default(now()) @map("imported_at")
   
