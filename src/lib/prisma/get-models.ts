@@ -23,7 +23,7 @@ export async function getModels() {
         },
       },
       orderBy: {
-        name: "asc",
+        modelName: "asc",
       },
     });
     return models;

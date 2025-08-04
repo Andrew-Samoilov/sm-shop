@@ -2,7 +2,7 @@ import { capitalizeFirstLetter, prisma } from '@/lib'
 
 export async function addMissingBrands(brands: { slug: string }[]) {
     if (brands.length === 0) {
-        console.log("[addMissingBrands] Немає нових брендів для додавання");
+        console.log("[addMissingBrands] No new brands to add");
         return;
     }
 

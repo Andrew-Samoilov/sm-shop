@@ -17,7 +17,7 @@ export async function findMissingModelsFromImport(): Promise<
       AND model IS NOT NULL
       AND model <> ''
   `;
-    console.log(`[findMissingModelsFromImport] Імпортовані моделі:`, importedModels);
+    // console.log(`[findMissingModelsFromImport] Імпортовані моделі:`, importedModels);
     
     // 2. Отримуємо список усіх існуючих slug моделей
     const existing = await prisma.model.findMany({
