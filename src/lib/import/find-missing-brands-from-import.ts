@@ -9,7 +9,7 @@ export async function findMissingBrandsFromImport(): Promise<{ slug: string }[]>
     SELECT DISTINCT
       LOWER(
         REGEXP_REPLACE(
-          TRIM(manufacturer),
+          TRIM(brand_name),
           '[^a-z0-9]+',
           '-',
           'gi'
@@ -18,8 +18,8 @@ export async function findMissingBrandsFromImport(): Promise<{ slug: string }[]>
     FROM tyre_import
     WHERE item_type = 'Товар'
       AND processed = false
-      AND manufacturer IS NOT NULL
-      AND manufacturer <> '';
+      AND brand_name IS NOT NULL
+      AND brand_name <> '';
   `;
   // console.log(`[findMissingBrandsFromImport]  importedBrands:`, importedBrands);
 
@@ -36,7 +36,7 @@ export async function findMissingBrandsFromImport(): Promise<{ slug: string }[]>
 
 
   // 4. Лог та повернення
-  console.log(`[findMissingBrandsFromImport] ❗ Brands to add :`, missingBrands);
+  // console.log(`[findMissingBrandsFromImport] ❗ Brands to add :`, missingBrands);
 
 
   // missing.forEach((b) => console.log(`❌ ${b.slug} (${b.brand_name})`));

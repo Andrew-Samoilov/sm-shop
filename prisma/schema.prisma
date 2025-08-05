@@ -165,7 +165,7 @@ model TyreImport {
   slug       String? @db.VarChar(100)
 
   model            String?
-  manufacturer     String?
+  brandName        String       @map("brand_name")
   yearOfProduction String? @map("year_of_production")
   season           String?
   typeSize         String? @map("type_size")

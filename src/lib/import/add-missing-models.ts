@@ -1,6 +1,6 @@
 import { prisma } from '@/lib'
 
-export async function addMissingModels(models: { model_name: string; slug: string }[]) {
+export async function addMissingModels(models: { modelName: string; slug: string; brandName: string }[]) {
     if (models.length === 0) {
         console.log("[addMissingModels] No new models to add");
         return;
