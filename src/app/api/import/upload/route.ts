@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
         const missingModels = await findMissingModelsFromImport();
         await addMissingModels(missingModels)            
 
-        const imported = await addMissingTyresFromImport()
+        // const imported = await addMissingTyresFromImport()
 
         const updated = await updateExistingTyresFromImportBatch();
 
@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
             brandsAdded: missingBrands.length,
             modelsAdded: missingModels.length,
             inserted,
-            imported,
+            // imported,
             updated,
         });
     } catch (error) {

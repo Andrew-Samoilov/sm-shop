@@ -10,7 +10,9 @@ export async function saveTyreImportItems(items: OneCTyreData[]) {
             externalId: item.id,
             code: item.code,
             model: item.model,
-            brandName: simpleSlug(typeof item.brand === 'string' ? item.brand : 'unknown'),
+            brandName: typeof item.brand === "string"
+                ? normalizeBrandName(item.brand)
+                : "Unknown",
             price: item.price ?? 0,
             quantity: item.quantity ?? 0,
             season: item.season,
@@ -36,4 +38,12 @@ export async function saveTyreImportItems(items: OneCTyreData[]) {
     })
 
     return result.count
+}
+
+function normalizeBrandName(brand: string): string {
+    return brand
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, " ")
+        .replace(/(^|\s)\S/g, (l) => l.toUpperCase()); // кожне слово з великої
 }

@@ -31,15 +31,15 @@ export async function addMissingTyresFromImport() {
     const tyresToInsert = [];
 
     for (const item of importItems) {
-        const manufacturer = item.manufacturer?.trim() || 'Unknown';
+        const brand = item.brandName?.trim() || 'Unknown';
         const modelName = item.model?.trim() || 'unknown';
-        const brandSlug = simpleSlug(manufacturer);
+        const brandSlug = simpleSlug(brand);
         const modelSlug = simpleSlug(`${brandSlug}-${modelName}`);
 
         const brandId = brandMap.get(brandSlug);
         const modelId = modelMap.get(modelSlug);
 
-        if (!brandId) console.warn(`[addMissingTyresFromImport]⚠️ Бренд не знайдено: ${manufacturer} → ${brandSlug}`);
+        if (!brandId) console.warn(`[addMissingTyresFromImport]⚠️ Бренд не знайдено: ${brand} → ${brandSlug}`);
         if (!modelId) console.warn(`[addMissingTyresFromImport]⚠️ Модель не знайдено: ${modelName} → ${modelSlug}`);
         if (!brandId || !modelId) continue;
 
