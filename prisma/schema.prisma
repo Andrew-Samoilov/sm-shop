@@ -161,7 +161,7 @@ model TyreImport {
   name       String
   code       String   // артикул
   price      Int
-  quantity   Int
+  quantity   Int      @default(0)
   slug       String? @db.VarChar(100)
 
   model            String?

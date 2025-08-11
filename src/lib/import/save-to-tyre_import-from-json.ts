@@ -1,7 +1,7 @@
 import { prisma, simpleSlug } from "@/lib"
 import { OneCTyreData } from "@/types"
 
-export async function saveTyreImportItems(items: OneCTyreData[]) {
+export async function saveToTyreImportFromJson(items: OneCTyreData[]) {
     const prepared = items.map((item) => {
         const name = item.name ?? item.title ?? "unnamed"
 
@@ -36,6 +36,10 @@ export async function saveTyreImportItems(items: OneCTyreData[]) {
         data: prepared,
         skipDuplicates: true,
     })
+
+    if (process.env.NODE_ENV === "development") {
+        console.info("[saveToTyreImportFromJson] items: ", result.count);
+    }
 
     return result.count
 }

@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { addMissingBrands, addMissingModels, addMissingTyresFromImport, findMissingBrandsFromImport, findMissingModelsFromImport, saveTyreImportItems, updateExistingTyresFromImportBatch } from '@/lib';
-
+import { saveToTyreImportFromJson,  updateExistingTyresOneByOne } from '@/lib';
 
 export async function POST(req: NextRequest) {
     const ALLOWED_IPS = (process.env.ALLOWED_IPS || '')
@@ -11,11 +10,11 @@ export async function POST(req: NextRequest) {
     const forwardedFor = req.headers.get('x-forwarded-for') || '';
     const clientIp = forwardedFor?.split(',')[0].trim() || 'невідомо'
 
-    console.log('x-forwarded-for:', forwardedFor)
-    console.log('Client IP:', clientIp)
+    console.log('[POST] x-forwarded-for:', forwardedFor)
+    console.log('[POST] Client IP:', clientIp)
 
     if (!ALLOWED_IPS.includes(clientIp)) {
-        console.warn(`Заблоковано запит з IP: ${clientIp}`)
+        console.warn(`[POST] Заблоковано запит з IP: ${clientIp}`)
         return new NextResponse('Forbidden', { status: 403 })
     }
 
@@ -24,8 +23,7 @@ export async function POST(req: NextRequest) {
     if (authHeader !== `Bearer ${API_TOKEN}`) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-
-
+   
     let data;
     try {
         data = await req.json();
@@ -38,26 +36,32 @@ export async function POST(req: NextRequest) {
     }
 
     try {
-        const inserted = await saveTyreImportItems(data);
+        const inserted = await saveToTyreImportFromJson(data);
+        /// upper this - works
 
-        const missingBrands = await findMissingBrandsFromImport();
-        await addMissingBrands(missingBrands);
+        // console.log("[upload] before updateExistingTyresOneByOne");
+        const res = await updateExistingTyresOneByOne();
+        console.log("[Post] after [updateExistingTyresOneByOne]", res);
+        
+
+        // const missingBrands = await findMissingBrandsFromImport();
+        // await addMissingBrands(missingBrands);
     
-        const missingModels = await findMissingModelsFromImport();
-        await addMissingModels(missingModels)            
+        // const missingModels = await findMissingModelsFromImport();
+        // await addMissingModels(missingModels)            
 
         // const imported = await addMissingTyresFromImport()
 
-        const updated = await updateExistingTyresFromImportBatch();
+        // const updated = await updateExistingTyresFromImportBatch();
 
         return NextResponse.json({
             status: 'ok',
             ip: clientIp,
-            brandsAdded: missingBrands.length,
-            modelsAdded: missingModels.length,
+            // brandsAdded: missingBrands.length,
+            // modelsAdded: missingModels.length,
             inserted,
             // imported,
-            updated,
+            res,
         });
     } catch (error) {
         console.error('❌ DB error in import:', error);
