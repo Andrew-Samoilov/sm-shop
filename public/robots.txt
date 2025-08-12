@@ -1,0 +1,29 @@
+# robots.txt — Інструкції для пошукових систем
+# Інтернет-магазин шин “Шина Мікс” — самовивіз у центрі Києва, доставка по Україні
+
+User-agent: *
+
+Allow: /tyres
+Allow: /tyres/
+Allow: /tyres/*
+
+Allow: /brands
+Allow: /brands/
+Allow: /brands/*
+
+Allow: /models
+Allow: /models/
+Allow: /models/*
+
+Allow: /info
+Allow: /info/
+Allow: /info/*
+Allow: /about
+Allow: /contacts
+
+Disallow: /cart
+Disallow: /checkout
+Disallow: /account
+Disallow: /admin
+
+# Додати посилання на карту сайту
