@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { addMissingBrands, addMissingModels, addMissingTyresFromImport, findMissingBrandsFromImport, findMissingModelsFromImport, prisma, saveToTyreImportFromJson,  updateExistingTyresOneByOne } from '@/lib';
+import { addMissingBrands, addMissingModels, addMissingTyresFromImport, findMissingBrandsFromImport, findMissingModelsFromImport, prisma, saveToTyreImportFromJson, updateExistingTyresBulk } from '@/lib';
 
 export async function POST(req: NextRequest) {
     const ALLOWED_IPS = (process.env.ALLOWED_IPS || '')
@@ -44,8 +44,9 @@ export async function POST(req: NextRequest) {
         const inserted = await saveToTyreImportFromJson(data);
        
         // console.log("[upload] before updateExistingTyresOneByOne");
-        const res = await updateExistingTyresOneByOne();
-        console.log("[Post] after [updateExistingTyresOneByOne]", res);
+        await updateExistingTyresBulk();
+        // const res = await updateExistingTyresOneByOne();
+        // console.log("[Post] after [updateExistingTyresOneByOne]", res);
         
 
         const missingBrands = await findMissingBrandsFromImport();
@@ -65,7 +66,7 @@ export async function POST(req: NextRequest) {
             brandsAdded: missingBrands.length,
             modelsAdded: missingModels.length,
             inserted,  
-            res,
+            // res,
         });
     } catch (error) {
         console.error('❌ DB error in import:', error);
