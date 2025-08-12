@@ -20,7 +20,7 @@ export { addMissingBrands } from "./import/add-missing-brands";
 export { addMissingModels } from "./import/add-missing-models";
 
 export { saveToTyreImportFromJson } from "./import/save-to-tyre_import-from-json";
-export { addMissingTyresFromImport } from "./import/add-missing-tyres";
+export { addMissingTyresFromImport } from "./import/add-missing-tyres-from-import";
 export { getTyreBySlug } from "./prisma/get-tyre-by-slug";
 export { getTyreById } from "./prisma/get-tyre-by-id";
 

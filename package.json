@@ -1,6 +1,6 @@
 {
   "name": "sm-shop",
-  "version": "0.8.5.5",
+  "version": "0.9.0",
   "private": true,
   "scripts": {
     "dev": "( taskkill /F /IM ssh.exe || echo ssh не працює ) && ssh -fN -L 5433:localhost:5432 sms && echo Тунель відкрито && next dev",

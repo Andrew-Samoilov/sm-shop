@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { saveToTyreImportFromJson,  updateExistingTyresOneByOne } from '@/lib';
+import { addMissingBrands, addMissingModels, addMissingTyresFromImport, findMissingBrandsFromImport, findMissingModelsFromImport, prisma, saveToTyreImportFromJson,  updateExistingTyresOneByOne } from '@/lib';
 
 export async function POST(req: NextRequest) {
     const ALLOWED_IPS = (process.env.ALLOWED_IPS || '')
@@ -36,31 +36,35 @@ export async function POST(req: NextRequest) {
     }
 
     try {
+        
+        console.time("[import]");
+        //очищаємо таблицю перед вставкою
+        await prisma.tyreImport.deleteMany({});
+        
         const inserted = await saveToTyreImportFromJson(data);
-        /// upper this - works
-
+       
         // console.log("[upload] before updateExistingTyresOneByOne");
         const res = await updateExistingTyresOneByOne();
         console.log("[Post] after [updateExistingTyresOneByOne]", res);
         
 
-        // const missingBrands = await findMissingBrandsFromImport();
-        // await addMissingBrands(missingBrands);
+        const missingBrands = await findMissingBrandsFromImport();
+        await addMissingBrands(missingBrands);
     
-        // const missingModels = await findMissingModelsFromImport();
-        // await addMissingModels(missingModels)            
+        const missingModels = await findMissingModelsFromImport();
+        await addMissingModels(missingModels)            
+        
 
-        // const imported = await addMissingTyresFromImport()
-
-        // const updated = await updateExistingTyresFromImportBatch();
+        await addMissingTyresFromImport();
+        console.timeEnd("[import]");
+        /// upper this - works
 
         return NextResponse.json({
             status: 'ok',
             ip: clientIp,
-            // brandsAdded: missingBrands.length,
-            // modelsAdded: missingModels.length,
-            inserted,
-            // imported,
+            brandsAdded: missingBrands.length,
+            modelsAdded: missingModels.length,
+            inserted,  
             res,
         });
     } catch (error) {
