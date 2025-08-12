@@ -6,7 +6,6 @@ import { Metadata } from "next";
 import { Certificate } from "@/types";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
 
-
 export async function generateStaticParams() {
   const models = await getModels();
 
@@ -29,7 +28,7 @@ export async function generateMetadata(
 
   const title = `${brand?.brand_name} ${model.modelName} – характеристики, ціна та відгуки | ${siteConfig.siteName}`;
   const description = `Детальний огляд шини ${brand?.brand_name} ${model.modelName}: характеристики, переваги, особливості експлуатації та наявність у магазині ${siteConfig.siteName}.`;
-  const canonicalUrl = `${BASE_URL}/brands/${model.slug}`;
+  const canonicalUrl = `${BASE_URL}/models/${model.slug}`;
 
   const images = await getModelImgByModelId(model.id);
   const ogImages = images?.map((img) => ({
@@ -81,7 +80,7 @@ export default async function ModelPage({
   const filteredCerts = normalizedCerts(cert, brand?.brand_name);
 
 
-  const canonicalUrl = `${BASE_URL}/brands/${model.slug}`;
+  const canonicalUrl = `${BASE_URL}/models/${model.slug}`;
   const images = await getModelImgByModelId(model.id);
 
   const jsonLd = {
