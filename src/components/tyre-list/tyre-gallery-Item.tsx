@@ -41,7 +41,7 @@ export function TyreGalleryItem({ tyre, modelImages }: TyreListItemProps) {
                         title: tyre.title,
                         price: tyre.price,
                         brand: tyre.brands?.brand_name ?? "unknown",
-                        model: tyre.models?.name ?? "",
+                        model: tyre.models?.modelName ?? "",
                         tyreImageUrl: modelImages[0]?.url ?? "",
                         tyreSize: tyreSize ?? "",
                         quantity: 4,

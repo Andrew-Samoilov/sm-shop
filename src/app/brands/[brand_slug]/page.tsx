@@ -161,7 +161,7 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
             <LinkWithGA
               key={model.id}
               href={`/models/${model.slug}`}
-              eventLabel={model.name}
+              eventLabel={model.modelName}
               eventCategory={`brand-${brand.brand_name}`}
               className=" px-6"
               eventParams={{
@@ -169,7 +169,7 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
                 modelId: `${model.id}`,
               }}
             >
-              {model.name}
+              {model.modelName}
             </LinkWithGA>
           ))}
         </div>

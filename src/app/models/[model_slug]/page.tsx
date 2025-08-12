@@ -27,14 +27,14 @@ export async function generateMetadata(
     ? await getBrandById(model.brandId)
     : null;
 
-  const title = `${brand?.brand_name} ${model.name} – характеристики, ціна та відгуки | ${siteConfig.siteName}`;
-  const description = `Детальний огляд шини ${brand?.brand_name} ${model.name}: характеристики, переваги, особливості експлуатації та наявність у магазині ${siteConfig.siteName}.`;
+  const title = `${brand?.brand_name} ${model.modelName} – характеристики, ціна та відгуки | ${siteConfig.siteName}`;
+  const description = `Детальний огляд шини ${brand?.brand_name} ${model.modelName}: характеристики, переваги, особливості експлуатації та наявність у магазині ${siteConfig.siteName}.`;
   const canonicalUrl = `${BASE_URL}/brands/${model.slug}`;
 
   const images = await getModelImgByModelId(model.id);
   const ogImages = images?.map((img) => ({
     url: img.url.startsWith("http") ? img.url : `${BASE_URL}${img.url}`,
-    alt: img.alt ?? `${brand?.brand_name} ${model.name} – купити в магазині ${siteConfig.siteName}`,
+    alt: img.alt ?? `${brand?.brand_name} ${model.modelName} – купити в магазині ${siteConfig.siteName}`,
     width: img.width ?? 800,
     height: img.height ?? 600,
   })) ?? [];
@@ -87,7 +87,7 @@ export default async function ModelPage({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
-    "name": `${brand?.brand_name} ${model.name}`,
+    "name": `${brand?.brand_name} ${model.modelName}`,
     "description": model.description,
     "image": images?.[0]?.url,
     "brand": {
@@ -116,7 +116,7 @@ export default async function ModelPage({
     <article className=" flex flex-col gap-6 md:p-6">
       <header className="lg:max-w-[65ch] mx-auto flex items-center justify-between flex-col-reverse md:flex-row bg-body dark:bg-darkmode-body">
         <h1>
-          {brand?.brand_name} {model.name}
+          {brand?.brand_name} {model.modelName}
         </h1>
         {brand?.logo && (
           // eslint-disable-next-line @next/next/no-img-element
@@ -146,7 +146,7 @@ export default async function ModelPage({
 
       <section className="mx-auto z-10">
         <h2>
-          Наявні шини для моделі {model.name} бренду {brand?.brand_name}
+          Наявні шини для моделі {model.modelName} бренду {brand?.brand_name}
         </h2>
         <TyresList tyres={modelTyres} images={images} />
       </section>

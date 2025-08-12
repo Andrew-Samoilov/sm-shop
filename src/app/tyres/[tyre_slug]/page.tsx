@@ -49,7 +49,7 @@ export async function generateMetadata(
     ? `${tyre.width}${tyre.delimiter ?? '/'}${tyre.profile} R${tyre.diameter} ${tyre.loadIndex}${tyre.speedIndex}`
     : "";
 
-  const name = `${tyre.brands?.brand_name ?? ""} ${tyre.models?.name ?? ""} ${tyreSize}`.trim();
+  const name = `${tyre.brands?.brand_name ?? ""} ${tyre.models?.modelName ?? ""} ${tyreSize}`.trim();
   const description = tyre.models?.description ??
     `Шина ${name} для легкового авто. Доставка по Україні.`;
   const canonical = `https://shina-mix.com.ua/tyres/${tyre.slug}`;
@@ -159,7 +159,7 @@ export default async function TyrePage({
         item_id={tyre.id}
         item_name={tyre.title}
         brand={tyre.brands?.brand_name ?? ""}
-        model={tyre.models?.name ?? ""}
+        model={tyre.models?.modelName ?? ""}
         price={Number(tyre.price)}
       />
 
@@ -171,7 +171,7 @@ export default async function TyrePage({
         <div className=" flex flex-col w-full md:w-auto min-w-fit p-2 md:p-0 gap-1 lg:gap-2">
           <h1 className="flex flex-col items-center md:items-start  ">
             <span>{tyre.brands?.brand_name}</span>
-            <span>{tyre.models?.name}</span>
+            <span>{tyre.models?.modelName}</span>
             <span className="font-normal text-[75%]">{tyreSize}</span>
           </h1>
 
@@ -252,7 +252,7 @@ export default async function TyrePage({
                 id: tyre.id,
                 title: tyre.title,
                 brand: tyre.brands?.brand_name ?? "",
-                model: tyre.models?.name ?? "",
+                model: tyre.models?.modelName ?? "",
                 tyreSize: tyreSize ?? "",
                 tyreImageUrl: images[0]?.url ?? "",
                 price: tyre.price,

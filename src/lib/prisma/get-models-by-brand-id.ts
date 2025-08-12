@@ -1,14 +1,17 @@
 import { prisma } from "./prisma";
 
 export async function getModelsByBrandId(brandId: number) {
-  return await prisma.model.findMany({
+  return prisma.model.findMany({
     where: {
-      brand: {
-        id: brandId,
-      },
+      brandId,              // простіше ніж brand: { id: brandId }
+      tyres: { some: {} },  // ← щоб не тягнути пусті моделі (опційно, але рекомендую)
     },
-    orderBy: {
-      name: "asc",
+    select: {
+      id: true,
+      slug: true,
+      modelName: true,
+      // _count: { select: { tyres: true } }, // якщо треба показати кількість шин
     },
+    orderBy: { modelName: "asc" },
   });
 }
