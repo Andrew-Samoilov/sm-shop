@@ -134,13 +134,13 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
           <img
             src={brand.logo}
             alt={`Логотип ${brand.logo} у нашому магазині`}
-            className="md:max-w-md max-w-full h-auto z-30"
+            className="md:max-w-md max-w-full h-auto z-30 xl:max-h-[140px]"
             style={{ viewTransitionName: `logo-${brand.brand_name}` }}
           />
         )}
       </header>
 
-      <section className="section container z-10 p-6 lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl xl:-mt-65 bg-body dark:bg-darkmode-body ">
+      <section className="section container z-10 p-6 lg:max-w-[65ch] sm:text-sm lg:text-lg xl:-mt-40  bg-body dark:bg-darkmode-body ">
         <ReactMarkdown>{brand.description}</ReactMarkdown>
       </section>
 
