@@ -39,7 +39,7 @@ export default function OGImage() {
 
                 <div style={{ marginTop: "auto", display: "flex", alignItems: "center", gap: 16 }}>
                     <div style={{ height: 2, width: 80, background: "#000", opacity: 0.15 }} />
-                    <div style={{ fontSize: 22, opacity: 0.75 }}>shinamix.kiev.ua</div>
+                    <div style={{ fontSize: 22, opacity: 0.75 }}>shinamix.com.ua</div>
                 </div>
             </div>
         ),

@@ -54,10 +54,10 @@ export default async function OG({ params }: { params: { tyre_slug: string } }) 
                 {/* Фото */}
                 <div style={{
                     display: "flex", alignItems: "center", justifyContent: "center",
-                    width: 420, height: 420
+                    width: 480, height: 600
                 }}>
                     {photoUrl ? (
-                        <img src={photoUrl} width={380} height={380} style={{ objectFit: "contain" }} alt="" />
+                        <img src={photoUrl} width={480} height={480} style={{ objectFit: "contain" }} alt="" />
                     ) : (
                         <div style={{ display: "flex" }}>
                             <span style={{ fontSize: 20, opacity: .5 }}>Фото моделі</span>

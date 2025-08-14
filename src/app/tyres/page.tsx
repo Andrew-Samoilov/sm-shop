@@ -31,7 +31,7 @@ export async function generateMetadata(
     openGraph: {
       title,
       description,
-      url: `https://shinamix.kiev.ua/tyres?${search}`,
+      url: `https://shinamix.com.ua/tyres?${search}`,
       siteName: "Шина Мікс",
       locale: "uk_UA",
       type: "website",
