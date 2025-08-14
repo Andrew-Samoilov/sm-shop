@@ -52,7 +52,7 @@ export async function handleClientSubmit(formId: string, formData: FormData) {
     });
 
     sendEmail({
-      subject: 'Нове повідомлення з сайту Shinamix.com',
+      subject: 'Нове повідомлення з сайту Shinamix',
       text: formatFormData(formData),
     });
 

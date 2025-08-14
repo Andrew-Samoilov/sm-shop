@@ -21,7 +21,7 @@ export async function getBaseMetadata(
             title: siteName,
             description: `Інтернет магазин автошин ${siteName} з власним складом в серці Києва `,
         },
-        metadataBase: new URL("https://shinamix.com"),
+        metadataBase: new URL("https://shinamix.kiev.ua"),
         icons: {
             icon: "/favicon.svg",
         },
