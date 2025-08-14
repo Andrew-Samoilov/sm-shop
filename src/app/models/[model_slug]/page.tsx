@@ -123,7 +123,6 @@ export default async function ModelPage({
             src={brand.logo}
             alt={brand.brand_name}
             className="max-w-1/4 xl:fixed xl:left-6 xl:top-37"
-            style={{ viewTransitionName: `logo-${brand.brand_name}` }}
           />
         )}
       </header>

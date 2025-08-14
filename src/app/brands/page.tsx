@@ -76,12 +76,10 @@ export default async function BrandsPage() {
                   src={brand.logo}
                   alt={brand.brand_name}
                   className=" md:max-w-[400px] md:min-w-[400px] h-auto"
-                  style={{ viewTransitionName: `logo-${brand.brand_name}` }}
                 />
               )}
               <figcaption
                 className="text-light group-hover:text-accent transition-colors"
-                style={{ viewTransitionName: `title-${brand.brand_name}` }}
               >
                 {brand.brand_name}
               </figcaption>

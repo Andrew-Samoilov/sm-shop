@@ -105,7 +105,6 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
       <header className="xl:-z-20 gap-6 xl:gap-0 flex items-center xl:items-start  justify-center xl:justify-between flex-col-reverse md:flex-row xl:sticky xl:top-[120px]  bg-body dark:bg-darkmode-body md:p-2">
         <div>
           <h1
-            style={{ viewTransitionName: `title-${brand.brand_name}` }}
             className="">
             {brand.brand_name}
           </h1>
@@ -135,7 +134,6 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
             src={brand.logo}
             alt={`Логотип ${brand.logo} у нашому магазині`}
             className="md:max-w-md max-w-full h-auto z-30 xl:max-h-[140px]"
-            style={{ viewTransitionName: `logo-${brand.brand_name}` }}
           />
         )}
       </header>
