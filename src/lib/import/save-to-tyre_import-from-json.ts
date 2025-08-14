@@ -19,6 +19,7 @@ export async function saveToTyreImportFromJson(items: OneCTyreData[]) {
             diameter: item.diameter,
             load: item.load,
             speed: item.speed,
+            tyreSize: item.tyreSize,
             applicability: item.applicability,
             yearOfProduction: item.yearOfProduction,
             country: item.country,

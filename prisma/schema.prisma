@@ -168,7 +168,7 @@ model TyreImport {
   brandName        String       @map("brand_name")
   yearOfProduction String? @map("year_of_production")
   season           String?
-  typeSize         String? @map("type_size")
+  tyreSize         String? @map("tyre_size")
   diameter         String?
   load             String?
   speed            String?
