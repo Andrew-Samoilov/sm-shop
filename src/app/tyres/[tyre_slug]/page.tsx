@@ -193,7 +193,6 @@ export default async function TyrePage({
               </span>
               <SeasonIcon
                 season={tyre.season}
-              // className="absolute top-2 left-2 z-99"
               />
             </span>
           )}
