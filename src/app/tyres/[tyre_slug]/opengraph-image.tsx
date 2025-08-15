@@ -42,7 +42,10 @@ export default async function OG({ params }: { params: { tyre_slug: string } }) 
     
     const images = tyre.modelId != null ? await getModelImgByModelId(tyre.modelId) : [];
     const rel = images?.[0]?.url as string | undefined;
-    const photoUrl = rel ? (rel.startsWith("http") ? rel : `${ORIGIN}${rel}`) : "";
+    let photoUrl = "";
+    if (rel) {
+        photoUrl = rel.startsWith("http") ? rel : `${ORIGIN}${rel}`;
+    }
 
     return new ImageResponse(
         (
