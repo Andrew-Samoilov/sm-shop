@@ -7,7 +7,9 @@ export { simpleSlug } from "./simple-slug";
 export { findMissingBrandsFromImport } from "./import/find-missing-brands-from-import";
 export { findMissingModelsFromImport } from "./import/find-missing-models-from-import";
 export { updateExistingTyresBulk } from "./import/update-existing-tyres-bulk";
-export { updateExistingTyresOneByOne } from "./import/update-existing-tyres-one-by-one";
+// export { updateExistingTyresOneByOne } from "./import/update-existing-tyres-one-by-one";
+export { parseTyreSize } from "./import/parse-tyre-size";
+export { fillTyreSizeParts } from "./import/fill-tyre-size-parts";
 
 export { capitalizeFirstLetter } from "./capitalize-first-letter";
 

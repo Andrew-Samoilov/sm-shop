@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { addMissingBrands, addMissingModels, addMissingTyresFromImport, findMissingBrandsFromImport, findMissingModelsFromImport, prisma, saveToTyreImportFromJson, updateExistingTyresBulk } from '@/lib';
+import { addMissingBrands, addMissingModels, addMissingTyresFromImport, fillTyreSizeParts, findMissingBrandsFromImport, findMissingModelsFromImport, prisma, saveToTyreImportFromJson, updateExistingTyresBulk } from '@/lib';
 
 export async function POST(req: NextRequest) {
     const ALLOWED_IPS = (process.env.ALLOWED_IPS || '')
@@ -38,6 +38,7 @@ export async function POST(req: NextRequest) {
     try {
         
         console.time("[import]");
+
         //очищаємо таблицю перед вставкою
         await prisma.tyreImport.deleteMany({});
         
@@ -45,6 +46,7 @@ export async function POST(req: NextRequest) {
        
         // console.log("[upload] before updateExistingTyresOneByOne");
         await updateExistingTyresBulk();
+
         // const res = await updateExistingTyresOneByOne();
         // console.log("[Post] after [updateExistingTyresOneByOne]", res);
         
@@ -57,6 +59,12 @@ export async function POST(req: NextRequest) {
         
 
         await addMissingTyresFromImport();
+
+        /// update width, profile, delimeter
+        console.log("[Post] before [fillTyreSizeParts]");
+        await fillTyreSizeParts();
+        console.log("[Post] after [fillTyreSizeParts]");
+
         console.timeEnd("[import]");
         /// upper this - works
 
