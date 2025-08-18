@@ -18,7 +18,7 @@ export async function Footer() {
             eventCategory="footer"
           />
         </span>
-        <div>
+        <div className="flex flex-col items-center">
           {/* <div className="text-center text-lg font-semibold">Інформація</div> */}
           <LinkWithGA
             href="/info"
