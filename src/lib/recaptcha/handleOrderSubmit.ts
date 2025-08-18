@@ -25,7 +25,7 @@ export async function handleOrderSubmit(formId: string, formData: FormData) {
     const email = formData.get('order_email') as string;
     const name = formData.get('order_name') as string;
     const tel = formData.get("order_tel") as string;
-    const comment = formData.get('order_message') as string;
+    const comment = formData.get('order_comment') as string;
 
     // Дані про товар з прихованих полів
     const tyreId = formData.get("tyreId") as string | null;
@@ -57,7 +57,7 @@ export async function handleOrderSubmit(formId: string, formData: FormData) {
         <li><b>Ім'я:</b> ${name}</li>
         <li><b>Email:</b> ${email}</li>
         <li><b>Телефон:</b> ${tel}</li>
-       {comment&&(<li><b>Повідомлення:</b> ${comment}</li>)} 
+       ${comment ? `<li><b>Повідомлення:</b> ${comment}</li>` : ""}
       </ul>
       ${productHtml}
     `;

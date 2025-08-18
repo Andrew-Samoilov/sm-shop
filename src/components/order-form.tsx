@@ -88,8 +88,6 @@ export function OrderForm({ tyre }: { tyre: CartTyre }){
           id="order_comment"
           inputMode="text"
           placeholder="Введіть повідомлення"
-
-
           className="w-full border-b border-theme-light dark:bg-darkmode-theme-light"
         />
 
