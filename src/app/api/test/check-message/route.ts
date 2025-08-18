@@ -5,7 +5,7 @@ export async function GET(req: NextRequest) {
     const secret = req.nextUrl.searchParams.get('secret');
     const email = req.nextUrl.searchParams.get('email');
 
-    if (secret !== process.env.TEST_API_SECRET) {
+    if (secret !== process.env.E2E_TEST_API_SECRET) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 

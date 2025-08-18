@@ -18,7 +18,7 @@ test('Форма відправляє дані і запис зʼявляєть�
     await page.waitForTimeout(3000);
 
     const res = await request.get(
-        `/api/test/check-message?email=${testEmail}&secret=${process.env.TEST_API_SECRET}`
+        `/api/test/check-message?email=${testEmail}&secret=${process.env.E2E_TEST_API_SECRET}`
     );
 
     expect(res.status()).toBe(200);
