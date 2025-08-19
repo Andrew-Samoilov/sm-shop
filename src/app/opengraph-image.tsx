@@ -20,27 +20,23 @@ export default function OGImage() {
                     fontFamily: "Karla, system-ui, Segoe UI, Roboto, sans-serif",
                 }}
             >
-                <div style={{ fontSize: 72, fontWeight: 600, letterSpacing: -1, lineHeight: 1, color: "#4169e1" }}>
+                <div style={{ fontSize: 200, fontWeight: 800, letterSpacing: -1, lineHeight: 1, color: "#4169e1" }}>
                     Шина Мікс
                 </div>
 
                 <div
-                    style={{ fontSize: 30, opacity: 0.85, marginTop: 8 }}>
+                    style={{ fontSize: 60, opacity: 0.85, marginTop: 8 }}>
                     Інтернет-магазин шин
                 </div>
 
-                <div style={{ fontSize: 24, opacity: 0.85, marginTop: 24 }}>
+                <div style={{ fontSize: 48, opacity: 0.85, marginTop: 24 }}>
                     Київ • Доставка по Україні
                 </div>
 
-                <div style={{ fontSize: 24, opacity: 0.85, marginTop: 6 }}>
+                <div style={{ fontSize: 48, opacity: 0.85, marginTop: 6 }}>
                     Зимові • Літні • Всесезонні • SUV
                 </div>
 
-                <div style={{ marginTop: "auto", display: "flex", alignItems: "center", gap: 16 }}>
-                    <div style={{ height: 2, width: 80, background: "#000", opacity: 0.15 }} />
-                    <div style={{ fontSize: 22, opacity: 0.75 }}>shinamix.com.ua</div>
-                </div>
             </div>
         ),
         size
