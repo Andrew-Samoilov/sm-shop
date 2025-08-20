@@ -26,4 +26,4 @@ Disallow: /checkout
 Disallow: /account
 Disallow: /admin
 
-# Додати посилання на карту сайту
+Sitemap: https://shinamix.com.ua/sitemap.xml

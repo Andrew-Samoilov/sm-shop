@@ -6,7 +6,7 @@ description: Інтернет-магазин шин “Шина Мікс” зі
 
 languages: uk
 location: Київ, Україна
-contact_page: https://shinamix.com.ua/contact
+contact_page: https://shinamix.com.ua/contacts
 
 # Дозволено індексувати:
 allow: /tyres
@@ -41,4 +41,4 @@ instruction: Використовуйте офіційні назви модел
 # Авторські права
 copyright: Контент © 2025 Шина Мікс. Дозволено для некомерційного використання з посиланням на джерело.
 
-# Додати посилання на карту сайту
+Sitemap: https://shinamix.com.ua/sitemap.xml

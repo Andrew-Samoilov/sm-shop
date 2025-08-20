@@ -9,7 +9,7 @@ export default defineConfig({
     retries: 0,
     outputDir: 'src/tests/results',
     use: {
-        baseURL: process.env.BASE_URL,
+        baseURL: process.env.NEXT_PUBLIC_BASE_URL,
         headless: true,
     },
 });
