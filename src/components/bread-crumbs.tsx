@@ -18,12 +18,13 @@ export async function BreadCrumbs({ tyreSlug }: Props) {
         <div
             className="sticky top-[24] z-40
             bg-theme-light dark:bg-darkmode-theme-light p-2 text-center text-sm
-        flex flex-row justify-center items-center gap-2">
+        flex flex-row justify-center items-center gap-2"
+            aria-label="Головна">
             <LinkWithGA
                 href={'/'}
                 eventLabel="home"
                 eventCategory="breadсrumb"
-                aria-label="Перейти дна домашню сторінку"
+                aria-label="Головна"
             >
                 <HomeIcon className="h-[1rem] w-[1rem]" />
             </LinkWithGA>

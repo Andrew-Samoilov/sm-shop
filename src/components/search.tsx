@@ -81,6 +81,7 @@ export function Search({ className = "" }: { className?: string }) {
             <button
               onClick={() => setIsOpen(false)}
               className="text-accent text-sm underline"
+              aria-label="Закрити"
             >
               Закрити
             </button>

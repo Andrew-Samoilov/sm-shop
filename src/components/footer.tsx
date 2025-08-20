@@ -22,16 +22,16 @@ export async function Footer() {
             href="/info"
             eventLabel="info"
             eventCategory="footer"
-            className="text-center text-lg font-semibold  text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+            className="px-3 py-2 text-center text-lg font-semibold  text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
           >
             Інформація
           </LinkWithGA>
-          <div className="flex flex-col items-center space-y-2">
+          <div className="flex flex-col items-center ">
             <LinkWithGA
               href="/about"
               eventLabel="about"
               eventCategory="footer"
-              className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+              className="px-3 py-2 text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
             >
               Про нас
             </LinkWithGA>
@@ -39,7 +39,7 @@ export async function Footer() {
               href="/info/payment-delivery"
               eventLabel="payment_delivery"
               eventCategory="footer"
-              className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+              className="px-3 py-2 text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
             >
               Оплата і доставка
             </LinkWithGA>
@@ -47,7 +47,7 @@ export async function Footer() {
               href="/info/warranty"
               eventLabel="warranty"
               eventCategory="footer"
-              className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+              className="px-3 py-2 text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
             >
               Гарантія
             </LinkWithGA>
@@ -60,7 +60,7 @@ export async function Footer() {
               href="/tyres"
               eventLabel="tyres"
               eventCategory="footer"
-              className=" text-sm md:text-base font-medium  text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+              className="px-3 py-2 text-sm md:text-base font-medium  text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
             >
               Шини
             </LinkWithGA>
@@ -69,7 +69,7 @@ export async function Footer() {
                 href="/brands"
                 eventLabel="brands"
                 eventCategory="footer"
-                className="text-xs md:text-sm font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+                className="px-3 py-2 text-xs md:text-sm font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
               >
                 Бренди
               </LinkWithGA>
@@ -77,7 +77,7 @@ export async function Footer() {
                 href="/models"
                 eventLabel="models"
                 eventCategory="footer"
-                className="text-xs md:text-sm font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+                className="px-3 py-2 text-xs md:text-sm font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
               >
                 Моделі
               </LinkWithGA>
@@ -108,6 +108,7 @@ export async function Footer() {
               eventLabel="email"
               eventCategory="footer"
               ariaLabel="Написати на пошту"
+              className="px-3 py-2"
             >
               {siteConfig.email}
             </LinkWithGA>
@@ -117,6 +118,7 @@ export async function Footer() {
               eventLabel="phone"
               eventCategory="footer"
               ariaLabel="Дзвоніть"
+              className="px-3 py-2"
             >
               {siteConfig.tel.visual}
             </LinkWithGA>

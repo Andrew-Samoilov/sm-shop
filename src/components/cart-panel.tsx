@@ -57,11 +57,11 @@ export function CartPanel() {
         onClick={() => CartTyre && setIsOpen(true)}
         className="cursor-pointer disabled:cursor-not-allowed flex items-center justify-center"
         disabled={!CartTyre}
+        aria-label={CartTyre ? "Відкрити кошик" : "Кошик порожній"}
       >
         <ShoppingCartIcon
           className={`h-5 w-5 transition-colors 
             ${CartTyre ? "text-accent" : "text-gray-400"}`}
-          aria-label={CartTyre ? "Відкрити кошик" : "Кошик порожній"}
         />
       </button>
 
@@ -82,6 +82,7 @@ export function CartPanel() {
                 onClick={() => CartTyre && setIsOpen(false)}
                 className="cursor-pointer disabled:cursor-not-allowed"
                 disabled={!CartTyre}
+                aria-label="Закрити кошик"
               >
                 <XMarkIcon className=" h-6 w-6 cursor-pointer" />
               </button>
