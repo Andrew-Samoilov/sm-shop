@@ -1,17 +1,17 @@
 import { MetadataRoute } from "next";
 import { prisma } from "@/lib";
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
-
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
     // Статичні сторінки
     const corePages: MetadataRoute.Sitemap = [
         { url: `${baseUrl}/`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 1 },
         { url: `${baseUrl}/tyres`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.9 },
         { url: `${baseUrl}/brands`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.7 },
         { url: `${baseUrl}/models`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.7 },
-        { url: `${baseUrl}/info`, lastModified: new Date(), changeFrequency: "weekly" as const,  priority: 0.7 },
-        { url: `${baseUrl}/contact`, lastModified: new Date(), changeFrequency: "weekly" as const,  priority: 0.3 },
+        { url: `${baseUrl}/info`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.7 },
+        { url: `${baseUrl}/contact`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.3 },
         { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.3 },
     ];
 
