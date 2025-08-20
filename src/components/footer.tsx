@@ -1,7 +1,6 @@
 'use server'
 import { LinkWithGA, Logo } from "@/components";
 
-
 import packageData from "../../package.json";
 import { getSiteConfig } from "@/lib";
 const version = packageData.version;
@@ -19,7 +18,6 @@ export async function Footer() {
           />
         </span>
         <div className="flex flex-col items-center">
-          {/* <div className="text-center text-lg font-semibold">Інформація</div> */}
           <LinkWithGA
             href="/info"
             eventLabel="info"
@@ -29,14 +27,6 @@ export async function Footer() {
             Інформація
           </LinkWithGA>
           <div className="flex flex-col items-center space-y-2">
-            {/* <LinkWithGA
-                href="/contacts"
-                eventLabel="contacts"
-                eventCategory="footer"
-                className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
-              >
-                Контакти
-              </LinkWithGA> */}
             <LinkWithGA
               href="/about"
               eventLabel="about"
@@ -94,13 +84,13 @@ export async function Footer() {
             </div>
             {/* <div className="text-light/75 cursor-not-allowed">Диски</div> */}
           </div>
-          <div className="flex flex-col items-center pt-2">
+          {/* <div className="flex flex-col items-center pt-2">
             <div className="text-lg font-semibold">Послуги</div>
             <div className="flex flex-col items-center space-y-2">
               <div className="text-light/75 cursor-not-allowed">Шиномонтаж</div>
               <div className="text-light/75 cursor-not-allowed">Зберігання</div>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="flex flex-col items-center pt-2">
           <LinkWithGA

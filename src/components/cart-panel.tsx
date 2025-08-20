@@ -61,6 +61,7 @@ export function CartPanel() {
         <ShoppingCartIcon
           className={`h-5 w-5 transition-colors 
             ${CartTyre ? "text-accent" : "text-gray-400"}`}
+          aria-label={CartTyre ? "Відкрити кошик" : "Кошик порожній"}
         />
       </button>
 

@@ -50,7 +50,8 @@ export function Search({ className = "" }: { className?: string }) {
   const renderInput = () => (
     <div className="relative w-full">
       {inputValue === "" && (
-        <MagnifyingGlassIcon className="text-light/75 absolute top-1/2 right-3 h-5 w-5 -translate-y-1/2 scale-x-[-1] transform pointer-events-none" />
+        <MagnifyingGlassIcon
+          className="text-light/75 absolute top-1/2 right-3 h-5 w-5 -translate-y-1/2 scale-x-[-1] transform pointer-events-none" />
       )}
       <input
         id="search"
@@ -88,6 +89,7 @@ export function Search({ className = "" }: { className?: string }) {
           <button
             className="flex items-center justify-center w-5 h-5 "
             onClick={() => setIsOpen(true)}
+            aria-label="Виконати пошук"
           >
             <MagnifyingGlassIcon className="h-5 w-5 " />
           </button>

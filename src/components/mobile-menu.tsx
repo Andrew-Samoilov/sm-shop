@@ -37,7 +37,9 @@ export function MobileMenu() {
                         }
                     });
                 }}
-                className=" rounded-lg md:hidden">
+                className=" rounded-lg md:hidden"
+                aria-label="Відкрити меню"
+            >
                 <Bars3Icon className="w-6 h-6 " />
             </button>
             {isMenuOpen && (
@@ -49,7 +51,10 @@ export function MobileMenu() {
                     }}
                 >
                     <nav tabIndex={-1} className="w-full bg-white dark:bg-darkmode-body text-lg text-black dark:text-white p-6 rounded-lg shadow-lg">
-                        <button onClick={() => setIsMenuOpen(false)} className="mb-4 ">
+                        <button
+                            onClick={() => setIsMenuOpen(false)} className="mb-4 "
+                            aria-label="Закрити меню"
+                        >
                             <XMarkIcon className="h-6 w-6 " />
                         </button>
 
