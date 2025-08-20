@@ -29,7 +29,7 @@ jobs:
       - name: Deploy to server
         run: |
           echo "Connecting to server $SERVER_HOST..."
-          ssh -i ~/.ssh/id_ed25519 $SERVER_USER@$SERVER_HOST << 'EOF'
+          ssh -i ~/.ssh/id_ed25519 $SERVER_USER@$SERVER_HOST << EOF
             set -e  # зупиняє виконання на першій помилці
 
             echo "Moving to project directory..."
