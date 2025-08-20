@@ -9,6 +9,7 @@ env:
   SERVER_HOST: 38.242.214.198
   SERVER_USER: root
   PROJECT_DIR: /var/www/shina-mix-shop
+  NPM_CMD: /root/.nvm/versions/node/v20.18.1/bin/npm
 
 jobs:
   deploy:
@@ -30,7 +31,7 @@ jobs:
         run: |
           echo "Connecting to server $SERVER_HOST..."
           ssh -i ~/.ssh/id_ed25519 $SERVER_USER@$SERVER_HOST << EOF
-            set -e  # зупиняє виконання на першій помилці
+            set -e
 
             echo "Moving to project directory..."
             cd $PROJECT_DIR
@@ -39,13 +40,13 @@ jobs:
             git pull origin main
 
             echo "Installing dependencies..."
-            npm install --omit=dev
+            $NPM_CMD install --omit=dev
 
             echo "Cleaning Next.js cache..."
             rm -rf .next/cache
 
             echo "Building project..."
-            if npm run build; then
+            if $NPM_CMD run build; then
               echo "Build success, restarting PM2..."
               pm2 restart shina-mix-shop
               echo "Deploy finished successfully!"
