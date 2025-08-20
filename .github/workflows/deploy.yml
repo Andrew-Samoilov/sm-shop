@@ -38,10 +38,10 @@ jobs:
             git pull origin main
 
             echo "Installing dependencies..."
-            $NPM_CMD install --omit=dev
+            $NPM_CMD install --production=false
 
             echo "Cleaning Next.js cache..."
-            rm -rf .next/cache
+            rm -rf .next
 
             echo "Building project..."
             $NPM_CMD run build
