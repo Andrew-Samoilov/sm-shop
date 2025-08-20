@@ -30,6 +30,8 @@ jobs:
         run: |
           echo "Connecting to server $SERVER_HOST..."
           ssh -i ~/.ssh/id_ed25519 $SERVER_USER@$SERVER_HOST << 'EOF'
+            set -e  # зупиняє виконання на першій помилці
+
             echo "Moving to project directory..."
             cd $PROJECT_DIR
 
@@ -43,10 +45,12 @@ jobs:
             rm -rf .next/cache
 
             echo "Building project..."
-            npm run build
-
-            echo "Restarting PM2 process..."
-            pm2 restart shina-mix-shop
-
-            echo "Deploy finished successfully!"
+            if npm run build; then
+              echo "Build success, restarting PM2..."
+              pm2 restart shina-mix-shop
+              echo "Deploy finished successfully!"
+            else
+              echo "Build failed! Keeping old version running."
+              exit 1
+            fi
           EOF
