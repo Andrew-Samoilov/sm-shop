@@ -9,7 +9,6 @@ env:
   SERVER_HOST: 38.242.214.198
   SERVER_USER: root
   PROJECT_DIR: /var/www/shina-mix-shop
-  NPM_CMD: /root/.nvm/versions/node/v20.18.1/bin/npm
 
 jobs:
   deploy:
@@ -26,28 +25,21 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -t rsa,ed25519 $SERVER_HOST >> ~/.ssh/known_hosts
-
       - name: Deploy to server
         run: |
           echo "Connecting to server $SERVER_HOST..."
-          ssh -i ~/.ssh/id_ed25519 $SERVER_USER@$SERVER_HOST << EOF
+          ssh -i ~/.ssh/id_ed25519 $SERVER_USER@$SERVER_HOST << 'EOF'
             echo "Moving to project directory..."
             cd $PROJECT_DIR
-
             echo "Pulling latest changes from Git..."
             git pull origin main
-
             echo "Installing dependencies..."
-            $NPM_CMD install --omit=dev
-
+            npm install --omit=dev
             echo "Cleaning Next.js cache..."
             rm -rf .next/cache
-
             echo "Building project..."
-            $NPM_CMD run build
-
+            npm run build
             echo "Restarting PM2 process..."
             pm2 restart shina-mix-shop
-
             echo "Deploy finished successfully!"
           EOF
