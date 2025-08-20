@@ -1,6 +1,6 @@
 import { HomeIcon } from "@heroicons/react/24/outline";
 
-import { getSeasonLabel, getTyreBySlug} from "@/lib";
+import { getSeasonLabel, getTyreBySlug } from "@/lib";
 import { LinkWithGA } from "./link-with-ga";
 
 type Props = { tyreSlug: string; };
@@ -19,12 +19,13 @@ export async function BreadCrumbs({ tyreSlug }: Props) {
             className="sticky top-[24] z-40
             bg-theme-light dark:bg-darkmode-theme-light p-2 text-center text-sm
         flex flex-row justify-center items-center gap-2"
-            aria-label="Головна">
+        >
             <LinkWithGA
                 href={'/'}
                 eventLabel="home"
                 eventCategory="breadсrumb"
                 aria-label="Головна"
+                title="Головна"
             >
                 <HomeIcon className="h-[1rem] w-[1rem]" />
             </LinkWithGA>

@@ -57,6 +57,7 @@ export function CartPanel() {
         onClick={() => CartTyre && setIsOpen(true)}
         className="cursor-pointer disabled:cursor-not-allowed flex items-center justify-center"
         disabled={!CartTyre}
+        title={CartTyre ? "Відкрити кошик" : "Кошик порожній"}
         aria-label={CartTyre ? "Відкрити кошик" : "Кошик порожній"}
       >
         <ShoppingCartIcon
