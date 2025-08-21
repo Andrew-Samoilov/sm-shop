@@ -49,7 +49,7 @@ export function CertificatesClient({ cert }: Props) {
                                 width={width}
                                 priority={index === 0}
                                 sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33.33vw, (min-width: 768px) 50vw, 100vw"
-                                className="embla__slide w-full h-auto"
+                                className="embla__slide object-contain"
                                 style={{ position: "relative" }}
                             />
                         ))}

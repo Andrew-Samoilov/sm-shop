@@ -51,7 +51,7 @@ export async function generateMetadata(
 
   const name = `${tyre.brands?.brand_name ?? ""} ${tyre.models?.modelName ?? ""} ${tyreSize}`.trim();
   const description = tyre.models?.description ??
-    `Шина ${name} для легкового авто. Доставка по Україні.`;
+    `Шина ${name} для легкового авто. ${tyre.price} грн/шт. Доставка по Україні.`;
   const canonical = `https://shina-mix.com.ua/tyres/${tyre.slug}`;
   const siteUrl = "https://shina-mix.com.ua";
 
@@ -112,10 +112,10 @@ export async function generateMetadata(
       description,
       images: [imageUrl],
     },
-    other: {
-      "application/ld+json": JSON.stringify(productJsonLd),
-      "application/ld+json-breadcrumbs": JSON.stringify(breadcrumbsJsonLd),
-    },
+    // other: {
+    //   "application/ld+json": JSON.stringify(productJsonLd),
+    //   "application/ld+json-breadcrumbs": JSON.stringify(breadcrumbsJsonLd),
+    // },
   };
 }
 

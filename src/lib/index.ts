@@ -10,7 +10,6 @@ export { updateExistingTyresBulk } from "./import/update-existing-tyres-bulk";
 // export { updateExistingTyresOneByOne } from "./import/update-existing-tyres-one-by-one";
 export { parseTyreSize } from "./import/parse-tyre-size";
 export { fillTyreSizeParts } from "./import/fill-tyre-size-parts";
-
 export { capitalizeFirstLetter } from "./capitalize-first-letter";
 
 export { getContentBlock } from "./get-content-block";
@@ -50,3 +49,7 @@ export { loadRecaptchaScript } from "./recaptcha/loadRecaptchaScript";
 
 export { sendGAEvent } from "./send-ga-event";
 export { sendEmail } from "./send-email";
+
+export { JsonLd } from "./json-ld/json-ld";
+export { buildBreadcrumbsJsonLd } from "./json-ld/breadcrumbs";
+export { buildProductJsonLd } from "./json-ld/product";
