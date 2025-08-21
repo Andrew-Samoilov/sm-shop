@@ -52,13 +52,6 @@ export default async function TyrePage({
   // console.info("[TyrePage]", cert);
 
   const tyreSize = getTyreSize(tyre);
-  // const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-  // const canonical = `${siteUrl}/tyres/${tyre.slug}`;
-  // const imageUrl = images?.[0]?.url
-  //   ? images[0].url.startsWith("http")
-  //     ? images[0].url
-  //     : `${siteUrl}${images[0].url}`
-  //   : `${siteUrl}/default.jpg`;
   
   const productJsonLd = buildProductJsonLd(tyre, images);
   const breadcrumbs = [

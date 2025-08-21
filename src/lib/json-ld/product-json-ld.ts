@@ -9,7 +9,7 @@ export type TyreWithRelations = Prisma.TyreGetPayload<{
 }>;
 
 export function buildProductJsonLd(tyre: TyreWithRelations, images: { url: string; alt?: string | null }[] = []) {
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://shinamix.com.ua/";
 
     const imageUrl =
         images?.[0]?.url
@@ -32,6 +32,9 @@ export function buildProductJsonLd(tyre: TyreWithRelations, images: { url: strin
         tyre.models?.description ??
         `${seasonUA} шина ${name} для легкового авто. Ціна ${tyre.price} грн/шт. Самовивіз у Києві. Доставка по Україні.`;
 
+    const priceValidUntil = new Date();
+    priceValidUntil.setDate(priceValidUntil.getDate() + 7);
+
     return {
         "@context": "https://schema.org/",
         "@type": "Product",
@@ -52,6 +55,7 @@ export function buildProductJsonLd(tyre: TyreWithRelations, images: { url: strin
                 tyre.inventoryQuantity && tyre.inventoryQuantity > 0
                     ? "https://schema.org/InStock"
                     : "https://schema.org/OutOfStock",
+            "priceValidUntil": priceValidUntil.toISOString().split("T")[0]
         },
     };
 }
