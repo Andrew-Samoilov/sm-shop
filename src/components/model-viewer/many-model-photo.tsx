@@ -78,6 +78,7 @@ export function ManyModelPhoto({ images }: { images: IImage[] }) {
                     <button
                         id="prev"
                         onClick={scrollPrev}
+                        aria-label="Попереднє фото"
                         className="p-2 lg:p-4 absolute left-6 top-1/2 -translate-y-1/2 bg-white/75   rounded-md hover:bg-gray-100 
                     cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed
                     "
@@ -89,6 +90,7 @@ export function ManyModelPhoto({ images }: { images: IImage[] }) {
                     <button
                         id="next"
                         onClick={scrollNext}
+                        aria-label="Наступне фото"
                         className="p-2 lg:p-4 absolute right-6 top-1/2 -translate-y-1/2 bg-white/75   z-10 rounded-md hover:bg-gray-100 
                     cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
                     >
@@ -108,10 +110,11 @@ export function ManyModelPhoto({ images }: { images: IImage[] }) {
                         <button
                             key={i}
                             onClick={() => scrollTo(i)}
+                            aria-label={`Переглянути фото ${i + 1}. ${img.alt}`}
                             className={`relative aspect-square h-16 sm:h-20 rounded-md overflow-hidden flex-shrink-0 w-[22vw] max-w-[72px] 
                                 ${i === selectedIndex ? "ring-2 ring-accent ring-offset-2" : ""}`}
                         >
-                            <Image src={img.url} alt="" fill className="object-cover" />
+                            <Image src={img.url} alt={img.alt ?? "Фото моделі"} fill className="object-cover" />
                         </button>
                     ))}
                 </div>
