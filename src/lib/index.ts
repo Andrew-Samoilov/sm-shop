@@ -51,5 +51,7 @@ export { sendGAEvent } from "./send-ga-event";
 export { sendEmail } from "./send-email";
 
 export { JsonLd } from "./json-ld/json-ld";
-export { buildBreadcrumbsJsonLd } from "./json-ld/breadcrumbs";
-export { buildProductJsonLd } from "./json-ld/product";
+export { buildBreadcrumbsJsonLd } from "./json-ld/breadcrumbs-json-ld";
+export { buildProductJsonLd } from "./json-ld/product-json-ld";
+
+export { generateTyreMetadata } from "./metadata/tyre-metadata";

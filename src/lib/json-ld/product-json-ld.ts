@@ -8,8 +8,19 @@ export type TyreWithRelations = Prisma.TyreGetPayload<{
     };
 }>;
 
-export function buildProductJsonLd(tyre: TyreWithRelations, imageUrl: string, canonical: string) {
+export function buildProductJsonLd(tyre: TyreWithRelations, images: { url: string; alt?: string | null }[] = []) {
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
+    const imageUrl =
+        images?.[0]?.url
+            ? images[0].url.startsWith("http")
+                ? images[0].url
+                : `${siteUrl}${images[0].url}`
+            : `${siteUrl}/default.jpg`;
+    
     const seasonUA = getSeasonLabel(tyre.season);
+
+    const canonical = `${siteUrl}/tyres/${tyre.slug}`
 
     const tyreSize =
         tyre?.width && tyre.profile && tyre.diameter && tyre.loadSpeedIndex

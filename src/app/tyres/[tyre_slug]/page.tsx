@@ -1,5 +1,5 @@
 import { AddToCartButton, BreadCrumbs, CertificatesClient, LinkWithGA, ModelViewer, QuantitySelector, SeasonIcon, ViewItemGA } from "@/components";
-import { getTyreBySlug, getModelImgByModelId, prisma, getContentBlock, getTyreSize, getSeasonLabel } from "@/lib";
+import { getTyreBySlug, getModelImgByModelId, prisma, getContentBlock, getTyreSize, getSeasonLabel, generateTyreMetadata, buildProductJsonLd, buildBreadcrumbsJsonLd, JsonLd, } from "@/lib";
 import { Certificate, } from "@/types";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -21,102 +21,7 @@ export async function generateStaticParams() {
 export async function generateMetadata(
   { params }: { params: { tyre_slug: string } }
 ): Promise<Metadata> {
-  const { tyre_slug } = params;
-
-  const tyre = await getTyreBySlug(tyre_slug);
-
-  if (!tyre) {
-    return {
-      title: "Шина не знайдена — Шина Мікс",
-      description: "Сторінка не знайдена або сталася помилка."
-    };
-  }
-
-  let imageUrl = "https://shina-mix.com.ua/default.jpg";
-  let imageAlt = "Зображення шини";
-  if (tyre.modelId) {
-    const images = await getModelImgByModelId(tyre.modelId);
-    if (images?.[0]?.url) {
-      imageUrl = images[0].url.startsWith("http")
-        ? images[0].url
-        : `https://shina-mix.com.ua${images[0].url}`;
-      imageAlt = images[0].alt ?? imageAlt;
-    }
-  }
-
-  const seasonUA = getSeasonLabel(tyre.season);
-  const tyreSize = tyre?.width && tyre.profile && tyre.diameter && tyre.loadSpeedIndex
-    ? `${tyre.width}${tyre.delimiter ?? '/'}${tyre.profile} R${tyre.diameter} ${tyre.loadIndex}${tyre.speedIndex}`
-    : "";
-
-  const name = `${tyre.brands?.brand_name ?? ""} ${tyre.models?.modelName ?? ""} ${tyreSize}`.trim();
-  const description = tyre.models?.description ??
-    `Шина ${name} для легкового авто. ${tyre.price} грн/шт. Доставка по Україні.`;
-  const canonical = `https://shina-mix.com.ua/tyres/${tyre.slug}`;
-  const siteUrl = "https://shina-mix.com.ua";
-
-  const breadcrumbs = [
-    { name: "Головна", url: "/" },
-    { name: "Шини", url: "/tyres" },
-    { name: `${seasonUA} шини`, url: `/tyres?season=${tyre.season?.toLowerCase()}&view=list&sort=price_asc` },
-    { name: `${seasonUA} шини ${tyreSize}`, url: `/tyres?season=${tyre.season?.toLowerCase()}&width=${tyre.width}&profile=${tyre.profile}&diameter=${tyre.diameter}&view=list&sort=price_asc` },
-    { name, url: `/tyres/${tyre.slug}` },
-  ];
-  const breadcrumbsJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: breadcrumbs.map((crumb, idx) => ({
-      "@type": "ListItem",
-      position: idx + 1,
-      name: crumb.name,
-      item: siteUrl + crumb.url,
-    })),
-  };
-
-  const productJsonLd = {
-    "@context": "https://schema.org/",
-    "@type": "Product",
-    name,
-    image: [imageUrl],
-    description,
-    brand: {
-      "@type": "Brand",
-      name: tyre.brands?.brand_name ?? ""
-    },
-    sku: tyre.slug,
-    offers: {
-      "@type": "Offer",
-      url: canonical,
-      priceCurrency: "UAH",
-      price: tyre.price?.toString(),
-      availability: tyre.inventoryQuantity && tyre.inventoryQuantity > 0
-        ? "https://schema.org/InStock"
-        : "https://schema.org/OutOfStock",
-    },
-  };
-
-  return {
-    title: `${name} — купити шини в Україні | Шина Мікс`,
-    description,
-    alternates: { canonical },
-    openGraph: {
-      title: name,
-      description,
-      url: canonical,
-      type: "website",
-      images: [{ url: imageUrl, alt: imageAlt }],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: name,
-      description,
-      images: [imageUrl],
-    },
-    // other: {
-    //   "application/ld+json": JSON.stringify(productJsonLd),
-    //   "application/ld+json-breadcrumbs": JSON.stringify(breadcrumbsJsonLd),
-    // },
-  };
+  return generateTyreMetadata(params.tyre_slug);
 }
 
 export default async function TyrePage({
@@ -127,16 +32,13 @@ export default async function TyrePage({
   const { tyre_slug } = params;
   const tyre = await getTyreBySlug(tyre_slug);
 
-  // console.info("[getTyreBySlug]", tyre);
   if (!tyre) return notFound();
 
   if (tyre.inventoryQuantity === 0) {
     notFound();
   }
 
-  const images = tyre.modelId !== null
-    ? await getModelImgByModelId(tyre.modelId)
-    : [];
+  const images = tyre.modelId !== null ? await getModelImgByModelId(tyre.modelId) : [];
   const cert = await getContentBlock<Certificate[]>('certificates', []);
   const filteredCerts = tyre.brand
     ? cert.filter(
@@ -150,7 +52,29 @@ export default async function TyrePage({
   // console.info("[TyrePage]", cert);
 
   const tyreSize = getTyreSize(tyre);
-
+  // const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  // const canonical = `${siteUrl}/tyres/${tyre.slug}`;
+  // const imageUrl = images?.[0]?.url
+  //   ? images[0].url.startsWith("http")
+  //     ? images[0].url
+  //     : `${siteUrl}${images[0].url}`
+  //   : `${siteUrl}/default.jpg`;
+  
+  const productJsonLd = buildProductJsonLd(tyre, images);
+  const breadcrumbs = [
+    { name: "Головна", url: "/" },
+    { name: "Шини", url: "/tyres" },
+    {
+      name: `${getSeasonLabel(tyre.season)} шини`,
+      url: `/tyres?season=${tyre.season?.toLowerCase()}&view=list&sort=price_asc`,
+    },
+    {
+      name: `${getSeasonLabel(tyre.season)} шини ${tyreSize}`,
+      url: `/tyres?season=${tyre.season?.toLowerCase()}&width=${tyre.width}&profile=${tyre.profile}&diameter=${tyre.diameter}&view=list&sort=price_asc`,
+    },
+    { name: tyre.title, url: `/tyres/${tyre.slug}` },
+  ];
+  const breadcrumbsJsonLd = buildBreadcrumbsJsonLd(breadcrumbs);
   return (
     <article >
       <BreadCrumbs tyreSlug={tyre_slug} />
@@ -309,6 +233,8 @@ export default async function TyrePage({
         )}
 
       </div>
+      <JsonLd id="product-jsonld" data={productJsonLd} />
+      <JsonLd id="breadcrumbs-jsonld" data={breadcrumbsJsonLd} />
     </article>
   );
 }

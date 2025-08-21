@@ -1,4 +1,5 @@
-export function buildBreadcrumbsJsonLd(breadcrumbs: { name: string; url: string }[], siteUrl: string) {
+export function buildBreadcrumbsJsonLd(breadcrumbs: { name: string; url: string }[]) {
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
     return {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
