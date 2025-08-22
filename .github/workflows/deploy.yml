@@ -33,6 +33,11 @@ jobs:
             ls -la
             git status
 
+            echo "Loading NVM..."
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm use 20
+
             echo "Pulling latest changes..."
             git pull origin main
 
