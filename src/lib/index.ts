@@ -16,7 +16,7 @@ export { getContentBlock } from "./get-content-block";
 
 export { prisma } from "./prisma/prisma";
 export { getSiteConfig } from "./get-site-сonfig";
-export { getBaseMetadata } from "./get-base-metadata";
+export { getBaseMetadata } from "./metadata/get-base-metadata";
 export { addMissingBrands } from "./import/add-missing-brands";
 export { addMissingModels } from "./import/add-missing-models";
 
@@ -55,3 +55,5 @@ export { buildBreadcrumbsJsonLd } from "./json-ld/breadcrumbs-json-ld";
 export { buildProductJsonLd } from "./json-ld/product-json-ld";
 
 export { generateTyreMetadata } from "./metadata/tyre-metadata";
+export { generateBrandMetadata } from "./metadata/brand-metadata";
+export { generateBrandJsonLd } from "./json-ld/brand-json-ld";

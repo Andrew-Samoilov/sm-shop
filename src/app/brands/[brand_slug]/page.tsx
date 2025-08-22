@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import ReactMarkdown from "react-markdown";
 import { notFound } from "next/navigation";
-import { getBrands, getBrandBySlug, getModelsByBrandId, getTyresByBrandId, formatDisplayUrl, getModelImagesByIds, getBaseMetadata, getContentBlock, normalizedCerts } from "@/lib";
+import { getBrands, getBrandBySlug, getModelsByBrandId, getTyresByBrandId, formatDisplayUrl, getModelImagesByIds,  getContentBlock, normalizedCerts, generateBrandMetadata, generateBrandJsonLd, JsonLd } from "@/lib";
 import { LinkWithGA, TyresList, CertificatesClient } from "@/components";
 import { Certificate } from "@/types";
 
@@ -14,55 +14,60 @@ export async function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ brand_slug: string }>;
-}): Promise<Metadata> {
-  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
-  const { brand_slug } = await params;
-  const brand = await getBrandBySlug(brand_slug);
-  if (!brand) return {};
+// export async function generateMetadata({
+//   params,
+// }: {
+//   params: Promise<{ brand_slug: string }>;
+// }): Promise<Metadata> {
+//   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://shinamix.com.ua";
+//   const { brand_slug } = await params;
+//   const brand = await getBrandBySlug(brand_slug);
+//   if (!brand) return {};
 
-  const title = `${brand.brand_name} – шини, моделі та характеристики`;
-  const description = `Огляд бренду ${brand.brand_name}: країна-виробник, моделі шин, характеристики та наявність у магазині.`;
-  const canonicalUrl = `${BASE_URL}/brands/${brand.slug}`;
+//   const title = `${brand.brand_name} – шини, моделі та характеристики`;
+//   const description = `Огляд бренду ${brand.brand_name}: країна-виробник, моделі шин, характеристики та наявність у магазині.`;
+//   const canonicalUrl = `${BASE_URL}/brands/${brand.slug}`;
 
-  let logoUrl: string | undefined = undefined;
-  if (brand.logo) {
-    logoUrl = brand.logo.startsWith("http")
-      ? brand.logo
-      : `${BASE_URL}${brand.logo}`;
-  }
+//   let logoUrl: string | undefined = undefined;
+//   if (brand.logo) {
+//     logoUrl = brand.logo.startsWith("http")
+//       ? brand.logo
+//       : `${BASE_URL}${brand.logo}`;
+//   }
 
-  return getBaseMetadata({
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      url: canonicalUrl,
-      images: logoUrl
-        ? [
-          {
-            url: logoUrl,
-            alt: `Шини ${brand.brand_name} – купити в магазині`,
-            width: 800,
-            height: 600,
-          },
-        ]
-        : undefined,
-    },
-    twitter: {
-      card: logoUrl ? "summary_large_image" : "summary",
-      title,
-      description,
-      images: logoUrl ? [logoUrl] : undefined,
-    },
-    alternates: {
-      canonical: canonicalUrl,
-    },
-  });
+//   return getBaseMetadata({
+//     title,
+//     description,
+//     openGraph: {
+//       title,
+//       description,
+//       url: canonicalUrl,
+//       images: logoUrl
+//         ? [
+//           {
+//             url: logoUrl,
+//             alt: `Шини ${brand.brand_name} – купити в магазині`,
+//             width: 800,
+//             height: 600,
+//           },
+//         ]
+//         : undefined,
+//     },
+//     twitter: {
+//       card: logoUrl ? "summary_large_image" : "summary",
+//       title,
+//       description,
+//       images: logoUrl ? [logoUrl] : undefined,
+//     },
+//     alternates: {
+//       canonical: canonicalUrl,
+//     },
+//   });
+// }
+export async function generateMetadata(
+  { params }: { params: { brand_slug: string } }
+): Promise<Metadata> {
+  return generateBrandMetadata(params.brand_slug);
 }
 
 export default async function BrandPage({ params, }: { params: { brand_slug: string }; }) {
@@ -82,21 +87,21 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
   const filteredCerts = normalizedCerts(cert, brand.brand_name);
   // console.log(`[filteredCerts]`, filteredCerts)
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Brand",
+  // const jsonLd = {
+  //   "@context": "https://schema.org",
+  //   "@type": "Brand",
 
-    name: brand.brand_name,
-    ...(brand.country && { countryOfOrigin: brand.country }),
-    ...(brand.website && !["null", "NULL", ""].includes(brand.website) && { url: brand.website }),
-    ...(brand.logo && {
-      logo: {
-        "@type": "ImageObject",
-        url: brand.logo,
-      },
-    }),
-  };
-
+  //   name: brand.brand_name,
+  //   ...(brand.country && { countryOfOrigin: brand.country }),
+  //   ...(brand.website && !["null", "NULL", ""].includes(brand.website) && { url: brand.website }),
+  //   ...(brand.logo && {
+  //     logo: {
+  //       "@type": "ImageObject",
+  //       url: brand.logo,
+  //     },
+  //   }),
+  // };
+  const jsonLd = await generateBrandJsonLd(brand_slug);
   // console.info(`[getTyresByBrandId]`,brandTyres);
   // console.log(`[getTyresByBrandId]`, brand);
 
@@ -180,11 +185,11 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
         <TyresList tyres={brandTyres} images={images} />
       </section>
 
-      <script
+      {/* <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-
+      /> */}
+      {jsonLd && <JsonLd id={`brand-${brand_slug}`} data={jsonLd} />}
     </article>
   );
 }
