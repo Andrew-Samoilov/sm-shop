@@ -10,9 +10,10 @@ export async function generateBrandJsonLd(brand_slug: string) {
         "@type": "Brand",
         name: brand.brand_name,
         url: `${BASE_URL}/brands/${brand.slug}`,
+        ...(brand.description && { description: brand.description }),
+        "sameAs": [brand.website],
         ...(brand.logo && {
             logo: brand.logo.startsWith("http") ? brand.logo : `${BASE_URL}${brand.logo}`
         }),
-        ...(brand.country && { countryOfOrigin: brand.country }),
     };
 }
