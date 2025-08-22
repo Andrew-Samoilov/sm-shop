@@ -50,9 +50,7 @@ export default async function ContactsPage() {
           <h2 className="text-center">Адреса</h2>
           <iframe
             title={"Київ, Бойчука 44"}
-            src={
-              "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1271.4559354128105!2d30.550140000000003!3d50.40548!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4cf5b9ef2c229%3A0xdd56d086eb1b5fd6!2z0KjQuNC90LDQvNGW0LrRgQ!5e0!3m2!1suk!2sua!4v1733747851047!5m2!1suk!2sua"
-            }
+            src = {`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}&q=Київ,+Україна`}
             loading="lazy"
             className="h-96 min-h-[50vh] w-full"
             referrerPolicy="no-referrer-when-downgrade"
