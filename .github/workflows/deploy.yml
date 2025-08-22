@@ -30,7 +30,10 @@ jobs:
           ssh -i ~/.ssh/id_ed25519 $SERVER_USER@$SERVER_HOST << 'EOF'
             set -e
             cd $PROJECT_DIR
-
+            pwd
+            ls -la
+            git status
+            
             echo "Pulling latest changes..."
             git pull origin main
 
