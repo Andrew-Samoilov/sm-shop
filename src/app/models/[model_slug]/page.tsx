@@ -1,10 +1,9 @@
 import { CertificatesClient, ModelViewer, TyresList } from "@/components";
-import { getBrandById, getModels, getTyresByModelId, getModelBySlug, getModelImgByModelId, getSiteConfig, getContentBlock, normalizedCerts } from "@/lib";
+import { getBrandById, getModels, getTyresByModelId, getModelBySlug, getModelImgByModelId, getContentBlock, normalizedCerts,  getSiteConfig } from "@/lib";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import { Metadata } from "next";
 import { Certificate } from "@/types";
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
 
 export async function generateStaticParams() {
   const models = await getModels();
@@ -14,7 +13,12 @@ export async function generateStaticParams() {
   }));
 }
 
-
+// export async function generateMetadata(
+//   { params }: { params: { brand_slug: string } }
+// ): Promise<Metadata> {
+//   return generateModelMetadata(params.brand_slug);
+// }
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://shinamix.com.ua";
 export async function generateMetadata(
   { params }: { params: { model_slug: string } }
 ): Promise<Metadata> {
@@ -25,7 +29,7 @@ export async function generateMetadata(
   const brand = typeof model.brandId === "number"
     ? await getBrandById(model.brandId)
     : null;
-
+  
   const title = `${brand?.brand_name} ${model.modelName} – характеристики, ціна та відгуки | ${siteConfig.siteName}`;
   const description = `Детальний огляд шини ${brand?.brand_name} ${model.modelName}: характеристики, переваги, особливості експлуатації та наявність у магазині ${siteConfig.siteName}.`;
   const canonicalUrl = `${BASE_URL}/models/${model.slug}`;
@@ -80,8 +84,8 @@ export default async function ModelPage({
   const filteredCerts = normalizedCerts(cert, brand?.brand_name);
 
 
-  const canonicalUrl = `${BASE_URL}/models/${model.slug}`;
   const images = await getModelImgByModelId(model.id);
+  const canonicalUrl = `${BASE_URL}/models/${model.slug}`;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -110,6 +114,8 @@ export default async function ModelPage({
         "availability": "https://schema.org/OutOfStock",
       },
   };
+
+
 
   return (
     <article className=" flex flex-col gap-6 md:p-6">
@@ -153,7 +159,7 @@ export default async function ModelPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-
+      
     </article>
   );
 }
