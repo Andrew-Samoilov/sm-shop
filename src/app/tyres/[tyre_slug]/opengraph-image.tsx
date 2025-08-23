@@ -10,7 +10,7 @@ export const revalidate = 3600;
 export default async function OG({ params }: { params: { tyre_slug: string } }) {
     const FG = "#0B1220";
     const BG = "#ffffff";
-    const ORIGIN = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+    const ORIGIN = process.env.NEXT_PUBLIC_SITE_URL ?? "https://shinamix.com.ua/";
 
     const tyre = await getTyreBySlug(params.tyre_slug);
 
