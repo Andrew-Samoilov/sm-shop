@@ -118,7 +118,7 @@ export default async function ModelPage({
 
 
   return (
-    <article className=" flex flex-col gap-6 md:p-6">
+    <article className=" flex flex-col gap-6 md:p-6 items-center">
       <header className="lg:max-w-[65ch] mx-auto flex items-center justify-between flex-col-reverse md:flex-row bg-body dark:bg-darkmode-body">
         <h1>
           {brand?.brand_name} {model.modelName}
