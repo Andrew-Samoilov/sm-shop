@@ -61,6 +61,9 @@ export async function GET(req: NextRequest) {
             in: tyres.map((tyre) => tyre.modelId).filter((id): id is number => id !== null)
           },
         },
+        orderBy: {
+          position: "asc",
+        },
       });
 
       return NextResponse.json({ tyres, images });
