@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
         await addMissingTyresFromImport();
 
         /// update width, profile, delimeter
-        console.log("[Post] before [fillTyreSizeParts]");
+        // console.log("[Post] before [fillTyreSizeParts]");
         await fillTyreSizeParts();
         console.log("[Post] after [fillTyreSizeParts]");
 
