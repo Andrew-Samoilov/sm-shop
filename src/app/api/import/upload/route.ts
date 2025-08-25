@@ -46,11 +46,17 @@ export async function POST(req: NextRequest) {
         const inserted = await saveToTyreImportFromJson(data);
 
         // перед оновленням всіх наявних шин, скидаємо кількість на 0
-        await prisma.tyre.updateMany({
-            data: { inventoryQuantity: 0 },
-        });
+        // await prisma.tyre.updateMany({
+        //     data: { inventoryQuantity: 0 },
+        // });
 
-        await updateExistingTyresBulk();
+        // await updateExistingTyresBulk();
+
+
+        await prisma.$transaction(async (tx) => {
+            await tx.tyre.updateMany({ data: { inventoryQuantity: 0 } });
+            await updateExistingTyresBulk(tx);
+        });
 
         const missingBrands = await findMissingBrandsFromImport();
         await addMissingBrands(missingBrands);
@@ -62,7 +68,6 @@ export async function POST(req: NextRequest) {
         await addMissingTyresFromImport();
 
         /// update width, profile, delimeter
-        // console.log("[Post] before [fillTyreSizeParts]");
         await fillTyreSizeParts();
         console.log("[Post] after [fillTyreSizeParts]");
 

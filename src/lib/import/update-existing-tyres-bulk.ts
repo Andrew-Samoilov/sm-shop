@@ -1,10 +1,12 @@
 // src/lib/import/update-existing-tyres-bulk.ts
 import { prisma } from "@/lib"
+import {Prisma, PrismaClient } from "@prisma/client";
+type DbClient = PrismaClient | Prisma.TransactionClient;
 
-export async function updateExistingTyresBulk() {
+export async function updateExistingTyresBulk(db: DbClient = prisma) {
     console.log("[updateExistingTyresBulk] start")
 
-    const pending = await prisma.tyreImport.count({
+    const pending = await db.tyreImport.count({
         where: { itemType: "Товар", processed: false },
     })
     console.log("[updateExistingTyresBulk] pending:", pending)
@@ -15,7 +17,7 @@ export async function updateExistingTyresBulk() {
     // 1) Масове оновлення price та inventory_quantity з tyre_import
     //    Вирівнюємо типи: t.external_id (uuid) = ti.external_id::uuid
     //    Відсікаємо не-UUID, щоб не падало на касті.
-    const updatedCount: number = await prisma.$executeRaw`
+    const updatedCount: number = await db.$executeRaw`
     UPDATE tyres AS t
     SET
       price = ti.price,
@@ -29,7 +31,7 @@ export async function updateExistingTyresBulk() {
   `
 
     // 2) Позначаємо processed=true тільки для тих рядків, які реально оновили шини
-    await prisma.$executeRaw`
+    await db.$executeRaw`
     UPDATE tyre_import AS ti
     SET processed = true, imported_at = NOW()
     FROM tyres AS t
