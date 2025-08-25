@@ -48,10 +48,6 @@ export async function POST(req: NextRequest) {
         // console.log("[upload] before updateExistingTyresOneByOne");
         await updateExistingTyresBulk();
 
-        // const res = await updateExistingTyresOneByOne();
-        // console.log("[Post] after [updateExistingTyresOneByOne]", res);
-
-
         const missingBrands = await findMissingBrandsFromImport();
         await addMissingBrands(missingBrands);
 
@@ -66,15 +62,15 @@ export async function POST(req: NextRequest) {
         await fillTyreSizeParts();
         console.log("[Post] after [fillTyreSizeParts]");
 
-        console.timeEnd("[import]");
-        /// upper this - works
-
         // запускаємо скипт для перезбірки сайту
         const child = spawn("bash", ["scripts/build.sh"], {
             cwd: "/var/www/shina-mix-shop", // робоча директорія
             detached: true,                 // не блокуємо роут
         });
         child.unref();
+        
+        
+        console.timeEnd("[import]");
 
         return NextResponse.json({
             status: 'ok',

@@ -5,6 +5,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 
+
 export async function generateStaticParams() {
   const tyres = await prisma.tyre.findMany({
     where: {
