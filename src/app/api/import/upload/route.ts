@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { addMissingBrands, addMissingModels, addMissingTyresFromImport, fillTyreSizeParts, findMissingBrandsFromImport, findMissingModelsFromImport, prisma, saveToTyreImportFromJson, updateExistingTyresBulk } from '@/lib';
+import { spawn } from 'child_process';
 
 export async function POST(req: NextRequest) {
     const ALLOWED_IPS = (process.env.ALLOWED_IPS || '')
@@ -23,7 +24,7 @@ export async function POST(req: NextRequest) {
     if (authHeader !== `Bearer ${API_TOKEN}`) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
-   
+
     let data;
     try {
         data = await req.json();
@@ -36,27 +37,27 @@ export async function POST(req: NextRequest) {
     }
 
     try {
-        
+
         console.time("[import]");
 
         //очищаємо таблицю перед вставкою
         await prisma.tyreImport.deleteMany({});
-        
+
         const inserted = await saveToTyreImportFromJson(data);
-       
+
         // console.log("[upload] before updateExistingTyresOneByOne");
         await updateExistingTyresBulk();
 
         // const res = await updateExistingTyresOneByOne();
         // console.log("[Post] after [updateExistingTyresOneByOne]", res);
-        
+
 
         const missingBrands = await findMissingBrandsFromImport();
         await addMissingBrands(missingBrands);
-    
+
         const missingModels = await findMissingModelsFromImport();
-        await addMissingModels(missingModels)            
-        
+        await addMissingModels(missingModels)
+
 
         await addMissingTyresFromImport();
 
@@ -68,13 +69,19 @@ export async function POST(req: NextRequest) {
         console.timeEnd("[import]");
         /// upper this - works
 
+        // запускаємо скипт для перезбірки сайту
+        const child = spawn("bash", ["scripts/build.sh"], {
+            cwd: "/var/www/shina-mix-shop", // робоча директорія
+            detached: true,                 // не блокуємо роут
+        });
+        child.unref();
+
         return NextResponse.json({
             status: 'ok',
             ip: clientIp,
             brandsAdded: missingBrands.length,
             modelsAdded: missingModels.length,
-            inserted,  
-            // res,
+            inserted,
         });
     } catch (error) {
         console.error('❌ DB error in import:', error);
