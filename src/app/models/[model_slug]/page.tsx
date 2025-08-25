@@ -1,5 +1,5 @@
 import { CertificatesClient, ModelViewer, TyresList } from "@/components";
-import { getBrandById, getModels, getTyresByModelId, getModelBySlug, getModelImgByModelId, getContentBlock, normalizedCerts,  getSiteConfig } from "@/lib";
+import { getBrandById, getModels, getTyresByModelId, getModelBySlug, getModelImgByModelId, getContentBlock, normalizedCerts, getSiteConfig } from "@/lib";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import { Metadata } from "next";
@@ -29,7 +29,7 @@ export async function generateMetadata(
   const brand = typeof model.brandId === "number"
     ? await getBrandById(model.brandId)
     : null;
-  
+
   const title = `${brand?.brand_name} ${model.modelName} – характеристики, ціна та відгуки | ${siteConfig.siteName}`;
   const description = `Детальний огляд шини ${brand?.brand_name} ${model.modelName}: характеристики, переваги, особливості експлуатації та наявність у магазині ${siteConfig.siteName}.`;
   const canonicalUrl = `${BASE_URL}/models/${model.slug}`;
@@ -159,7 +159,7 @@ export default async function ModelPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      
+
     </article>
   );
 }
