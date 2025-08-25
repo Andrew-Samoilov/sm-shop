@@ -45,7 +45,11 @@ export async function POST(req: NextRequest) {
 
         const inserted = await saveToTyreImportFromJson(data);
 
-        // console.log("[upload] before updateExistingTyresOneByOne");
+        // перед оновленням всіх наявних шин, скидаємо кількість на 0
+        await prisma.tyre.updateMany({
+            data: { inventoryQuantity: 0 },
+        });
+
         await updateExistingTyresBulk();
 
         const missingBrands = await findMissingBrandsFromImport();
