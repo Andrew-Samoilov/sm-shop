@@ -18,7 +18,8 @@ export async function saveToTyreImportFromJson(items: OneCTyreData[],
                 ? normalizeBrandName(item.brand)
                 : "Unknown",
             price: item.price ?? 0,
-            quantity: item.quantity ?? 0,
+            quantity: typeof item.quantity === "number" ? item.quantity : Number(item.quantity) || 0,
+            
             season: item.season,
             diameter: item.diameter,
             load: item.load,
@@ -37,10 +38,14 @@ export async function saveToTyreImportFromJson(items: OneCTyreData[],
         };
     });
 
+    console.log("import [saveToTyreImportFromJson] prepared[0]:", prepared[0]);
+
     const result = await db.tyreImport.createMany({
         data: prepared,
         skipDuplicates: false,
     })
+
+    console.log("import [saveToTyreImportFromJson] inserted rows:", result.count);
 
     if (process.env.NODE_ENV === "development") {
         console.info("[saveToTyreImportFromJson] items: ", result.count);
