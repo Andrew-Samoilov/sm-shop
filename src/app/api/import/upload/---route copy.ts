@@ -55,7 +55,6 @@ export async function POST(req: NextRequest) {
             try {
                 console.log("[import] post-processing started…");
 
-                // перед оновленням всіх наявних шин, скидаємо кількість на 0
                 await prisma.tyre.updateMany({ data: { inventoryQuantity: 0 } });
                 await updateExistingTyresBulk(prisma);
 
@@ -91,6 +90,45 @@ export async function POST(req: NextRequest) {
             { status: 200 }
         );
 
+        ///////////////////// 
+        
+        // перед оновленням всіх наявних шин, скидаємо кількість на 0
+        // await prisma.tyre.updateMany({
+        //     data: { inventoryQuantity: 0 },
+        // });
+
+        // await updateExistingTyresBulk();
+
+        // const missingBrands = await findMissingBrandsFromImport();
+        // await addMissingBrands(missingBrands);
+
+        // const missingModels = await findMissingModelsFromImport();
+        // await addMissingModels(missingModels)
+
+
+        // await addMissingTyresFromImport();
+
+        /// update width, profile, delimeter
+        // await fillTyreSizeParts();
+        // console.log("[Post] after [fillTyreSizeParts]");
+
+        // запускаємо скипт для перезбірки сайту
+        // const child = spawn("bash", ["scripts/build.sh"], {
+        //     cwd: "/var/www/shina-mix-shop", // робоча директорія
+        //     detached: true,                 // не блокуємо роут
+        // });
+        // child.unref();
+        
+        
+        // console.timeEnd("[import]");
+
+        // return NextResponse.json({
+        //     status: 'ok',
+        //     ip: clientIp,
+        //     brandsAdded: missingBrands.length,
+        //     modelsAdded: missingModels.length,
+        //     insertedCount,
+        // });
     } catch (err) {
         console.error("[import] failed ❌:", err);
         return NextResponse.json(
