@@ -1,7 +1,11 @@
-import { prisma, simpleSlug } from "@/lib"
+import {simpleSlug } from "@/lib"
+import { PrismaClient, Prisma } from "@prisma/client";
+const prisma = new PrismaClient();
 import { OneCTyreData } from "@/types"
 
-export async function saveToTyreImportFromJson(items: OneCTyreData[]) {
+export async function saveToTyreImportFromJson(items: OneCTyreData[],
+    db: Prisma.TransactionClient | PrismaClient = prisma
+) {
     const prepared = items.map((item) => {
         const name = item.name ?? item.title ?? "unnamed"
 
@@ -33,9 +37,9 @@ export async function saveToTyreImportFromJson(items: OneCTyreData[]) {
         };
     });
 
-    const result = await prisma.tyreImport.createMany({
+    const result = await db.tyreImport.createMany({
         data: prepared,
-        skipDuplicates: true,
+        skipDuplicates: false,
     })
 
     if (process.env.NODE_ENV === "development") {
