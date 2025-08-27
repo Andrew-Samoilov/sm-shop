@@ -31,6 +31,7 @@ export async function GET(req: NextRequest) {
     try {
       const tyres = await prisma.tyre.findMany({
         where: {
+          inventoryQuantity: { gt: 0 },
           ...(width && { width: +width }),
           ...(profile && { profile: +profile }),
           ...(diameter && { diameter: +diameter }),
@@ -65,7 +66,9 @@ export async function GET(req: NextRequest) {
           position: "asc",
         },
       });
-
+      // console.log("[API] /tyres fetched tyresCount:", tyres.length);
+      // console.log("[API] /tyres fetched tyres:", tyres);
+      
       return NextResponse.json({ tyres, images });
     } catch(error) {
       console.error("[API] /tyres error:", error);

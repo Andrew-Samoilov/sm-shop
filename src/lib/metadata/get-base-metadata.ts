@@ -7,13 +7,14 @@ export async function getBaseMetadata(
     const config = await getSiteConfig();
 
     const siteName = config.siteName ?? "Шина Мікс";
+    const baseUrl = "https://shinamix.com.ua";
 
     const defaults: Metadata = {
         title: {
             default: siteName,
             template: `%s | ${siteName}`,
         },
-        description: `Шини від ${siteName} з доставкою по Україні.`,
+        description: `Шини від ${siteName} з доставкою по Києву та Україні.`,
         openGraph: {
             type: "website",
             siteName: siteName,
@@ -24,6 +25,9 @@ export async function getBaseMetadata(
         metadataBase: new URL("https://shinamix.com.ua"),
         icons: {
             icon: "/favicon.svg",
+        },
+        alternates: {
+            canonical: baseUrl,
         },
     };
 

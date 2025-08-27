@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
-import { prisma } from "@/lib";
+import { generateInfoPageMetadata, prisma } from "@/lib";
 import ReactMarkdown from "react-markdown";
+import { Metadata } from "next";
 
 
 export async function generateStaticParams() {
@@ -10,6 +11,14 @@ export async function generateStaticParams() {
     });
     return pages.map((page) => ({ info_page_slug: page.slug }));
 }
+
+
+export async function generateMetadata(
+    { params }: { params: { info_page_slug: string } }
+): Promise<Metadata> {
+    return generateInfoPageMetadata(params.info_page_slug);
+}
+
 
 export default async function InfoPage({ params }: { params: { info_page_slug: string } }) {
     const page = await prisma.staticPage.findUnique({

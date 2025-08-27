@@ -1,3 +1,6 @@
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 import { AddToCartButton, BreadCrumbs, CertificatesClient, LinkWithGA, ModelViewer, QuantitySelector, SeasonIcon, ViewItemGA } from "@/components";
 import { getTyreBySlug, getModelImgByModelId, prisma, getContentBlock, getTyreSize, getSeasonLabel, generateTyreMetadata, buildProductJsonLd, buildBreadcrumbsJsonLd, JsonLd, } from "@/lib";
 import { Certificate, } from "@/types";
@@ -18,20 +21,26 @@ export async function generateStaticParams() {
     tyre_slug: tyre.slug,
   }));
 }
+type TyreParams = Promise<{ tyre_slug: string }>;
 
 export async function generateMetadata(
-  { params }: { params: { tyre_slug: string } }
+  { params }: { params: TyreParams }
 ): Promise<Metadata> {
-  return generateTyreMetadata(params.tyre_slug);
+  const { tyre_slug } = await params;            
+  return generateTyreMetadata(tyre_slug);
 }
 
-export default async function TyrePage({
-  params,
-}: {
-  params: { tyre_slug: string };
-}) {
-  const { tyre_slug } = params;
+
+export default async function TyrePage(
+  { params }: { params: TyreParams }) {
+  
+  const { tyre_slug } = await  params;
+  
+  console.log('[TyrePage]',tyre_slug);
+
   const tyre = await getTyreBySlug(tyre_slug);
+
+  // console.log('[TyrePage]', tyre);
 
   if (!tyre) return notFound();
 
@@ -76,8 +85,8 @@ export default async function TyrePage({
       <ViewItemGA
         item_id={tyre.id}
         item_name={tyre.title}
-        brand={tyre.brands?.brand_name ?? ""}
-        model={tyre.models?.modelName ?? ""}
+        brand={tyre.brand ?? ""}
+        model={tyre.model ?? ""}
         price={Number(tyre.price)}
       />
 
@@ -88,8 +97,8 @@ export default async function TyrePage({
 
         <div className=" flex flex-col w-full md:w-auto min-w-fit p-2 md:p-0 gap-1 lg:gap-2">
           <h1 className="flex flex-col items-center md:items-start  ">
-            <span>{tyre.brands?.brand_name}</span>
-            <span>{tyre.models?.modelName}</span>
+            <span>{tyre.brand}</span>
+            <span>{tyre.model}</span>
             <span className="font-normal text-[75%]">{tyreSize}</span>
           </h1>
 
@@ -168,8 +177,8 @@ export default async function TyrePage({
               tyre={{
                 id: tyre.id,
                 title: tyre.title,
-                brand: tyre.brands?.brand_name ?? "",
-                model: tyre.models?.modelName ?? "",
+                brand: tyre.brand ?? "",
+                model: tyre.model ?? "",
                 tyreSize: tyreSize ?? "",
                 tyreImageUrl: images[0]?.url ?? "",
                 price: tyre.price,

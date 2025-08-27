@@ -19,6 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
     "@type": "CollectionPage",
     name: "Бренди шин",
     description: `Сторінка з переліком брендів шин, представлених у нашому магазині.`,
+    path: "/brands",
     url: `/brands`,
     mainEntity: {
       "@type": "ItemList",
