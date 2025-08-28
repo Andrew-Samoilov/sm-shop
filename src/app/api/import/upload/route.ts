@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // 📦 Отримуємо JSON
+    // Отримуємо JSON
     let data;
     try {
         data = await req.json();
@@ -88,7 +88,12 @@ export async function POST(req: NextRequest) {
         // 3. Відповідаємо 1С одразу
         return NextResponse.json(
             { ok: true, inserted: insertedCount },
-            { status: 200 }
+            {
+                status: 200,
+                headers: {
+                    "X-Items-Inserted": insertedCount.toString(),
+                },
+            }
         );
 
     } catch (err) {
