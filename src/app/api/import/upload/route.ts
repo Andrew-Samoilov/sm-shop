@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { addMissingBrands, addMissingModels, addMissingTyresFromImport, fillTyreSizeParts, findMissingBrandsFromImport, findMissingModelsFromImport, prisma, saveToTyreImportFromJson, updateExistingTyresBulk } from '@/lib';
+import { addMissingBrands, addMissingModels, addMissingTyresFromImport, fillTyreSizeParts, findMissingBrandsFromImport, findMissingModelsFromImport, normalizeSeasonsInTyreImport, prisma, saveToTyreImportFromJson, updateExistingTyresBulk } from '@/lib';
 import { spawn } from 'child_process';
 
 export async function POST(req: NextRequest) {
@@ -44,7 +44,9 @@ export async function POST(req: NextRequest) {
 
         const insertedCount = await prisma.$transaction(async (tx) => {
             await tx.tyreImport.deleteMany({});
-            return await saveToTyreImportFromJson(data, tx);
+            const count = await saveToTyreImportFromJson(data, tx);
+            await normalizeSeasonsInTyreImport(tx);
+            return count;
         });
 
         console.log(`[import] saved to tyre_import: ${insertedCount} rows`);

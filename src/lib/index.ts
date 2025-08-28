@@ -21,6 +21,8 @@ export { addMissingBrands } from "./import/add-missing-brands";
 export { addMissingModels } from "./import/add-missing-models";
 
 export { saveToTyreImportFromJson } from "./import/save-to-tyre_import-from-json";
+export { normalizeSeasonsInTyreImport } from "./import/normalize-seasons-in-tyre-import";
+
 export { addMissingTyresFromImport } from "./import/add-missing-tyres-from-import";
 export { getTyreBySlug } from "./prisma/get-tyre-by-slug";
 export { getTyreById } from "./prisma/get-tyre-by-id";
@@ -59,3 +61,4 @@ export { generateTyreMetadata } from "./metadata/tyre-metadata";
 export { generateBrandMetadata } from "./metadata/brand-metadata";
 export { generateBrandJsonLd } from "./json-ld/brand-json-ld";
 export { generateInfoPageMetadata } from "./metadata/generate-info-page-metadata";
+export { formatSearchTitle } from "./format-search-title";

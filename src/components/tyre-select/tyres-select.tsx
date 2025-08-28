@@ -1,8 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { getTyresOptions } from "@/lib";
-import { HelpWindow, TyresList, OptionSelect, SeasonCheckbox, ListHeader, } from "@/components";
+import { getTyresOptions, formatSearchTitle } from "@/lib";
+import { HelpWindow, TyresList, OptionSelect, SeasonCheckbox, ListHeader } from "@/components";
 import { ModelImage } from "@prisma/client";
 import { TyreWithRelations } from "@/types";
 
@@ -145,46 +145,7 @@ export function TyresSelect() {
     gallery: "у вигляді галереї",
   };
 
-  type FiltersType = {
-    width?: string;
-    profile?: string;
-    diameter?: string;
-    seasons: string[];
-  };
-
-  function formatSearchTitle(query: string, filters: FiltersType): string {
-    const parts: string[] = [];
-
-    if (query) parts.push(`«${query}»`);
-
-    if (filters.width && filters.profile) {
-      parts.push(`${filters.width}/${filters.profile}`);
-    }
-
-    if (filters.diameter) {
-      parts.push(`R${filters.diameter}`);
-    }
-
-    function getSeasonLabel(s: string): string | undefined {
-      if (s === "summer") return "літні";
-      if (s === "winter") return "зимові";
-      if (s === "allseason") return "всесезонні";
-    }
-
-    if (filters.seasons.length > 0) {
-      const seasons = filters.seasons
-        .map(getSeasonLabel)
-        .filter(Boolean) // видаляє undefined/порожні
-        .join(", ");
-      if (seasons.length > 0) {
-        parts.push(`(${seasons})`);
-      }
-    }
-
-
-    return parts.join(" ");
-
-  }
+  
 
   //  console.log(`[formatSearchTitle]`, formatSearchTitle.length);
   const searchTitle = formatSearchTitle(query, filters);
