@@ -21,7 +21,8 @@ export async function updateExistingTyresBulk(db: DbClient = prisma) {
     UPDATE tyres AS t
     SET
       price = ti.price,
-      inventory_quantity = COALESCE(ti.quantity, 0)
+      inventory_quantity = COALESCE(ti.quantity, 0),
+      season = ti.season
     FROM tyre_import AS ti
     WHERE
       ti.item_type = 'Товар'
