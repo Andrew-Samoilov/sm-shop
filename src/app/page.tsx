@@ -1,4 +1,4 @@
-import { HeroSection, InfoSection, LinkWithGA } from "@/components";
+import { BuyTyres, HeroSection, InfoSection } from "@/components";
 
 export default async function Home() {
 
@@ -6,7 +6,7 @@ export default async function Home() {
     <>
       <HeroSection />
 
-      <section className="section  flex flex-col items-center">
+      {/* <section className="section  flex flex-col items-center">
         <h2>Купити шини</h2>
         <div className="flex flex-col md:flex-row gap-6">
           <LinkWithGA
@@ -42,8 +42,8 @@ export default async function Home() {
             <h3>Всесезон</h3>
           </LinkWithGA>
         </div>
-      </section>
-
+      </section> */}
+      <BuyTyres />
       <InfoSection />
 
     </>

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getTyresOptions, formatSearchTitle } from "@/lib";
-import { HelpWindow, TyresList, OptionSelect, SeasonCheckbox, ListHeader } from "@/components";
+import { HelpWindow, TyresList, OptionSelect, SeasonCheckbox, ListHeader, EmptyPlaceholder } from "@/components";
 import { ModelImage } from "@prisma/client";
 import { TyreWithRelations } from "@/types";
 
@@ -146,12 +146,19 @@ export function TyresSelect() {
   };
 
   
-
   //  console.log(`[formatSearchTitle]`, formatSearchTitle.length);
   const searchTitle = formatSearchTitle(query, filters);
 
   return (
-    <div className="flex flex-col w-auto  px-1">
+    // <div className="flex flex-col w-auto  px-1">
+
+      <div
+        className={
+          selectedTyres.length > 0
+            ? "flex flex-col w-auto  px-1"
+            : "flex flex-col items-center  min-h-[70vh]"
+        }
+      >
 
       {searchTitle.length > 0 && (
         <>
@@ -206,7 +213,7 @@ export function TyresSelect() {
           </form>
         </aside>
 
-        {selectedTyres.length > 0 && (
+        {selectedTyres.length > 0 ? (
           <div className="mx-auto">
             <ListHeader
               view={filters.view}
@@ -216,6 +223,8 @@ export function TyresSelect() {
             />
             <TyresList tyres={selectedTyres} images={images} view={filters.view} />
           </div>
+        ):(
+        <EmptyPlaceholder/>
         )}
       </div>
     </div>

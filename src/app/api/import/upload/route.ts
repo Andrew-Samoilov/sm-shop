@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
 
 
     try {
-        console.time("[import]");
+        console.time("[import/save]");
 
         const insertedCount = await prisma.$transaction(async (tx) => {
             await tx.tyreImport.deleteMany({});
@@ -50,12 +50,14 @@ export async function POST(req: NextRequest) {
             return count;
         });
 
+        console.timeEnd("[import/save]");
         console.log(`[route] saved to tyre_import: ${insertedCount} rows`);
 
 
         // 2. Запускаємо фонову обробку (асинхронно)
         (async () => {
             try {
+                console.time("[import/post]");
                 console.log("[import] post-processing started…");
 
                 // перед оновленням всіх наявних шин, скидаємо кількість на 0
@@ -86,6 +88,7 @@ export async function POST(req: NextRequest) {
                 await addMissingTyresFromImport();
                 await fillTyreSizeParts();
 
+                console.timeEnd("[import/post]");
                 console.log("[import] post-processing finished ✅");
 
                 // 🚀 запускаємо скрипт для перезбірки сайту
@@ -95,7 +98,6 @@ export async function POST(req: NextRequest) {
                 });
                 child.unref();
 
-                console.timeEnd("[import]");
             } catch (err) {
                 console.error("[import] post-processing failed ❌:", err);
             }
