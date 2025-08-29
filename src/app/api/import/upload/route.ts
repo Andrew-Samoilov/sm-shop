@@ -62,14 +62,19 @@ export async function POST(req: NextRequest) {
                 // await prisma.tyre.updateMany({ data: { inventoryQuantity: 0 } });
                 // await updateExistingTyresBulk(prisma);
 
-                await prisma.$transaction(async (tx) => {
-                    // Обнуляємо всі залишки
-                    await tx.tyre.updateMany({ data: { inventoryQuantity: 0 } });
+                // await prisma.$transaction(async (tx) => {
+                //     // Обнуляємо всі залишки
+                //     await tx.tyre.updateMany({ data: { inventoryQuantity: 0 } });
 
-                    // Оновлюємо існуючі шини даними з імпорту
-                    // await updateExistingTyresBulk(tx);
-                    await updateExistingTyresOneByOne(tx);
-                });
+                //     // Оновлюємо існуючі шини даними з імпорту
+                //     // await updateExistingTyresBulk(tx);
+                //     await updateExistingTyresOneByOne(tx);
+                // });
+
+                await prisma.tyre.updateMany({ data: { inventoryQuantity: 0 } });
+                console.log('[api/import/upload/route] Updated inventory quantities to 0');
+                
+                await updateExistingTyresOneByOne();
 
 
                 const missingBrands = await findMissingBrandsFromImport();

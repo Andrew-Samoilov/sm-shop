@@ -35,19 +35,32 @@ export async function updateExistingTyresOneByOne(db: DbClient = prisma) {
 
         try {
             // 2) оновити існуючий Tyre по externalId + відмітити імпорт як processed
-            await prisma.$transaction([
-                prisma.tyre.update({
-                    where: { externalId: r.externalId },
-                    data: {
-                        price: r.price,
-                        inventoryQuantity: r.quantity ?? 0,
-                    },
-                }),
-                prisma.tyreImport.update({
-                    where: { id: r.id },
-                    data: { processed: true },
-                }),
-            ])
+            // await prisma.$transaction([
+            //     prisma.tyre.update({
+            //         where: { externalId: r.externalId },
+            //         data: {
+            //             price: r.price,
+            //             inventoryQuantity: r.quantity ?? 0,
+            //         },
+            //     }),
+            //     prisma.tyreImport.update({
+            //         where: { id: r.id },
+            //         data: { processed: true },
+            //     }),
+            // ])
+
+            await db.tyre.update({
+                where: { externalId: r.externalId },
+                data: {
+                    price: r.price,
+                    inventoryQuantity: r.quantity ?? 0,
+                },
+            });
+
+            await db.tyreImport.update({
+                where: { id: r.id },
+                data: { processed: true },
+            });
 
             updated++
             // console.log(`[updateExistingTyresOneByOne] Updated tyre with externalId: ${r.externalId}`, updated)
