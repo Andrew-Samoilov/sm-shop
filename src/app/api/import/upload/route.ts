@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { addMissingBrands, addMissingModels, addMissingTyresFromImport, fillTyreSizeParts, findMissingBrandsFromImport, findMissingModelsFromImport, normalizeSeasonsInTyreImport, prisma, saveToTyreImportFromJson, updateExistingTyresBulk } from '@/lib';
+import { addMissingBrands, addMissingModels, addMissingTyresFromImport, fillTyreSizeParts, findMissingBrandsFromImport, findMissingModelsFromImport, normalizeSeasonsInTyreImport, prisma, saveToTyreImportFromJson } from '@/lib';
 import { spawn } from 'child_process';
 
 export async function POST(req: NextRequest) {
@@ -45,6 +45,7 @@ export async function POST(req: NextRequest) {
         const insertedCount = await prisma.$transaction(async (tx) => {
             await tx.tyreImport.deleteMany({});
             const count = await saveToTyreImportFromJson(data, tx);
+            // await updateExistingTyresOneByOne(tx);
             await normalizeSeasonsInTyreImport(tx);
             return count;
         });
@@ -66,10 +67,10 @@ export async function POST(req: NextRequest) {
                     await tx.tyre.updateMany({ data: { inventoryQuantity: 0 } });
 
                     // Оновлюємо існуючі шини даними з імпорту
-                    await updateExistingTyresBulk(tx);
+                    // await updateExistingTyresBulk(tx);
                 });
 
-                
+
                 const missingBrands = await findMissingBrandsFromImport();
                 await addMissingBrands(missingBrands);
 

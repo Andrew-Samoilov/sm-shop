@@ -23,6 +23,8 @@ export { addMissingModels } from "./import/add-missing-models";
 export { saveToTyreImportFromJson } from "./import/save-to-tyre_import-from-json";
 export { normalizeSeasonsInTyreImport } from "./import/normalize-seasons-in-tyre-import";
 
+export { updateExistingTyresOneByOne } from "./import/update-existing-tyres-one-by-one";
+
 export { addMissingTyresFromImport } from "./import/add-missing-tyres-from-import";
 export { getTyreBySlug } from "./prisma/get-tyre-by-slug";
 export { getTyreById } from "./prisma/get-tyre-by-id";

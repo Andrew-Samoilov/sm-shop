@@ -38,8 +38,10 @@ model Tyre {
   country           String? @db.VarChar(50)
   dateCode          String? @map("date_code") @db.Char(4)
   applicability     String? @db.VarChar(50)
+
   inventoryQuantity Int?    @default(0) @map("inventory_quantity")
   price             Float
+  
   loadSpeedIndex    String? @map("load_speed_index") @db.VarChar(10)
   brand             String? @db.VarChar(50)
   model             String? @db.VarChar(100)
@@ -160,8 +162,10 @@ model TyreImport {
   externalId String   @map("external_id")// поле id з 1С
   name       String
   code       String   // артикул
+
   price      Int
   quantity   Int      @default(0)
+
   slug       String? @db.VarChar(100)
 
   model            String?

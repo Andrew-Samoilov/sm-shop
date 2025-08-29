@@ -1,11 +1,13 @@
 // src/lib/import/update-existing-tyres-one-by-one.ts
 import { prisma } from "@/lib"
-import { Prisma } from "@prisma/client"
+import { Prisma, PrismaClient } from "@prisma/client";
 
-export async function updateExistingTyresOneByOne() {
+type DbClient = PrismaClient | Prisma.TransactionClient;
+
+export async function updateExistingTyresOneByOne(db: DbClient = prisma) {
     console.log("[updateExistingTyresOneByOne] start");
 
-    const pending = await prisma.tyreImport.count({
+    const pending = await db.tyreImport.count({
         where: { itemType: "Товар", processed: false },
     });
     console.log("[updateExistingTyresOneByOne] pending:", pending);
