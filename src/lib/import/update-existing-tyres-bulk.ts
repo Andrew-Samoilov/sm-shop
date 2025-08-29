@@ -6,6 +6,7 @@ type DbClient = PrismaClient | Prisma.TransactionClient;
 export async function updateExistingTyresBulk(db: DbClient = prisma) {
     console.log("[updateExistingTyresBulk] start")
 
+  try {
     const pending = await db.tyreImport.count({
         where: { itemType: "Товар", processed: false },
     })
@@ -45,4 +46,8 @@ export async function updateExistingTyresBulk(db: DbClient = prisma) {
 
     console.log(`[updateExistingTyresBulk] Updated: ${updatedCount} tyres in ${Date.now() - t0}ms`)
     return { updated: updatedCount }
+  } catch (err) {
+    console.error("[updateExistingTyresBulk] ❌ Error:", err)
+    throw err // важливо пробросити далі, щоб транзакція відкотилася
+  }
 }
