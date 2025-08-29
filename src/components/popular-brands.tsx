@@ -30,7 +30,7 @@ const popularBrands = [
 
 export function PopularBrands() {
     return (
-        <section className="section flex flex-col items-center">
+        <section className="section flex flex-col items-center ">
             <h2>Популярні бренди:</h2>
             <div className="flex flex-wrap justify-center gap-6">
                 {popularBrands.map((b) => (
