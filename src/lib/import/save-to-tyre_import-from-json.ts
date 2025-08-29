@@ -38,18 +38,14 @@ export async function saveToTyreImportFromJson(items: OneCTyreData[],
         };
     });
 
-    console.log("import [saveToTyreImportFromJson] prepared[0]:", prepared[0]);
+    // console.log("import [saveToTyreImportFromJson] prepared[0]:", prepared[0]);
 
     const result = await db.tyreImport.createMany({
         data: prepared,
         skipDuplicates: false,
     })
 
-    console.log("import [saveToTyreImportFromJson] inserted rows:", result.count);
-
-    if (process.env.NODE_ENV === "development") {
-        console.info("[saveToTyreImportFromJson] items: ", result.count);
-    }
+    console.log("[saveToTyreImportFromJson] inserted rows:", result.count);
 
     return result.count
 }

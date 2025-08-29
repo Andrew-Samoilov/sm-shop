@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { addMissingBrands, addMissingModels, addMissingTyresFromImport, fillTyreSizeParts, findMissingBrandsFromImport, findMissingModelsFromImport, normalizeSeasonsInTyreImport, prisma, saveToTyreImportFromJson } from '@/lib';
+import { addMissingBrands, addMissingModels, addMissingTyresFromImport, fillTyreSizeParts, findMissingBrandsFromImport, findMissingModelsFromImport, normalizeSeasonsInTyreImport, prisma, saveToTyreImportFromJson, updateExistingTyresOneByOne } from '@/lib';
 import { spawn } from 'child_process';
 
 export async function POST(req: NextRequest) {
@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
             return count;
         });
 
-        console.log(`[import] saved to tyre_import: ${insertedCount} rows`);
+        console.log(`[route] saved to tyre_import: ${insertedCount} rows`);
 
 
         // 2. Запускаємо фонову обробку (асинхронно)
@@ -68,6 +68,7 @@ export async function POST(req: NextRequest) {
 
                     // Оновлюємо існуючі шини даними з імпорту
                     // await updateExistingTyresBulk(tx);
+                    await updateExistingTyresOneByOne(tx);
                 });
 
 
