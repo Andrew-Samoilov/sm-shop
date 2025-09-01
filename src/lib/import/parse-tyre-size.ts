@@ -10,7 +10,7 @@ export function parseTyreSize(size: string) {
       width: parseInt(m[1], 10),
       delimeter: m[2],
       profile: parseInt(m[3], 10),
-      construct: m[4].toUpperCase(),
+      constr: m[4].toUpperCase(),
       diameter: parseInt(m[5], 10),
     }
   }
@@ -23,7 +23,7 @@ export function parseTyreSize(size: string) {
       width: parseInt(m[1], 10),
       delimiter: 'X',
       profile: parseFloat(m[2]),
-      construct: 'R',
+      constr: 'R',
       diameter: parseInt(m[3], 10),
     }
   }
