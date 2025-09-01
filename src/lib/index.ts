@@ -7,9 +7,9 @@ export { simpleSlug } from "./simple-slug";
 export { findMissingBrandsFromImport } from "./import/find-missing-brands-from-import";
 export { findMissingModelsFromImport } from "./import/find-missing-models-from-import";
 export { updateExistingTyresBulk } from "./import/update-existing-tyres-bulk";
-// export { updateExistingTyresOneByOne } from "./import/update-existing-tyres-one-by-one";
+export { updateExistingTyresOneByOne } from "./import/update-existing-tyres-one-by-one";
 export { parseTyreSize } from "./import/parse-tyre-size";
-export { fillTyreSizeParts } from "./import/fill-tyre-size-parts";
+export { fillTyreParts } from "./import/fill-tyre-parts";
 export { capitalizeFirstLetter } from "./capitalize-first-letter";
 
 export { getContentBlock } from "./get-content-block";
@@ -22,8 +22,6 @@ export { addMissingModels } from "./import/add-missing-models";
 
 export { saveToTyreImportFromJson } from "./import/save-to-tyre_import-from-json";
 export { normalizeSeasonsInTyreImport } from "./import/normalize-seasons-in-tyre-import";
-
-export { updateExistingTyresOneByOne } from "./import/update-existing-tyres-one-by-one";
 
 export { addMissingTyresFromImport } from "./import/add-missing-tyres-from-import";
 export { getTyreBySlug } from "./prisma/get-tyre-by-slug";

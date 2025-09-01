@@ -1,13 +1,12 @@
 import { parseTyreSize, prisma } from "@/lib";
 
-export async function fillTyreSizeParts() {
+export async function fillTyreParts() {
     const tyres = await prisma.tyre.findMany({
         where: {
             OR: [
                 { width: null },
                 { profile: null },
-                { constr: null },
-                { delimiter: null },
+                { diameter: null },
             ],
             NOT: { externalId: null }, // замість { not: null }
         },

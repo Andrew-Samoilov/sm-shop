@@ -20,7 +20,13 @@ export async function updateExistingTyresOneByOne(db: DbClient = prisma) {
     // 1) 
     const rows = await prisma.tyreImport.findMany({
         where: { itemType: "Товар", processed: false },
-        select: { id: true, externalId: true, price: true, quantity: true },
+        select: {
+            id: true,
+            externalId: true,
+            price: true,
+            quantity: true,
+            season: true,
+        },
         orderBy: { id: "asc" },
     })
   

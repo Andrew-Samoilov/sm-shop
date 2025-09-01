@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { addMissingBrands, addMissingModels, addMissingTyresFromImport, fillTyreSizeParts, findMissingBrandsFromImport, findMissingModelsFromImport, normalizeSeasonsInTyreImport, prisma, saveToTyreImportFromJson, updateExistingTyresOneByOne } from '@/lib';
+import { addMissingBrands, addMissingModels, addMissingTyresFromImport, fillTyreParts, findMissingBrandsFromImport, findMissingModelsFromImport, normalizeSeasonsInTyreImport, prisma, saveToTyreImportFromJson, updateExistingTyresOneByOne } from '@/lib';
 import { spawn } from 'child_process';
 
 export async function POST(req: NextRequest) {
@@ -60,19 +60,6 @@ export async function POST(req: NextRequest) {
                 console.time("[import/post]");
                 console.log("[import] post-processing started…");
 
-                // перед оновленням всіх наявних шин, скидаємо кількість на 0
-                // await prisma.tyre.updateMany({ data: { inventoryQuantity: 0 } });
-                // await updateExistingTyresBulk(prisma);
-
-                // await prisma.$transaction(async (tx) => {
-                //     // Обнуляємо всі залишки
-                //     await tx.tyre.updateMany({ data: { inventoryQuantity: 0 } });
-
-                //     // Оновлюємо існуючі шини даними з імпорту
-                //     // await updateExistingTyresBulk(tx);
-                //     await updateExistingTyresOneByOne(tx);
-                // });
-
                 await prisma.tyre.updateMany({ data: { inventoryQuantity: 0 } });
                 console.log('[api/import/upload/route] Updated inventory quantities to 0');
                 
@@ -86,7 +73,8 @@ export async function POST(req: NextRequest) {
                 await addMissingModels(missingModels);
 
                 await addMissingTyresFromImport();
-                await fillTyreSizeParts();
+
+                await fillTyreParts();
 
                 console.timeEnd("[import/post]");
                 console.log("[import] post-processing finished ✅");
