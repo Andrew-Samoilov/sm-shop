@@ -3,8 +3,7 @@ export function parseTyreSize(size: string) {
   const s = size.trim()
   
   // 1) Класичний формат: 205/55R16, LT225/75R16C
-  const reClassic = /^(?:LT|HL|P|T)?\s*(\d{3})([/-])(\d{2})([RrDd])(\d{2})(?:C|LT)?$/
-
+  const reClassic = /^(?:LT|HL|P|T)?\s*(\d{3})([/-])(\d{2})([RD])(\d{2})(?:C|LT)?/i
   let m = reClassic.exec(s)
   if (m) {
     return {
