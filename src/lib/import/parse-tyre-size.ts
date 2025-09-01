@@ -1,20 +1,15 @@
-export type ParsedTyreSize = {
-  width: number | null
-  profile: number | null
-  diameter: number | null
-}
-
-export function parseTyreSize(size: string): ParsedTyreSize | null {
+export function parseTyreSize(size: string) {
     if (!size) return null;
   const s = size.trim()
   
   // 1) Класичний формат: 205/55R16, LT225/75R16C
-  const reClassic = /^(?:LT|HL|P|T)?\s*(\d{3})[/-](\d{2})[Rr](\d{2})(?:C|LT)?$/
+  const reClassic = /^(?:LT|HL|P|T)?\s*(\d{3})[/-](\d{2})([RrDd])(\d{2})(?:C|LT)?$/
   let m = reClassic.exec(s)
   if (m) {
     return {
       width: parseInt(m[1], 10),
       profile: parseInt(m[2], 10),
+      construct: m[3].toUpperCase(),
       diameter: parseInt(m[3], 10),
     }
   }
@@ -26,9 +21,10 @@ export function parseTyreSize(size: string): ParsedTyreSize | null {
     return {
       width: parseInt(m[1], 10),
       profile: parseFloat(m[2]),
+      construct: 'R',
       diameter: parseInt(m[3], 10),
     }
   }
   
-  return { width: null, profile: null, diameter: null }
+  return { width: null, profile: null,  diameter: null }
 }

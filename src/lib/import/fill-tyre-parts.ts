@@ -7,6 +7,7 @@ export async function fillTyreParts() {
                 { width: null },
                 { profile: null },
                 { diameter: null },
+                
             ],
             NOT: { externalId: null }, // замість { not: null }
         },
