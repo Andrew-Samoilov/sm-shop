@@ -35,8 +35,5 @@ export function parseTyreSize(size: string) {
     }
   }
 
-
-  const result = { width: null, delimiter: null, profile: null, constr: null, diameter: null };
-  console.log("[parseTyreSize]", size, "=>", result);
-  return result;
+  return { width: null, delimiter: null, profile: null, constr: null, diameter: null };
 }
