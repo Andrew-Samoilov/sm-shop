@@ -32,4 +32,6 @@ export async function fillTyreParts() {
             data: parsed,
         });
     }
+
+    console.log("[fillTyreParts] виконано");
 }

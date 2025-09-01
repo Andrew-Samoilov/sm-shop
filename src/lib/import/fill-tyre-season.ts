@@ -2,8 +2,6 @@ import { season } from "@prisma/client"
 import { prisma } from "../prisma/prisma"
 
 export async function fillTyreSeason() {
-    console.log("[fillTyreSeason] start")
-
     // Беремо тільки ті шини, де ще нема сезону
     const tyres = await prisma.tyre.findMany({
         where: { season: null },

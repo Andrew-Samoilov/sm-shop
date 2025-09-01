@@ -29,10 +29,10 @@ export async function updateExistingTyresOneByOne(db: DbClient = prisma) {
         },
         orderBy: { id: "asc" },
     })
-  
+
     if (rows.length === 0) {
         console.log("[updateExistingTyresOneByOne] No tyres to update");
-        return { scanned, updated, missing, errors }; 
+        return { scanned, updated, missing, errors };
     }
     const t0 = Date.now();
 
@@ -71,11 +71,11 @@ export async function updateExistingTyresOneByOne(db: DbClient = prisma) {
             updated++
             // console.log(`[updateExistingTyresOneByOne] Updated tyre with externalId: ${r.externalId}`, updated)
 
-            if (updated % 10 === 0) {
+            if (updated % 50 === 0) {
                 console.log(`[updateExistingTyresOneByOne] Updated`, updated)
             }
 
-            
+
         } catch (e: unknown) {
             if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === "P2025") {
                 // Tyre з таким externalId не знайдено
