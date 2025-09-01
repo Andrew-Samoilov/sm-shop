@@ -1,14 +1,14 @@
 export function parseTyreSize(size: string) {
   if (!size) return null;
-
   const s = size.trim()
 
   // 1) Класичний формат: 205/55R16, LT225/75R16C
   // const reClassic = /^(?:LT|HL|P|T)?\s*(\d{3})([/-])(\d{2})([RD])(\d{2})(?:C|LT)?/i;
   // const reClassic = /^(?:LT|HL|P|T)?\s*(\d{3})([/-])(\d{2})([RD])(\d{2})/i;
   // const reClassic = /^(?:LT|HL|P|T)?\s*(\d{3})([\/-])(\d{2})(Z?R|D)(\d{2})(?:C|XL|LT)?/i;
-  const reClassic = /^(?:LT|HL|P|T)?\s*(\d{3})([/-])(\d{2})([RD])(\d{2})/i;
-
+  // const reClassic = /^(?:LT|HL|P|T)?\s*(\d{3})([/-])(\d{2})([RD])(\d{2})/i;
+  // const reClassic = /^(?:LT|HL|P|T)?\s*(\d{3})([/-])(\d{2})(R|D)(\d{2})\b/i;
+  const reClassic = /^(?:LT|HL|P|T)?\s*(\d{3})([/-])(\d{2})(RD)(\d{2})$/i;
   let m = reClassic.exec(s)
   if (m) {
     return {
@@ -35,5 +35,8 @@ export function parseTyreSize(size: string) {
     }
   }
 
-  return { width: null, delimiter: null, profile: null, constr: null, diameter: null }
+
+  const result = { width: null, delimiter: null, profile: null, constr: null, diameter: null };
+  console.log("[parseTyreSize]", size, "=>", result);
+  return result;
 }
