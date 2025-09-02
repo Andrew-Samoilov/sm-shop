@@ -7,7 +7,7 @@ export async function fillTyreParts() {
                 { width: null },
                 { profile: null },
                 { diameter: null },
-                
+
             ],
             NOT: { externalId: null }, // замість { not: null }
         },
@@ -27,11 +27,19 @@ export async function fillTyreParts() {
         const parsed = parseTyreSize(imported.tyreSize);
         if (!parsed) continue;
 
-        await prisma.tyre.update({
-            where: { id: tyre.id },
-            data: parsed,
-        });
-    }
+        if (parsed) {
+            for (const [key, val] of Object.entries(parsed)) {
+                if (typeof val === "string") {
+                    console.log(`[${tyre.id}] ${key} length=${val.length} value="${val}"`);
+                }
+            }
+        }
+        
+            await prisma.tyre.update({
+                where: { id: tyre.id },
+                data: parsed,
+            });
+        }
 
-    console.log("[fillTyreParts] виконано");
-}
+        console.log("[fillTyreParts] виконано");
+    }
