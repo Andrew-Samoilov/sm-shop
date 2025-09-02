@@ -27,14 +27,17 @@ export async function fillTyreParts() {
         const parsed = parseTyreSize(imported.tyreSize);
         if (!parsed) continue;
 
-        if (parsed) {
-            for (const [key, val] of Object.entries(parsed)) {
-                if (typeof val === "string") {
-                    console.log(`[${tyre.id}] ${key} length=${val.length} value="${val}"`);
-                }
+        // детальний лог усіх ключів
+        console.log(`[${tyre.id}] FULL PARSED:`, parsed);
+        
+        for (const [key, val] of Object.entries(parsed)) {
+            if (typeof val === "string") {
+                console.log(`  ${key}: length=${val.length} value="${val}"`);
+            } else {
+                console.log(`  ${key}:`, val);
             }
         }
-        
+
             await prisma.tyre.update({
                 where: { id: tyre.id },
                 data: parsed,
