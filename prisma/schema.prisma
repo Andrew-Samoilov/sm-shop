@@ -47,9 +47,9 @@ model Tyre {
   model             String? @db.VarChar(100)
 
   width             Float?  @db.Real
-  delimiter         String? @db.Char(1)
+  delimiter         String? @db.Char(1)   @default("/")
   profile           Float?  @db.Real
-  constr            String? @db.Char(1)
+  constr            String? @db.Char(1)   @default("R")
   diameter          Float?  @db.Real
   
   loadIndex         String? @map("load_index") @db.VarChar(10)
