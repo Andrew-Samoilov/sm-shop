@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
         (async () => {
             try {
                 console.time("[import/post]");
-                console.log("[import] post-processing started…");
+                console.log(new Date().toISOString(), "[import] post-processing started…");
 
                 await prisma.tyre.updateMany({ data: { inventoryQuantity: 0 } });
                 console.log('[api/import/upload/route] Updated inventory quantities to 0');
@@ -79,7 +79,7 @@ export async function POST(req: NextRequest) {
                 await fillTyreSeason();
 
                 console.timeEnd("[import/post]");
-                console.log("[import] post-processing finished ✅");
+                console.log(new Date().toISOString(), "[import] post-processing finished ✅");
 
                 // 🚀 запускаємо скрипт для перезбірки сайту
                 const child = spawn("bash", ["scripts/build.sh"], {
@@ -89,7 +89,7 @@ export async function POST(req: NextRequest) {
                 child.unref();
 
             } catch (err) {
-                console.error("[import] post-processing failed ❌:", err);
+                console.error(new Date().toISOString(), "[import] post-processing failed ❌:", err);
             }
 
         })();

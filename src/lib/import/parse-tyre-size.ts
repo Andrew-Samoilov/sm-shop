@@ -8,9 +8,24 @@ export function parseTyreSize(size: string) {
   // const reClassic = /^(?:LT|HL|P|T)?\s*(\d{3})([\/-])(\d{2})(Z?R|D)(\d{2})(?:C|XL|LT)?/i;
   // const reClassic = /^(?:LT|HL|P|T)?\s*(\d{3})([/-])(\d{2})([RD])(\d{2})/i;
   // const reClassic = /^(?:LT|HL|P|T)?\s*(\d{3})([/-])(\d{2})(R|D)(\d{2})\b/i;
-  const reClassic = /^(?:LT|HL|P|T)?\s*(\d{3})([/-])(\d{2})(RD)(\d{2})$/i;
-  let m = reClassic.exec(s)
+  
+  const reLT = /^(?:LT|HL)?\s*(\d{3})[/-](\d{2})([RD])(\d{2})$/i;
+  let m = reLT.exec(s)
   if (m) {
+    console.log('Matched LT format', m);
+    return {
+      width: parseInt(m[1], 10),
+      delimiter: m[2],
+      profile: parseInt(m[3], 10),
+      constr: m[4].toUpperCase(),
+      diameter: parseInt(m[5], 10),
+    }
+  }
+  
+  const reClassic = /^(?:LT|HL|P|T)?\s*(\d{3})([/-])(\d{2})(RD)(\d{2})$/i;
+  m = reClassic.exec(s)
+  if (m) {
+    // console.log('Matched Classic format', m);
     return {
       width: parseInt(m[1], 10),
       delimiter: m[2],
@@ -26,6 +41,7 @@ export function parseTyreSize(size: string) {
   const reInch = /^(?:LT)?\s*(\d{2,3})[XxХх](\d{1,2}(?:\.\d)?)R(\d{2})(?:LT)?/;
   m = reInch.exec(s)
   if (m) {
+    // console.log('Matched Inch format', m);
     return {
       width: parseInt(m[1], 10),
       delimiter: 'X',
