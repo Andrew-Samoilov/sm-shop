@@ -28,8 +28,8 @@ export async function Header() {
         >Контакти</LinkWithGA>
       </div>
 
-      <div className="flex items-center ustify-center gap-1 ">
-        <Search className="block w-full lg:w-[45%] xl:w-[60%]" />
+      <div className="flex items-center justify-center gap-1 ">
+        <Search className="block w-full" />
         <ThemeSwitcher />
         <CartPanel />
         <MobileMenu />
