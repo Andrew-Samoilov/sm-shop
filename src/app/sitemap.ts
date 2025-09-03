@@ -17,7 +17,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     // Динамічні сторінки
     const [tyres, brands, models, staticDbPages] = await Promise.all([
-        prisma.tyre.findMany({ select: { slug: true } }),
+        prisma.tyre.findMany({
+            where: {
+                inventoryQuantity: {
+                    gt: 0 
+                }
+            },
+            select: { slug: true }
+        }),
         prisma.brand.findMany({ select: { slug: true, updatedAt: true } }),
         prisma.model.findMany({ select: { slug: true, updatedAt: true } }),
         prisma.staticPage.findMany({
