@@ -162,18 +162,18 @@ export function TyresSelect() {
 
       {searchTitle.length > 0 && (
         <>
-          <h1 className="text-left">
+          <h1 className="text-left pl-3">
             Пошук: {searchTitle}
           </h1>
 
-          <span className="text-light text-sm hidden md:block">
+          <span className="text-light text-sm hidden md:block pl-3">
             {`сортування ${sortLabels[filters.sort] ?? filters.sort}`}
             {` / ${viewLabels[filters.view]}`}
           </span>
         </>
       )}
 
-      <div className="flex gap-0 md:gap-2 lg:gap-6 flex-col lg:flex-row">
+      <div className="flex gap-0 md:gap-2 lg:gap-6 flex-col lg:flex-row container">
         <aside className="gap-0 md:gap-2 lg:gap-6 flex flex-col lg:flex-row w-auto">
           <form
             aria-label="Фільтри пошуку шин"

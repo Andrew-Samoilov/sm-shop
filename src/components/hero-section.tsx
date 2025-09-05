@@ -3,7 +3,7 @@ import { LinkWithGA } from "@/components";
 
 export function HeroSection() {
     return (
-        <section className="flex flex-col  items-center ">
+        <section className="flex flex-col  items-center section">
             <div className=" flex flex-col-reverse md:flex-row items-center 
              md:p-18 md:gap-18  rounded-md px-7 xl:px-16 py-10
             from-body to-theme-light dark:from-darkmode-body dark:to-darkmode-theme-light bg-gradient-to-l

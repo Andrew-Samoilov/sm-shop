@@ -43,6 +43,7 @@ model Tyre {
   price             Float
   
   loadSpeedIndex    String? @map("load_speed_index") @db.VarChar(10)
+  
   brand             String? @db.VarChar(50)
   model             String? @db.VarChar(100)
 
