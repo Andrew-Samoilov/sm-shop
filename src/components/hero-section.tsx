@@ -12,7 +12,7 @@ export function HeroSection() {
                     <p className="mb-2 lg:mb-3 text-light dark:text-darkmode-light font-medium md:text-xl"
                     >Наші постійні умови</p>
                     <h1>-50% <br className={`hidden lg:block`}/>за зберігання*</h1>
-                    <p className="text-sm text-light "
+                    <p className="text-sm text-light mb-2"
                     >* - на сезон, при купівлі комплекту шин&nbsp;
                         <LinkWithGA
                             href={'/info/storage-50'}
@@ -28,7 +28,7 @@ export function HeroSection() {
                         eventCategory="hero"
                         aria-label="Перейти до каталогу шин"
                         // className="btn btn-sm md:btn-lg btn-primary font-medium"
-                        className="inline-flex items-center justify-center px-12 py-4 text-xl font-medium text-white bg-primary rounded-md hover:bg-primary/90 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                        className="inline-flex items-center justify-center px-12 py-4 text-xl font-medium text-white bg-primary rounded-md hover:no-underline transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                     >
                         Купити шини
                     </LinkWithGA>

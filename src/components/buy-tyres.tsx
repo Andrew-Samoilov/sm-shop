@@ -11,7 +11,7 @@ export function BuyTyres() {
                     eventLabel="summer"
                     eventCategory="season_tyres_section"
                     aria-label="Перейти до каталогу літніх шин"
-                    className="flex justify-center items-center rounded-md p-12 
+                    className="flex justify-center items-center rounded-md p-12 hover:no-underline
                     // md:w-1/3
                     flex-1 w-full
                         bg-theme-light dark:bg-darkmode-theme-dark text-theme-dark dark:text-theme-light"
@@ -24,7 +24,7 @@ export function BuyTyres() {
                     eventLabel="winter"
                     eventCategory="season_tyres_section"
                     aria-label="Перейти до каталогу зимових шин"
-                    className="flex justify-center  rounded-md p-12 
+                    className="flex justify-center  rounded-md p-12 hover:no-underline
                     // md:w-1/3
                      flex-1 w-full
                         border-theme-light border dark:bg-darkmode-theme-dark text-theme-dark dark:text-theme-light"
@@ -37,7 +37,7 @@ export function BuyTyres() {
                     eventLabel="allseason"
                     eventCategory="season_tyres_section"
                     aria-label="Перейти до каталогу всесезонних шин"
-                    className="flex justify-center items-center rounded-md p-12 
+                    className="flex justify-center items-center rounded-md p-12 hover:no-underline
                     // md:w-1/3
                      flex-1 w-full
                         bg-theme-light dark:bg-darkmode-theme-dark text-theme-dark dark:text-theme-light"
