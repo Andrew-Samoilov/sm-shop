@@ -31,7 +31,10 @@ export async function GET(req: NextRequest) {
     try {
       const tyres = await prisma.tyre.findMany({
         where: {
-          inventoryQuantity: { gt: 0 },
+          inventoryQuantity: {
+            not: null,
+            gt: 0
+          },
           ...(width && { width: +width }),
           ...(profile && { profile: +profile }),
           ...(diameter && { diameter: +diameter }),

@@ -1,5 +1,3 @@
-// src/app/info/page.tsx
-
 import Link from "next/link";
 import { prisma } from "@/lib";
 
