@@ -82,7 +82,7 @@ export async function Footer() {
                 Моделі
               </LinkWithGA>
             </div>
-            {/* <div className="text-light/75 cursor-not-allowed">Диски</div> */}
+            
           </div>
           {/* <div className="flex flex-col items-center pt-2">
             <div className="text-lg font-semibold">Послуги</div>
@@ -129,6 +129,7 @@ export async function Footer() {
                 eventLabel="viber"
                 eventCategory="footer"
                 ariaLabel="Пишіть у Viber"
+                title="Пишіть у Viber"
                 className="text-light border-border dark:border-light dark:bg-darkmode-theme-light dark:text-darkmode-light rounded-full border bg-white p-2 px-3 text-center font-bold duration-300 hover:bg-black hover:text-white hover:no-underline dark:hover:bg-white dark:hover:text-black"
               >
                 Vb
@@ -138,17 +139,29 @@ export async function Footer() {
                 href={siteConfig.signal}
                 eventLabel="signal"
                 eventCategory="footer"
+                ariaLabel="Пишіть у WhatsApp"
+                title="Пишіть у WhatsApp"
+                className="text-light border-border dark:border-light dark:bg-darkmode-theme-light dark:text-darkmode-light rounded-full border bg-white p-2 px-4 text-center font-bold duration-300 hover:bg-black hover:text-white hover:no-underline dark:hover:bg-white dark:hover:text-black"
+              >
+                W
+              </LinkWithGA>
+
+              {/* <LinkWithGA
+                href={siteConfig.signal}
+                eventLabel="signal"
+                eventCategory="footer"
                 ariaLabel="Пишіть у Signal"
-                className="text-[#3A76F0] border-border dark:border-light dark:bg-darkmode-theme-light dark:text-darkmode-light rounded-full border bg-white p-2 px-4 text-center font-bold duration-300 hover:bg-black hover:text-white hover:no-underline dark:hover:bg-white dark:hover:text-black"
+                className="text-light border-border dark:border-light dark:bg-darkmode-theme-light dark:text-darkmode-light rounded-full border bg-white p-2 px-4 text-center font-bold duration-300 hover:bg-black hover:text-white hover:no-underline dark:hover:bg-white dark:hover:text-black"
               >
                 S
-              </LinkWithGA>
+              </LinkWithGA> */}
 
               <LinkWithGA
                 href={siteConfig.fb}
                 eventLabel="facebook"
                 eventCategory="footer"
-                ariaLabel="Завітайте до нас у Fb"
+                ariaLabel="Завітайте до нас у Facebook"
+                title="Завітайте до нас у Facebook"
                 className="text-light border-border dark:border-light dark:bg-darkmode-theme-light dark:text-darkmode-light rounded-full border bg-white p-2 px-3 text-center font-bold duration-300 hover:bg-black hover:text-white hover:no-underline dark:hover:bg-white dark:hover:text-black"
               >
                 Fb
