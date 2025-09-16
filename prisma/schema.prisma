@@ -28,7 +28,7 @@ model Tyre {
   id                Int     @id(map: "tires_pkey") @default(autoincrement())
   externalId        String? @unique @db.Uuid @map("external_id")// 1с ід
   sku               String  @unique @db.VarChar(50) //у 1с = code
-  slug              String  @default("")
+  slug              String  @unique @default("")
 
   modelId           Int?    @map("model_id") 
   brandId           Int?    @map("brand_id")
@@ -65,6 +65,10 @@ model Tyre {
   orders Order[]
 
   @@index([title(ops: raw("gin_trgm_ops"))], map: "tyres_title_trgm_idx", type: Gin)
+  @@index([modelId, title], map: "tyres_model_title_idx")
+  @@index([brandId], map: "tyres_brand_idx")
+  @@index([width, profile, diameter, season], map: "tyres_size_season_idx")
+
   @@map("tyres")
 }
 
@@ -82,7 +86,7 @@ model Model {
   brand       Brand?        @relation(fields: [brandId], references: [id], onDelete: Cascade)
   tyres       Tyre[]
 
-  @@index([brandId])
+  @@index([brandId,slug])
   @@map("models")
 }
 
@@ -107,7 +111,7 @@ model ModelImage {
   position Int     @default(0)
   model    Model   @relation(fields: [modelId], references: [id])
 
-  @@index([modelId])
+  @@index([modelId, position])
   @@map("model_images")
 }
 
