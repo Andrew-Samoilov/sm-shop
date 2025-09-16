@@ -44,8 +44,6 @@ model Tyre {
   
   loadSpeedIndex    String? @map("load_speed_index") @db.VarChar(10)
   
-  brand             String? @db.VarChar(50)
-  model             String? @db.VarChar(100)
 
   width             Float?  @db.Real
   delimiter         String? @db.Char(1)   @default("/")
@@ -56,18 +54,17 @@ model Tyre {
   loadIndex         String? @map("load_index") @db.VarChar(10)
   speedIndex        String? @map("speed_index") @db.Char(1)
   type              String? @db.VarChar(50)
-  season            season?
   diskProtection    String? @map("disk_protection") @db.VarChar(50)
   rof               String? @db.VarChar(50)
 
-  brands            Brand?  @relation(fields: [brandId], references: [id], onUpdate: NoAction)
-  models            Model?  @relation(fields: [modelId], references: [id], onUpdate: NoAction)
+  brand             Brand?  @relation(fields: [brandId], references: [id], onUpdate: NoAction)
+  model             Model?  @relation(fields: [modelId], references: [id], onUpdate: NoAction)
   orders Order[]
 
   @@index([title(ops: raw("gin_trgm_ops"))], map: "tyres_title_trgm_idx", type: Gin)
   @@index([modelId, title], map: "tyres_model_title_idx")
   @@index([brandId], map: "tyres_brand_idx")
-  @@index([width, profile, diameter, season], map: "tyres_size_season_idx")
+  @@index([width, profile, diameter], map: "tyres_size_season_idx")
 
   @@map("tyres")
 }

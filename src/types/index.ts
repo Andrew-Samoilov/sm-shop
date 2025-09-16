@@ -13,7 +13,7 @@ export type SiteConfig = {
 };
 
 export type TyreWithRelations = Prisma.TyreGetPayload<{
-  include: { brands: true; models: true }
+  include: { brand: true; model: true }
 }>;
 
 export interface Benefit {

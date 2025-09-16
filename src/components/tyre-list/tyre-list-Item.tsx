@@ -18,13 +18,13 @@ export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
             href={`/tyres/${tyre.slug}`}
             className="w-full min-w-0 flex flex-1 flex-col md:flex-row justify-between gap-1 p-1 xl:p-6 xl:gap-6 items-center border border-white dark:border-darkmode-body hover:border-accent rounded-lg hover:no-underline">
 
-            <TyreViewer images={modelImages} season={tyre.season}/>
+            <TyreViewer images={modelImages} season={tyre.model?.season}/>
 
             <div 
                 className="flex-2  min-w-0  gap-0 xl:gap-2 flex flex-row md:flex-col ">
-                <span className="hidden md:block text-md md:text-2xl font-semibold">{tyre.brand}</span>
-                <span className="hidden md:block text-md md:text-lg font-semibold">{tyre.model}</span>
-                <TyreTitle title={tyre.title} country={tyre.country} date={tyre.dateCode} season={tyre.season} applicability={tyre.applicability} diskProtection={tyre.diskProtection}/>
+                <span className="hidden md:block text-md md:text-2xl font-semibold">{tyre.brand?.brand_name}</span>
+                <span className="hidden md:block text-md md:text-lg font-semibold">{tyre.model?.modelName}</span>
+                <TyreTitle title={tyre.title} country={tyre.country} date={tyre.dateCode} season={tyre.model?.season} applicability={tyre.applicability} diskProtection={tyre.diskProtection}/>
             </div>
 
             <div className="flex flex-col gap-0  ">
@@ -40,8 +40,8 @@ export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
                         id: tyre.id,
                         title: tyre.title,
                         price: tyre.price,
-                        brand: tyre.brands?.brand_name ??"unknown" ,
-                        model: tyre.model ?? "unknown",
+                        brand: tyre.brand?.brand_name ??"unknown" ,
+                        model: tyre.model?.modelName ?? "unknown",
                         tyreImageUrl: modelImages[0]?.url ?? "",
                         tyreSize: tyreSize ?? "",
                         quantity: 4,

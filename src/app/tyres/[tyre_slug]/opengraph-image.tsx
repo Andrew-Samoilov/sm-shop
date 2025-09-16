@@ -33,12 +33,12 @@ export default async function OG({ params }: { params: { tyre_slug: string } }) 
     }
 
     // бренд/модель з реляцій
-    const brand = tyre.brand ?? "";
-    const modelName = tyre.model ?? "";
+    const brandName = tyre.brand?.brand_name ?? "";
+    const modelName = tyre.model?.modelName ?? "";
 
     const tyreSize = getTyreSize(tyre) || "";
     const tyrePrice = tyre.price ?? 0;
-    const tyreSeason = getSeasonLabel(tyre.season);
+    const tyreSeason = getSeasonLabel(tyre.model?.season);
     
     const images = tyre.modelId != null ? await getModelImgByModelId(tyre.modelId) : [];
     const rel = images?.[0]?.url as string | undefined;
@@ -71,7 +71,7 @@ export default async function OG({ params }: { params: { tyre_slug: string } }) 
                 {/* Текст */}
                 <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
                     <div style={{ display: "flex", flexDirection: "column" }}>
-                        <div style={{ fontSize: 60, fontWeight: 700, lineHeight: 1.1 }}>{brand}</div>
+                        <div style={{ fontSize: 60, fontWeight: 700, lineHeight: 1.1 }}>{brandName}</div>
                         <div style={{ fontSize: 60, fontWeight: 700, lineHeight: 1.1 }}>{modelName}</div>
                     </div>
 

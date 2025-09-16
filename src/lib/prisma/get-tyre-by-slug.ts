@@ -3,8 +3,8 @@ import { Prisma } from "@prisma/client";
 
 type TyreWithRelations = Prisma.TyreGetPayload<{
   include: {
-    brands: true;
-    models: true;
+    brand: true;
+    model: true;
   };
 }>;
 
@@ -14,8 +14,8 @@ export async function getTyreBySlug(slug: string): Promise<TyreWithRelations | n
   return prisma.tyre.findFirst({
     where: { slug },
     include: {
-      brands: true,
-      models: true,
+      brand: true,
+      model: true,
     },
   });
 }

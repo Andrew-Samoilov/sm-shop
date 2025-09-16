@@ -6,8 +6,8 @@ export async function getTyresByBrandId(brandId: number): Promise<TyreWithRelati
     where: { brandId },
     orderBy: { title: "asc" },
     include: {
-      models: true,
-      brands: true,
+      model: true,
+      brand: true,
     },
   });
   return tyresWithRel;

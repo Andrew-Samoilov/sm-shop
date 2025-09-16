@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { addMissingBrands, addMissingModels, addMissingTyresFromImport, fillTyreParts, fillTyreSeason, findMissingBrandsFromImport, findMissingModelsFromImport, normalizeSeasonsInTyreImport, prisma, saveToTyreImportFromJson, updateExistingTyresOneByOne } from '@/lib';
+import { addMissingBrands, addMissingModels, addMissingTyresFromImport, fillTyreParts, findMissingBrandsFromImport, findMissingModelsFromImport, normalizeSeasonsInTyreImport, prisma, saveToTyreImportFromJson, updateExistingTyresOneByOne } from '@/lib';
 import { spawn } from 'child_process';
 
 export async function POST(req: NextRequest) {
@@ -75,8 +75,6 @@ export async function POST(req: NextRequest) {
                 await addMissingTyresFromImport();
 
                 await fillTyreParts();
-
-                await fillTyreSeason();
 
                 console.timeEnd("[import/post]");
                 console.log(new Date().toISOString(), "[import] post-processing finished ✅");

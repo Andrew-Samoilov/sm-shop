@@ -18,7 +18,7 @@ export function TyreGalleryItem({ tyre, modelImages }: TyreListItemProps) {
             className="z-10 bg-white dark:bg-dark  p-1 flex flex-col h-full  overflow-hidden justify-between items-center gap-1 xl:gap-6 border border-transparent  rounded-lg xl:p-6 hover:border-accent hover:no-underline">
 
             <div className="relative w-full  max-w-[293px] overflow-hidden group shrink-0 ">
-                <TyreViewer images={modelImages} season={tyre.season} />
+                <TyreViewer images={modelImages} season={tyre.model?.season} />
                 {/* <SeasonIcon
                     season={tyre.season}
                     className="absolute top-2 left-2 z-99"
@@ -26,7 +26,7 @@ export function TyreGalleryItem({ tyre, modelImages }: TyreListItemProps) {
             </div>
 
             <div className=" flex flex-row">
-                <TyreTitle title={tyre.title} country={tyre.country} date={tyre.dateCode} season={tyre.season} diskProtection={tyre.diskProtection} applicability={tyre.applicability} />
+                <TyreTitle title={tyre.title} country={tyre.country} date={tyre.dateCode} season={tyre.model?.season} diskProtection={tyre.diskProtection} applicability={tyre.applicability} />
             </div>
 
             <div className="flex flex-row gap-2 mx-auto items-center ">
@@ -40,8 +40,8 @@ export function TyreGalleryItem({ tyre, modelImages }: TyreListItemProps) {
                         id: tyre.id,
                         title: tyre.title,
                         price: tyre.price,
-                        brand: tyre.brands?.brand_name ?? "unknown",
-                        model: tyre.models?.modelName ?? "",
+                        brand: tyre.brand?.brand_name ?? "",
+                        model: tyre.model?.modelName ?? "",
                         tyreImageUrl: modelImages[0]?.url ?? "",
                         tyreSize: tyreSize ?? "",
                         quantity: 4,

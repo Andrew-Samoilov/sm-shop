@@ -3,18 +3,18 @@ import { prisma, simpleSlug } from "@/lib";
 import { Prisma } from "@prisma/client";
 
 // тип енума напряму з інпут-типу
-type SeasonType = Prisma.TyreCreateManyInput["season"];
+// type SeasonType = Prisma.TyreCreateManyInput["season"];
 
-function toSeason(raw: string | null | undefined): SeasonType {
-    if (!raw) return null;
-    const s = raw.trim().toLowerCase().replace(/[\s_-]+/g, "");
-    const map: Record<string, SeasonType> = {
-        winter: "WINTER", "зима": "WINTER", "зимові": "WINTER", zimova: "WINTER",
-        summer: "SUMMER", "літо": "SUMMER", "літні": "SUMMER", lito: "SUMMER",
-        allseason: "ALLSEASON", allseazon: "ALLSEASON", "всесезон": "ALLSEASON", "всесезонні": "ALLSEASON",
-    };
-    return map[s] ?? null;
-}
+// function toSeason(raw: string | null | undefined): SeasonType {
+//     if (!raw) return null;
+//     const s = raw.trim().toLowerCase().replace(/[\s_-]+/g, "");
+//     const map: Record<string, SeasonType> = {
+//         winter: "WINTER", "зима": "WINTER", "зимові": "WINTER", zimova: "WINTER",
+//         summer: "SUMMER", "літо": "SUMMER", "літні": "SUMMER", lito: "SUMMER",
+//         allseason: "ALLSEASON", allseazon: "ALLSEASON", "всесезон": "ALLSEASON", "всесезонні": "ALLSEASON",
+//     };
+//     return map[s] ?? null;
+// }
 
 const toFloatOrNull = (v: string | number | null | undefined) => {
     if (v === null || v === undefined || v === "") return null;
@@ -141,9 +141,6 @@ export async function addMissingTyresFromImport() {
             brandId,
             modelId,
 
-            // дублюємо у текстові поля (зручно для пошуку/SEO)
-            brand: i.brandName ?? null,
-            model: i.model ?? null,
 
             price: i.price ?? 0,
             inventoryQuantity: i.quantity ?? 0,
@@ -163,7 +160,7 @@ export async function addMissingTyresFromImport() {
             loadSpeedIndex: (i.load && i.speed) ? `${i.load}${i.speed}` : null,
 
             type: i.applicability ?? null,
-            season: toSeason(i.season),
+            // season: toSeason(i.season),
             diskProtection: i.diskProtection ?? null,
             rof: i.rof ?? null,
         };

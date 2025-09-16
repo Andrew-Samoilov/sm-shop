@@ -3,8 +3,8 @@ import { Prisma } from "@prisma/client";
 
 export type TyreWithRelations = Prisma.TyreGetPayload<{
     include: {
-        brands: true;
-        models: true;
+        brand: true;
+        model: true;
     };
 }>;
 
@@ -18,7 +18,7 @@ export function buildProductJsonLd(tyre: TyreWithRelations, images: { url: strin
                 : `${siteUrl}${images[0].url}`
             : `${siteUrl}/default.jpg`;
     
-    const seasonUA = getSeasonLabel(tyre.season);
+    const seasonUA = getSeasonLabel(tyre.model?.season);
 
     const canonical = `${siteUrl}/tyres/${tyre.slug}`
 
@@ -27,9 +27,9 @@ export function buildProductJsonLd(tyre: TyreWithRelations, images: { url: strin
             ? `${tyre.width}${tyre.delimiter ?? "/"}${tyre.profile} R${tyre.diameter} ${tyre.loadIndex}${tyre.speedIndex}`
             : "";
 
-    const name = `${tyre.brands?.brand_name ?? ""} ${tyre.models?.modelName ?? ""} ${tyreSize}`.trim();
+    const name = `${tyre.brand?.brand_name ?? ""} ${tyre.model?.modelName ?? ""} ${tyreSize}`.trim();
     const description =
-        tyre.models?.description ??
+        tyre.model?.description ??
         `${seasonUA} шина ${name} для легкового авто. Ціна ${tyre.price} грн/шт. Самовивіз у Києві. Доставка по Україні.`;
 
     const priceValidUntil = new Date();
@@ -43,7 +43,7 @@ export function buildProductJsonLd(tyre: TyreWithRelations, images: { url: strin
         description,
         brand: {
             "@type": "Brand",
-            name: tyre.brands?.brand_name ?? "",
+            name: tyre.brand?.brand_name ?? "",
         },
         sku: tyre.slug,
         offers: {

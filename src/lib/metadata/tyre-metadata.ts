@@ -26,8 +26,8 @@ export async function  generateTyreMetadata(tyre_slug: string): Promise<Metadata
 
   const tyreSize = getTyreSize(tyre);
 
-  const name = `${tyre.brands?.brand_name ?? ""} ${tyre.models?.modelName ?? ""} ${tyreSize}`.trim();
-  const description = tyre.models?.description ??
+  const name = `${tyre.brand?.brand_name ?? ""} ${tyre.model?.modelName ?? ""} ${tyreSize}`.trim();
+  const description = tyre.model?.description ??
     `Шина ${name} для легкового авто. ${tyre.price} грн/шт. Доставка по Україні.`;
   const canonical = `https://shina-mix.com.ua/tyres/${tyre.slug}`;
 

@@ -54,7 +54,7 @@ export default async function TyrePage(
     ? cert.filter(
       c =>
         typeof c.brand === 'string' &&
-        c.brand.toLowerCase() === tyre.brand!.toLowerCase()
+        c.brand.toLowerCase() === tyre.brand?.brand_name!.toLowerCase()
     )
     : cert;
 
@@ -68,12 +68,12 @@ export default async function TyrePage(
     { name: "Головна", url: "/" },
     { name: "Шини", url: "/tyres" },
     {
-      name: `${getSeasonLabel(tyre.season)} шини`,
-      url: `/tyres?season=${tyre.season?.toLowerCase()}&view=list&sort=price_asc`,
+      name: `${getSeasonLabel(tyre.model?.season)} шини`,
+      url: `/tyres?season=${tyre.model?.season?.toLowerCase()}&view=list&sort=price_asc`,
     },
     {
-      name: `${getSeasonLabel(tyre.season)} шини ${tyreSize}`,
-      url: `/tyres?season=${tyre.season?.toLowerCase()}&width=${tyre.width}&profile=${tyre.profile}&diameter=${tyre.diameter}&view=list&sort=price_asc`,
+      name: `${getSeasonLabel(tyre.model?.season)} шини ${tyreSize}`,
+      url: `/tyres?season=${tyre.model?.season?.toLowerCase()}&width=${tyre.width}&profile=${tyre.profile}&diameter=${tyre.diameter}&view=list&sort=price_asc`,
     },
     { name: tyre.title, url: `/tyres/${tyre.slug}` },
   ];
@@ -85,20 +85,20 @@ export default async function TyrePage(
       <ViewItemGA
         item_id={tyre.id}
         item_name={tyre.title}
-        brand={tyre.brand ?? ""}
-        model={tyre.model ?? ""}
+        brand={tyre.brand?.brand_name ?? ""}
+        model={tyre.model?.modelName ?? ""}
         price={Number(tyre.price)}
       />
 
       <div className=" flex flex-col md:flex-row md:gap-6 pb-6 2xl:p-12
        items-center  justify-center ">
 
-        <ModelViewer images={images} season={tyre.season} />
+        <ModelViewer images={images} season={tyre.model?.season} />
 
         <div className=" flex flex-col w-full md:w-auto min-w-fit p-2 md:p-0 gap-1 lg:gap-2">
           <h1 className="flex flex-col items-center md:items-start  ">
-            <span>{tyre.brand}</span>
-            <span>{tyre.model}</span>
+            <span>{tyre.brand?.brand_name}</span>
+            <span>{tyre.model?.modelName}</span>
             <span className="font-normal text-[75%]">{tyreSize}</span>
           </h1>
 
@@ -113,13 +113,13 @@ export default async function TyrePage(
             className=" text-light    hover:no-underline"
           >Тиждень та рік виробництва: {tyre.dateCode}</div>
 
-          {tyre.season && (
+          {tyre.model?.season && (
             <span className=" text-light flex gap-2">{"Сезон: "}
               <span>
-                {getSeasonLabel(tyre.season)}
+                {getSeasonLabel(tyre.model?.season)}
               </span>
               <SeasonIcon
-                season={tyre.season}
+                season={tyre.model?.season}
               />
             </span>
           )}
@@ -177,8 +177,8 @@ export default async function TyrePage(
               tyre={{
                 id: tyre.id,
                 title: tyre.title,
-                brand: tyre.brand ?? "",
-                model: tyre.model ?? "",
+                brand: tyre.brand?.brand_name ?? "",
+                model: tyre.model?.modelName ?? "",
                 tyreSize: tyreSize ?? "",
                 tyreImageUrl: images[0]?.url ?? "",
                 price: tyre.price,
@@ -211,14 +211,14 @@ export default async function TyrePage(
       </div>
 
       <div>
-        {tyre.models?.description && (
+        {tyre.model?.description && (
           <section className="p-2 pb-6 max-w-[65ch] mx-auto">
             <details className="group" open>
               <summary className="flex flex-between justify-center items-center marker:content-none cursor-pointer ">
                 <h2 className="pr-2 md:pr-6">Детальний опис</h2>
                 <span className="text-light text-4xl transition-transform group-open:rotate-45">+</span>
               </summary>
-              <ReactMarkdown>{tyre.models.description}</ReactMarkdown>
+              <ReactMarkdown>{tyre.model?.description}</ReactMarkdown>
             </details>
           </section>
         )}

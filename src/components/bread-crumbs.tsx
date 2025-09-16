@@ -7,7 +7,8 @@ type Props = { tyreSlug: string; };
 
 export async function BreadCrumbs({ tyreSlug }: Props) {
     const tyre = await getTyreBySlug(tyreSlug);
-    const season = tyre?.season?.toLowerCase();
+    const season = tyre?.model?.season?.toLowerCase();
+
     const seasonUA = getSeasonLabel(season);
 
     const tyreSize = tyre?.width && tyre.profile && tyre.diameter && tyre.loadSpeedIndex

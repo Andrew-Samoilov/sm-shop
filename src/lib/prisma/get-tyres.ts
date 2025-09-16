@@ -14,7 +14,7 @@ export async function getTyres(query?: string): Promise<TyreWithRelations[]> {
         },
       }
       : undefined,
-    include: { models: true, brands: true },
+    include: { model: true, brand: true },
     orderBy: {
       title: "asc",
     },

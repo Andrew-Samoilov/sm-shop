@@ -28,53 +28,51 @@ export async function GET(req: NextRequest) {
   const seasons = searchParams.getAll("season");
   const query = searchParams.get("query")?.trim();
 
-    try {
-      const tyres = await prisma.tyre.findMany({
-        where: {
-          inventoryQuantity: {
-            not: null,
-            gt: 0
-          },
-          ...(width && { width: +width }),
-          ...(profile && { profile: +profile }),
-          ...(diameter && { diameter: +diameter }),
-          ...(seasons.length > 0 && {
-            season: { in: seasons.map((s) => s.toUpperCase() as season) }
-          }),
-          ...(query && {
-            OR: [
-              { title: { contains: query, mode: "insensitive" } },
-              { models: { is: { modelName: { contains: query, mode: "insensitive" } } } },
-              { brands: { is: { brand_name: { contains: query, mode: "insensitive" } } } },
-            ],
-          }),
+  try {
+    const tyres = await prisma.tyre.findMany({
+      where: {
+        inventoryQuantity: {
+          not: null,
+          gt: 0
         },
-        include: {
-          models: {
-            include: {
-              brand: true,
-            },
-          },
-        },
+        ...(width && { width: +width }),
+        ...(profile && { profile: +profile }),
+        ...(diameter && { diameter: +diameter }),
+        ...(seasons.length > 0 && {
+          model: { is: { season: { in: seasons.map((s) => s.toUpperCase() as season) } } }
+        }),
+        ...(query && {
+          OR: [
+            { title: { contains: query, mode: "insensitive" } },
+            { model: { is: { modelName: { contains: query, mode: "insensitive" } } } },
+            { brand: { is: { brand_name: { contains: query, mode: "insensitive" } } } },
+          ],
+        }),
+      },
+
+      include: {
+        brand: true,
+        model: true,
+      },
         orderBy: getOrderBy(sort),
       });
 
-      const images = await prisma.modelImage.findMany({
-        where: {
-          modelId: {
-            in: tyres.map((tyre) => tyre.modelId).filter((id): id is number => id !== null)
-          },
+    const images = await prisma.modelImage.findMany({
+      where: {
+        modelId: {
+          in: tyres.map((tyre) => tyre.modelId).filter((id): id is number => id !== null)
         },
-        orderBy: {
-          position: "asc",
-        },
-      });
-      // console.log("[API] /tyres fetched tyresCount:", tyres.length);
-      // console.log("[API] /tyres fetched tyres:", tyres);
-      
-      return NextResponse.json({ tyres, images });
-    } catch(error) {
-      console.error("[API] /tyres error:", error);
-      return NextResponse.json({ error: "Server error" }, { status: 500 });
-    }
+      },
+      orderBy: {
+        position: "asc",
+      },
+    });
+    // console.log("[API] /tyres fetched tyresCount:", tyres.length);
+    // console.log("[API] /tyres fetched tyres:", tyres);
+
+    return NextResponse.json({ tyres, images });
+  } catch (error) {
+    console.error("[API] /tyres error:", error);
+    return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
+}
