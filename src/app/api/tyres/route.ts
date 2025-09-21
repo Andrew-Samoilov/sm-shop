@@ -43,9 +43,32 @@ export async function GET(req: NextRequest) {
         }),
         ...(query && {
           OR: [
-            { title: { contains: query, mode: "insensitive" } },
-            { model: { is: { modelName: { contains: query, mode: "insensitive" } } } },
-            { brand: { is: { brand_name: { contains: query, mode: "insensitive" } } } },
+            {
+              title: {
+                contains: query,
+                mode: "insensitive", 
+              },
+            },
+            {
+              model: {
+                is: {
+                  modelName: {
+                    contains: query,
+                    mode: "insensitive", 
+                  },
+                },
+              },
+            },
+            {
+              brand: {
+                is: {
+                  brand_name: {
+                    contains: query,
+                    mode: "insensitive",
+                  },
+                },
+              },
+            },
           ],
         }),
       },
