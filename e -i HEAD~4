@@ -1,0 +1,447 @@
+[33mdfab9b9[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m chore
+[33m4e519be[m chore
+[33mfc33ccb[m chore
+[33m99b1750[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m fix: product json ld
+[33mcb9dc96[m chore
+[33m121e91a[m feat: google merchant auth
+[33mc763818[m feat: return page
+[33md71913c[m feat: build
+[33me981d43[m refactor: tyre db chema
+[33m1381f3f[m feat: models
+[33m8a03c5b[m chore
+[33mda83b34[m refactor: contacts
+[33ma65acb0[m feat: models
+[33ma71e725[m feat: models
+[33m6cd7a3a[m feat: models
+[33m2d975d3[m feat: models
+[33md4e2d30[m feat: models
+[33me3f3b22[m feat:models
+[33m206d023[m feat: models
+[33mb0d41ba[m chore
+[33m7770f78[m fix: models bug
+[33me644705[m feat: models
+[33m6518946[m feat: models
+[33m647fb10[m feat: models
+[33m10c7989[m feat: models
+[33m5e6ebf4[m fear: models
+[33m08e4ebd[m feat: models
+[33m7f3aab1[m feat: models
+[33m159b07a[m chore
+[33m7355abe[m feat: photo
+[33m36aa3e4[m feat: model
+[33mfcbaa22[m feat: models
+[33m4e31d1a[m refactor: visual
+[33m1ab0814[m feat: models
+[33m3023624[m chore
+[33md7cc206[m refactor: site map
+[33mfb3d6b6[m fix: search panel
+[33macd279a[m chore
+[33m0e73685[m refactor: parse tyre size
+[33m37f7635[m refactor: parse tyre size
+[33me2fe5a2[m refactor: logs
+[33mfce04ef[m refactor: pars tyre size
+[33md1c7eb1[m refactor: build logs
+[33m857ffc7[m feat: default value for constr & delimiter
+[33m954fc0a[m chore
+[33m0b0c9f3[m chore
+[33m276b275[m refactor: prs tyre size
+[33m21d6a7e[m refactor: pars tyre size
+[33mfbdb21f[m refactor: pars tyres
+[33mdcce1bf[m chore
+[33m9aec403[m refactor: parse tyre size
+[33m070b550[m refactor: import
+[33m49d672e[m refactor: tyre size
+[33m8cf24eb[m refactor: tyre size
+[33m6ed1cdc[m feat: fill tyre season
+[33m3ba7780[m chore
+[33m28e120d[m refactor: parse tyre size
+[33m740823c[m chore
+[33m752a29d[m refactor: tyres page
+[33mad9afea[m chore
+[33m3d56432[m refactor: update
+[33mad6f42c[m refactor: update one by one
+[33mbd7a136[m refactor: import
+[33m38f30bf[m refactor: data update
+[33md1e8f7f[m refactor: season update
+[33mbf86ed1[m refactor: tyre import
+[33maf52fa4[m refactor: logs
+[33md1fae05[m refactor: rout/tyres
+[33m499ee37[m refacor: import
+[33mcd35282[m fix: import
+[33mc2ba43d[m refactor: tyre import
+[33m3f3dca8[m refactor: upload
+[33m3e0bd8f[m refactor: upload
+[33mfbf395e[m refactor: upload
+[33m829406f[m refactor: upload
+[33mc8c63c3[m fix: make build.sh executable
+[33me81c649[m make build.sh executable
+[33m230127c[m feat: models
+[33m7cfbc1d[m feat: nokia r5
+[33m831807d[m feat: season-storage page
+[33m381a746[m refactor: model page
+[33m580dee3[m refactor: brans OG Image
+[33mbb5d040[m refactor: tyres api: image sort by position
+[33mca8b91f[m chore
+[33mbde7e6e[m refactor: brand json
+[33m7121f38[m refactor: brand metadata & json ld
+[33m4635ade[m refactor: google maps
+[33ma9dc6aa[m refactor: google maps
+[33m0e0e5c8[m update lock file
+[33mdc3f49b[m refactor: deploy
+[33m0815db3[m refactor: deploy
+[33m76254ce[m refactor: deploy
+[33m1bfb1fa[m refactor: deploy
+[33mfbbf845[m refactor: deploy
+[33m5ceb0e4[m refactor: metadata
+[33mede85d3[m refactor: metadata
+[33m67b7ced[m refactor: description
+[33mc5d57fa[m refactor: model viewer
+[33mff12059[m refactor: ci/cd
+[33m58ac4d7[m refactor: aria label
+[33mba2dfd7[m refactor: acecibilyty
+[33me275adc[m refactor: deploy
+[33mb5f8212[m refactor: sitemap
+[33mc3d996b[m refactor: deploy
+[33m4739219[m feat: sitemap
+[33m5b29af4[m refactor: deploy
+[33me87cbf1[m refactor: deploy
+[33m1c35884[m refactor: deploy
+[33m2d4315c[m refactor: deploy
+[33m7fd1edd[m refactor: deploy
+[33m729f470[m refactor: deploy
+[33m32771ba[m chore
+[33mef867bf[m refactor: deploy
+[33meeb6068[m feat: autodeploy to Contabo
+[33mfddf1e8[m refacor: og-image
+[33m779460d[m fix: footer
+[33m8d27d89[m refactor E2E_TEST_API_SECRET
+[33m86b6741[m fix: order message
+[33mc2c1e9f[m refactor: og Image
+[33m7d5299f[m feat: parse tyreSize after import
+[33m26b4f9f[m  refactor: import
+[33m5e6eb67[m chore
+[33m1d889e0[m feat: og Image, tyre_slug page
+[33m0c3557e[m feat OG Image
+[33m07eede2[m chore: view transition
+[33m50d3d57[m feat tyre
+[33med82498[m feat: nokian snow proof 2
+[33m27acd1d[m refactor: brands_slug page
+[33mb0b2792[m refactor: bulk update
+[33m5f06aba[m feat: tyre import
+[33md8d14b0[m refactor: models_slug page
+[33md29b7f6[m refactor: get models by brand id
+[33m37622c8[m feat: llms & robots .txt
+[33m600bebb[m refactor: tyre import
+[33m56c32db[m refactor: import
+[33m596a32a[m refactor: import
+[33mf5f8d7f[m refactor: moddels import
+[33m0484808[m refactor: models import
+[33m2ed70db[m refactor: tyre import
+[33m3088baf[m feat: tyre Season to Ukrane function
+[33mc260b31[m refactor: brans_name
+[33m19d1d46[m refactor: prisma chema
+[33m2a4f66f[m refactor: chema
+[33m4dbfe8e[m refactor: models page
+[33mffb314b[m refactor: brands page
+[33m796d0ce[m refactor: tyre_slug page
+[33m72d1596[m refactor: brands & models fetch
+[33m0a21de1[m refactor: link in tyre list & galery item
+[33mf5de24b[m feat apdate tyres
+[33m30c1d19[m core
+[33me8ba94e[m feat: tyres import
+[33me103376[m feat: add missing models
+[33mdad65ac[m refactor: find missing brands
+[33m0036303[m regactor: import
+[33m491c77e[m refactor: import
+[33mdc9cdde[m feat: slug function
+[33m4162fdc[m refactor: tyre import
+[33mcd54986[m refactor: import
+[33m97a7145[m feat: cron for delete tyre import > 60 days
+[33m001b523[m refactor: order letter
+[33m131c94b[m refactor: tyre_slug page
+[33me5470f5[m fix: tyre select
+[33me7707f5[m refactor: tyres table
+[33ma739c80[m chore
+[33m328a793[m refactor: hero:subheader
+[33m6ef0fd2[m refactor: hero button
+[33mb45f025[m refactor: by tyres section
+[33m4733c02[m fix: filtered cert
+[33ma6cc8c5[m refactor: no photo
+[33m0ee382a[m refactor: tyre list& galery items
+[33m348ae06[m refactor: tyre-gallery grid
+[33m1dff482[m refactor: tyre galery
+[33m2b132d0[m refactor: tyreselect
+[33maa2004a[m refactor: tyre list / galery item
+[33mb987abd[m refactor: tyre galary item
+[33ma964047[m refactor: tyre items
+[33m4c97b55[m chore
+[33m88ec830[m refactor: db dump
+[33m960069d[m refactor: season & tyreviews
+[33maa095ee[m refactor: translate console log to english
+[33md6ca2c6[m Merge branch 'main' of https://github.com/Andrew-Samoilov/sm-shop
+[33m3dbf870[m feat: static data
+[33m543c0ee[m fix: static data
+[33m82ccb84[m chore
+[33m6246f68[m refactor: tyre select
+[33ma3f73f6[m fix: storage -50 page
+[33ma3e8bb1[m refactor: msg
+[33m68c8702[m feat orders
+[33mdbd0adb[m chore
+[33mf67b156[m refactor: cart panel
+[33mc01e96a[m fix db drop
+[33m6ffa9a8[m fix db drop
+[33mdf15ec3[m refactor: filtered srt
+[33m0fb390b[m fix: db drop
+[33m78a7519[m refactor: cart form
+[33mcd18109[m refactor: add 2 cart in items
+[33m863aaee[m refactor: cart tyre
+[33m3d666d7[m refactor: cart panel
+[33m193b702[m refactor: tyre galery item
+[33mb126e3d[m refactor: breadcrambs
+[33m21b1f71[m refactor: tyre slug page
+[33m78e38a0[m refactor: search panel
+[33m49bb743[m refactor: sm viev
+[33m079f791[m refactor: price visualization
+[33m0ce9b9a[m refactor: tyres kist item
+[33mdd89825[m refactor: tyre list item
+[33m4b39634[m reactor: add 2 card button
+[33m1d13726[m refactor: card
+[33m216a823[m refactor: cart panel
+[33me6771d9[m refactor: many photo
+[33m074dd24[m refactor: cart panel
+[33m3e95d9b[m refactor: cart panel
+[33m0d596e0[m refactor: cart panel
+[33m36bbc90[m refactor: cart panel
+[33m4e466c7[m refactor: cart panel
+[33m6014fc4[m refactor tyre_slug page
+[33m6ee204e[m refactor: many photo viewer
+[33m7f474f7[m fix: add 2 cart btn
+[33m292cae2[m fix: tyre_select use effect
+[33m9f25d4c[m refactor: tyre_slug page
+[33ma8cd0a8[m refactor: LinkWithGA
+[33m08ab738[m refactor: info section
+[33mefce82b[m refactor: tyre select
+[33m96ad51e[m feat: inputMode
+[33m1073be1[m refactor: tyre select
+[33m9a6259d[m refator: tyre select
+[33mf8c9cb4[m refactor: tyre_slug page
+[33m423fb75[m refactor: logs
+[33mc669b8d[m refactor: tyre_gallery item
+[33ma2e94d5[m refactor: tyre_slug page
+[33m2e6570d[m refactor: ga link
+[33m5981d82[m refactor: model viewer
+[33m7bd6dc1[m refactor: model viewer
+[33m188579f[m refactor: model viewer
+[33m0bf45a5[m refactor: model-viewer section
+[33mdf6f717[m refactor: tyres_slug page
+[33mc095b52[m refactor: send GA event
+[33m4836fa5[m feat: speed & load index
+[33m111fd02[m refator: tyres select
+[33m59196a6[m refactor: tyre_slug page
+[33mdc4cef7[m refactor: certificate section
+[33m285ac29[m refactor: info page
+[33me876c4c[m feat: info pages
+[33m8212725[m refactor: tyres select
+[33mab5d0c4[m refactor: tyres select
+[33mf708710[m feat: translate season to ukraine function
+[33m6ff444b[m refactor: generate metadata
+[33m47ea491[m feat: mobile menu
+[33m9acfeac[m refactor: header
+[33m43bfbb8[m feat Info section
+[33med550d0[m refactor: tyres select
+[33m800e18c[m refactor: search
+[33md6f06cb[m feat: metadata tyre_slug page
+[33ma06f4bb[m feat: sceleton
+[33m640f285[m fix: types
+[33md125710[m feat: breadcrumbs
+[33m439ea5a[m refactor
+[33m10e8729[m fix: filter
+[33m0056a3f[m refactor: tyres route
+[33mcdd7c69[m refactor: tyres metadata
+[33m05c1e98[m refactor: list header
+[33m284e0cd[m refactor: tyres select
+[33mb68e234[m refactor: tyre page
+[33mf0a4d66[m refactor: list & galery items
+[33mdd0b158[m refactor: list header
+[33mbb9ed03[m refactor: tyres & search pages
+[33mb62ebbf[m refactor: contact form
+[33m14d7679[m chore
+[33m6367af2[m refactor: search field
+[33m80e7234[m refactor: tyres select / list
+[33m30285d3[m refactor: tyre select
+[33m2579a2b[m refactor: season checkbox
+[33m7c60b37[m refactor: help window
+[33m5993dbf[m chore
+[33mee1357f[m feat: dump
+[33m8367816[m refactor: tyre list
+[33m1daf84e[m chore
+[33m80485f8[m refactor: page& tyre select
+[33m4916e7b[m refactor: tyres select
+[33m883596d[m refactor: tyres view
+[33mff38950[m chore
+[33mf2078f8[m fix: tyres select
+[33me33d5e6[m feat: add season ion to image
+[33m51cf7ba[m fix: tyre list image warning
+[33m82568ac[m feat: season icon
+[33mc0ddb50[m fix: tyre route
+[33m5f8ad70[m fix: tyres rout
+[33m5d9e240[m refactor: tyres list
+[33m6f42ead[m refactor: model viewer section
+[33m021edbd[m chore
+[33mee7023c[m fix: db drop
+[33mce22a49[m fix: db
+[33m7b1a0e3[m refactor: tyres list
+[33mbefc973[m chore
+[33mb4e305a[m feat: thumbnail viewer
+[33ma007fd9[m refactor: tyres list
+[33mac2b402[m refactor: helper
+[33m6f95895[m fix: model viewer
+[33m5ecbe18[m refactor: models page
+[33m80b3f6b[m feat: payment & delivery
+[33m807596e[m refactor: cert section
+[33m9618983[m fix: site config
+[33m7833af3[m fix: warranty page
+[33m96f1f4f[m refactor: contacts
+[33m8724144[m refactor: feautures section
+[33ma32d897[m refactor: benefit section
+[33m3db77de[m refactor: static data
+[33me1a8005[m feat: brands
+[33mcd82499[m refactor: brands page
+[33m4de6b95[m feat: logos
+[33mc6cedd9[m refactor: certificates section
+[33m8cb50b1[m refactor: section & prose style
+[33m0ced9ea[m refactor: tyre list
+[33m6c8848d[m refactor: tyres select
+[33ma47fb8e[m refactor: db chema
+[33m91a96ea[m refactor: default in db
+[33ma7e6a37[m refactor: schema
+[33m1ceb523[m refactor: schema
+[33m8bba366[m refactor: tyre select
+[33m8099e6f[m fix: brand page
+[33m8239878[m chore
+[33m9189fa0[m chore
+[33m7a7e386[m refactor: tyres select
+[33m9661008[m refactor: tyre select
+[33m7b82b30[m feat: waranty page
+[33m266a823[m chore
+[33m8f1f391[m refactor: model page
+[33mfabc8bf[m refactor: brand page
+[33m4887d7b[m feat: model metadata
+[33mdc33a8f[m refactor: brands description
+[33m1336feb[m refactor: db shema
+[33mad01253[m chore
+[33mdeeda18[m chore
+[33m8cc2e74[m refactor: Sertificate sections
+[33m943941b[m refactor: help popap
+[33m28ca8bf[m chore
+[33m9dabf9c[m refactor: contact panel
+[33m0beccea[m refactor: main page
+[33mdd393a6[m refactor: model viewer section arrows
+[33m9221983[m refacto: model viewer section
+[33m0080ecb[m refactor: model viewer section
+[33m33ff652[m refactor: model viewer section
+[33m550e5d7[m feat: models img
+[33m1b3550c[m chore: deletete getByName functions
+[33m4881563[m refactor: description
+[33md4c3bf7[m refactor: brands page
+[33m89a85f4[m refactor: get tyres function
+[33m21b7951[m chore
+[33m60026e5[m refactor: db add slug
+[33m396f4d2[m feat: sailun attezo-eco model info & img
+[33mcff74ec[m refactor: models data
+[33m4535e02[m refactor: models page
+[33m84dab66[m feat: brands certicates section
+[33m32381ff[m refactor: brand_name & model_name pages
+[33mf999f1b[m refactor: brands/brand_name page
+[33m82fcb87[m chore
+[33m37332cc[m chore
+[33m34fc993[m feat: tw size indicator
+[33m7d3bf48[m refactor: db conections
+[33m100137a[m feat: backup
+[33m9f5bb8d[m refactor: brands/[brand_name} page
+[33m97eae6c[m feat: generate metadata brands/[brand_name] page
+[33medf3d01[m feat: Playwright test
+[33mf350430[m chore
+[33mdef6a2a[m refactor: brands page
+[33m7cd8552[m refactor: brands page
+[33m61927b9[m refactor: header
+[33md8811be[m refactor: logging
+[33m6d73dfa[m refactor: next & libs
+[33m4c7d379[m refactor: brands page
+[33mf01c36d[m refactor: brands page
+[33m3c92cff[m refactor: brands page
+[33m5e3370e[m refactor: brands description
+[33m294daee[m feat: send email after message from site
+[33m7528d06[m refactor terms 2 legal
+[33md80a1a3[m refactor: header
+[33ma98148c[m feat: clases & import / export sorting
+[33m377ce65[m refactor: darkmode footer
+[33m611318e[m fix: gradient to b in dark mode
+[33m974f7a0[m refactor: log / info
+[33m196f6d1[m feat: search GA event
+[33me248f8b[m feat: add_to_cart GA event
+[33mfc2b5a1[m refactor: logs
+[33mf3ec5be[m feat: GA event view item
+[33m68f1b75[m refactor: brands page link
+[33m8f6e1f3[m feat: external link with GA
+[33mbce52c1[m feat: page_view GA event
+[33m4cc3f62[m refactor: GA & GA logs
+[33mf58e585[m refactor: recaptcha conection
+[33m0bf3355[m refactor: brands page
+[33mcdbf637[m feat: ga events - brands click
+[33m43e51fc[m feat: debounce
+[33m2827f69[m feat: recaptha
+[33md91bbe6[m fix: toaster section
+[33m1be0916[m fix: toaster
+[33m79e461e[m refactor: contact form
+[33m115d13b[m refactor: footer
+[33m37d060d[m fix: footer
+[33m0f58553[m feat: contact form
+[33me64808b[m refactor: 404 page
+[33m639e5ca[m refactor: colors
+[33mcce26a8[m feat: contact page
+[33m508a521[m chore: remove warnings
+[33m87a59c3[m chore
+[33mf9c7463[m feat: about page
+[33m04eed86[m refactor: search panel
+[33mcbb23bf[m feat: about page
+[33mcef2040[m refactor: footer
+[33m8b46f18[m chore
+[33mfc61037[m feat: terms page
+[33m54d6939[m feat: site config
+[33m5b7fc42[m chore
+[33mc861e19[m feat: logo
+[33m8fdef22[m feat: cart
+[33mca36540[m feat: view transiton
+[33m3b2c651[m refactor: add to cart button
+[33m142102d[m feat: add to cart button
+[33m3f0760f[m feat: width profile diameter search
+[33maef50fd[m add: brands logo
+[33m72c5b31[m refactor: function names
+[33mf0cdad7[m feat: search page
+[33m1bcc00e[m refactor: tyres select component
+[33m45c978b[m refactor: tyres select component
+[33medc1d39[m refactor: tyres list
+[33m9d239b6[m chore
+[33m08d9ed7[m feat: tyres select
+[33m4650366[m refactor: search
+[33m2dc9253[m add: backup
+[33m7ae07b8[m feat: search
+[33mc75b1f7[m add: backup
+[33m51f291d[m add: brands logo
+[33m35453e4[m refactor: tyreList
+[33mec54eee[m feat: tyre list component
+[33m23879bc[m add: tyres/[tyre_slug] page
+[33m9948540[m chore
+[33m2a94dc9[m add: /tyres/[name] page
+[33m7439483[m chore
+[33mbea6b2c[m add: brands deswcription
+[33m3533265[m refactor: model/[name] page
+[33m1290295[m add: header
+[33m6b2eca5[m refactor: /brands/[name] page
+[33mcee3da0[m refactor: models/[name] page
+[33mf4bcf52[m refactor: brands page
+[33m485116d[m refactor: brands/[name] page
+[33ma626efd[m refactor: models page
+[33m6d03142[m refactor: brands/[name] page
+[33m457a764[m refactor: tyres page
