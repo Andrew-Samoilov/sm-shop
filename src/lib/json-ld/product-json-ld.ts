@@ -51,10 +51,7 @@ export function buildProductJsonLd(tyre: TyreWithRelations, images: { url: strin
             url: canonical,
             priceCurrency: "UAH",
             price: tyre.price?.toString(),
-            availability:
-                tyre.inventoryQuantity && tyre.inventoryQuantity > 0
-                    ? "https://schema.org/InStock"
-                    : "https://schema.org/OutOfStock",
+            availability: "https://schema.org/InStock",
             "priceValidUntil": priceValidUntil.toISOString().split("T")[0]
         },
     };

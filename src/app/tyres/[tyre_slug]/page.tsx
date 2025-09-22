@@ -227,7 +227,7 @@ export default async function TyrePage(
           <section className="pb-6">
             <details className="group" open>
               <summary className="flex flex-between justify-center items-center marker:content-none cursor-pointer ">
-                <h2 className="pr-2 md:pr-6">{`Наші сертифікати ${tyre.brand}`}</h2>
+                <h2 className="pr-2 md:pr-6">{`Наші сертифікати ${tyre.brand?.brand_name}`}</h2>
                 <span className="text-light text-4xl transition-transform group-open:rotate-45">+</span>
               </summary>
               <CertificatesClient cert={filteredCerts} />
