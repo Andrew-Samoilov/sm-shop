@@ -59,8 +59,7 @@ model Tyre {
 
   brand             Brand?  @relation(fields: [brandId], references: [id], onUpdate: NoAction)
   model             Model?  @relation(fields: [modelId], references: [id], onUpdate: NoAction)
-  orders Order[]
-
+  orders  Order[]
   @@index([title(ops: raw("gin_trgm_ops"))], map: "tyres_title_trgm_idx", type: Gin)
   @@index([modelId, title], map: "tyres_model_title_idx")
   @@index([brandId], map: "tyres_brand_idx")

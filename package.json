@@ -2,6 +2,7 @@
   "name": "sm-shop",
   "version": "0.9.5",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "( taskkill /F /IM ssh.exe || echo ssh не працює ) && ssh -fN -L 5433:localhost:5432 sms && echo Тунель відкрито && next dev",
     "build": "next build",
@@ -17,12 +18,14 @@
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@prisma/client": "^6.13.0",
+    "@tailwindcss/postcss": "^4.1.12",
     "dotenv": "^16.4.7",
     "embla-carousel-autoplay": "^8.5.2",
     "embla-carousel-react": "^8.5.2",
+    "google-auth-library": "^10.3.0",
+    "googleapis": "^160.0.0",
     "image-size": "^2.0.2",
     "next": "^15.3.3",
-    "@tailwindcss/postcss": "^4.1.12",
     "nodemailer": "^6.10.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -46,6 +49,7 @@
     "prettier-plugin-tailwindcss": "^0.6.11",
     "prisma": "^6.13.0",
     "tailwindcss": "^4.1.3",
-    "typescript": "^5.8.3"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
   }
 }
