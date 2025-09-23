@@ -43,6 +43,8 @@ export async function GET() {
         // якщо нема фото – пропускаємо товар
         if (!imageLink) continue;
 
+        imageLink = `https://shinamix.com.ua${imageLink}`;
+
         xml += `
     <item>
       <g:id>${tyre.sku}</g:id>
