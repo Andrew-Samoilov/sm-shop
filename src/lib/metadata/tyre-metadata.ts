@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { getTyreBySlug, getModelImgByModelId, getTyreSize } from "@/lib";
 
-export async function  generateTyreMetadata(tyre_slug: string): Promise<Metadata> {
+export async function generateTyreMetadata(tyre_slug: string): Promise<Metadata> {
 
   const origin = process.env.NEXT_PUBLIC_SITE_URL ?? "https://shinamix.com.ua";
   const tyre = await getTyreBySlug(tyre_slug);
@@ -39,9 +39,16 @@ export async function  generateTyreMetadata(tyre_slug: string): Promise<Metadata
     openGraph: {
       title: name,
       description,
-      url: `${origin}/tyres/${tyre.slug}/opengraph-image`,
+      url: `${origin}/tyres/${tyre.slug}`,
       type: "website",
-      images: [{ url: imageUrl, alt: imageAlt }],
+      images: [
+        {
+          url: `${origin}/tyres/${tyre.slug}/opengraph-image`,
+          width: 1200,
+          height: 630,
+          alt: imageAlt,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
