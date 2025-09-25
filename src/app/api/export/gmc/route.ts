@@ -8,7 +8,7 @@ export async function GET() {
 
     const tyres = await prisma.tyre.findMany({
         where: {
-            inventoryQuantity: { gt: 0 }, // тільки товари в наявності
+            inventoryQuantity: { gt: 0 }, 
         },
         include: {
             brand: true,
