@@ -74,6 +74,7 @@ export async function GET() {
         <id>${tyre.id}</id>
         <categoryId>${getCategoryId(tyre.model?.season)}</categoryId>
         <vendor>${tyre.brand?.brand_name || ''}</vendor>
+        <model>${tyre.model?.modelName || ''}</model>
         <name>${fullName}</name>
         <description>${tyre.description || ''}</description>
         <url>https://shinamix.com.ua/tyres/${tyre.slug}</url>
