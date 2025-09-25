@@ -23,6 +23,7 @@ export async function GET() {
             model: {
                 select: {
                     season: true,
+                    modelName: true,
                     images: true,
                 },
             },
@@ -33,6 +34,25 @@ export async function GET() {
 
     const xmlItems = tyres
         .map((tyre) => {
+
+
+            // розмір + індекси
+            const size =
+                tyre.width && tyre.profile && tyre.diameter
+                    ? `${tyre.width}/${tyre.profile}R${tyre.diameter}`
+                    : ''
+            const indexes = `${tyre.loadIndex || ''}${tyre.speedIndex || ''}`.trim()
+
+            // бренд + модель
+            const baseName = [
+                tyre.brand?.brand_name || '',
+                tyre.model?.modelName || '',
+            ]
+                .filter(Boolean)
+                .join(' ')
+
+            // фінальне ім’я у форматі Hotline
+            const fullName = `${baseName} (${size} ${indexes})`.trim()
 
             const images =
                 tyre.model?.images
@@ -54,7 +74,7 @@ export async function GET() {
         <id>${tyre.id}</id>
         <categoryId>${getCategoryId(tyre.model?.season)}</categoryId>
         <vendor>${tyre.brand?.brand_name || ''}</vendor>
-        <name>${tyre.title}</name>
+        <name>${fullName}</name>
         <description>${tyre.description || ''}</description>
         <url>https://shinamix.com.ua/tyres/${tyre.slug}</url>
         ${images}
