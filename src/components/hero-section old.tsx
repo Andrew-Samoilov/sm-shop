@@ -1,5 +1,5 @@
 import { LinkWithGA } from "@/components";
-import Image from "next/image";
+
 
 export function HeroSection() {
     return (
@@ -11,12 +11,12 @@ export function HeroSection() {
                 <div className="lg:max-w-[70ch] flex flex-col items-center xl:gap-2 ">
                     <p className="mb-2 lg:mb-3 text-light dark:text-darkmode-light font-medium md:text-xl"
                     >Наші постійні умови</p>
-                    <h1>2% <br className={`hidden lg:block`} />знижка УБД*</h1>
+                    <h1>-50% <br className={`hidden lg:block`}/>за зберігання*</h1>
                     <p className="text-sm text-light mb-2"
-                    >* - не сумується з іншими акціями&nbsp;
+                    >* - на сезон, при купівлі комплекту шин&nbsp;
                         <LinkWithGA
-                            href={'/info/ubd-discount'}
-                            eventLabel="ubd-discount"
+                            href={'/info/storage-50'}
+                            eventLabel="storage-50"
                             eventCategory="hero"
                             aria-label="Докладніше про детальні умови акції"
                         >(докладніше)
@@ -35,14 +35,7 @@ export function HeroSection() {
                 </div>
 
                 <div className="bg-theme-light dark:bg-darkmode-theme-dark text-theme-dark dark:text-theme-light w-auto h-auto rounded-md max-w-100">
-
-                    <Image
-                        src='/others/sklad.jpg'
-                        alt='наш склад'
-                        height="460"
-                        width='360'
-                    />
-                    {/* <p className="font-bold text-xl p-6 md:p-12 lg:p-18 ">Картинка, шо показує наскільки шинам краще в нас, ніж бозна де ;-)</p> */}
+                    <p className="font-bold text-xl p-6 md:p-12 lg:p-18 ">Картинка, шо показує наскільки шинам краще в нас, ніж бозна де ;-)</p>
                 </div>
             </div>
         </section>
