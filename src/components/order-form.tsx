@@ -106,7 +106,7 @@ export function OrderForm({ tyre }: { tyre: CartTyre }){
         Надіслати замовлення
       </SubmitButton>
       <p
-        className="text-light text-sm"
+        className="text-light text-sm mx-auto"
       >Натискаючи &ldquo;Надіслати замовлення&ldquo;, Ви погоджуєтесь з&nbsp;
         <LinkWithGA
           href={'/info/legal'}
