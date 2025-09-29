@@ -73,10 +73,10 @@ export function CartPanel() {
             aria-labelledby="cart-title"
             aria-hidden={!isOpen}
             tabIndex={-1}
-            className="fixed inset-0 z-50 flex flex-col bg-white/95 dark:bg-darkmode-body/95 md:rounded-md w-full md:w-auto lg:max-w-1/2"
+            className="fixed inset-0 z-50 overflow-y-auto flex flex-col bg-white/95 dark:bg-darkmode-body/95 md:rounded-md w-full md:w-auto lg:max-w-1/2"
           >
 
-            <header className="p-2 md:p-4 lg:p-6 mx-auto w-2/3 
+            <header className="p-2 md:p-4 lg:p-6  
             flex items-center justify-between border-b border-theme-light">
               <h2 className="text-lg font-semibold">Кошик</h2>
               <button
@@ -89,11 +89,10 @@ export function CartPanel() {
               </button>
             </header>
 
-
             {/* Контент кошика */}
-            <div className="w-full mx-auto flex-1 overflow-y-auto p-2 md:p-4 lg:p-6">
+            <div className="w-full mx-auto flex-1  p-2 md:p-4 lg:p-6">
               {CartTyre ? (
-                <div className="w-2/3 mx-auto h-fit flex flex-col  md:flex-row gap-2 lg:gap-6 items-center justify-between ">
+                <div className=" mx-auto  flex flex-col  md:flex-row gap-2 lg:gap-6 items-center justify-between ">
 
                   {CartTyre.tyreImageUrl && (
                     <Image
@@ -111,7 +110,7 @@ export function CartPanel() {
                     <p>{CartTyre.tyreSize}</p>
                   </div>
 
-                  <div className="flex flex-col items-center ">
+                  <div className="flex flex-betwen items-center gap-4">
                     {/* <span>{CartTyre.quantity} шт.</span> */}
                     <QuantitySelector />
                     <span >{CartTyre.price.toLocaleString("uk-UA")} грн.</span>
@@ -123,7 +122,7 @@ export function CartPanel() {
             </div>
 
             {CartTyre && (
-              <footer className="w-2/3 mx-auto flex flex-col justify-between p-2 md:p-4 lg:p-6 gap-2 lg:gap-6 ">
+              <footer className="mx-auto flex flex-col justify-between p-2 md:p-4 lg:p-6 gap-2 lg:gap-6 ">
 
                 <p className="text-right w-full text-h5 border-t border-theme-light">
                   Разом: <strong> {(CartTyre.price * CartTyre.quantity).toLocaleString("uk-UA")}</strong>{" "}

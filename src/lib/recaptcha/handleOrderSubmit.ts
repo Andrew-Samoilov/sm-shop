@@ -76,15 +76,33 @@ export async function handleOrderSubmit(formId: string, formData: FormData) {
       return;
     }
 
-    toast.success("Замовлення успішно надіслано!");
 
-    // ВІДПРАВКА ПОДІЇ В GA
-    sendGAEvent({
-      action: "order",
-      params: {
-        form_type: "order",
-      },
-    });
+    if (result.success) {
+      const order = result.data; 
+
+      sendGAEvent({
+        action: "purchase",
+        params: {
+          transaction_id: order.id.toString(),
+          value: order.tyrePrice * order.quantity,
+          currency: "UAH",
+          items: [
+            {
+              item_id: order.tyreId.toString(),
+              item_name: order.tyreTitle,
+              item_variant: order.tyreSize,
+              price: order.tyrePrice,
+              quantity: order.quantity,
+            },
+          ],
+        },
+      });
+
+      toast.success("Замовлення успішно надіслано!");
+    }
+
+
+
 
     sendEmail({
       subject: `Нове замовлення з сайту ShinaMix`,

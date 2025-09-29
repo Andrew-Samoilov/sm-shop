@@ -79,7 +79,7 @@ export function OrderForm({ tyre }: { tyre: CartTyre }){
       </div>
 
 
-      <div className="flex flex-left w-full gap-0 md:gap-2">
+      <div className="flex flex-col w-full gap-0 md:gap-2">
         <label htmlFor="order_comment" className="form-label">
           Повідомлення
         </label>
