@@ -179,24 +179,24 @@ export function TyresSelect() {
             className="flex flex-col gap-0 py-1 md:py-2 md:gap-2 lg:gap-6 w-full mx-auto lg:py-6"
             onSubmit={(e) => e.preventDefault()}
           >
-            <div className="flex gap-0 md:gap-2 lg:gap-6 flex-col md:flex-row lg:flex-col justify-between">
+            <div className="flex gap-0 md:gap-2 lg:gap-6 flex-row lg:flex-col justify-between">
               <OptionSelect
                 id="width"
-                label="ширина"
+                label="Ширина"
                 value={filters.width}
                 onChange={(v) => updateFilter("width", v)}
                 options={options.widths}
               />
               <OptionSelect
                 id="profile"
-                label="профіль"
+                label="Профіль"
                 value={filters.profile}
                 onChange={(v) => updateFilter("profile", v)}
                 options={options.profiles}
               />
               <OptionSelect
                 id="diameter"
-                label="діаметр"
+                label="Діаметр"
                 value={filters.diameter}
                 onChange={(v) => updateFilter("diameter", v)}
                 options={options.diameters}

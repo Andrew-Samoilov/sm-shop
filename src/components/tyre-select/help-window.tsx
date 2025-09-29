@@ -42,8 +42,8 @@ export function HelpWindow({ isOpen, setIsOpen }: {
           });
         }}
         className=" md:pl-4 lg:pl-0 mx-auto flex flex-row items-center gap-2 text-sm  cursor-pointer">
-        <QuestionMarkCircleIcon className=" h-6 w-6 text-accent" />
-        <span>Потрібна допомога?</span>
+        <QuestionMarkCircleIcon className=" h-5 w-5 text-accent" />
+        <span>Допомогти</span>
       </button>
 
       {isOpen && (

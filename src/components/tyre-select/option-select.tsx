@@ -8,16 +8,16 @@ type Props = {
 
 export function OptionSelect({ id, label, options, value, onChange }: Props) {
     return (
-        <div className="flex flex-col gap-0 lg:gap-2 ">
-            <label htmlFor={id} className="block text-sm text-light pl-2 ">
+        <div className="flex flex-col gap-2 lg:gap-2 ">
+            {/* <label htmlFor={id} className="block text-sm text-light pl-2 ">
                 Оберіть {label}
-            </label>
+            </label> */}
             <select
                 id={id}
                 name={id}
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
-                className="border-2 border-border bg-white dark:bg-darkmode-body rounded-md px-4 py-1 md:py-2 focus:ring-2 focus:outline-none"
+                className="border-2 border-border bg-white dark:bg-darkmode-body rounded-md pl-2 py-1 md:py-2 focus:ring-2 focus:outline-none"
             >
                 <option value="">{label.toLowerCase()}</option>
                 {options.map((opt) => (
