@@ -25,7 +25,7 @@ export function SeasonCheckbox({
     return (
         <fieldset >
             <legend className="text-sm text-light hidden md:block md:pl-6 text-center ">Сезон</legend>
-            <div className="flex flex-row flex-wrap justify-center  gap-6  lg:flex-nowrap py-2 md:py-0">
+            <div className="flex flex-row flex-wrap justify-center  gap-6  lg:flex-nowrap py-4 md:py-0">
                 {SEASONS.map(({ value: v, label }) => (
                     <label key={v} className="flex items-center gap-2 cursor-pointer ">
                         <input

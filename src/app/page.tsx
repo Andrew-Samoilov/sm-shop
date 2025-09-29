@@ -1,4 +1,4 @@
-import {  HeroSection, InfoSection, TyresSelect } from "@/components";
+import {  BuyTyres, HeroSection, InfoSection, TyresSelect } from "@/components";
 import { Suspense } from "react";
 
 export default async function Home() {
@@ -11,9 +11,9 @@ export default async function Home() {
 
       <HeroSection />
 
-      {/* <BuyTyres /> */}
-
       <InfoSection />
+
+      <BuyTyres />
     </>
   );
 }

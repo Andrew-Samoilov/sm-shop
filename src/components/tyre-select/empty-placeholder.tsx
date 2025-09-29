@@ -1,4 +1,4 @@
-import { BuyTyres, PopularBrands, PopularSizes } from "@/components";
+import { PopularBrands, PopularSizes } from "@/components";
 
 export function EmptyPlaceholder() {
     return (
@@ -9,11 +9,12 @@ export function EmptyPlaceholder() {
             </p>
             < p className="text-sm" >Використайте фільтри</p>
 
-            <BuyTyres />
+            {/* <BuyTyres /> */}
+
+            <PopularSizes />
 
             <PopularBrands />
 
-            <PopularSizes />
         </div>
     );
 }

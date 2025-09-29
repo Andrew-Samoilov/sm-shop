@@ -145,6 +145,7 @@ export function TyresSelect() {
     gallery: "у вигляді галереї",
   };
 
+  
   //  console.log(`[formatSearchTitle]`, formatSearchTitle.length);
   const searchTitle = formatSearchTitle(query, filters);
 
@@ -182,21 +183,21 @@ export function TyresSelect() {
             <div className="flex gap-0 md:gap-2 lg:gap-6 flex-col md:flex-row lg:flex-col justify-between">
               <OptionSelect
                 id="width"
-                label="ширина"
+                label="Ширина"
                 value={filters.width}
                 onChange={(v) => updateFilter("width", v)}
                 options={options.widths}
               />
               <OptionSelect
                 id="profile"
-                label="профіль"
+                label="Профіль"
                 value={filters.profile}
                 onChange={(v) => updateFilter("profile", v)}
                 options={options.profiles}
               />
               <OptionSelect
                 id="diameter"
-                label="діаметр"
+                label="Діаметр"
                 value={filters.diameter}
                 onChange={(v) => updateFilter("diameter", v)}
                 options={options.diameters}
