@@ -83,6 +83,8 @@ export function ListHeader({ view, onChangeView, sort, onChangeSort }: Props) {
             <div className="flex gap-2 items-center">
                 <span className="hidden xl:block text-light text-sm">Сортування</span>
                 <select
+                    id="sort"
+                    name="sort"
                     className="rounded-md border border-border dark:border-darkmode-border px-2 py-1"
                     value={sort}
                     onChange={handleSortChange}

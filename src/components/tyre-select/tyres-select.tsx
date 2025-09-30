@@ -179,7 +179,7 @@ export function TyresSelect() {
             className="flex flex-col  gap-0 py-1 md:py-2 md:gap-2 lg:gap-6 w-full mx-auto lg:py-6"
             onSubmit={(e) => e.preventDefault()}
           >
-            <div className="flex flex-wrap gap-4 lg:gap-6 flex-row lg:flex-col justify-center">
+            <div className="flex flex-wrap gap-4 lg:gap-6 flex-row lg:flex-col justify-center py-4">
               <OptionSelect
                 id="width"
                 label="Ширина"

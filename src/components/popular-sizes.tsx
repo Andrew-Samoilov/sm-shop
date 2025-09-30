@@ -20,7 +20,7 @@ const popularSizes = [
 
 export function PopularSizes() {
     return (
-        <section className="section flex flex-col items-center">
+        <section className="section flex flex-col items-center rounded-md bg-theme-light dark:bg-darkmode-theme-dark text-theme-dark dark:text-theme-light">
             <h2>Популярні розміри:</h2>
             <div className="flex flex-wrap justify-center gap-4">
                 {popularSizes.map((s) => {

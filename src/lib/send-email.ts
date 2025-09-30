@@ -27,7 +27,7 @@ export async function sendEmail({
     const defaultTo = 'webmaster@shinamix.com';
 
     const mailOptions = {
-        from: 'webmaster@shinamix.com',
+        from: '"Shinamix" <webmaster@shinamix.com>',
         replyTo: 'webmaster@shinamix.com',
         to: to ?? defaultTo,
         subject,
