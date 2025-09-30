@@ -176,10 +176,10 @@ export function TyresSelect() {
         <aside className="gap-0 md:gap-2 lg:gap-6 flex flex-col lg:flex-row w-auto">
           <form
             aria-label="Фільтри пошуку шин"
-            className="flex flex-col gap-0 py-1 md:py-2 md:gap-2 lg:gap-6 w-full mx-auto lg:py-6"
+            className="flex flex-col  gap-0 py-1 md:py-2 md:gap-2 lg:gap-6 w-full mx-auto lg:py-6"
             onSubmit={(e) => e.preventDefault()}
           >
-            <div className="flex gap-0 md:gap-2 lg:gap-6 flex-row lg:flex-col justify-between">
+            <div className="flex flex-wrap gap-4 lg:gap-6 flex-row lg:flex-col justify-center">
               <OptionSelect
                 id="width"
                 label="Ширина"
