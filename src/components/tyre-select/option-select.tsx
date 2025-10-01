@@ -24,7 +24,7 @@ export function OptionSelect({ id, label, options, value, onChange }: Props) {
             >
 
               
-                <option value="">{label.toLowerCase()}</option>
+                <option value="">{label}</option>
                 {options.map((opt) => (
                     <option key={opt} value={opt}>
                         {opt}

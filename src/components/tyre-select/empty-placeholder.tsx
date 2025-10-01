@@ -7,7 +7,7 @@ export function EmptyPlaceholder() {
             <p className="text-lg font-medium" >
                 Оберіть параметри для пошуку шин
             </p>
-            < p className="text-sm" >Використайте фільтри</p>
+            <p>Використайте фільтри</p>
 
             {/* <BuyTyres /> */}
 
