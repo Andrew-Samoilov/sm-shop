@@ -25,6 +25,7 @@ export async function GET() {
                     season: true,
                     modelName: true,
                     images: true,
+                    description: true,
                 },
             },
         },
@@ -51,7 +52,6 @@ export async function GET() {
                 .filter(Boolean)
                 .join(' ')
 
-            // фінальне ім’я у форматі Hotline
             const fullName = `${baseName} (${size} ${indexes})`.trim()
 
             const images =
@@ -76,7 +76,7 @@ export async function GET() {
         <vendor>${tyre.brand?.brand_name || ''}</vendor>
         <model>${tyre.model?.modelName || ''}</model>
         <name>${fullName}</name>
-        <description>${tyre.description || ''}</description>
+        <description>${tyre.model!.description || ''}</description>
         <url>https://shinamix.com.ua/tyres/${tyre.slug}</url>
         ${images}
         <priceRUAH>${tyre.price}</priceRUAH>

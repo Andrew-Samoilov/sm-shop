@@ -34,8 +34,8 @@ export function HeroSection() {
 
                 <div className="bg-theme-light dark:bg-darkmode-theme-dark text-theme-dark dark:text-theme-light w-auto h-auto rounded-md max-w-100">
                     <Image
-                        src='/others/sklad.jpg'
-                        alt='наш склад'
+                        src='/others/ubd-discount.jpg'
+                        alt='УБД знижка 2%'
                         width={1605}
                         height={1205}
                         className="rounded-lg w-full h-auto"
