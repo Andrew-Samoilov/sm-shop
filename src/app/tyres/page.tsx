@@ -6,9 +6,10 @@ import { Suspense } from "react";
 export async function generateMetadata({
   searchParams,
 }: {
-  searchParams: { width?: string; profile?: string; diameter?: string; season?: string };
-}): Promise<Metadata> {
-  return generateTyresMetadata({ searchParams });
+    searchParams: Promise<{ width?: string; profile?: string; diameter?: string; season?: string }>;
+  }): Promise<Metadata> {
+  const params = await searchParams;
+  return generateTyresMetadata({ searchParams: params });
 }
 
 

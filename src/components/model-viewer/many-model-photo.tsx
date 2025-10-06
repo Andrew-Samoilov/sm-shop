@@ -66,7 +66,9 @@ export function ManyModelPhoto({ images }: { images: IImage[] }) {
                             <Image
                                 src={img.url}
                                 alt={img.alt ?? "Фото моделі"}
+                                sizes="(max-width: 768px) 100vw, 50vw"
                                 fill
+                                priority={img.id === images[0].id}
                                 className="object-contain"
                             />
                         </div>
@@ -114,7 +116,13 @@ export function ManyModelPhoto({ images }: { images: IImage[] }) {
                             className={`relative aspect-square h-16 sm:h-20 rounded-md overflow-hidden flex-shrink-0 w-[22vw] max-w-[72px] 
                                 ${i === selectedIndex ? "ring-2 ring-accent ring-offset-2" : ""}`}
                         >
-                            <Image src={img.url} alt={img.alt ?? "Фото моделі"} fill className="object-cover" />
+                            <Image
+                                src={img.url}
+                                alt={img.alt ?? "Фото моделі"}
+                                fill
+                                sizes="72px"
+                                loading="lazy"
+                                className="object-cover" />
                         </button>
                     ))}
                 </div>

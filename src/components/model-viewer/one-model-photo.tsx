@@ -10,7 +10,7 @@ export function OneModelPhoto({ image }: { image: IImage }) {
                 alt={image.alt ?? "Фото моделі"}
                 fill
                 priority
-                sizes="100vw"
+                sizes="(max-width: 768px) 100vw, 40vw"
                 className="object-contain mx-auto"
             />
         </div>
