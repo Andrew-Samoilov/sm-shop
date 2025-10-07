@@ -26,7 +26,6 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    // Отримуємо JSON
     let data;
     try {
         data = await req.json();
@@ -45,9 +44,8 @@ export async function POST(req: NextRequest) {
         const insertedCount = await prisma.$transaction(async (tx) => {
             await tx.tyreImport.deleteMany({});
             const count = await saveToTyreImportFromJson(data, tx);
-            // await updateExistingTyresOneByOne(tx);
             await normalizeSeasonsInTyreImport(tx);
-            return count;
+            return count; 
         });
 
         console.timeEnd("[import/save]");
