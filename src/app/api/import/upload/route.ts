@@ -51,7 +51,6 @@ export async function POST(req: NextRequest) {
         console.timeEnd("[import/save]");
         console.log(`[route] saved to tyre_import: ${insertedCount} rows`);
 
-
         // 2. Запускаємо фонову обробку (асинхронно)
         (async () => {
             try {
