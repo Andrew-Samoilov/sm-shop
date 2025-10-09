@@ -49,11 +49,13 @@ export function Search({ className = "" }: { className?: string }) {
 
   const renderInput = () => (
     <div className="relative w-full">
-      {inputValue === "" && (
-        <MagnifyingGlassIcon
-          className="text-light/75 absolute top-1/2 right-3 h-5 w-5 -translate-y-1/2 scale-x-[-1] transform pointer-events-none" />
-      )}
-      <input
+
+      <MagnifyingGlassIcon
+        onClick={handleSearch}
+        className={`text-light/75 absolute top-1/2 h-5 w-5 -translate-y-1/2 scale-x-[-1] transform transition-all
+    ${inputValue ? "right-10" : "right-3"}`}
+      />
+      {/* // */}      <input
         id="search"
         type="search"
         inputMode="search"

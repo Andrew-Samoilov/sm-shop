@@ -66,7 +66,8 @@ export function ManyModelPhoto({ images }: { images: IImage[] }) {
                             <Image
                                 src={img.url}
                                 alt={img.alt ?? "Фото моделі"}
-                                sizes="(max-width: 768px) 100vw, 50vw"
+                                // sizes="(max-width: 768px) 100vw, 50vw"
+                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
                                 fill
                                 priority={img.id === images[0].id}
                                 className="object-contain"
