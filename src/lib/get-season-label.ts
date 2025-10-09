@@ -1,4 +1,6 @@
 export function getSeasonLabel(season: string | null | undefined): string {
+    if (typeof season !== "string") return "";
+    
     const normalized = season?.trim().toLowerCase();
 
     switch (normalized) {

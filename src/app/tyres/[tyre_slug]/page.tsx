@@ -1,9 +1,8 @@
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const dynamic = "force-static";
 
 import { AddToCartButton, BreadCrumbs, CertificatesClient, LinkWithGA, ModelViewer, QuantitySelector, SeasonIcon, ViewItemGA } from "@/components";
 import { getTyreBySlug, getModelImgByModelId, prisma, getContentBlock, getTyreSize, getSeasonLabel, generateTyreMetadata, buildProductJsonLd, buildBreadcrumbsJsonLd, JsonLd, } from "@/lib";
-import { Certificate, } from "@/types";
+import { Certificate } from "@/types";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
@@ -26,17 +25,17 @@ type TyreParams = Promise<{ tyre_slug: string }>;
 export async function generateMetadata(
   { params }: { params: TyreParams }
 ): Promise<Metadata> {
-  const { tyre_slug } = await params;            
+  const { tyre_slug } = await params;
   return generateTyreMetadata(tyre_slug);
 }
 
 
 export default async function TyrePage(
   { params }: { params: TyreParams }) {
-  
-  const { tyre_slug } = await  params;
-  
-  console.log('[TyrePage]',tyre_slug);
+
+  const { tyre_slug } = await params;
+
+  console.log('[TyrePage]', tyre_slug);
 
   const tyre = await getTyreBySlug(tyre_slug);
 
@@ -62,7 +61,7 @@ export default async function TyrePage(
   // console.info("[TyrePage]", cert);
 
   const tyreSize = getTyreSize(tyre);
-  
+
   const productJsonLd = buildProductJsonLd(tyre, images);
   const breadcrumbs = [
     { name: "Головна", url: "/" },
@@ -96,7 +95,7 @@ export default async function TyrePage(
         <ModelViewer images={images} season={tyre.model?.season} />
 
         <div className=" flex flex-col w-full md:w-auto min-w-fit p-2 md:p-0 gap-1 lg:gap-2">
-          <h1 className="flex flex-col items-center md:items-start  ">
+          <h1 className="text-h1 flex flex-col items-center md:items-start  ">
             <span>{tyre.brand?.brand_name}</span>
             <span>{tyre.model?.modelName}</span>
             <span className="font-normal text-[75%]">{tyreSize}</span>
@@ -163,15 +162,21 @@ export default async function TyrePage(
             &nbsp;{tyre.loadIndex}
           </div>
 
-          <div className="flex flex-col md:flex-row md:items-center">
+          <div className="flex flex-col md:flex-row md:items-center border-b border-theme-light">
             <div className="flex flex-row md:flex-col gap-2 xl:gap-6 items-center">
 
               <QuantitySelector />
-              <span
-                className="font-semibold text-h1"
-              >{tyre.price?.toLocaleString("uk-UA")} <span className="text-h3 font-normal text-light">грн<span
-                className="text-[75%] opacity-75">/шт</span></span></span>
+
+              <div className="flex items-center gap-2 font-semibold text-h1 leading-none"
+              >{tyre.price?.toLocaleString("uk-UA")}
+                <div className="text-h3 font-normal text-light leading-none">грн<span
+                  className="text-[75%] opacity-75">/шт</span>
+                </div>
+              </div>
+
             </div>
+
+        
 
             <AddToCartButton
               tyre={{
@@ -188,6 +193,10 @@ export default async function TyrePage(
             fixed bottom-2 left-2 right-2 z-10
               md:relative md:bottom-auto md:left-auto md:right-auto "
             />
+          </div>
+
+          <div className="text-light text-center">
+            {(tyre.price * 4)?.toLocaleString("uk-UA")} за комплект(4)
           </div>
 
           <LinkWithGA

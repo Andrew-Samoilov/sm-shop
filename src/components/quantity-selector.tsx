@@ -7,7 +7,7 @@ type QuantitySelectorProps = {
 }
 
 export function QuantitySelector({ storageKey = 'tyre' }: QuantitySelectorProps) {
-    const [quantity, setQuantity] = useState<number>(1)
+    const [quantity, setQuantity] = useState<number>(4)
 
     // Завантаження початкового значення з localStorage
     useEffect(() => {
