@@ -1,6 +1,6 @@
 export const dynamic = "force-static";
 
-import { AddToCartButton, BreadCrumbs, CertificatesClient, LinkWithGA, ModelViewer, QuantitySelector, SeasonIcon, ViewItemGA } from "@/components";
+import { AddToCartButton, BreadCrumbs, CertificatesClient, LinkWithGA, ModelViewer, QuantitySelector, SeasonIcon, TotalPrice, ViewItemGA } from "@/components";
 import { getTyreBySlug, getModelImgByModelId, prisma, getContentBlock, getTyreSize, getSeasonLabel, generateTyreMetadata, buildProductJsonLd, buildBreadcrumbsJsonLd, JsonLd, } from "@/lib";
 import { Certificate } from "@/types";
 import { Metadata } from "next";
@@ -176,7 +176,7 @@ export default async function TyrePage(
 
             </div>
 
-        
+
 
             <AddToCartButton
               tyre={{
@@ -195,9 +195,11 @@ export default async function TyrePage(
             />
           </div>
 
-          <div className="text-light text-center">
+          {/* <div className="text-light text-h4 text-center border-b border-theme-light">
             {(tyre.price * 4)?.toLocaleString("uk-UA")} за комплект(4)
-          </div>
+          </div> */}
+
+          <TotalPrice price={tyre.price} storageKey="tyre" />
 
           <LinkWithGA
             className="flex flex-wrap flex-col md:flex-row justify-center items-center gap-2 lg:gap-6 text-center max-w-full hover:no-underline"

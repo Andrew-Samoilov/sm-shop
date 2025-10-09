@@ -48,3 +48,5 @@ export { EmptyPlaceholder } from "./tyre-select/empty-placeholder"
 export { BuyTyres } from "./buy-tyres"
 export { PopularBrands } from "./popular-brands"
 export { PopularSizes } from "./popular-sizes"
+
+export { TotalPrice } from "./total-price"

@@ -38,6 +38,8 @@ export function QuantitySelector({ storageKey = 'tyre' }: QuantitySelectorProps)
                 console.error('Помилка оновлення localStorage:', err)
             }
         }
+        //відправили подію
+        window.dispatchEvent(new CustomEvent('quantityChange', { detail: { newQty, storageKey } }))
     }
 
     const increase = () => updateQuantity(quantity + 1)
