@@ -48,6 +48,7 @@ export default async function ContactsPage() {
 
         <div className="bg-theme-light dark:bg-darkmode-theme-light grid gap-6 rounded-md p-4 md:p-6">
           <h2 className="text-center">Адреса</h2>
+          <p className="text-h3 text-center">01014, м.Київ, вул. Бойчука, 44. (ангар 14.)</p>
           <iframe
             title={"Київ, Бойчука 44"}
             // src = {`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}&q=Київ,+Україна`}
