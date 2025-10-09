@@ -12,7 +12,7 @@ export async function BreadCrumbs({ tyreSlug }: Props) {
     const seasonUA = getSeasonLabel(season);
 
     const tyreSize = tyre?.width && tyre.profile && tyre.diameter && tyre.loadSpeedIndex
-        ? `${tyre.width}${tyre.delimiter ?? '/'}${tyre.profile} R${tyre.diameter}`
+        ? `${tyre.width}$'/'${tyre.profile} R${tyre.diameter}`
         : null;
 
     return (

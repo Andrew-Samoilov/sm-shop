@@ -24,7 +24,7 @@ export function buildProductJsonLd(tyre: TyreWithRelations, images: { url: strin
 
     const tyreSize =
         tyre?.width && tyre.profile && tyre.diameter && tyre.loadSpeedIndex
-            ? `${tyre.width}${tyre.delimiter ?? "/"}${tyre.profile} R${tyre.diameter} ${tyre.loadIndex}${tyre.speedIndex}`
+            ? `${tyre.width} "/"${tyre.profile} R${tyre.diameter} ${tyre.loadIndex}${tyre.speedIndex}`
             : "";
 
     const name = `${tyre.brand?.brand_name ?? ""} ${tyre.model?.modelName ?? ""} ${tyreSize}`.trim();
