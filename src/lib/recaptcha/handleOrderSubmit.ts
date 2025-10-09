@@ -102,17 +102,18 @@ export async function handleOrderSubmit(formId: string, formData: FormData) {
     }
 
 
-
+    const now = new Date().toLocaleString('uk-UA')
+    const subject = `Нове замовлення (${now})`
 
     sendEmail({
       to: "valery@shinamix.com, webmaster@shinamix.com, ityre03@gmail.com",
-      subject: `Нове замовлення з сайту ShinaMix`,
+      subject: subject,
       html: orderHtml,
     });
 
     sendEmail({
       to: email,
-      subject: "Ваше замовлення надіслано",
+      subject: `Ваше замовлення надіслано (${now})`,
       html: orderHtml
     });
 
