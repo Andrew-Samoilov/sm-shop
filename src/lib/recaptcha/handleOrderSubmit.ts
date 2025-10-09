@@ -105,6 +105,7 @@ export async function handleOrderSubmit(formId: string, formData: FormData) {
 
 
     sendEmail({
+      to: "valery@shinamix.com, webmaster@shinamix.com, ityre03@gmail.com",
       subject: `Нове замовлення з сайту ShinaMix`,
       html: orderHtml,
     });
