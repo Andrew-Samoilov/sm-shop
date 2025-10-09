@@ -101,19 +101,20 @@ export async function handleOrderSubmit(formId: string, formData: FormData) {
       toast.success("Замовлення успішно надіслано!");
     }
 
-
-    const now = new Date().toLocaleString('uk-UA')
-    const subject = `Нове замовлення (${now})`
+  
+    const order = result.data;
+    const now = new Date().toLocaleString('uk-UA');
+    const subject = `Нове замовлення №${order.id} (${now})`;
 
     sendEmail({
       to: "valery@shinamix.com, webmaster@shinamix.com, ityre03@gmail.com",
-      subject: subject,
+      subject,
       html: orderHtml,
     });
 
     sendEmail({
       to: email,
-      subject: `Ваше замовлення надіслано (${now})`,
+      subject: `Ваше замовлення №${order.id} надіслано (${now})`,
       html: orderHtml
     });
 
