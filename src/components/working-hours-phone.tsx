@@ -17,7 +17,7 @@ export default async function WorkingHoursPhone() {
 
     return (
         <a
-            className="fixed top-0 left-1/2 py-1 -translate-x-1/2 w-full  bg-theme-light text-theme-dark text-center md:hidden"
+            className="flex items-center justify-center text-center md:hidden py-2"
             href="tel:+380973232161" >
             📞 +38 (097) 323-21-61
         </a>
