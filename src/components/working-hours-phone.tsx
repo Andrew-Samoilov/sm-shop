@@ -1,8 +1,11 @@
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
+import { getSiteConfig } from "@/lib";
+
 
 export default async function WorkingHoursPhone() {
-    if (process.env.NODE_ENV !== 'production') return null;
+    // if (process.env.NODE_ENV !== 'production') return null;
+    const siteConfig = await getSiteConfig();
 
     // Поточний час на сервері (Europe/Berlin)
     const now = new Date();
@@ -17,9 +20,9 @@ export default async function WorkingHoursPhone() {
 
     return (
         <a
-            className="flex items-center justify-center text-center md:hidden py-2"
-            href="tel:+380973232161" >
-            📞 +38 (097) 323-21-61
+            className="flex items-center justify-center text-center md:hidden py-2 bg-theme-light dark:bg-theme-dark"
+            href={ siteConfig.tel.normalize} >
+            {siteConfig.tel.visual}
         </a>
     );
 }

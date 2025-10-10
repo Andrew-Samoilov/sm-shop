@@ -84,13 +84,6 @@ export async function Footer() {
             </div>
             
           </div>
-          {/* <div className="flex flex-col items-center pt-2">
-            <div className="text-lg font-semibold">Послуги</div>
-            <div className="flex flex-col items-center space-y-2">
-              <div className="text-light/75 cursor-not-allowed">Шиномонтаж</div>
-              <div className="text-light/75 cursor-not-allowed">Зберігання</div>
-            </div>
-          </div> */}
         </div>
         <div className="flex flex-col items-center pt-2">
           <LinkWithGA
@@ -145,17 +138,7 @@ export async function Footer() {
               >
                 W
               </LinkWithGA>
-
-              {/* <LinkWithGA
-                href={siteConfig.signal}
-                eventLabel="signal"
-                eventCategory="footer"
-                ariaLabel="Пишіть у Signal"
-                className="text-light border-border dark:border-light dark:bg-darkmode-theme-light dark:text-darkmode-light rounded-full border bg-white p-2 px-4 text-center font-bold duration-300 hover:bg-black hover:text-white hover:no-underline dark:hover:bg-white dark:hover:text-black"
-              >
-                S
-              </LinkWithGA> */}
-
+              
               <LinkWithGA
                 href={siteConfig.fb}
                 eventLabel="facebook"

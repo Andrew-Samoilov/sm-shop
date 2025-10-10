@@ -9,8 +9,6 @@ export function EmptyPlaceholder() {
             </p>
             <p>Використайте фільтри</p>
 
-            {/* <BuyTyres /> */}
-
             <PopularSizes />
 
             <PopularBrands />

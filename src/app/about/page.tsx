@@ -1,4 +1,4 @@
-import { BenefitsSection, FeatureSection, CertificatesClient, BuyTyres } from "@/components";
+import { BenefitsSection, FeatureSection, CertificatesClient, BuyTyres, PopularSizes } from "@/components";
 import { getContentBlock } from "@/lib";
 import { Certificate } from "@/types";
 const cert = await getContentBlock<Certificate[]>('certificates', [])
@@ -17,6 +17,8 @@ export default async function AboutPage() {
       
       <BuyTyres />
 
+      <PopularSizes />
+      
     </section>
   );
 }
