@@ -151,6 +151,11 @@ model Order {
   phone   String
   email   String?
   comment String?
+
+  deliveryMethod String?   // "pickup" або "delivery"
+  deliveryCity   String?   // назва міста
+  deliveryWarehouse String? // номер або адреса відділення
+
   status  String?  @default("pending")
 
   tyre Tyre @relation(fields: [tyreId], references: [id])

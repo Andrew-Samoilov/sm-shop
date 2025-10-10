@@ -2,7 +2,7 @@
 import Form from "next/form";
 import { useState } from "react";
 import { handleOrderSubmit, loadRecaptchaScript } from "@/lib";
-import { LinkWithGA, SubmitButton } from "@/components";
+import { DeliverySelect, LinkWithGA, SubmitButton } from "@/components";
 import { CartTyre } from "@/types";
 
 const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!;
@@ -78,7 +78,37 @@ export function OrderForm({ tyre }: { tyre: CartTyre }){
         />
       </div>
 
+      <div className="flex flex-col w-full gap-2 md:gap-3">
+        <label className="form-label">Спосіб отримання</label>
+        <div className="flex flex-col sm:flex-row gap-4">
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="delivery_method"
+              value="pickup"
+              required
+              className="accent-accent h-4 w-4"
+            />
+            <span>Самовивіз</span>
+          </label>
 
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="delivery_method"
+              value="delivery"
+              required
+              className="accent-accent h-4 w-4"
+            />
+            <span>Доставка</span>
+          </label>
+        </div>
+
+        <DeliverySelect />
+        
+      </div>
+
+      
       <div className="flex flex-col w-full gap-0 md:gap-2">
         <label htmlFor="order_comment" className="form-label">
           Повідомлення

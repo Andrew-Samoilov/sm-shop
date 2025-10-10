@@ -34,6 +34,10 @@ export async function handleOrderSubmit(formId: string, formData: FormData) {
     const tyrePrice = formData.get("tyrePrice") as string | null;
     const quantity = formData.get("quantity") as string | null;
 
+    const deliveryMethod = formData.get('delivery_method');
+    const city = formData.get('delivery_city') as string | null;
+    const warehouse = formData.get('delivery_warehouse') as string | null;
+
     let productHtml = "";
     if (tyreId || tyreTitle || tyreSize || tyrePrice || quantity) {
       productHtml = `
@@ -57,6 +61,10 @@ export async function handleOrderSubmit(formId: string, formData: FormData) {
         <li><b>Ім'я:</b> ${name}</li>
         <li><b>Email:</b> ${email}</li>
         <li><b>Телефон:</b> ${tel}</li>
+
+        <p>Спосіб доставки: ${deliveryMethod === 'pickup' ? 'Самовивіз' : 'Доставка'}</p>
+${deliveryMethod === 'delivery' ? `Місто: ${city}\n Відділення: ${warehouse}` : ''}
+
        ${comment ? `<li><b>Повідомлення:</b> ${comment}</li>` : ""}
       </ul>
       ${productHtml}
