@@ -11,7 +11,7 @@ function getCategoryId(season: string | null | undefined): number {
         case 'Summer':
             return 3
         default:
-            return 1 
+            return 1
     }
 }
 
@@ -60,7 +60,7 @@ export async function GET() {
                     .join('\n') || ''
 
             const params: string[] = []
-            
+
             if (tyre.country) {
                 params.push(`<param name="Країна виробник">${tyre.country}</param>`)
             }
@@ -81,6 +81,7 @@ export async function GET() {
         ${images}
         <priceRUAH>${tyre.price}</priceRUAH>
         <stock store_id="1">В наявності</stock>
+        <shipping>0</shipping>
         <guarantee type="shop">0</guarantee>
         ${params.join('\n')}
       </item>`

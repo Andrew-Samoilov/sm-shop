@@ -107,7 +107,7 @@ export async function handleOrderSubmit(formId: string, formData: FormData) {
     const subject = `Нове замовлення №${order.id} (${now})`;
 
     sendEmail({
-      to: "valery@shinamix.com, webmaster@shinamix.com, ityre03@gmail.com",
+      to: "valeriy@shinamix.com, webmaster@shinamix.com, ityre03@gmail.com",
       subject,
       html: orderHtml,
     });
