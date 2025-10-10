@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "../styles/globals.css"
-import { Analytics, Footer, Header, TwSizeIndicator } from "@/components";
+import { Analytics, Footer, Header, TwSizeIndicator, WorkingHoursPhone } from "@/components";
 import { ToastContainer } from "react-toastify";
 import Script from "next/script";
 import { Suspense } from "react";
@@ -41,7 +41,11 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
             `,
           }}
         />
+
+        <WorkingHoursPhone />
+
         <TwSizeIndicator />
+
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

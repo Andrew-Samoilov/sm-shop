@@ -50,3 +50,4 @@ export { PopularBrands } from "./popular-brands"
 export { PopularSizes } from "./popular-sizes"
 
 export { TotalPrice } from "./total-price"
+export { default as WorkingHoursPhone } from "./working-hours-phone";

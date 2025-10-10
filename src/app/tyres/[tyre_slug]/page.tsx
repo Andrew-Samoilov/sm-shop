@@ -162,7 +162,7 @@ export default async function TyrePage(
             &nbsp;{tyre.loadIndex}
           </div>
 
-          <div className="flex flex-col md:flex-row md:items-center border-b border-theme-light">
+          <div className="flex flex-col md:flex-row md:items-center border-b pb-2 border-theme-light">
             <div className="flex flex-row md:flex-col gap-2 xl:gap-6 items-center">
 
               <QuantitySelector />
