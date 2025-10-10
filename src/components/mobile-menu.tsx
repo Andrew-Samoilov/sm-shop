@@ -71,6 +71,16 @@ export function MobileMenu() {
 
                             <li>
                                 <LinkWithGA
+                                    href={'/about'}
+                                    eventLabel="about"
+                                    eventCategory="mobile_menu"
+                                    aria-label="Перейти до інформації про нас"
+                                    onClick={() => setIsMenuOpen(false)}
+                                >Про нас</LinkWithGA>
+                            </li>
+
+                            <li>
+                                <LinkWithGA
                                     href={'/info'}
                                     eventLabel="info"
                                     eventCategory="mobile_menu"
