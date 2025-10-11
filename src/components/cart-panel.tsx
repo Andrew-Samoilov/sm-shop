@@ -73,7 +73,7 @@ export function CartPanel() {
             aria-labelledby="cart-title"
             aria-hidden={!isOpen}
             tabIndex={-1}
-            className="fixed inset-0 z-50 overflow-y-auto flex flex-col bg-white/95 dark:bg-darkmode-body/95 md:rounded-md w-full md:w-auto lg:max-w-1/2"
+            className=" fixed inset-0 z-50 overflow-y-auto flex flex-col bg-white/95 dark:bg-darkmode-body/95 md:rounded-md w-full md:w-auto "
           >
 
             <header className="p-2 md:p-4 lg:p-6  
@@ -90,7 +90,7 @@ export function CartPanel() {
             </header>
 
             {/* Контент кошика */}
-            <div className="w-full mx-auto flex-1  p-2 md:p-4 lg:p-6">
+            <div className="container  w-full mx-auto flex-1  p-2 md:p-4 lg:p-6">
               {CartTyre ? (
                 <div className=" mx-auto  flex flex-col  md:flex-row gap-2 lg:gap-6 items-center justify-between ">
 
@@ -111,7 +111,6 @@ export function CartPanel() {
                   </div>
 
                   <div className="flex flex-betwen items-center gap-4">
-                    {/* <span>{CartTyre.quantity} шт.</span> */}
                     <QuantitySelector />
                     <span >{CartTyre.price.toLocaleString("uk-UA")} грн.</span>
                   </div>

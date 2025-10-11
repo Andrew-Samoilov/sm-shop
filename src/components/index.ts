@@ -52,3 +52,4 @@ export { PopularSizes } from "./popular-sizes"
 export { TotalPrice } from "./total-price"
 export { default as WorkingHoursPhone } from "./working-hours-phone";
 export { DeliverySelect } from "./delivery-select"
+export { getProductHtml } from "../lib/order/get-product-html"

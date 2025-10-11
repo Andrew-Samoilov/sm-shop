@@ -1,6 +1,6 @@
 "use client";
 import Form from "next/form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { handleOrderSubmit, loadRecaptchaScript } from "@/lib";
 import { DeliverySelect, LinkWithGA, SubmitButton } from "@/components";
 import { CartTyre } from "@/types";
@@ -22,6 +22,24 @@ export function OrderForm({ tyre }: { tyre: CartTyre }){
     }
   };
 
+
+  const [currentTyre, setCurrentTyre] = useState(tyre);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("tyre");
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (parsed?.id === tyre.id) {
+          setCurrentTyre(parsed);
+        }
+      } catch (e) {
+        console.error("Error parsing tyre from localStorage:", e);
+      }
+    }
+  }, [tyre.id]);
+
+  
   return (
     <Form
       id="order-form"
@@ -129,7 +147,8 @@ export function OrderForm({ tyre }: { tyre: CartTyre }){
       <input type="hidden" name="tyreTitle" value={tyre.title} />
       <input type="hidden" name="tyreSize" value={tyre.tyreSize} />
       <input type="hidden" name="tyrePrice" value={tyre.price} />
-      <input type="hidden" name="quantity" value={tyre.quantity} />
+      <input type="hidden" name="tyreImageUrl" value={tyre.tyreImageUrl} />
+      <input type="hidden" name="tyreImageUrl" value={currentTyre.tyreImageUrl} />
 
       <SubmitButton
         pendingText="Надсилання ..."

@@ -1,59 +1,54 @@
 export function getOrderHtml({
-    name,
-    email,
-    tel,
-    deliveryMethod,
-    city,
-    warehouse,
-    comment,
-    productHtml,
+  name,
+  email,
+  tel,
+  deliveryMethod,
+  city,
+  warehouse,
+  comment,
+  productHtml,
 }: {
-    name: string;
-    email: string;
-    tel: string;
-    deliveryMethod: "pickup" | "delivery";
-    city?: string;
-    warehouse?: string;
-    comment?: string;
-    productHtml: string;
+  name: string;
+  email: string;
+  tel: string;
+  deliveryMethod: "pickup" | "delivery";
+  city?: string;
+  warehouse?: string;
+  comment?: string;
+  productHtml: string;
 }) {
-    return `
+  return `
   <!DOCTYPE html>
   <html lang="uk">
   <head>
     <meta charset="UTF-8" />
     <title>Підтвердження замовлення — ShinaMix</title>
   </head>
-  <body style="margin:0;padding:0;background-color:#f9fafb;font-family:Arial,sans-serif;">
-    <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color:#f9fafb;">
+  <body style="margin:0;padding:0;background-color:#ffffff;font-family:Arial,sans-serif;">
+    <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color:#ffffff;>
       <tr>
         <td align="center" style="padding:40px 0;">
-          <table role="presentation" cellpadding="0" cellspacing="0" width="600" style="background-color:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,0.05);">
+          <table role="presentation" cellpadding="0" cellspacing="0" width="600" style="background-color:#ffffff;border-radius:12px;overflow:hidden;">
             
             <!-- Header -->
             <tr>
-              <td style="padding:30px 0;text-align:center;background:#111827;">
-                <div style="width:64px;height:auto;margin:0 auto;">
-                  <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-                  <svg width="64" height="32" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                    <g transform="translate(-9.4983664,-9.4898964)">
-                      <path
-                        d="m 10,10 0.63,80 H 110 V 39 l 20,31 20,-30 v 50 h 20 V 10 H 150 L 130,40 110.33,10 H 90 V 70 H 70 V 30 H 50 V 70 H 30 V 10 L 10.01,9.99 Z"
-                        fill="#4169e1"
-                        stroke="#ffffff"
-                        stroke-opacity="0.1" />
-                    </g>
-                  </svg>
-                </div>
+              <td style="text-align:center;">
+                <div style="text-align:center;margin-bottom:16px;">
+  <img
+  src="https://shinamix.com.ua/favicon.ico"
+   width="32" height="32" alt="ShinaMix"
+   style="vertical-align:middle;margin-right:8px;">
+  <span style="font-size:20px;font-weight:600;color:#4169E1;">ShinaMix</span>
+</div>
               </td>
-            </tr>
+            </tr> 
 
             <!-- Title -->
             <tr>
               <td style="padding:30px 40px 10px 40px;text-align:center;">
-                <h1 style="margin:0;font-size:24px;color:#111827;">Ваше замовлення підтверджено ✅</h1>
+                <h1 style="margin:0;font-size:24px;color:#111827;">Ваше замовлення отримано ✅</h1>
                 <p style="margin-top:10px;font-size:16px;color:#6b7280;">
-                  Дякуємо, <b>${name}</b>! Ми вже готуємо ваше замовлення до відправки.
+                  Дякуємо, <b>${name}</b>! Ми вже обробляємо ваше замовлення
                 </p>
               </td>
             </tr>
@@ -67,16 +62,16 @@ export function getOrderHtml({
                   <tr><td style="padding:6px 0;color:#111827;font-weight:bold;">Телефон:</td><td style="padding:6px 0;color:#374151;text-align:right;">${tel}</td></tr>
                   <tr><td style="padding:6px 0;color:#111827;font-weight:bold;">Доставка:</td><td style="padding:6px 0;color:#374151;text-align:right;">${deliveryMethod === "pickup" ? "Самовивіз" : "Нова Пошта"}</td></tr>
                   ${deliveryMethod === "delivery"
-            ? `
+      ? `
                         <tr><td style="padding:6px 0;color:#111827;font-weight:bold;">Місто:</td><td style="padding:6px 0;color:#374151;text-align:right;">${city}</td></tr>
                         <tr><td style="padding:6px 0;color:#111827;font-weight:bold;">Відділення:</td><td style="padding:6px 0;color:#374151;text-align:right;">${warehouse}</td></tr>
                       `
-            : ""
-        }
+      : ""
+    }
                   ${comment
-            ? `<tr><td style="padding:6px 0;color:#111827;font-weight:bold;">Коментар:</td><td style="padding:6px 0;color:#374151;text-align:right;">${comment}</td></tr>`
-            : ""
-        }
+      ? `<tr><td style="padding:6px 0;color:#111827;font-weight:bold;">Коментар:</td><td style="padding:6px 0;color:#374151;text-align:right;">${comment}</td></tr>`
+      : ""
+    }
                 </table>
               </td>
             </tr>

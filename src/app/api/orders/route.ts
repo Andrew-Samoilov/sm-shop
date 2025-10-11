@@ -19,6 +19,16 @@ export async function POST(req: Request) {
     const tyrePrice = Number(body.tyrePrice);
     const quantity = Number(body.quantity);
 
+    // console.log("BODY RECEIVED:", body);
+
+    if (!Number.isFinite(quantity) || quantity <= 0) {
+      console.error("[PRISMA] Invalid quantity:", body.quantity);
+      return NextResponse.json(
+        { success: false, error: "Invalid quantity" },
+        { status: 400 },
+      );
+    }
+
     if (!name) {
       console.error("[PRISMA] Error: Required field [name] is missing.");
       return NextResponse.json(
@@ -38,7 +48,17 @@ export async function POST(req: Request) {
     // Збереження в БД
     const newOrder = await prisma.order.create({
       data: {
-        name, email, phone, comment, tyreId, tyreTitle, tyreSize, tyrePrice, quantity
+        name,
+        email,
+        phone,
+        comment,
+        tyreTitle,
+        tyreSize,
+        tyrePrice,
+        quantity,
+        tyre: {
+          connect: { id: tyreId },
+        },
       },
     });
 

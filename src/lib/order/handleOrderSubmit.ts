@@ -1,5 +1,6 @@
 import { toast } from "react-toastify";
 import { getOrderHtml, sendEmail, sendGAEvent } from "@/lib";
+import { getProductHtml } from "@/components";
 
 declare global {
   interface Window {
@@ -27,33 +28,47 @@ export async function handleOrderSubmit(formId: string, formData: FormData) {
     const tel = formData.get("order_tel") as string;
     const comment = formData.get('order_comment') as string;
 
-    // Дані про товар з прихованих полів
-    const tyreId = formData.get("tyreId") as string | null;
-    const tyreTitle = formData.get("tyreTitle") as string | null;
-    const tyreSize = formData.get("tyreSize") as string | null;
-    const tyrePrice = formData.get("tyrePrice") as string | null;
-    const quantity = formData.get("quantity") as string | null;
+    // const tyreId = (formData.get("tyreId") as string) ?? "";
+    // const tyreTitle = (formData.get("tyreTitle") as string) ?? "";
+    // const tyreSize = (formData.get("tyreSize") as string) ?? "";
+    // const tyrePrice = (formData.get("tyrePrice") as string) ?? "";
+    // const quantity = Number(formData.get("quantity")) || 777;
+    // formData.set("quantity", String(quantity));
+    // const imageUrl = (formData.get("imageUrl") as string) ?? "";
+
+
+    const savedTyre = localStorage.getItem("tyre");
+    let productData;
+
+    if (savedTyre) {
+      try {
+        productData = JSON.parse(savedTyre);
+        formData.set("tyreId", String(productData.id));
+        formData.set("tyreTitle", productData.title ?? "");
+        formData.set("tyreSize", productData.tyreSize ?? "");
+        formData.set("tyrePrice", String(productData.price ?? ""));
+        formData.set("quantity", String(productData.quantity ?? 1));
+        formData.set("tyreImageUrl", productData.tyreImageUrl ?? "");
+      } catch (err) {
+        console.error("[LocalStorage] Failed to parse tyre:", err);
+      }
+    }
 
     const deliveryMethod = formData.get("delivery_method") as "pickup" | "delivery";
 
     const city = formData.get('delivery_city') as string | undefined;
     const warehouse = formData.get('delivery_warehouse') as string | undefined;
 
-    let productHtml = "";
-    if (tyreId || tyreTitle || tyreSize || tyrePrice || quantity) {
-      productHtml = `
-        <hr/>
-        <b>Дані про товар:</b>
-        <ul>
-          ${tyreId ? `<li><b>ID:</b> ${tyreId}</li>` : ""}
-          ${tyreTitle ? `<li><b>Назва:</b> ${tyreTitle}</li>` : ""}
-          ${tyreSize ? `<li><b>Розмір:</b> ${tyreSize}</li>` : ""}
-          ${tyrePrice ? `<li><b>Ціна:</b> ${tyrePrice} грн</li>` : ""}
-          ${quantity ? `<li><b>Кількість:</b> ${quantity}</li>` : ""}
-        </ul>
-        
-      `;
-    }
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://shinamix.com.ua";
+
+    const productHtml = getProductHtml({
+      tyreId: productData?.id ?? formData.get("tyreId"),
+      tyreTitle: productData?.title ?? formData.get("tyreTitle"),
+      tyreSize: productData?.tyreSize ?? formData.get("tyreSize"),
+      tyrePrice: productData?.price ?? formData.get("tyrePrice"),
+      quantity: productData?.quantity ?? formData.get("quantity"),
+      imageUrl: `${baseUrl}${productData?.tyreImageUrl ?? formData.get("tyreImageUrl")}`,
+    });
 
     const response = await fetch("/api/orders", {
       method: "POST",
