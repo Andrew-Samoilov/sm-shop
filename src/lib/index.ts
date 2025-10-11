@@ -63,3 +63,4 @@ export { generateBrandMetadata } from "./metadata/brand-metadata";
 export { generateBrandJsonLd } from "./json-ld/brand-json-ld";
 export { generateInfoPageMetadata } from "./metadata/generate-info-page-metadata";
 export { formatSearchTitle } from "./format-search-title";
+export { getOrderHtml } from "./order/get-order-html";

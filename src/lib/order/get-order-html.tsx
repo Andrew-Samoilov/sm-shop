@@ -88,15 +88,6 @@ export function getOrderHtml({
               </td>
             </tr>
 
-            <!-- Button -->
-            <tr>
-              <td align="center" style="padding:20px 40px 40px 40px;">
-                <a href="https://shinamix.com.ua/orders" style="background-color:#111827;color:#ffffff;font-size:16px;padding:12px 24px;border-radius:8px;display:inline-block;text-decoration:none;font-weight:bold;">
-                  Переглянути замовлення
-                </a>
-              </td>
-            </tr>
-
             <!-- Footer -->
             <tr>
               <td style="padding:20px;text-align:center;font-size:12px;color:#9ca3af;background:#f3f4f6;">

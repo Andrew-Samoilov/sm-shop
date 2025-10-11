@@ -78,14 +78,16 @@ export function OrderForm({ tyre }: { tyre: CartTyre }){
         />
       </div>
 
-      <div className="flex flex-col w-full gap-2 md:gap-3">
-        <label className="form-label">Спосіб отримання</label>
+      <fieldset className="flex flex-col w-full gap-2 md:gap-3">   
+        <legend className="form-label">Спосіб отримання</legend>
+
         <div className="flex flex-col sm:flex-row gap-4">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="radio"
               name="delivery_method"
               value="pickup"
+              defaultChecked
               required
               className="accent-accent h-4 w-4"
             />
@@ -106,7 +108,7 @@ export function OrderForm({ tyre }: { tyre: CartTyre }){
 
         <DeliverySelect />
         
-      </div>
+      </fieldset >
 
       
       <div className="flex flex-col w-full gap-0 md:gap-2">

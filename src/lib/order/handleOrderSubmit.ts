@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { sendEmail, sendGAEvent } from "@/lib";
+import { getOrderHtml, sendEmail, sendGAEvent } from "@/lib";
 
 declare global {
   interface Window {
@@ -34,9 +34,10 @@ export async function handleOrderSubmit(formId: string, formData: FormData) {
     const tyrePrice = formData.get("tyrePrice") as string | null;
     const quantity = formData.get("quantity") as string | null;
 
-    const deliveryMethod = formData.get('delivery_method');
-    const city = formData.get('delivery_city') as string | null;
-    const warehouse = formData.get('delivery_warehouse') as string | null;
+    const deliveryMethod = formData.get("delivery_method") as "pickup" | "delivery";
+
+    const city = formData.get('delivery_city') as string | undefined;
+    const warehouse = formData.get('delivery_warehouse') as string | undefined;
 
     let productHtml = "";
     if (tyreId || tyreTitle || tyreSize || tyrePrice || quantity) {
@@ -93,6 +94,16 @@ export async function handleOrderSubmit(formId: string, formData: FormData) {
       toast.success("Замовлення успішно надіслано!");
     }
 
+    const orderHtml = getOrderHtml({
+      name,
+      email,
+      tel,
+      deliveryMethod,
+      city,
+      warehouse,
+      comment,
+      productHtml,
+    });
 
     const order = result.data;
     const now = new Date().toLocaleString('uk-UA');
