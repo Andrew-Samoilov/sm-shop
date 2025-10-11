@@ -19,10 +19,6 @@ export function TyreGalleryItem({ tyre, modelImages }: TyreListItemProps) {
 
             <div className="relative w-full  max-w-[293px] overflow-hidden group shrink-0 ">
                 <TyreViewer images={modelImages} season={tyre.model?.season} />
-                {/* <SeasonIcon
-                    season={tyre.season}
-                    className="absolute top-2 left-2 z-99"
-                /> */}
             </div>
 
             <div className=" flex flex-row">

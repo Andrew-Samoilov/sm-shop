@@ -13,7 +13,7 @@ function handleClick(tyre: CartTyre) {
   }
 
   // Отримуємо поточну кількість із localStorage
-  let quantity = tyre.quantity ?? 1;
+  let quantity = tyre.quantity ?? 4;
   try {
     const stored = localStorage.getItem("tyre");
     if (stored) {

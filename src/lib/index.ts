@@ -46,7 +46,7 @@ export { getModelImagesByIds } from "./prisma/get-model-img-by-model-ids";
 export { getSeasonLabel } from "./get-season-label";
 
 export { handleClientSubmit } from "./recaptcha/handleClientSubmit";
-export { handleOrderSubmit } from "./recaptcha/handleOrderSubmit";
+export { handleOrderSubmit } from "./order/handleOrderSubmit";
 export { loadRecaptchaScript } from "./recaptcha/loadRecaptchaScript";
 
 export { sendGAEvent } from "./send-ga-event";

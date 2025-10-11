@@ -50,7 +50,7 @@ export function TyresSelect() {
       profile: searchParams.get("profile") ?? "",
       diameter: searchParams.get("diameter") ?? "",
       seasons: searchParams.getAll("season").filter(s => !!s && s !== "undefined"), 
-      view: searchParams.get("view") === "gallery" ? "gallery" : "list",
+      view: searchParams.get("view") === "list" ? "list" : "gallery",
       sort: searchParams.get("sort") ?? "price_asc",
     });
     setInitialized(true);
@@ -161,11 +161,11 @@ export function TyresSelect() {
 
       {searchTitle.length > 0 && (
         <>
-          <h1 className="text-left pl-3">
+          <h1 className="text-center">
             Пошук: {searchTitle}
           </h1>
 
-          <span className="text-light text-sm hidden md:block pl-3">
+          <span className="text-light text-sm hidden md:block pl-3 text-center">
             {`сортування ${sortLabels[filters.sort] ?? filters.sort}`}
             {` / ${viewLabels[filters.view]}`}
           </span>

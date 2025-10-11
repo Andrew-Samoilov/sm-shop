@@ -152,9 +152,9 @@ model Order {
   email   String?
   comment String?
 
-  deliveryMethod String?   // "pickup" або "delivery"
-  deliveryCity   String?   // назва міста
-  deliveryWarehouse String? // номер або адреса відділення
+  deliveryMethod     String?  @map("delivery_method")
+  deliveryCity       String?  @map("delivery_city")
+  deliveryWarehouse  String?  @map("delivery_warehouse")
 
   status  String?  @default("pending")
 

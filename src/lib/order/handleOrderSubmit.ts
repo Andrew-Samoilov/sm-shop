@@ -54,22 +54,6 @@ export async function handleOrderSubmit(formId: string, formData: FormData) {
       `;
     }
 
-    const orderHtml = `
-      <p>Дякуємо, <b>${name}</b>! Ваше замовлення надіслано. Ми відповімо найближчим часом.</p>
-      <hr/>
-      <ul> 
-        <li><b>Ім'я:</b> ${name}</li>
-        <li><b>Email:</b> ${email}</li>
-        <li><b>Телефон:</b> ${tel}</li>
-
-        <p>Спосіб доставки: ${deliveryMethod === 'pickup' ? 'Самовивіз' : 'Доставка'}</p>
-${deliveryMethod === 'delivery' ? `Місто: ${city}\n Відділення: ${warehouse}` : ''}
-
-       ${comment ? `<li><b>Повідомлення:</b> ${comment}</li>` : ""}
-      </ul>
-      ${productHtml}
-    `;
-
     const response = await fetch("/api/orders", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -86,7 +70,7 @@ ${deliveryMethod === 'delivery' ? `Місто: ${city}\n Відділення: $
 
 
     if (result.success) {
-      const order = result.data; 
+      const order = result.data;
 
       sendGAEvent({
         action: "purchase",
@@ -109,13 +93,13 @@ ${deliveryMethod === 'delivery' ? `Місто: ${city}\n Відділення: $
       toast.success("Замовлення успішно надіслано!");
     }
 
-  
+
     const order = result.data;
     const now = new Date().toLocaleString('uk-UA');
     const subject = `Нове замовлення №${order.id} (${now})`;
 
     sendEmail({
-      to: "valeriy@shinamix.com, webmaster@shinamix.com, ityre03@gmail.com",
+      to: "webmaster@shinamix.com, ityre03@gmail.com",
       subject,
       html: orderHtml,
     });
@@ -130,6 +114,6 @@ ${deliveryMethod === 'delivery' ? `Місто: ${city}\n Відділення: $
     formEl?.reset();
   } catch (error) {
     console.error("[Form] Error while submitting the order:", error);
-    toast.error("Не вдалося зв’язатися із сервером. Перевірте, будь ласка, ваше інтернет‑з’єднання та спробуйте ще раз. / Failed to connect to the server. / Please check your internet connection and try again.");
+    toast.error("Не вдалося зв’язатися із сервером. Спробуйте ще раз. Перевірте, будь ласка, ваше інтернет‑з’єднання та спробуйте ще раз. / Failed to connect to the server. / Please check your internet connection and try again.");
   }
 }
