@@ -18,8 +18,8 @@ export function OptionSelect({ id, label, options, value, onChange }: Props) {
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
                 className="border-2 border-border bg-white dark:bg-darkmode-body rounded-md 
-                px-4 py-2
-                  {/* pl-2 py-1 md:py-2   */}
+               
+                p-1 py-2 md:px-4  
                 focus:ring-2 focus:outline-none"
             >
 

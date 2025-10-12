@@ -149,8 +149,6 @@ export function TyresSelect() {
   const searchTitle = formatSearchTitle(query, filters);
 
   return (
-    // <div className="flex flex-col w-auto  px-1">
-
       <div
         className={
           selectedTyres.length > 0
@@ -179,7 +177,7 @@ export function TyresSelect() {
             className="flex flex-col  gap-0 py-1 md:py-2 md:gap-2 lg:gap-6 w-full mx-auto lg:py-6"
             onSubmit={(e) => e.preventDefault()}
           >
-            <div className="flex flex-wrap gap-4 lg:gap-6 flex-row lg:flex-col justify-center py-4">
+            <div className="flex flex-wrap gap-2 lg:gap-6 flex-row lg:flex-col justify-around md:justify-center py-4">
               <OptionSelect
                 id="width"
                 label="Ширина"
