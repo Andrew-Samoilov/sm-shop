@@ -25,22 +25,20 @@ export function QuantitySelector({ storageKey = 'tyre' }: QuantitySelectorProps)
         }
     }, [storageKey])
 
-    // Оновлення localStorage при зміні quantity
     const updateQuantity = (newQty: number) => {
         setQuantity(newQty)
-        const stored = localStorage.getItem(storageKey)
-        if (stored) {
-            try {
-                const data = JSON.parse(stored)
-                data.quantity = newQty
-                localStorage.setItem(storageKey, JSON.stringify(data))
-            } catch (err) {
-                console.error('Помилка оновлення localStorage:', err)
-            }
+
+        try {
+            const stored = localStorage.getItem(storageKey)
+            const data = stored ? JSON.parse(stored) : {}
+            data.quantity = newQty
+            localStorage.setItem(storageKey, JSON.stringify(data))
+        } catch (err) {
+            console.error('Помилка оновлення localStorage:', err)
         }
-        //відправили подію
         window.dispatchEvent(new CustomEvent('quantityChange', { detail: { newQty, storageKey } }))
     }
+
 
     const increase = () => updateQuantity(quantity + 1)
     const decrease = () => {

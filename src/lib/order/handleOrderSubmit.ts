@@ -28,15 +28,6 @@ export async function handleOrderSubmit(formId: string, formData: FormData) {
     const tel = formData.get("order_tel") as string;
     const comment = formData.get('order_comment') as string;
 
-    // const tyreId = (formData.get("tyreId") as string) ?? "";
-    // const tyreTitle = (formData.get("tyreTitle") as string) ?? "";
-    // const tyreSize = (formData.get("tyreSize") as string) ?? "";
-    // const tyrePrice = (formData.get("tyrePrice") as string) ?? "";
-    // const quantity = Number(formData.get("quantity")) || 777;
-    // formData.set("quantity", String(quantity));
-    // const imageUrl = (formData.get("imageUrl") as string) ?? "";
-
-
     const savedTyre = localStorage.getItem("tyre");
     let productData;
 

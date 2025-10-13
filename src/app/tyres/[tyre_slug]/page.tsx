@@ -165,7 +165,7 @@ export default async function TyrePage(
           <div className="flex flex-col md:flex-row md:items-center border-b pb-2 border-theme-light">
             <div className="flex flex-row md:flex-col gap-2 xl:gap-6 items-center">
 
-              <QuantitySelector />
+              <QuantitySelector storageKey="PageQuantity"/>
 
               <div className="flex items-center gap-2 font-semibold text-h1 leading-none"
               >{tyre.price?.toLocaleString("uk-UA")}
@@ -175,8 +175,6 @@ export default async function TyrePage(
               </div>
 
             </div>
-
-
 
             <AddToCartButton
               tyre={{
@@ -195,11 +193,7 @@ export default async function TyrePage(
             />
           </div>
 
-          {/* <div className="text-light text-h4 text-center border-b border-theme-light">
-            {(tyre.price * 4)?.toLocaleString("uk-UA")} за комплект(4)
-          </div> */}
-
-          <TotalPrice price={tyre.price} storageKey="tyre" />
+          <TotalPrice price={tyre.price} storageKey="PageQuantity" />
 
           <LinkWithGA
             className="flex flex-wrap flex-col md:flex-row justify-center items-center gap-2 lg:gap-6 text-center max-w-full hover:no-underline"
