@@ -170,7 +170,7 @@ export function TyresSelect() {
         </>
       )}
 
-      <div className="flex gap-0 md:gap-2 lg:gap-6 flex-col lg:flex-row container">
+      <div className="flex gap-0 md:gap-2 lg:gap-6 flex-col lg:flex-row ">
         <aside className="gap-0 md:gap-2 lg:gap-6 flex flex-col lg:flex-row w-auto">
           <form
             aria-label="Фільтри пошуку шин"
