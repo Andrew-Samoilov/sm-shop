@@ -32,7 +32,7 @@ export function PopularBrands() {
     return (
         <section className="section flex flex-col items-center ">
             <h2>Популярні бренди:</h2>
-            <div className="flex flex-wrap justify-center gap-6">
+            <div className="flex flex-wrap justify-center gap-2 md:gap-6">
                 {popularBrands.map((b) => (
                     <LinkWithGA
                         key={b.slug}
@@ -46,7 +46,7 @@ export function PopularBrands() {
                             <img
                                 src={b.logo}
                                 alt={b.brand}
-                                className="h-16 w-auto object-contain mb-2"
+                                className="h-16 w-auto max-w-16 lg:max-w-max object-contain mb-2"
                             />
                         )}
                         <span className="text-light group-hover:text-accent transition-colors">

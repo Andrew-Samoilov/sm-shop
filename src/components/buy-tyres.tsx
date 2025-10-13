@@ -3,7 +3,7 @@ import { LinkWithGA } from "@/components";
 export function BuyTyres() {
     return (
         
-        <section className="section  flex flex-col items-center container">
+        <section className="section  flex flex-col items-center container py-6">
             <h2>Купити шини</h2>
             <div className="flex flex-col items-center md:flex-row gap-6 w-full">
                 <LinkWithGA
