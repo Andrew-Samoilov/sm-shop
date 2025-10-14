@@ -7,9 +7,10 @@ import {  getTyreSize, TyreTitle } from "@/lib";
 type TyreListItemProps = {
     tyre: TyreWithRelations;
     modelImages: ModelImage[];
+    isPriority?: boolean;
 };
 
-export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
+export function TyreListItem({ tyre, modelImages, isPriority }: TyreListItemProps) {
     const tyreSize = getTyreSize(tyre);
     // console.log(`[TyreListItem] tyre.season`, tyre.season)
 
@@ -18,7 +19,7 @@ export function TyreListItem({ tyre, modelImages }: TyreListItemProps) {
             href={`/tyres/${tyre.slug}`}
             className="w-full min-w-0 flex flex-1 flex-col md:flex-row justify-between gap-1 p-1 xl:p-6 xl:gap-6 items-center border border-white dark:border-darkmode-body hover:border-accent rounded-lg hover:no-underline">
 
-            <TyreViewer images={modelImages} season={tyre.model?.season}/>
+            <TyreViewer images={modelImages} season={tyre.model?.season} isPriority={isPriority} />
 
             <div 
                 className="flex-2  min-w-0  gap-0 xl:gap-2 flex flex-row md:flex-col ">

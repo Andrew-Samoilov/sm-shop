@@ -7,9 +7,10 @@ import { getTyreSize, TyreTitle } from "@/lib";
 type TyreListItemProps = {
     tyre: TyreWithRelations;
     modelImages: ModelImage[];
+    isPriority?: boolean;
 };
 
-export function TyreGalleryItem({ tyre, modelImages }: TyreListItemProps) {
+export function TyreGalleryItem({ tyre, modelImages, isPriority = false }: TyreListItemProps) {
     const tyreSize = getTyreSize(tyre);
 
     return (
@@ -18,7 +19,7 @@ export function TyreGalleryItem({ tyre, modelImages }: TyreListItemProps) {
             className="z-10 bg-white dark:bg-dark  p-1 flex flex-col h-full  overflow-hidden justify-between items-center gap-1  border border-transparent  rounded-lg  hover:border-accent hover:no-underline">
 
             <div className="relative w-full   overflow-hidden group shrink-0 ">
-                <TyreViewer images={modelImages} season={tyre.model?.season} />
+                <TyreViewer images={modelImages} season={tyre.model?.season} isPriority={isPriority} />
             </div>
 
             <div className=" flex flex-row">
