@@ -7,7 +7,7 @@ export async function generateBrandMetadata(brand_slug: string): Promise<Metadat
     if (!brand) return {};
 
     const title = `${brand.brand_name} – шини, моделі та характеристики`;
-    const description = `Огляд бренду ${brand.brand_name}: країна-виробник, моделі шин, характеристики та наявність у магазині.`;
+    const description = `Шини ${brand.brand_name} — країна-виробник, популярні моделі та характеристики. Купуйте оригінальні шини ${brand.brand_name} з доставкою по Україні у магазині ShinaMix.`;
     const canonicalUrl = `${BASE_URL}/brands/${brand.slug}`;
 
     let logoUrl: string | undefined = undefined;
@@ -43,6 +43,16 @@ export async function generateBrandMetadata(brand_slug: string): Promise<Metadat
         },
         alternates: {
             canonical: canonicalUrl,
+        },
+        other: {
+            "application/ld+json": JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Brand",
+                name: brand.brand_name,
+                url: canonicalUrl,
+                logo: logoUrl,
+                description,
+            }),
         },
     };
 }

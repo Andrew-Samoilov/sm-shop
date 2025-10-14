@@ -40,9 +40,6 @@ export function TyresSelect() {
   const [selectedTyres, setSelectedTyres] = useState<TyreWithRelations[]>([]);
   const [images, setImages] = useState<ModelImage[]>([]);
   const [initialized, setInitialized] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [hasSearched, setHasSearched] = useState(false); // чи вже був хоча б один реальний запит
-
 
   const query = searchParams.get("query") ?? "";
 
@@ -102,17 +99,11 @@ export function TyresSelect() {
 
     const isEmpty =
       !width && !profile && !diameter && seasons.length === 0 && !query;
-
     if (isEmpty) {
-      // Коли жодного фільтра — чистимо список, не показуємо "не знайдено"
       setSelectedTyres([]);
       setImages([]);
-      setHasSearched(false);
-      setLoading(false);
       return;
     }
-
-    setLoading(true);
 
     const params = new URLSearchParams();
     if (width) params.set("width", width);
@@ -127,18 +118,13 @@ export function TyresSelect() {
       .then((data) => {
         setSelectedTyres(Array.isArray(data?.tyres) ? data.tyres : []);
         setImages(Array.isArray(data?.images) ? data.images : []);
-        setHasSearched(true);
       })
       .catch((error) => {
         console.error("[Tyres Select] fetch error:", error);
         setSelectedTyres([]);
         setImages([]);
-        setHasSearched(true);
-      })
-      .finally(() => setLoading(false));
+      });
   }, [filters, query]);
-
-
 
   const updateFilter = <K extends keyof FilterState>(
     key: K,
@@ -173,7 +159,7 @@ export function TyresSelect() {
 
       {searchTitle.length > 0 && (
         <>
-          <h1 className="text-h3 lg:text-h1 text-center">
+          <h1 className="text-center">
             Пошук: {searchTitle}
           </h1>
 
@@ -188,10 +174,10 @@ export function TyresSelect() {
         <aside className="gap-0 md:gap-2 lg:gap-6 flex flex-col lg:flex-row w-auto">
           <form
             aria-label="Фільтри пошуку шин"
-            className="flex flex-col  gap-0 py-0 md:py-2 md:gap-2 lg:gap-6 w-full mx-auto lg:py-6"
+            className="flex flex-col  gap-0 py-1 md:py-2 md:gap-2 lg:gap-6 w-full mx-auto lg:py-6"
             onSubmit={(e) => e.preventDefault()}
           >
-            <div className="flex flex-wrap gap-2 lg:gap-6 flex-row lg:flex-col justify-around md:justify-center md:py-2">
+            <div className="flex flex-wrap gap-2 lg:gap-6 flex-row lg:flex-col justify-around md:justify-center py-4">
               <OptionSelect
                 id="width"
                 label="Ширина"
@@ -224,16 +210,7 @@ export function TyresSelect() {
           </form>
         </aside>
 
-        {loading ? (
-          <div className="py-10 text-center text-gray-500">Завантаження...</div>
-        ) : hasSearched && selectedTyres.length === 0 ? (
-          <div className="py-10 text-center text-gray-500">
-            <p className="text-lg font-medium">Шини не знайдено</p>
-            <p className="text-sm text-gray-400">
-              Спробуйте змінити параметри фільтру або пошуку.
-            </p>
-          </div>
-        ) : selectedTyres.length > 0 ? (
+        {selectedTyres.length > 0 ? (
           <div className="mx-auto">
             <ListHeader
               view={filters.view}
@@ -243,10 +220,9 @@ export function TyresSelect() {
             />
             <TyresList tyres={selectedTyres} images={images} view={filters.view} />
           </div>
-        ) : (
-          <EmptyPlaceholder />
+        ):(
+        <EmptyPlaceholder/>
         )}
-
       </div>
     </div>
   );

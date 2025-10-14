@@ -10,26 +10,24 @@ type Props = {
 export function TotalPrice({ price, storageKey = 'tyre' }: Props) {
     const [quantity, setQuantity] = useState<number>(4)
 
-    // Зчитує кількість із localStorage
     useEffect(() => {
         const load = () => {
             const stored = localStorage.getItem(storageKey)
             if (stored) {
-                try {
-                    const data = JSON.parse(stored)
-                    if (typeof data.quantity === 'number') {
-                        setQuantity(data.quantity)
-                    }
-                } catch { }
+                const num = Number(stored)
+                if (!isNaN(num)) setQuantity(num)
             }
         }
 
         load()
 
-        // ✅ Слухаємо подію з QuantitySelector
+
+        // ✅ слухаємо подію з QuantitySelector
         const handler = (e: Event) => {
             const custom = e as CustomEvent<{ newQty: number; storageKey: string }>
-            if (custom.detail.storageKey === storageKey) setQuantity(custom.detail.newQty)
+            if (custom.detail.storageKey === storageKey) {
+                setQuantity(custom.detail.newQty)
+            }
         }
 
         window.addEventListener('quantityChange', handler)

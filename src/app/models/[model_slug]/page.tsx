@@ -19,6 +19,7 @@ export async function generateStaticParams() {
 //   return generateModelMetadata(params.brand_slug);
 // }
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://shinamix.com.ua";
+
 export async function generateMetadata(
   { params }: { params: { model_slug: string } }
 ): Promise<Metadata> {

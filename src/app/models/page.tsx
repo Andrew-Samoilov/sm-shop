@@ -1,4 +1,4 @@
-import { getModels } from "@/lib";
+import { getBaseMetadata, getModels } from "@/lib";
 import { Brand, Model } from "@prisma/client";
 import Link from "next/link";
 import Image from "next/image";
@@ -6,6 +6,19 @@ import Image from "next/image";
 export const dynamic = "force-static";
 
 type ModelWithBrand = Model & { brand: Brand | null };
+
+export async function generateMetadata() {
+  return getBaseMetadata({
+    title: "Моделі автошин",
+    description:
+      "Популярні моделі шин у магазині ShinaMix — зимові, літні та всесезонні. Оберіть оптимальний варіант для свого авто та замовте онлайн з доставкою по Україні.",
+    openGraph: {
+      title: "Моделі шин — ShinaMix",
+      description:
+        "Каталог моделей автошин у магазині ShinaMix. Вигідні ціни, швидка доставка по Києву та Україні, офіційна гарантія.",
+    },
+  });
+}
 
 export default async function ModelsPage() {
   const models: ModelWithBrand[] = await getModels();

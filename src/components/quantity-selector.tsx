@@ -14,29 +14,14 @@ export function QuantitySelector({ storageKey = 'tyre' }: QuantitySelectorProps)
         if (typeof window === 'undefined') return
         const stored = localStorage.getItem(storageKey)
         if (stored) {
-            try {
-                const data = JSON.parse(stored)
-                if (typeof data.quantity === 'number') {
-                    setQuantity(data.quantity)
-                }
-            } catch (err) {
-                console.error('Помилка читання з localStorage:', err)
-            }
+            const num = Number(stored)
+            if (!isNaN(num)) setQuantity(num)
         }
     }, [storageKey])
 
     const updateQuantity = (newQty: number) => {
         setQuantity(newQty)
-
-        try {
-            const stored = localStorage.getItem(storageKey)
-            const data = stored ? JSON.parse(stored) : {}
-            data.quantity = newQty
-            localStorage.setItem(storageKey, JSON.stringify(data))
-        } catch (err) {
-            console.error('Помилка оновлення localStorage:', err)
-        }
-        window.dispatchEvent(new CustomEvent('quantityChange', { detail: { newQty, storageKey } }))
+        localStorage.setItem(storageKey, String(newQty)) // <--- просто число
     }
 
 

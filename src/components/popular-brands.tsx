@@ -46,7 +46,7 @@ export function PopularBrands() {
                             <img
                                 src={b.logo}
                                 alt={b.brand}
-                                className="h-16 w-auto max-w-16 lg:max-w-max object-contain mb-2"
+                                className="h-16 lg:h-24 w-auto max-w-16 lg:max-w-max object-contain mb-2"
                             />
                         )}
                         <span className="text-light group-hover:text-accent transition-colors">

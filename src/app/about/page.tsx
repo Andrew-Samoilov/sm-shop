@@ -1,8 +1,20 @@
 import { BenefitsSection, FeatureSection, CertificatesClient, BuyTyres, PopularSizes,  PopularBrands } from "@/components";
-import { getContentBlock } from "@/lib";
+import { getBaseMetadata, getContentBlock } from "@/lib";
 import { Certificate } from '@/types'
 
 const cert = await getContentBlock<Certificate[]>('certificates', [])
+export async function generateMetadata() {
+  return getBaseMetadata({
+    title: "Про компанію ShinaMix",
+    description:
+      "ShinaMix — українська компанія з багаторічним досвідом у продажу автошин. Ми працюємо лише з перевіреними брендами, гарантуємо якість, чесні ціни та швидку доставку по всій Україні.",
+    openGraph: {
+      title: "Про нас — ShinaMix",
+      description:
+        "Дізнайтесь більше про компанію ShinaMix: історію, принципи роботи та сервіс. Ми цінуємо довіру клієнтів і пропонуємо тільки якісні шини.",
+    },
+  });
+}
 
 // console.log(`[AboutPage]`,brandsSection) 
 
