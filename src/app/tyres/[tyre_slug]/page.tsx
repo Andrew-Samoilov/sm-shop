@@ -61,6 +61,7 @@ export default async function TyrePage(
   // console.info("[TyrePage]", cert);
 
   const tyreSize = getTyreSize(tyre);
+  const quantity = Math.min(tyre.inventoryQuantity ?? 0, 20);
 
   const productJsonLd = buildProductJsonLd(tyre, images);
   const breadcrumbs = [
@@ -77,6 +78,7 @@ export default async function TyrePage(
     { name: tyre.title, url: `/tyres/${tyre.slug}` },
   ];
   const breadcrumbsJsonLd = buildBreadcrumbsJsonLd(breadcrumbs);
+
   return (
     <article >
       <BreadCrumbs tyreSlug={tyre_slug} />
@@ -162,10 +164,14 @@ export default async function TyrePage(
             &nbsp;{tyre.loadIndex}
           </div>
 
+          <div>Кількість: {quantity}</div>
+
           <div className="flex flex-col md:flex-row md:items-center border-b pb-2 border-theme-light">
             <div className="flex flex-row md:flex-col gap-2 xl:gap-6 items-center">
 
-              <QuantitySelector storageKey="pageQuantity"/>
+
+
+              <QuantitySelector storageKey="pageQuantity" />
 
               <div className="flex items-center gap-2 font-semibold text-h1 leading-none"
               >{tyre.price?.toLocaleString("uk-UA")}
