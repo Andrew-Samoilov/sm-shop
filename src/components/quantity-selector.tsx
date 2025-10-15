@@ -3,15 +3,16 @@
 import { useEffect, useState } from 'react'
 
 type QuantitySelectorProps = {
-    storageKey?: string // за замовчуванням 'tyre'
+    storageKey?: string
 }
 
 export function QuantitySelector({ storageKey = 'tyre' }: QuantitySelectorProps) {
     const [quantity, setQuantity] = useState<number>(4)
 
-    // Завантаження початкового значення з localStorage
+    // Зчитуємо з localStorage при завантаженні
     useEffect(() => {
         if (typeof window === 'undefined') return
+
         const stored = localStorage.getItem(storageKey)
         if (stored) {
             const num = Number(stored)
@@ -19,39 +20,28 @@ export function QuantitySelector({ storageKey = 'tyre' }: QuantitySelectorProps)
         }
     }, [storageKey])
 
+    // Записуємо просто число
     const updateQuantity = (newQty: number) => {
         setQuantity(newQty)
-        localStorage.setItem(storageKey, String(newQty)) // <--- просто число
-    }
-
-
-    const increase = () => updateQuantity(quantity + 1)
-    const decrease = () => {
-        if (quantity > 1) updateQuantity(quantity - 1)
+        localStorage.setItem(storageKey, String(newQty))
     }
 
     return (
-        <fieldset
-            className="inline-flex items-center border border-theme-light dark:border-theme-dark rounded px-2"
-            role="group"
-            aria-label="Кількість товару">
-            
-            <legend className="sr-only">Кількість товару</legend>
-
+        <fieldset className="inline-flex items-center border border-theme-light dark:border-theme-dark rounded px-2">
             <button
                 type="button"
-                onClick={decrease}
-                className="text-xl px-2 py-1"
-                aria-label="Зменшити кількість"
+                className="px-2 text-lg select-none"
+                onClick={() => updateQuantity(quantity - 1)}
             >
                 −
             </button>
+
             <span className="mx-2 min-w-[2ch] text-center">{quantity}</span>
+
             <button
                 type="button"
-                onClick={increase}
-                className="text-xl px-2 py-1"
-                aria-label="Збільшити кількість"
+                className="px-2 text-lg select-none"
+                onClick={() => updateQuantity(quantity + 1)}
             >
                 +
             </button>

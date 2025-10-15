@@ -7,11 +7,11 @@ type Props = {
     storageKey?: string
 }
 
-export function TotalPrice({ price, storageKey = 'tyre' }: Props) {
+export function TotalPrice({ price, storageKey = 'page-quantity' }: Props) {
     const [quantity, setQuantity] = useState<number>(4)
 
     useEffect(() => {
-        const load = () => {
+        const update = () => {
             const stored = localStorage.getItem(storageKey)
             if (stored) {
                 const num = Number(stored)
@@ -19,10 +19,10 @@ export function TotalPrice({ price, storageKey = 'tyre' }: Props) {
             }
         }
 
-        load()
+        // початкове зчитування
+        update()
 
-
-        // ✅ слухаємо подію з QuantitySelector
+        // слухач події від QuantitySelector
         const handler = (e: Event) => {
             const custom = e as CustomEvent<{ newQty: number; storageKey: string }>
             if (custom.detail.storageKey === storageKey) {
@@ -34,11 +34,9 @@ export function TotalPrice({ price, storageKey = 'tyre' }: Props) {
         return () => window.removeEventListener('quantityChange', handler)
     }, [storageKey])
 
-    const total = price * quantity
-
     return (
         <div className="text-center text-h4 text-light border-b border-theme-light">
-            {total.toLocaleString('uk-UA')} за комплект ({quantity})
+            {(price * quantity).toLocaleString('uk-UA')} грн за комплект ({quantity})
         </div>
     )
 }

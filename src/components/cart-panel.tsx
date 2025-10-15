@@ -111,8 +111,12 @@ export function CartPanel() {
                   </div>
 
                   <div className="flex flex-betwen items-center gap-4">
-                    <QuantitySelector />
-                    <span >{CartTyre.price.toLocaleString("uk-UA")} грн.</span>
+                    <QuantitySelector storageKey="cart-quantity"/>
+                    <span>
+                      {CartTyre?.price != null
+                        ? `${CartTyre.price.toLocaleString("uk-UA")} грн.`
+                        : "Ціну уточнюйте"}
+                    </span>
                   </div>
                 </div>
               ) : (
