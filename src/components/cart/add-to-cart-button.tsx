@@ -4,7 +4,7 @@ import { sendGAEvent } from "@/lib";
 import { CartTyre } from "@/types";
 
 const openCart = () => {
-  window.dispatchEvent(new Event("open-cart"));
+  globalThis.dispatchEvent(new Event("open-cart"));
 };
 
 function handleClick(tyre: CartTyre) {

@@ -1,4 +1,4 @@
-export { AddToCartButton } from "./add-to-cart-button"
+
 export { SubmitButton } from "./submit-button"
 export { Analytics } from "./analytics"
 export { BenefitsSection } from "./benefits-section"
@@ -6,7 +6,11 @@ export { BreadCrumbs } from "./bread-crumbs"
 
 export { MobileMenu } from "./mobile-menu"
 
-export { CartPanel } from "./cart-panel"
+export { CartPanel } from "./cart/cart-panel"
+export { AddToCartButton } from "./cart/add-to-cart-button"
+export { RemoveFromCartButton } from "./cart/remove-from-cart-button"
+
+
 export { ContactForm } from "./contact-form"
 export { OrderForm } from "./order-form"
 export { QuantitySelector } from "./quantity-selector"

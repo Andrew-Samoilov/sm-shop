@@ -5,7 +5,7 @@ import { ShoppingCartIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { sendGAEvent } from "@/lib";
 import { CartTyre } from "@/types";
 import Image from "next/image";
-import { OrderForm, QuantitySelector } from "@/components";
+import { OrderForm, QuantitySelector, RemoveFromCartButton } from "@/components";
 import { createPortal } from "react-dom";
 
 export function CartPanel() {
@@ -14,7 +14,7 @@ export function CartPanel() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof globalThis !== "undefined") {
       const storedTyre = localStorage.getItem("tyre");
       if (storedTyre) {
         setCartTyre(JSON.parse(storedTyre));
@@ -45,8 +45,8 @@ export function CartPanel() {
 
   useEffect(() => {
     const openCart = () => setIsOpen(true);
-    window.addEventListener("open-cart", openCart);
-    return () => window.removeEventListener("open-cart", openCart);
+    globalThis.addEventListener("open-cart", openCart);
+    return () => globalThis.removeEventListener("open-cart", openCart);
   }, []);
 
   return (
@@ -98,11 +98,12 @@ export function CartPanel() {
                     <Image
                       src={CartTyre.tyreImageUrl}
                       alt={CartTyre.title}
-                      width={160}
-                      height={160}
-                      className="rounded-md"
+                      width={300}
+                      height={300}
+                      className="top-5 rounded-md max-w-full h-auto object-contain"
                     />
                   )}
+
 
                   <div className="flex flex-col ">
                     <p className="text-h4">{CartTyre.brand}</p>
@@ -110,15 +111,28 @@ export function CartPanel() {
                     <p>{CartTyre.tyreSize}</p>
                   </div>
 
-                  <div className="flex flex-betwen items-center gap-4">
-                    <QuantitySelector storageKey="cart-quantity"/>
+                  <div className="flex items-center gap-4 pt-2">
+                    <QuantitySelector storageKey="cart-quantity" />
                     <span>
-                      {CartTyre?.price != null
-                        ? `${CartTyre.price.toLocaleString("uk-UA")} грн.`
-                        : "Ціну уточнюйте"}
+                      {CartTyre?.price == null
+                        ? "Ціну уточнюйте"
+                        : `${CartTyre.price.toLocaleString("uk-UA")} грн.`}
+
                     </span>
+                    
+                    <RemoveFromCartButton
+                      tyre={CartTyre}
+                      onRemoved={() => {
+                        setCartTyre(null);
+                        setIsOpen(false);
+                      }}
+                    />
+
+
                   </div>
+
                 </div>
+
               ) : (
                 <p>Кошик порожній</p>
               )}
