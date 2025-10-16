@@ -122,8 +122,10 @@ export function TyresSelect() {
     params.set("sort", sort);
     if (query) params.set("query", query);
 
-    // кеш на 3 години. після білду оновлюється
-    fetch(`/api/tyres?${params.toString()}`)
+
+    fetch(`/api/tyres?${params.toString()}`, {
+      next: { revalidate: 10800, tags: [`tyres-${params.toString()}`] },
+    })
       .then((res) => res.json())
       .then((data) => {
         setSelectedTyres(Array.isArray(data?.tyres) ? data.tyres : []);

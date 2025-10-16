@@ -2,8 +2,6 @@ import { prisma } from "@/lib";
 import { Prisma, season } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server"
 
-export const dynamic = "force-static";
-
 function getOrderBy(sort: string): Prisma.TyreOrderByWithRelationInput {
   switch (sort) {
     case "title_asc":
@@ -18,8 +16,6 @@ function getOrderBy(sort: string): Prisma.TyreOrderByWithRelationInput {
       return { title: "asc" };
   }
 }
-
-export const revalidate = 10800;
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);

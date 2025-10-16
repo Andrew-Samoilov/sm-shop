@@ -30,7 +30,8 @@ export function QuantitySelector({ storageKey = 'tyre' }: QuantitySelectorProps)
         <fieldset className="inline-flex items-center border border-theme-light dark:border-theme-dark rounded px-2">
             <button
                 type="button"
-                className="px-2 text-lg select-none"
+                className="px-2 text-lg select-none
+                disabled:opacity-30 disabled:cursor-not-allowed"
                 disabled={quantity <= 1}
                 onClick={() => updateQuantity(quantity - 1)}
             >
