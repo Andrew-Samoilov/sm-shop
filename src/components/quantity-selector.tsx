@@ -31,6 +31,7 @@ export function QuantitySelector({ storageKey = 'tyre' }: QuantitySelectorProps)
             <button
                 type="button"
                 className="px-2 text-lg select-none"
+                disabled={quantity <= 1}
                 onClick={() => updateQuantity(quantity - 1)}
             >
                 −

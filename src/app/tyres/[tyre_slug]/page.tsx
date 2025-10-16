@@ -1,6 +1,6 @@
 export const dynamic = "force-static";
 
-import { AddToCartButton, BreadCrumbs, CertificatesClient, LinkWithGA, ModelViewer, QuantitySelector, SeasonIcon,  TotalPrice,  ViewItemGA } from "@/components";
+import { AddToCartButton, BreadCrumbs, CertificatesClient, LinkWithGA, ModelViewer, QuantitySelector, SeasonIcon, TotalPrice, ViewItemGA } from "@/components";
 import { getTyreBySlug, getModelImgByModelId, prisma, getContentBlock, getTyreSize, getSeasonLabel, generateTyreMetadata, buildProductJsonLd, buildBreadcrumbsJsonLd, JsonLd, } from "@/lib";
 import { Certificate } from "@/types";
 import { Metadata } from "next";
@@ -47,7 +47,8 @@ export default async function TyrePage(
     notFound();
   }
 
-  const images = tyre.modelId !== null ? await getModelImgByModelId(tyre.modelId) : [];
+  const images = tyre.modelId === null ? [] : await getModelImgByModelId(tyre.modelId);
+
   const cert = await getContentBlock<Certificate[]>('certificates', []);
   const filteredCerts = tyre.brand
     ? cert.filter(
@@ -198,7 +199,7 @@ export default async function TyrePage(
             />
           </div>
 
-          
+
           <TotalPrice price={tyre.price} storageKey="page-quantity" />
 
           <LinkWithGA

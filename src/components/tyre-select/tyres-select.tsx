@@ -122,6 +122,7 @@ export function TyresSelect() {
     params.set("sort", sort);
     if (query) params.set("query", query);
 
+    // кеш на 3 години. після білду оновлюється
     fetch(`/api/tyres?${params.toString()}`)
       .then((res) => res.json())
       .then((data) => {
@@ -188,6 +189,7 @@ export function TyresSelect() {
         <aside className="gap-0 md:gap-2 lg:gap-6 flex flex-col lg:flex-row w-auto">
           <form
             aria-label="Фільтри пошуку шин"
+            method="get"
             className="flex flex-col  gap-0 py-0 md:py-2 md:gap-2 lg:gap-6 w-full mx-auto lg:py-6"
             onSubmit={(e) => e.preventDefault()}
           >
