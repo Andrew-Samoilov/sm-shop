@@ -39,8 +39,6 @@ export default async function TyrePage(
 
   const tyre = await getTyreBySlug(tyre_slug);
 
-  // console.log('[TyrePage]', tyre);
-
   if (!tyre) return notFound();
 
   if (tyre.inventoryQuantity === 0) {
@@ -62,7 +60,7 @@ export default async function TyrePage(
   // console.info("[TyrePage]", cert);
 
   const tyreSize = getTyreSize(tyre);
-  const quantity = Math.min(tyre.inventoryQuantity ?? 0, 20);
+  const quantity = Math.min(4, tyre.inventoryQuantity ?? 4);
 
   const productJsonLd = buildProductJsonLd(tyre, images);
   const breadcrumbs = [
@@ -194,7 +192,7 @@ export default async function TyrePage(
                 tyreSize: tyreSize ?? "",
                 tyreImageUrl: images[0]?.url ?? "",
                 price: tyre.price,
-                quantity: 4,
+                quantity
               }}
               className="btn btn-lg btn-accent max-w-xs mx-auto 
             fixed bottom-2 left-2 right-2 z-10
