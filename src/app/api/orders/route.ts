@@ -1,78 +1,91 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/lib";
 
-const prisma = new PrismaClient();
+interface TyreItem {
+  id: number;
+  title: string;
+  tyreSize?: string;
+  price: number;
+  quantity?: number;
+}
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    // console.info("[PRISMA] incoming data:", body);
 
-    // Переконуємось, що всі необхідні поля є
-    const name = body.order_name?.trim();
-    const email = body.order_email?.trim() || null;
-    const phone = body.order_tel?.trim() ?? null;
-    const comment = body.order_comment?.trim() || null; ;
-    const tyreId = Number(body.tyreId);
-    const tyreTitle = body.tyreTitle;
-    const tyreSize = body.tyreSize;
-    const tyrePrice = Number(body.tyrePrice);
-    const quantity = Number(body.quantity);
+    // ✅ 1. базова перевірка
+    if (!Array.isArray(body.tyres) || body.tyres.length === 0) {
+      return NextResponse.json({ error: "No tyres provided" }, { status: 400 });
+    }
 
-    // console.log("BODY RECEIVED:", body);
-
-    if (!Number.isFinite(quantity) || quantity <= 0) {
-      console.error("[PRISMA] Invalid quantity:", body.quantity);
+    if (!body.customerName || !body.customerTel) {
       return NextResponse.json(
-        { success: false, error: "Invalid quantity" },
-        { status: 400 },
+        { error: "Missing required fields" },
+        { status: 400 }
       );
     }
 
-    if (!name) {
-      console.error("[PRISMA] Error: Required field [name] is missing.");
-      return NextResponse.json(
-        { success: false, error: "Please enter your name." },
-        { status: 400 },
-      );
+    // ✅ 2. (опціонально) перевірка reCAPTCHA
+    if (body.recaptcha) {
+      try {
+        const verify = await fetch(
+          "https://www.google.com/recaptcha/api/siteverify",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${body.recaptcha}`,
+          }
+        ).then((r) => r.json());
+
+        if (!verify.success) {
+          return NextResponse.json(
+            { error: "reCAPTCHA verification failed" },
+            { status: 403 }
+          );
+        }
+      } catch (err) {
+        console.error("[reCAPTCHA]", err);
+      }
     }
 
-    if (!phone) {
-      console.error("[PRISMA] Error: Required field [phone] is missing.");
-      return NextResponse.json(
-        { success: false, error: "Please enter your phone number." },
-        { status: 400 },
-      );
-    }
+    console.log("[API][orders] incoming tyres:", body.tyres);
 
-    // Збереження в БД
-    const newOrder = await prisma.order.create({
+    const order = await prisma.order.create({
       data: {
-        name,
-        email,
-        phone,
-        comment,
-        tyreTitle,
-        tyreSize,
-        tyrePrice,
-        quantity,
-        tyre: {
-          connect: { id: tyreId },
+        name: body.customerName,
+        phone: body.customerTel,
+        email: body.customerEmail,
+        comment: body.customerComment ?? null,
+        deliveryMethod: body.deliveryMethod ?? "delivery",
+        deliveryCity: body.city ?? null,
+        deliveryWarehouse: body.warehouse ?? null,
+
+        items: {
+          create: body.tyres.map((t: TyreItem) => ({
+            // 👇 ключовий момент
+            tyre: {
+              connect: {
+                id: Number(t.id),
+              },
+            },
+            tyreTitle: t.title,
+            tyreSize: t.tyreSize,
+            tyrePrice: Number(t.price),
+            quantity: Number(t.quantity),
+          })),
         },
       },
+      include: { items: true },
     });
 
 
-    if (process.env.NODE_ENV === "development") {
-      console.info("[PRISMA] Order saved:", newOrder);
-    }
 
-    return NextResponse.json({ success: true, data: newOrder });
-  } catch (error) {
-    console.error("[PRISMA] Error in API:", error);
-    return NextResponse.json(
-      { success: false, error: "An error occurred on the server. Please try again later or contact us at webmaster@shinamix.com" },
-      { status: 500 },
-    );
+    console.log(`[ORDER CREATED] id=${order.id}, items=${order.items.length}`);
+
+    // ✅ 4. повертаємо результат
+    return NextResponse.json({ success: true, order });
+  } catch (err) {
+    console.error("[API/ORDERS] Error:", err);
+    return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }

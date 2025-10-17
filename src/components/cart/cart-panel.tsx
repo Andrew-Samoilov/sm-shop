@@ -5,68 +5,91 @@ import { ShoppingCartIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { sendGAEvent } from "@/lib";
 import { CartTyre } from "@/types";
 import Image from "next/image";
-import { OrderForm, QuantitySelector, RemoveFromCartButton } from "@/components";
+import { OrderForm, RemoveFromCartButton } from "@/components";
 import { createPortal } from "react-dom";
 
 export function CartPanel() {
   const [isOpen, setIsOpen] = useState(false);
-  const [CartTyre, setCartTyre] = useState<CartTyre | null>(null);
-  const [mounted, setMounted] = useState(false);
+  // const [CartTyre, setCartTyre] = useState<CartTyre | null>(null);
+  const [cartItems, setCartItems] = useState<CartTyre[]>([]);
+
 
   useEffect(() => {
     if (typeof globalThis !== "undefined") {
-      const storedTyre = localStorage.getItem("tyre");
-      if (storedTyre) {
-        setCartTyre(JSON.parse(storedTyre));
+      const stored = localStorage.getItem("tyres");
+      localStorage.removeItem("tyre");
+      if (stored) {
+        try {
+          setCartItems(JSON.parse(stored));
+        } catch {
+          setCartItems([]);
+        }
       }
-      setMounted(true);
     }
   }, []);
 
+
+
+  //аналітика
   useEffect(() => {
-    if (isOpen && CartTyre) {
+    if (isOpen && cartItems.length > 0) {
       sendGAEvent({
         action: "view_cart",
         params: {
           currency: "UAH",
           debug_mode: true,
-          items: [
-            {
-              item_id: CartTyre.id.toString(),
-              item_name: CartTyre.title,
-              price: CartTyre.price,
-              quantity: CartTyre.quantity,
-            },
-          ],
+          items: cartItems.map((item) => ({
+            item_id: item.id.toString(),
+            item_name: item.title,
+            price: item.price,
+            quantity: item.quantity,
+          })),
         },
       });
     }
-  }, [isOpen, CartTyre]);
+  }, [isOpen, cartItems]);
+
 
   useEffect(() => {
-    const openCart = () => setIsOpen(true);
+    const openCart = () => {
+      try {
+        const stored = localStorage.getItem("tyres");
+        if (stored) {
+          setCartItems(JSON.parse(stored));
+        } else {
+          setCartItems([]);
+        }
+      } catch {
+        setCartItems([]);
+      }
+      setIsOpen(true);
+    };
+
     globalThis.addEventListener("open-cart", openCart);
     return () => globalThis.removeEventListener("open-cart", openCart);
   }, []);
+
+
 
   return (
     <div>
 
       {/* Кнопка відкриття */}
       <button
-        onClick={() => CartTyre && setIsOpen(true)}
+        onClick={() => setIsOpen(true)}
         className="cursor-pointer disabled:cursor-not-allowed flex items-center justify-center"
-        disabled={!CartTyre}
-        title={CartTyre ? "Відкрити кошик" : "Кошик порожній"}
-        aria-label={CartTyre ? "Відкрити кошик" : "Кошик порожній"}
+        disabled={cartItems.length === 0}
+        title={cartItems.length > 0 ? "Відкрити кошик" : "Кошик порожній"}
+        aria-label={cartItems.length > 0 ? "Відкрити кошик" : "Кошик порожній"}
       >
         <ShoppingCartIcon
-          className={`h-5 w-5 transition-colors 
-            ${CartTyre ? "text-accent" : "text-gray-400"}`}
+          className={`h-5 w-5 transition-colors ${cartItems.length > 0 ? "text-accent" : "text-gray-400"
+            }`}
         />
       </button>
 
-      {mounted && isOpen && (
+      {isOpen &&
+        typeof document !== "undefined" &&
         createPortal(
           <aside
             id="cart-panel"
@@ -80,9 +103,8 @@ export function CartPanel() {
             flex items-center justify-between border-b border-theme-light">
               <h2 className="text-lg font-semibold">Кошик</h2>
               <button
-                onClick={() => CartTyre && setIsOpen(false)}
+                onClick={() => setIsOpen(false)}
                 className="cursor-pointer disabled:cursor-not-allowed"
-                disabled={!CartTyre}
                 aria-label="Закрити кошик"
               >
                 <XMarkIcon className=" h-6 w-6 cursor-pointer" />
@@ -91,69 +113,78 @@ export function CartPanel() {
 
             {/* Контент кошика */}
             <div className="container  w-full mx-auto flex-1  p-2 md:p-4 lg:p-6">
-              {CartTyre ? (
-                <div className=" mx-auto  flex flex-col  md:flex-row gap-2 lg:gap-6 items-center justify-between ">
 
-                  {CartTyre.tyreImageUrl && (
-                    <Image
-                      src={CartTyre.tyreImageUrl}
-                      alt={CartTyre.title}
-                      width={300}
-                      height={300}
-                      className="top-5 rounded-md max-w-full h-auto object-contain"
-                    />
-                  )}
-
-
-                  <div className="flex flex-col ">
-                    <p className="text-h4">{CartTyre.brand}</p>
-                    <p className="text-h3">{CartTyre.model}</p>
-                    <p>{CartTyre.tyreSize}</p>
-                  </div>
-
-                  <div className="flex items-center gap-4 pt-2">
-                    <QuantitySelector storageKey="cart-quantity" />
-                    <span>
-                      {CartTyre?.price == null
-                        ? "Ціну уточнюйте"
-                        : `${CartTyre.price.toLocaleString("uk-UA")} грн.`}
-
-                    </span>
-                    
-                    <RemoveFromCartButton
-                      tyre={CartTyre}
-                      onRemoved={() => {
-                        setCartTyre(null);
-                        setIsOpen(false);
-                      }}
-                    />
-
-
-                  </div>
-
-                </div>
-
-              ) : (
+              {cartItems.length === 0 ? (
                 <p>Кошик порожній</p>
+              ) : (
+                <div className="flex flex-col gap-4 container lg:px-20">
+                  {cartItems.map((item) => (
+                    <div
+                      key={item.id}
+                      className="flex flex-Dcol md:flex-row gap-4 items-center justify-between border-b border-theme-light pb-2"
+                    >
+                      {item.tyreImageUrl && (
+                        <Image
+                          src={item.tyreImageUrl}
+                          alt={item.title}
+                          width={60}
+                          height={60}
+                          className="rounded-md object-contain h-20 md:h-24 w-auto"
+                        />
+                      )}
+                      <div className="flex flex-col">
+                        <p className="md:text-h4">{item.brand}</p>
+                        <p className="md:text-h3">{item.model}</p>
+                        <p>{item.tyreSize}</p>
+                      </div>
+
+                      <div className="flex items-center gap-3">
+                        <span className="md:text-h5">
+                          {(item.price * item.quantity).toLocaleString("uk-UA")} грн
+                        </span>
+
+                        <RemoveFromCartButton
+                          tyre={item}
+                          onRemoved={() => {
+                            const updated = cartItems.filter((t) => t.id !== item.id);
+                            setCartItems(updated);
+                            localStorage.setItem("tyres", JSON.stringify(updated));
+                            if (updated.length === 0) setIsOpen(false);
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
               )}
+
             </div>
 
-            {CartTyre && (
+            {cartItems.length > 0 && (
               <footer className="mx-auto flex flex-col justify-between p-2 md:p-4 lg:p-6 gap-2 lg:gap-6 ">
 
-                <p className="text-right w-full text-h5 border-t border-theme-light">
-                  Разом: <strong> {(CartTyre.price * CartTyre.quantity).toLocaleString("uk-UA")}</strong>{" "}
-                  грн.
-                </p>
+                {cartItems.length > 0 && (
+                  <footer className="mx-auto flex flex-col justify-between p-4 gap-4 border-t border-theme-light">
+                    <p className="text-right text-h5">
+                      Разом:&nbsp;
+                      <strong>
+                        {cartItems
+                          .reduce((sum, t) => sum + t.price * t.quantity, 0)
+                          .toLocaleString("uk-UA")}
+                      </strong>
+                      &nbsp;грн.
+                    </p>
 
-                <OrderForm tyre={CartTyre} />
+                    <OrderForm tyres={cartItems} />
+                  </footer>
+                )}
 
               </footer>
             )}
 
           </aside>
           , document.body
-        ))}
+        )}
     </div>
   );
 }

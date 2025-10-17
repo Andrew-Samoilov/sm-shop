@@ -13,7 +13,7 @@ export async function sendEmail({
     subject,
     html,
     text,
-    to ,
+    to,
 }: EmailPayload): Promise<SentMessageInfo> {
     const transporter = nodemailer.createTransport({
         host: process.env.SMTP_HOST ?? 'm.itim.com.ua',
@@ -27,7 +27,7 @@ export async function sendEmail({
     const defaultTo = 'webmaster@shinamix.com';
 
     const mailOptions = {
-        from: '"Shinamix" <webmaster@shinamix.com>',
+        from: `"Shinamix" <${process.env.SMTP_USER}>`,
         replyTo: 'webmaster@shinamix.com',
         to: to ?? defaultTo,
         subject,
@@ -36,10 +36,10 @@ export async function sendEmail({
     };
 
     const info = await transporter.sendMail(mailOptions);
-    
+
     if (process.env.NODE_ENV === "development") {
         console.log('[sendEmail] Letter sent:', info.messageId);
     }
-    
+
     return info;
 }

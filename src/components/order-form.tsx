@@ -7,48 +7,63 @@ import { CartTyre } from "@/types";
 
 const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!;
 
-export function OrderForm({ tyre }: { tyre: CartTyre }){
-
+export function OrderForm({ tyres }: { tyres: CartTyre[] }) {
   const [isRecaptchaReady, setIsRecaptchaReady] = useState(false);
 
+  // ініціалізація reCAPTCHA
   const initRecaptcha = async () => {
     if (!isRecaptchaReady) {
       try {
         await loadRecaptchaScript(siteKey);
         setIsRecaptchaReady(true);
       } catch (e) {
-        console.error(`[Recaptcha]`, e);
+        console.error("[Recaptcha] Load error:", e);
       }
     }
   };
+  const [localTyres] = useState(tyres);
 
 
-    
+  // сабміт форми
+  const handleAction = async (formData: FormData) => {
+    try {
+      await initRecaptcha();
+      const token = await window.grecaptcha.execute(siteKey, { action: "submit" });
+      formData.append("recaptcha", token);
+
+      await handleOrderSubmit("order-form", formData, localTyres);
+    } catch (err) {
+      console.error("[OrderForm] Submit error:", err);
+    }
+  };
+
   return (
     <Form
       id="order-form"
-      action={(formData) => handleOrderSubmit("order-form", formData)}
-      aria-label="Форма замовлення"
-      className="gap-2 xl:gap-6  flex  flex-col items-start  md:p-6"
-    >
+      action={handleAction}
 
-      <div className="flex flex-col items-left w-full  gap-0 md:gap-2 ">
+      aria-label="Форма замовлення"
+      className="gap-2 xl:gap-6 flex flex-col items-start md:p-6"
+    >
+      {/* --- Ім’я --- */}
+      <div className="flex flex-col w-full gap-2">
         <label htmlFor="order_name" className="form-label">
           Ім&apos;я<span className="text-accent">*</span>
         </label>
         <input
-          required={true}
+          required
           name="order_name"
           type="text"
           id="order_name"
           autoComplete="name"
-          placeholder="Введіть імя..."
-          className="w-full border-b  border-theme-light dark:bg-darkmode-theme-light"
+          placeholder="Введіть ім'я..."
+          className="w-full border-b border-theme-light dark:bg-darkmode-theme-light"
           onFocus={initRecaptcha}
         />
       </div>
 
-      <div className="flex flex-col items-left w-full gap-0 md:gap-2">
+      {/* --- Email --- */}
+      <div className="flex flex-col w-full gap-2">
         <label htmlFor="order_email" className="form-label">
           Email
         </label>
@@ -59,30 +74,30 @@ export function OrderForm({ tyre }: { tyre: CartTyre }){
           id="order_email"
           autoComplete="email"
           placeholder="example@domain.com"
-          className="w-full border-b  border-theme-light dark:bg-darkmode-theme-light"
+          className="w-full border-b border-theme-light dark:bg-darkmode-theme-light"
         />
       </div>
 
-
-      <div className="flex flex-col items-left w-full gap-0 md:gap-2">
+      {/* --- Телефон --- */}
+      <div className="flex flex-col w-full gap-2">
         <label htmlFor="order_tel" className="form-label">
           Тел<span className="text-accent">*</span>
         </label>
         <input
           name="order_tel"
           type="tel"
-          required={true}
+          required
           id="order_tel"
           inputMode="tel"
           autoComplete="tel"
           placeholder="+380__ ___ ____ ___"
-          className="w-full border-b  border-theme-light dark:bg-darkmode-theme-light"
+          className="w-full border-b border-theme-light dark:bg-darkmode-theme-light"
         />
       </div>
 
-      <fieldset className="flex flex-col w-full gap-2 md:gap-3">   
+      {/* --- Спосіб отримання --- */}
+      <fieldset className="flex flex-col w-full gap-3">
         <legend className="form-label">Спосіб отримання</legend>
-
         <div className="flex flex-col sm:flex-row gap-4">
           <label className="flex items-center gap-2 cursor-pointer">
             <input
@@ -109,45 +124,39 @@ export function OrderForm({ tyre }: { tyre: CartTyre }){
         </div>
 
         <DeliverySelect />
-        
-      </fieldset >
+      </fieldset>
 
-      
-      <div className="flex flex-col w-full gap-0 md:gap-2">
+      {/* --- Коментар --- */}
+      <div className="flex flex-col w-full gap-2">
         <label htmlFor="order_comment" className="form-label">
           Повідомлення
         </label>
         <textarea
           name="order_comment"
           id="order_comment"
-          inputMode="text"
           placeholder="Введіть повідомлення"
           className="w-full border-b border-theme-light dark:bg-darkmode-theme-light"
         />
-
       </div>
 
-      <input type="hidden" name="tyreId" value={tyre.id} />
-      <input type="hidden" name="tyreTitle" value={tyre.title} />
-      <input type="hidden" name="tyreSize" value={tyre.tyreSize} />
-      <input type="hidden" name="tyrePrice" value={tyre.price} />
-      <input type="hidden" name="tyreImageUrl" value={tyre.tyreImageUrl} />
-      
+      {/* --- Кнопка --- */}
       <SubmitButton
         pendingText="Надсилання ..."
         className="w-2/3 mx-auto btn btn-md btn-primary bg-accent border-accent hover:bg-accent-hover hover:border-accent-hover"
       >
         Надіслати замовлення
       </SubmitButton>
-      <p
-        className="text-light text-sm mx-auto"
-      >Натискаючи &ldquo;Надіслати замовлення&ldquo;, Ви погоджуєтесь з&nbsp;
+
+      {/* --- Примітка --- */}
+      <p className="text-light text-sm mx-auto text-center">
+        Натискаючи &ldquo;Надіслати замовлення&ldquo;, Ви погоджуєтесь з&nbsp;
         <LinkWithGA
-          href={'/info/legal'}
+          href="/info/legal"
           eventLabel="legal"
           eventCategory="cart"
           aria-label="Умови використання сайту"
-        >умовами
+        >
+          умовами
         </LinkWithGA>
       </p>
     </Form>

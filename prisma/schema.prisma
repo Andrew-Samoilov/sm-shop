@@ -11,13 +11,13 @@ datasource db {
 model Brand {
   id          Int      @id @default(autoincrement())
   slug        String   @unique @db.VarChar(100)
-  brand_name  String  
+  brand_name  String
   logo        String?
   description String?
   website     String?
   country     String?
   createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @default(now()) @map("updated_at")
+  updatedAt   DateTime @default(now()) @updatedAt @map("updated_at")
   models      Model[]
   tyres       Tyre[]
 
@@ -25,44 +25,44 @@ model Brand {
 }
 
 model Tyre {
-  id                Int     @id(map: "tires_pkey") @default(autoincrement())
-  externalId        String? @unique @db.Uuid @map("external_id")// 1с ід
-  sku               String  @unique @db.VarChar(50) //у 1с = code
-  slug              String  @unique @default("")
+  id         Int     @id(map: "tires_pkey") @default(autoincrement())
+  externalId String? @unique @map("external_id") @db.Uuid // 1с ід
+  sku        String  @unique @db.VarChar(50) //у 1с = code
+  slug       String  @unique @default("")
 
-  modelId           Int?    @map("model_id") 
-  brandId           Int?    @map("brand_id")
+  modelId Int? @map("model_id")
+  brandId Int? @map("brand_id")
 
-  title             String
-  description       String?
-  country           String? @db.VarChar(50)
-  dateCode          String? @map("date_code") @db.Char(4)
-  applicability     String? @db.VarChar(50)
+  title         String
+  description   String?
+  country       String? @db.VarChar(50)
+  dateCode      String? @map("date_code") @db.Char(4)
+  applicability String? @db.VarChar(50)
 
-  inventoryQuantity Int?    @default(0) @map("inventory_quantity")
+  inventoryQuantity Int?  @default(0) @map("inventory_quantity")
   price             Float
-  
-  loadSpeedIndex    String? @map("load_speed_index") @db.VarChar(10)
-  
 
-  width             Float?  @db.Real
-  profile           Float?  @db.Real
-  diameter          Float?  @db.Real
-  
-  loadIndex         String? @map("load_index") @db.VarChar(10)
-  speedIndex        String? @map("speed_index") @db.Char(1)
-  type              String? @db.VarChar(50)
-  diskProtection    String? @map("disk_protection") @db.VarChar(50)
-  rof               String? @db.VarChar(50)
+  loadSpeedIndex String? @map("load_speed_index") @db.VarChar(10)
 
-  brand             Brand?  @relation(fields: [brandId], references: [id], onUpdate: NoAction)
-  model             Model?  @relation(fields: [modelId], references: [id], onUpdate: NoAction)
-  orders  Order[]
+  width    Float? @db.Real
+  profile  Float? @db.Real
+  diameter Float? @db.Real
+
+  loadIndex      String? @map("load_index") @db.VarChar(10)
+  speedIndex     String? @map("speed_index") @db.Char(1)
+  type           String? @db.VarChar(50)
+  diskProtection String? @map("disk_protection") @db.VarChar(50)
+  rof            String? @db.VarChar(50)
+
+  brand Brand? @relation(fields: [brandId], references: [id], onUpdate: NoAction)
+  model Model? @relation(fields: [modelId], references: [id], onUpdate: NoAction)
+
+  orderItems OrderItem[] @relation("TyreToOrderItem")
+
   @@index([title(ops: raw("gin_trgm_ops"))], map: "tyres_title_trgm_idx", type: Gin)
   @@index([modelId, title], map: "tyres_model_title_idx")
   @@index([brandId], map: "tyres_brand_idx")
   @@index([width, profile, diameter], map: "tyres_size_season_idx")
-
   @@map("tyres")
 }
 
@@ -72,15 +72,15 @@ model Model {
   modelName   String       @map("model_name")
   brandName   String       @map("brand_name")
   description String?
-  brandId     Int?          @map("brand_id")
+  brandId     Int?         @map("brand_id")
   createdAt   DateTime     @default(now()) @map("created_at")
-  updatedAt   DateTime     @updatedAt @default(now()) @map("updated_at")
+  updatedAt   DateTime     @default(now()) @updatedAt @map("updated_at")
   season      season?
   images      ModelImage[]
-  brand       Brand?        @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  brand       Brand?       @relation(fields: [brandId], references: [id], onDelete: Cascade)
   tyres       Tyre[]
 
-  @@index([brandId,slug])
+  @@index([brandId, slug])
   @@map("models")
 }
 
@@ -125,7 +125,7 @@ model StaticPage {
   description String?
   visible     Boolean  @default(true)
   createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
 
   @@map("static_page")
 }
@@ -137,45 +137,50 @@ enum season {
 }
 
 model Order {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt @default(now())
-
-  tyreId    Int
-  tyreTitle String
-  tyreSize  String
-  tyrePrice Int
-  quantity  Int
-
-  name    String
-  phone   String
-  email   String?
-  comment String?
-
-  deliveryMethod     String?  @map("delivery_method")
-  deliveryCity       String?  @map("delivery_city")
-  deliveryWarehouse  String?  @map("delivery_warehouse")
-
-  status  String?  @default("pending")
-
-  tyre Tyre @relation(fields: [tyreId], references: [id])
+  id                Int         @id @default(autoincrement())
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  name              String
+  phone             String
+  email             String?
+  comment           String?
+  deliveryMethod    String?     @map("delivery_method")
+  deliveryCity      String?     @map("delivery_city")
+  deliveryWarehouse String?     @map("delivery_warehouse")
+  status            String      @default("pending")
+  items             OrderItem[] @relation("OrderToOrderItem")
 
   @@map("orders")
 }
 
+model OrderItem {
+  id        Int    @id @default(autoincrement())
+  orderId   Int
+  tyreId    Int
+  tyreTitle String
+  tyreSize  String
+  tyrePrice Float
+  quantity  Int
+
+  tyre  Tyre  @relation("TyreToOrderItem", fields: [tyreId], references: [id])
+  order Order @relation("OrderToOrderItem", fields: [orderId], references: [id])
+
+  @@map("order_items")
+}
+
 model TyreImport {
-  id          Int     @id @default(autoincrement())
-  externalId String   @map("external_id")// поле id з 1С
+  id         Int    @id @default(autoincrement())
+  externalId String @map("external_id") // поле id з 1С
   name       String
-  code       String   // артикул
+  code       String // артикул
 
-  price      Int
-  quantity   Int      @default(0)
+  price    Int
+  quantity Int @default(0)
 
-  slug       String? @db.VarChar(100)
+  slug String? @db.VarChar(100)
 
   model            String?
-  brandName        String       @map("brand_name")
+  brandName        String  @map("brand_name")
   yearOfProduction String? @map("year_of_production")
   season           String?
   tyreSize         String? @map("tyre_size")
@@ -188,10 +193,10 @@ model TyreImport {
   country          String?
   rof              String?
 
-  itemType         String? @map("item_type")  
-  raw              Json?     
-  processed   Boolean   @default(false)
-  importedAt  DateTime  @default(now()) @map("imported_at")
-  
+  itemType   String?  @map("item_type")
+  raw        Json?
+  processed  Boolean  @default(false)
+  importedAt DateTime @default(now()) @map("imported_at")
+
   @@map("tyre_import")
 }
