@@ -103,18 +103,18 @@ export default async function TyrePage(
           </h1>
 
           <div
-            className="md:pt-2 text-light   hover:no-underline"
+            className="md:pt-2 text-light  dark:text-darkmode-light hover:no-underline"
           >Країна виробництва: <span
-            className="text-dark dark:text-darkmode-dark"
+              className="text-dark dark:text-darkmode-dark"
           >{tyre.country}</span>
           </div>
 
           <div
-            className=" text-light    hover:no-underline"
+            className=" text-light dark:text-darkmode-light   hover:no-underline"
           >Тиждень та рік виробництва: {tyre.dateCode}</div>
 
           {tyre.model?.season && (
-            <span className=" text-light flex gap-2">{"Сезон: "}
+            <span className=" text-light dark:text-darkmode-light flex gap-2">{"Сезон: "}
               <span>
                 {getSeasonLabel(tyre.model?.season)}
               </span>
@@ -125,14 +125,14 @@ export default async function TyrePage(
           )}
 
           {tyre.applicability && (
-            <span className=" text-light">Застосовуваність: {tyre.applicability}</span>
+            <span className=" text-light dark:text-darkmode-light">Застосовуваність: {tyre.applicability}</span>
           )}
           {tyre.diskProtection && (
-            <span className=" text-light">Захист диска: {tyre.diskProtection}</span>
+            <span className=" text-light  dark:text-darkmode-light">Захист диска: {tyre.diskProtection}</span>
           )}
 
           <div
-            className=" text-light hover:text-dark dark:text-drkmode-text dark:hover:text-darkmode-primary  "
+            className=" text-light dark:text-darkmode-light hover:text-dark dark:hover:text-darkmode-primary  "
           >
             <LinkWithGA
               href="/info/speed-index"
@@ -140,7 +140,7 @@ export default async function TyrePage(
               eventCategory="TyrePage"
               target="_blank"
               title="Докладніше про індекси швидкості"
-              className="hover:no-underline"
+              className="hover:no-underline "
             >
               Індекс швидкості:
             </LinkWithGA>
@@ -148,7 +148,7 @@ export default async function TyrePage(
           </div>
 
           <div
-            className=" text-light  hover:text-dark dark:text-drkmode-text dark:hover:text-darkmode-primary"
+            className=" text-light dark:text-darkmode-light hover:text-dark dark:hover:text-darkmode-primary"
           >
             <LinkWithGA
               href="/info/load-index"
@@ -163,12 +163,12 @@ export default async function TyrePage(
             &nbsp;{tyre.loadIndex}
           </div>
 
-          <div className={quantity < 4 ? "font-bold" : "text-light "}>
+          <div className={quantity < 4 ? "font-bold" : "text-light dark:text-darkmode-light "}>
             Кількість: {quantity}
           </div>
 
 
-          <div className="flex flex-col md:flex-row md:items-center border-b pb-2 border-theme-light">
+          <div className="flex flex-col md:flex-row md:items-center border-b pb-2 border-theme-light dark:border-theme-dark">
             <div className="flex flex-row md:flex-col gap-2 xl:gap-6 items-center">
 
               <QuantitySelector storageKey="page-quantity" />
@@ -176,7 +176,7 @@ export default async function TyrePage(
 
               <div className="flex items-center gap-2 font-semibold text-h1 leading-none"
               >{tyre.price?.toLocaleString("uk-UA")}
-                <div className="text-h3 font-normal text-light leading-none">грн<span
+                <div className="text-h3 font-normal text-light  dark:text-darkmode-ligh leading-none">грн<span
                   className="text-[75%] opacity-75">/шт</span>
                 </div>
               </div>
@@ -212,10 +212,10 @@ export default async function TyrePage(
               className="text-h5 max-md:text-base"
             >Доставка: </span>
             <span
-              className="px-2 py-1 rounded-md border border-border dark:border-border/40 text-text-light dark:text-darkmode-text-light "
+              className="px-2 py-1 rounded-md border border-border dark:border-theme-dark text-light dark:text-darkmode-light"
             > Наступного дня.</span>
             <span
-              className="px-2 py-1 rounded-md border border-border dark:border-border/40 text-text-light dark:text-darkmode-text-light"
+              className="px-2 py-1 rounded-md border border-border dark:border-theme-dark text-light dark:text-darkmode-light"
             >Самовивіз: вже сьогодні.</span>
           </LinkWithGA>
 
@@ -229,7 +229,7 @@ export default async function TyrePage(
             <details className="group" open>
               <summary className="flex flex-between justify-center items-center marker:content-none cursor-pointer ">
                 <h2 className="pr-2 md:pr-6">Детальний опис</h2>
-                <span className="text-light text-4xl transition-transform group-open:rotate-45">+</span>
+                <span className="text-light  dark:text-darkmode-light text-4xl transition-transform group-open:rotate-45">+</span>
               </summary>
               <ReactMarkdown>{tyre.model?.description}</ReactMarkdown>
             </details>
@@ -241,7 +241,7 @@ export default async function TyrePage(
             <details className="group" open>
               <summary className="flex flex-between justify-center items-center marker:content-none cursor-pointer ">
                 <h2 className="pr-2 md:pr-6">{`Наші сертифікати ${tyre.brand?.brand_name}`}</h2>
-                <span className="text-light text-4xl transition-transform group-open:rotate-45">+</span>
+                <span className="text-light dark:text-darkmode-light text-4xl transition-transform group-open:rotate-45">+</span>
               </summary>
               <CertificatesClient cert={filteredCerts} />
             </details>
