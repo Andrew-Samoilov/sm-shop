@@ -90,7 +90,7 @@ export default async function TyrePage(
         price={Number(tyre.price)}
       />
 
-      <div className=" flex flex-col md:flex-row md:gap-6 pb-6 2xl:p-12
+      <div className=" flex flex-col md:flex-row md:gap-6  2xl:p-12
        items-center  justify-center ">
 
         <ModelViewer images={images} season={tyre.model?.season} />
@@ -201,7 +201,7 @@ export default async function TyrePage(
           </div>
 
 
-          <TotalPrice price={tyre.price} storageKey="page-quantity" />
+          
 
           <LinkWithGA
             className="flex flex-wrap flex-col md:flex-row justify-center items-center gap-2 lg:gap-6 text-center max-w-full hover:no-underline"
@@ -222,6 +222,8 @@ export default async function TyrePage(
         </div>
 
       </div>
+
+      <TotalPrice price={tyre.price} storageKey="page-quantity" />
 
       <div>
         {tyre.model?.description && (
