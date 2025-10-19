@@ -48,6 +48,7 @@ export async function POST(req: Request) {
       }
     }
 
+    console.log("[API][orders] incoming order:", body);
     console.log("[API][orders] incoming tyres:", body.tyres);
 
     const order = await prisma.order.create({
@@ -56,13 +57,12 @@ export async function POST(req: Request) {
         phone: body.customerTel,
         email: body.customerEmail,
         comment: body.customerComment ?? null,
-        deliveryMethod: body.deliveryMethod ?? "delivery",
+        deliveryMethod: body.deliveryMethod ?? "pickup",
         deliveryCity: body.city ?? null,
         deliveryWarehouse: body.warehouse ?? null,
 
         items: {
           create: body.tyres.map((t: TyreItem) => ({
-            // 👇 ключовий момент
             tyre: {
               connect: {
                 id: Number(t.id),

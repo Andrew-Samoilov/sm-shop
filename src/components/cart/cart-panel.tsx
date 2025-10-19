@@ -100,7 +100,7 @@ export function CartPanel() {
           >
 
             <header className="p-2 md:p-4 lg:p-6  
-            flex items-center justify-between border-b border-theme-light">
+            flex items-center justify-between border-b border-border dark:border-darkmode-border">
               <h2 className="text-lg font-semibold">Кошик</h2>
               <button
                 onClick={() => setIsOpen(false)}
@@ -121,7 +121,7 @@ export function CartPanel() {
                   {cartItems.map((item) => (
                     <div
                       key={item.id}
-                      className="flex flex-Dcol md:flex-row gap-4 items-center justify-between border-b border-theme-light pb-2"
+                      className="flex flex-Dcol md:flex-row gap-4 items-center justify-between border-b border-border dark:border-darkmode-border pb-2"
                     >
                       {item.tyreImageUrl && (
                         <Image
@@ -166,13 +166,13 @@ export function CartPanel() {
                 {cartItems.length > 0 && (
                   <footer className="mx-auto flex flex-col justify-between p-4 gap-4 border-t border-theme-light">
                     <p className="text-right text-h5">
-                      Разом:&nbsp;
+                      Разом:{" "}
                       <strong>
                         {cartItems
                           .reduce((sum, t) => sum + t.price * t.quantity, 0)
                           .toLocaleString("uk-UA")}
                       </strong>
-                      &nbsp;грн.
+                      {" "}грн.
                     </p>
 
                     <OrderForm tyres={cartItems} />

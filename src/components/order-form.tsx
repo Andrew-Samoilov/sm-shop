@@ -9,8 +9,8 @@ const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!;
 
 export function OrderForm({ tyres }: { tyres: CartTyre[] }) {
   const [isRecaptchaReady, setIsRecaptchaReady] = useState(false);
+  const [deliveryMethod, setDeliveryMethod] = useState<"pickup" | "delivery">("pickup");
 
-  // ініціалізація reCAPTCHA
   const initRecaptcha = async () => {
     if (!isRecaptchaReady) {
       try {
@@ -102,8 +102,9 @@ export function OrderForm({ tyres }: { tyres: CartTyre[] }) {
           <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="radio"
-              name="delivery_method"
+              name="deliveryMethod"
               value="pickup"
+              onChange={() => setDeliveryMethod("pickup")}
               defaultChecked
               required
               className="accent-accent h-4 w-4"
@@ -114,8 +115,9 @@ export function OrderForm({ tyres }: { tyres: CartTyre[] }) {
           <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="radio"
-              name="delivery_method"
+              name="deliveryMethod"
               value="delivery"
+              onChange={() => setDeliveryMethod("delivery")}
               required
               className="accent-accent h-4 w-4"
             />
@@ -123,10 +125,14 @@ export function OrderForm({ tyres }: { tyres: CartTyre[] }) {
           </label>
         </div>
 
-        <DeliverySelect />
+        
+        {deliveryMethod === "delivery" && (
+            <DeliverySelect />
+
+        )}
+
       </fieldset>
 
-      {/* --- Коментар --- */}
       <div className="flex flex-col w-full gap-2">
         <label htmlFor="order_comment" className="form-label">
           Повідомлення
@@ -139,6 +145,7 @@ export function OrderForm({ tyres }: { tyres: CartTyre[] }) {
         />
       </div>
 
+    
       {/* --- Кнопка --- */}
       <SubmitButton
         pendingText="Надсилання ..."

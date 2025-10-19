@@ -27,7 +27,7 @@ export function QuantitySelector({ storageKey = 'tyre' }: QuantitySelectorProps)
     }
 
     return (
-        <fieldset className="inline-flex items-center border border-theme-light dark:border-theme-dark rounded px-2">
+        <fieldset className="inline-flex items-center border border-border dark:border-darkmode-border rounded px-2">
             <button
                 type="button"
                 className="px-2 text-lg select-none

@@ -6,6 +6,7 @@ export function getOrderHtml({
   city,
   warehouse,
   comment,
+
   productHtml,
 }: {
   name: string;
@@ -17,6 +18,19 @@ export function getOrderHtml({
   comment?: string;
   productHtml: string;
 }) {
+  // ✅ Формуємо інформацію доставки для листа
+  let deliveryInfo = "";
+  if (deliveryMethod === "delivery") {
+    deliveryInfo = `
+        <tr><td style="padding:6px 0;color:#111827;font-weight:bold;">Місто:</td><td style="padding:6px 0;color:#374151;text-align:right;">${city}</td></tr>
+        <tr><td style="padding:6px 0;color:#111827;font-weight:bold;">Відділення:</td><td style="padding:6px 0;color:#374151;text-align:right;">${warehouse}</td></tr>
+      `;
+  } else {
+    deliveryInfo = `
+        <p><strong>Спосіб:</strong> Самовивіз</p>
+      `;
+  }
+
   return `
   <!DOCTYPE html>
   <html lang="uk">
@@ -60,14 +74,9 @@ export function getOrderHtml({
                   <tr><td style="padding:6px 0;color:#111827;font-weight:bold;">Ім'я:</td><td style="padding:6px 0;color:#374151;text-align:right;">${name}</td></tr>
                   <tr><td style="padding:6px 0;color:#111827;font-weight:bold;">Email:</td><td style="padding:6px 0;color:#374151;text-align:right;">${email}</td></tr>
                   <tr><td style="padding:6px 0;color:#111827;font-weight:bold;">Телефон:</td><td style="padding:6px 0;color:#374151;text-align:right;">${tel}</td></tr>
-                  <tr><td style="padding:6px 0;color:#111827;font-weight:bold;">Доставка:</td><td style="padding:6px 0;color:#374151;text-align:right;">${deliveryMethod === "pickup" ? "Самовивіз" : "Нова Пошта"}</td></tr>
-                  ${deliveryMethod === "delivery"
-      ? `
-                        <tr><td style="padding:6px 0;color:#111827;font-weight:bold;">Місто:</td><td style="padding:6px 0;color:#374151;text-align:right;">${city}</td></tr>
-                        <tr><td style="padding:6px 0;color:#111827;font-weight:bold;">Відділення:</td><td style="padding:6px 0;color:#374151;text-align:right;">${warehouse}</td></tr>
-                      `
-      : ""
-    }
+  <h3>Доставка</h3>
+    ${deliveryInfo}
+
                   ${comment
       ? `<tr><td style="padding:6px 0;color:#111827;font-weight:bold;">Коментар:</td><td style="padding:6px 0;color:#374151;text-align:right;">${comment}</td></tr>`
       : ""

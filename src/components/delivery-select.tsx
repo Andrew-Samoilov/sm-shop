@@ -143,9 +143,10 @@ export function DeliverySelect() {
             )}
 
             {/* приховані інпути для передачі даних у замовлення */}
-            {query && <input type="hidden" name="delivery_city" value={query} />}
+
+            {query && <input type="hidden" name="city" value={query} />}
             {warehouseQuery && (
-                <input type="hidden" name="delivery_warehouse" value={warehouseQuery} />
+                <input type="hidden" name="warehouse" value={warehouseQuery} />
             )}
 
         </div>

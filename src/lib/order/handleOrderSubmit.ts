@@ -29,6 +29,11 @@ export async function handleOrderSubmit(
     const name = formData.get("order_name") as string;
     const tel = formData.get("order_tel") as string;
     const comment = formData.get("order_comment") as string;
+    
+    // ✅ Дані доставки
+    const deliveryMethod = formData.get("deliveryMethod") as string;
+    const city = formData.get("city") as string | null;
+    const warehouse = formData.get("warehouse") as string | null;
 
     // ✅ Перевірка кошика
     if (!Array.isArray(tyres) || tyres.length === 0) {
@@ -36,12 +41,19 @@ export async function handleOrderSubmit(
       return;
     }
 
+
+    
+
+
     // ✅ Тіло запиту
     const body = {
       customerName: name,
       customerEmail: email,
       customerTel: tel,
       customerComment: comment,
+      deliveryMethod: deliveryMethod,
+      city: city,
+      warehouse: warehouse,
       tyres: tyres.map((t) => ({
         id: t.id,
         title: t.title,
@@ -82,7 +94,9 @@ export async function handleOrderSubmit(
       tel,
       email,
       comment,
-      deliveryMethod: "delivery",
+      deliveryMethod: deliveryMethod as "delivery" | "pickup",
+      city: city || undefined,
+      warehouse: warehouse || undefined,  
       productHtml: productsHtml,
     });
 

@@ -168,7 +168,7 @@ export default async function TyrePage(
           </div>
 
 
-          <div className="flex flex-col md:flex-row md:items-center border-b pb-2 border-theme-light dark:border-theme-dark">
+          <div className="flex flex-col md:flex-row md:items-center border-b pb-2 border-border dark:border-darkmode-border">
             <div className="flex flex-row md:flex-col gap-2 xl:gap-6 items-center">
 
               <QuantitySelector storageKey="page-quantity" />
@@ -212,10 +212,10 @@ export default async function TyrePage(
               className="text-h5 max-md:text-base"
             >Доставка: </span>
             <span
-              className="px-2 py-1 rounded-md border border-border dark:border-theme-dark text-light dark:text-darkmode-light"
+              className="px-2 py-1 rounded-md border border-border dark:border-darkmode-border text-light dark:text-darkmode-light"
             > Наступного дня.</span>
             <span
-              className="px-2 py-1 rounded-md border border-border dark:border-theme-dark text-light dark:text-darkmode-light"
+              className="px-2 py-1 rounded-md border border-border dark:border-darkmode-border text-light dark:text-darkmode-light"
             >Самовивіз: вже сьогодні.</span>
           </LinkWithGA>
 
