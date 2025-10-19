@@ -7,40 +7,31 @@ type TotalPriceProps = {
     storageKey?: string
 }
 
-export function TotalPrice({ price, storageKey = 'tyre' }: TotalPriceProps) {
-    const [quantity, setQuantity] = useState<number>(1)
+export function TotalPrice({ price, storageKey = 'page-quantity' }: TotalPriceProps) {
+    const [quantity, setQuantity] = useState(1)
 
-
-
+    // читаємо при кожній зміні localStorage
     useEffect(() => {
-
-        const loadQuantity = () => {
-            const stored = localStorage.getItem(storageKey)
-            if (stored) {
-                const num = Number(stored)
-                if (!isNaN(num)) setQuantity(num)
-            }
+        const update = () => {
+            const num = Number(localStorage.getItem(storageKey)) || 1
+            setQuantity(num)
         }
 
-        loadQuantity()
+        update() // одразу при mount
+        window.addEventListener('storage', update)
+        const interval = setInterval(update, 300) // 🔥 простий автопулінг (оновлення раз на 0.3 сек)
 
-        // 🔥 слухаємо подію від QuantitySelector
-        const handler = (e: Event) => {
-            const custom = e as CustomEvent<{ key: string; value: number }>
-            if (custom.detail.key === storageKey) setQuantity(custom.detail.value)
+        return () => {
+            window.removeEventListener('storage', update)
+            clearInterval(interval)
         }
+    }, [storageKey])
 
-        window.addEventListener('quantityChange', handler)
-        return () => window.removeEventListener('quantityChange', handler)
-    }, [ storageKey])
-
-    if (quantity === 1) return null
-
-    const total = price * quantity
+    if (quantity <= 1) return null
 
     return (
         <div className="text-center text-h4 text-light border-b border-theme-light">
-            {total.toLocaleString('uk-UA')} грн за комплект ({quantity})
+            {(price * quantity).toLocaleString('uk-UA')} грн за комплект ({quantity})
         </div>
     )
 }

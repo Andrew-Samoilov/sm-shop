@@ -1,6 +1,6 @@
 export const dynamic = "force-static";
 
-import { AddToCartButton, BreadCrumbs, CertificatesClient, LinkWithGA, ModelViewer, QuantitySelector, SeasonIcon, ViewItemGA } from "@/components";
+import { AddToCartButton, BreadCrumbs, CertificatesClient, LinkWithGA, ModelViewer, QuantitySelector, SeasonIcon, TotalPrice, ViewItemGA } from "@/components";
 import { getTyreBySlug, getModelImgByModelId, prisma, getContentBlock, getTyreSize, getSeasonLabel, generateTyreMetadata, buildProductJsonLd, buildBreadcrumbsJsonLd, JsonLd, } from "@/lib";
 import { Certificate } from "@/types";
 import { Metadata } from "next";
@@ -201,7 +201,7 @@ export default async function TyrePage(
           </div>
 
 
-          {/* <TotalPrice price={tyre.price} storageKey="page-quantity" /> */}
+          <TotalPrice price={tyre.price} storageKey="page-quantity" />
 
           <LinkWithGA
             className="flex flex-wrap flex-col md:flex-row justify-center items-center gap-2 lg:gap-6 text-center max-w-full hover:no-underline"
