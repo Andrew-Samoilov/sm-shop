@@ -136,11 +136,15 @@ export function CartPanel() {
                         <p className="md:text-h4">{item.brand}</p>
                         <p className="md:text-h3">{item.model}</p>
                         <p>{item.tyreSize}</p>
+
                       </div>
+
 
                       <div className="flex items-center gap-3">
                         <span className="md:text-h5">
-                          {(item.price * item.quantity).toLocaleString("uk-UA")} грн
+                          {(item.price).toLocaleString("uk-UA")} грн
+
+                          <div>{item.quantity} шт</div>
                         </span>
 
                         <RemoveFromCartButton
@@ -169,7 +173,7 @@ export function CartPanel() {
                       Разом:{" "}
                       <strong>
                         {cartItems
-                          .reduce((sum, t) => sum + t.price * t.quantity, 0)
+                          .reduce((sum, t) => sum + Number(t.price) * Number(t.quantity), 0)
                           .toLocaleString("uk-UA")}
                       </strong>
                       {" "}грн.

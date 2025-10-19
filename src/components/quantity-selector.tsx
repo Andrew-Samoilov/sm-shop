@@ -3,28 +3,28 @@
 import { useEffect, useState } from 'react'
 
 type QuantitySelectorProps = {
-    storageKey?: string
+    storageKey: string,
 }
 
-export function QuantitySelector({ storageKey = 'tyre' }: QuantitySelectorProps) {
-    const [quantity, setQuantity] = useState<number>(4)
+export function QuantitySelector({ storageKey }: QuantitySelectorProps) {
+    const [quantity, setQuantity] = useState<number>(4);
 
     // Зчитуємо з localStorage при завантаженні
     useEffect(() => {
-        if (typeof window === 'undefined') return
+        if (typeof globalThis === 'undefined') return
 
         const stored = localStorage.getItem(storageKey)
         if (stored) {
             const num = Number(stored)
-            if (!isNaN(num)) setQuantity(num)
+            if (!Number.isNaN(num)) setQuantity(num)
         }
     }, [storageKey])
 
-    // Записуємо просто число
     const updateQuantity = (newQty: number) => {
         setQuantity(newQty)
         localStorage.setItem(storageKey, String(newQty))
     }
+
 
     return (
         <fieldset className="inline-flex items-center border border-border dark:border-darkmode-border rounded px-2">
@@ -42,7 +42,7 @@ export function QuantitySelector({ storageKey = 'tyre' }: QuantitySelectorProps)
 
             <button
                 type="button"
-                className="px-2 text-lg select-none"
+                className="px-2 text-lg select-none "
                 onClick={() => updateQuantity(quantity + 1)}
             >
                 +
