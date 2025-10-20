@@ -1,5 +1,6 @@
+import { importStocks } from "@/lib";
 import { NextRequest, NextResponse } from "next/server";
-import { spawn } from 'child_process';
+import { spawn } from 'node:child_process';
 
 export async function POST(req: NextRequest) {
 
@@ -11,11 +12,11 @@ export async function POST(req: NextRequest) {
     const forwardedFor = req.headers.get('x-forwarded-for') || '';
     const clientIp = forwardedFor?.split(',')[0].trim() || 'невідомо'
 
-    console.log('[POST] x-forwarded-for:', forwardedFor)
-    console.log('[POST] Client IP:', clientIp)
+    console.log('[POST][stocks] x-forwarded-for:', forwardedFor)
+    console.log('[POST][stocks] Client IP:', clientIp)
 
     if (!ALLOWED_IPS.includes(clientIp)) {
-        console.warn(`[POST] Заблоковано запит з IP: ${clientIp}`)
+        console.warn(`[POST][stocks] Заблоковано запит з IP: ${clientIp}`)
         return new NextResponse('Forbidden', { status: 403 })
     }
 
@@ -32,20 +33,14 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
     }
 
-    //ще не знаю - масив чи ні
     if (!Array.isArray(data) || data.length === 0) {
         return NextResponse.json({ error: 'Expected array' }, { status: 400 });
     }
 
-
-
     try {
-        console.time("[import/save]");
-        const insertedCount = 0;
 
-        console.timeEnd("[import/save]");
-        console.log(`[route] saved to tyre_import: ${insertedCount} rows`);
-        
+       const insertedCount = await importStocks(data);
+
         // 2. Запускаємо фонову обробку (асинхронно)
         (async () => {
             try {
@@ -54,9 +49,6 @@ export async function POST(req: NextRequest) {
 
                 // await prisma.tyre.updateMany({ data: { inventoryQuantity: 0 } });
                 // console.log('[api/import/upload/route] Updated inventory quantities to 0');
-
-
-
 
                 console.timeEnd("[import/post]");
                 console.log(new Date().toISOString(), "[import] post-processing finished ✅");

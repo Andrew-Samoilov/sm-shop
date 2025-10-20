@@ -200,3 +200,13 @@ model TyreImport {
 
   @@map("tyre_import")
 }
+
+model StocksImport {
+  id          Int      @id @default(autoincrement())
+  externalId  String   @map("external_id")
+  warehouse   String    
+  quantity    Int
+  importedAt  DateTime  @default(now()) @map("imported_at")
+
+  @@map("stocks_import")
+}
