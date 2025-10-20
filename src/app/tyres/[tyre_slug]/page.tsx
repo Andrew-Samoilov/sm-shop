@@ -1,9 +1,10 @@
 export const dynamic = "force-static";
 
-import { AddToCartButton, BreadCrumbs, CertificatesClient, LinkWithGA, ModelViewer, QuantitySelector, SeasonIcon, TotalPrice, ViewItemGA } from "@/components";
+import { AddToCartButton, BreadCrumbs, CertificatesClient, ModelViewer, QuantitySelector, SeasonIcon, TotalPrice, ViewItemGA } from "@/components";
 import { getTyreBySlug, getModelImgByModelId, prisma, getContentBlock, getTyreSize, getSeasonLabel, generateTyreMetadata, buildProductJsonLd, buildBreadcrumbsJsonLd, JsonLd, } from "@/lib";
 import { Certificate } from "@/types";
 import { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 
@@ -134,32 +135,32 @@ export default async function TyrePage(
           <div
             className=" text-light dark:text-darkmode-light hover:text-dark dark:hover:text-darkmode-primary  "
           >
-            <LinkWithGA
+            <Link
               href="/info/speed-index"
-              eventLabel="speed-index"
-              eventCategory="TyrePage"
+              // eventLabel="speed-index"
+              // eventCategory="TyrePage"
               target="_blank"
               title="Докладніше про індекси швидкості"
               className="hover:no-underline "
             >
               Індекс швидкості:
-            </LinkWithGA>
+            </Link>
             &nbsp;{tyre.speedIndex}
           </div>
 
           <div
             className=" text-light dark:text-darkmode-light hover:text-dark dark:hover:text-darkmode-primary"
           >
-            <LinkWithGA
+            <Link
               href="/info/load-index"
-              eventLabel="load-index"
-              eventCategory="TyrePage"
+              // eventLabel="load-index"
+              // eventCategory="TyrePage"
               target="_blank"
               title="Докладніше про індекси навантаження"
               className="hover:no-underline"
             >
               Індекс навантаження:
-            </LinkWithGA>
+            </Link>
             &nbsp;{tyre.loadIndex}
           </div>
 
@@ -203,11 +204,12 @@ export default async function TyrePage(
 
           
 
-          <LinkWithGA
+          <Link
             className="flex flex-wrap flex-col md:flex-row justify-center items-center gap-2 lg:gap-6 text-center max-w-full hover:no-underline"
             href={"/info/payment-delivery"}
             target="_blank"
-            eventLabel={""}>
+            // eventLabel={""}
+          >
             <span
               className="text-h5 max-md:text-base"
             >Доставка: </span>
@@ -217,7 +219,7 @@ export default async function TyrePage(
             <span
               className="px-2 py-1 rounded-md border border-border dark:border-darkmode-border text-light dark:text-darkmode-light"
             >Самовивіз: вже сьогодні.</span>
-          </LinkWithGA>
+          </Link>
 
         </div>
 

@@ -18,6 +18,7 @@ export default function NotFound() {
       <p className="text-lg md:mb-8">
         Нажаль, за цією адресою сторінки не існує або вона була переміщена.
       </p>
+
       <Link
         href="/"
         className="btn btn-sm md:btn-lg btn-primary hover:no-underline"

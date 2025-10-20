@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import ReactMarkdown from "react-markdown";
 import { notFound } from "next/navigation";
 import { getBrands, getBrandBySlug, getModelsByBrandId, getTyresByBrandId, formatDisplayUrl, getModelImagesByIds, getContentBlock, normalizedCerts, generateBrandMetadata, generateBrandJsonLd, JsonLd } from "@/lib";
-import { LinkWithGA, TyresList, CertificatesClient } from "@/components";
+import { TyresList, CertificatesClient } from "@/components";
 import { Certificate } from "@/types";
+import Link from "next/link";
 
 
 export async function generateStaticParams() {
@@ -55,17 +56,14 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
             </p>
           )}
           {brand.website && !["NULL", "null", ""].includes(brand.website) && (
-            <LinkWithGA
+            <Link
               href={brand.website}
               className=" hover:underline text-light text-sm"
               target="_blank"
               rel="noopener noreferrer"
-              eventLabel="brand_website"
-              eventCategory={`brand-${brand.brand_name}`}
-              ariaLabel={`Перейти на сайт бренду ${brand.brand_name}`}
             >
               {formatDisplayUrl(brand.website)}
-            </LinkWithGA>
+            </Link>
           )}
         </div>
         {/* {console.log(`[BrandPage]`,brand.logo)} */}
@@ -97,19 +95,13 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
         </h2>
         <div className="flex flex-wrap">
           {brandModels.map((model) => (
-            <LinkWithGA
+            <Link
               key={model.id}
               href={`/models/${model.slug}`}
-              eventLabel={model.modelName}
-              eventCategory={`brand-${brand.brand_name}`}
               className=" px-6"
-              eventParams={{
-                brand_slug: `${brand.brand_name}`,
-                modelId: `${model.id}`,
-              }}
             >
               {model.modelName}
-            </LinkWithGA>
+            </Link>
           ))}
         </div>
       </section>

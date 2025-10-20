@@ -1,8 +1,9 @@
 "use client";
 import Form from "next/form";
 import { useState } from "react";
-import { SubmitButton, LinkWithGA } from "@/components";
+import { SubmitButton } from "@/components";
 import { handleClientSubmit, loadRecaptchaScript } from "@/lib";
+import Link from "next/link";
 
 const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!;
 
@@ -102,13 +103,10 @@ export function ContactForm() {
           className="text-dark dark:text-darkmode-light font-normal max-md:text-base"
         >
           Погоджуюсь з
-          <LinkWithGA
+          <Link
             href={'/info/legal'}
-            eventLabel="legal"
-            eventCategory="hero"
-            aria-label="Умови використання сайту"
           >&nbsp;умовами використання
-          </LinkWithGA>
+          </Link>
         </label>
       </div>
 

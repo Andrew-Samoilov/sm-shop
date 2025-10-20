@@ -1,7 +1,7 @@
 'use server'
 import React from "react";
-import { LinkWithGA } from "@/components";
 import { getSiteConfig } from "@/lib";
+import Link from "next/link";
 
 
 function SMTyreIcon(props: Readonly<React.SVGProps<SVGSVGElement>>) {
@@ -48,16 +48,14 @@ interface LogoProps {
   eventCategory?: string;
 }
 
-export async function Logo({ text, eventCategory = "header" }: Readonly<LogoProps>) {
+export async function Logo({ text }: Readonly<LogoProps>) {
   const siteConfig = await getSiteConfig();
 
   const label = text ?? siteConfig.siteName;
 
   return (
-    <LinkWithGA
+    <Link
       href="/"
-      eventLabel="logo"
-      eventCategory={eventCategory}
       className="group flex items-center gap-2 focus:outline-hidden"
       aria-label={`Navigate to ${label}`}
     >
@@ -65,6 +63,6 @@ export async function Logo({ text, eventCategory = "header" }: Readonly<LogoProp
       <span className="group-hover:text-accent -mb-3 -ml-6 text-xl font-semibold md:text-2xl">
         {label}
       </span>
-    </LinkWithGA>
+    </Link>
   );
 }

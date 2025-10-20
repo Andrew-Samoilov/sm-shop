@@ -1,7 +1,6 @@
 // popular-sizes.tsx
 "use client"
-
-import { LinkWithGA } from "@/components"
+import Link from "next/link"
 
 const popularSizes = [
     { width: 185, profile: 65, diameter: 15 },
@@ -27,17 +26,15 @@ export function PopularSizes() {
                     const label = `${s.width}/${s.profile} R${s.diameter}`
                     const href = `/tyres?width=${s.width}&profile=${s.profile}&diameter=${s.diameter}`
                     return (
-                        <LinkWithGA
+                        <Link
                             key={label}
                             href={href}
-                            eventCategory="tyre_size"
-                            eventLabel={label}
                             className="px-4 py-2 border-2 border-border dark:border-darkmode-border rounded-md hover:border-accent hover:no-underline group"
                         >
                             <span className="text-light group-hover:text-accent transition-colors">
                                 {label}
                             </span>
-                        </LinkWithGA>
+                        </Link>
                     )
                 })}
             </div>

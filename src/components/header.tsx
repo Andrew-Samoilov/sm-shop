@@ -1,4 +1,5 @@
-import { CartPanel, LinkWithGA, Logo, Search, ThemeSwitcher, MobileMenu } from "@/components";
+import { CartPanel,  Logo, Search, ThemeSwitcher, MobileMenu } from "@/components";
+import Link from "next/link";
 
 // import { UserIcon } from "@heroicons/react/24/outline";
 
@@ -11,26 +12,18 @@ export async function Header() {
       />
 
       <div className="items-center gap-6 hidden md:flex">
-        <LinkWithGA
-          eventLabel="tyres"
-          eventCategory="header"
+        <Link
           href="/tyres"
-        >Шини</LinkWithGA>
-        <LinkWithGA
-          eventLabel="about"
-          eventCategory="header"
+        >Шини</Link>
+        <Link
           href="/about"
-        >Про нас</LinkWithGA>
-        <LinkWithGA
-          eventLabel="info"
-          eventCategory="header"
+        >Про нас</Link>
+        <Link
           href="/info"
-        >Інфо</LinkWithGA>
-        <LinkWithGA
-          eventLabel="contacts"
-          eventCategory="header"
+        >Інфо</Link>
+        <Link
           href="/contacts"
-        >Контакти</LinkWithGA>
+        >Контакти</Link>
       </div>
 
       <div className="flex items-center justify-center gap-3 ">

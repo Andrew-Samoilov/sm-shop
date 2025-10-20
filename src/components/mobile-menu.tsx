@@ -1,12 +1,12 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { XMarkIcon, Bars3Icon } from "@heroicons/react/24/outline";
-import { LinkWithGA } from "./";
 import { sendGAEvent } from "@/lib";
+import Link from "next/link";
 
 export function MobileMenu() {
 
-     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const menuRef = useRef<HTMLDialogElement>(null);
 
@@ -60,42 +60,34 @@ export function MobileMenu() {
 
                         <ul className="flex flex-col gap-4 list-none">
                             <li>
-                                <LinkWithGA
+                                <Link
                                     href={'/tyres?view=gallery'}
-                                    eventLabel="tyres"
-                                    eventCategory="mobile_menu"
                                     aria-label="Перейти до каталогу шин"
                                     onClick={() => setIsMenuOpen(false)}
-                                >Шини</LinkWithGA>
+                                >Шини</Link>
                             </li>
 
                             <li>
-                                <LinkWithGA
+                                <Link
                                     href={'/about'}
-                                    eventLabel="about"
-                                    eventCategory="mobile_menu"
                                     aria-label="Перейти до інформації про нас"
                                     onClick={() => setIsMenuOpen(false)}
-                                >Про нас</LinkWithGA>
+                                >Про нас</Link>
                             </li>
 
                             <li>
-                                <LinkWithGA
+                                <Link
                                     href={'/info'}
-                                    eventLabel="info"
-                                    eventCategory="mobile_menu"
                                     aria-label="Перейти до інформаційних сторінок"
                                     onClick={() => setIsMenuOpen(false)}
-                                >Інфо</LinkWithGA>
+                                >Інфо</Link>
                             </li>
 
                             <li>
-                                <LinkWithGA
-                                    eventLabel="contacts"
-                                    eventCategory="mobile_menu"
+                                <Link
                                     href="/contacts"
                                     onClick={() => setIsMenuOpen(false)}
-                                >Контакти</LinkWithGA>
+                                >Контакти</Link>
                             </li>
                         </ul>
                     </nav>

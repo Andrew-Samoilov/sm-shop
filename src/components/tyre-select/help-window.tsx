@@ -3,7 +3,7 @@ import Image from "next/image";
 import { QuestionMarkCircleIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { sendGAEvent } from "@/lib";
 import { useEffect, useRef } from "react";
-import { LinkWithGA } from "../link-with-ga";
+import Link from "next/link";
 
 export function HelpWindow({ isOpen, setIsOpen }: {
   isOpen: boolean;
@@ -86,22 +86,18 @@ export function HelpWindow({ isOpen, setIsOpen }: {
               Діаметр обода, на який ви монтуєте шину.
               <h3>4. Індекс навантаження</h3>
               Індекс навантаження вказує на максимальне навантаження, яке може витримати шина під час руху з максимальною швидкістю, дозволеною виробником шин.
-              <LinkWithGA
+              <Link
                 href="/info/load-index"
-                eventLabel="speed-index"
-                eventCategory="TyrePage"
                 className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
               > Детальніше про індекс навантаження.
-              </LinkWithGA>
+              </Link>
               <h3>5. Індекс швидкості</h3>
               Індекс швидкості вказує на максимально допустиму швидкість для даної шини.
-              <LinkWithGA
+              <Link
                 href="/info/speed-index"
-                eventLabel="speed-index"
-                eventCategory="TyrePage"
                 className="text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
               > Детальніше про індекс швидкості
-              </LinkWithGA>
+              </Link>
               <blockquote>Ширина, профіль і діаметр складають розмір шини.</blockquote>
               <h3>XL</h3>
               Посилені шини мають підвищену вантажопідйомність. Завдяки цьому вони краще відповідають вимогам до шин, що використовуються в транспортних засобах, таких як фургони. Посилені шини зазвичай маркуються літерами <abbr title="Extra Loaded">XL</abbr> , але в залежності від виробника можуть використовуватися й інші символи.

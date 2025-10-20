@@ -2,8 +2,9 @@
 import Form from "next/form";
 import { useState } from "react";
 import { handleOrderSubmit, loadRecaptchaScript } from "@/lib";
-import { DeliverySelect, LinkWithGA, SubmitButton } from "@/components";
+import { DeliverySelect,  SubmitButton } from "@/components";
 import { CartTyre } from "@/types";
+import Link from "next/link";
 
 const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!;
 
@@ -157,14 +158,12 @@ export function OrderForm({ tyres }: { tyres: CartTyre[] }) {
       {/* --- Примітка --- */}
       <p className="text-light text-sm mx-auto text-center">
         Натискаючи &ldquo;Надіслати замовлення&ldquo;, Ви погоджуєтесь з&nbsp;
-        <LinkWithGA
+        <Link
           href="/info/legal"
-          eventLabel="legal"
-          eventCategory="cart"
           aria-label="Умови використання сайту"
         >
           умовами
-        </LinkWithGA>
+        </Link>
       </p>
     </Form>
   );

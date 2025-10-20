@@ -1,6 +1,6 @@
-import { LinkWithGA } from "@/components";
 import { getBaseMetadata, getBrands } from "@/lib";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export async function generateStaticParams() {
   const brands = await getBrands();
@@ -63,10 +63,8 @@ export default async function BrandsPage() {
       <h1 className="pb-6">Список брендів</h1>
       <div className="flex flex-wrap justify-around gap-6 p-2 lg:p-6">
         {brands.map((brand) => (
-          <LinkWithGA
+          <Link
             key={brand.id}
-            eventCategory="brand"
-            eventLabel={brand.brand_name}
             className="group flex flex-col items-center justify-center border-2 p-6 border-border dark:border-darkmode-border hover:border-accent  rounded-md  hover:no-underline"
             href={`/brands/${brand.slug}`}
           >
@@ -85,7 +83,7 @@ export default async function BrandsPage() {
                 {brand.brand_name}
               </figcaption>
             </figure>
-          </LinkWithGA>
+          </Link>
         ))}
       </div>
     </section>

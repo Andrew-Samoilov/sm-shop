@@ -1,11 +1,11 @@
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
-import { getSiteConfig, sendGAEvent } from "@/lib";
+"use client"
+import {  sendGAEvent } from "@/lib";
 import { PhoneIcon } from "@heroicons/react/24/outline";
 
-export default async function WorkingHoursPhone() {
-    const siteConfig = await getSiteConfig();
+export default  function WorkingHoursPhone() {
 
+    const telVisual = `097 323 21 61`
+    const telNormalize = "+380973232161"
     // Поточний час на сервері (Europe/Berlin)
     const now = new Date();
 
@@ -47,11 +47,11 @@ export default async function WorkingHoursPhone() {
     return (
         <a
             className="flex items-center justify-center text-center md:hidden py-2 bg-theme-light dark:bg-theme-dark"
-            href={siteConfig.tel.normalize}
+            href={telNormalize}
             onClick={handleClick}
         >
             <PhoneIcon className=" h-4 w-4 mr-2" />
-            {siteConfig.tel.visual}
+            {telVisual}
         </a>
     );
 }

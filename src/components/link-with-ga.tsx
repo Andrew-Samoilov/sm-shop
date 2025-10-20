@@ -1,11 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { sendGAEvent } from "@/lib";
 import type { ReactNode } from "react";
 
-type SmartLinkWithGAProps = {
+type LinkWithGAProps = {
   href: string;
   children: ReactNode;
   eventLabel: string;
@@ -17,65 +15,24 @@ type SmartLinkWithGAProps = {
   title?: string;
   target?: string;
   rel?: string;
-  onClick?: (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => void;
 };
 
 export function LinkWithGA({
   href,
   children,
-  eventLabel,
-  eventCategory,
-  eventName,
-  eventParams,
   className,
   ariaLabel,
-  target,
   title,
+  target,
   rel,
-  onClick,
-}: SmartLinkWithGAProps) {
-  const [isClient, setIsClient] = useState(false);
-  const [isExternal, setIsExternal] = useState(false);
+}: LinkWithGAProps) {
+  const isExternal = href.startsWith("http") || href.startsWith("//");
 
-  useEffect(() => {
-    setIsClient(true);
-
-    try {
-      const url = new URL(href, window.location.origin);
-      setIsExternal(url.origin !== window.location.origin);
-    } catch {
-      setIsExternal(false);
-    }
-  }, [href]);
-
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
-    sendGAEvent({
-      action: eventName ?? "click",
-      category: eventCategory ?? (isExternal ? "external_link" : "navigation"),
-      label: eventLabel,
-      params: eventParams,
-    });
-    if (onClick) onClick(e);
-  };
-
-  if (!isClient) {
-    return (
-      <Link
-        href={href}
-        className={className}
-        onClick={handleClick}
-        {...(title ? { title } : {})}
-        aria-label={ariaLabel}>
-        {children}
-      </Link>
-    );
-  }
 
   if (isExternal) {
     return (
       <a
         href={href}
-        onClick={handleClick}
         className={className}
         aria-label={ariaLabel}
         target={target ?? "_blank"}
@@ -90,11 +47,11 @@ export function LinkWithGA({
   return (
     <Link
       href={href}
-      onClick={handleClick}
       className={className}
-      {...(target ? { target } : {})}
-      {...(title ? { title } : {})}
       aria-label={ariaLabel}
+      {...(title ? { title } : {})}
+      {...(target ? { target } : {})}
+      {...(rel ? { rel } : {})}
     >
       {children}
     </Link>

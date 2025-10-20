@@ -12,7 +12,6 @@ export async function generateMetadata({
   return generateTyresMetadata({ searchParams: params });
 }
 
-
 export default function TyresPage() {
   return (
     <section className="">

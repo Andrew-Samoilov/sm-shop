@@ -1,4 +1,5 @@
-import { LinkWithGA } from "@/components"
+
+import Link from "next/link"
 
 const popularBrands = [
     {
@@ -34,11 +35,9 @@ export function PopularBrands() {
             <h2>Популярні бренди:</h2>
             <div className="flex flex-wrap justify-center gap-2 md:gap-6">
                 {popularBrands.map((b) => (
-                    <LinkWithGA
+                    <Link
                         key={b.slug}
                         href={`/brands/${b.slug}`}
-                        eventCategory="brand"
-                        eventLabel={b.brand}
                         className="group flex flex-col items-center border-2 border-border dark:border-darkmode-border hover:border-accent rounded-md p-4 hover:no-underline"
                     >
                         {b.logo && (
@@ -52,7 +51,7 @@ export function PopularBrands() {
                         <span className="text-light group-hover:text-accent transition-colors">
                             {b.brand}
                         </span>
-                    </LinkWithGA>
+                    </Link>
                 ))}
             </div>
         </section>
