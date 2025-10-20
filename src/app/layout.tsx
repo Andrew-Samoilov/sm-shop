@@ -42,7 +42,7 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
           }}
         />
 
-        <WorkingHougitrsPhone />
+        <WorkingHoursPhone />
 
         <TwSizeIndicator />
 
