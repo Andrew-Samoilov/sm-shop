@@ -10,7 +10,6 @@ function handleClick(tyre: CartTyre) {
 
   let cart: CartTyre[] = [];
 
-
   // 🔹 1. Зчитуємо існуючий кошик (масив)
   try {
     const stored = localStorage.getItem("tyres");

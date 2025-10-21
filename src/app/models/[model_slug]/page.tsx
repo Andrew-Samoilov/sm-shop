@@ -1,9 +1,15 @@
 import { CertificatesClient, ModelViewer, TyresList } from "@/components";
-import { getBrandById, getModels, getTyresByModelId, getModelBySlug, getModelImgByModelId, getContentBlock, normalizedCerts, getSiteConfig } from "@/lib";
+import {  normalizedCerts, getSiteConfig } from "@/lib";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import { Metadata } from "next";
 import { Certificate } from "@/types";
+import { getModels } from "@/lib/server/prisma/get-models";
+import { getModelBySlug } from "@/lib/server/prisma/get-model-by-slug";
+import { getBrandById } from "@/lib/server/prisma/get-brand-by-id";
+import { getModelImgByModelId } from "@/lib/server/prisma/get-model-img-by-model-id";
+import { getTyresByModelId } from "@/lib/server/prisma/get-tyres-by-model-id";
+import { getContentBlock } from "@/lib/server/get-content-block";
 
 export async function generateStaticParams() {
   const models = await getModels();
@@ -13,11 +19,6 @@ export async function generateStaticParams() {
   }));
 }
 
-// export async function generateMetadata(
-//   { params }: { params: { brand_slug: string } }
-// ): Promise<Metadata> {
-//   return generateModelMetadata(params.brand_slug);
-// }
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://shinamix.com.ua";
 
 export async function generateMetadata(

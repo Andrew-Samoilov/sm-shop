@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib';
+import { prisma } from "@/lib/server/prisma/prisma";
 
 export async function GET(req: NextRequest) {
     const secret = req.nextUrl.searchParams.get('secret');

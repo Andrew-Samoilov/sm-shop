@@ -1,5 +1,5 @@
 "use server";
-import { prisma } from "@/lib";
+import { prisma } from "@/lib/server/prisma/prisma";
 
 type TyreField = "width" | "profile" | "diameter";
 

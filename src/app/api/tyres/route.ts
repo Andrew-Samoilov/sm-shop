@@ -1,4 +1,4 @@
-import { prisma } from "@/lib";
+import { prisma } from "@/lib/server/prisma/prisma";
 import { Prisma, season } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server"
 
@@ -46,7 +46,7 @@ export async function GET(req: NextRequest) {
             {
               title: {
                 contains: query,
-                mode: "insensitive", 
+                mode: "insensitive",
               },
             },
             {
@@ -54,7 +54,7 @@ export async function GET(req: NextRequest) {
                 is: {
                   modelName: {
                     contains: query,
-                    mode: "insensitive", 
+                    mode: "insensitive",
                   },
                 },
               },
@@ -77,8 +77,8 @@ export async function GET(req: NextRequest) {
         brand: true,
         model: true,
       },
-        orderBy: getOrderBy(sort),
-      });
+      orderBy: getOrderBy(sort),
+    });
 
     const images = await prisma.modelImage.findMany({
       where: {

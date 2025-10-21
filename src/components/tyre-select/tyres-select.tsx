@@ -1,10 +1,11 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { getTyresOptions, formatSearchTitle } from "@/lib";
+import { formatSearchTitle } from "@/lib";
 import { HelpWindow, TyresList, OptionSelect, SeasonCheckbox, ListHeader, EmptyPlaceholder } from "@/components";
 import { ModelImage } from "@prisma/client";
 import { TyreWithRelations } from "@/types";
+import { getTyresOptions } from "@/lib/server/prisma/get-tyres-options";
 
 type ViewType = "list" | "gallery";
 

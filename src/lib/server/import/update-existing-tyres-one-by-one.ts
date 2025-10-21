@@ -1,5 +1,5 @@
-// src/lib/import/update-existing-tyres-one-by-one.ts
-import { prisma } from "@/lib"
+
+import { prisma } from "@/lib/server/prisma/prisma";
 import { Prisma, PrismaClient } from "@prisma/client";
 
 type DbClient = PrismaClient | Prisma.TransactionClient;
@@ -40,7 +40,7 @@ export async function updateExistingTyresOneByOne(db: DbClient = prisma) {
         scanned++
 
         try {
-                    await db.tyre.update({
+            await db.tyre.update({
                 where: { externalId: r.externalId },
                 data: {
                     price: r.price,

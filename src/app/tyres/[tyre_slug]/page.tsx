@@ -1,12 +1,16 @@
 export const dynamic = "force-static";
 
 import { AddToCartButton, BreadCrumbs, CertificatesClient, ModelViewer, QuantitySelector, SeasonIcon, TotalPrice, ViewItemGA } from "@/components";
-import { getTyreBySlug, getModelImgByModelId, prisma, getContentBlock, getTyreSize, getSeasonLabel, generateTyreMetadata, buildProductJsonLd, buildBreadcrumbsJsonLd, JsonLd, } from "@/lib";
+import { getTyreSize, getSeasonLabel, generateTyreMetadata, buildProductJsonLd, buildBreadcrumbsJsonLd, JsonLd, } from "@/lib";
+import { getTyreBySlug } from "@/lib/server/prisma/get-tyre-by-slug";
+import { getModelImgByModelId } from "@/lib/server/prisma/get-model-img-by-model-id";
+import { prisma } from "@/lib/server/prisma/prisma";
 import { Certificate } from "@/types";
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
+import { getContentBlock } from "@/lib/server/get-content-block";
 
 
 export async function generateStaticParams() {
@@ -202,13 +206,13 @@ export default async function TyrePage(
           </div>
 
 
-          
+
 
           <Link
             className="flex flex-wrap flex-col md:flex-row justify-center items-center gap-2 lg:gap-6 text-center max-w-full hover:no-underline"
             href={"/info/payment-delivery"}
             target="_blank"
-            // eventLabel={""}
+          // eventLabel={""}
           >
             <span
               className="text-h5 max-md:text-base"

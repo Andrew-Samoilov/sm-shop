@@ -1,17 +1,12 @@
-"use client";
-import { prisma } from "@/lib";
+export const dynamic = "force-static";
+import { getInfoPages } from "@/lib/server/get-info-pages";
 import Link from "next/link";
 
 export async function InfoSection() {
-  const pages = await prisma.staticPage.findMany({
-    where: { visible: true },
-    orderBy: { title: "asc" },
-    select: { slug: true, title: true },
-  });
+  const pages = await getInfoPages();
 
   return (
     <section className="section">
-
       <Link
         href="/info"
         className="text-center text-lg font-semibold  text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"

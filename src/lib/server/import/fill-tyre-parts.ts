@@ -1,4 +1,6 @@
-import { parseTyreSize, prisma } from "@/lib";
+
+import { prisma } from "@/lib/server/prisma/prisma";
+import { parseTyreSize } from "./parse-tyre-size";
 
 export async function fillTyreParts() {
     const tyres = await prisma.tyre.findMany({
@@ -29,7 +31,7 @@ export async function fillTyreParts() {
 
         // детальний лог усіх ключів
         console.log(`[${tyre.id}] FULL PARSED:`, parsed);
-        
+
         for (const [key, val] of Object.entries(parsed)) {
             if (typeof val === "string") {
                 console.log(`  ${key}: length=${val.length} value="${val}"`);
@@ -38,11 +40,11 @@ export async function fillTyreParts() {
             }
         }
 
-            await prisma.tyre.update({
-                where: { id: tyre.id },
-                data: parsed,
-            });
-        }
-
-        console.log("[fillTyreParts] виконано");
+        await prisma.tyre.update({
+            where: { id: tyre.id },
+            data: parsed,
+        });
     }
+
+    console.log("[fillTyreParts] виконано");
+}

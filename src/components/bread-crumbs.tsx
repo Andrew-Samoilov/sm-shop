@@ -1,6 +1,7 @@
 import { HomeIcon } from "@heroicons/react/24/outline";
 
-import { getSeasonLabel, getTyreBySlug } from "@/lib";
+import { getSeasonLabel } from "@/lib";
+import { getTyreBySlug } from "@/lib/server/prisma/get-tyre-by-slug";
 import Link from "next/link";
 
 type Props = { tyreSlug: string; };

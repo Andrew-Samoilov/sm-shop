@@ -2,9 +2,11 @@ import { Prisma } from "@prisma/client";
 
 export type SiteConfig = {
   siteName: string;
+  baseUrl: string;
   fb: string;
   signal: string;
   viber: string;
+  whatsapp: string;
   email: string;
   tel: {
     visual: string;

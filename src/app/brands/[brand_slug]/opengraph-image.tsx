@@ -1,5 +1,6 @@
+import { getBrandBySlug } from "@/lib/server/prisma/get-brand-by-slug";
 import { ImageResponse } from "next/og";
-import { getBrandBySlug } from "@/lib";
+
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -67,9 +68,9 @@ export default async function OG({ params }: { params: { brand_slug: string } })
                 }}
             >
                 {logoUrl ? (
+                    // eslint-disable-next-line @next/next/no-img-element
                     <img
-                        src={logoUrl}
-                      
+                        src={logoUrl}                     
                         style={{
                             objectFit: "contain",  maxHeight: "100%",
                             maxWidth: "100%", }}

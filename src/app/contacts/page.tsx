@@ -2,8 +2,9 @@ import Link from "next/link";
 import Script from "next/script";
 
 import { ContactForm } from "@/components";
-import { getContentBlock } from "@/lib";
+
 import { ContactBlock } from "@/types";
+import { getContentBlock } from "@/lib/server/get-content-block";
 
 export default async function ContactsPage() {
   const contacts = await getContentBlock<ContactBlock[]>('contacts', [])

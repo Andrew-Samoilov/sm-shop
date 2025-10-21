@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
-import { prisma , getSeasonLabel } from "@/lib";
+import { getSeasonLabel } from "@/lib";
+import { prisma } from "@/lib/server/prisma/prisma";
 import { Season } from "@/types";
 
 export const runtime = "nodejs";

@@ -99,9 +99,9 @@ export function CartPanel() {
             className=" fixed inset-0 z-50 overflow-y-auto flex flex-col bg-white/95 dark:bg-darkmode-body/95 md:rounded-md w-full md:w-auto "
           >
 
-            <header className="p-2 md:p-4 lg:p-6  
+            <header className="container p-2 md:p-4 lg:p-6  
             flex items-center justify-between border-b border-border dark:border-darkmode-border">
-              <h2 className="text-lg font-semibold">Кошик</h2>
+              <h1 className="text-h1">Кошик</h1>
               <button
                 onClick={() => setIsOpen(false)}
                 className="cursor-pointer disabled:cursor-not-allowed"
@@ -121,7 +121,7 @@ export function CartPanel() {
                   {cartItems.map((item) => (
                     <div
                       key={item.id}
-                      className="flex flex-Dcol md:flex-row gap-4 items-center justify-between border-b border-border dark:border-darkmode-border pb-2"
+                      className="flex flex-col md:flex-row gap-4 md:gap-16 items-center justify-center border-b border-border dark:border-darkmode-border pb-2"
                     >
                       {item.tyreImageUrl && (
                         <Image
@@ -139,13 +139,17 @@ export function CartPanel() {
 
                       </div>
 
-
-                      <div className="flex items-center gap-3">
-                        <span className="md:text-h5">
+                      <div className="flex items-center gap-4 md:gap-10">
+                        <span className="flex flex-row md:text-h5">
                           {(item.price).toLocaleString("uk-UA")} грн
-
-                          <div>{item.quantity} шт</div>
                         </span>
+                        <input
+                          type="number"
+                          value={item.quantity}
+                          min={1}
+                          className="border border-border rounded-md p-1 md:px-4  text-center "
+                        />
+                        <div> шт</div>
 
                         <RemoveFromCartButton
                           tyre={item}

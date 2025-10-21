@@ -1,5 +1,6 @@
+import { prisma } from "@/lib/server/prisma/prisma";
 import { MetadataRoute } from "next";
-import { prisma } from "@/lib";
+
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
@@ -20,7 +21,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         prisma.tyre.findMany({
             where: {
                 inventoryQuantity: {
-                    gt: 0 
+                    gt: 0
                 }
             },
             select: { slug: true }

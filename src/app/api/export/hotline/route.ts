@@ -1,6 +1,5 @@
-// src/app/api/export/hotline/route.ts
 import { NextResponse } from 'next/server'
-import { prisma } from '@/lib'
+import { prisma } from "@/lib/server/prisma/prisma";
 
 function getCategoryId(season: string | null | undefined): number {
     switch (season) {

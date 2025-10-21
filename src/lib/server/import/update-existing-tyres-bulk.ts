@@ -1,14 +1,13 @@
-// src/lib/import/update-existing-tyres-bulk.ts
-import { prisma } from "@/lib"
-import {Prisma, PrismaClient } from "@prisma/client";
+import { prisma } from "@/lib/server/prisma/prisma";
+import { Prisma, PrismaClient } from "@prisma/client";
 type DbClient = PrismaClient | Prisma.TransactionClient;
 
 export async function updateExistingTyresBulk(db: DbClient = prisma) {
-    console.log("[updateExistingTyresBulk] start")
+  console.log("[updateExistingTyresBulk] start")
 
   try {
     const pending = await db.tyreImport.count({
-        where: { itemType: "Товар", processed: false },
+      where: { itemType: "Товар", processed: false },
     })
     console.log("[updateExistingTyresBulk] pending:", pending)
     if (pending === 0) return { updated: 0 }

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { prisma } from "@/lib";
+import { prisma } from "@/lib/server/prisma/prisma";
 
 export default async function InfoPageList() {
     const pages = await prisma.staticPage.findMany({

@@ -1,6 +1,8 @@
+"use server";
 import type { Metadata } from "next";
-import { getBaseMetadata, prisma } from "@/lib";
+import { prisma } from "@/lib/server/prisma/prisma";
 import { notFound } from "next/navigation";
+import { getBaseMetadataAction } from "../server/get-base-metadata-action";
 
 export async function generateInfoPageMetadata(slug: string): Promise<Metadata> {
     const page = await prisma.staticPage.findUnique({
@@ -10,7 +12,7 @@ export async function generateInfoPageMetadata(slug: string): Promise<Metadata> 
 
     if (!page) notFound();
 
-    const base = await getBaseMetadata();
+    const base = await getBaseMetadataAction();
     const baseUrl = base.metadataBase?.toString().replace(/\/$/, "") ?? "https://shinamix.com.ua";
     const canonicalUrl = `${baseUrl}/info/${page.slug}`;
     const title = `${page.title} | ShinaMix`;
@@ -19,7 +21,7 @@ export async function generateInfoPageMetadata(slug: string): Promise<Metadata> 
             ? page.description
             : `Інформаційна сторінка ${page.title.toLowerCase()} у магазині ShinaMix. Дізнайтесь більше про ${page.title.toLowerCase()} та інші корисні поради щодо вибору шин.`;
 
-    
+
     return {
         ...base,
         title,

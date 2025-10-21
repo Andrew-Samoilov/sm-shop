@@ -1,13 +1,12 @@
-import type { Metadata } from "next";
 import "../styles/globals.css"
 import { Analytics, Footer, Header, TwSizeIndicator, WorkingHoursPhone } from "@/components";
 import { ToastContainer } from "react-toastify";
 import Script from "next/script";
 import { Suspense } from "react";
-import { getBaseMetadata } from "@/lib";
+import { getBaseMetadataAction } from "@/lib/server/get-base-metadata-action";
 
-export async function generateMetadata(): Promise<Metadata> {
-  return getBaseMetadata(); 
+export async function generateMetadata() {
+  return getBaseMetadataAction();
 }
 
 export const viewport = {

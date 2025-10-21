@@ -1,5 +1,4 @@
 import { Logo } from "@/components";
-
 import packageData from "../../package.json";
 import { getSiteConfig } from "@/lib";
 import Link from "next/link";

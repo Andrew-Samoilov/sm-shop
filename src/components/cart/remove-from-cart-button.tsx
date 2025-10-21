@@ -6,11 +6,9 @@ import { TrashIcon } from "@heroicons/react/24/solid";
 
 export function RemoveFromCartButton({
   tyre,
-  className,
   onRemoved,
 }: {
   tyre: CartTyre;
-  className?: string;
   onRemoved?: () => void;
 }) {
   const handleRemove = () => {
@@ -48,12 +46,8 @@ export function RemoveFromCartButton({
     <button
       type="button"
       onClick={handleRemove}
-      className={
-        className ??
-        "text-sm text-gray-500 hover:text-accent transition-colors"
-      }
     >
-      <TrashIcon className=" h-5 w-5 cursor-pointer text-light" />
+      <TrashIcon className="h-5 w-5 cursor-pointer opacity-50" />
     </button>
   );
 }

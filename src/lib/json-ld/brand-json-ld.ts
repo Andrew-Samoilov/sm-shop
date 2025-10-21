@@ -1,4 +1,4 @@
-import { getBrandBySlug } from "@/lib";
+import { getBrandBySlug } from "../server/prisma/get-brand-by-slug";
 
 export async function generateBrandJsonLd(brand_slug: string) {
     const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";

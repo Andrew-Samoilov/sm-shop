@@ -1,10 +1,12 @@
 import { BenefitsSection, FeatureSection, CertificatesClient, BuyTyres, PopularSizes,  PopularBrands } from "@/components";
-import { getBaseMetadata, getContentBlock } from "@/lib";
+import { getBaseMetadataAction } from "@/lib/server/get-base-metadata-action";
+
+import { getContentBlock } from "@/lib/server/get-content-block";
 import { Certificate } from '@/types'
 
 const cert = await getContentBlock<Certificate[]>('certificates', [])
 export async function generateMetadata() {
-  return getBaseMetadata({
+  return getBaseMetadataAction({
     title: "Про компанію ShinaMix",
     description:
       "ShinaMix — українська компанія з багаторічним досвідом у продажу автошин. Ми працюємо лише з перевіреними брендами, гарантуємо якість, чесні ціни та швидку доставку по всій Україні.",

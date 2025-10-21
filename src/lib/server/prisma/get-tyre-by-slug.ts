@@ -1,4 +1,5 @@
-import { prisma } from "@/lib";
+"use server";
+import { prisma } from "@/lib/server/prisma/prisma";
 import { Prisma } from "@prisma/client";
 
 type TyreWithRelations = Prisma.TyreGetPayload<{

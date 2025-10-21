@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { getBrandBySlug } from "@/lib";
-
+import { getBrandBySlug } from "../server/prisma/get-brand-by-slug";
+    
 export async function generateBrandMetadata(brand_slug: string): Promise<Metadata> {
     const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://shinamix.com.ua";
     const brand = await getBrandBySlug(brand_slug);

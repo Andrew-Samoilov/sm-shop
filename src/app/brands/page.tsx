@@ -1,4 +1,6 @@
-import { getBaseMetadata, getBrands } from "@/lib";
+
+import { getBaseMetadataAction } from "@/lib/server/get-base-metadata-action";
+import { getBrands } from "@/lib/server/prisma/get-brands";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -35,7 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
   };
 
-  return getBaseMetadata({
+  return getBaseMetadataAction({
     title: "Бренди шин",
     description: "Ознайомтесь з переліком брендів шин, доступних у нашому магазині.",
     openGraph: {

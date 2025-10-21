@@ -1,4 +1,4 @@
-"use client";
+export const dynamic = "force-static";
 import { BuyTyres, HeroSection, InfoSection, TyresSelect } from "@/components";
 import { Suspense } from "react";
 

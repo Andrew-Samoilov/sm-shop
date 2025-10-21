@@ -1,4 +1,5 @@
-import { prisma, simpleSlug } from '@/lib'
+import { simpleSlug } from '@/lib'
+import { prisma } from "@/lib/server/prisma/prisma";
 
 export async function findMissingModelsFromImport(): Promise<
   { modelName: string; slug: string; brandName: string }[]
@@ -6,7 +7,7 @@ export async function findMissingModelsFromImport(): Promise<
 
   // 1. Отримуємо унікальні назви моделей з імпорту
   const rawModels = await prisma.tyreImport.findMany({
-    distinct: ["model", "brandName"], 
+    distinct: ["model", "brandName"],
     where: {
       itemType: "Товар",
       processed: false,

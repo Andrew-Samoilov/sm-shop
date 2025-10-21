@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib";
+import { prisma } from "@/lib/server/prisma/prisma";
 
 interface TyreItem {
   id: number;

@@ -1,4 +1,4 @@
-import { prisma } from "@/lib";
+import { prisma } from "@/lib/server/prisma/prisma";
 import { Tyre } from "@prisma/client";
 
 export async function getTyreById(id: number): Promise<Tyre | null> {

@@ -1,5 +1,7 @@
 import { Metadata } from "next";
-import { getTyreBySlug, getModelImgByModelId, getTyreSize } from "@/lib";
+import { getTyreBySlug } from "@/lib/server/prisma/get-tyre-by-slug";
+import { getModelImgByModelId } from "@/lib/server/prisma/get-model-img-by-model-id";
+import { getTyreSize } from "@/lib";
 
 export async function generateTyreMetadata(tyre_slug: string): Promise<Metadata> {
 

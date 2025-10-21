@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
-import {  generateInfoPageMetadata, prisma } from "@/lib";
+import { generateInfoPageMetadata } from "@/lib";
+import { prisma } from "@/lib/server/prisma/prisma";
 import ReactMarkdown from "react-markdown";
 import { Metadata } from "next";
 

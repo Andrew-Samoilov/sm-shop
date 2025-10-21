@@ -1,5 +1,6 @@
-// src/lib/import/add-missing-tyres-from-import.ts
-import { prisma, simpleSlug } from "@/lib";
+
+import { simpleSlug } from "@/lib";
+import { prisma } from "@/lib/server/prisma/prisma";
 import { Prisma } from "@prisma/client";
 
 // тип енума напряму з інпут-типу

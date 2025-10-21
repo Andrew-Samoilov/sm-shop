@@ -1,4 +1,3 @@
-"use client";
 import Link from "next/link";
 
 export function BuyTyres() {
@@ -9,8 +8,6 @@ export function BuyTyres() {
             <div className="flex flex-col items-center md:flex-row gap-6 w-full">
                 <Link
                     href={'/tyres?season=summer&view=gallery'}
-                    // eventLabel="summer"
-                    // eventCategory="season_tyres_section"
                     aria-label="Перейти до каталогу літніх шин"
                     className="flex justify-center items-center rounded-md p-12 hover:no-underline
                     // md:w-1/3
@@ -22,8 +19,6 @@ export function BuyTyres() {
 
                 <Link
                     href={'/tyres?season=winter&view=gallery'}
-                    // eventLabel="winter"
-                    // eventCategory="season_tyres_section"
                     aria-label="Перейти до каталогу зимових шин"
                     className="flex justify-center  rounded-md p-12 hover:no-underline
                     // md:w-1/3
@@ -35,8 +30,6 @@ export function BuyTyres() {
 
                 <Link
                     href={'/tyres?season=allseason&view=gallery'}
-                    // eventLabel="allseason"
-                    // eventCategory="season_tyres_section"
                     aria-label="Перейти до каталогу всесезонних шин"
                     className="flex justify-center items-center rounded-md p-12 hover:no-underline
                     // md:w-1/3

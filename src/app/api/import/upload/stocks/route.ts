@@ -1,4 +1,5 @@
-import { importStocks } from "@/lib";
+
+import { importStocks } from "@/lib/server/import/stocks/import-stocks";
 import { NextRequest, NextResponse } from "next/server";
 import { spawn } from 'node:child_process';
 
@@ -73,7 +74,7 @@ export async function POST(req: NextRequest) {
             {
                 status: 200,
                 headers: {
-                    "X-Items-Inserted": insertedCount.toString(),
+                    "X-Items-Inserted": insertedCount.count.toString(),
                 },
             }
         );

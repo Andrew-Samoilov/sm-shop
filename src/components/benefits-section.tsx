@@ -1,6 +1,7 @@
 'use server'
 
-import { getContentBlock } from "@/lib";
+
+import { getContentBlock } from "@/lib/server/get-content-block";
 import { Benefit } from "@/types";
 
 export async function BenefitsSection() {

@@ -1,6 +1,5 @@
-// src/app/api/export/gmc/route.ts
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib";
+import { prisma } from "@/lib/server/prisma/prisma";
 
 export async function GET() {
 
@@ -8,7 +7,7 @@ export async function GET() {
 
     const tyres = await prisma.tyre.findMany({
         where: {
-            inventoryQuantity: { gt: 0 }, 
+            inventoryQuantity: { gt: 0 },
         },
         include: {
             brand: true,

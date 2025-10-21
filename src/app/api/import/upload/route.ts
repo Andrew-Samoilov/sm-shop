@@ -1,6 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { addMissingBrands, addMissingModels, addMissingTyresFromImport, fillTyreParts, findMissingBrandsFromImport, findMissingModelsFromImport, normalizeSeasonsInTyreImport, prisma, saveToTyreImportFromJson, updateExistingTyresOneByOne } from '@/lib';
+
+import { prisma } from "@/lib/server/prisma/prisma";
 import { spawn } from 'child_process';
+import { saveToTyreImportFromJson } from '@/lib/server/import/save-to-tyre_import-from-json';
+import { normalizeSeasonsInTyreImport } from '@/lib/server/import/normalize-seasons-in-tyre-import';
+import { updateExistingTyresOneByOne } from '@/lib/server/import/update-existing-tyres-one-by-one';
+import { findMissingBrandsFromImport } from '@/lib/server/import/find-missing-brands-from-import';
+import { findMissingModelsFromImport } from '@/lib/server/import/find-missing-models-from-import';
+import { addMissingTyresFromImport } from '@/lib/server/import/add-missing-tyres-from-import';
+import { addMissingBrands } from '@/lib/server/import/add-missing-brands';
+import { addMissingModels } from '@/lib/server/import/add-missing-models';
+import { fillTyreParts } from '@/lib/server/import/fill-tyre-parts';
 
 export async function POST(req: NextRequest) {
 
@@ -45,7 +55,7 @@ export async function POST(req: NextRequest) {
             await tx.tyreImport.deleteMany({});
             const count = await saveToTyreImportFromJson(data, tx);
             await normalizeSeasonsInTyreImport(tx);
-            return count; 
+            return count;
         });
 
         console.timeEnd("[import/save]");
@@ -59,7 +69,7 @@ export async function POST(req: NextRequest) {
 
                 await prisma.tyre.updateMany({ data: { inventoryQuantity: 0 } });
                 console.log('[api/import/upload/route] Updated inventory quantities to 0');
-                
+
                 await updateExistingTyresOneByOne();
 
 
@@ -89,7 +99,7 @@ export async function POST(req: NextRequest) {
 
         })();
 
-       
+
         // 3. Відповідаємо 1С одразу
         return NextResponse.json(
             { ok: true, inserted: insertedCount },

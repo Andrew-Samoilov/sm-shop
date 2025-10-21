@@ -1,4 +1,6 @@
-import { capitalizeFirstLetter, prisma } from '@/lib'
+import { capitalizeFirstLetter } from '@/lib';
+import { prisma } from "@/lib/server/prisma/prisma";
+
 
 export async function addMissingBrands(brands: { slug: string }[]) {
     if (brands.length === 0) {
@@ -13,7 +15,7 @@ export async function addMissingBrands(brands: { slug: string }[]) {
 
     await prisma.brand.createMany({
         data: formatted,
-        skipDuplicates: true, 
+        skipDuplicates: true,
     });
 
     console.log(`[addMissingBrands] Створено (або пропущено дублікати): ${formatted.length} брендів`);

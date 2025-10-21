@@ -1,4 +1,4 @@
-import { prisma } from '@/lib'
+import { prisma } from "@/lib/server/prisma/prisma";
 
 export async function findMissingBrandsFromImport(): Promise<{ slug: string }[]> {
 

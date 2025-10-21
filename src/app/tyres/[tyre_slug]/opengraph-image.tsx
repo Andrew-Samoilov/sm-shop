@@ -1,5 +1,7 @@
 import { ImageResponse } from "next/og";
-import { getTyreBySlug, getModelImgByModelId, getTyreSize, getSeasonLabel } from "@/lib";
+import {  getTyreSize, getSeasonLabel } from "@/lib";
+import { getTyreBySlug } from "@/lib/server/prisma/get-tyre-by-slug";
+import { getModelImgByModelId } from "@/lib/server/prisma/get-model-img-by-model-id";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -38,7 +40,8 @@ export default async function OG({ params }: { params: { tyre_slug: string } }) 
     const tyrePrice = tyre.price ?? 0;
     const tyreSeason = getSeasonLabel(tyre.model?.season);
     
-    const images = tyre.modelId != null ? await getModelImgByModelId(tyre.modelId) : [];
+    const images = tyre.modelId === null ? [] : await getModelImgByModelId(tyre.modelId);
+
     const rel = images?.[0]?.url as string | undefined;
     let photoUrl = "";
     if (rel) {
@@ -61,6 +64,7 @@ export default async function OG({ params }: { params: { tyre_slug: string } }) 
                     justifyContent: "center",
                 }}>
                     {photoUrl ? (
+                        // eslint-disable-next-line @next/next/no-img-element
                         <img src={photoUrl} style={{
                             objectFit: "contain", width: "100%",
                             height: "100%", }}  alt="" />

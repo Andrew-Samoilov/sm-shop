@@ -2,7 +2,7 @@
 
 import { Certificate } from "@/types";
 import Image from "next/image";
-import "./embla.css";
+// import "./embla.css";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 
