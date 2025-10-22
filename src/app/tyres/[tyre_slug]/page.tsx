@@ -1,6 +1,6 @@
 export const dynamic = "force-static";
 
-import { AddToCartButton, BreadCrumbs, CertificatesClient, ModelViewer, QuantitySelector, SeasonIcon, TotalPrice, ViewItemGA } from "@/components";
+import { AddToCartButton, BreadCrumbs, CertificatesClient, ModelViewer, QuantitySelector, SeasonIcon, TotalPrice, TyreByWarehouses, ViewItemGA } from "@/components";
 import { getTyreSize, getSeasonLabel, generateTyreMetadata, buildProductJsonLd, buildBreadcrumbsJsonLd, JsonLd, } from "@/lib";
 import { getTyreBySlug } from "@/lib/server/prisma/get-tyre-by-slug";
 import { getModelImgByModelId } from "@/lib/server/prisma/get-model-img-by-model-id";
@@ -65,7 +65,7 @@ export default async function TyrePage(
   // console.info("[TyrePage]", cert);
 
   const tyreSize = getTyreSize(tyre);
-  const quantity = Math.min(4, tyre.inventoryQuantity ?? 4);
+  const quantity = Math.min( tyre.inventoryQuantity ?? 0,20);
 
   const productJsonLd = buildProductJsonLd(tyre, images);
   const breadcrumbs = [
@@ -141,8 +141,6 @@ export default async function TyrePage(
           >
             <Link
               href="/info/speed-index"
-              // eventLabel="speed-index"
-              // eventCategory="TyrePage"
               target="_blank"
               title="Докладніше про індекси швидкості"
               className="hover:no-underline "
@@ -172,6 +170,7 @@ export default async function TyrePage(
             Кількість: {quantity}
           </div>
 
+          <TyreByWarehouses externalId={tyre.externalId} />
 
           <div className="flex flex-col md:flex-row md:items-center border-b pb-2 border-border dark:border-darkmode-border">
             <div className="flex flex-row md:flex-col gap-2 xl:gap-6 items-center">
@@ -225,6 +224,8 @@ export default async function TyrePage(
             >Самовивіз: вже сьогодні.</span>
           </Link>
 
+   
+
         </div>
 
       </div>
@@ -240,6 +241,7 @@ export default async function TyrePage(
                 <span className="text-light  dark:text-darkmode-light text-4xl transition-transform group-open:rotate-45">+</span>
               </summary>
               <ReactMarkdown>{tyre.model?.description}</ReactMarkdown>
+          
             </details>
           </section>
         )}

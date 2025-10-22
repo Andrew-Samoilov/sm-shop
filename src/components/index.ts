@@ -56,3 +56,4 @@ export { TotalPrice } from "./totalPrice"
 export { default as WorkingHoursPhone } from "./working-hours-phone";
 export { DeliverySelect } from "./delivery-select"
 export { getProductHtml } from "../lib/order/get-product-html"
+export { TyreByWarehouses } from "./tyre-by-warehouses"
