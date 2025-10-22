@@ -1,3 +1,8 @@
+"use server";
+/**
+ * @server-only
+ */
+
 import { prisma } from "@/lib/server/prisma/prisma";
 
 type RawStock = Record<string, string | number>; // простий тип під твій JSON

@@ -1,3 +1,8 @@
+"use server";
+/**
+ * @server-only
+ */
+
 import { prisma } from "@/lib/server/prisma/prisma";
 
 export async function addMissingModels(models: { modelName: string; slug: string; brandName: string }[]) {

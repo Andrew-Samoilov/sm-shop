@@ -1,3 +1,7 @@
+"use server";
+/**
+ * @server-only
+ */
 import { capitalizeFirstLetter } from '@/lib';
 import { prisma } from "@/lib/server/prisma/prisma";
 

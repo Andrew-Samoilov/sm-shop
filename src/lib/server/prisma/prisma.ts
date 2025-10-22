@@ -1,3 +1,7 @@
+/**
+ * @server-only
+ */
+
 import { PrismaClient } from "@prisma/client";
 
 if (globalThis.window === undefined) {

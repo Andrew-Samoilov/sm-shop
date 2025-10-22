@@ -1,6 +1,10 @@
+"use server";
+/**
+ * @server-only
+ */
 
 import { prisma } from "@/lib/server/prisma/prisma";
-import { parseTyreSize } from "./parse-tyre-size";
+import { parseTyreSize } from "../../parse-tyre-size";
 
 export async function fillTyreParts() {
     const tyres = await prisma.tyre.findMany({

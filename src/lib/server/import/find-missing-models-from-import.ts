@@ -1,3 +1,8 @@
+"use server";
+/**
+ * @server-only
+ */
+
 import { simpleSlug } from '@/lib'
 import { prisma } from "@/lib/server/prisma/prisma";
 

@@ -1,4 +1,9 @@
-import {simpleSlug } from "@/lib"
+"use server";
+/**
+ * @server-only
+ */
+
+import { simpleSlug } from "@/lib"
 import { PrismaClient, Prisma } from "@prisma/client";
 const prisma = new PrismaClient();
 import { OneCTyreData } from "@/types"

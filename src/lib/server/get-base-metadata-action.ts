@@ -1,4 +1,7 @@
 "use server";
+/**
+ * @server-only
+ */
 
 import { getBaseMetadata } from "@/lib/metadata/get-base-metadata";
 type GetBaseMetadataParams = Parameters<typeof getBaseMetadata>[0];

@@ -28,3 +28,5 @@ export { generateBrandJsonLd } from "./json-ld/brand-json-ld";
 export { generateInfoPageMetadata } from "./metadata/generate-info-page-metadata";
 export { formatSearchTitle } from "./format-search-title";
 export { getOrderHtml } from "./order/get-order-html";
+
+export { parseTyreSize } from "./parse-tyre-size";

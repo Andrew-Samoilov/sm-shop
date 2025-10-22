@@ -1,3 +1,8 @@
+"use server";
+/**
+ * @server-only
+ */
+
 import { prisma } from "@/lib/server/prisma/prisma";
 import { Prisma, PrismaClient } from "@prisma/client";
 type DbClient = PrismaClient | Prisma.TransactionClient;

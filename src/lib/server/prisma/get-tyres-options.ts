@@ -1,4 +1,7 @@
 "use server";
+/**
+ * @server-only
+ */
 import { prisma } from "@/lib/server/prisma/prisma";
 
 type TyreField = "width" | "profile" | "diameter";

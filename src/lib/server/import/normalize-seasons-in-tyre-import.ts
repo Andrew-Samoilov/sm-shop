@@ -1,3 +1,8 @@
+"use server";
+/**
+ * @server-only
+ */
+
 import { Prisma } from "@prisma/client";
 
 export async function normalizeSeasonsInTyreImport(tx: Prisma.TransactionClient) {

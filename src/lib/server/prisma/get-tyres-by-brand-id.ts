@@ -1,3 +1,8 @@
+"use server";
+/**
+ * @server-only
+ */
+
 import { TyreWithRelations } from "@/types";
 import { prisma } from "./prisma";
 

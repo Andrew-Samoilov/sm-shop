@@ -1,3 +1,9 @@
+"use server";
+/**
+ * @server-only
+ */
+
+
 import { prisma } from "./prisma";
 
 export async function getModelImagesByIds(modelIds: (number | null)[]) {

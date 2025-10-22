@@ -1,3 +1,8 @@
+"use server";
+/**
+ * @server-only
+ */
+
 import type { Brand } from "@prisma/client";
 import { prisma } from "./prisma";
 
