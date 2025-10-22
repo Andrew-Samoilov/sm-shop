@@ -41,10 +41,7 @@ export async function handleOrderSubmit(
       return;
     }
 
-
-    
-
-
+ 
     // ✅ Тіло запиту
     const body = {
       customerName: name,
@@ -109,7 +106,7 @@ export async function handleOrderSubmit(
 
     // ✅ Надсилаємо копію адміну
     await sendEmail({
-      to: "webmaster@shinamix.com.ua",
+      to: "webmaster@shinamix.com, gigatyre@gmail.com",
       subject: `Нове замовлення від ${name}`,
       html,
     });
@@ -130,6 +127,9 @@ export async function handleOrderSubmit(
 
     // ✅ Завершення
     toast.success("Ваше замовлення успішно надіслано!");
+
+    setTimeout(() => globalThis.location.href = "/thank-you", 3000);
+
     localStorage.removeItem("tyres");
     (document.getElementById(formId) as HTMLFormElement)?.reset();
   } catch (err) {

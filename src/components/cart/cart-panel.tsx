@@ -29,7 +29,6 @@ export function CartPanel() {
   }, []);
 
 
-
   //аналітика
   useEffect(() => {
     if (isOpen && cartItems.length > 0) {
@@ -69,7 +68,19 @@ export function CartPanel() {
     return () => globalThis.removeEventListener("open-cart", openCart);
   }, []);
 
-
+  function handleQuantityChange(
+    id: number,
+    newValue: string,
+    cartItems: CartTyre[],
+    setCartItems: React.Dispatch<React.SetStateAction<CartTyre[]>>
+  ) {
+    const newQty = Math.max(1, Number(newValue) || 1);
+    const updated = cartItems.map((t) =>
+      t.id === id ? { ...t, quantity: newQty } : t
+    );
+    setCartItems(updated);
+    localStorage.setItem("tyres", JSON.stringify(updated));
+  }
 
   return (
     <div>
@@ -147,6 +158,7 @@ export function CartPanel() {
                           type="number"
                           value={item.quantity}
                           min={1}
+                          onChange={(e) => handleQuantityChange(item.id, e.target.value, cartItems, setCartItems)}
                           className="border border-border rounded-md p-1 md:px-4  text-center "
                         />
                         <div> шт</div>

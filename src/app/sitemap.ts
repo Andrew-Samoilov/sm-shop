@@ -14,6 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         { url: `${baseUrl}/info`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.7 },
         { url: `${baseUrl}/contact`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.3 },
         { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.3 },
+        { url: `${baseUrl}/thank-you`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.3 },
     ];
 
     // Динамічні сторінки
