@@ -205,7 +205,7 @@ model TyreImport {
 
 model StocksImport {
   id          Int      @id @default(autoincrement())
-  externalId  String   @map("external_id")
+  externalId  String   @db.Uuid @map("external_id")
   warehouse   String    
   quantity    Int
   importedAt  DateTime  @default(now()) @map("imported_at")
