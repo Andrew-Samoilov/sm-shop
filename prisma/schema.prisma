@@ -59,6 +59,8 @@ model Tyre {
 
   orderItems OrderItem[] @relation("TyreToOrderItem")
 
+  stocks      StocksImport[]  @relation("TyreStocksRelation")
+
   @@index([title(ops: raw("gin_trgm_ops"))], map: "tyres_title_trgm_idx", type: Gin)
   @@index([modelId, title], map: "tyres_model_title_idx")
   @@index([brandId], map: "tyres_brand_idx")
@@ -207,6 +209,8 @@ model StocksImport {
   warehouse   String    
   quantity    Int
   importedAt  DateTime  @default(now()) @map("imported_at")
+
+  tyre        Tyre?    @relation("TyreStocksRelation", fields: [externalId], references: [externalId])
 
   @@map("stocks_import")
 }

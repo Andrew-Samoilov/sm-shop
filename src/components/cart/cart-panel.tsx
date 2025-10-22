@@ -138,8 +138,8 @@ export function CartPanel() {
                         <Image
                           src={item.tyreImageUrl}
                           alt={item.title}
-                          width={60}
-                          height={60}
+                          width={80}
+                          height={80}
                           className="rounded-md object-contain h-20 md:h-24 w-auto"
                         />
                       )}
