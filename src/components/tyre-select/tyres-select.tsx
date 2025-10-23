@@ -148,7 +148,7 @@ export function TyresSelect({
         setHasSearched(true);
       })
       .finally(() => setLoading(false));
-  }, [filters, query]);
+  }, [filters, query, hasSearched, initialData, initialImages]);
 
 
 
@@ -247,7 +247,20 @@ export function TyresSelect({
             </p>
           </div>
         ) : selectedTyres.length > 0 ? (
-          <div className="mx-auto">
+              <div className="mx-auto">
+                
+                {!loading && !filters.width && !filters.profile && !filters.diameter && !query && hasSearched && selectedTyres.length > 0 && (
+                  <div className="w-full text-center ">
+                    <h1 className="text-h3 md:text-h2 font-semibold">
+                      Вибрані популярні шини
+                    </h1>
+                    <p className="text-light text-sm md:text-base mt-1">
+                      Оберіть свій розмір та сезон за допомогою фільтрів.
+                    </p>
+                  </div>
+                )}
+
+
             <ListHeader
               view={filters.view}
               onChangeView={(v) => updateFilter("view", v)}
