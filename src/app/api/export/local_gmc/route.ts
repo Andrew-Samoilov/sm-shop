@@ -8,7 +8,7 @@ export async function GET() {
     try {
         // відповідність кодів складів → store_code у Business Profile
         const warehouseMap: Record<string, string> = {
-            stockVPR: "kyiv",
+            stockVPR: "11331586209148150730",  //київ
             stockBrovariUA: "brovary",
         };
 
