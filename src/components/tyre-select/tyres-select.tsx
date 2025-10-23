@@ -18,7 +18,13 @@ type FilterState = {
   sort: string;
 };
 
-export function TyresSelect() {
+export function TyresSelect({
+  initialData = [],
+  initialImages = [],
+}: {
+  initialData?: TyreWithRelations[];
+  initialImages?: ModelImage[];
+}) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -39,7 +45,8 @@ export function TyresSelect() {
 
   const [helpOpen, setHelpOpen] = useState(false);
   const [selectedTyres, setSelectedTyres] = useState<TyreWithRelations[]>([]);
-  const [images, setImages] = useState<ModelImage[]>([]);
+  const [images, setImages] = useState<ModelImage[]>(initialImages);
+
   const [initialized, setInitialized] = useState(false);
   const [loading, setLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false); // чи вже був хоча б один реальний запит
@@ -105,15 +112,16 @@ export function TyresSelect() {
       !width && !profile && !diameter && seasons.length === 0 && !query;
 
     if (isEmpty) {
-      // Коли жодного фільтра — чистимо список, не показуємо "не знайдено"
-      setSelectedTyres([]);
-      setImages([]);
-      setHasSearched(false);
+      if (!hasSearched && initialData.length > 0) {
+        setSelectedTyres(initialData);
+        setImages(initialImages);
+        setHasSearched(true);
+      }
       setLoading(false);
       return;
     }
-
     setLoading(true);
+
 
     const params = new URLSearchParams();
     if (width) params.set("width", width);
