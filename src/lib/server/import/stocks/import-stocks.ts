@@ -5,28 +5,21 @@
 
 import { prisma } from "@/lib/server/prisma/prisma";
 
-type RawStock = Record<string, string | number>; // простий тип під твій JSON
+type StockRecord = {
+    externalId: string;
+    warehouse: string;
+    quantity: number;
+};
 
-export async function importStocks(data: RawStock[]) {
+export async function importStocks(data: StockRecord[]) {
+    console.time("[import/stocks]");
+
     try {
-        console.time("[import/stocks]");
-
         await prisma.stocksImport.deleteMany();
         console.log("[import/stocks] stocks_import очищено");
 
-        const rows = data.map((item) => {
-            const [warehouse, quantity] = Object.entries(item).find(
-                ([k]) => k !== "externalId"
-            )!;
-            return {
-                externalId: String(item.externalId),
-                warehouse,
-                quantity: Number(quantity),
-            };
-        });
-
         const result = await prisma.stocksImport.createMany({
-            data: rows,
+            data: data,
         });
 
         console.timeEnd("[import/stocks]");

@@ -1,7 +1,5 @@
-
 import { importStocks } from "@/lib/server/import/stocks/import-stocks";
 import { NextRequest, NextResponse } from "next/server";
-import { spawn } from 'node:child_process';
 
 export async function POST(req: NextRequest) {
 
@@ -53,13 +51,6 @@ export async function POST(req: NextRequest) {
 
                 console.timeEnd("[import/post]");
                 console.log(new Date().toISOString(), "[import] post-processing finished ✅");
-
-                // 🚀 запускаємо скрипт для перезбірки сайту
-                const child = spawn("bash", ["scripts/build.sh"], {
-                    cwd: "/var/www/shina-mix-shop", // робоча директорія
-                    detached: true,                 // не блокуємо роут
-                });
-                child.unref();
 
             } catch (err) {
                 console.error(new Date().toISOString(), "[import] post-processing failed ❌:", err);
