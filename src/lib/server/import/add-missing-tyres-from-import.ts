@@ -38,6 +38,7 @@ export async function addMissingTyresFromImport() {
             quantity: true,
             season: true,
             diameter: true,
+            tyreSize: true,
             load: true,
             speed: true,
             additionalIndex: true,
@@ -140,10 +141,9 @@ export async function addMissingTyresFromImport() {
             country: i.country ?? null,
             dateCode: (i.yearOfProduction && /^\d{4}$/.test(i.yearOfProduction)) ? i.yearOfProduction : null,
 
-            // немає у імпорті окремо — залишаємо null
-
-            width: null,
-            profile: null,
+            width: Number(i.tyreSize?.match(/^(\d{3})/)?.[1]) || null,
+            profile: Number(i.tyreSize?.match(/\/(\d{2})/)?.[1]) || null,
+            
             diameter: toFloatOrNull(i.diameter),
 
             loadIndex: i.load ?? null,
