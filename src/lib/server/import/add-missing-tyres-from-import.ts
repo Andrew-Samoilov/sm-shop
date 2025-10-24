@@ -7,20 +7,6 @@ import { simpleSlug } from "@/lib";
 import { prisma } from "@/lib/server/prisma/prisma";
 import { Prisma } from "@prisma/client";
 
-// тип енума напряму з інпут-типу
-// type SeasonType = Prisma.TyreCreateManyInput["season"];
-
-// function toSeason(raw: string | null | undefined): SeasonType {
-//     if (!raw) return null;
-//     const s = raw.trim().toLowerCase().replace(/[\s_-]+/g, "");
-//     const map: Record<string, SeasonType> = {
-//         winter: "WINTER", "зима": "WINTER", "зимові": "WINTER", zimova: "WINTER",
-//         summer: "SUMMER", "літо": "SUMMER", "літні": "SUMMER", lito: "SUMMER",
-//         allseason: "ALLSEASON", allseazon: "ALLSEASON", "всесезон": "ALLSEASON", "всесезонні": "ALLSEASON",
-//     };
-//     return map[s] ?? null;
-// }
-
 const toFloatOrNull = (v: string | number | null | undefined) => {
     if (v === null || v === undefined || v === "") return null;
     const n = typeof v === "number" ? v : Number(String(v).replace(",", "."));
@@ -156,9 +142,7 @@ export async function addMissingTyresFromImport() {
 
             width: null, // немає у імпорті окремо — залишаємо null
             profile: null,
-            constr: null,
             diameter: toFloatOrNull(i.diameter),
-            delimiter: null,
 
             loadIndex: i.load ?? null,
             speedIndex: i.speed ?? null,
@@ -172,7 +156,10 @@ export async function addMissingTyresFromImport() {
     });
 
     // 6) вставка + processed=true
-    const externalIds = latestWithExt.map((i) => i.externalId);
+    // const externalIds = latestWithExt.map((i) => i.externalId);
+    const validExternalIds = latestWithExt
+        .map(i => normalizeUuidOrNull(i.externalId))
+        .filter((id): id is string => !!id);
 
     await prisma.$transaction([
         prisma.tyre.createMany({
@@ -183,7 +170,7 @@ export async function addMissingTyresFromImport() {
             where: {
                 processed: false,
                 itemType: "Товар",
-                externalId: { in: externalIds },
+                externalId: { in: validExternalIds },
             },
             data: { processed: true },
         }),
