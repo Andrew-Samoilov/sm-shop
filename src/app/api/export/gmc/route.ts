@@ -46,7 +46,8 @@ export async function GET() {
 
         xml += `
     <item>
-      <g:id>${tyre.sku}</g:id>
+    //історично склалося - по 1с ід (externalId) заливаемо в GMC
+      <g:id>${tyre.externalId}</g:id>
       <g:title><![CDATA[${tyre.title}]]></g:title>
       <g:description><![CDATA[${tyre.description || tyre.title}]]></g:description>
       <g:link>https://shinamix.com.ua/tyres/${tyre.slug}</g:link>

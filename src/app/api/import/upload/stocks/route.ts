@@ -40,25 +40,6 @@ export async function POST(req: NextRequest) {
 
        const insertedCount = await importStocks(data);
 
-        // 2. Запускаємо фонову обробку (асинхронно)
-        (async () => {
-            try {
-                console.time("[import/post]");
-                console.log(new Date().toISOString(), "[import] post-processing started…");
-
-                // await prisma.tyre.updateMany({ data: { inventoryQuantity: 0 } });
-                // console.log('[api/import/upload/route] Updated inventory quantities to 0');
-
-                console.timeEnd("[import/post]");
-                console.log(new Date().toISOString(), "[import] post-processing finished ✅");
-
-            } catch (err) {
-                console.error(new Date().toISOString(), "[import] post-processing failed ❌:", err);
-            }
-
-        })();
-
-
         // 3. Відповідаємо 1С одразу
         return NextResponse.json(
             { ok: true, inserted: insertedCount },
