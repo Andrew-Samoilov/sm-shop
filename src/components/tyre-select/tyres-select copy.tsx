@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { formatSearchTitle } from "@/lib";
-import { HelpWindow, TyresList, OptionSelect, SeasonCheckbox, ListHeader } from "@/components";
+import { HelpWindow, TyresList, OptionSelect, SeasonCheckbox, ListHeader, EmptyPlaceholder } from "@/components";
 import { ModelImage } from "@prisma/client";
 import { TyreWithRelations } from "@/types";
 import { getTyresOptions } from "@/lib/server/prisma/get-tyres-options";
@@ -18,7 +18,13 @@ type FilterState = {
   sort: string;
 };
 
-export function TyresSelect() {
+export function TyresSelect({
+  initialData = [],
+  initialImages = [],
+}: {
+  initialData?: TyreWithRelations[];
+  initialImages?: ModelImage[];
+}) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -39,11 +45,11 @@ export function TyresSelect() {
 
   const [helpOpen, setHelpOpen] = useState(false);
   const [selectedTyres, setSelectedTyres] = useState<TyreWithRelations[]>([]);
-  const [images, setImages] = useState<ModelImage[]>([]);
+  const [images, setImages] = useState<ModelImage[]>(initialImages);
 
   const [initialized, setInitialized] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [hasSearched, setHasSearched] = useState(false); 
+  const [hasSearched, setHasSearched] = useState(false); // чи вже був хоча б один реальний запит
 
 
   const query = searchParams.get("query") ?? "";
@@ -54,7 +60,7 @@ export function TyresSelect() {
       width: searchParams.get("width") ?? "",
       profile: searchParams.get("profile") ?? "",
       diameter: searchParams.get("diameter") ?? "",
-      seasons: searchParams.getAll("season").filter(s => !!s && s !== "undefined"),
+      seasons: searchParams.getAll("season").filter(s => !!s && s !== "undefined"), 
       view: searchParams.get("view") === "list" ? "list" : "gallery",
       sort: searchParams.get("sort") ?? "price_asc",
     });
@@ -69,11 +75,7 @@ export function TyresSelect() {
     if (filters.width) params.set("width", filters.width);
     if (filters.profile) params.set("profile", filters.profile);
     if (filters.diameter) params.set("diameter", filters.diameter);
-
-    for (const s of filters.seasons) {
-      params.append("season", s);
-    }
-
+    filters.seasons.forEach((s) => params.append("season", s));
     params.set("view", filters.view);
     params.set("sort", filters.sort);
     if (query) params.set("query", query);
@@ -104,19 +106,31 @@ export function TyresSelect() {
 
   // Завантаження шин
   useEffect(() => {
-    const { width, profile, diameter, sort } = filters;
+    const { width, profile, diameter, seasons, sort } = filters;
+
+    const isEmpty =
+      !width && !profile && !diameter && seasons.length === 0 && !query;
+
+    if (isEmpty) {
+      if (!hasSearched && initialData.length > 0) {
+        setSelectedTyres(initialData);
+        setImages(initialImages);
+        setHasSearched(true);
+      }
+      setLoading(false);
+      return;
+    }
     setLoading(true);
+
+
     const params = new URLSearchParams();
     if (width) params.set("width", width);
     if (profile) params.set("profile", profile);
     if (diameter) params.set("diameter", diameter);
-
-    for (const s of filters.seasons) {
-      params.append("season", s);
-    }
-
+    seasons.forEach((s) => params.append("season", s.toUpperCase()));
     params.set("sort", sort);
     if (query) params.set("query", query);
+
 
     fetch(`/api/tyres?${params.toString()}`, {
       next: { revalidate: 10800, tags: [`tyres-${params.toString()}`] },
@@ -134,7 +148,8 @@ export function TyresSelect() {
         setHasSearched(true);
       })
       .finally(() => setLoading(false));
-  }, [filters, query, hasSearched, setImages]);
+  }, [filters, query, hasSearched, initialData, initialImages]);
+
 
 
   const updateFilter = <K extends keyof FilterState>(
@@ -160,13 +175,13 @@ export function TyresSelect() {
   const searchTitle = formatSearchTitle(query, filters);
 
   return (
-    <div
-      className={
-        selectedTyres.length > 0
-          ? "flex flex-col w-auto  px-1"
-          : "flex flex-col items-center  min-h-[70vh]"
-      }
-    >
+      <div
+        className={
+          selectedTyres.length > 0
+            ? "flex flex-col w-auto  px-1"
+            : "flex flex-col items-center  min-h-[70vh]"
+        }
+      >
 
       {searchTitle.length > 0 && (
         <>
@@ -222,7 +237,7 @@ export function TyresSelect() {
           </form>
         </aside>
 
-        {/* {loading ? (
+        {loading ? (
           <div className="py-10 text-center text-gray-500">Завантаження...</div>
         ) : hasSearched && selectedTyres.length === 0 ? (
           <div className="py-10 text-center text-gray-500">
@@ -231,38 +246,43 @@ export function TyresSelect() {
               Спробуйте змінити параметри фільтру або пошуку.
             </p>
           </div>
-        ) :
-          <div className="mx-auto">
+        ) : selectedTyres.length > 0 ? (
+              <div className="mx-auto">
+                
+                {!loading && !filters.width && !filters.profile && !filters.diameter && !query && hasSearched && selectedTyres.length > 0 && (
+                  <div className="w-full text-center ">
+                    <h1 className="text-h3 md:text-h2 font-semibold">
+                      Вибрані популярні шини
+                    </h1>
+                    <p className="text-light text-sm md:text-base mt-1">
+                      Оберіть свій розмір та сезон за допомогою фільтрів.
+                    </p>
+                  </div>
+                )}
 
-            <ListHeader view={filters.view}
-              onChangeView={(v) => updateFilter("view", v)}
-              sort={filters.sort}
-              onChangeSort={(v) => updateFilter("sort", v)}
-              />
-              
-            <TyresList tyres={selectedTyres} images={images} view={filters.view} />
 
-          </div>
-        } */}
-
-        {(loading) && <div className="py-10 text-center text-gray-500">Завантаження...</div>}
-
-        {(hasSearched && selectedTyres.length === 0) ?
-          <div className="py-10 text-center text-gray-500">
-            <p className="text-lg font-medium"> Шини не знайдено </p>
-            <p className="text-sm text-gray-400">  Спробуйте змінити параметри фільтру або пошуку.</p>
-          </div>
-          :
-          <div className="mx-auto">
             <ListHeader
               view={filters.view}
               onChangeView={(v) => updateFilter("view", v)}
               sort={filters.sort}
               onChangeSort={(v) => updateFilter("sort", v)}
             />
-            <TyresList tyres={selectedTyres} images={images} view={filters.view} />
+                <TyresList tyres={selectedTyres} images={images} view={filters.view} />
+                {!loading && !filters.width && !filters.profile && !filters.diameter && !query && hasSearched && selectedTyres.length > 0 && (
+                  <div className="w-full text-center ">
+                    <h1 className="text-h3 md:text-h2 font-semibold">
+                      Вибрані популярні шини
+                    </h1>
+                    <p className="text-light text-sm md:text-base mt-1">
+                      Оберіть свій розмір та сезон за допомогою фільтрів.
+                    </p>
+                  </div>
+                )}
           </div>
-        }
+        ) : (
+          <EmptyPlaceholder />
+        )}
+
       </div>
     </div>
   );

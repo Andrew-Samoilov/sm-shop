@@ -47,7 +47,7 @@ export { NoPhoto } from "./model-viewer/no-photo"
 export { OneModelPhoto } from "./model-viewer/one-model-photo"
 export { ManyModelPhoto } from "./model-viewer/many-model-photo"
 
-export { EmptyPlaceholder } from "./tyre-select/empty-placeholder"
+export { EmptyPlaceholder } from "./tyre-select/_empty-placeholder"
 export { BuyTyres } from "./buy-tyres"
 export { PopularBrands } from "./popular-brands"
 export { PopularSizes } from "./popular-sizes"
