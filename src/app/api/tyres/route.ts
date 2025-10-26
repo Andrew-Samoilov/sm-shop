@@ -28,6 +28,10 @@ export async function GET(req: NextRequest) {
   const seasons = searchParams.getAll("season");
   const query = searchParams.get("query")?.trim();
 
+  //все пусто - даєм 100 записів
+  const hasFilters =
+    width || profile || diameter || seasons.length > 0 || query;
+  
   try {
     const tyres = await prisma.tyre.findMany({
       where: {
@@ -78,6 +82,8 @@ export async function GET(req: NextRequest) {
         model: true,
       },
       orderBy: getOrderBy(sort),
+      //якщо немає параметрів - 100 записів
+      ...(hasFilters ? {} : { take: 100 }),
     });
 
     const images = await prisma.modelImage.findMany({
