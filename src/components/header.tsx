@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export async function Header() {
   return (
-    <header className=" px-3 py-6 flex flex-wrap justify-between items-center  gap-1 
+    <header className=" px-3 py-5 flex flex-wrap justify-between items-center  gap-1 
     bg-body/75 dark:bg-darkmode-body/75 sticky top-0 z-30   backdrop-blur-sm">
       <Logo
         eventCategory="header"
@@ -27,7 +27,7 @@ export async function Header() {
       </div>
 
       <div className="flex items-center justify-center gap-3 ">
-        <Search className="block w-full" />
+        <Search/>
         <ThemeSwitcher />
         <CartPanel />
         <MobileMenu />

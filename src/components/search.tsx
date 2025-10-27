@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { sendGAEvent } from "@/lib";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
-export function Search({ className = "" }: { className?: string }) {
+export function Search() {
   const router = useRouter();
   const [inputValue, setInputValue] = useState("");
   const [isOpen, setIsOpen] = useState(false); // для мобільної версії
@@ -55,7 +55,7 @@ export function Search({ className = "" }: { className?: string }) {
         className={`text-light/75 absolute top-1/2 h-5 w-5 -translate-y-1/2 scale-x-[-1] transform transition-all
     ${inputValue ? "right-10" : "right-3"}`}
       />
-      {/* // */}      <input
+      <input
         id="search"
         type="search"
         inputMode="search"
@@ -84,8 +84,7 @@ export function Search({ className = "" }: { className?: string }) {
               onClick={() => setIsOpen(false)}
               className="text-accent text-sm underline"
               aria-label="Закрити"
-            >
-              Закрити
+            >            
             </button>
           </div>
         ) : (
@@ -100,7 +99,7 @@ export function Search({ className = "" }: { className?: string }) {
       </div>
 
       {/* Desktop version (md+) */}
-      <div className={`hidden md:block ${className}`}>
+      <div className={`hidden md:block`}>
         {renderInput()}
       </div>
     </div>
