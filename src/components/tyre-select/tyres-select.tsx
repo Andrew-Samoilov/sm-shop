@@ -222,28 +222,6 @@ export function TyresSelect() {
           </form>
         </aside>
 
-        {/* {loading ? (
-          <div className="py-10 text-center text-gray-500">Завантаження...</div>
-        ) : hasSearched && selectedTyres.length === 0 ? (
-          <div className="py-10 text-center text-gray-500">
-            <p className="text-lg font-medium">Шини не знайдено</p>
-            <p className="text-sm text-gray-400">
-              Спробуйте змінити параметри фільтру або пошуку.
-            </p>
-          </div>
-        ) :
-          <div className="mx-auto">
-
-            <ListHeader view={filters.view}
-              onChangeView={(v) => updateFilter("view", v)}
-              sort={filters.sort}
-              onChangeSort={(v) => updateFilter("sort", v)}
-              />
-              
-            <TyresList tyres={selectedTyres} images={images} view={filters.view} />
-
-          </div>
-        } */}
 
         {(loading) && <div className="py-10 text-center text-gray-500">Завантаження...</div>}
 

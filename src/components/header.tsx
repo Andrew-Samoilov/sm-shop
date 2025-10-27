@@ -11,7 +11,7 @@ export async function Header() {
         eventCategory="header"
       />
 
-      <div className="items-center gap-6 hidden md:flex">
+      <div className="items-center gap-2 lg:gap-6 hidden md:flex">
         <Link
           href="/tyres"
         >Шини</Link>
