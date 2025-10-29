@@ -2,6 +2,7 @@ import { ImageResponse } from "next/og";
 import { getSeasonLabel } from "@/lib";
 import { prisma } from "@/lib/server/prisma/prisma";
 import { Season } from "@/types";
+import { sendServerGAEvent } from "@/lib/server/import/send-server-ga-event";
 
 export const runtime = "nodejs";
 
@@ -52,6 +53,21 @@ export async function GET(req: Request) {
                 : `Ціна: ${minPrice.toLocaleString("uk-UA")} грн.`;
     }
 
+    sendServerGAEvent({
+        action: "og_image_view",
+        params: {
+            source: "tyres-og",
+            width,
+            profile,
+            diameter,
+            season,
+            tyreSize,
+            tyreSeason,
+            user_agent: req.headers.get("user-agent"),
+            referrer: req.headers.get("referer"),
+        },
+    });
+    
     return new ImageResponse(
         (
             <div

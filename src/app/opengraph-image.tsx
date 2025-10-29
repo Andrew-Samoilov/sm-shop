@@ -1,8 +1,17 @@
 // app/opengraph-image.tsx
+import { sendServerGAEvent } from "@/lib/server/import/send-server-ga-event";
 import { ImageResponse } from "next/og";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+
+sendServerGAEvent({
+    action: "og_image_view",
+    params: {
+        source: "home_page",
+    },
+});
+
 
 export default function OGImage() {
     return new ImageResponse(

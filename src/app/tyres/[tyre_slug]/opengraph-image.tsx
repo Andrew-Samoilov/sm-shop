@@ -2,6 +2,7 @@ import { ImageResponse } from "next/og";
 import {  getTyreSize, getSeasonLabel } from "@/lib";
 import { getTyreBySlug } from "@/lib/server/prisma/get-tyre-by-slug";
 import { getModelImgByModelId } from "@/lib/server/prisma/get-model-img-by-model-id";
+import { sendServerGAEvent } from "@/lib/server/import/send-server-ga-event";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -14,7 +15,7 @@ export default async function OG({ params }: { params: { tyre_slug: string } }) 
     const ORIGIN = process.env.NEXT_PUBLIC_SITE_URL ?? "https://shinamix.com.ua/";
 
     const tyre = await getTyreBySlug(params.tyre_slug);
-
+  
     if (!tyre) {
         return new ImageResponse(
             (
@@ -48,6 +49,16 @@ export default async function OG({ params }: { params: { tyre_slug: string } }) 
         photoUrl = rel.startsWith("http") ? rel : `${ORIGIN}${rel}`;
     }
 
+    sendServerGAEvent({
+        action: "og_image_view",
+        params: {
+            tyre_slug: params.tyre_slug,
+            brand: tyre?.brand?.brand_name,
+            model: tyre?.model?.modelName,
+            price: tyre?.price,
+        },
+    });
+    
     return new ImageResponse(
         (
             <div style={{
