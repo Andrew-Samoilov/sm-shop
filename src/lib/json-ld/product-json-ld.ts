@@ -11,13 +11,14 @@ export type TyreWithRelations = Prisma.TyreGetPayload<{
 export function buildProductJsonLd(tyre: TyreWithRelations, images: { url: string; alt?: string | null }[] = []) {
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://shinamix.com.ua/";
 
-    const imageUrl =
-        images?.[0]?.url
-            ? images[0].url.startsWith("http")
-                ? images[0].url
-                : `${siteUrl}${images[0].url}`
-            : `${siteUrl}/default.jpg`;
-    
+    let imageUrl = `${siteUrl}/default.jpg`;
+
+    if (images?.[0]?.url) {
+        const firstUrl = images[0].url;
+        imageUrl = firstUrl.startsWith("http") ? firstUrl : `${siteUrl}${firstUrl}`;
+    }
+
+
     const seasonUA = getSeasonLabel(tyre.model?.season);
 
     const canonical = `${siteUrl}/tyres/${tyre.slug}`
@@ -52,7 +53,88 @@ export function buildProductJsonLd(tyre: TyreWithRelations, images: { url: strin
             priceCurrency: "UAH",
             price: tyre.price?.toString(),
             availability: "https://schema.org/InStock",
-            "priceValidUntil": priceValidUntil.toISOString().split("T")[0]
+            "priceValidUntil": priceValidUntil.toISOString().split("T")[0],
+
+            hasMerchantReturnPolicy: [
+                {
+                    "@type": "MerchantReturnPolicy",
+                    name: "Повернення через Нову Пошту",
+                    applicableCountry: "UA",
+                    returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+                    merchantReturnDays: 14,
+                    returnMethod: "https://schema.org/ReturnByMail",
+                    returnFees: "https://schema.org/CustomerResponsibility",
+                },
+                {
+                    "@type": "MerchantReturnPolicy",
+                    name: "Повернення у пункті прийому (Київ)",
+                    applicableCountry: "UA",
+                    returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+                    merchantReturnDays: 14,
+                    returnMethod: "https://schema.org/ReturnInStore",
+                    returnFees: "https://schema.org/FreeReturn",
+                },
+            ],
+            
+            shippingDetails: [
+                {
+                    "@type": "OfferShippingDetails",
+                    name: "Доставка Новою Поштою по Україні",
+                    shippingRate: {
+                        "@type": "MonetaryAmount",
+                        value: "за тарифами перевізника",
+                        currency: "UAH",
+                    },
+                    shippingDestination: {
+                        "@type": "DefinedRegion",
+                        addressCountry: "UA",
+                    },
+                    deliveryTime: {
+                        "@type": "ShippingDeliveryTime",
+                        handlingTime: {
+                            "@type": "QuantitativeValue",
+                            minValue: 0,
+                            maxValue: 1,
+                            unitCode: "d",
+                        },
+                        transitTime: {
+                            "@type": "QuantitativeValue",
+                            minValue: 1,
+                            maxValue: 3,
+                            unitCode: "d",
+                        },
+                    },
+                },
+                {
+                    "@type": "OfferShippingDetails",
+                    name: "Самовивіз у Києві",
+                    shippingRate: {
+                        "@type": "MonetaryAmount",
+                        value: "0",
+                        currency: "UAH",
+                    },
+                    shippingDestination: {
+                        "@type": "DefinedRegion",
+                        addressCountry: "UA",
+                        addressRegion: "Kyiv",
+                    },
+                    deliveryTime: {
+                        "@type": "ShippingDeliveryTime",
+                        handlingTime: {
+                            "@type": "QuantitativeValue",
+                            minValue: 0,
+                            maxValue: 1,
+                            unitCode: "d",
+                        },
+                        transitTime: {
+                            "@type": "QuantitativeValue",
+                            minValue: 0,
+                            maxValue: 1,
+                            unitCode: "d",
+                        },
+                    },
+                },
+            ],
         },
     };
 }
