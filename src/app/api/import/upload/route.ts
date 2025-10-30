@@ -54,6 +54,8 @@ export async function POST(req: NextRequest) {
         const insertedCount = await prisma.$transaction(async (tx) => {
             await tx.tyreImport.deleteMany({});
             const count = await saveToTyreImportFromJson(data, tx);
+
+            //check this function
             await normalizeSeasonsInTyreImport(tx);
             return count;
         });
