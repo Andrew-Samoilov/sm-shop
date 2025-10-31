@@ -55,34 +55,23 @@ export function buildProductJsonLd(tyre: TyreWithRelations, images: { url: strin
             availability: "https://schema.org/InStock",
             "priceValidUntil": priceValidUntil.toISOString().split("T")[0],
 
-            hasMerchantReturnPolicy: [
-                {
-                    "@type": "MerchantReturnPolicy",
-                    name: "Повернення через Нову Пошту",
-                    applicableCountry: "UA",
-                    returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
-                    merchantReturnDays: 14,
-                    returnMethod: "https://schema.org/ReturnByMail",
-                    returnFees: "https://schema.org/CustomerResponsibility",
-                },
-                {
-                    "@type": "MerchantReturnPolicy",
-                    name: "Повернення у пункті прийому (Київ)",
-                    applicableCountry: "UA",
-                    returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
-                    merchantReturnDays: 14,
-                    returnMethod: "https://schema.org/ReturnInStore",
-                    returnFees: "https://schema.org/FreeReturn",
-                },
-            ],
-            
+            hasMerchantReturnPolicy:
+            {
+                "@type": "MerchantReturnPolicy",
+                applicableCountry: "UA",
+                returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+                merchantReturnDays: 14,
+                "returnFees": "FreeReturn",
+            },
+
+
             shippingDetails: [
                 {
                     "@type": "OfferShippingDetails",
                     name: "Доставка Новою Поштою по Україні",
                     shippingRate: {
                         "@type": "MonetaryAmount",
-                        value: "за тарифами перевізника",
+                        value: 0,
                         currency: "UAH",
                     },
                     shippingDestination: {
@@ -110,7 +99,7 @@ export function buildProductJsonLd(tyre: TyreWithRelations, images: { url: strin
                     name: "Самовивіз у Києві",
                     shippingRate: {
                         "@type": "MonetaryAmount",
-                        value: "0",
+                        value: 0,
                         currency: "UAH",
                     },
                     shippingDestination: {

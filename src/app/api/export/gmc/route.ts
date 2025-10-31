@@ -46,7 +46,6 @@ export async function GET() {
 
         xml += `
     <item>
-    //історично склалося - по 1с ід (externalId) заливаемо в GMC
       <g:id>${tyre.externalId}</g:id>
       <g:title><![CDATA[${tyre.title}]]></g:title>
       <g:description><![CDATA[${tyre.description || tyre.title}]]></g:description>
