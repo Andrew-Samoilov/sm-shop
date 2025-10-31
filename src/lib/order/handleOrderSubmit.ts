@@ -86,9 +86,14 @@ export async function handleOrderSubmit(
       }))
     );
 
+    const formattedTel = tel.replace(
+      /^\+?38(\d{3})(\d{3})(\d{2})(\d{2})$/,
+      "+38 ($1) $2-$3-$4"
+    );
+
     const html = getOrderHtml({
       name,
-      tel,
+      tel: formattedTel,
       email,
       comment,
       deliveryMethod: deliveryMethod as "delivery" | "pickup",

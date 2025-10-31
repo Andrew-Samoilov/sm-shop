@@ -59,6 +59,7 @@ function normalizeBrandName(brand: string): string {
     return brand
         .trim()
         .toLowerCase()
+        //Fucking sonar writing bullshit
         .replace(/\s+/g, " ")
         .replace(/(^|\s)\S/g, (l) => l.toUpperCase()); // кожне слово з великої
 }
