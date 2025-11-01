@@ -30,6 +30,7 @@ export async function updateExistingTyresOneByOne(db: DbClient = prisma) {
             price: true,
             quantity: true,
             season: true,
+            yearOfProduction: true,
         },
         orderBy: { id: "asc" },
     })
@@ -49,6 +50,7 @@ export async function updateExistingTyresOneByOne(db: DbClient = prisma) {
                 data: {
                     price: r.price,
                     inventoryQuantity: r.quantity ?? 0,
+                    dateCode: r.yearOfProduction,
                 },
             });
 

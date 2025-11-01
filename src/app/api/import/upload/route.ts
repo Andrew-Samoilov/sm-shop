@@ -83,6 +83,7 @@ export async function POST(req: NextRequest) {
 
                 await addMissingTyresFromImport();
 
+                //Треба перевірити чи воно взагалі запускається чи йде як треба з імпорту
                 await fillTyreParts();
 
                 console.timeEnd("[import/post]");
