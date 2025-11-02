@@ -2,6 +2,7 @@ export { formatDisplayUrl } from "./format-display-url";
 export { formatFormData } from "./format-form-data";
 export { normalizedCerts } from "./normalized-sert";
 export { TyreTitle } from "./tyre-title";
+export { TyreTitleGallery } from "./tyre-title-gallery"
 export { getTyreSize } from "./get-tyre-size";
 export { simpleSlug } from "./simple-slug";
 export { capitalizeFirstLetter } from "./capitalize-first-letter";

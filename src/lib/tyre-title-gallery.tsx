@@ -2,19 +2,19 @@ import { TyreTitleProps } from "@/types";
 import { getSeasonLabel } from "@/lib";
 
 
-export function TyreTitle({ title, country, date, season, applicability, diskProtection }: TyreTitleProps) {
+export function TyreTitleGallery({ title, country, date, season, applicability, diskProtection }: TyreTitleProps) {
   return (
-    <p className="md:flex flex-col">
+    <p>
       {title}
       {season && (
         <span title="Сезон" className="text-light ">{" "}{getSeasonLabel(season)} </span>
       )}
       {country && (
         <span title="Країна виробництва" className="text-light text-sm" >
-          {country}{" "}
+          {country}
         </span>)}
       {date && (
-        <span title="Номер тижня та рік виробництва" className="text-light  text-sm">{date} </span>
+        <span title="Номер тижня та рік виробництва" className="text-light  text-sm">{" "}{date} </span>
       )}
       {applicability && (
         <span title="Застосовуваність" className="text-light  text-sm">{applicability}</span>

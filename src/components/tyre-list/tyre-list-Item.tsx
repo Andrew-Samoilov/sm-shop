@@ -22,7 +22,7 @@ export function TyreListItem({ tyre, modelImages, isPriority }: TyreListItemProp
             <TyreViewer images={modelImages} season={tyre.model?.season} isPriority={isPriority} />
 
             <div 
-                className="flex-2  min-w-0  gap-0 xl:gap-2 flex flex-row md:flex-col ">
+                className="flex-2    gap-0 xl:gap-2 flex flex-row md:flex-col ">
                 <span className="hidden md:block text-md md:text-2xl font-semibold">{tyre.brand?.brand_name}</span>
                 <span className="hidden md:block text-md md:text-lg font-semibold">{tyre.model?.modelName}</span>
                 <TyreTitle title={tyre.title} country={tyre.country} date={tyre.dateCode} season={tyre.model?.season} applicability={tyre.applicability} diskProtection={tyre.diskProtection}/>
