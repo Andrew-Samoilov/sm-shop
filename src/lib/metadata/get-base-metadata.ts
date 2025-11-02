@@ -14,13 +14,13 @@ export async function getBaseMetadata(
             default: siteName,
             template: `%s | ${siteName}`,
         },
-        description: `Шини від ${siteName} з доставкою по Києву та Україні.`,
+        description: `Шини від інтернет магазину ${siteName} — широкий вибір шин за вигідними цінами. Зимові, літні та всесезонні моделі для легкових авто з доставкою по Києву та Україні.`,
         openGraph: {
             type: "website",
             siteName: siteName,
-            locale: "uk_UA",
+            locale: "uk_UA", 
             title: siteName,
-            description: `Інтернет магазин автошин ${siteName} з власним складом в серці Києва `,
+            description: `Шини від інтернет магазину ${siteName} — широкий вибір шин за вигідними цінами. Зимові, літні та всесезонні моделі для легкових авто з доставкою по Києву та Україні.`,
         },
         metadataBase: new URL("https://shinamix.com.ua"),
         icons: {

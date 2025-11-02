@@ -7,7 +7,7 @@ export async function generateBrandMetadata(brand_slug: string): Promise<Metadat
     if (!brand) return {};
 
     const title = `${brand.brand_name} – шини, моделі та характеристики`;
-    const description = `Шини ${brand.brand_name} — країна-виробник, популярні моделі та характеристики. Купуйте оригінальні шини ${brand.brand_name} з доставкою по Україні у магазині ShinaMix.`;
+    const description = `Шини ${brand.brand_name}. Країна походження ${brand.country}. Опис бренду, популярні моделі та характеристики. Купуйте оригінальні шини ${brand.brand_name} у Києві та з доставкою по Україні у магазині ShinaMix.`;
     const canonicalUrl = `${BASE_URL}/brands/${brand.slug}`;
 
     let logoUrl: string | undefined = undefined;

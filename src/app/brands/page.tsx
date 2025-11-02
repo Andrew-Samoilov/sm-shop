@@ -15,12 +15,13 @@ export async function generateStaticParams() {
 export async function generateMetadata(): Promise<Metadata> {
   const brands = await getBrands();
   const brandNames = brands.map((b) => b.brand_name).filter(Boolean);
+  const description = "Популярні бренди шин у магазині ShinaMix: від бюджетних до преміум-класу. Підберіть літні, зимові чи всесезонні шини від перевірених виробників."
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     name: "Бренди шин",
-    description: `Сторінка з переліком брендів шин, представлених у нашому магазині.`,
+    description,
     path: "/brands",
     url: `/brands`,
     mainEntity: {
@@ -39,16 +40,16 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return getBaseMetadataAction({
     title: "Бренди шин",
-    description: "Ознайомтесь з переліком брендів шин, доступних у нашому магазині.",
+    description,
     openGraph: {
       title: "Бренди шин",
-      description: "Ознайомтесь з переліком брендів шин, доступних у нашому магазині.",
+      description,
       url: "/brands",
     },
     twitter: {
       card: "summary_large_image",
       title: "Бренди шин",
-      description: "Ознайомтесь з переліком брендів шин, доступних у нашому магазині.",
+      description,
     },
     other: {
       "application/ld+json": JSON.stringify(jsonLd),

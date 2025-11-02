@@ -19,7 +19,7 @@ export async function generateInfoPageMetadata(slug: string): Promise<Metadata> 
     const description =
         page.description && page.description.length > 80
             ? page.description
-            : `Інформаційна сторінка ${page.title.toLowerCase()} у магазині ShinaMix. Дізнайтесь більше про ${page.title.toLowerCase()} та інші корисні поради щодо вибору шин.`;
+            : `Інформаційна сторінка ${page.title.toLowerCase()} у магазині ShinaMix. Тут ви знайдете детальні пояснення про ${page.title.toLowerCase()} поради та корисні матеріали для правильного вибору та експлуатації автошин.`;
 
 
     return {
