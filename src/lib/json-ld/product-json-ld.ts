@@ -62,7 +62,7 @@ export function buildProductJsonLd(tyre: TyreWithRelations, images: { url: strin
                 returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
                 merchantReturnDays: 14,
                 returnFees: "FreeReturn",
-                returnMethod: "ReturnByMailOrStore",
+                returnMethod: ["ReturnByMail", "ReturnInStore"],
             },
 
 

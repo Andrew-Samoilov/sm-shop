@@ -4,28 +4,27 @@ import { getSeasonLabel } from "@/lib";
 
 export function TyreTitle({ title, country, date, season, applicability, diskProtection }: TyreTitleProps) {
   return (
-    <p>
+    <p className="md:flex flex-col">
       {title}
       {season && (
-        <span title="Сезон" className="text-light text-sm">{" "}{getSeasonLabel(season)} </span>
+        <span title="Сезон" className="text-light ">{" "}{getSeasonLabel(season)} </span>
       )}
-      {
-        country && (
-          <span title="Країна виробництва" className="text-light text-sm" >
-            {applicability && (
-              <span title="Застосовуваність">{" "}{applicability}</span>
-            )}
-            {diskProtection && (
-              <span title="Захист диска">{" "}{diskProtection}</span>
-            )}
-            {" "}{country}
-            {date && (
-              <span title="Номер тижня та рік виробництва" > {" "}{date} </span>
-            )}
+      {country && (
+        <span title="Країна виробництва" className="text-light text-sm" >
+          {country}
+        </span>)}
+      {date && (
+        <span title="Номер тижня та рік виробництва" className="text-light  text-sm">{date} </span>
+      )}
+      {applicability && (
+        <span title="Застосовуваність" className="text-light  text-sm">{applicability}</span>
+      )}
+      {diskProtection && (
+        <span title="Захист диска" className="text-light  text-sm">{diskProtection}</span>
+      )}
 
-          </span>
-        )
-      }
+
+
     </p>
   );
 }
