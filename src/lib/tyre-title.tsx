@@ -2,10 +2,9 @@ import { TyreTitleProps } from "@/types";
 import { getSeasonLabel } from "@/lib";
 
 
-export function TyreTitle({ title, country, date, season, applicability, diskProtection }: TyreTitleProps) {
+export function TyreTitle({ country, date, season, applicability, diskProtection }: TyreTitleProps) {
   return (
     <p className="md:flex flex-col">
-      {title}
       {season && (
         <span title="Сезон" className="text-light ">{" "}{getSeasonLabel(season)} </span>
       )}
