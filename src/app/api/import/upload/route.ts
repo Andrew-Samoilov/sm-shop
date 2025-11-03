@@ -10,7 +10,7 @@ import { findMissingModelsFromImport } from '@/lib/server/import/find-missing-mo
 import { addMissingTyresFromImport } from '@/lib/server/import/add-missing-tyres-from-import';
 import { addMissingBrands } from '@/lib/server/import/add-missing-brands';
 import { addMissingModels } from '@/lib/server/import/add-missing-models';
-import { fillTyreParts } from '@/lib/server/import/fill-tyre-parts';
+// import { fillTyreParts } from '@/lib/server/import/fill-tyre-parts';
 
 export async function POST(req: NextRequest) {
 
@@ -84,7 +84,7 @@ export async function POST(req: NextRequest) {
                 await addMissingTyresFromImport();
 
                 //Треба перевірити чи воно взагалі запускається чи йде як треба з імпорту
-                await fillTyreParts();
+                // await fillTyreParts();
 
                 console.timeEnd("[import/post]");
                 console.log(new Date().toISOString(), "[import] post-processing finished ✅");
