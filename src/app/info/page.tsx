@@ -1,5 +1,27 @@
 import Link from "next/link";
 import { prisma } from "@/lib/server/prisma/prisma";
+import { getBaseMetadataAction } from "@/lib/server/get-base-metadata-action";
+import { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+    const baseUrl = "https://shinamix.com.ua";
+    const description = "У цьому розділі зібрано всю корисну інформацію про оплату, доставку, гарантію, сезонне зберігання шин, омологації, повернення та знижки ShinaMix. Ознайомтесь із деталями перед покупкою."
+    
+    return getBaseMetadataAction({
+        title: "Інформація — ShinaMix",
+        description,
+        alternates: {
+            canonical: `${baseUrl}/info`,
+        },
+        openGraph: {
+            title: "Інформаційні сторінки — ShinaMix",
+            description,
+            url: `${baseUrl}/info`,
+            siteName: "ShinaMix",
+            type: "website",
+        },
+    });
+}
 
 export default async function InfoPageList() {
     const pages = await prisma.staticPage.findMany({
