@@ -19,26 +19,26 @@ export async function Footer() {
         <div className="flex flex-col items-center">
           <Link
             href="/info"
-            className="px-3 py-2 text-center text-lg font-semibold  text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+            className="text-center text-lg font-semibold  text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
           >
             Інформація
           </Link>
           <div className="flex flex-col items-center ">
             <Link
               href="/about"
-              className="px-3 py-2 text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+              className="px-3 py-1 text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
             >
               Про нас
             </Link>
             <Link
               href="/info/payment-delivery"
-              className="px-3 py-2 text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+              className="px-3 py-1 text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
             >
               Оплата і доставка
             </Link>
             <Link
               href="/info/warranty"
-              className="px-3 py-2 text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+              className="px-3 py-1 text-sm md:text-base font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
             >
               Гарантія
             </Link>
@@ -46,23 +46,23 @@ export async function Footer() {
         </div>
         <div className="flex flex-col items-center">
           <div className="text-lg font-semibold">Товари</div>
-          <div className="gap-2 flex flex-col items-center justify-center">
+          <div className="flex flex-col items-center justify-center">
             <Link
               href="/tyres"
-              className="px-3 py-2 text-sm md:text-base font-medium  text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+              className="px-3 py-1 text-sm md:text-base font-medium  text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
             >
               Шини
             </Link>
-            <div className="flex gap-2 pl-2">
+            <div className="flex pl-2">
               <Link
                 href="/brands"
-                className="px-3 py-2 text-xs md:text-sm font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+                className="px-3 py-1 text-xs md:text-sm font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
               >
                 Бренди
               </Link>
               <Link
                 href="/models"
-                className="px-3 py-2 text-xs md:text-sm font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
+                className="px-3 py-1 text-xs md:text-sm font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
               >
                 Моделі
               </Link>
@@ -70,7 +70,7 @@ export async function Footer() {
 
           </div>
         </div>
-        <div className="flex flex-col items-center pt-2">
+        <div className="flex flex-col items-center">
           <Link
             href="/contacts"
             className="text-lg font-semibold"
@@ -79,13 +79,6 @@ export async function Footer() {
           </Link>
 
           <div className="flex flex-col items-center space-y-2">
-            <Link
-              href={`mailto:${siteConfig.email}`}
-              className="px-3 py-2"
-            >
-              {siteConfig.email}
-            </Link>
-
             <Link
               href={`tel:${siteConfig.tel.normalize}`}
               className="px-3 py-2"
@@ -110,13 +103,6 @@ export async function Footer() {
                 W
               </Link>
 
-              <Link
-                href={siteConfig.fb}
-                title="Завітайте до нас у Facebook"
-                className="text-light border-border dark:border-light dark:bg-darkmode-theme-light dark:text-darkmode-light rounded-full border bg-white p-2 px-3 text-center font-bold duration-300 hover:bg-black hover:text-white hover:no-underline dark:hover:bg-white dark:hover:text-black"
-              >
-                Fb
-              </Link>
             </div>
           </div>
         </div>
