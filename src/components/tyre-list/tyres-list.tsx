@@ -16,8 +16,8 @@ export function TyresList({ tyres, images, view }: TyresListProps) {
   return (
     <div className={
       view === "list"
-        ? "flex flex-col gap-0 md:gap-1 2xl:gap-6 mx-auto"
-        : "z-40 mx-auto grid gap-2 md:gap-4 xl:gap-6 w-full lg:max-w-screen-md xl:max-w-screen-lg 2xl:max-w-screen-xl grid-cols-[repeat(auto-fit,minmax(280px,1fr))]"
+        ? "flex flex-col gap-0 md:gap-1 2xl:gap-6"
+        : "z-40  grid gap-2 md:gap-4 xl:gap-6 w-full lg:max-w-screen-md xl:max-w-screen-lg 2xl:max-w-screen-xl grid-cols-[repeat(auto-fit,minmax(280px,1fr))]"
     }>
 
       {tyres.map((tyre, index) => {

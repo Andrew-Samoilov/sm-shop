@@ -233,7 +233,7 @@ export function TyresSelect() {
             <p className="text-sm text-gray-400">  Спробуйте змінити параметри фільтру або пошуку.</p>
           </div>
           :
-          <div className="mx-auto">
+          <div >
             <ListHeader
               view={filters.view}
               onChangeView={(v) => updateFilter("view", v)}

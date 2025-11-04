@@ -13,7 +13,7 @@ export function OneModelPhoto({ image }: { image: IImage }) {
                 fill
                 priority
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
-                className="object-contain mx-auto"
+                className="object-contain"
             />
         </div>
     )
