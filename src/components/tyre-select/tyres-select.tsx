@@ -170,7 +170,7 @@ export function TyresSelect() {
 
       {searchTitle.length > 0 && (
         <>
-          <h1 className="text-h3 lg:text-h1 text-center">
+          <h1 className="min-h-[3rem] lg:min-h-[4.5rem] text-h3 lg:text-h1 text-center">
             Пошук: {searchTitle}
           </h1>
 
@@ -182,11 +182,13 @@ export function TyresSelect() {
       )}
 
       <div className="flex gap-0 md:gap-2 lg:gap-6 flex-col lg:flex-row ">
-        <aside className="gap-0 md:gap-2 lg:gap-6 flex flex-col lg:flex-row w-auto">
+        {/* <aside className="gap-0 md:gap-2 lg:gap-6 flex flex-col lg:flex-row w-auto"> */}
+        {/* <div className="flex flex-wrap justify-center gap-0 md:gap-2 lg:gap-6 ">*/}
+        <aside className="flex flex-wrap justify-center gap-0 md:gap-2 lg:gap-6 w-auto"> 
           <form
             aria-label="Фільтри пошуку шин"
             method="get"
-            className="flex flex-col  gap-0 py-0 md:py-2 md:gap-2 lg:gap-6 w-full mx-auto lg:py-6"
+            className="flex flex-col  gap-0 py-0 md:py-2 md:gap-2 lg:gap-6 w-full lg:py-6"
             onSubmit={(e) => e.preventDefault()}
           >
             <div className="flex flex-wrap gap-2 lg:gap-6 flex-row lg:flex-col  md:py-2 content-center justify-center">

@@ -4,6 +4,14 @@ import { ToastContainer } from "react-toastify";
 import Script from "next/script";
 import { Suspense } from "react";
 import { getBaseMetadataAction } from "@/lib/server/get-base-metadata-action";
+import { Karla } from "next/font/google";
+
+const karla = Karla({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "600", "700"],
+  display: "swap",
+  variable: "--font-primary", 
+});
 
 export async function generateMetadata() {
   return getBaseMetadataAction();
@@ -18,7 +26,7 @@ export const viewport = {
 
 export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
   return (
-    <html lang="uk">
+    <html lang="uk" className={karla.variable}>
       <body className="bg-body dark:bg-darkmode-body font-primary dark:text-darkmode-text flex 
     flex-col scroll-smooth ">
         {/* Google Analytics */}
