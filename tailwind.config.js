@@ -19,7 +19,7 @@ module.exports = {
                 border: 'var(--color-border)',
             },
             fontFamily: {
-                primary: ['var(--font-primary)', 'sans-serif'],
+                primary: ['Karla', 'sans-serif'],
             },
         },
     },

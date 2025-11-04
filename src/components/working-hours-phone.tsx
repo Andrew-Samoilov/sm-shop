@@ -5,7 +5,7 @@ import { PhoneIcon } from "@heroicons/react/24/outline";
 export default  function WorkingHoursPhone() {
 
     const telVisual = `097 323 21 61`
-    const telNormalize = "+380973232161"
+    const telNormalize = "tel:+380973232161"
     // Поточний час на сервері (Europe/Berlin)
     const now = new Date();
 
