@@ -11,7 +11,7 @@ export function OptionSelect({ id, label, options, value, onChange }: Props) {
         <div className="flex flex-col lg:gap-2">
             <label
                 htmlFor={id}
-                className="hidden lg:block text-sm text-light pl-2 "
+                className=" sr-only lg:not-sr-only text-sm text-light pl-2 "
                 aria-hidden="false">
                 Оберіть {label}
             </label>
