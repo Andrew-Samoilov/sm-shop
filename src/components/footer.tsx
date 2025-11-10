@@ -95,14 +95,6 @@ export async function Footer() {
                 Vb
               </Link>
 
-              <Link
-                href={siteConfig.signal}
-                title="Пишіть у WhatsApp"
-                className="text-light border-border dark:border-light dark:bg-darkmode-theme-light dark:text-darkmode-light rounded-full border bg-white p-2 px-4 text-center font-bold duration-300 hover:bg-black hover:text-white hover:no-underline dark:hover:bg-white dark:hover:text-black"
-              >
-                W
-              </Link>
-
             </div>
           </div>
         </div>

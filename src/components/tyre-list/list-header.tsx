@@ -1,4 +1,4 @@
-import { ListBulletIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
+ import { ListBulletIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
 
 const SORT_OPTIONS = [
     { label: "(А-Я)", value: "title_asc" },

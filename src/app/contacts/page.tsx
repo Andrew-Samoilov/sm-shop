@@ -22,7 +22,7 @@ export default async function ContactsPage() {
         <h1>Контакти</h1>
       </section>
       <section className="flex flex-col gap-6 p-6 container" id="contacts">
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {contacts.map(({ id, link, name }) => (
             <div
               key={id}

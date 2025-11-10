@@ -163,17 +163,17 @@ export function TyresSelect() {
         </h1>
       )}
 
-      <div className="flex gap-0 md:gap-2 lg:gap-6 flex-col lg:flex-row mx-auto ">
+      <div className="flex gap-0 md:gap-2 lg:gap-6 flex-col lg:flex-row mx-auto  ">
         {/* <aside className="gap-0 md:gap-2 lg:gap-6 flex flex-col lg:flex-row w-auto"> */}
         {/* <div className="flex flex-wrap justify-center gap-0 md:gap-2 lg:gap-6 ">*/}
-        <aside className="flex flex-wrap justify-center gap-0 md:gap-2 lg:gap-6 w-auto md:py-2 xl:py-6 ">
+        <aside className="flex flex-wrap justify-center gap-0 md:gap-2 lg:gap-6 w-auto md:py-2 xl:py-6 lg:mt-6">
           <form
             aria-label="Фільтри пошуку шин"
             method="get"
             className="flex flex-col  gap-0 py-0 md:gap-2 lg:gap-6 w-full "
             onSubmit={(e) => e.preventDefault()}
           >
-            <div className="flex flex-wrap gap-2 lg:gap-6 flex-row lg:flex-col content-center justify-center ">
+            <div className="flex flex-wrap gap-2  flex-row lg:flex-col content-center justify-center ">
               <OptionSelect
                 id="width"
                 label="Ширина"
@@ -216,13 +216,14 @@ export function TyresSelect() {
           </div>
           :
           <div >
-            {(loading) && <div className="py-10 text-center text-gray-500">Завантаження...</div>}
+    
             <ListHeader
               view={filters.view}
               onChangeView={(v) => updateFilter("view", v)}
               sort={filters.sort}
               onChangeSort={(v) => updateFilter("sort", v)}
             />
+            {(loading) && <div className="py-10 text-center text-gray-500">Завантаження...</div>}
             <TyresList tyres={selectedTyres} images={images} view={filters.view} />
           </div>
         }
