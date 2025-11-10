@@ -41,7 +41,7 @@ export function ListHeader({ view, onChangeView, sort, onChangeSort }: Props) {
     return (
         <header className="flex justify-between py-0 md:py-2 xl:py-6">
             <fieldset className="flex gap-2 items-center">
-                <span className="hidden xl:block text-light text-sm">Вигляд</span>
+                <span className="sr-only lg:not-sr-only text-light text-sm">Вигляд</span>
 
                 <label
                     className={`btn p-0.5 ${view === "list"
@@ -81,7 +81,7 @@ export function ListHeader({ view, onChangeView, sort, onChangeSort }: Props) {
             </fieldset>
 
             <div className="flex gap-2 items-center">
-                <span className="hidden xl:block text-light text-sm">Сортування</span>
+                <span className="sr-only lg:not-sr-only text-light text-sm">Сортування</span>
                 <select
                     id="sort"
                     name="sort"

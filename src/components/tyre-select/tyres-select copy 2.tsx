@@ -43,7 +43,7 @@ export function TyresSelect() {
 
   const [initialized, setInitialized] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [hasSearched, setHasSearched] = useState(false);
+  const [hasSearched, setHasSearched] = useState(false); 
 
 
   const query = searchParams.get("query") ?? "";
@@ -144,6 +144,18 @@ export function TyresSelect() {
     setFilters((prev) => ({ ...prev, [key]: value }));
   };
 
+  const sortLabels: Record<string, string> = {
+    price_asc: "за ціною ↑ (зростання)",
+    price_desc: "за ціною ↓ (спадання)",
+    title_asc: "за назвою (А-Я)",
+    title_desc: "за назвою (Я-А)",
+  };
+
+  const viewLabels: Record<ViewType, string> = {
+    list: "у вигляді списку",
+    gallery: "у вигляді галереї",
+  };
+
   //  console.log(`[formatSearchTitle]`, formatSearchTitle.length);
   const searchTitle = formatSearchTitle(query, filters);
 
@@ -157,16 +169,22 @@ export function TyresSelect() {
     >
 
       {searchTitle.length > 0 && (
-        <h1
-          className="min-h-[3rem] lg:min-h-[4.5rem] text-h3 lg:text-h1 text-center">
-          {searchTitle}
-        </h1>
+        <>
+          <h1 className="min-h-[3rem] lg:min-h-[4.5rem] text-h3 lg:text-h1 text-center">
+            Пошук: {searchTitle}
+          </h1>
+
+          <span className="text-light text-sm hidden md:block pl-3 text-center">
+            {`сортування ${sortLabels[filters.sort] ?? filters.sort}`}
+            {` / ${viewLabels[filters.view]}`}
+          </span>
+        </>
       )}
 
       <div className="flex gap-0 md:gap-2 lg:gap-6 flex-col lg:flex-row mx-auto ">
         {/* <aside className="gap-0 md:gap-2 lg:gap-6 flex flex-col lg:flex-row w-auto"> */}
         {/* <div className="flex flex-wrap justify-center gap-0 md:gap-2 lg:gap-6 ">*/}
-        <aside className="flex flex-wrap justify-center gap-0 md:gap-2 lg:gap-6 w-auto md:py-2 xl:py-6 ">
+        <aside className="flex flex-wrap justify-center gap-0 md:gap-2 lg:gap-6 w-auto md:py-2 xl:py-6 "> 
           <form
             aria-label="Фільтри пошуку шин"
             method="get"
