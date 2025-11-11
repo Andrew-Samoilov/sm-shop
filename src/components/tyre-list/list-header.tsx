@@ -1,4 +1,5 @@
- import { ListBulletIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
+ import { sendGAEvent } from "@/lib";
+import { ListBulletIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
 
 const SORT_OPTIONS = [
     { label: "(А-Я)", value: "title_asc" },
@@ -18,21 +19,42 @@ export function ListHeader({ view, onChangeView, sort, onChangeSort }: Props) {
 
     const handleViewChange = (newView: "list" | "gallery") => {
         onChangeView(newView);
-        const newParams = new URLSearchParams(window.location.search);
+        const newParams = new URLSearchParams(globalThis.location.search);
         newParams.set("view", newView);
-        window.history.replaceState(null, "", `?${newParams.toString()}`);
+        globalThis.history.replaceState(null, "", `?${newParams.toString()}`);
 
+        sendGAEvent({
+            action: "view_mode_change",
+            category: "UI",
+            label: newView,
+            params: {
+                mode: newView,
+                page_path: globalThis.location.pathname,
+            },
+        });
+        
         if (process.env.NODE_ENV === "development") {
             console.info("[handleViewChange]", newView);
         }
     };
 
     const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const value = e.target.value;
         onChangeSort(e.target.value);
-        const newParams = new URLSearchParams(window.location.search);
+        const newParams = new URLSearchParams(globalThis.location.search);
         newParams.set("sort", e.target.value);
-        window.history.replaceState(null, "", `?${newParams.toString()}`);
+        globalThis.history.replaceState(null, "", `?${newParams.toString()}`);
 
+        sendGAEvent({
+            action: "sort_option_change",
+            category: "UI",
+            label: value,
+            params: {
+                sort_by: value,
+                page_path: globalThis.location.pathname,
+            },
+        });
+        
         if (process.env.NODE_ENV === "development") {
             console.info("[handleSortChange]", e.target.value);
         }
