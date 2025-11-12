@@ -165,7 +165,11 @@ export default async function TyrePage(
             </Link>
             &nbsp;{tyre.loadIndex}
           </div>
-
+          
+          {tyre.additionalIndex && (
+            <div>Додатковий індекс: {tyre.additionalIndex}</div>
+          )}
+            
           <div className={quantity < 4 ? "font-bold" : "text-light dark:text-darkmode-light "}>
             Кількість: {quantity}
           </div>

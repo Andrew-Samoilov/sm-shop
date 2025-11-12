@@ -53,6 +53,7 @@ model Tyre {
   type           String? @db.VarChar(50)
   diskProtection String? @map("disk_protection") @db.VarChar(50)
   rof            String? @db.VarChar(50)
+  additionalIndex  String? @map("additional_index")@db.VarChar(10)
 
   brand Brand? @relation(fields: [brandId], references: [id], onUpdate: NoAction)
   model Model? @relation(fields: [modelId], references: [id], onUpdate: NoAction)
