@@ -65,7 +65,7 @@ export default async function TyrePage(
   // console.info("[TyrePage]", cert);
 
   const tyreSize = getTyreSize(tyre);
-  const quantity = Math.min( tyre.inventoryQuantity ?? 0,20);
+  const quantity = Math.min(tyre.inventoryQuantity ?? 0, 20);
 
   const productJsonLd = buildProductJsonLd(tyre, images);
   const breadcrumbs = [
@@ -165,11 +165,11 @@ export default async function TyrePage(
             </Link>
             &nbsp;{tyre.loadIndex}
           </div>
-          
+
           {tyre.additionalIndex && (
-            <div>Додатковий індекс: {tyre.additionalIndex}</div>
+            <div className=" text-light dark:text-darkmode-light">Додатковий індекс: {tyre.additionalIndex}</div>
           )}
-            
+
           <div className={quantity < 4 ? "font-bold" : "text-light dark:text-darkmode-light "}>
             Кількість: {quantity}
           </div>
@@ -228,7 +228,7 @@ export default async function TyrePage(
             >Самовивіз: вже сьогодні.</span>
           </Link>
 
-   
+
 
         </div>
 
@@ -245,7 +245,7 @@ export default async function TyrePage(
                 <span className="text-light  dark:text-darkmode-light text-4xl transition-transform group-open:rotate-45">+</span>
               </summary>
               <ReactMarkdown>{tyre.model?.description}</ReactMarkdown>
-          
+
             </details>
           </section>
         )}

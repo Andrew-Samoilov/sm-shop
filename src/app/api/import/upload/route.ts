@@ -74,7 +74,6 @@ export async function POST(req: NextRequest) {
 
                 await updateExistingTyresOneByOne();
 
-
                 const missingBrands = await findMissingBrandsFromImport();
                 await addMissingBrands(missingBrands);
 
