@@ -22,7 +22,7 @@ export function OptionSelect({ id, label, options, value, onChange }: Props) {
                 onChange={(e) => onChange(e.target.value)}
                 className="border-2 border-border bg-white dark:bg-darkmode-body rounded-md 
                
-                p-1 py-2 md:px-4  
+                p-1  md:px-4  
                 focus:ring-2 focus:outline-none"
             >
 
