@@ -8,7 +8,7 @@ import { Prisma } from "@prisma/client";
 export async function normalizeSeasonsInTyreImport(tx: Prisma.TransactionClient) {
     // 1 → SUMMER
     await tx.tyreImport.updateMany({
-        where: { season: { startsWith: "1." } },
+        where: { season: { startsWith: "3." } },
         data: { season: "SUMMER" },
     });
 
@@ -20,7 +20,7 @@ export async function normalizeSeasonsInTyreImport(tx: Prisma.TransactionClient)
 
     // 3 → WINTER
     await tx.tyreImport.updateMany({
-        where: { season: { startsWith: "3." } },
+        where: { season: { startsWith: "1." } },
         data: { season: "WINTER" },
     });
 }
