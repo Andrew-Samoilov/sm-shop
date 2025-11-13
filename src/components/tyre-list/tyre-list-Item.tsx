@@ -2,7 +2,7 @@ import Link from "next/link";
 import { AddToCartButton, TyreViewer } from "@/components";
 import type { ModelImage } from "@prisma/client";
 import { TyreWithRelations } from "@/types";
-import {  getTyreSize, TyreTitle } from "@/lib";
+import {  getTyreSize,  TyreTitle } from "@/lib";
 
 type TyreListItemProps = {
     tyre: TyreWithRelations;
@@ -24,7 +24,7 @@ export function TyreListItem({ tyre, modelImages, isPriority }: TyreListItemProp
             <div 
                 className="flex-2    gap-0 xl:gap-2 flex flex-row md:flex-col ">
                 <span className="hidden md:block text-md md:text-2xl font-semibold">{tyre.brand?.brand_name}</span>
-                <span className="hidden md:block text-md md:text-lg font-semibold">{tyre.model?.modelName}</span>
+                <span className="hidden md:block  text-md md:text-lg font-semibold">{tyre.model?.modelName}</span>
                 <TyreTitle title={tyre.title} country={tyre.country} date={tyre.dateCode} season={tyre.model?.season} applicability={tyre.applicability} diskProtection={tyre.diskProtection}/>
             </div>
 
