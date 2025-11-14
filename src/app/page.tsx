@@ -1,5 +1,5 @@
 export const dynamic = "force-static";
-import { BuyTyres, HeroSection, InfoSection, TyreSelectClient } from "@/components";
+import { BuyTyres, HeroSection, InfoSection, PopularSizes, TyreSelectClient } from "@/components";
 // import { Suspense } from "react";
 
 export default function Home() {
@@ -11,6 +11,8 @@ export default function Home() {
       </Suspense>  */}
       
       <TyreSelectClient />
+
+      <PopularSizes />
 
       <BuyTyres />
 
