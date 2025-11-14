@@ -209,8 +209,6 @@ export default async function TyrePage(
           </div>
 
 
-
-
           <Link
             className="flex flex-wrap flex-col md:flex-row justify-center items-center gap-2 lg:gap-6 text-center max-w-full hover:no-underline"
             href={"/info/payment-delivery"}
@@ -221,10 +219,10 @@ export default async function TyrePage(
               className="text-h5 max-md:text-base"
             >Доставка: </span>
             <span
-              className="px-2 py-1 rounded-md border border-border dark:border-darkmode-border text-light dark:text-darkmode-light"
-            > Наступного дня.</span>
+              className="px-2 py-1 rounded-md bg-theme-light dark:bg-theme-dark text-light dark:text-darkmode-light"
+            > Наступного дня</span>
             <span
-              className="px-2 py-1 rounded-md border border-border dark:border-darkmode-border text-light dark:text-darkmode-light"
+              className="px-2 py-1 rounded-md  bg-theme-light dark:bg-theme-dark text-light dark:text-darkmode-light "
             >Самовивіз: вже сьогодні.</span>
           </Link>
 

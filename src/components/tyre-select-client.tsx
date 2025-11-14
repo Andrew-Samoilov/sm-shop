@@ -113,7 +113,7 @@ export function TyreSelectClient() {
                 <button
                     type="submit"
                     className="my-auto mx-auto rounded-md bg-theme-dark dark:bg-theme-light text-white dark:text-black inline-block 
-                     border border-transparent px-4 py-1.5  text-xl font-medium md:px-8 md:py-4 lg:px-12 lg:py-4 md:font-semibold capitalize transition cursor-pointer"
+                     border border-transparent text-xl font-medium px-4 py-1.5 md:px-8 md:py-4 lg:px-12 lg:py-4 md:font-semibold capitalize transition cursor-pointer"
                 >
                     Підібрати
                 </button>

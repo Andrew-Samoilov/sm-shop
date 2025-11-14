@@ -11,7 +11,7 @@ export function OptionSelect({ id, label, options, value, onChange }: Props) {
         <div className="flex flex-col lg:gap-1">
             <label
                 htmlFor={id}
-                className=" sr-only lg:not-sr-only text-sm text-light pl-2 "
+                className=" sr-only  text-sm text-light pl-2 "
                 aria-hidden="false">
                 Оберіть {label}
             </label>
@@ -21,12 +21,10 @@ export function OptionSelect({ id, label, options, value, onChange }: Props) {
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
                 className="border-2 border-border bg-white dark:bg-darkmode-body rounded-md 
-               
-                p-1  md:px-4  
+                px-2 py-1 md:px-4 md:py-2 lg:px-6 lg:py-2
                 focus:ring-2 focus:outline-none"
             >
 
-              
                 <option value="">{label}</option>
                 {options.map((opt) => (
                     <option key={opt} value={opt}>
