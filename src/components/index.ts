@@ -1,6 +1,6 @@
 
 export { SubmitButton } from "./submit-button"
-export { Analytics } from "./analytics"
+export { GtagPageView } from "./g-tag-page-view"
 export { BenefitsSection } from "./benefits-section"
 export { BreadCrumbs } from "./bread-crumbs"
 

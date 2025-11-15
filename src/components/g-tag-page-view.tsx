@@ -3,7 +3,7 @@
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
-export function Analytics() {
+export function GtagPageView() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const GAKey = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID!;

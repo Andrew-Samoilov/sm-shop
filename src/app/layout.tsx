@@ -1,9 +1,9 @@
 import "../styles/globals.css"
-import { Analytics, Footer, Header, TwSizeIndicator, WorkingHoursPhone } from "@/components";
+import { GtagPageView, Footer, Header, TwSizeIndicator, WorkingHoursPhone } from "@/components";
 import { ToastContainer } from "react-toastify";
 import Script from "next/script";
-import { Suspense } from "react";
 import { getBaseMetadataAction } from "@/lib/server/get-base-metadata-action";
+import { Suspense } from "react";
 
 
 export async function generateMetadata() {
@@ -47,11 +47,15 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
         <TwSizeIndicator />
 
         <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        
         <Suspense fallback={null}>
-          <Analytics />
+          <GtagPageView />
         </Suspense>
+
+        <main className="flex-1">{children}</main>
+
+        <Footer />
+
         <ToastContainer />
       </body>
     </html>
