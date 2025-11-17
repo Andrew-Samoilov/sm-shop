@@ -36,8 +36,8 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
               gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}', {
-                debug_mode: true,
-              });
+                  debug_mode: ${process.env.NODE_ENV === "development"},
+             });
             `,
           }}
         />
@@ -47,7 +47,7 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
         <TwSizeIndicator />
 
         <Header />
-        
+
         <Suspense fallback={null}>
           <GtagPageView />
         </Suspense>
