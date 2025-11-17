@@ -1,6 +1,6 @@
 export const dynamic = "force-static";
 
-import { AddToCartButton, BreadCrumbs, CertificatesClient, ModelViewer, QuantitySelector, SeasonIcon, TotalPrice, TyreByWarehouses, ViewItemGA } from "@/components";
+import { AddToCartButton, BreadCrumbs, CertificatesClient, ModelViewer, QuantitySelector, SeasonIcon, TotalPrice, TyreByWarehouses,  ViewItemGA } from "@/components";
 import { getTyreSize, getSeasonLabel, generateTyreMetadata, buildProductJsonLd, buildBreadcrumbsJsonLd, JsonLd, } from "@/lib";
 import { getTyreBySlug } from "@/lib/server/prisma/get-tyre-by-slug";
 import { getModelImgByModelId } from "@/lib/server/prisma/get-model-img-by-model-id";
@@ -98,7 +98,15 @@ export default async function TyrePage(
       <div className=" flex flex-col md:flex-row md:gap-6  2xl:p-12
        items-center  justify-center ">
 
-        <ModelViewer images={images} season={tyre.model?.season} />
+        <div className="relative">
+          <ModelViewer images={images} isPriority={true} />
+
+          {tyre.model?.season && (
+            <SeasonIcon season={tyre.model?.season} className="absolute top-2 left-2 z-99" />
+          )}
+        </div>
+
+        {/* <TyreViewer images={images} season={tyre.model?.season} /> */}
 
         <div className=" flex flex-col w-full md:w-auto min-w-fit p-2 md:p-0 gap-1 lg:gap-2">
           <h1 className="text-h1 flex flex-col items-center md:items-start  ">

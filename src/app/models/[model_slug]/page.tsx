@@ -1,4 +1,4 @@
-import { CertificatesClient, ModelViewer, TyresList } from "@/components";
+import { CertificatesClient, ModelViewer, SeasonIcon, TyresList } from "@/components";
 import {  normalizedCerts, getSiteConfig } from "@/lib";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
@@ -135,7 +135,13 @@ export default async function ModelPage({
         )}
       </header>
 
-      <ModelViewer images={images} season={model.season} />
+        <div className="relative">
+          <ModelViewer images={images} isPriority={true} />
+
+          {model?.season && (
+            <SeasonIcon season={model?.season} className="absolute top-2 left-2 z-99" />
+          )}
+        </div>
 
       {model.description && (
         <section className="mx-auto p-6 lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl  bg-body dark:bg-darkmode-body z-10">
