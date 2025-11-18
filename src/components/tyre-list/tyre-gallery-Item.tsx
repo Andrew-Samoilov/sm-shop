@@ -23,7 +23,7 @@ export function TyreGalleryItem({ tyre, modelImages, isPriority = false }: TyreL
             </div>
 
             <div className=" flex flex-row">
-                <TyreTitle title={tyre.title} country={tyre.country} date={tyre.dateCode} season={tyre.model?.season} diskProtection={tyre.diskProtection} applicability={tyre.applicability} />
+                <TyreTitle title={tyre.title} country={tyre.country} date={tyre.dateCode} season={tyre.model?.season}  applicability={tyre.applicability} />
             </div>
 
             <div className="flex flex-row gap-2 mx-auto items-center ">

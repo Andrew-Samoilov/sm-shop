@@ -178,6 +178,10 @@ export default async function TyrePage(
             <div className=" text-light dark:text-darkmode-light">Додатковий індекс: {tyre.additionalIndex}</div>
           )}
 
+          {tyre.rof && (
+            <div className=" text-light dark:text-darkmode-light font-semibold">Ран флет: {tyre.rof}</div>
+          )}
+
           <div className={quantity < 4 ? "font-bold" : "text-light dark:text-darkmode-light "}>
             Кількість: {quantity}
           </div>

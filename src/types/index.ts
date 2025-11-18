@@ -82,7 +82,6 @@ export type TyreTitleProps = {
   date: string | null | undefined;
   season: Season | null | undefined;
   applicability: string | null | undefined;
-  diskProtection: string | null | undefined;
 };
 
 export interface OneCTyreData {
