@@ -10,7 +10,7 @@ export function OneModelPhoto({
 }) {
 
     return (
-        <div className="relative w-full md:max-w-[40vw] aspect-[3/4] h-[50vh] overflow-hidden rounded-md ">
+        <div className="relative w-full md:max-w-[40vw] aspect-[3/4] min-h-[395px]  lg:max-w-[733px] overflow-hidden rounded-md ">
             <Image
                 key={image.id}
                 src={image.url}
@@ -19,7 +19,7 @@ export function OneModelPhoto({
                 fill
                 priority={isPriority}
                 fetchPriority={isPriority ? "high" : "auto"}
-                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 35vw"
+                sizes="(max-width: 768px) 90vw, (max-width: 1280px) 50vw, 35vw"
             />
 
         </div>

@@ -178,8 +178,22 @@ export default async function TyrePage(
             <div className=" text-light dark:text-darkmode-light">Додатковий індекс: {tyre.additionalIndex}</div>
           )}
 
+
+
           {tyre.rof && (
-            <div className=" text-light dark:text-darkmode-light font-semibold">Ран флет: {tyre.rof}</div>
+            <div
+              className=" text-light dark:text-darkmode-light hover:text-dark dark:hover:text-darkmode-primary"
+            >
+              <Link
+                href="/info/runonflat"
+                target="_blank"
+                title="Докладніше про безпробойні шини"
+                className="hover:no-underline"
+              >
+                Ран Флет:
+              </Link>
+              &nbsp;{tyre.rof}
+            </div>
           )}
 
           <div className={quantity < 4 ? "font-bold" : "text-light dark:text-darkmode-light "}>
@@ -225,7 +239,6 @@ export default async function TyrePage(
             className="flex flex-wrap flex-col md:flex-row justify-center items-center gap-2 lg:gap-6 text-center max-w-full hover:no-underline"
             href={"/info/payment-delivery"}
             target="_blank"
-          // eventLabel={""}
           >
             <span
               className="text-h5 max-md:text-base"
@@ -248,7 +261,7 @@ export default async function TyrePage(
 
       <div>
         {tyre.model?.description && (
-          <section className="p-2 pb-6 max-w-[65ch] mx-auto">
+          <section className="p-2 py-6 max-w-[65ch] mx-auto">
             <details className="group" open>
               <summary className="flex flex-between justify-center items-center marker:content-none cursor-pointer ">
                 <h2 className="pr-2 md:pr-6">Детальний опис</h2>

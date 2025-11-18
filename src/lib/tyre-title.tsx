@@ -17,7 +17,7 @@ export function TyreTitle({ title, country, date, season, applicability }: TyreT
         <span title="Номер тижня та рік виробництва" className="text-light  text-sm">{" "}{date} </span>
       )}
       {applicability && (
-        <span title="Застосовуваність" className="text-light  text-sm">{applicability}</span>
+        <span title="Застосовуваність" className="text-light  text-sm">{" "}{applicability}</span>
       )}
 
     </p>
