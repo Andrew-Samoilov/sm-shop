@@ -6,7 +6,7 @@ export async function InfoSection() {
   const pages = await getInfoPages();
 
   return (
-    <section className="section">
+    <section className="section container">
       <Link
         href="/info"
         className="text-center text-lg font-semibold  text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
