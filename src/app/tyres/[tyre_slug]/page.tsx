@@ -116,7 +116,7 @@ export default async function TyrePage(
           </h1>
 
           <div
-            className="md:pt-2 text-light  dark:text-darkmode-light hover:no-underline"
+            className="md:pt-2 text-light dark:text-darkmode-light hover:no-underline"
           >Країна виробництва: <span
             className="text-dark dark:text-darkmode-dark"
           >{tyre.country}</span>
