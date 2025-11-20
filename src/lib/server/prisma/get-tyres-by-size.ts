@@ -16,6 +16,16 @@ export async function getTyresBySize(width: number, profile: number, diameter: n
             model: {
                 select: {
                     season: true,
+                    images: {
+                        orderBy: { position: "asc" },
+                        select: {
+                            url: true,
+                            alt: true,
+                            width: true,
+                            height: true,
+                        },
+                        take: 1, 
+                    },
                 },
             },
         },
