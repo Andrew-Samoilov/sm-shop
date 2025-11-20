@@ -47,15 +47,18 @@ export default async function SizePage({
 
                     return (
                         <li key={t.id} className="p-2 border border-border rounded-md inline-grid grid-cols-[1fr_auto] gap-2 items-center">
+                           
                             <Link
                                 href={`/tyres/${t.slug}`}
-                                className="flex flex-col gap-2 ">
+                                className="flex flex-col gap-1 lg:gap-2">
+                                
+                                {season && (
+                                    <SeasonIcon season={season} />
+                                )}
+
                                 {t.title}
 
                                 <div className="flex flex-wrap gap-2 items-center">
-                                    {season && (
-                                        <SeasonIcon season={season} />
-                                    )}
 
                                     <div className={
                                         qty < 4
@@ -74,7 +77,7 @@ export default async function SizePage({
                                 alt={t.model?.images?.[0]?.alt ?? t.title}
                                 width={t.model?.images?.[0]?.width ?? 0}
                                 height={t.model?.images?.[0]?.height ?? 0}
-                                className=" max-w-[160px] h-auto max-h-[160px] object-contain rounded-md"
+                                className=" max-w-[160px] h-auto max-h-[180px] object-contain rounded-md"
                             />
 
                         </li>
