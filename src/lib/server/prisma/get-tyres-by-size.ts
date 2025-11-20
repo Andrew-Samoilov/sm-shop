@@ -12,5 +12,12 @@ export async function getTyresBySize(width: number, profile: number, diameter: n
         orderBy: {
             price: "asc",
         },
+        include: {
+            model: {
+                select: {
+                    season: true,
+                },
+            },
+        },
     });
 }

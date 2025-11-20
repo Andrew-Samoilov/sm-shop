@@ -1,3 +1,4 @@
+import { SeasonIcon } from "@/components";
 import { getPopularSizes } from "@/lib/server/prisma/get-popular-sizes";
 import { getTyresBySize } from "@/lib/server/prisma/get-tyres-by-size";
 import Link from "next/link";
@@ -31,22 +32,41 @@ export default async function SizePage({
 
     if (tyres.length === 0) return notFound();
 
+
     return (<>
         <h1>
             {width}/{profile} R{diameter}
         </h1>
 
         <section className="container ">
-            <ul className="grid gap-4">
-                {tyres.map((t) => (
-                    <li key={t.id} className="p-2 border border-border rounded-md flex flex-col gap-2">
-                        <Link href={`/tyres/${t.slug}`} >
-                            {t.title}
-                        </Link>
+            <ul className="grid gap-2">
+                {tyres.map((t) => {
+                    const qty = t.inventoryQuantity ?? 0;
+                    const season = t.model?.season ?? null;
 
-                        <div>Ціна: {t.price} грн</div>
-                    </li>
-                ))}
+                    return (
+                        <li key={t.id} className="p-2 border border-border rounded-md flex flex-col gap-2">
+                            <Link href={`/tyres/${t.slug}`} >
+                                {t.title}
+                            </Link>
+                            <div className="flex flex-wrap gap-2 items-center">
+                                {season && (
+                                    <SeasonIcon season={season} />
+                                )}
+
+                                <div className={
+                                    qty < 4
+                                        ? "font-semibold"
+                                        : ""
+                                }><span className="text-light">В наявності:</span> {qty > 20 ? 20 : qty}</div>
+
+                                <div>{t.country}</div>
+
+                                <div>Ціна: <span className="text-lg font-semibold">{t.price.toLocaleString("ua-UA")}</span> грн<span className="text-light text-xs">/шт</span></div>
+                            </div>
+                        </li>
+                    )
+                })}
             </ul>
         </section>
     </>
