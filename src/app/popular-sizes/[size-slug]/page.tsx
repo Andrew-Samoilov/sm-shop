@@ -1,9 +1,9 @@
-import { SeasonIcon } from "@/components";
+
 import { getPopularSizes } from "@/lib/server/prisma/get-popular-sizes";
 import { getTyresBySize } from "@/lib/server/prisma/get-tyres-by-size";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import Image from "next/image";
+import { getTyresBySizeAndSeason } from "@/lib/server/prisma/get-tyres-by-size-and-season";
+import { ServerTyreList } from "@/components/server-tyre-list";
 
 export async function generateStaticParams() {
     const sizes = await getPopularSizes();
@@ -30,60 +30,41 @@ export default async function SizePage({
     const diameter = Number(diameterStr);
 
     const tyres = await getTyresBySize(width, profile, diameter);
-
+    const winterTyres = await getTyresBySizeAndSeason(width, profile, diameter, 'WINTER');
+    const summerTyres = await getTyresBySizeAndSeason(width, profile, diameter, 'SUMMER');
+    const allseasonTyres = await getTyresBySizeAndSeason(width, profile, diameter, 'ALLSEASON');
     if (tyres.length === 0) return notFound();
 
 
     return (<>
-        <h1>
-            {width}/{profile} R{diameter}
-        </h1>
+        <h1>{width}/{profile} R{diameter}</h1>
 
         <section className="container ">
-            <ul className="grid gap-2 max-w-max mx-auto">
-                {tyres.map((t) => {
-                    const qty = t.inventoryQuantity ?? 0;
-                    const season = t.model?.season ?? null;
 
-                    return (
-                        <li key={t.id} className="p-2 border border-border rounded-md inline-grid grid-cols-[1fr_auto] gap-2 items-center">
-                           
-                            <Link
-                                href={`/tyres/${t.slug}`}
-                                className="flex flex-col gap-1 lg:gap-2">
-                                
-                                {season && (
-                                    <SeasonIcon season={season} />
-                                )}
+            {winterTyres.length === 0 ? (
+                <p className="text-center text-light">Зимових шин немає в наявності, будуть ближче до зими</p>
+            ) : (<>
+                    <h2 className="text-center">Зимові шини {width}/{profile} R{diameter}</h2>
+                    <ServerTyreList tyres={winterTyres} />
+                </>
+            )}
 
-                                {t.title}
+            {summerTyres.length === 0 ? (
+                <p className="text-center text-light">Літніх шин немає в наявності, будуть ближче до літа</p>
+            ) : (<>
+                    <h2 className="text-center">Літні шини {width}/{profile} R{diameter}</h2>
+                    <ServerTyreList tyres={summerTyres} />
+            </>
+            )}         
 
-                                <div className="flex flex-wrap gap-2 items-center">
+            {allseasonTyres.length === 0 ? (
+                <p className="text-center text-light">Всесезонних шин немає в наявності</p>
+            ) : (<>
+                    <h2 className="text-center">Всесезонні шини {width}/{profile} R{diameter}</h2>
+                    <ServerTyreList tyres={allseasonTyres} />
+            </>
+            )}   
 
-                                    <div className={
-                                        qty < 4
-                                            ? "font-semibold"
-                                            : ""
-                                    }><span className="text-light">В наявності:</span> {qty > 20 ? 20 : qty}</div>
-
-                                    <div>{t.country}</div>
-
-                                    <div>Ціна: <span className="text-lg font-semibold">{t.price.toLocaleString("ua-UA")}</span> грн<span className="text-light text-xs">/шт</span></div>
-                                </div>
-                            </Link>
-
-                            <Image
-                                src={t.model?.images?.[0]?.url ?? "/no-photo.jpg"}
-                                alt={t.model?.images?.[0]?.alt ?? t.title}
-                                width={t.model?.images?.[0]?.width ?? 0}
-                                height={t.model?.images?.[0]?.height ?? 0}
-                                className=" max-w-[160px] h-auto max-h-[180px] object-contain rounded-md"
-                            />
-
-                        </li>
-                    )
-                })}
-            </ul>
         </section>
     </>
     );
