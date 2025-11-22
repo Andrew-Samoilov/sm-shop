@@ -1,9 +1,9 @@
 export const dynamic = "force-static";
 
-import { AddToCartButton, BreadCrumbs, CertificatesClient, ModelViewer, QuantitySelector, SeasonIcon, TotalPrice, TyreByWarehouses,  ViewItemGA } from "@/components";
+import { AddToCartButton, BreadCrumbs, CertificatesClient, ModelViewer, QuantitySelector, SeasonIcon, TotalPrice, TyreByWarehouses, ViewItemGA } from "@/components";
 import { getTyreSize, getSeasonLabel, generateTyreMetadata, buildProductJsonLd, buildBreadcrumbsJsonLd, JsonLd, } from "@/lib";
 import { getTyreBySlug } from "@/lib/server/prisma/get-tyre-by-slug";
-import { getModelImgByModelId } from "@/lib/server/prisma/get-model-img-by-model-id";
+// import { getModelImgByModelId } from "@/lib/server/prisma/get-model-img-by-model-id";
 import { prisma } from "@/lib/server/prisma/prisma";
 import { Certificate } from "@/types";
 import { Metadata } from "next";
@@ -42,17 +42,22 @@ export default async function TyrePage(
 
   console.log('[TyrePage]', tyre_slug);
 
-  const tyre = await getTyreBySlug(tyre_slug);
+  // const tyre = await getTyreBySlug(tyre_slug);
+
+  const [tyre, cert] = await Promise.all([
+    getTyreBySlug(tyre_slug),
+    getContentBlock<Certificate[]>('certificates', []),
+  ]);
 
   if (!tyre) return notFound();
-
   if (tyre.inventoryQuantity === 0) {
     notFound();
   }
 
-  const images = tyre.modelId === null ? [] : await getModelImgByModelId(tyre.modelId);
+  // const images = tyre.modelId === null ? [] : await getModelImgByModelId(tyre.modelId);
+  const images = tyre.model?.images || [];
+  // const cert = await getContentBlock<Certificate[]>('certificates', []);
 
-  const cert = await getContentBlock<Certificate[]>('certificates', []);
   const filteredCerts = tyre.brand
     ? cert.filter(
       c =>

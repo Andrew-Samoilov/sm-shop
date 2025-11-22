@@ -32,7 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
         item: {
           "@type": "Brand",
           name,
-          url: `/brands/${name.toLowerCase().replace(/\s+/g, "-")}`,
+          url: `/brands/${name.toLowerCase().replaceAll(/\s+/g, "-")}`,
         },
       })),
     },

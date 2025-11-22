@@ -15,7 +15,7 @@ export default async function allSeasonTyresPage() {
 
     const seoContent = block?.value ? (block.value as { body: string, h1_title: string }) : null;
     const markdownBody = seoContent?.body || '';
-    const cleanMarkdownBody = markdownBody.replace(/\\n/g, '\n');
+    const cleanMarkdownBody = markdownBody.replaceAll('\\n', '\n');
 
     return (
         <>
