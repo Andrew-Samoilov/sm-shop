@@ -20,6 +20,7 @@ export function OneModelPhoto({
                 priority={isPriority}
                 fetchPriority={isPriority ? "high" : "auto"}
                 sizes="(max-width: 768px) 90vw, (max-width: 1280px) 50vw, 35vw"
+                className="object-contain"
             />
 
         </div>
