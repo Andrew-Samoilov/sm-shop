@@ -11,14 +11,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         { url: `${baseUrl}/tyres`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.9 },
         { url: `${baseUrl}/brands`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.7 },
         { url: `${baseUrl}/models`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.7 },
-        { url: `${baseUrl}/info`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.7 },
+        { url: `${baseUrl}/info`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.4 },
         { url: `${baseUrl}/contact`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.3 },
         { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.3 },
-        { url: `${baseUrl}/thank-you`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.3 },
+        { url: `${baseUrl}/popular-sizes`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.4 },
     ];
 
     // Динамічні сторінки
-    const [tyres, brands, models, staticDbPages] = await Promise.all([
+    const [tyres, brands, models, staticDbPages, popularSizesResult] = await Promise.all([
         prisma.tyre.findMany({
             where: {
                 inventoryQuantity: {
@@ -33,7 +33,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             where: { visible: true },
             select: { slug: true, updatedAt: true },
         }),
+        prisma.tyre.groupBy({
+            by: ["width", "profile", "diameter"],
+            where: { inventoryQuantity: { gt: 0 } },
+            _sum: { inventoryQuantity: true },
+            orderBy: { _sum: { inventoryQuantity: "desc" } },
+            take: 20,
+        }),
     ]);
+
 
     const tyrePages = tyres.map((t) => ({
         url: `${baseUrl}/tyres/${t.slug}`,
@@ -52,15 +60,29 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: `${baseUrl}/models/${m.slug}`,
         lastModified: m.updatedAt,
         changeFrequency: "weekly" as const,
-        priority: 0.5,
+        priority: 0.8,
     }));
 
     const staticPagesFromDb = staticDbPages.map((p) => ({
-        url: `${baseUrl}/${p.slug}`,
+        url: `${baseUrl}/info/${p.slug}`,
         lastModified: p.updatedAt,
         changeFrequency: "monthly" as const,
-        priority: 0.4,
+        priority: 0.8,
     }));
 
-    return [...corePages, ...tyrePages, ...brandPages, ...modelPages, ...staticPagesFromDb];
+    const popularSizePages = (popularSizesResult || []).map((s) => {
+        // Формування slug: 185-65r15 (без слешів та пробілів)
+        const slug = `${s.width}-${s.profile}r${s.diameter}`.toLowerCase();
+
+        return {
+            url: `${baseUrl}/popular-sizes/${slug}`,
+            lastModified: new Date().toISOString(),
+            changeFrequency: "daily" as const,
+            priority: 0.75, // Високий пріоритет
+        };
+    });
+
+
+
+    return [...corePages, ...tyrePages, ...brandPages, ...modelPages, ...staticPagesFromDb, ...popularSizePages];
 }
