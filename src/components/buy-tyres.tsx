@@ -7,7 +7,7 @@ export function BuyTyres() {
             <h2>Купити шини</h2>
             <div className="flex flex-col items-center md:flex-row gap-6 w-full">
                 <Link
-                    href={'/tyres?season=summer&view=gallery'}
+                    href={'/summer-tyres'}
                     aria-label="Перейти до каталогу літніх шин"
                     className="flex justify-center items-center rounded-md p-12 hover:no-underline
                     // md:w-1/3
@@ -18,7 +18,7 @@ export function BuyTyres() {
                 </Link>
 
                 <Link
-                    href={'/tyres?season=winter&view=gallery'}
+                    href={'/winter-tyres'}
                     aria-label="Перейти до каталогу зимових шин"
                     className="flex justify-center  rounded-md p-12 hover:no-underline
                     // md:w-1/3
@@ -29,7 +29,7 @@ export function BuyTyres() {
                 </Link>
 
                 <Link
-                    href={'/tyres?season=allseason&view=gallery'}
+                    href={'/all-season-tyres'}
                     aria-label="Перейти до каталогу всесезонних шин"
                     className="flex justify-center items-center rounded-md p-12 hover:no-underline
                     // md:w-1/3

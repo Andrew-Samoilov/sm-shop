@@ -15,6 +15,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         { url: `${baseUrl}/contact`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.3 },
         { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.3 },
         { url: `${baseUrl}/popular-sizes`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.4 },
+        { url: `${baseUrl}/winter-tyres`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.9 },
+        { url: `${baseUrl}/summer-tyres`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.9 },
+        { url: `${baseUrl}/all-season-tyres`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.8 },
     ];
 
     // Динамічні сторінки
@@ -71,7 +74,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }));
 
     const popularSizePages = (popularSizesResult || []).map((s) => {
-        // Формування slug: 185-65r15 (без слешів та пробілів)
         const slug = `${s.width}-${s.profile}r${s.diameter}`.toLowerCase();
 
         return {
