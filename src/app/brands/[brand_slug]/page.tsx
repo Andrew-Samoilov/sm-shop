@@ -8,9 +8,10 @@ import Link from "next/link";
 import { getBrands } from "@/lib/server/prisma/get-brands";
 import { getBrandBySlug } from "@/lib/server/prisma/get-brand-by-slug";
 import { getModelsByBrandId } from "@/lib/server/prisma/get-models-by-brand-id";
-import { getModelImagesByIds } from "@/lib/server/prisma/get-model-img-by-model-ids";
+// import { getModelImagesByIds } from "@/lib/server/prisma/get-model-img-by-model-ids";
 import { getTyresByBrandId } from "@/lib/server/prisma/get-tyres-by-brand-id";
 import { getContentBlock } from "@/lib/server/get-content-block";
+import { getModelImagesByIds } from "@/lib/server/prisma/get-model-img-by-model-ids";
 
 
 export async function generateStaticParams() {
@@ -31,22 +32,26 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
   const { brand_slug } = await params;
   if (!brand_slug) return notFound();
 
-  const brand = await getBrandBySlug(brand_slug);
+  // const brand = await getBrandBySlug(brand_slug);
+
+  const [brand, cert, jsonLd] = await Promise.all([
+    getBrandBySlug(brand_slug),
+    getContentBlock<Certificate[]>('certificates', []),
+    generateBrandJsonLd(brand_slug),
+  ]);
+
   if (!brand) return notFound();
 
-  const brandModels = await getModelsByBrandId(brand.id);
-  const brandTyres = await getTyresByBrandId(brand.id);
-  const modelId = brandTyres.map(t => t.modelId)
+
+  const [brandModels, brandTyres] = await Promise.all([
+    getModelsByBrandId(brand.id),
+    getTyresByBrandId(brand.id),
+  ]);
+
+  const modelId = brandTyres.map(t => t.modelId);
   const images = await getModelImagesByIds(modelId);
-  const cert = await getContentBlock<Certificate[]>('certificates', []);
-  // console.log(cert, brand.brand_name);
 
   const filteredCerts = normalizedCerts(cert, brand.brand_name);
-  // console.log(`[filteredCerts]`, filteredCerts)
-
-  const jsonLd = await generateBrandJsonLd(brand_slug);
-  // console.info(`[getTyresByBrandId]`,brandTyres);
-  // console.log(`[getTyresByBrandId]`, brand);
 
   return (
     <article className="flex flex-col gap-6 mx-auto">

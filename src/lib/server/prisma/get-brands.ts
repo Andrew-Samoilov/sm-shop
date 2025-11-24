@@ -5,8 +5,9 @@
 
 import { Brand } from "@prisma/client";
 import { prisma } from "./prisma";
+import { unstable_cache } from "next/cache";
 
-export async function getBrands(): Promise<Brand[]> {
+export async function fetchBrandsList(): Promise<Brand[]> {
   try {
     const brands = await prisma.brand.findMany({
       where: {
@@ -28,3 +29,12 @@ export async function getBrands(): Promise<Brand[]> {
     return [];
   }
 }
+
+export const getBrands = unstable_cache(
+  fetchBrandsList,
+  // 1. Key Parts: Масив ідентифікаторів, що створюють унікальний ключ кешу.
+  //    (Тут він один, бо ми завжди отримуємо повний список брендів)
+  ['brands-list-with-inventory'],
+  // 2. Tags: Дозволяє вручну очистити кеш (revalidateTag)
+  { tags: ['brands'] }
+);
