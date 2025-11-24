@@ -61,10 +61,10 @@ export async function Footer() {
                 Бренди
               </Link>
               <Link
-                href="/models"
+                href="/popular-sizes"
                 className="px-3 py-1 text-xs md:text-sm font-medium transition text-light hover:text-dark dark:text-darkmode-text dark:hover:text-darkmode-primary hover:no-underline"
               >
-                Моделі
+                Популярні розміри
               </Link>
             </div>
 
