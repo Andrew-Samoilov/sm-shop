@@ -10,7 +10,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         { url: `${baseUrl}/`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 1 },
         { url: `${baseUrl}/tyres`, lastModified: new Date(), changeFrequency: "daily" as const, priority: 0.9 },
         { url: `${baseUrl}/brands`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.7 },
-        { url: `${baseUrl}/models`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.7 },
         { url: `${baseUrl}/info`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.4 },
         { url: `${baseUrl}/contact`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.3 },
         { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.3 },
@@ -31,7 +30,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             select: { slug: true }
         }),
         prisma.brand.findMany({ select: { slug: true, updatedAt: true } }),
-        prisma.model.findMany({ select: { slug: true, updatedAt: true } }),
+        prisma.model.findMany({
+            select: {
+                slug: true, updatedAt: true,
+                brand: { select: { slug: true, }, },
+            }
+        }),
         prisma.staticPage.findMany({
             where: { visible: true },
             select: { slug: true, updatedAt: true },
@@ -59,12 +63,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.5,
     }));
 
-    const modelPages = models.map((m) => ({
-        url: `${baseUrl}/models/${m.slug}`,
-        lastModified: m.updatedAt,
-        changeFrequency: "weekly" as const,
-        priority: 0.8,
-    }));
+    const modelPages = models
+        .filter(m => m.brand?.slug)
+        .map((m) => ({
+            url: `${baseUrl}/brands/${m.brand!.slug}/${m.slug}`,
+            lastModified: m.updatedAt,
+            changeFrequency: "weekly" as const,
+            priority: 0.8,
+        }));
 
     const staticPagesFromDb = staticDbPages.map((p) => ({
         url: `${baseUrl}/info/${p.slug}`,

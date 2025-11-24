@@ -11,10 +11,6 @@ Allow: /brands
 Allow: /brands/
 Allow: /brands/*
 
-Allow: /models
-Allow: /models/
-Allow: /models/*
-
 Allow: /info
 Allow: /info/
 Allow: /info/*

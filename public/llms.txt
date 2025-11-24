@@ -15,9 +15,6 @@ allow: /tyres/*
 allow: /brands
 allow: /brands/
 allow: /brands/*
-allow: /models
-allow: /models/
-allow: /models/*
 allow: /info
 allow: /info/
 allow: /info/*

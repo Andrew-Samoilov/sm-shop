@@ -15,6 +15,7 @@ export async function generateStaticParams() {
   const models = await getModels();
 
   return models.map((model) => ({
+    brand_slug: model.brand?.slug ?? 'default-brand',
     model_slug: model.slug,
   }));
 }
@@ -22,17 +23,17 @@ export async function generateStaticParams() {
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://shinamix.com.ua";
 
 export async function generateMetadata(
-  props: { params: { model_slug: string } }
+  { params }: { params: { model_slug: string, brand_slug: string } }
 ): Promise<Metadata> {
-  return generateModelMetadata(props);
+  return generateModelMetadata({ params });
 }
 
 export default async function ModelPage({
   params,
 }: {
-  params: Promise<{ model_slug: string }>;
+  params: Promise<{ brand_slug: string, model_slug: string }>;
 }) {
-  const { model_slug } = await params;
+  const { brand_slug, model_slug } = await params;
 
   const model = await getModelBySlug(model_slug);
   if (!model) return notFound();
@@ -46,7 +47,7 @@ export default async function ModelPage({
 
   const filteredCerts = normalizedCerts(cert, brand?.brand_name);
 
-  const canonicalUrl = `${BASE_URL}/models/${model.slug}`;
+  const canonicalUrl = `${BASE_URL}/brands/${brand_slug}/${model.slug}`;
 
   const jsonLd = {
     "@context": "https://schema.org",

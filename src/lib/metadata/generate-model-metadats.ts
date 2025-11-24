@@ -6,15 +6,13 @@ import { getModelBySlug } from "@/lib/server/prisma/get-model-by-slug";
 import { getBrandById } from "@/lib/server/prisma/get-brand-by-id";
 import { getModelImgByModelId } from "@/lib/server/prisma/get-model-img-by-model-id";
 
-// Константу BASE_URL виносьте сюди або імпортуйте з config-файлу
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://shinamix.com.ua";
 
 export async function generateModelMetadata(
-    { params }: { params: { model_slug: string } }
+    { params }: { params: { model_slug: string, brand_slug: string } }
 ): Promise<Metadata> {
-    const { model_slug } = params;
+    const { model_slug, brand_slug } = params;
 
-    // 1. --- ЕТАП 1: Паралельні запити siteConfig та model ---
     const [model, siteConfig] = await Promise.all([
         getModelBySlug(model_slug),
         getSiteConfig(),
@@ -22,7 +20,6 @@ export async function generateModelMetadata(
 
     if (!model) return {};
 
-    // 2. --- ЕТАП 2: Паралельні запити brand та images (залежні від model) ---
     const brandPromise = typeof model.brandId === "number"
         ? getBrandById(model.brandId)
         : Promise.resolve(null); // Важливо: повертаємо resolve(null), щоб Promise.all не зламався
@@ -34,10 +31,9 @@ export async function generateModelMetadata(
         imagesPromise,
     ]);
 
-    // --- Решта логіки, яка використовує отримані дані ---
     const title = `${brand?.brand_name} ${model.modelName} – характеристики, ціна та відгуки | ${siteConfig.siteName}`;
     const description = `Детальний огляд шини ${brand?.brand_name} ${model.modelName}: характеристики, переваги, особливості експлуатації та наявність у магазині ${siteConfig.siteName}.`;
-    const canonicalUrl = `${BASE_URL}/models/${model.slug}`;
+    const canonicalUrl = `${BASE_URL}/brands/${brand_slug}/${model.slug}`;
 
     const ogImages = images?.map((img) => ({
         url: img.url.startsWith("http") ? img.url : `${BASE_URL}${img.url}`,

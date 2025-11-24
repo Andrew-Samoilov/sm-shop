@@ -103,7 +103,7 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
           {brandModels.map((model) => (
             <Link
               key={model.id}
-              href={`/models/${model.slug}`}
+              href={`/${brand.slug}/${model.slug}`}
               className=" px-6"
             >
               {model.modelName}
