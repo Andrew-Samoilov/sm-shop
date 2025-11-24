@@ -1,5 +1,5 @@
 import { CertificatesClient, ModelViewer, SeasonIcon, TyresList } from "@/components";
-import {  normalizedCerts, getSiteConfig } from "@/lib";
+import {  normalizedCerts,  generateModelMetadata } from "@/lib";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import { Metadata } from "next";
@@ -22,49 +22,9 @@ export async function generateStaticParams() {
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://shinamix.com.ua";
 
 export async function generateMetadata(
-  { params }: { params: { model_slug: string } }
+  props: { params: { model_slug: string } }
 ): Promise<Metadata> {
-  const siteConfig = await getSiteConfig();
-  const { model_slug } = params;
-  const model = await getModelBySlug(model_slug);
-  if (!model) return {};
-  const brand = typeof model.brandId === "number"
-    ? await getBrandById(model.brandId)
-    : null;
-
-  const title = `${brand?.brand_name} ${model.modelName} – характеристики, ціна та відгуки | ${siteConfig.siteName}`;
-  const description = `Детальний огляд шини ${brand?.brand_name} ${model.modelName}: характеристики, переваги, особливості експлуатації та наявність у магазині ${siteConfig.siteName}.`;
-  const canonicalUrl = `${BASE_URL}/models/${model.slug}`;
-
-  const images = await getModelImgByModelId(model.id);
-  const ogImages = images?.map((img) => ({
-    url: img.url.startsWith("http") ? img.url : `${BASE_URL}${img.url}`,
-    alt: img.alt ?? `${brand?.brand_name} ${model.modelName} – купити в магазині ${siteConfig.siteName}`,
-    width: img.width ?? 800,
-    height: img.height ?? 600,
-  })) ?? [];
-
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      url: canonicalUrl,
-      siteName: siteConfig.siteName,
-      type: "website",
-      images: ogImages,
-    },
-    twitter: {
-      card: ogImages.length ? "summary_large_image" : "summary",
-      title,
-      description,
-      images: ogImages.length ? ogImages.map(i => i.url) : undefined,
-    },
-    alternates: {
-      canonical: canonicalUrl,
-    },
-  };
+  return generateModelMetadata(props);
 }
 
 export default async function ModelPage({
@@ -73,6 +33,8 @@ export default async function ModelPage({
   params: Promise<{ model_slug: string }>;
 }) {
   const { model_slug } = await params;
+
+
   const model = await getModelBySlug(model_slug);
 
 
