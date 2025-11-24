@@ -34,21 +34,25 @@ export default async function ModelPage({
 }) {
   const { model_slug } = await params;
 
-
   const model = await getModelBySlug(model_slug);
-
-
   if (!model) return notFound();
 
-  const modelTyres = await getTyresByModelId(model.id);
+  const [modelTyres, brand, cert, images] = await Promise.all([
+    getTyresByModelId(model.id),
+    model.brandId ? getBrandById(model.brandId) : Promise.resolve(null),
+    getContentBlock<Certificate[]>('certificates', []),
+    getModelImgByModelId(model.id),
+  ]);
 
-  const brand = model.brandId ? await getBrandById(model.brandId) : null;
-
-  const cert = await getContentBlock<Certificate[]>('certificates', []);
   const filteredCerts = normalizedCerts(cert, brand?.brand_name);
 
+  // const modelTyres = await getTyresByModelId(model.id);
 
-  const images = await getModelImgByModelId(model.id);
+  // const brand = model.brandId ? await getBrandById(model.brandId) : null;
+
+  // const cert = await getContentBlock<Certificate[]>('certificates', []);
+
+  // const images = await getModelImgByModelId(model.id);
   const canonicalUrl = `${BASE_URL}/models/${model.slug}`;
 
   const jsonLd = {
