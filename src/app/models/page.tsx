@@ -59,7 +59,6 @@ export default async function ModelsPage() {
             )}
           </div>
 
-
           <span className="text-light text-sm">({models.length})</span>
           {models.map((model) => (
             <Link key={model.id} href={`/models/${model.slug}`}>

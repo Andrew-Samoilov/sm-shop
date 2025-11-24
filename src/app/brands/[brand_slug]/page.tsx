@@ -1,18 +1,16 @@
 import type { Metadata } from "next";
 import ReactMarkdown from "react-markdown";
 import { notFound } from "next/navigation";
-import {  formatDisplayUrl,  normalizedCerts, generateBrandMetadata, generateBrandJsonLd, JsonLd } from "@/lib";
+import { formatDisplayUrl,  normalizedCerts, generateBrandMetadata, generateBrandJsonLd, JsonLd } from "@/lib";
 import { TyresList, CertificatesClient } from "@/components";
 import { Certificate } from "@/types";
 import Link from "next/link";
 import { getBrands } from "@/lib/server/prisma/get-brands";
 import { getBrandBySlug } from "@/lib/server/prisma/get-brand-by-slug";
 import { getModelsByBrandId } from "@/lib/server/prisma/get-models-by-brand-id";
-// import { getModelImagesByIds } from "@/lib/server/prisma/get-model-img-by-model-ids";
 import { getTyresByBrandId } from "@/lib/server/prisma/get-tyres-by-brand-id";
 import { getContentBlock } from "@/lib/server/get-content-block";
 import { getModelImagesByIds } from "@/lib/server/prisma/get-model-img-by-model-ids";
-
 
 export async function generateStaticParams() {
   const brands = await getBrands();
@@ -32,8 +30,6 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
   const { brand_slug } = await params;
   if (!brand_slug) return notFound();
 
-  // const brand = await getBrandBySlug(brand_slug);
-
   const [brand, cert, jsonLd] = await Promise.all([
     getBrandBySlug(brand_slug),
     getContentBlock<Certificate[]>('certificates', []),
@@ -41,7 +37,6 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
   ]);
 
   if (!brand) return notFound();
-
 
   const [brandModels, brandTyres] = await Promise.all([
     getModelsByBrandId(brand.id),

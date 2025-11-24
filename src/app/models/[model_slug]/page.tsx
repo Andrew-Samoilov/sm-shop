@@ -46,13 +46,6 @@ export default async function ModelPage({
 
   const filteredCerts = normalizedCerts(cert, brand?.brand_name);
 
-  // const modelTyres = await getTyresByModelId(model.id);
-
-  // const brand = model.brandId ? await getBrandById(model.brandId) : null;
-
-  // const cert = await getContentBlock<Certificate[]>('certificates', []);
-
-  // const images = await getModelImgByModelId(model.id);
   const canonicalUrl = `${BASE_URL}/models/${model.slug}`;
 
   const jsonLd = {
@@ -82,7 +75,6 @@ export default async function ModelPage({
         "availability": "https://schema.org/OutOfStock",
       },
   };
-
 
 
   return (
