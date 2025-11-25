@@ -1,5 +1,11 @@
 import { getPopularSizes } from "@/lib/server/prisma/get-popular-sizes";
+import { getPopularSizesIndexMetadata } from "@/lib/server/prisma/get-popular-sizes-index-metadata";
+import { Metadata } from "next";
 import Link from "next/link";
+
+export async function generateMetadata(): Promise<Metadata> {
+    return getPopularSizesIndexMetadata();
+}
 
 export default async function PopularSizes() {
     const sizes = await getPopularSizes();

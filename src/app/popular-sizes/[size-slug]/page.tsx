@@ -1,8 +1,10 @@
-
 import { getPopularSizes } from "@/lib/server/prisma/get-popular-sizes";
 import { notFound } from "next/navigation";
 import { getTyresBySizeAndSeason } from "@/lib/server/prisma/get-tyres-by-size-and-season";
 import { ServerTyreList } from "@/components/server-tyre-list";
+import { Metadata } from "next";
+import { generateSizeMetadata } from "@/lib/metadata/generate-size-metadata";
+
 
 export async function generateStaticParams() {
     const sizes = await getPopularSizes();
@@ -10,6 +12,15 @@ export async function generateStaticParams() {
     return sizes.map((s) => ({
         "size-slug": s.slug,
     }));
+}
+
+export async function generateMetadata(
+    { params }: { params: { "size-slug": string } }
+): Promise<Metadata> {
+
+    return generateSizeMetadata({
+        sizeSlug: params["size-slug"],
+    });
 }
 
 export default async function SizePage({
