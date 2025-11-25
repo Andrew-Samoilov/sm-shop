@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { prisma } from "@/lib/server/prisma/prisma";
 import { getBaseMetadataAction } from "@/lib/server/metadata/get-base-metadata-action";
 import { Metadata } from "next";
@@ -32,7 +33,16 @@ export default async function InfoPageList() {
     // console.log(`[infoPages generateStaticParams]pages`, pages);
     return (
         <section className=" container ">
-            <h1>Інформаційні сторінки</h1>
+            <div className="rounded-md from-body to-theme-light dark:from-darkmode-body dark:to-darkmode-theme-light bg-gradient-to-l ">
+                <Image
+                    src='/other/info-page.png'
+                    alt="Інформаційні сторінки"
+                    width={300}
+                    height={300}
+                    className="mx-auto"
+                />
+                <h1>Інформаційні сторінки</h1>
+            </div>
             <ul className="flex flex-col md:flex-row md:flex-wrap mx-auto gap-6 list-none p-6">
                 {pages.map((page) => (
                     <li key={page.slug}>
