@@ -1,7 +1,7 @@
 export const dynamic = "force-static";
 
 import { AddToCartButton, BreadCrumbs, CertificatesClient, ModelViewer, QuantitySelector, SeasonIcon, TotalPrice, TyreByWarehouses, ViewItemGA } from "@/components";
-import { getTyreSize, getSeasonLabel, generateTyreMetadata, buildProductJsonLd, buildBreadcrumbsJsonLd, JsonLd, } from "@/lib";
+import { getTyreSize, getSeasonLabel, buildProductJsonLd, buildBreadcrumbsJsonLd, JsonLd, } from "@/lib";
 import { getTyreBySlug } from "@/lib/server/prisma/get-tyre-by-slug";
 // import { getModelImgByModelId } from "@/lib/server/prisma/get-model-img-by-model-id";
 import { prisma } from "@/lib/server/prisma/prisma";
@@ -11,6 +11,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import { getContentBlock } from "@/lib/server/get-content-block";
+import { generateTyreMetadata } from "@/lib/server";
 
 
 export async function generateStaticParams() {

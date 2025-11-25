@@ -1,4 +1,4 @@
-import { getBaseMetadataAction } from "@/lib/server/get-base-metadata-action";
+import { getBaseMetadataAction } from "@/lib/server/metadata/get-base-metadata-action";
 import Link from "next/link";
 
 export async function generateMetadata() {

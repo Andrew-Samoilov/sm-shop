@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { getTyresBySizeAndSeason } from "@/lib/server/prisma/get-tyres-by-size-and-season";
 import { ServerTyreList } from "@/components/server-tyre-list";
 import { Metadata } from "next";
-import { generateSizeMetadata } from "@/lib/metadata/generate-size-metadata";
+import { generateSizeMetadata } from "@/lib/server/metadata/generate-size-metadata";
 
 
 export async function generateStaticParams() {
@@ -51,26 +51,26 @@ export default async function SizePage({
             {winterTyres.length === 0 ? (
                 <p className="text-center text-light">Зимових шин немає в наявності, будуть ближче до зими</p>
             ) : (<>
-                    <h2 className="text-center">Зимові шини {width}/{profile} R{diameter}</h2>
-                    <ServerTyreList tyres={winterTyres} />
-                </>
+                <h2 className="text-center">Зимові шини {width}/{profile} R{diameter}</h2>
+                <ServerTyreList tyres={winterTyres} />
+            </>
             )}
 
             {summerTyres.length === 0 ? (
                 <p className="text-center text-light">Літніх шин немає в наявності, будуть ближче до літа</p>
             ) : (<>
-                    <h2 className="text-center">Літні шини {width}/{profile} R{diameter}</h2>
-                    <ServerTyreList tyres={summerTyres} />
+                <h2 className="text-center">Літні шини {width}/{profile} R{diameter}</h2>
+                <ServerTyreList tyres={summerTyres} />
             </>
-            )}         
+            )}
 
             {allseasonTyres.length === 0 ? (
                 <p className="text-center text-light">Всесезонних шин немає в наявності</p>
             ) : (<>
-                    <h2 className="text-center">Всесезонні шини {width}/{profile} R{diameter}</h2>
-                    <ServerTyreList tyres={allseasonTyres} />
+                <h2 className="text-center">Всесезонні шини {width}/{profile} R{diameter}</h2>
+                <ServerTyreList tyres={allseasonTyres} />
             </>
-            )}   
+            )}
 
         </section>
     </>

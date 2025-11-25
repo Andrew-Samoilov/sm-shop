@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import { prisma } from "@/lib/server/prisma/prisma";
 import { notFound } from "next/navigation";
-import { getBaseMetadataAction } from "../server/get-base-metadata-action";
+import { getBaseMetadataAction } from "./get-base-metadata-action";
 
 export async function generateInfoPageMetadata(slug: string): Promise<Metadata> {
     const page = await prisma.staticPage.findUnique({

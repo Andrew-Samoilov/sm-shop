@@ -1,16 +1,13 @@
 import type { Metadata } from "next";
 import ReactMarkdown from "react-markdown";
 import { notFound } from "next/navigation";
-import { formatDisplayUrl,  normalizedCerts, generateBrandMetadata, generateBrandJsonLd, JsonLd } from "@/lib";
+import { formatDisplayUrl, normalizedCerts, generateBrandJsonLd, JsonLd } from "@/lib";
+
 import { TyresList, CertificatesClient } from "@/components";
 import { Certificate } from "@/types";
 import Link from "next/link";
-import { getBrands } from "@/lib/server/prisma/get-brands";
-import { getBrandBySlug } from "@/lib/server/prisma/get-brand-by-slug";
-import { getModelsByBrandId } from "@/lib/server/prisma/get-models-by-brand-id";
-import { getTyresByBrandId } from "@/lib/server/prisma/get-tyres-by-brand-id";
-import { getContentBlock } from "@/lib/server/get-content-block";
-import { getModelImagesByIds } from "@/lib/server/prisma/get-model-img-by-model-ids";
+
+import { generateBrandMetadata, getBrands, getModelImagesByIds, getContentBlock, getTyresByBrandId, getModelsByBrandId, getBrandBySlug } from "@/lib/server";
 
 export async function generateStaticParams() {
   const brands = await getBrands();

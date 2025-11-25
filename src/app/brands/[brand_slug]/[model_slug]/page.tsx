@@ -1,15 +1,10 @@
 import { CertificatesClient, ModelViewer, SeasonIcon, TyresList } from "@/components";
-import {  normalizedCerts,  generateModelMetadata } from "@/lib";
+import { normalizedCerts } from "@/lib";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import { Metadata } from "next";
 import { Certificate } from "@/types";
-import { getModels } from "@/lib/server/prisma/get-models";
-import { getModelBySlug } from "@/lib/server/prisma/get-model-by-slug";
-import { getBrandById } from "@/lib/server/prisma/get-brand-by-id";
-import { getModelImgByModelId } from "@/lib/server/prisma/get-model-img-by-model-id";
-import { getTyresByModelId } from "@/lib/server/prisma/get-tyres-by-model-id";
-import { getContentBlock } from "@/lib/server/get-content-block";
+import { getContentBlock, generateModelMetadata, getModels, getModelBySlug, getBrandById, getModelImgByModelId, getTyresByModelId } from "@/lib/server";
 
 export async function generateStaticParams() {
   const models = await getModels();
@@ -94,13 +89,13 @@ export default async function ModelPage({
         )}
       </header>
 
-        <div className="relative">
-          <ModelViewer images={images} isPriority={true} />
+      <div className="relative">
+        <ModelViewer images={images} isPriority={true} />
 
-          {model?.season && (
-            <SeasonIcon season={model?.season} className="absolute top-2 left-2 z-99" />
-          )}
-        </div>
+        {model?.season && (
+          <SeasonIcon season={model?.season} className="absolute top-2 left-2 z-99" />
+        )}
+      </div>
 
       {model.description && (
         <section className="mx-auto p-6 lg:max-w-[65ch] sm:text-sm lg:text-lg xl:text-xl  bg-body dark:bg-darkmode-body z-10">

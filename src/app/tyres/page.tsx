@@ -1,5 +1,5 @@
 import { TyresSelect } from "@/components";
-import { generateTyresMetadata } from "@/lib";
+import { generateTyresMetadata } from "@/lib/server";
 // import { getPopularTyres } from "@/lib/server/get-popular-tyres";
 import { Metadata } from "next";
 

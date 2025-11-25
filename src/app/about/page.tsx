@@ -1,5 +1,5 @@
-import { BenefitsSection, FeatureSection, CertificatesClient, BuyTyres, PopularSizes,  PopularBrands } from "@/components";
-import { getBaseMetadataAction } from "@/lib/server/get-base-metadata-action";
+import { BenefitsSection, FeatureSection, CertificatesClient, BuyTyres, PopularSizes, PopularBrands } from "@/components";
+import { getBaseMetadataAction } from "@/lib/server/metadata/get-base-metadata-action";
 
 import { getContentBlock } from "@/lib/server/get-content-block";
 import { Certificate } from '@/types'

@@ -3,7 +3,7 @@
  * @server-only
  */
 
-import { getBaseMetadata } from "@/lib/metadata/get-base-metadata";
+import { getBaseMetadata } from "@/lib/server/metadata/get-base-metadata";
 type GetBaseMetadataParams = Parameters<typeof getBaseMetadata>[0];
 
 export async function getBaseMetadataAction(params?: GetBaseMetadataParams) {

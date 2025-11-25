@@ -20,13 +20,7 @@ export { sendEmail } from "./send-email";
 export { JsonLd } from "./json-ld/json-ld";
 export { buildBreadcrumbsJsonLd } from "./json-ld/breadcrumbs-json-ld";
 export { buildProductJsonLd } from "./json-ld/product-json-ld";
-
-export { generateModelMetadata } from "./metadata/generate-model-metadats";
-export { generateTyreMetadata } from "./metadata/tyre-metadata";
-export { generateTyresMetadata } from "./metadata/generate-tyres-metadata";
-export { generateBrandMetadata } from "./metadata/brand-metadata";
 export { generateBrandJsonLd } from "./json-ld/brand-json-ld";
-export { generateInfoPageMetadata } from "./metadata/generate-info-page-metadata";
 export { formatSearchTitle } from "./format-search-title";
 export { getOrderHtml } from "./order/get-order-html";
 

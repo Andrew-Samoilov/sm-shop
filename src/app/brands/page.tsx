@@ -1,5 +1,5 @@
 
-import { getBaseMetadataAction } from "@/lib/server/get-base-metadata-action";
+import { getBaseMetadataAction } from "@/lib/server/metadata/get-base-metadata-action";
 import { getBrands } from "@/lib/server/prisma/get-brands";
 import type { Metadata } from "next";
 import Link from "next/link";

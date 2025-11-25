@@ -2,7 +2,7 @@ import "../styles/globals.css"
 import { GtagPageView, Footer, Header, TwSizeIndicator, WorkingHoursPhone } from "@/components";
 import { ToastContainer } from "react-toastify";
 import Script from "next/script";
-import { getBaseMetadataAction } from "@/lib/server/get-base-metadata-action";
+import { getBaseMetadataAction } from "@/lib/server/metadata/get-base-metadata-action";
 import { Suspense } from "react";
 
 
