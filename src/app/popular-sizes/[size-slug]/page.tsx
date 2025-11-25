@@ -1,6 +1,5 @@
 
 import { getPopularSizes } from "@/lib/server/prisma/get-popular-sizes";
-import { getTyresBySize } from "@/lib/server/prisma/get-tyres-by-size";
 import { notFound } from "next/navigation";
 import { getTyresBySizeAndSeason } from "@/lib/server/prisma/get-tyres-by-size-and-season";
 import { ServerTyreList } from "@/components/server-tyre-list";
@@ -29,12 +28,9 @@ export default async function SizePage({
     const profile = Number(profileStr);
     const diameter = Number(diameterStr);
 
-    const tyres = await getTyresBySize(width, profile, diameter);
     const winterTyres = await getTyresBySizeAndSeason(width, profile, diameter, 'WINTER');
     const summerTyres = await getTyresBySizeAndSeason(width, profile, diameter, 'SUMMER');
     const allseasonTyres = await getTyresBySizeAndSeason(width, profile, diameter, 'ALLSEASON');
-    if (tyres.length === 0) return notFound();
-
 
     return (<>
         <h1>{width}/{profile} R{diameter}</h1>

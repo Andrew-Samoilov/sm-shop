@@ -1,3 +1,4 @@
+import { getAllTyreSizesAndSeasons } from "@/lib/server/prisma/get-all-tyres-by-size-and-season";
 import { prisma } from "@/lib/server/prisma/prisma";
 import { MetadataRoute } from "next";
 
@@ -20,7 +21,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ];
 
     // Динамічні сторінки
-    const [tyres, brands, models, staticDbPages, popularSizesResult] = await Promise.all([
+    const [tyres, brands, models, staticDbPages, popularSizesResult, uniqueTyreCombinations] = await Promise.all([
         prisma.tyre.findMany({
             where: {
                 inventoryQuantity: {
@@ -47,6 +48,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             orderBy: { _sum: { inventoryQuantity: "desc" } },
             take: 20,
         }),
+        getAllTyreSizesAndSeasons(), 
     ]);
 
 
@@ -86,11 +88,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             url: `${baseUrl}/popular-sizes/${slug}`,
             lastModified: new Date().toISOString(),
             changeFrequency: "daily" as const,
-            priority: 0.75, // Високий пріоритет
+            priority: 0.75, 
         };
     });
 
+    const tyreSizeAndSeasonPages = uniqueTyreCombinations.map((c) => ({
+        // /tyre-sizes/[size-slug]/[season-slug]
+        url: `${baseUrl}/tyre-sizes/${c.sizeSlug}/${c.seasonSlug}`,
+        lastModified: new Date().toISOString(),
+        changeFrequency: "weekly" as const,
+        priority: 0.85, 
+    }));
 
 
-    return [...corePages, ...tyrePages, ...brandPages, ...modelPages, ...staticPagesFromDb, ...popularSizePages];
+    return [...corePages, ...tyrePages, ...brandPages, ...modelPages, ...staticPagesFromDb, ...popularSizePages, ...tyreSizeAndSeasonPages,];
 }
