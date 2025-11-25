@@ -1,3 +1,4 @@
+"use server";
 import { Metadata } from "next";
 import { getBaseMetadata } from "./get-base-metadata";
 

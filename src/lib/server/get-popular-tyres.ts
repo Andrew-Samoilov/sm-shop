@@ -22,7 +22,7 @@ export async function getPopularTyres() {
                 include: { images: true },
             },
         },
-        orderBy: { inventoryQuantity: "desc" }, // ✅ сюди
+        orderBy: { inventoryQuantity: "desc" }, 
         take: 20,
     });
 

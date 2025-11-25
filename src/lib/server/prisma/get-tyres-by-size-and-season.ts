@@ -1,5 +1,5 @@
 "use server";
-import {    prisma } from "@/lib/server/prisma/prisma";   
+import { prisma } from "@/lib/server/prisma/prisma";
 import { season as SeasonEnum } from "@prisma/client";
 
 

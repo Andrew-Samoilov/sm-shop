@@ -1,3 +1,5 @@
+"use server";
+
 import { getBaseMetadata } from "@/lib/server/metadata/get-base-metadata";
 import { Metadata } from "next";
 

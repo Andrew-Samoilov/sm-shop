@@ -1,3 +1,5 @@
+"use server";
+
 import { Metadata } from "next";
 import { getSiteConfig } from "@/lib";
 

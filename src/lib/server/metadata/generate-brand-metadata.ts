@@ -1,3 +1,5 @@
+"use server";
+
 import type { Metadata } from "next";
 import { getBrandBySlug } from "../prisma/get-brand-by-slug";
 

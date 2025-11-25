@@ -1,4 +1,4 @@
-// /lib/seo/generate-model-metadata.ts
+"use server";
 
 import { Metadata } from "next";
 import { getSiteConfig } from "@/lib";

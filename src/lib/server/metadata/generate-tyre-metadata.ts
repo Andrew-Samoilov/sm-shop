@@ -1,3 +1,5 @@
+"use server";
+
 import { Metadata } from "next";
 import { getTyreBySlug } from "@/lib/server/prisma/get-tyre-by-slug";
 import { getModelImgByModelId } from "@/lib/server/prisma/get-model-img-by-model-id";
