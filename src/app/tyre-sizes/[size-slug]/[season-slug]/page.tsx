@@ -1,9 +1,6 @@
-
 import { ServerTyreList } from "@/components/server-tyre-list";
-import { generateSizeSeasonMetadata } from "@/lib/metadata/generate-size-metadata";
 import { getAllTyreSizesAndSeasons } from "@/lib/server/prisma/get-all-tyres-by-size-and-season";
 import { getTyresBySizeAndSeason } from "@/lib/server/prisma/get-tyres-by-size-and-season";
-import { Metadata } from "next";
 
 export async function generateStaticParams() {
     const combos = await getAllTyreSizesAndSeasons();
@@ -14,15 +11,15 @@ export async function generateStaticParams() {
     }));
 }
 
-export async function generateMetadata(
-    { params }: { params: { "size-slug": string; "season-slug": string } }
-): Promise<Metadata> {
+// export async function generateMetadata(
+//     { params }: { params: { "size-slug": string; "season-slug": string } }
+// ): Promise<Metadata> {
 
-    return generateSizeSeasonMetadata({
-        sizeSlug: params["size-slug"],
-        seasonSlug: params["season-slug"],
-    });
-}
+//     return generateSizeSeasonMetadata({
+//         sizeSlug: params["size-slug"],
+//         seasonSlug: params["season-slug"],
+//     });
+// }
 
 
 export default async function SeasonAndSizePage({
