@@ -32,17 +32,19 @@ export default async function InfoPageList() {
     });
     // console.log(`[infoPages generateStaticParams]pages`, pages);
     return (
-        <section className=" container ">
-            <div className="rounded-md from-body to-theme-light dark:from-darkmode-body dark:to-darkmode-theme-light bg-gradient-to-l ">
+        <section className="container ">
+            <div className="max-w-4xl mx-auto
+            p-10 rounded-md from-body to-theme-light dark:from-darkmode-body dark:to-darkmode-theme-light bg-gradient-to-l ">
                 <Image
-                    src='/other/info-page.png'
+                    src='/others/info-page.png'
                     alt="Інформаційні сторінки"
                     width={300}
                     height={300}
-                    className="mx-auto"
+                    className="mx-auto rounded-md"
                 />
                 <h1>Інформаційні сторінки</h1>
             </div>
+
             <ul className="flex flex-col md:flex-row md:flex-wrap mx-auto gap-6 list-none p-6">
                 {pages.map((page) => (
                     <li key={page.slug}>
