@@ -36,7 +36,7 @@ export default async function InfoPageList() {
             <div className="max-w-4xl mx-auto
             p-10 rounded-md from-body to-theme-light dark:from-darkmode-body dark:to-darkmode-theme-light bg-gradient-to-l ">
                 <Image
-                    src='/others/info-page.png'
+                    src='/others/info-page-2.png'
                     alt="Інформаційні сторінки"
                     width={300}
                     height={300}
