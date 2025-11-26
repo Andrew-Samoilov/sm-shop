@@ -9,7 +9,7 @@ export async function GET() {
         // відповідність кодів складів → store_code у Business Profile
         const warehouseMap: Record<string, string> = {
             stockVPR: "11331586209148150730",  //київ
-            stockBrovariUA: "brovary",
+            stockBrovariUA: "brovary-ua",
         };
 
         const allowedWarehouses = Object.keys(warehouseMap);
