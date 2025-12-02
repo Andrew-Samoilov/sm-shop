@@ -42,8 +42,7 @@ export async function BreadCrumbs({ tyreSlug }: Props) {
             <span>{'>'}</span>
 
             <Link
-                href={`/tyres?season=` + season +
-                    `&view=list&sort=price_asc`}
+                href={`/tyres?season=` + season }
                 aria-label={`Перейти до ${seasonUA} шин`}
             >
                 <span>{seasonUA} шини</span>
@@ -55,8 +54,7 @@ export async function BreadCrumbs({ tyreSlug }: Props) {
                 href={`/tyres?season=` + season +
                     `&width=` + tyre?.width +
                     `&profile=` + tyre?.profile +
-                    `&diameter=` + tyre?.diameter +
-                    `&view=list&sort=price_asc`}
+                    `&diameter=` + tyre?.diameter }
                 aria-label={`Перейти до ${seasonUA} шин ${tyreSize}`}
             >
                 <span>{seasonUA} шини {tyreSize}</span>

@@ -79,11 +79,11 @@ export default async function TyrePage(
     { name: "Шини", url: "/tyres" },
     {
       name: `${getSeasonLabel(tyre.model?.season)} шини`,
-      url: `/tyres?season=${tyre.model?.season?.toLowerCase()}&view=list&sort=price_asc`,
+      url: `/tyres?season=${tyre.model?.season?.toLowerCase()}`,
     },
     {
       name: `${getSeasonLabel(tyre.model?.season)} шини ${tyreSize}`,
-      url: `/tyres?season=${tyre.model?.season?.toLowerCase()}&width=${tyre.width}&profile=${tyre.profile}&diameter=${tyre.diameter}&view=list&sort=price_asc`,
+      url: `/tyres?season=${tyre.model?.season?.toLowerCase()}&width=${tyre.width}&profile=${tyre.profile}&diameter=${tyre.diameter}`,
     },
     { name: tyre.title, url: `/tyres/${tyre.slug}` },
   ];
