@@ -42,7 +42,8 @@ export async function BreadCrumbs({ tyreSlug }: Props) {
             <span>{'>'}</span>
 
             <Link
-                href={`/tyres?season=` + season }
+                // href={`/tyres?season=` + season }
+                href={`/${season?.toLowerCase()}-tyres`}
                 aria-label={`Перейти до ${seasonUA} шин`}
             >
                 <span>{seasonUA} шини</span>
