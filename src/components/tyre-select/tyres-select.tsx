@@ -39,7 +39,8 @@ export function TyresSelect() {
 
   const [helpOpen, setHelpOpen] = useState(false);
   const [selectedTyres, setSelectedTyres] = useState<TyreWithRelations[]>([]);
-  const [images, setImages] = useState<ModelImage[]>([]);
+  // const [images, setImages] = useState<ModelImage[]>([]);
+  const [imageMap, setImageMap] = useState<Record<string, ModelImage[]>>({});
 
   const [initialized, setInitialized] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -132,17 +133,32 @@ export function TyresSelect() {
       .then((res) => res.json())
       .then((data) => {
         setSelectedTyres(Array.isArray(data?.tyres) ? data.tyres : []);
-        setImages(Array.isArray(data?.images) ? data.images : []);
+        // const fetchedImages = Array.isArray(data?.images) ? data.images : [];
+        // setImages(fetchedImages);
+        const fetchedImages: ModelImage[] = Array.isArray(data?.images) ? data.images : [];
+
+        // 2. 3. ВИПРАВЛЕННЯ: Явно задаємо типи acc та img
+        const map = fetchedImages.reduce((acc: Record<string, ModelImage[]>, img: ModelImage) => {
+          // Додаємо перевірку на modelId, як ми робили в TyresList
+          if (img.modelId) {
+            const id = String(img.modelId);
+            if (!acc[id]) acc[id] = [];
+            acc[id].push(img);
+          }
+          return acc;
+        }, {} as Record<string, ModelImage[]>);
+
+        setImageMap(map); // Зберігаємо кеш
         setHasSearched(true);
       })
       .catch((error) => {
         console.error("[Tyres Select] fetch error:", error);
         setSelectedTyres([]);
-        setImages([]);
+        // setImages([]);
         setHasSearched(true);
       })
       .finally(() => setLoading(false));
-  }, [filters, query, hasSearched, setImages]);
+  }, [filters, query, hasSearched, ]);
 
 
   const updateFilter = <K extends keyof FilterState>(
@@ -232,7 +248,7 @@ export function TyresSelect() {
               onChangeSort={(v) => updateFilter("sort", v)}
             />
             {(loading) && <div className="py-10 text-center text-gray-500">Завантаження...</div>}
-            <TyresList tyres={selectedTyres} images={images} view={filters.view} />
+            <TyresList tyres={selectedTyres} imageMap={imageMap} view={filters.view} />
           </div>
         }
       </div>

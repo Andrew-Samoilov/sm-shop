@@ -5,12 +5,24 @@ import { TyreWithRelations } from "@/types";
 
 type TyresListProps = {
   tyres: TyreWithRelations[];
-  images: ModelImage[];
+  images?: ModelImage[];
+  imageMap?: Record<string, ModelImage[]>;
   view?: "list" | "gallery";
 }
 
-export function TyresList({ tyres, images, view }: TyresListProps) {
+const buildImageMap = (images: ModelImage[]): Record<string, ModelImage[]> => {
+  return images.reduce((acc, img) => {
+    if (img.modelId) {
+      const id = String(img.modelId);
+      if (!acc[id]) acc[id] = [];
+      acc[id].push(img);
+    }
+    return acc;
+  }, {} as Record<string, ModelImage[]>);
+};
 
+export function TyresList({ tyres, images, imageMap, view }: TyresListProps) {
+  const finalImageMap = imageMap ?? (images ? buildImageMap(images) : {});
   // console.log("[TyresList]", tyres.length, images.length, view);
 
   return (
@@ -21,7 +33,10 @@ export function TyresList({ tyres, images, view }: TyresListProps) {
     }>
 
       {tyres.map((tyre, index) => {
-        const modelImages = images.filter((img) => img.modelId === tyre.modelId);
+       
+        const modelIdKey = tyre.modelId ? String(tyre.modelId) : null;
+        const modelImages = modelIdKey ? finalImageMap[modelIdKey] || [] : [];
+        
         const isPriority = index === 0;
         
         return view === "list" ? (
