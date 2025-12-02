@@ -74,16 +74,8 @@ export function TyresSelect() {
       params.append("season", s);
     }
 
-    // params.set("view", filters.view);
-    // params.set("sort", filters.sort);
-    
-    if (filters.view !== "gallery") { // Gallery - це значення за замовчуванням
-      params.set("view", filters.view);
-    }
-    if (filters.sort !== "price_asc") { // price_asc - це значення за замовчуванням
-      params.set("sort", filters.sort);
-    }
-
+    params.set("view", filters.view);
+    params.set("sort", filters.sort);
     if (query) params.set("query", query);
 
     router.replace(`?${params.toString()}`, { scroll: false });

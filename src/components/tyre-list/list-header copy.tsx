@@ -19,17 +19,17 @@ export function ListHeader({ view, onChangeView, sort, onChangeSort }: Props) {
 
     const handleViewChange = (newView: "list" | "gallery") => {
         onChangeView(newView);
-        // const newParams = new URLSearchParams(globalThis.location.search);
+        const newParams = new URLSearchParams(globalThis.location.search);
         // newParams.set("view", newView);
 
         // "gallery" вважаємо значенням за замовчуванням
-        // if (newView === "gallery") {
-        //     newParams.delete("view");
-        // } else { // newView === "list"
-        //     newParams.set("view", newView);
-        // }
+        if (newView === "gallery") {
+            newParams.delete("view");
+        } else { // newView === "list"
+            newParams.set("view", newView);
+        }
 
-        // globalThis.history.replaceState(null, "", `?${newParams.toString()}`);
+        globalThis.history.replaceState(null, "", `?${newParams.toString()}`);
 
         sendGAEvent({
             action: "view_mode_change",
@@ -49,17 +49,17 @@ export function ListHeader({ view, onChangeView, sort, onChangeSort }: Props) {
     const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const value = e.target.value;
         onChangeSort(e.target.value);
-        // const newParams = new URLSearchParams(globalThis.location.search);
+        const newParams = new URLSearchParams(globalThis.location.search);
         
         // newParams.set("sort", e.target.value);
 
-        // if (value === "price_asc") { // 'price_asc' - дефолтне значення
-        //     newParams.delete("sort");
-        // } else {
-        //     newParams.set("sort", value);
-        // }
+        if (value === "price_asc") { // 'price_asc' - дефолтне значення
+            newParams.delete("sort");
+        } else {
+            newParams.set("sort", value);
+        }
 
-        // globalThis.history.replaceState(null, "", `?${newParams.toString()}`);
+        globalThis.history.replaceState(null, "", `?${newParams.toString()}`);
 
         sendGAEvent({
             action: "sort_option_change",

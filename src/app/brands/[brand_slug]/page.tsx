@@ -100,7 +100,7 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
           {brandModels.map((model) => (
             <Link
               key={model.id}
-              href={`/${brand.slug}/${model.slug}`}
+              href={`/brands/${brand.slug}/${model.slug}`}
               className=" px-6"
             >
               {model.modelName}
@@ -109,7 +109,7 @@ export default async function BrandPage({ params, }: { params: { brand_slug: str
         </div>
       </section>
 
-      <section>
+      <section className="mx-auto">
         <h2 className=" text-center  mx:auto lg:sticky lg:top-[90px] lg:z-40 bg-body/75 dark:bg-darkmode-body/75 p-2 backdrop-blur-sm">
           Наявні шини бренду {brand.brand_name} ({brandTyres.length})
         </h2>
