@@ -22,7 +22,7 @@ export async function getAllTyreSizesAndSeasons() {
         const sizeSlug = `${r.width}-${r.profile}r${r.diameter}`;
         const seasonSlug = r.model?.season
             ? r.model.season.toLowerCase()
-            : null;
+            : "allseason";
 
         return { sizeSlug, seasonSlug };
     });
