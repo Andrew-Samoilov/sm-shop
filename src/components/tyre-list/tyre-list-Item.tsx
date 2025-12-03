@@ -47,8 +47,17 @@ export function TyreListItem({ tyre, modelImages, isPriority }: TyreListItemProp
                         tyreSize: tyreSize ?? "",
                         quantity: 4,
                     }}
-                    className="btn btn-sm btn-primary z-10
-     "
+        
+                    className="btn btn-outline font-semibold
+                    text-sm px-3 py-1.5 
+  
+                    /* Середній розмір для md екранів */
+                    md:text-base md:px-5 md:py-2 
+  
+                    /* Великий розмір для lg екранів */
+                    lg:text-lg lg:px-8 lg:py-3 
+  
+                    z-10 hover:bg-accent hover:text-white "
                 />
             </div>
         </Link>
