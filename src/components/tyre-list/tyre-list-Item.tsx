@@ -17,7 +17,7 @@ export function TyreListItem({ tyre, modelImages, isPriority }: TyreListItemProp
     return (
         <Link
             href={`/tyres/${tyre.slug}`}
-            className="w-full min-w-0 flex flex-1 flex-col md:flex-row justify-between gap-1 p-1 xl:p-6 xl:gap-6 items-center border border-white dark:border-darkmode-body hover:border-accent rounded-lg hover:no-underline">
+            className="w-full min-w-0 flex flex-1 flex-col md:flex-row justify-between gap-1 p-1 xl:p-6 xl:gap-6 items-center border border-white dark:border-darkmode-body hover:border-accent rounded-md hover:no-underline">
 
             <TyreViewer images={modelImages} season={tyre.model?.season} isPriority={isPriority} />
 
@@ -32,7 +32,7 @@ export function TyreListItem({ tyre, modelImages, isPriority }: TyreListItemProp
                 <div className="flex flex-row gap-2 md:gap-2 items-center md:items-end mx-auto">
                     <span
                         className="font-semibold text-2xl"
-                    >{tyre.price?.toLocaleString("uk-UA")}</span>
+                    >{tyre.price?.toLocaleString("ua-UA")}</span>
                     <span className="text-light">грн</span>
                 </div>
 

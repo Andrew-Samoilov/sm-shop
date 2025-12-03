@@ -18,7 +18,7 @@ export function OneTyrePhoto({
                 priority={isPriority}
                 fetchPriority={isPriority ? "high" : "auto"}
                 sizes="(min-width: 768px) 15vw, 30vw"
-                className="object-contain mx-auto"
+                className="object-contain mx-auto "
             />
         </div>
     )

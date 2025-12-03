@@ -32,11 +32,11 @@ export function ServerTyreList({ tyres }: { tyres: TyreListItem[] }) {
                 return (
                     <li
                         key={t.id}
-                        className="p-2 border border-border rounded-md inline-grid grid-cols-[1fr_auto] gap-2 items-center"
+                        className="p-2 border border-border hover:border-accent  rounded-md inline-grid grid-cols-[1fr_auto] gap-2 items-center"
                     >
                         <Link
                             href={`/tyres/${t.slug}`}
-                            className="flex flex-col gap-1 lg:gap-2"
+                            className="flex flex-col gap-1 lg:gap-2 hover:no-underline"
                         >
                             {season && <SeasonIcon season={season} />}
 
@@ -50,14 +50,15 @@ export function ServerTyreList({ tyres }: { tyres: TyreListItem[] }) {
 
                                 <div>{t.country}</div>
 
-                                <div>
-                                    Ціна:{" "}
-                                    <span className="text-lg font-semibold">
-                                        {t.price.toLocaleString("ua-UA")}
-                                    </span>{" "}
-                                    грн
-                                    <span className="text-light text-xs">/шт</span>
-                                </div>
+                            </div>
+
+                            <div>
+                                Ціна:{" "}
+                                <span className="text-2xl font-semibold">
+                                    {t.price.toLocaleString("ua-UA")}
+                                </span>{" "}
+                                грн
+                                <span className="text-light text-xs">/шт</span>
                             </div>
                         </Link>
 
