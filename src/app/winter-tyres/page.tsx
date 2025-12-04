@@ -1,13 +1,13 @@
 'use server'
 import { ServerTyreList } from "@/components/server-tyre-list";
-import { getTyresSeason } from "@/lib/server/prisma/get-tyres-by-season";
+import { getTyresBySeason } from "@/lib/server/prisma/get-tyres-by-season";
 import { prisma } from "@/lib/server/prisma/prisma";
 import ReactMarkdown from "react-markdown";
 
 
 export default async function winterTyresPage() {
     const [winterTyres, block] = await Promise.all([
-        getTyresSeason('WINTER'),   
+        getTyresBySeason('WINTER'),   
         prisma.contentBlock.findUnique({
             where: { key: 'winter-tyres' },
             select: { value: true },

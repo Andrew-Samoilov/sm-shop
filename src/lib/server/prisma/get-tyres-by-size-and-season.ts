@@ -24,8 +24,14 @@ export async function getTyresBySizeAndSeason(
             price: "asc",
         },
         include: {
+            brand: {
+                select: {
+                    brand_name: true, 
+                },
+            },
             model: {
                 select: {
+                    modelName: true,
                     season: true,
                     images: {
                         orderBy: { position: "asc" },

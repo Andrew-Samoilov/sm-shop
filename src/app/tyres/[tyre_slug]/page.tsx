@@ -108,7 +108,7 @@ export default async function TyrePage(
           <ModelViewer images={images} isPriority={true} />
 
           {tyre.model?.season && (
-            <SeasonIcon season={tyre.model?.season} className="absolute top-2 left-2 z-99" />
+            <SeasonIcon season={tyre.model?.season} className="absolute top-2 left-2 " />
           )}
         </div>
 

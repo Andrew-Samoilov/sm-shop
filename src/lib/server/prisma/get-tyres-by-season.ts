@@ -2,8 +2,7 @@
 import { prisma } from "@/lib/server/prisma/prisma";
 import { season as SeasonEnum } from "@prisma/client";
 
-
-export async function getTyresSeason(
+export async function getTyresBySeason(
     season: SeasonEnum
 ) {
     return prisma.tyre.findMany({
@@ -20,6 +19,7 @@ export async function getTyresSeason(
         include: {
             model: {
                 select: {
+                    modelName: true,
                     season: true,
                     images: {
                         orderBy: { position: "asc" },
@@ -31,6 +31,11 @@ export async function getTyresSeason(
                         },
                         take: 1,
                     },
+                },
+            },
+            brand: {
+                select: {
+                    brand_name: true, 
                 },
             },
         },
