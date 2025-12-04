@@ -10,7 +10,7 @@ export function TyreViewer({ images, season, isPriority = false }: { images?: II
             className={
                 noPhoto
                     ? "relative h-auto w-auto py-5 flex items-center justify-center"
-                    : "relative w-full aspect-square max-w-xs mx-auto overflow-hidden group shrink-0"
+                    : "relative w-full aspect-square max-w-[160px] mx-auto overflow-hidden group shrink-0"
             }
             // className="relative w-full h-auto py-5 flex items-center justify-center"
         >

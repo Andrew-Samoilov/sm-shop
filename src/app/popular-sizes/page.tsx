@@ -20,8 +20,8 @@ export default async function PopularSizes() {
                         const slug = `${s.width}-${s.profile}r${s.diameter}`;
 
                         return (
-                            <li key={slug} className="px-4 py-2 border-2 border-border dark:border-darkmode-border rounded-md hover:border-accent hover:no-underline">
-                                <Link href={`/popular-sizes/${slug}`}>
+                            <li key={slug} className="px-4 py-2 border-2 border-border dark:border-darkmode-border rounded-md hover:border-accent">
+                                <Link href={`/popular-sizes/${slug}`} className="hover:no-underline">
                                     {s.width}/{s.profile} R{s.diameter}
                                 </Link>
                             </li>

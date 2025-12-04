@@ -46,7 +46,7 @@ export function ServerTyreList({ tyres }: { tyres: TyreListItem[] }) {
 
                     <li
                         key={t.id}
-                        className="p-2 border border-border hover:border-accent hover:no-underline rounded-md inline-grid grid-cols-[auto_1fr_auto] gap-2 items-center"
+                        className="p-1 xl:p-6 border border-transparent hover:border-accent hover:no-underline rounded-md inline-grid grid-cols-[auto_1fr_auto] gap-1 lg:gap-2 items-center"
                     >
 
                         <div className="relative max-w-[160px] h-auto max-h-[180px]">
@@ -65,7 +65,7 @@ export function ServerTyreList({ tyres }: { tyres: TyreListItem[] }) {
 
                         <Link
                             href={`/tyres/${t.slug}`}
-                            className="flex flex-col gap-1 lg:gap-2 hover:no-underline"
+                            className="flex flex-col gap-1  hover:no-underline"
                         >
 
                             <span className=" text-md md:text-2xl font-semibold">{t.brand?.brand_name}</span>
@@ -81,7 +81,7 @@ export function ServerTyreList({ tyres }: { tyres: TyreListItem[] }) {
 
                         </Link>
 
-                        <div className="flex flex-col gap-0 items-center">
+                        <div className="flex flex-col gap-1 items-center">
                             <p>
                                 <span className="text-2xl font-semibold">
                                     {t.price.toLocaleString("ua-UA")}
