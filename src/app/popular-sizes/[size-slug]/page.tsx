@@ -39,9 +39,11 @@ export default async function SizePage({
     const profile = Number(profileStr);
     const diameter = Number(diameterStr);
 
-    const winterTyres = await getTyresBySizeAndSeason(width, profile, diameter, 'WINTER');
-    const summerTyres = await getTyresBySizeAndSeason(width, profile, diameter, 'SUMMER');
-    const allseasonTyres = await getTyresBySizeAndSeason(width, profile, diameter, 'ALLSEASON');
+    const [winterTyres, summerTyres, allseasonTyres] = await Promise.all([
+        getTyresBySizeAndSeason(width, profile, diameter, 'WINTER'),
+        getTyresBySizeAndSeason(width, profile, diameter, 'SUMMER'),
+        getTyresBySizeAndSeason(width, profile, diameter, 'ALLSEASON'),
+    ]);
 
     return (<>
         <h1>{width}/{profile} R{diameter}</h1>
