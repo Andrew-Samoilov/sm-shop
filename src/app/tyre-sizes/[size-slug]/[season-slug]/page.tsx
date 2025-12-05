@@ -16,9 +16,12 @@ export async function generateMetadata(
     { params }: { params: { "size-slug": string; "season-slug": string } }
 ): Promise<Metadata> {
 
+    const sizeSlug = await params["size-slug"];
+    const seasonSlug = await params["season-slug"];
+
     return generateSizeSeasonMetadata({
-        sizeSlug: params["size-slug"],
-        seasonSlug: params["season-slug"],
+        sizeSlug: sizeSlug, 
+        seasonSlug: seasonSlug, 
     });
 }
 
@@ -28,8 +31,8 @@ export default async function SeasonAndSizePage({
 }: {
     params: { "size-slug": string; "season-slug": string };
 }) {
-    const sizeSlug = params["size-slug"];
-    const seasonSlug = params["season-slug"];
+    const sizeSlug = await params["size-slug"];
+    const seasonSlug = await params["season-slug"];
 
     const match = sizeSlug.match(/^(\d+)-(\d+)r(\d+)$/i);
     if (!match) return <h1>Не знайдено розмір</h1>;

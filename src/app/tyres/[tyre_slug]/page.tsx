@@ -41,9 +41,7 @@ export default async function TyrePage(
 
   const { tyre_slug } = await params;
 
-  console.log('[TyrePage]', tyre_slug);
-
-  // const tyre = await getTyreBySlug(tyre_slug);
+  // console.log('[TyrePage]', tyre_slug);
 
   const [tyre, cert] = await Promise.all([
     getTyreBySlug(tyre_slug),
@@ -55,9 +53,7 @@ export default async function TyrePage(
     notFound();
   }
 
-  // const images = tyre.modelId === null ? [] : await getModelImgByModelId(tyre.modelId);
   const images = tyre.model?.images || [];
-  // const cert = await getContentBlock<Certificate[]>('certificates', []);
 
   const filteredCerts = tyre.brand
     ? cert.filter(
