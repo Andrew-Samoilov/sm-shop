@@ -11,8 +11,8 @@ cd /var/www/shina-mix-shop
 ( while true; do echo "[deploy] still working..."; sleep 60; done ) &
 KEEPALIVE_PID=$!
 
-echo "[build] generate prisma client..."
-npx prisma generate
+# echo "[build] generate prisma client..."
+# npx prisma generate
 
 npm run build -- --verbose
 
